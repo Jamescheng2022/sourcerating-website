@@ -14,13 +14,12 @@ export const siteConfig = {
     { label: "Services", href: "/services" },
     { label: "Industries", href: "/industries" },
     { label: "Case Studies", href: "/case-studies" },
-    { label: "Blog", href: "/blog" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/contact" },
   ],
   footer: {
     tagline:
-      "Your independent, on-the-ground partner for factory inspection and industrial sourcing in China.",
+      "Independent on-site factory verification, production inspection, and supplier due diligence in China.",
     quickLinks: [
       { label: "Services", href: "/services" },
       { label: "Industries", href: "/industries" },
