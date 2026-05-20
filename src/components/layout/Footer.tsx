@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/data/site-config";
+import { Logo } from "@/components/ui/Logo";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,9 +9,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <Link href="/" className="inline-block mb-4">
-              <span className="text-xl font-bold tracking-tight text-white">Source<span className="text-brand-400">Rating</span></span>
-            </Link>
+            <div className="mb-4"><Logo inverted /></div>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">{siteConfig.footer.tagline}</p>
           </div>
           <div>
@@ -25,7 +24,7 @@ export function Footer() {
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Contact</h4>
             <ul className="space-y-3 text-sm text-gray-400">
               <li><a href={`mailto:${siteConfig.contact.email}`} className="hover:text-white transition-colors">{siteConfig.contact.email}</a></li>
-              {siteConfig.contact.wechat && <li>WeChat: {siteConfig.contact.wechat}</li>}
+              <li><a href={siteConfig.social.linkedin} className="hover:text-white transition-colors">LinkedIn</a></li>
             </ul>
           </div>
         </div>
