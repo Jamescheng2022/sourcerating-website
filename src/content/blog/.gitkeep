@@ -1,0 +1,12 @@
+Place MDX or MD blog post files here.
+Each file should follow this frontmatter format:
+
+---
+title: "Your Post Title"
+excerpt: "Brief description for SEO and previews"
+date: "2026-05-19"
+author: "Source Rating"
+tags: ["factory audit", "China sourcing"]
+---
+
+Your content here in Markdown.
