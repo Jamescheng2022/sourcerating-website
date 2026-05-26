@@ -5,12 +5,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function ServicesGrid() {
   return (
-    <section className="py-20 bg-gray-50 border-y border-gray-100">
+    <section className="py-20 bg-[#fbfbf8] border-y border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Core services"
-          title="Practical checks for real sourcing risk"
-          description="Focused support for buyers who need facts before they place orders, pay deposits, or scale production."
+          title="Supplier checks built around engineering procurement decisions"
+          description="The goal is not a generic supplier list. The goal is to help you decide whether a supplier is suitable for your project, order, drawings, quality expectations, and delivery risk."
         />
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((service) => (
