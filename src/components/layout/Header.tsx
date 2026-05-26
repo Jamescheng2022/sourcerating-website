@@ -26,7 +26,7 @@ export function Header() {
           </div>
           <div className="hidden lg:flex items-center gap-3">
             <a href={`mailto:${siteConfig.contact.email}`} className="text-sm font-medium text-gray-600 hover:text-brand-700 transition-colors">{siteConfig.contact.email}</a>
-            <Link href="/contact" className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-brand-700 rounded-md hover:bg-brand-800 transition-colors">Request a Factory Check</Link>
+            <Link href="/contact" className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-brand-700 rounded-md hover:bg-brand-800 transition-colors">Request a Supplier Check</Link>
           </div>
           <button type="button" className="lg:hidden p-2 text-gray-600" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -41,7 +41,7 @@ export function Header() {
                 </Link>
               ))}
               <a href={`mailto:${siteConfig.contact.email}`} className="px-3 py-2 text-sm font-medium text-gray-600">{siteConfig.contact.email}</a>
-              <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="mt-2 inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white bg-brand-700 rounded-md hover:bg-brand-800">Request a Factory Check</Link>
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="mt-2 inline-flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white bg-brand-700 rounded-md hover:bg-brand-800">Request a Supplier Check</Link>
             </div>
           </div>
         )}
