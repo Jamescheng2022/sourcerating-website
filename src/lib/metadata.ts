@@ -58,9 +58,17 @@ export function generateOrganizationSchema() {
     contactPoint: {
       "@type": "ContactPoint",
       email: siteConfig.contact.email,
-      contactType: "customer service",
+      contactType: "sales",
       availableLanguage: ["English", "Chinese"],
     },
+    areaServed: ["Europe", "North America", "Australia", "United Kingdom"],
+    serviceType: [
+      "Engineering supplier verification",
+      "Construction materials factory audit",
+      "Pre-shipment inspection",
+      "Production monitoring",
+      "China engineering sourcing support",
+    ],
     address: { "@type": "PostalAddress", addressCountry: "CN" },
   };
 }
