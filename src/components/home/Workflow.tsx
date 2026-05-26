@@ -3,33 +3,33 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const steps = [
   {
     step: "01",
-    title: "Send the supplier or product brief",
-    description: "Share the factory name, product, order stage, risk concerns, drawings, specifications, or links.",
+    title: "Send project and supplier context",
+    description: "Share material category, supplier link, drawings/specifications, order stage, target country, and timing.",
   },
   {
     step: "02",
-    title: "Define the verification scope",
-    description: "We confirm the right check: company background, factory audit, production inspection, or sourcing research.",
+    title: "Define the engineering risk scope",
+    description: "We decide whether you need background checks, an on-site audit, pre-shipment inspection, sourcing support, or monitoring.",
   },
   {
     step: "03",
-    title: "Conduct the on-site or desk review",
-    description: "We verify identity, capability, quality controls, documents, production status, and practical risk indicators.",
+    title: "Prepare the checklist",
+    description: "The checklist is built around drawings, standards, QA/QC documents, material traceability, capacity, packaging, and delivery risk.",
   },
   {
     step: "04",
-    title: "Deliver the report",
-    description: "You receive findings, photos, risk rating, red flags, and recommended next steps in plain English.",
+    title: "Verify supplier evidence",
+    description: "We review documents, visit the factory when needed, capture photo evidence, and ask the questions a project buyer would ask.",
   },
   {
     step: "05",
-    title: "Review decisions together",
-    description: "We discuss what the evidence means for payment terms, supplier choice, quality controls, and negotiation.",
+    title: "Deliver the decision brief",
+    description: "You receive findings, gaps, red flags, risk rating, supplier questions, and recommended next commercial steps.",
   },
   {
     step: "06",
-    title: "Monitor what matters",
-    description: "For production orders, we can follow up with inspections, progress checks, and issue escalation.",
+    title: "Follow up or monitor production",
+    description: "For active orders, we can track production progress, inspect critical stages, and escalate issues before shipment.",
   },
 ];
 
@@ -39,8 +39,8 @@ export function Workflow() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Process"
-          title="Simple enough to start quickly. Structured enough to reduce risk."
-          description="The first engagement can be as focused as checking one supplier before a deposit, or as broad as building a qualified supplier shortlist."
+          title="A practical verification workflow for engineering procurement."
+          description="The first engagement can be as focused as checking one steel fabricator before deposit, or as broad as building a qualified supplier shortlist for a project package."
         />
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {steps.map((item) => (
