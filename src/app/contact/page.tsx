@@ -5,16 +5,16 @@ import { siteConfig } from "@/data/site-config";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Request China factory inspection, supplier verification, production monitoring, or industrial sourcing support.",
-  keywords: ["contact China factory inspector", "China sourcing consultation", "factory audit inquiry"],
+  description: "Request China supplier verification, factory audit, pre-shipment inspection, or sourcing support for engineering and construction materials.",
+  keywords: ["contact China factory inspector", "engineering supplier verification China", "construction materials sourcing consultation"],
 };
 
-const benefits = [
-  "Free initial scope review",
-  "Response within 24 hours",
-  "No supplier-side commissions",
-  "Practical next-step recommendation",
-  "Direct communication by email",
+const checklist = [
+  "Supplier name, website, or sales contact",
+  "Material category and project destination",
+  "Drawings, specifications, or document status",
+  "Order stage: before deposit, production, or shipment",
+  "Your main risk concern",
 ];
 
 export default function ContactPage() {
@@ -25,10 +25,10 @@ export default function ContactPage() {
           <div className="max-w-3xl">
             <span className="text-sm font-semibold uppercase tracking-wider text-brand-700">Contact</span>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-950">
-              Send the supplier, product, or risk you need checked.
+              Send the engineering supplier or material package you need checked.
             </h1>
             <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-              Share what you know so far. We will recommend the right next step: supplier verification, factory audit, production inspection, or sourcing research.
+              Share the supplier, product category, drawings/specification status, order stage, and project concern. You will receive a practical next-step recommendation within 24 hours.
             </p>
           </div>
         </div>
@@ -37,8 +37,8 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-14">
             <div className="lg:col-span-3">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Request a check</h2>
-              <p className="text-gray-600 mb-8">The more detail you include, the faster we can scope the work.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Request a verification scope</h2>
+              <p className="text-gray-600 mb-8">The more project context you include, the faster the scope and quote can be prepared.</p>
               <ContactForm />
             </div>
             <div className="lg:col-span-2">
@@ -64,25 +64,25 @@ export default function ContactPage() {
                       <Clock className="h-5 w-5 text-brand-700 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-gray-900">Response time</p>
-                        <p className="text-sm text-gray-600">Within 24 hours</p>
+                        <p className="text-sm text-gray-600">Scope reply within 24 hours</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <MapPin className="h-5 w-5 text-brand-700 shrink-0 mt-0.5" />
                       <div>
                         <p className="text-sm font-medium text-gray-900">Location</p>
-                        <p className="text-sm text-gray-600">China industrial regions</p>
+                        <p className="text-sm text-gray-600">China engineering and construction supply chain</p>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="p-6 rounded-md bg-brand-50 border border-brand-100">
-                  <h3 className="text-lg font-bold text-brand-950 mb-4">What to include</h3>
+                  <h3 className="text-lg font-bold text-brand-950 mb-4">Helpful details to include</h3>
                   <ul className="space-y-3">
-                    {benefits.map((b) => (
-                      <li key={b} className="flex items-start gap-2.5">
+                    {checklist.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5">
                         <ShieldCheck className="h-5 w-5 text-brand-700 shrink-0 mt-0.5" />
-                        <span className="text-sm text-brand-900">{b}</span>
+                        <span className="text-sm text-brand-900">{item}</span>
                       </li>
                     ))}
                   </ul>
