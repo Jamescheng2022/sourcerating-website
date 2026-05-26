@@ -14,7 +14,7 @@ export function Logo({ inverted = false }: { inverted?: boolean }) {
           Source Rating
         </span>
         <span className={`block text-[11px] font-medium uppercase tracking-[0.18em] ${inverted ? "text-gray-400" : "text-gray-500"}`}>
-          China Inspection
+          Engineering Checks
         </span>
       </span>
     </Link>
