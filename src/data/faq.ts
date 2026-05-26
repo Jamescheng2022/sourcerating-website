@@ -1,16 +1,46 @@
 export interface FAQItem { question: string; answer: string; }
 
 export const faqItems: FAQItem[] = [
-  { question: "What does a factory audit include and how long does it take?", answer: "A standard factory audit covers facility inspection, equipment assessment, quality management system evaluation, production capacity verification, certification checks, and workforce assessment. It typically takes 1-2 days on-site, with the full report delivered within 3 business days with detailed photographic evidence and actionable recommendations." },
-  { question: "How do you verify a Chinese supplier is legitimate and not a trading company?", answer: "We conduct multi-layer verification: physical factory visits to confirm real production capabilities, business license authentication through government databases, cross-referencing of export records, ownership structure tracing, and discreet market reputation checks. We can distinguish genuine manufacturers from trading companies posing as factories." },
-  { question: "Can you help with supplier negotiations and pricing?", answer: "Yes. Having local market knowledge allows us to help you negotiate fair pricing and favorable terms. We understand Chinese business culture and bridge communication gaps. Importantly, we never take commissions from suppliers — our loyalty is entirely to you, ensuring our negotiation advice is always in your best interest." },
-  { question: "What industries do you specialize in?", answer: "Our core expertise is in industrial and engineering sectors: machinery and equipment, construction and building materials, metal fabrication and processing, automotive and transportation parts, electronics and electrical components, and renewable energy equipment. This technical focus means we understand manufacturing processes and quality standards at a deeper level than general agents." },
-  { question: "How do you handle quality control during production?", answer: "We offer tiered QC programs from spot-check inspections to full-time production monitoring, based on your order complexity and risk level. This includes in-process quality checks at critical stages, adherence verification against agreed specifications, pre-shipment AQL sampling inspections, and loading supervision. Reports are delivered within 24 hours." },
-  { question: "What makes you different from a standard sourcing agent?", answer: "Three key differences: First, we are independent — we never take commissions or kickbacks from suppliers. Second, we are technical — our background is in engineering and industrial supply chains, not general trading. Third, we are on the ground — physically present in China's industrial regions providing real oversight, not remote coordination." },
-  { question: "How do you charge for your services?", answer: "We charge transparent, pre-agreed fees based on the scope of work — typically per-audit, per-project, or monthly retainer for ongoing services. We do not take any commissions from suppliers, ensuring our interests are fully aligned with yours. Contact us for a tailored proposal based on your specific needs." },
-  { question: "Do you handle logistics and shipping?", answer: "Our primary focus is on the upstream side — finding, verifying, and managing suppliers and production quality. However, we can coordinate with your freight forwarder or recommend trusted logistics partners for shipping, customs clearance, and delivery. Our loading supervision service ensures your goods are properly packed and shipped." },
-  { question: "Can you work with small businesses or only large companies?", answer: "We work with businesses of all sizes, from startups placing their first China order to multinational corporations with established supply chains. Our service packages are flexible and scalable. For smaller businesses, we often recommend starting with a focused supplier verification and initial production monitoring package." },
-  { question: "How quickly can you start on a project?", answer: "For urgent needs, we can typically begin within 48-72 hours. For standard projects, we recommend 1-2 weeks lead time to properly prepare, align on requirements, and schedule visits. Contact us with your timeline and requirements for a realistic start date." },
+  {
+    question: "What engineering materials do you focus on?",
+    answer: "The strongest fit is project-related manufacturing: precast concrete, steel structures, construction materials, MEP and industrial components, engineering equipment, molds, embedded parts, facade materials, and similar technical supply packages.",
+  },
+  {
+    question: "Can you verify whether a supplier can actually handle our drawings and specifications?",
+    answer: "Yes. Supplier verification can include review of drawings/specifications, engineering communication, QA/QC documents, material certificates, production process, equipment, workload, and the supplier's ability to answer project-specific technical questions.",
+  },
+  {
+    question: "What does a factory audit include?",
+    answer: "A typical audit checks business identity, workshop layout, equipment, production flow, capacity, QA/QC process, material traceability, inspection records, packaging, export readiness, and project-fit risks. The scope is adapted to the material category and decision you need to make.",
+  },
+  {
+    question: "Can you inspect precast concrete or steel structure suppliers?",
+    answer: "Yes. These are core focus areas. For precast, checks may cover molds, reinforcement preparation, embedded parts, curing controls, production records, and QA/QC documentation. For steel structures, checks may cover cutting, welding, assembly, coating, traceability, packing, and fabrication capacity.",
+  },
+  {
+    question: "Do you take commissions from suppliers?",
+    answer: "No. The service is buyer-side. Fees are agreed with the overseas client, and recommendations are based on project risk and supplier evidence rather than supplier-side incentives.",
+  },
+  {
+    question: "How quickly can you start?",
+    answer: "For urgent checks, initial scoping can usually begin within 24 hours after receiving supplier details, material category, project location, order stage, and available documents. On-site scheduling depends on factory location and supplier availability.",
+  },
+  {
+    question: "How do you charge?",
+    answer: "Pricing starts from published guidance, then becomes a fixed quote after scope review. Final cost depends on factory location, product complexity, drawings/spec depth, number of suppliers or SKUs, report depth, urgency, and travel requirements.",
+  },
+  {
+    question: "Can you help us find suppliers, not only verify existing ones?",
+    answer: "Yes, but the focus is qualified sourcing rather than long supplier lists. The aim is to shortlist manufacturers that match drawings, specifications, order size, export requirements, and project constraints.",
+  },
+  {
+    question: "Do you handle logistics and shipping?",
+    answer: "The primary focus is supplier verification, production visibility, and quality risk before shipment. Loading checks and coordination with your freight forwarder can be included when relevant, but logistics brokerage is not the core service.",
+  },
+  {
+    question: "What should I send for an initial quote?",
+    answer: "Send the supplier name or link, material category, project country, current order stage, available drawings/specifications, target timeline, and your main concern. If documents are sensitive, send a summary first and we can define a safer review process.",
+  },
 ];
 
 export const faqSchemaData = {
