@@ -18,7 +18,12 @@ export async function POST(request: Request) {
   const name = clean(body?.name);
   const email = clean(body?.email);
   const company = clean(body?.company);
-  const service = clean(body?.service);
+  const targetCountry = clean(body?.targetCountry);
+  const projectType = clean(body?.projectType);
+  const materialCategory = clean(body?.materialCategory);
+  const supplier = clean(body?.supplier);
+  const orderStage = clean(body?.orderStage);
+  const drawingStatus = clean(body?.drawingStatus);
   const message = clean(body?.message);
 
   if (!name || !email || !message) {
@@ -31,7 +36,12 @@ export async function POST(request: Request) {
     `Name: ${name}`,
     `Email: ${email}`,
     `Company / Country: ${company || "Not provided"}`,
-    `Service interest: ${service || "Not selected"}`,
+    `Target country / project location: ${targetCountry || "Not provided"}`,
+    `Project type: ${projectType || "Not selected"}`,
+    `Material / component category: ${materialCategory || "Not selected"}`,
+    `Supplier name / link: ${supplier || "Not provided"}`,
+    `Order stage: ${orderStage || "Not selected"}`,
+    `Drawings/specifications: ${drawingStatus || "Not selected"}`,
     "",
     "Message:",
     message,
