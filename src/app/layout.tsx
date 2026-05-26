@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { generateOrganizationSchema } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
 import "./globals.css";
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   title: { default: `${siteConfig.tagline} | ${siteConfig.name}`, template: `%s | ${siteConfig.name}` },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
-  keywords: ["China factory inspection","China factory audit","supplier verification China","China sourcing agent","factory quality control China","production monitoring China","China supply chain","industrial sourcing China"],
+  keywords: ["China engineering supplier verification","China construction materials sourcing","precast concrete supplier China","steel structure factory audit China","construction materials inspection China","China factory audit engineering","project procurement China"],
   authors: [{ name: siteConfig.author }],
   robots: { index: true, follow: true },
   openGraph: { type: "website", locale: siteConfig.locale, url: siteConfig.url, siteName: siteConfig.name, title: `${siteConfig.tagline} | ${siteConfig.name}`, description: siteConfig.description, images: [{ url: "/images/og-default.jpg", width: 1200, height: 630, alt: siteConfig.name }] },
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <GoogleAnalytics />
       </body>
     </html>
   );
