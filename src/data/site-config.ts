@@ -1,10 +1,10 @@
 export const siteConfig = {
   name: "Source Rating",
-  tagline: "China Factory Inspection & Industrial Sourcing",
+  tagline: "China Supplier Verification for Engineering & Construction Materials",
   domain: "www.sourcerating.com",
   url: "https://www.sourcerating.com",
   description:
-    "Independent, on-the-ground factory inspection, supplier verification, and industrial sourcing services in China. Helping overseas clients reduce risk and ensure quality.",
+    "China-based supplier verification, factory audits, inspection, and sourcing support for engineering, construction materials, precast concrete, and steel structure buyers.",
   author: "Source Rating",
   locale: "en_US",
   contact: { email: "contact@sourcerating.com", wechat: "SourceRating" },
@@ -12,19 +12,20 @@ export const siteConfig = {
   nav: [
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
+    { label: "Pricing", href: "/pricing" },
     { label: "Industries", href: "/industries" },
     { label: "Case Studies", href: "/case-studies" },
-      { label: "About", href: "/about" },
-      { label: "Contact", href: "/contact" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
   footer: {
     tagline:
-      "Independent on-site factory verification, production inspection, and supplier due diligence in China.",
+      "Engineering-focused supplier verification, factory audits, and project procurement support in China.",
     quickLinks: [
       { label: "Services", href: "/services" },
+      { label: "Pricing", href: "/pricing" },
       { label: "Industries", href: "/industries" },
       { label: "Case Studies", href: "/case-studies" },
-      { label: "Blog", href: "/blog" },
       { label: "FAQ", href: "/faq" },
     ],
     company: [
