@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Camera, ClipboardCheck, FileText, ListChecks, MessageSquareText } from "lucide-react";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const deliverables = [
   { icon: FileText, title: "PDF verification report", text: "Structured findings, supplier profile, project-fit notes, and practical recommendations." },
@@ -12,34 +12,41 @@ const deliverables = [
 
 export function Deliverables() {
   return (
-    <section className="py-20 bg-[#fbfbf8] border-y border-gray-200">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          label="What you receive"
-          title="Decision-ready evidence, not a generic inspection note."
-          description="The output is built for project buyers who need to decide whether to approve a supplier, release a deposit, request corrections, or stop."
-        />
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-[1fr_0.75fr] gap-8 items-start">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-center">
+          <div className="relative overflow-hidden rounded-md border border-gray-200 bg-gray-100 aspect-[4/3]">
+            <Image
+              src="/images/ai-verification-report.png"
+              alt="Supplier verification report package with inspection evidence"
+              fill
+              sizes="(min-width: 1024px) 46vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-brand-600">What you receive</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-gray-950">
+              A report your team can actually make a decision from.
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-gray-600">
+              Clear evidence, risk ratings, and next steps for approving, correcting, or pausing a supplier.
+            </p>
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {deliverables.map((item) => (
-              <div key={item.title} className="rounded-md border border-gray-200 bg-white p-6">
-                <item.icon className="h-5 w-5 text-brand-700" />
-                <h3 className="mt-4 text-lg font-bold text-gray-950">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">{item.text}</p>
+              <div key={item.title} className="flex gap-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-700">
+                  <item.icon className="h-4 w-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-gray-950">{item.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-gray-600">{item.text}</p>
+                </div>
               </div>
             ))}
-          </div>
-          <div className="rounded-md border border-brand-200 bg-white p-7">
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-700">Lead magnet</p>
-            <h3 className="mt-3 text-2xl font-bold text-gray-950">Supplier Verification Checklist for Engineering Buyers</h3>
-            <p className="mt-3 text-gray-600 leading-relaxed">
-              Use this checklist to prepare supplier documents, drawings, QA/QC questions, material certificate checks, and factory visit priorities.
-            </p>
-            <div className="mt-6 rounded-md bg-[#f6f7f3] border border-gray-200 p-4 text-sm text-gray-700">
-              Placeholder for downloadable checklist. Replace with a real PDF once prepared.
             </div>
-            <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-800">
-              Request the checklist <ArrowRight className="h-4 w-4" />
+            <Link href="/contact" className="mt-8 inline-flex items-center gap-2 rounded-md bg-brand-700 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-800">
+              Request the engineering checklist <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
