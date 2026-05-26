@@ -1,42 +1,55 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { services } from "@/data/services";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Comprehensive China factory inspection, supplier verification, production monitoring, and industrial sourcing services for overseas clients.",
-  keywords: ["China factory audit services","supplier verification China","production quality control China","factory inspection China","China sourcing services"],
+  description: "China supplier verification, factory audits, pre-shipment inspection, production monitoring, sourcing support, and visit coordination for engineering and construction materials.",
+  keywords: ["China engineering supplier verification", "steel structure factory audit China", "precast concrete supplier audit", "construction materials inspection China"],
 };
 
 export default function ServicesPage() {
   return (
     <>
-      <section className="pt-32 pb-20 bg-gradient-to-b from-brand-950 to-brand-900">
+      <section className="pt-28 pb-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-sm font-semibold uppercase tracking-wider text-brand-300">Our Services</span>
-            <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-white">End-to-end China sourcing support</h1>
-            <p className="mt-4 text-lg text-gray-300 leading-relaxed">From factory verification to production oversight, each service is designed to reduce your risk and give you confidence in your China supply chain.</p>
+            <span className="text-sm font-semibold uppercase tracking-wider text-brand-700">Services</span>
+            <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-950">
+              China verification support for engineering procurement.
+            </h1>
+            <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+              Each service is designed around a procurement decision: approve a supplier, release a deposit, monitor production, release shipment, or build a qualified supplier shortlist.
+            </p>
           </div>
         </div>
       </section>
-      <section className="py-24 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-24">
-            {services.map((service, index) => (
-              <div key={service.id} id={service.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center`}>
-                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-50 text-brand-700 mb-6"><service.icon className="h-7 w-7" /></div>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">{service.title}</h2>
-                  <p className="text-gray-600 leading-relaxed mb-6">{service.longDescription}</p>
-                  <ul className="space-y-3 mb-8">
-                    {service.features.map((feature) => (<li key={feature} className="flex items-start gap-3"><Check className="h-5 w-5 text-brand-600 shrink-0 mt-0.5" /><span className="text-gray-700">{feature}</span></li>))}
-                  </ul>
-                  <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-medium text-white bg-brand-700 px-5 py-2.5 rounded-lg hover:bg-brand-800 transition-colors">Inquire About This Service <ArrowRight className="h-4 w-4" /></Link>
+          <div className="space-y-16">
+            {services.map((service) => (
+              <div key={service.id} id={service.id} className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 lg:gap-12 items-start rounded-md border border-gray-200 bg-white p-7">
+                <div>
+                  <div className="flex items-center justify-center w-12 h-12 rounded-md bg-brand-50 text-brand-700 mb-5">
+                    <service.icon className="h-6 w-6" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-950">{service.title}</h2>
+                  <p className="mt-4 text-gray-600 leading-relaxed">{service.longDescription}</p>
+                  <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white bg-brand-700 px-5 py-2.5 rounded-md hover:bg-brand-800 transition-colors">
+                    Request this service <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
-                <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                  <div className="aspect-[4/3] rounded-2xl bg-gray-100 flex items-center justify-center"><span className="text-gray-400 text-sm">[Service image placeholder]</span></div>
+                <div className="rounded-md bg-[#fbfbf8] border border-gray-200 p-6">
+                  <p className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Scope can include</p>
+                  <ul className="space-y-3">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-3">
+                        <Check className="h-5 w-5 text-brand-700 shrink-0 mt-0.5" />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
