@@ -1,24 +1,24 @@
-import { ClipboardCheck, Building2, MessageSquare } from "lucide-react";
+import { Building2, ClipboardCheck, MessageSquare } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const values = [
   {
     icon: ClipboardCheck,
-    title: "Verify what is real",
-    description: "Confirm the company, workshop, equipment, certifications, production capacity, and quality system before funds are committed.",
-    highlight: "Built for pre-payment due diligence",
+    title: "Engineering documents are part of the check",
+    description: "Drawings, specifications, material certificates, QA/QC records, packing requirements, and inspection points are reviewed as part of supplier readiness.",
+    highlight: "Built for project procurement",
   },
   {
     icon: Building2,
-    title: "Get eyes inside the factory",
-    description: "On-site visits replace guesswork with photos, observations, checklists, and practical risk notes from the production floor.",
-    highlight: "Factory-floor evidence, not broker claims",
+    title: "Factory-floor evidence replaces assumptions",
+    description: "The work focuses on visible production capability: molds, jigs, welding bays, coating lines, storage, packaging, and workload pressure.",
+    highlight: "Evidence from the workshop",
   },
   {
     icon: MessageSquare,
-    title: "Remove supplier-side bias",
-    description: "We do not take factory commissions. The work is scoped, paid, and reported to the overseas buyer only.",
-    highlight: "Independent from supplier incentives",
+    title: "Commercial advice stays buyer-side",
+    description: "No factory commissions. No supplier-side referral fees. Recommendations are based on the buyer's project risk, not supplier incentives.",
+    highlight: "Aligned with overseas buyers",
   },
 ];
 
@@ -27,9 +27,9 @@ export function ValueProps() {
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          label="First principles"
-          title="Most sourcing failures start with unverified assumptions."
-          description="A professional sourcing process should prove identity, capability, quality controls, and communication reliability before commercial exposure grows."
+          label="Why Source Rating"
+          title="Engineering buyers need supplier evidence that matches project reality."
+          description="A factory can look capable on a website and still fail on drawings, tolerances, documentation, packaging, or schedule control. The service is designed to test those assumptions before commitment."
         />
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
           {values.map((value) => (
