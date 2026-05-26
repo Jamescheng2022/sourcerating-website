@@ -2,7 +2,7 @@
   "name": "sourcerating",
   "version": "1.0.0",
   "private": true,
-  "description": "China Factory Inspection & Industrial Sourcing — professional service website",
+  "description": "China supplier verification for engineering and construction materials",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
