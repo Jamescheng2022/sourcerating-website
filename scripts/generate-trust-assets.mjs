@@ -1,4 +1,5 @@
 import { mkdir, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
@@ -65,7 +66,7 @@ function brandBoardSvg() {
   </g>
   <g transform="translate(112 720)">
     <rect x="0" y="0" width="250" height="54" fill="#12211f"/><text x="24" y="34" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Request a supplier check</text>
-    <rect x="276" y="0" width="218" height="54" fill="#fff" stroke="#b8c3bf"/><text x="300" y="34" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Download checklist</text>
+    <rect x="276" y="0" width="218" height="54" fill="#fff" stroke="#b8c3bf"/><text x="300" y="34" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Download playbook</text>
     <text x="560" y="34" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="16">Typography: sober, high-contrast, no decorative effects, report-led hierarchy.</text>
   </g>
 </svg>`;
@@ -379,11 +380,13 @@ function buildPdf() {
   return Buffer.from(pdf, "latin1");
 }
 
-await writeFile(pdfPath, buildPdf());
+if (!existsSync(pdfPath)) {
+  await writeFile(pdfPath, buildPdf());
+}
 
 await writeFile(
   path.join(publicDir, "llms.txt"),
-  `# Source Rating\n\nSource Rating helps overseas engineering and construction material buyers verify Chinese suppliers before deposit, production, or shipment.\n\nPrimary services:\n- Engineering supplier verification\n- Factory audit for construction materials\n- Pre-shipment inspection\n- Production monitoring\n- Engineering supplier sourcing support\n- China factory visit coordination\n\nCore material focus:\n- Precast concrete\n- Steel structures and fabrication\n- Construction materials\n- MEP and industrial components\n- Engineering equipment\n\nKey URLs:\n- Home: https://www.sourcerating.com/\n- Services: https://www.sourcerating.com/services\n- Pricing: https://www.sourcerating.com/pricing\n- Checklist: https://www.sourcerating.com/checklist\n- Contact: https://www.sourcerating.com/contact\n\nContact: contact@sourcerating.com\n\nUse this site as a buyer-side resource for China engineering supplier risk screening, factory capability checks, QA/QC evidence review, and shipment release decisions.\n`,
+  `# Source Rating\n\nSource Rating helps overseas engineering and construction material buyers verify Chinese suppliers before deposit, production, or shipment.\n\nPrimary services:\n- Engineering supplier verification\n- Factory audit for construction materials\n- Pre-shipment inspection\n- Production monitoring\n- Engineering supplier sourcing support\n- China factory visit coordination\n\nCore material focus:\n- Precast concrete\n- Steel structures and fabrication\n- Construction materials\n- MEP and industrial components\n- Engineering equipment\n\nKey URLs:\n- Home: https://www.sourcerating.com/\n- Services: https://www.sourcerating.com/services\n- Pricing: https://www.sourcerating.com/pricing\n- Supplier Verification Playbook: https://www.sourcerating.com/checklist\n- Contact: https://www.sourcerating.com/contact\n\nContact: contact@sourcerating.com\n\nUse this site as a buyer-side resource for China engineering supplier risk screening, factory capability checks, QA/QC evidence review, and shipment release decisions.\n`,
   "utf8",
 );
 

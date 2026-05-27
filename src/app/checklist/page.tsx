@@ -4,29 +4,29 @@ import Link from "next/link";
 import { ArrowRight, Download, FileText, Mail, SearchCheck, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Engineering Supplier Verification Checklist",
+  title: "Engineering Supplier Verification Playbook",
   description:
-    "Download Source Rating's engineering supplier verification checklist for overseas buyers evaluating Chinese suppliers before deposit, production, or shipment.",
+    "Download Source Rating's professional supplier verification playbook for overseas engineering buyers evaluating Chinese suppliers before deposit, production, or shipment.",
 };
 
 const checklistSections = [
-  "Legal identity and export entity",
-  "Drawings, specifications, tolerances, and standards",
-  "Factory capability and current workload",
-  "QA/QC controls, certificates, and traceability",
-  "Packaging, markings, documents, and shipment release",
+  "Supplier identity, legal entity, and export risk",
+  "Quality management, document control, and engineering fit",
+  "Factory capability, capacity, and subcontracting risk",
+  "Material certificates, traceability, and compliance documents",
+  "Production monitoring, pre-shipment release, and escalation gates",
 ];
 
 const includedSections = [
-  "Supplier identity and business legitimacy",
-  "Engineering documents and technical fit",
-  "Factory capability and production capacity",
-  "QA/QC, certificates, and traceability",
-  "Production monitoring and schedule risk",
-  "Pre-shipment inspection and release",
-  "Risk scoring matrix",
-  "Supplier questions before a visit",
-  "When to request Source Rating support",
+  "Buyer decision gates before deposit, production, and shipment",
+  "0-3 evidence scoring model and proceed / hold thresholds",
+  "Supplier identity, legal entity, and business legitimacy",
+  "ISO-style quality system, document control, and corrective-action checks",
+  "Factory capability, capacity, and hidden subcontracting risk",
+  "Material certificates, traceability, and compliance document review",
+  "Precast concrete and construction material module",
+  "Steel structures, fabrication, MEP, and industrial component module",
+  "Supplier questions email template and Source Rating operating model",
 ];
 
 const sampleReports = [
@@ -53,7 +53,7 @@ export default function ChecklistPage() {
       <section className="relative overflow-hidden bg-brand-950 pt-28 text-white">
         <Image
           src="/images/checklist-report-pack.png"
-          alt="Engineering supplier verification checklist and report package"
+          alt="Engineering supplier verification playbook and report package"
           fill
           priority
           sizes="100vw"
@@ -62,12 +62,12 @@ export default function ChecklistPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/88 to-brand-950/45" />
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 pb-20 pt-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase text-brand-200">Free buyer resource</p>
+            <p className="text-sm font-semibold uppercase text-brand-200">Professional buyer resource</p>
             <h1 className="mt-4 text-5xl font-bold sm:text-6xl">
-              Engineering Supplier Verification Checklist
+              Engineering Supplier Verification Playbook
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-200">
-              A practical pre-deposit and pre-shipment checklist for overseas buyers evaluating Chinese engineering and construction material suppliers.
+              A 14-page buyer-side field guide for evaluating Chinese engineering and construction material suppliers before deposit, production, or shipment release.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a
@@ -76,7 +76,7 @@ export default function ChecklistPage() {
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-brand-950 hover:bg-gray-100"
               >
                 <Download className="h-4 w-4" />
-                Download PDF
+                Download playbook
               </a>
               <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/10 px-5 py-3 text-sm font-semibold text-white hover:bg-white/15">
                 Ask about a supplier <ArrowRight className="h-4 w-4" />
@@ -86,7 +86,7 @@ export default function ChecklistPage() {
           <div className="rounded-md border border-white/15 bg-white/10 p-6 backdrop-blur">
             <div className="flex items-center gap-3">
               <FileText className="h-6 w-6 text-brand-200" />
-              <h2 className="text-xl font-bold">What it helps you check</h2>
+              <h2 className="text-xl font-bold">What the playbook helps you check</h2>
             </div>
             <div className="mt-6 space-y-4">
               {checklistSections.map((item) => (
@@ -105,7 +105,7 @@ export default function ChecklistPage() {
           <div>
             <p className="text-sm font-semibold uppercase text-brand-700">How to use it</p>
             <h2 className="mt-3 text-4xl font-bold text-gray-950">
-              Use the checklist before you release money or shipment.
+              Use the playbook before you release money or shipment.
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -128,10 +128,10 @@ export default function ChecklistPage() {
           <div>
             <p className="text-sm font-semibold uppercase text-brand-700">Inside the PDF</p>
             <h2 className="mt-3 text-4xl font-bold text-gray-950">
-              A buyer-side checklist, not a generic supplier form.
+              A buyer-side verification guide, not a generic supplier form.
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              The document gives your procurement or project team a simple way to score supplier risk before deposit, during production, and before shipment release.
+              The document gives your procurement or project team a structured way to score evidence quality, identify red flags, and decide whether to proceed, hold, or verify on-site.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -222,7 +222,7 @@ export default function ChecklistPage() {
               Send the supplier link and your main concern.
             </h2>
             <p className="mt-4 text-lg leading-8 text-gray-600">
-              Source Rating can turn the checklist into a scoped supplier verification visit, desk check, or pre-shipment inspection.
+              Source Rating can turn the playbook into a scoped supplier verification visit, desk check, or pre-shipment inspection.
             </p>
           </div>
           <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-950 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-800">

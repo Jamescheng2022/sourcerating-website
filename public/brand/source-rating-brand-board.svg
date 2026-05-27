@@ -26,7 +26,7 @@
   </g>
   <g transform="translate(112 720)">
     <rect x="0" y="0" width="250" height="54" fill="#12211f"/><text x="24" y="34" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Request a supplier check</text>
-    <rect x="276" y="0" width="218" height="54" fill="#fff" stroke="#b8c3bf"/><text x="300" y="34" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Download checklist</text>
+    <rect x="276" y="0" width="218" height="54" fill="#fff" stroke="#b8c3bf"/><text x="300" y="34" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Download playbook</text>
     <text x="560" y="34" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="16">Typography: sober, high-contrast, no decorative effects, report-led hierarchy.</text>
   </g>
 </svg>

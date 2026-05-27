@@ -147,7 +147,7 @@ export default function HomePage() {
                 Request a supplier check <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/checklist" className="inline-flex items-center justify-center gap-2 border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
-                Download checklist <FileText className="h-4 w-4" />
+                Download playbook <FileText className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -271,13 +271,13 @@ export default function HomePage() {
               ))}
             </div>
             <Link href="/checklist" className="mt-8 inline-flex items-center gap-2 bg-white px-5 py-3 text-sm font-semibold text-brand-950 transition hover:-translate-y-0.5 hover:bg-gray-100">
-              Get the free checklist <ArrowRight className="h-4 w-4" />
+              Get the buyer playbook <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="relative min-h-[360px] overflow-hidden border border-white/15 bg-white/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
             <Image
               src="/images/checklist-report-pack.png"
-              alt="Engineering supplier verification checklist and report pack"
+              alt="Engineering supplier verification playbook and report pack"
               fill
               sizes="(min-width: 1024px) 52vw, 100vw"
               className="object-cover"
@@ -297,7 +297,7 @@ export default function HomePage() {
               The preview below is anonymized and redacted. Real reports use your project criteria, supplier documents, factory photos, and a clear release or hold recommendation.
             </p>
             <Link href="/checklist" className="mt-8 inline-flex items-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
-              View checklist page <ArrowRight className="h-4 w-4" />
+              View playbook page <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">

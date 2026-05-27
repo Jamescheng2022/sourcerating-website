@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "generate:trust-assets": "node scripts/generate-trust-assets.mjs && node scripts/generate-professional-checklist.mjs",
     "lint": "next lint"
   },
   "dependencies": {

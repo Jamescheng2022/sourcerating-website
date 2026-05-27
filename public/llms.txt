@@ -21,7 +21,7 @@ Key URLs:
 - Home: https://www.sourcerating.com/
 - Services: https://www.sourcerating.com/services
 - Pricing: https://www.sourcerating.com/pricing
-- Checklist: https://www.sourcerating.com/checklist
+- Supplier Verification Playbook: https://www.sourcerating.com/checklist
 - Contact: https://www.sourcerating.com/contact
 
 Contact: contact@sourcerating.com
