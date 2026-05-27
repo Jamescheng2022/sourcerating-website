@@ -10,7 +10,7 @@ export default function PrivacyPage() {
   return (
     <section className="pt-28 pb-20 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-950">Privacy Policy</h1>
+        <h1 className="text-4xl font-bold text-gray-950">Privacy Policy</h1>
         <p className="mt-4 text-gray-600 leading-relaxed">
           Source Rating collects only the information needed to respond to inquiries and provide sourcing, inspection, and advisory services.
         </p>

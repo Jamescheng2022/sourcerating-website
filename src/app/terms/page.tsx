@@ -10,7 +10,7 @@ export default function TermsPage() {
   return (
     <section className="pt-28 pb-20 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-950">Terms of Service</h1>
+        <h1 className="text-4xl font-bold text-gray-950">Terms of Service</h1>
         <p className="mt-4 text-gray-600 leading-relaxed">
           These terms provide a plain-English overview for website inquiries. Specific paid engagements are governed by the written scope, proposal, or service agreement agreed with the client.
         </p>

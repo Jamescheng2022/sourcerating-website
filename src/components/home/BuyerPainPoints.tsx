@@ -29,8 +29,8 @@ export function BuyerPainPoints() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[0.55fr_1fr] gap-10 items-start">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-600">Why buyers ask us</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-950">
+            <p className="text-sm font-semibold uppercase text-brand-600">Why buyers ask us</p>
+            <h2 className="mt-3 text-3xl font-bold text-gray-950">
               The risk is usually hidden in the details.
             </h2>
           </div>

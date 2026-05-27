@@ -17,7 +17,7 @@ export function Deliverables() {
         <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-center">
           <div className="relative overflow-hidden rounded-md border border-gray-200 bg-gray-100 aspect-[4/3]">
             <Image
-              src="/images/ai-verification-report.png"
+              src="/images/checklist-report-pack.png"
               alt="Supplier verification report package with inspection evidence"
               fill
               sizes="(min-width: 1024px) 46vw, 100vw"
@@ -25,8 +25,8 @@ export function Deliverables() {
             />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-600">What you receive</p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-gray-950">
+            <p className="text-sm font-semibold uppercase text-brand-600">What you receive</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-gray-950">
               A report your team can actually make a decision from.
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-gray-600">

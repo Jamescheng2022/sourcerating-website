@@ -10,8 +10,29 @@ export default function FAQPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }} />
-      <section className="pt-32 pb-20 bg-gradient-to-b from-brand-950 to-brand-900"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div className="max-w-3xl"><span className="text-sm font-semibold uppercase tracking-wider text-brand-300">FAQ</span><h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-white">Frequently asked questions</h1><p className="mt-4 text-lg text-gray-300 leading-relaxed">Answers to the most common questions from overseas clients about factory inspection, supplier verification, and China sourcing services.</p></div></div></section>
-      <section className="py-24 bg-white"><div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8"><div className="space-y-8">{faqItems.map((item, index) => (<div key={index} className="pb-8 border-b border-gray-100 last:border-0"><h2 className="text-xl font-bold text-gray-900 mb-3">{item.question}</h2><p className="text-gray-600 leading-relaxed">{item.answer}</p></div>))}</div></div></section>
+      <section className="border-b border-gray-200 bg-[#f7f8f5] pb-16 pt-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <span className="text-sm font-semibold uppercase text-brand-700">FAQ</span>
+            <h1 className="mt-3 text-4xl font-bold text-gray-950 sm:text-5xl">Frequently asked questions</h1>
+            <p className="mt-4 text-lg leading-relaxed text-gray-600">
+              Practical answers for overseas buyers planning supplier verification, factory audits, inspection, or sourcing support in China.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="bg-white py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="divide-y divide-gray-200 border-y border-gray-200">
+            {faqItems.map((item) => (
+              <div key={item.question} className="py-7">
+                <h2 className="text-xl font-bold text-gray-950">{item.question}</h2>
+                <p className="mt-3 leading-7 text-gray-600">{item.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

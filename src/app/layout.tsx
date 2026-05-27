@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { generateOrganizationSchema } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   title: { default: `${siteConfig.tagline} | ${siteConfig.name}`, template: `%s | ${siteConfig.name}` },
@@ -16,14 +13,14 @@ export const metadata: Metadata = {
   keywords: ["China engineering supplier verification","China construction materials sourcing","precast concrete supplier China","steel structure factory audit China","construction materials inspection China","China factory audit engineering","project procurement China"],
   authors: [{ name: siteConfig.author }],
   robots: { index: true, follow: true },
-  openGraph: { type: "website", locale: siteConfig.locale, url: siteConfig.url, siteName: siteConfig.name, title: `${siteConfig.tagline} | ${siteConfig.name}`, description: siteConfig.description, images: [{ url: "/images/og-default.jpg", width: 1200, height: 630, alt: siteConfig.name }] },
-  twitter: { card: "summary_large_image", title: `${siteConfig.tagline} | ${siteConfig.name}`, description: siteConfig.description, images: ["/images/og-default.jpg"] },
+  openGraph: { type: "website", locale: siteConfig.locale, url: siteConfig.url, siteName: siteConfig.name, title: `${siteConfig.tagline} | ${siteConfig.name}`, description: siteConfig.description, images: [{ url: "/images/hero-factory-audit.png", width: 1600, height: 900, alt: siteConfig.name }] },
+  twitter: { card: "summary_large_image", title: `${siteConfig.tagline} | ${siteConfig.name}`, description: siteConfig.description, images: ["/images/hero-factory-audit.png"] },
   alternates: { canonical: siteConfig.url },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(generateOrganizationSchema()) }} />

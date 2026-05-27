@@ -15,8 +15,8 @@ export default function CaseStudiesPage() {
       <section className="pt-28 pb-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-sm font-semibold uppercase tracking-wider text-brand-700">Anonymized case studies</span>
-            <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-950">
+            <span className="text-sm font-semibold uppercase text-brand-700">Anonymized case studies</span>
+            <h1 className="mt-3 text-4xl sm:text-5xl font-bold text-gray-950">
               Engineering supplier risk, checked before it becomes project cost.
             </h1>
             <p className="mt-4 text-lg text-gray-600 leading-relaxed">
@@ -42,15 +42,15 @@ export default function CaseStudiesPage() {
                   <h2 className="text-xl font-bold text-gray-950 mb-4">{study.title}</h2>
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-sm font-semibold text-gray-950 uppercase tracking-wider mb-2">Problem</h3>
+                      <h3 className="text-sm font-semibold text-gray-950 uppercase mb-2">Problem</h3>
                       <p className="text-gray-600 leading-relaxed text-sm">{study.challenge}</p>
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-gray-950 uppercase tracking-wider mb-2">Verification method</h3>
+                      <h3 className="text-sm font-semibold text-gray-950 uppercase mb-2">Verification method</h3>
                       <p className="text-gray-600 leading-relaxed text-sm">{study.solution}</p>
                     </div>
                     <div className="p-4 rounded-md bg-green-50 border border-green-100">
-                      <h3 className="text-sm font-semibold text-green-900 uppercase tracking-wider mb-1">Decision value</h3>
+                      <h3 className="text-sm font-semibold text-green-900 uppercase mb-1">Decision value</h3>
                       <p className="text-green-800 leading-relaxed text-sm">{study.result}</p>
                     </div>
                   </div>

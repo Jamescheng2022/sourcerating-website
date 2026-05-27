@@ -7,8 +7,8 @@ export function CTASection() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-300">Start with one engineering supplier</p>
-            <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-white">
+            <p className="text-sm font-semibold uppercase text-brand-300">Start with one engineering supplier</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-white">
               Have a precast, steel, MEP, or construction material supplier you need checked?
             </h2>
             <p className="mt-4 text-lg text-gray-300 leading-relaxed">

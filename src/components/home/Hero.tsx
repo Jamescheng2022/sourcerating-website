@@ -11,7 +11,7 @@ export function Hero() {
             <div className="inline-flex items-center gap-2 rounded-md border border-brand-200 bg-white px-3 py-1.5 text-sm font-semibold text-brand-800 mb-6">
               China engineering supplier checks
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-950 leading-[1.02]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-950 leading-[1.02]">
               Verify Chinese engineering suppliers before you commit.
             </h1>
             <p className="mt-6 text-lg text-gray-600 leading-relaxed">
@@ -42,7 +42,7 @@ export function Hero() {
           <div className="relative">
             <div className="relative aspect-[1.18/1] overflow-hidden rounded-md border border-gray-200 bg-gray-900 shadow-sm">
               <Image
-                src="/images/ai-engineering-inspection.png"
+                src="/images/hero-factory-audit.png"
                 alt="Engineering supplier verification inside a steel fabrication workshop"
                 fill
                 priority

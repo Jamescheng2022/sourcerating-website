@@ -12,8 +12,8 @@ export function ServicesGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[0.42fr_1fr] gap-10 items-start">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-600">Core services</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-950">Pick the check that matches your order risk.</h2>
+            <p className="text-sm font-semibold uppercase text-brand-600">Core services</p>
+            <h2 className="mt-3 text-3xl font-bold text-gray-950">Pick the check that matches your order risk.</h2>
             <Link href="/services" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-800">
               View all services <ArrowRight className="h-4 w-4" />
             </Link>

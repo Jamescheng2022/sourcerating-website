@@ -13,18 +13,18 @@ export function Footer() {
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">{siteConfig.footer.tagline}</p>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Quick Links</h4>
-            <ul className="space-y-3">{[...siteConfig.footer.quickLinks, { label: "FAQ", href: "/faq" }].map((link) => (<li key={link.href}><Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">{link.label}</Link></li>))}</ul>
+            <h4 className="text-sm font-semibold text-white uppercase mb-4">Quick Links</h4>
+            <ul className="space-y-3">{siteConfig.footer.quickLinks.map((link) => (<li key={link.href}><Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">{link.label}</Link></li>))}</ul>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h4>
+            <h4 className="text-sm font-semibold text-white uppercase mb-4">Company</h4>
             <ul className="space-y-3">{siteConfig.footer.company.map((link) => (<li key={link.href}><Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">{link.label}</Link></li>))}</ul>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Contact</h4>
+            <h4 className="text-sm font-semibold text-white uppercase mb-4">Contact</h4>
             <ul className="space-y-3 text-sm text-gray-400">
               <li><a href={`mailto:${siteConfig.contact.email}`} className="hover:text-white transition-colors">{siteConfig.contact.email}</a></li>
-              <li><a href={siteConfig.social.linkedin} className="hover:text-white transition-colors">LinkedIn</a></li>
+              <li>China engineering and construction supply chain support</li>
             </ul>
           </div>
         </div>

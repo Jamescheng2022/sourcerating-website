@@ -1,20 +1,19 @@
 export const siteConfig = {
   name: "Source Rating",
-  tagline: "China Supplier Verification for Engineering & Construction Materials",
+  tagline: "China Supplier Verification for Engineering Buyers",
   domain: "www.sourcerating.com",
   url: "https://www.sourcerating.com",
   description:
-    "China-based supplier verification, factory audits, inspection, and sourcing support for engineering, construction materials, precast concrete, and steel structure buyers.",
+    "China-based supplier verification, factory audits, inspection, and sourcing support for engineering and construction material buyers.",
   author: "Source Rating",
   locale: "en_US",
   contact: { email: "contact@sourcerating.com", wechat: "SourceRating" },
-  social: { linkedin: "https://linkedin.com/company/sourcerating" },
+  social: { linkedin: "" },
   nav: [
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Industries", href: "/industries" },
-    { label: "Case Studies", href: "/case-studies" },
+    { label: "Checklist", href: "/checklist" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
@@ -24,9 +23,9 @@ export const siteConfig = {
     quickLinks: [
       { label: "Services", href: "/services" },
       { label: "Pricing", href: "/pricing" },
+      { label: "Checklist", href: "/checklist" },
       { label: "Industries", href: "/industries" },
       { label: "Case Studies", href: "/case-studies" },
-      { label: "FAQ", href: "/faq" },
     ],
     company: [
       { label: "About", href: "/about" },

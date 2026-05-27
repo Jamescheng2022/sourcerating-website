@@ -15,8 +15,8 @@ export default function IndustriesPage() {
       <section className="pt-28 pb-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-sm font-semibold uppercase tracking-wider text-brand-700">Engineering material focus</span>
-            <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-950">
+            <span className="text-sm font-semibold uppercase text-brand-700">Engineering material focus</span>
+            <h1 className="mt-3 text-4xl sm:text-5xl font-bold text-gray-950">
               Focused on engineering and construction supply chains.
             </h1>
             <p className="mt-4 text-lg text-gray-600 leading-relaxed">

@@ -8,6 +8,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  body { @apply bg-[#fbfbf8] text-gray-900; }
+  body { @apply bg-[#f4f6f4] text-gray-900; }
   ::selection { @apply bg-brand-200 text-brand-950; }
 }
