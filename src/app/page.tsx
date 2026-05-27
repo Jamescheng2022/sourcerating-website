@@ -5,10 +5,12 @@ import {
   ArrowRight,
   BadgeCheck,
   ClipboardCheck,
+  Download,
   Factory,
   FileText,
   Gauge,
   HardHat,
+  SearchCheck,
   ShieldCheck,
 } from "lucide-react";
 import { pricingItems } from "@/data/pricing";
@@ -95,6 +97,24 @@ const deliverables = [
   "Shipment release notes",
 ];
 
+const sampleReports = [
+  {
+    src: "/images/report-cover-redacted.svg",
+    alt: "Redacted Source Rating supplier verification report cover sample",
+    label: "Report cover",
+  },
+  {
+    src: "/images/report-risk-matrix-redacted.svg",
+    alt: "Redacted engineering supplier risk matrix sample",
+    label: "Risk matrix",
+  },
+  {
+    src: "/images/report-photo-evidence-redacted.svg",
+    alt: "Redacted factory audit photo evidence page sample",
+    label: "Photo evidence",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
@@ -119,7 +139,7 @@ export default function HomePage() {
             <h1 className="mt-7 max-w-[12ch] text-5xl font-semibold leading-none sm:text-6xl lg:text-7xl">
               Know the factory before you trust the quote.
             </h1>
-            <p className="mt-6 max-w-[64ch] text-lg leading-8 text-gray-200">
+            <p className="mt-6 max-w-[64ch] text-base leading-7 text-gray-200 sm:text-lg sm:leading-8">
               Buyer-side factory audits, supplier checks, and inspection support for overseas engineering and construction material buyers.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -266,12 +286,89 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-y border-gray-200 bg-[#f4f6f4] py-20">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[0.45fr_1fr] lg:px-8">
+          <div>
+            <p className="text-sm font-semibold uppercase text-brand-700">Sample report pack</p>
+            <h2 className="mt-3 text-4xl font-semibold leading-tight text-gray-950">
+              Show your team evidence, not a sales opinion.
+            </h2>
+            <p className="mt-5 max-w-[58ch] text-base leading-7 text-gray-600">
+              The preview below is anonymized and redacted. Real reports use your project criteria, supplier documents, factory photos, and a clear release or hold recommendation.
+            </p>
+            <Link href="/checklist" className="mt-8 inline-flex items-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
+              View checklist page <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {sampleReports.map((report) => (
+              <div key={report.src} className="border border-gray-200 bg-white p-3 shadow-sm">
+                <div className="relative aspect-[1.08/1.38] overflow-hidden bg-gray-100">
+                  <Image
+                    src={report.src}
+                    alt={report.alt}
+                    fill
+                    sizes="(min-width: 768px) 24vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <p className="mt-3 font-mono text-xs font-semibold uppercase text-gray-500">Sample / redacted</p>
+                <p className="mt-1 text-sm font-semibold text-gray-950">{report.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+          <div className="relative min-h-[430px] overflow-hidden border border-gray-200 bg-gray-100">
+            <Image
+              src="/images/audit-report-desk-mockup.png"
+              alt="Anonymized engineering supplier verification report mockup on a desk"
+              fill
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="flex flex-col justify-center">
+            <p className="text-sm font-semibold uppercase text-brand-700">Launch offer</p>
+            <h2 className="mt-3 text-4xl font-semibold leading-tight text-gray-950">
+              Send one supplier link. Get a free first-pass risk screen.
+            </h2>
+            <p className="mt-5 text-base leading-7 text-gray-600">
+              For early overseas engineering buyers, Source Rating will review one supplier link and your main risk concern at no cost. You receive a concise note on obvious red flags, engineering fit, and whether a paid visit or inspection is worth it.
+            </p>
+            <div className="mt-8 divide-y divide-gray-200 border-y border-gray-200">
+              {[
+                "Best for pre-deposit supplier screening",
+                "Desk-based only: no legal opinion, lab test, or on-site claim",
+                "Send supplier link, product category, target country, and concern",
+              ].map((item) => (
+                <div key={item} className="flex gap-3 py-4">
+                  <SearchCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-700" />
+                  <p className="text-sm font-semibold text-gray-800">{item}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
+                Request free screen <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a href="/downloads/source-rating-engineering-supplier-checklist.pdf" download className="inline-flex items-center justify-center gap-2 border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-800 transition hover:-translate-y-0.5 hover:border-brand-300">
+                Download PDF <Download className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-white py-20">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-[0.34fr_1fr] lg:px-8">
           <div>
             <p className="text-sm font-semibold uppercase text-brand-700">Pricing</p>
             <h2 className="mt-3 text-4xl font-semibold leading-tight text-gray-950">
-              Start small. Expand only if risk requires it.
+              Start with the free screen. Expand only if risk requires it.
             </h2>
           </div>
           <div className="divide-y divide-gray-200 border-y border-gray-200">

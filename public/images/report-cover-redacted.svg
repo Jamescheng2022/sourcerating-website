@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="980" viewBox="0 0 1440 980" role="img" aria-label="Redacted supplier verification report cover sample">
+  <rect width="1440" height="980" fill="#eef1ef"/>
+  <rect x="160" y="56" width="1120" height="868" fill="#fff" stroke="#cfd8d4"/>
+  <rect x="160" y="812" width="1120" height="112" fill="#12211f"/>
+  <text x="230" y="140" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800">SOURCE RATING</text>
+  <text x="230" y="178" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="18">Independent Verification for Engineering &amp; Construction Materials</text>
+  <text x="230" y="292" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="800">SUPPLIER VERIFICATION</text>
+  <text x="230" y="372" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="800">REPORT</text>
+  <line x1="230" y1="418" x2="1110" y2="418" stroke="#c7a35b" stroke-width="3"/>
+  <text x="230" y="470" fill="#37413f" font-family="Arial, Helvetica, sans-serif" font-size="21">Client:</text><rect x="430" y="445" width="310" height="28" fill="#111827"/><text x="230" y="520" fill="#37413f" font-family="Arial, Helvetica, sans-serif" font-size="21">Supplier:</text><rect x="430" y="495" width="310" height="28" fill="#111827"/><text x="230" y="570" fill="#37413f" font-family="Arial, Helvetica, sans-serif" font-size="21">Location:</text><text x="430" y="570" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">Jiangsu, China</text><text x="230" y="620" fill="#37413f" font-family="Arial, Helvetica, sans-serif" font-size="21">Industry:</text><text x="430" y="620" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">Steel Structures / Fabrication</text><text x="230" y="670" fill="#37413f" font-family="Arial, Helvetica, sans-serif" font-size="21">Assessment Date:</text><text x="430" y="670" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">May 2026</text><text x="230" y="720" fill="#37413f" font-family="Arial, Helvetica, sans-serif" font-size="21">Report No.:</text><text x="430" y="720" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">SR-2026-0527-01</text>
+  <rect x="815" y="492" width="300" height="156" fill="#f4f6f4" stroke="#cfd8d4"/>
+  <text x="842" y="540" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">OVERALL RISK</text>
+  <rect x="842" y="565" width="178" height="48" fill="#e7a83a"/>
+  <text x="866" y="598" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800">MODERATE</text>
+  <text x="230" y="870" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="18">On-site verification</text>
+  <text x="520" y="870" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="18">Evidence based</text>
+  <text x="810" y="870" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="18">Actionable next steps</text>
+  <text x="1060" y="872" fill="#9ca3af" font-family="Arial, Helvetica, sans-serif" font-size="15">SAMPLE / REDACTED</text>
+</svg>

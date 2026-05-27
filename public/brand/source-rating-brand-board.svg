@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-label="Source Rating brand UI board">
+  <rect width="1440" height="900" fill="#f4f6f4"/>
+  <rect x="72" y="64" width="1296" height="772" fill="#fff" stroke="#d8dfdc"/>
+  <g transform="translate(112 104)">
+    <text x="0" y="0" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">SOURCE RATING BRAND SYSTEM</text>
+    <text x="0" y="58" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="800">Engineering trust, not decoration.</text>
+    <text x="0" y="100" fill="#5f6f6b" font-family="Arial, Helvetica, sans-serif" font-size="24">Minimal audit-led UI for overseas engineering buyers sourcing from China.</text>
+  </g>
+  <g transform="translate(112 260)">
+    
+      <rect width="640" height="160" fill="none"/>
+      <g transform="translate(24 24)">
+        <rect width="112" height="112" rx="18" fill="#12211f"/>
+        <path d="M29 31h49.4c12.1 0 19.1 6.2 19.1 16.4 0 7-3.4 12.3-9.9 14.9l12.6 27.7H82L71.7 65.8H49.5V90H29V31Zm20.5 15.4v11.9h27c4 0 6.4-2.2 6.4-6.1 0-3.6-2.4-5.8-6.4-5.8h-27Z" fill="#ffffff"/>
+        <path d="M29 95h70v8H29v-8Z" fill="#ffffff" opacity=".42"/>
+      </g>
+      <g transform="translate(168 43)">
+        <text x="0" y="34" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="800">Source Rating</text>
+        <text x="0" y="66" fill="#5f6f6b" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">FACTORY RISK CHECKS</text>
+      </g>
+    
+  </g>
+  <g transform="translate(112 460)">
+    <text x="0" y="0" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Palette</text>
+    <g transform="translate(0 34)"><rect width="140" height="92" fill="#12211f" stroke="#d8dfdc"/><text x="0" y="122" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Brand 950</text><text x="0" y="146" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="13">#12211f</text></g><g transform="translate(185 34)"><rect width="140" height="92" fill="#2f514e" stroke="#d8dfdc"/><text x="0" y="122" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Brand 700</text><text x="0" y="146" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="13">#2f514e</text></g><g transform="translate(370 34)"><rect width="140" height="92" fill="#66736f" stroke="#d8dfdc"/><text x="0" y="122" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Steel</text><text x="0" y="146" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="13">#66736f</text></g><g transform="translate(555 34)"><rect width="140" height="92" fill="#f4f6f4" stroke="#d8dfdc"/><text x="0" y="122" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Paper</text><text x="0" y="146" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="13">#f4f6f4</text></g><g transform="translate(740 34)"><rect width="140" height="92" fill="#e7a83a" stroke="#d8dfdc"/><text x="0" y="122" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Amber</text><text x="0" y="146" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="13">#e7a83a</text></g><g transform="translate(925 34)"><rect width="140" height="92" fill="#c73b2f" stroke="#d8dfdc"/><text x="0" y="122" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">Risk Red</text><text x="0" y="146" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="13">#c73b2f</text></g>
+  </g>
+  <g transform="translate(112 720)">
+    <rect x="0" y="0" width="250" height="54" fill="#12211f"/><text x="24" y="34" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Request a supplier check</text>
+    <rect x="276" y="0" width="218" height="54" fill="#fff" stroke="#b8c3bf"/><text x="300" y="34" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Download checklist</text>
+    <text x="560" y="34" fill="#66736f" font-family="Arial, Helvetica, sans-serif" font-size="16">Typography: sober, high-contrast, no decorative effects, report-led hierarchy.</text>
+  </g>
+</svg>

@@ -7,6 +7,12 @@ export interface PricingItem {
 
 export const pricingItems: PricingItem[] = [
   {
+    service: "Free First-Pass Supplier Risk Screen",
+    price: "Free during launch",
+    description: "A desk-based first look at one China engineering supplier before you decide whether a paid visit, audit, or inspection is worth it.",
+    deliverables: ["Supplier website and business-signal screen", "Engineering fit and obvious red flags", "Recommended next verification step"],
+  },
+  {
     service: "Engineering Supplier Background Check",
     price: "From USD 300",
     description: "Desk-based verification for a construction material, steel, precast, MEP, or engineering component supplier.",

@@ -20,9 +20,23 @@ export default function PricingPage() {
               Transparent starting points for engineering supplier checks.
             </h1>
             <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-              Final pricing depends on factory location, product complexity, drawings/specification depth, inspection scope, travel requirements, and report depth. Send supplier and project details for a fixed quote within 24 hours.
+              Start with a free first-pass supplier risk screen during launch. Paid scopes depend on factory location, product complexity, drawings/specification depth, inspection scope, travel requirements, and report depth.
             </p>
           </div>
+        </div>
+      </section>
+      <section className="border-b border-gray-200 bg-[#f4f6f4] py-12">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
+          <div>
+            <span className="font-mono text-sm font-semibold uppercase text-brand-700">Launch offer</span>
+            <h2 className="mt-2 text-3xl font-bold text-gray-950">Free first-pass screen for one supplier link.</h2>
+            <p className="mt-3 max-w-[76ch] text-base leading-7 text-gray-600">
+              Send the supplier website, product category, target country, and your main concern. I will give a concise desk-based risk note and suggest whether a deeper paid check is worth it.
+            </p>
+          </div>
+          <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
+            Request free screen <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
       <section className="py-20 bg-white">

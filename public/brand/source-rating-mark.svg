@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="Source Rating logo">
+  <rect width="160" height="160" fill="none"/>
+  <g transform="translate(24 24)">
+    <rect width="112" height="112" rx="18" fill="#12211f"/>
+    <path d="M29 31h49.4c12.1 0 19.1 6.2 19.1 16.4 0 7-3.4 12.3-9.9 14.9l12.6 27.7H82L71.7 65.8H49.5V90H29V31Zm20.5 15.4v11.9h27c4 0 6.4-2.2 6.4-6.1 0-3.6-2.4-5.8-6.4-5.8h-27Z" fill="#ffffff"/>
+    <path d="M29 95h70v8H29v-8Z" fill="#ffffff" opacity=".42"/>
+  </g>
+  
+</svg>

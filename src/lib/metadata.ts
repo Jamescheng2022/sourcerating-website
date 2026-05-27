@@ -49,12 +49,17 @@ export function generatePageMetadata({
 }
 
 export function generateOrganizationSchema() {
+  const sameAs = siteConfig.social.linkedin ? [siteConfig.social.linkedin] : undefined;
+
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: siteConfig.name,
     url: siteConfig.url,
+    logo: `${siteConfig.url}/brand/source-rating-logo.svg`,
+    image: `${siteConfig.url}/images/hero-factory-audit.png`,
     description: siteConfig.description,
+    ...(sameAs ? { sameAs } : {}),
     contactPoint: {
       "@type": "ContactPoint",
       email: siteConfig.contact.email,
@@ -69,6 +74,30 @@ export function generateOrganizationSchema() {
       "Production monitoring",
       "China engineering sourcing support",
     ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Engineering supplier verification services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          name: "Free first-pass supplier risk screen",
+          description: "Desk-based initial risk screen for one engineering supplier during launch.",
+          price: "0",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+        },
+        {
+          "@type": "Offer",
+          name: "Factory verification visit",
+          description: "On-site supplier verification visit in China before deposit or supplier approval.",
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            priceCurrency: "USD",
+            minPrice: 600,
+          },
+        },
+      ],
+    },
     address: { "@type": "PostalAddress", addressCountry: "CN" },
   };
 }

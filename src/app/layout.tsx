@@ -15,14 +15,13 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   openGraph: { type: "website", locale: siteConfig.locale, url: siteConfig.url, siteName: siteConfig.name, title: `${siteConfig.tagline} | ${siteConfig.name}`, description: siteConfig.description, images: [{ url: "/images/hero-factory-audit.png", width: 1600, height: 900, alt: siteConfig.name }] },
   twitter: { card: "summary_large_image", title: `${siteConfig.tagline} | ${siteConfig.name}`, description: siteConfig.description, images: ["/images/hero-factory-audit.png"] },
-  alternates: { canonical: siteConfig.url },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/brand/source-rating-mark.svg" type="image/svg+xml" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(generateOrganizationSchema()) }} />
       </head>
       <body className="font-sans antialiased">
