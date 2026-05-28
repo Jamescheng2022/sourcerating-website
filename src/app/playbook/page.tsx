@@ -21,7 +21,8 @@ export const metadata: Metadata = {
   keywords: [
     "China engineering supplier verification playbook",
     "China supplier audit guide",
-    "construction materials supplier verification China",
+    "building materials supplier verification China",
+    "construction equipment supplier verification China",
     "steel structure factory audit China",
     "precast concrete supplier verification China",
   ],
@@ -38,7 +39,7 @@ const navItems = [
   ["materials", "Material modules"],
   ["monitoring", "Production and shipment"],
   ["template", "Supplier email template"],
-  ["team", "Operating model"],
+  ["workflow", "Review workflow"],
 ];
 
 const gates = [
@@ -87,25 +88,25 @@ const documentChecks = [
 
 const materialModules = [
   {
-    title: "Precast concrete",
+    title: "Structural and fabricated systems",
     checks: [
-      "Review drawings, molds, embedded plates, lifting anchors, reinforcement details, finishes, tolerances, and curing requirements.",
-      "Check concrete mix design, batching controls, curing records, dimensional checks, and repair process.",
-      "Confirm rebar, inserts, cast-in items, and connection details before casting where possible.",
+      "Review drawings, material grade, connection details, welds or cast-in items, tolerances, finish, coating, and release criteria.",
+      "Check process ownership for cutting, welding, casting, machining, coating, assembly, and subcontracted steps.",
+      "Confirm traceability from raw material to finished component before irreversible production steps.",
     ],
   },
   {
-    title: "Steel structures and fabrication",
+    title: "Architectural and finishing materials",
     checks: [
-      "Control material grade, heat number, thickness, cutting list, and drawing revision.",
-      "Check welding process, welder qualification, fit-up, distortion control, NDT, coating, and repair records.",
-      "Review release package: material certificates, welding/NDT records, coating reports, dimensions, and packing photos.",
+      "Review samples, finish standards, mockups, color/texture control, packaging, installation accessories, and project approval status.",
+      "Check batch consistency, supplier test reports, compliance claims, and how defects are sorted or replaced.",
+      "Confirm packing, labeling, palletizing, and moisture/shock protection for long-distance shipping.",
     ],
   },
   {
-    title: "MEP and industrial components",
+    title: "MEP, equipment, and site-support packages",
     checks: [
-      "Review model, rating, serial numbers, nameplates, certificates, spare parts, manuals, and warranty terms.",
+      "Review model, rating, serial numbers, nameplates, certificates, spare parts, manuals, warranty terms, and destination-market compliance.",
       "Define factory acceptance test or functional check where relevant.",
       "Confirm packaging protects components against moisture, shock, vibration, and missing accessories.",
     ],
@@ -120,11 +121,11 @@ const monitoringChecks = [
 ];
 
 const teamRoles = [
-  ["Engineering lead", "Translates drawings, specifications, and project risks into verification criteria."],
-  ["Field verification coordinator", "Scopes factory visits, evidence capture, production checks, and supplier communication."],
-  ["Quality/research analyst", "Checks documents, business signals, standards, certificates, and traceability."],
-  ["Client success", "Keeps inquiry triage, response time, quotation, handover, and follow-up consistent."],
-  ["Technology and SEO", "Maintains the site, forms, analytics events, online playbook, and AI-readable content."],
+  ["1. Intake", "You submit the supplier link, material category, order stage, destination market, and the concern you want checked."],
+  ["2. AI-assisted first pass", "The online screen highlights obvious risk signals, missing evidence, and useful supplier questions."],
+  ["3. Human review", "Source Rating reviews the context before recommending a desk check, factory visit, inspection, or no paid action."],
+  ["4. Supplier evidence request", "A focused document and question list is prepared so the supplier must prove capability, not only reassure you."],
+  ["5. Next decision", "The outcome is practical: proceed, proceed with controls, verify on site, request corrections, or hold."],
 ];
 
 const supplierEmail = `Subject: Supplier verification information request - [Product / Project]
@@ -208,7 +209,7 @@ export default function PlaybookPage() {
                 <Download className="h-4 w-4" />
                 Download PDF
               </a>
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2 border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
+              <Link href="/risk-screen" className="inline-flex items-center justify-center gap-2 border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
                 Request free supplier screen <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -380,9 +381,9 @@ export default function PlaybookPage() {
               </p>
             </section>
 
-            <section id="team" className="scroll-mt-24 py-14">
-              <p className="text-sm font-semibold uppercase text-brand-700">Source Rating operating model</p>
-              <h2 className="mt-3 text-3xl font-bold text-gray-950">Built like a small specialist verification team.</h2>
+            <section id="workflow" className="scroll-mt-24 py-14">
+              <p className="text-sm font-semibold uppercase text-brand-700">Review workflow</p>
+              <h2 className="mt-3 text-3xl font-bold text-gray-950">From online screen to a practical supplier decision.</h2>
               <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
                 {teamRoles.map(([role, text]) => (
                   <div key={role} className="border border-gray-200 bg-white p-5">
@@ -396,10 +397,10 @@ export default function PlaybookPage() {
                 <div>
                   <h3 className="text-2xl font-bold text-gray-950">Want a quick opinion before ordering an audit?</h3>
                   <p className="mt-3 max-w-[72ch] text-sm leading-6 text-gray-600">
-                    During launch, send one supplier link, product category, target country, and main concern. Source Rating can provide a free first-pass risk screen for suitable engineering material inquiries.
+                    During launch, submit one supplier link, product category, target country, and main concern. Source Rating can provide a free first-pass risk screen for suitable construction material, equipment, or project-component inquiries.
                   </p>
                 </div>
-                <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-800">
+                <Link href="/risk-screen" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-800">
                   <Mail className="h-4 w-4" />
                   Request free screen
                 </Link>

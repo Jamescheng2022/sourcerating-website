@@ -22,7 +22,7 @@ export const services: Service[] = [
   {
     id: "supplier-verification",
     title: "Engineering Supplier Verification",
-    description: "Verify Chinese suppliers for precast concrete, steel structures, construction materials, and engineered components before deposits or contracts.",
+    description: "Verify Chinese suppliers for construction materials, equipment, fabricated systems, and project components before deposits or contracts.",
     longDescription: "For engineering buyers, supplier risk is rarely just identity risk. You need to know whether the factory can read drawings, control tolerances, document materials, manage QA/QC, and deliver to project requirements. This service checks the supplier's business identity, production setup, engineering communication, and practical readiness for your project.",
     icon: FileSearch,
     features: [
@@ -37,7 +37,7 @@ export const services: Service[] = [
   {
     id: "factory-audit",
     title: "Factory Audit for Construction Materials",
-    description: "On-site factory audits for steel fabrication, precast concrete, aluminum systems, MEP materials, and project-related manufacturing.",
+    description: "On-site factory audits for structural packages, architectural materials, MEP systems, construction equipment, and project-related manufacturing.",
     longDescription: "A site visit turns supplier claims into observable evidence. We check workshops, equipment, process flow, workforce, incoming material controls, in-process QA/QC, storage, packaging, and production records. The audit is structured around the decision you need to make: proceed, negotiate safeguards, request corrections, or walk away.",
     icon: ClipboardCheck,
     features: [
@@ -82,7 +82,7 @@ export const services: Service[] = [
   {
     id: "sourcing-support",
     title: "Engineering Sourcing Support",
-    description: "Shortlist and screen Chinese manufacturers for construction materials, steel, precast, MEP, and engineered project components.",
+    description: "Shortlist and screen Chinese manufacturers for construction materials, equipment, building systems, fabricated packages, and made-to-spec project components.",
     longDescription: "The goal is not a long list of suppliers. The goal is a qualified shortlist that matches your drawings, specification requirements, order size, destination market, and project constraints. We help screen candidates before you spend time negotiating with the wrong factory.",
     icon: Route,
     features: [

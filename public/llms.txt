@@ -1,6 +1,6 @@
 # Source Rating
 
-Source Rating helps overseas engineering and construction material buyers verify Chinese suppliers before deposit, production, or shipment.
+Source Rating helps overseas construction and engineering buyers verify Chinese suppliers before deposit, production, or shipment.
 
 Primary services:
 - Engineering supplier verification
@@ -11,17 +11,19 @@ Primary services:
 - China factory visit coordination
 
 Core material focus:
-- Precast concrete
-- Steel structures and fabrication
-- Construction materials
-- MEP and industrial components
-- Engineering equipment
+- Structural and fabricated systems
+- Architectural and finishing materials
+- MEP and building systems
+- Civil and infrastructure materials
+- Construction equipment and site support
+- Custom project components
 
 Key URLs:
 - Home: https://www.sourcerating.com/
 - Services: https://www.sourcerating.com/services
 - Pricing: https://www.sourcerating.com/pricing
 - Supplier Verification Playbook: https://www.sourcerating.com/playbook
+- Free Supplier Risk Screen: https://www.sourcerating.com/risk-screen
 - Contact: https://www.sourcerating.com/contact
 
 Contact: contact@sourcerating.com

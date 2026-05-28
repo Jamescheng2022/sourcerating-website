@@ -34,7 +34,7 @@ export default function PricingPage() {
               Send the supplier website, product category, target country, and your main concern. I will give a concise desk-based risk note and suggest whether a deeper paid check is worth it.
             </p>
           </div>
-          <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
+          <Link href="/risk-screen" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
             Request free screen <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

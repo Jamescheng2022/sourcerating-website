@@ -73,6 +73,7 @@ export function generateOrganizationSchema() {
       "Pre-shipment inspection",
       "Production monitoring",
       "China engineering sourcing support",
+      "Free supplier risk screen",
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",

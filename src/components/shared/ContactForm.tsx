@@ -84,12 +84,12 @@ export function ContactForm() {
           <label htmlFor="materialCategory" className="block text-sm font-medium text-gray-700 mb-1.5">Material / component category</label>
           <select id="materialCategory" name="materialCategory" className="w-full px-4 py-2.5 rounded-md border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-sm bg-white">
             <option value="">Select...</option>
-            <option value="Precast concrete">Precast concrete</option>
-            <option value="Steel structures / fabrication">Steel structures / fabrication</option>
-            <option value="Construction materials">Construction materials</option>
-            <option value="MEP / industrial components">MEP / industrial components</option>
-            <option value="Engineering equipment">Engineering equipment</option>
-            <option value="Other engineering materials">Other engineering materials</option>
+            <option value="Structural / fabricated systems">Structural / fabricated systems</option>
+            <option value="Architectural / finishing materials">Architectural / finishing materials</option>
+            <option value="MEP / building systems">MEP / building systems</option>
+            <option value="Civil / infrastructure materials">Civil / infrastructure materials</option>
+            <option value="Construction equipment / site support">Construction equipment / site support</option>
+            <option value="Custom project components">Custom project components</option>
           </select>
         </div>
       </div>

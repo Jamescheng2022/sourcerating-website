@@ -5,8 +5,8 @@ import { industries } from "@/data/industries";
 
 export const metadata: Metadata = {
   title: "Industries",
-  description: "China supplier verification for precast concrete, steel structures, construction materials, MEP components, and engineering equipment.",
-  keywords: ["China precast concrete supplier verification", "China steel structure factory audit", "construction materials supplier inspection China"],
+  description: "China supplier verification for construction materials, building systems, structural packages, equipment, civil materials, and made-to-spec project components.",
+  keywords: ["China building materials supplier verification", "China construction equipment supplier audit", "construction materials supplier inspection China"],
 };
 
 export default function IndustriesPage() {
@@ -15,12 +15,12 @@ export default function IndustriesPage() {
       <section className="pt-28 pb-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-sm font-semibold uppercase text-brand-700">Engineering material focus</span>
+            <span className="text-sm font-semibold uppercase text-brand-700">Construction supply focus</span>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold text-gray-950">
-              Focused on engineering and construction supply chains.
+              Broad enough for construction projects. Focused enough to avoid consumer-goods sourcing.
             </h1>
             <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-              The best fit is not consumer goods. It is project-related manufacturing where drawings, QA/QC, material certificates, fabrication capacity, and delivery reliability matter.
+              Source Rating covers the materials, equipment, and project components that construction buyers source from China: structural systems, finishes, MEP packages, civil materials, site equipment, and custom made-to-spec items.
             </p>
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function IndustriesPage() {
                   ))}
                 </div>
                 <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-800 transition-colors">
-                  Discuss this material category <ArrowRight className="h-4 w-4" />
+                  Discuss this category <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             ))}

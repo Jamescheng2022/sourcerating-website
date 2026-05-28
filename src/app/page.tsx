@@ -16,17 +16,17 @@ import {
 import { pricingItems } from "@/data/pricing";
 
 export const metadata: Metadata = {
-  title: "China Supplier Verification for Engineering Buyers",
+  title: "China Supplier Verification for Construction Buyers",
   description:
-    "Factory audits, supplier verification, inspection, and sourcing support in China for precast concrete, steel structures, construction materials, MEP components, and engineering equipment.",
+    "Factory audits, supplier verification, inspection, and sourcing support in China for construction materials, equipment, fabricated systems, MEP packages, and project components.",
 };
 
 const materialFocus = [
-  "Precast concrete",
-  "Steel structures",
-  "Construction materials",
-  "MEP components",
-  "Engineering equipment",
+  "Structural systems",
+  "Architectural materials",
+  "MEP packages",
+  "Civil materials",
+  "Construction equipment",
 ];
 
 const decisionChecks = [
@@ -143,8 +143,8 @@ export default function HomePage() {
               Buyer-side factory audits, supplier checks, and inspection support for overseas engineering and construction material buyers.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-white px-5 py-3 text-sm font-semibold text-brand-950 transition hover:-translate-y-0.5 hover:bg-gray-100">
-                Request a supplier check <ArrowRight className="h-4 w-4" />
+              <Link href="/risk-screen" className="inline-flex items-center justify-center gap-2 bg-white px-5 py-3 text-sm font-semibold text-brand-950 transition hover:-translate-y-0.5 hover:bg-gray-100">
+                Get a free risk screen <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/playbook" className="inline-flex items-center justify-center gap-2 border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
                 Download playbook <FileText className="h-4 w-4" />
@@ -341,7 +341,7 @@ export default function HomePage() {
             </p>
             <div className="mt-8 divide-y divide-gray-200 border-y border-gray-200">
               {[
-                "Best for pre-deposit supplier screening",
+                "Best for early supplier screening before deposit",
                 "Desk-based only: no legal opinion, lab test, or on-site claim",
                 "Send supplier link, product category, target country, and concern",
               ].map((item) => (
@@ -352,7 +352,7 @@ export default function HomePage() {
               ))}
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
+              <Link href="/risk-screen" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
                 Request free screen <ArrowRight className="h-4 w-4" />
               </Link>
               <a href="/downloads/source-rating-engineering-supplier-checklist.pdf" download className="inline-flex items-center justify-center gap-2 border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-800 transition hover:-translate-y-0.5 hover:border-brand-300">
@@ -397,7 +397,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-            <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
+            <Link href="/risk-screen" className="inline-flex items-center justify-center gap-2 bg-brand-950 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
               Request a check <ArrowRight className="h-4 w-4" />
             </Link>
             <a href="mailto:contact@sourcerating.com" className="inline-flex items-center justify-center border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-gray-800 transition hover:-translate-y-0.5 hover:border-brand-300">

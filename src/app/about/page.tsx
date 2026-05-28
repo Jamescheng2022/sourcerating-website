@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BriefcaseBusiness, Code2, Factory, Globe, Headphones, Mail, SearchCheck, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Factory, FileSearch, Globe, Headphones, Mail, SearchCheck, ShieldCheck, Users } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About",
@@ -15,36 +15,36 @@ const principles = [
   ["China-grounded checks", "Local documents, supplier communication, and factory-floor evidence where required."],
 ];
 
-const operatingRoles = [
+const verificationWorkflow = [
   {
-    icon: BriefcaseBusiness,
-    title: "Product and positioning",
-    text: "Keeps the offer focused on overseas engineering buyers, supplier risk, and practical decision support.",
+    icon: FileSearch,
+    title: "Inquiry triage",
+    text: "Reviews the supplier link, material category, order stage, destination market, and the decision you need to make.",
   },
   {
     icon: SearchCheck,
-    title: "Research and quality analysis",
-    text: "Reviews supplier signals, documents, certificates, traceability, QA/QC records, and engineering-fit gaps.",
+    title: "Desk evidence review",
+    text: "Checks business signals, documents, certificates, project fit, traceability, and obvious supplier-risk gaps.",
   },
   {
     icon: Factory,
-    title: "Field verification",
-    text: "Scopes factory visits, evidence capture, production checks, pre-shipment inspection, and local supplier communication.",
+    title: "Factory verification",
+    text: "When needed, scopes factory visits, production checks, photo evidence, supplier interviews, and inspection hold points.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Risk report",
+    text: "Turns findings into a concise risk rating, supplier questions, evidence gaps, and recommended next steps.",
   },
   {
     icon: Headphones,
-    title: "Client success",
-    text: "Handles inquiry triage, response time, quotation follow-up, report handover, and post-report next actions.",
-  },
-  {
-    icon: Code2,
-    title: "Technology and SEO",
-    text: "Maintains the site, inquiry form, analytics events, buyer resources, AI-readable content, and search landing pages.",
+    title: "Follow-up support",
+    text: "Helps clarify supplier answers, define a paid verification scope, and decide whether to proceed, correct, or hold.",
   },
   {
     icon: Users,
-    title: "Operations network",
-    text: "Builds a controlled network for translation, travel coordination, specialist inspectors, and document support as demand grows.",
+    title: "Specialist network",
+    text: "Adds local inspection, translation, travel coordination, or technical specialist support when the assignment requires it.",
   },
 ];
 
@@ -59,12 +59,12 @@ export default function AboutPage() {
               Engineering experience applied to China supplier risk.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Source Rating helps overseas buyers verify Chinese suppliers for precast concrete, steel structures, construction materials, MEP components, and project-related manufacturing.
+              Source Rating helps overseas buyers verify Chinese suppliers for construction materials, equipment, fabricated systems, MEP packages, and project-related manufacturing.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-950 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-800">
+              <Link href="/risk-screen" className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-950 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-800">
                 <Mail className="h-4 w-4" />
-                Start a supplier check
+                Start a free risk screen
               </Link>
               <Link href="/playbook" className="inline-flex items-center justify-center gap-2 rounded-md border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 hover:border-brand-300">
                 Download playbook <ArrowRight className="h-4 w-4" />
@@ -117,16 +117,16 @@ export default function AboutPage() {
       <section className="border-t border-gray-200 bg-[#f4f6f4] py-20">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-[0.36fr_1fr] lg:px-8">
           <div>
-            <p className="text-sm font-semibold uppercase text-brand-700">Operating model</p>
+            <p className="text-sm font-semibold uppercase text-brand-700">Verification workflow</p>
             <h2 className="mt-3 text-4xl font-bold text-gray-950">
-              Built like a small specialist verification team.
+              A clear path from supplier link to decision.
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              The first version is intentionally lean, but the service model is designed around the roles a serious buyer expects: technical judgment, field evidence, operations, client follow-up, and digital acquisition.
+              The public promise is simple: collect the right facts, separate evidence from sales claims, and show you what to do next before money or goods move.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {operatingRoles.map((role) => (
+            {verificationWorkflow.map((role) => (
               <div key={role.title} className="border border-gray-200 bg-white p-5">
                 <role.icon className="h-5 w-5 text-brand-700" />
                 <h3 className="mt-4 font-bold text-gray-950">{role.title}</h3>
