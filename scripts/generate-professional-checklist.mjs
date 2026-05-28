@@ -179,9 +179,9 @@ const html = `<!doctype html>
     <div>
       <div class="brand"><div class="mark">R</div><div><strong>Source Rating</strong><span>Factory risk checks</span></div></div>
       <div style="margin-top: 38mm;">
-        <p class="eyebrow">Buyer-side engineering supplier verification</p>
+        <p class="eyebrow">Buyer-side construction supplier verification</p>
         <h1 style="margin-top: 8px;">Supplier Verification Playbook</h1>
-        <p class="lead">A practical pre-deposit, production, and pre-shipment checklist for overseas buyers sourcing engineering and construction materials from China.</p>
+        <p class="lead">A practical pre-deposit, production, and pre-shipment checklist for overseas buyers sourcing construction materials, equipment, building systems, and project components from China.</p>
       </div>
       <div class="cover-grid">
         <div><b>12</b><span>decision areas</span></div>
@@ -189,14 +189,14 @@ const html = `<!doctype html>
         <div><b>0-3</b><span>evidence scoring</span></div>
       </div>
     </div>
-    <div class="footer"><span>Version 1.2 | ${today}</span><span>contact@sourcerating.com | www.sourcerating.com</span></div>
+    <div class="footer"><span>Version 1.3 | ${today}</span><span>contact@sourcerating.com | www.sourcerating.com</span></div>
   </section>
 
   <section class="page">
     <div class="section-head">
       <p class="eyebrow">How to use this document</p>
       <h2>Use it to decide what must be proven before money or goods move.</h2>
-      <p class="lead">This playbook converts supplier claims into evidence requests. It is written for engineering buyers who need to judge whether a Chinese supplier is real, capable, quality-controlled, and shipment-ready.</p>
+      <p class="lead">This playbook converts supplier claims into evidence requests. It is written for construction and engineering buyers who need to judge whether a Chinese supplier is real, capable, quality-controlled, and shipment-ready.</p>
     </div>
     <div class="three-col">
       <div class="card dark"><h3>Before deposit</h3><p>Confirm legal identity, factory ownership of the process, technical fit, and red flags before payment pressure begins.</p></div>
@@ -354,37 +354,36 @@ const html = `<!doctype html>
   </section>
 
   <section class="page">
-    <div class="section-head"><p class="eyebrow">Material module</p><h2>Precast concrete and construction material suppliers</h2></div>
-    ${moduleBlock("Precast concrete checks", [
-      "Drawings, molds, embedded plates, lifting anchors, reinforcement details, finishes, tolerances, and curing requirements are reviewed before production.",
-      "Concrete mix design, batching controls, curing records, dimensional checks, and repair process are documented.",
-      "Rebar, inserts, cast-in items, and connection details are checked before casting when possible.",
-      "Handling, stacking, weather protection, packaging, and loading method are suitable for export and site storage.",
-      "Factory can show similar product evidence, not just general concrete production capability.",
+    <div class="section-head"><p class="eyebrow">Material module</p><h2>Structural systems, architectural materials, and finishes</h2></div>
+    ${moduleBlock("Structural and fabricated system checks", [
+      "Drawings, connection details, material grade, critical dimensions, surface finish, coating, and acceptance criteria are reviewed before production.",
+      "Factory owns or controls the key process: casting, cutting, welding, machining, forming, coating, galvanizing, assembly, or trial fitting.",
+      "Material certificates, heat numbers, batch numbers, embedded items, fasteners, or accessories can be linked to the finished package.",
+      "Critical hold points are defined before irreversible steps such as casting, welding completion, coating, galvanizing, packing, or loading.",
+      "The supplier can show comparable project evidence, not only a brochure or generic workshop photos.",
     ])}
-    ${moduleBlock("General construction material checks", [
-      "Product standard, grade, model, color, finish, thickness, tolerance, and testing method are clear.",
-      "Batch or lot traceability is maintained from incoming material to packing.",
-      "Packaging protects against moisture, corrosion, breakage, deformation, or label loss during export.",
-      "Third-party test reports or declarations are current and relevant to the actual product.",
+    ${moduleBlock("Architectural, finishing, and envelope material checks", [
+      "Product standard, grade, model, color, finish, texture, thickness, tolerance, and sample approval status are clear.",
+      "Facade, glass, doors, windows, flooring, stone, tile, ceiling, partition, waterproofing, insulation, or hardware packages are checked against project requirements.",
+      "Batch consistency, defect sorting, repair/replacement process, and destination-market compliance claims are reviewed.",
+      "Packaging protects against moisture, corrosion, breakage, deformation, abrasion, color mismatch, label loss, or missing accessories during export.",
     ])}
     <div class="footer"><span>Module 1 of 3</span><span>Page 8</span></div>
   </section>
 
   <section class="page">
-    <div class="section-head"><p class="eyebrow">Material module</p><h2>Steel structures, fabrication, MEP, and engineering components</h2></div>
-    ${moduleBlock("Steel structure and fabrication checks", [
-      "Material grade, heat number, thickness, cutting list, and drawing revision are controlled.",
-      "Welding process, welder qualification, WPS/PQR availability, fit-up, distortion control, and repair process are checked.",
-      "NDT requirements, dimensional control, trial assembly, bolt hole alignment, surface preparation, coating, or galvanizing controls are defined.",
-      "Packing protects coated surfaces, edges, bolts, tags, and shipment marks.",
-      "Supplier can produce a release package with material certificates, welding/NDT records, coating reports, dimensions, and packing photos.",
+    <div class="section-head"><p class="eyebrow">Material module</p><h2>MEP, civil materials, equipment, and custom project components</h2></div>
+    ${moduleBlock("MEP and building system checks", [
+      "Model, rating, serial numbers, nameplates, certificates, spare parts, manuals, warranty terms, and destination-market requirements are reviewed.",
+      "Pipes, valves, fittings, pumps, HVAC, cable trays, lighting, panels, fire protection, sanitary, or low-voltage packages match the agreed specification.",
+      "Factory acceptance test, pressure test, functional check, or sample check is defined where relevant.",
+      "Packaging protects components against moisture, shock, vibration, missing accessories, incorrect labels, and site receiving confusion.",
     ])}
-    ${moduleBlock("MEP and industrial components", [
-      "Model, rating, serial numbers, nameplates, certificates, spare parts, manuals, and warranty terms are reviewed.",
-      "Factory acceptance test or functional check is defined where relevant.",
-      "Electrical, pressure, safety, or market compliance documents match the target country.",
-      "Packaging protects components against moisture, shock, vibration, and missing accessories.",
+    ${moduleBlock("Civil, site-support, equipment, and custom component checks", [
+      "Civil and infrastructure items are checked for standard, grade, dimensions, coating/finish, batch control, marking, and packing suitability.",
+      "Construction equipment, site machinery, lifting devices, tooling, molds, spare parts, and temporary works are checked for model, capacity, accessories, manuals, and service support.",
+      "Custom made-to-spec components have drawing revision control, sample or first-article approval, production hold points, and final acceptance criteria.",
+      "Supplier explains the highest-risk process step and how it will be controlled before production release or shipment.",
     ])}
     <div class="footer"><span>Module 2 of 3</span><span>Page 9</span></div>
   </section>
@@ -468,13 +467,13 @@ Please answer each point and attach supporting evidence where available.</div>
       <div class="card"><h3>Client success follow-up</h3><p>Clear next actions, document gaps, supplier questions, and a practical follow-up path after the report.</p></div>
     </div>
     <div style="margin-top: 18px;">
-      <h3>Operating team model</h3>
+      <h3>How the supplier screen is handled</h3>
       ${list([
-        "Engineering lead: translates drawings, specifications, and project risks into inspection criteria.",
-        "Field verification coordinator: scopes visits, manages local supplier communication, and controls evidence capture.",
-        "Quality/research analyst: checks documents, business signals, standards, certificates, and traceability.",
-        "Client success / operations: keeps response time, handover, quotation, and post-report follow-up consistent.",
-        "Technology/marketing support: maintains the website, intake form, analytics, SEO assets, and buyer resources.",
+        "Intake: supplier link, material category, order stage, destination market, and buyer concern are reviewed first.",
+        "AI-assisted first pass: obvious risk signals, missing evidence, and useful supplier questions are identified quickly.",
+        "Human review: Source Rating checks the context before recommending a desk check, factory visit, inspection, or no paid action.",
+        "Supplier evidence request: documents and questions are structured so the supplier must prove capability, not only reassure the buyer.",
+        "Next decision: proceed, proceed with controls, verify on site, request corrections, or hold.",
       ])}
     </div>
     <div class="callout"><strong>Scope note:</strong> Source Rating provides buyer-side supplier verification and practical procurement risk support. It does not replace legal advice, accredited lab testing, certification bodies, or final engineering approval by the buyer's responsible engineer.</div>
@@ -487,13 +486,13 @@ Please answer each point and attach supporting evidence where available.</div>
     <ul class="source-list">
       <li><strong>ISO 9001 quality management systems:</strong> used as a high-level reference for process control, documented evidence, corrective action, and customer-focused quality management.</li>
       <li><strong>ISO 19011 auditing guidelines:</strong> used as a high-level reference for audit planning, evidence-based findings, and audit principles.</li>
-      <li><strong>AISC steel fabricator certification concepts:</strong> used as an industry signal for steel fabrication quality systems and process capability expectations.</li>
-      <li><strong>PCI plant certification concepts:</strong> used as an industry signal for precast concrete production controls and plant quality expectations.</li>
+      <li><strong>Destination-market product standards:</strong> buyer specifications may reference EN, ASTM, BS, AS/NZS, UL, CE/UKCA, local building codes, or project-specific acceptance criteria.</li>
+      <li><strong>Factory acceptance and traceability practices:</strong> used as practical references for equipment, MEP packages, fabricated systems, custom components, and construction material release decisions.</li>
     </ul>
     <div class="callout"><strong>Professional use:</strong> adapt this checklist to your contract, product standard, drawing package, inspection level, target country, and project risk. The strongest version of any checklist is project-specific.</div>
     <div style="margin-top: 18px;" class="two-col">
       <div class="card"><h3>What buyers should prepare</h3>${list(["Supplier link and legal name.", "Drawings/specifications and order stage.", "Main risk concern and target country.", "Budget, timing, and shipment deadline."])}</div>
-      <div class="card dark"><h3>Next step</h3><p>Email contact@sourcerating.com with one supplier link and your main concern. During launch, Source Rating can provide a free first-pass risk screen for suitable engineering material inquiries.</p></div>
+      <div class="card dark"><h3>Next step</h3><p>Email contact@sourcerating.com with one supplier link and your main concern, or use the online risk screen. During launch, Source Rating can provide a free first-pass screen for suitable construction material, equipment, or project-component inquiries.</p></div>
     </div>
     <div class="footer"><span>Source Rating | www.sourcerating.com</span><span>Page 14</span></div>
   </section>

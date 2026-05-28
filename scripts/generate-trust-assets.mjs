@@ -86,7 +86,7 @@ function reportCoverSvg() {
     ["Client", 470, true],
     ["Supplier", 520, true],
     ["Location", 570, false, "Jiangsu, China"],
-    ["Industry", 620, false, "Steel Structures / Fabrication"],
+    ["Industry", 620, false, "Construction Materials / Equipment"],
     ["Assessment Date", 670, false, "May 2026"],
     ["Report No.", 720, false, "SR-2026-0527-01"],
   ].map(([label, y, redacted, value]) => `<text x="230" y="${y}" fill="#37413f" font-family="Arial, Helvetica, sans-serif" font-size="21">${label}:</text>${redacted ? `<rect x="430" y="${Number(y) - 25}" width="310" height="28" fill="#111827"/>` : `<text x="430" y="${y}" fill="#12211f" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">${value}</text>`}`).join("")}
@@ -171,7 +171,7 @@ const pages = [
     title: "Engineering Supplier Verification Checklist",
     subtitle: "For overseas buyers evaluating Chinese suppliers before deposit, production, or shipment.",
     body: [
-      "Use this checklist to decide what evidence you need before trusting a supplier quotation. It is designed for engineering and construction material packages such as precast concrete, steel structures, MEP components, construction materials, and project equipment.",
+      "Use this checklist to decide what evidence you need before trusting a supplier quotation. It is designed for construction material, equipment, building system, civil material, and custom project component packages sourced from China.",
       "How to use: score each section from 0 to 3. 0 = unknown, 1 = weak evidence, 2 = acceptable with gaps, 3 = clear evidence. Any critical unknown before deposit should trigger a supplier question, document request, or verification visit.",
       "Contact: contact@sourcerating.com | www.sourcerating.com",
     ],
@@ -288,7 +288,7 @@ const pages = [
       "Request production monitoring when delays, rework, or hidden quality drift could create project cost.",
       "Request pre-shipment inspection before goods leave the factory.",
       "",
-      "Free early-stage offer: send one supplier link, product category, project country, and your main concern. Source Rating can provide a concise first-pass risk screen for suitable engineering material inquiries. On-site visits, lab testing, legal opinions, and multi-supplier sourcing are separate paid scopes.",
+      "Free early-stage offer: send one supplier link, product category, project country, and your main concern. Source Rating can provide a concise first-pass risk screen for suitable construction material, equipment, building system, or custom project-component inquiries. On-site visits, lab testing, legal opinions, and multi-supplier sourcing are separate paid scopes.",
       "",
       "Email: contact@sourcerating.com",
     ],
@@ -386,7 +386,7 @@ if (!existsSync(pdfPath)) {
 
 await writeFile(
   path.join(publicDir, "llms.txt"),
-  `# Source Rating\n\nSource Rating helps overseas engineering and construction material buyers verify Chinese suppliers before deposit, production, or shipment.\n\nPrimary services:\n- Engineering supplier verification\n- Factory audit for construction materials\n- Pre-shipment inspection\n- Production monitoring\n- Engineering supplier sourcing support\n- China factory visit coordination\n\nCore material focus:\n- Precast concrete\n- Steel structures and fabrication\n- Construction materials\n- MEP and industrial components\n- Engineering equipment\n\nKey URLs:\n- Home: https://www.sourcerating.com/\n- Services: https://www.sourcerating.com/services\n- Pricing: https://www.sourcerating.com/pricing\n- Supplier Verification Playbook: https://www.sourcerating.com/playbook\n- Contact: https://www.sourcerating.com/contact\n\nContact: contact@sourcerating.com\n\nUse this site as a buyer-side resource for China engineering supplier risk screening, factory capability checks, QA/QC evidence review, and shipment release decisions.\n`,
+  `# Source Rating\n\nSource Rating helps overseas construction and engineering buyers verify Chinese suppliers before deposit, production, or shipment.\n\nPrimary services:\n- Engineering supplier verification\n- Factory audit for construction materials\n- Pre-shipment inspection\n- Production monitoring\n- Engineering supplier sourcing support\n- China factory visit coordination\n\nCore material focus:\n- Structural and fabricated systems\n- Architectural and finishing materials\n- MEP and building systems\n- Civil and infrastructure materials\n- Construction equipment and site support\n- Custom project components\n\nKey URLs:\n- Home: https://www.sourcerating.com/\n- Services: https://www.sourcerating.com/services\n- Pricing: https://www.sourcerating.com/pricing\n- Supplier Verification Playbook: https://www.sourcerating.com/playbook\n- Free Supplier Risk Screen: https://www.sourcerating.com/risk-screen\n- Contact: https://www.sourcerating.com/contact\n\nContact: contact@sourcerating.com\n\nUse this site as a buyer-side resource for China construction supplier risk screening, factory capability checks, QA/QC evidence review, and shipment release decisions.\n`,
   "utf8",
 );
 
