@@ -146,7 +146,7 @@ export default function HomePage() {
               <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-white px-5 py-3 text-sm font-semibold text-brand-950 transition hover:-translate-y-0.5 hover:bg-gray-100">
                 Request a supplier check <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link href="/checklist" className="inline-flex items-center justify-center gap-2 border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
+              <Link href="/playbook" className="inline-flex items-center justify-center gap-2 border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15">
                 Download playbook <FileText className="h-4 w-4" />
               </Link>
             </div>
@@ -270,7 +270,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            <Link href="/checklist" className="mt-8 inline-flex items-center gap-2 bg-white px-5 py-3 text-sm font-semibold text-brand-950 transition hover:-translate-y-0.5 hover:bg-gray-100">
+            <Link href="/playbook" className="mt-8 inline-flex items-center gap-2 bg-white px-5 py-3 text-sm font-semibold text-brand-950 transition hover:-translate-y-0.5 hover:bg-gray-100">
               Get the buyer playbook <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -296,7 +296,7 @@ export default function HomePage() {
             <p className="mt-5 max-w-[58ch] text-base leading-7 text-gray-600">
               The preview below is anonymized and redacted. Real reports use your project criteria, supplier documents, factory photos, and a clear release or hold recommendation.
             </p>
-            <Link href="/checklist" className="mt-8 inline-flex items-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
+            <Link href="/playbook" className="mt-8 inline-flex items-center gap-2 bg-brand-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-800">
               View playbook page <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

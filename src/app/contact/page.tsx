@@ -84,10 +84,10 @@ export default function ContactPage() {
                 <div className="rounded-md border border-gray-200 bg-white p-6">
                   <h3 className="text-lg font-bold text-gray-900">Not ready to send a supplier yet?</h3>
                   <p className="mt-2 text-sm leading-6 text-gray-600">
-                    Use the buyer checklist first. It helps you collect the documents and questions needed for a sharper quote.
+                    Use the buyer playbook first. It helps you collect the documents and questions needed for a sharper quote.
                   </p>
-                  <Link href="/checklist" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-900">
-                    Download the checklist <ArrowRight className="h-4 w-4" />
+                  <Link href="/playbook" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-900">
+                    Read the playbook <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>

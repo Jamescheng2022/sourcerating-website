@@ -13,7 +13,7 @@ export const siteConfig = {
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Playbook", href: "/checklist" },
+    { label: "Playbook", href: "/playbook" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
@@ -23,7 +23,7 @@ export const siteConfig = {
     quickLinks: [
       { label: "Services", href: "/services" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Playbook", href: "/checklist" },
+      { label: "Playbook", href: "/playbook" },
       { label: "Industries", href: "/industries" },
       { label: "Case Studies", href: "/case-studies" },
     ],

@@ -66,7 +66,7 @@ export default function AboutPage() {
                 <Mail className="h-4 w-4" />
                 Start a supplier check
               </Link>
-              <Link href="/checklist" className="inline-flex items-center justify-center gap-2 rounded-md border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 hover:border-brand-300">
+              <Link href="/playbook" className="inline-flex items-center justify-center gap-2 rounded-md border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 hover:border-brand-300">
                 Download playbook <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

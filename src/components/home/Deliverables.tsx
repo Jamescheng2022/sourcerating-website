@@ -46,7 +46,7 @@ export function Deliverables() {
             ))}
             </div>
             <Link href="/contact" className="mt-8 inline-flex items-center gap-2 rounded-md bg-brand-700 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-800">
-              Request the engineering checklist <ArrowRight className="h-4 w-4" />
+              Request a supplier check <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
