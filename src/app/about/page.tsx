@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ClipboardCheck, Factory, FileSearch, Globe, Headphones, Mail, SearchCheck, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Factory, FileSearch, Globe, Headphones, Linkedin, Mail, SearchCheck, ShieldCheck, Users } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Source Rating provides China supplier verification and factory audit support for engineering and construction material buyers, backed by 20+ years of international engineering project experience.",
+    "Source Rating is a buyer-side engineering supplier verification and procurement practice led by James Cheng, based in Thailand, with more than 10 years of CNBM experience and project work across more than 10 countries.",
 };
 
 const principles = [
-  ["Buyer-side only", "No factory commission or supplier referral fee."],
-  ["Engineering context", "Drawings, specifications, QA/QC, materials, fabrication, and delivery constraints."],
-  ["China-grounded checks", "Local documents, supplier communication, and factory-floor evidence where required."],
+  ["Buyer-side first", "For buyer-paid Source Rating assignments, there is no undisclosed factory commission or supplier referral fee."],
+  ["Engineering context", "Drawings, specifications, QA/QC, materials, fabrication, commercial terms, and delivery constraints are reviewed together."],
+  ["Conflict disclosure", "If James has a commercial relationship with a candidate supplier, that relationship is disclosed before evaluation or recommendation."],
 ];
 
 const verificationWorkflow = [
@@ -38,8 +38,8 @@ const verificationWorkflow = [
   },
   {
     icon: Headphones,
-    title: "Follow-up support",
-    text: "Helps clarify supplier answers, define a paid verification scope, and decide whether to proceed, correct, or hold.",
+    title: "Procurement support",
+    text: "Helps structure RFQs, clarify supplier answers, compare quotations, support negotiations, and decide whether to proceed, correct, or hold.",
   },
   {
     icon: Users,
@@ -56,19 +56,23 @@ export default function AboutPage() {
           <div>
             <p className="text-sm font-semibold uppercase text-brand-700">About Source Rating</p>
             <h1 className="mt-4 text-5xl font-bold text-gray-950 sm:text-6xl">
-              Engineering experience applied to China supplier risk.
+              Engineering experience applied to supplier and procurement risk.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Source Rating helps overseas buyers verify Chinese suppliers for construction materials, equipment, fabricated systems, MEP packages, and project-related manufacturing.
+              Source Rating is a buyer-side supplier-verification and engineering procurement practice led by James Cheng, based in Thailand. It supports overseas buyers evaluating factories and project suppliers across China, Vietnam, and Southeast Asia.
+            </p>
+            <p className="mt-4 text-lg leading-8 text-gray-600">
+              James spent more than 10 years with the CNBM group and has worked on industrial and construction projects across more than 10 countries. The focus is practical: understand the project, verify the supplier, surface the risks, and help the buyer make a better procurement decision.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/risk-screen" className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-950 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-800">
                 <Mail className="h-4 w-4" />
                 Start a free risk screen
               </Link>
-              <Link href="/playbook" className="inline-flex items-center justify-center gap-2 rounded-md border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 hover:border-brand-300">
-                Download playbook <ArrowRight className="h-4 w-4" />
-              </Link>
+              <a href="https://www.linkedin.com/in/hcrdi" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-md border border-gray-300 px-5 py-3 text-sm font-semibold text-gray-800 hover:border-brand-300">
+                <Linkedin className="h-4 w-4" />
+                James on LinkedIn
+              </a>
             </div>
           </div>
           <div className="relative overflow-hidden rounded-md border border-gray-200 bg-gray-100">
@@ -81,16 +85,16 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div className="rounded-md bg-white p-6 ring-1 ring-gray-200">
-              <p className="text-5xl font-bold text-gray-950">20+</p>
-              <p className="mt-3 font-semibold text-gray-900">years in international engineering projects</p>
-            </div>
-            <div className="rounded-md bg-white p-6 ring-1 ring-gray-200">
-              <Factory className="h-7 w-7 text-brand-700" />
-              <p className="mt-5 font-semibold text-gray-900">Factory-floor evidence over sales promises</p>
+              <p className="text-5xl font-bold text-gray-950">10+ years</p>
+              <p className="mt-3 font-semibold text-gray-900">with the CNBM group</p>
             </div>
             <div className="rounded-md bg-white p-6 ring-1 ring-gray-200">
               <Globe className="h-7 w-7 text-brand-700" />
-              <p className="mt-5 font-semibold text-gray-900">Built for Europe, North America, UK, and Australia buyers</p>
+              <p className="mt-5 font-semibold text-gray-900">Project experience across 10+ countries</p>
+            </div>
+            <div className="rounded-md bg-white p-6 ring-1 ring-gray-200">
+              <Factory className="h-7 w-7 text-brand-700" />
+              <p className="mt-5 font-semibold text-gray-900">Thailand-based support across China, Vietnam, and Southeast Asia</p>
             </div>
           </div>
         </div>
@@ -100,7 +104,7 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-[0.42fr_1fr] lg:px-8">
           <div>
             <p className="text-sm font-semibold uppercase text-brand-700">Principles</p>
-            <h2 className="mt-3 text-4xl font-bold text-gray-950">Focused, practical, and buyer-side.</h2>
+            <h2 className="mt-3 text-4xl font-bold text-gray-950">Focused, practical, and transparent.</h2>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {principles.map(([title, text]) => (
@@ -119,11 +123,14 @@ export default function AboutPage() {
           <div>
             <p className="text-sm font-semibold uppercase text-brand-700">Verification workflow</p>
             <h2 className="mt-3 text-4xl font-bold text-gray-950">
-              A clear path from supplier link to decision.
+              A clear path from supplier link to procurement decision.
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              The public promise is simple: collect the right facts, separate evidence from sales claims, and show you what to do next before money or goods move.
+              The public promise is simple: collect the right facts, separate evidence from sales claims, disclose conflicts, and show you what to do next before money or goods move.
             </p>
+            <Link href="/playbook" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-900">
+              Read the buyer playbook <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {verificationWorkflow.map((role) => (
