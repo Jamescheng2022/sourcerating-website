@@ -59,6 +59,11 @@ export function generateOrganizationSchema() {
     logo: `${siteConfig.url}/brand/source-rating-logo.svg`,
     image: `${siteConfig.url}/images/hero-factory-audit.png`,
     description: siteConfig.description,
+    founder: {
+      "@type": "Person",
+      name: "James Cheng",
+      url: siteConfig.social.linkedin,
+    },
     ...(sameAs ? { sameAs } : {}),
     contactPoint: {
       "@type": "ContactPoint",
@@ -66,18 +71,29 @@ export function generateOrganizationSchema() {
       contactType: "sales",
       availableLanguage: ["English", "Chinese"],
     },
-    areaServed: ["Europe", "North America", "Australia", "United Kingdom"],
+    areaServed: [
+      "China",
+      "Vietnam",
+      "Southeast Asia",
+      "Europe",
+      "North America",
+      "Middle East",
+      "Australia",
+      "United Kingdom",
+    ],
     serviceType: [
       "Engineering supplier verification",
       "Construction materials factory audit",
+      "Technical supplier review",
       "Pre-shipment inspection",
       "Production monitoring",
-      "China engineering sourcing support",
+      "Buyer-side engineering procurement support",
+      "Supplier sourcing across China, Vietnam, and Southeast Asia",
       "Free supplier risk screen",
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Engineering supplier verification services",
+      name: "Engineering supplier verification and procurement services",
       itemListElement: [
         {
           "@type": "Offer",
@@ -89,8 +105,16 @@ export function generateOrganizationSchema() {
         },
         {
           "@type": "Offer",
+          name: "Engineering supplier background check",
+          description: "Desk-based verification for an engineering or construction supplier.",
+          price: "300",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+        },
+        {
+          "@type": "Offer",
           name: "Factory verification visit",
-          description: "On-site supplier verification visit in China before deposit or supplier approval.",
+          description: "On-site supplier verification before deposit, supplier approval, or a major procurement decision.",
           priceSpecification: {
             "@type": "PriceSpecification",
             priceCurrency: "USD",
@@ -99,6 +123,6 @@ export function generateOrganizationSchema() {
         },
       ],
     },
-    address: { "@type": "PostalAddress", addressCountry: "CN" },
+    address: { "@type": "PostalAddress", addressCountry: "TH" },
   };
 }
