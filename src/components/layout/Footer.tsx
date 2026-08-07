@@ -24,7 +24,10 @@ export function Footer() {
             <h4 className="text-sm font-semibold text-white uppercase mb-4">Contact</h4>
             <ul className="space-y-3 text-sm text-gray-400">
               <li><a href={`mailto:${siteConfig.contact.email}`} className="hover:text-white transition-colors">{siteConfig.contact.email}</a></li>
-              <li>China engineering and construction supply chain support</li>
+              <li>James Cheng · Thailand-based engineering procurement support</li>
+              {siteConfig.social.linkedin ? (
+                <li><a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">LinkedIn · James Cheng</a></li>
+              ) : null}
             </ul>
           </div>
         </div>
