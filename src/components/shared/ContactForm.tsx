@@ -47,6 +47,16 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="contact-fax-number">Fax number</label>
+        <input
+          id="contact-fax-number"
+          name="fax_number"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">Name *</label>

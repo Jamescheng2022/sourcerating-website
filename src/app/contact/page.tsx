@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Clock, Linkedin, Mail, MapPin, ShieldCheck } from "lucide-react";
 import { ContactForm } from "@/components/shared/ContactForm";
 import { siteConfig } from "@/data/site-config";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Contact",
   description: "Contact James Cheng / Source Rating for engineering supplier verification, factory visits, pre-shipment inspection, or buyer-side procurement support across China, Vietnam, and Southeast Asia.",
   keywords: ["contact China factory inspector", "engineering supplier verification China", "Vietnam supplier verification", "engineering procurement advisor"],
-};
+  path: "/contact",
+});
 
 const checklist = [
   "Supplier name, website, or sales contact — or tell me if you still need supplier options",

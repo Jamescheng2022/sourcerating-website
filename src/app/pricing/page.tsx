@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { pricingFactors, pricingItems } from "@/data/pricing";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Pricing",
   description: "Launch pricing for engineering supplier verification, factory visits, technical supplier review, procurement support, pre-shipment inspection, and buyer-side success-fee projects.",
   keywords: ["China engineering supplier verification pricing", "construction materials factory audit cost", "engineering procurement advisor fee", "China sourcing service price"],
-};
+  path: "/pricing",
+});
 
 const paymentSteps = [
   {

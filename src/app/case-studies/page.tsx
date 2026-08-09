@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Briefcase, MapPin } from "lucide-react";
 import { caseStudies } from "@/data/case-studies";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Case Studies",
   description: "Anonymized examples of China supplier verification, factory audits, pre-shipment inspections, and production monitoring for engineering and construction material buyers.",
   keywords: ["China engineering supplier verification case study", "steel structure audit China", "precast concrete supplier verification"],
-};
+  path: "/case-studies",
+});
 
 export default function CaseStudiesPage() {
   return (

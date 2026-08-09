@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import { faqItems, faqSchemaData } from "@/data/faq";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "FAQ", description: "Frequently asked questions about China factory inspection, supplier verification, production monitoring, pricing, and how our sourcing services work.",
   keywords: ["China factory audit FAQ","supplier verification questions","China sourcing FAQ","factory inspection pricing"],
-};
+  path: "/faq",
+});
 
 export default function FAQPage() {
   return (

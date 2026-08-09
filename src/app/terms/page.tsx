@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import { siteConfig } from "@/data/site-config";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Terms of Service",
   description: "Terms of service for Source Rating inspection, sourcing, and advisory inquiries.",
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

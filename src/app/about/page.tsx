@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ClipboardCheck, Factory, FileSearch, Globe, Headphones, Linkedin, Mail, SearchCheck, ShieldCheck, Users } from "lucide-react";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "About",
   description:
     "Source Rating is a buyer-side engineering supplier verification and procurement practice led by James Cheng, based in Thailand, with more than 10 years of CNBM experience and project work across more than 10 countries.",
-};
+  path: "/about",
+});
 
 const principles = [
   ["Buyer-side first", "For buyer-paid Source Rating assignments, there is no undisclosed factory commission or supplier referral fee."],

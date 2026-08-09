@@ -1,4 +1,9 @@
 import { NextResponse } from "next/server";
+import {
+  guardPublicFormRequest,
+  isSpamTrapFilled,
+  isValidEmail,
+} from "@/lib/request-guard";
 
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const DEEPSEEK_ENDPOINT = "https://api.deepseek.com/chat/completions";
@@ -231,7 +236,36 @@ async function sendLeadEmail(input: RiskScreenInput, assessment: RiskAssessment,
 }
 
 export async function POST(request: Request) {
+  const startedAt = Date.now();
+  const requestId = request.headers.get("x-vercel-id") || undefined;
+  const guardFailure = guardPublicFormRequest(request, "risk-screen");
+
+  if (guardFailure) {
+    console.warn(JSON.stringify({
+      level: "warn",
+      event: "form_request_rejected",
+      route: "/api/risk-screen",
+      requestId,
+      reason: guardFailure.reason,
+    }));
+    return NextResponse.json(
+      { error: guardFailure.error },
+      { status: guardFailure.status },
+    );
+  }
+
   const body = await request.json().catch(() => null);
+  if (isSpamTrapFilled(body)) {
+    console.warn(JSON.stringify({
+      level: "warn",
+      event: "form_request_rejected",
+      route: "/api/risk-screen",
+      requestId,
+      reason: "spam_trap",
+    }));
+    return NextResponse.json({ error: "Invalid submission." }, { status: 400 });
+  }
+
   const input: RiskScreenInput = {
     name: clean(body?.name, 120),
     email: clean(body?.email, 160),
@@ -245,9 +279,15 @@ export async function POST(request: Request) {
     concern: clean(body?.concern, 1600),
   };
 
-  if (!input.name || !input.email || !input.supplier || !input.category || !input.stage || !input.concern) {
+  if (!input.name || !isValidEmail(input.email) || !input.supplier || !input.category || !input.stage || !input.concern) {
+    console.warn(JSON.stringify({
+      level: "warn",
+      event: "form_validation_failed",
+      route: "/api/risk-screen",
+      requestId,
+    }));
     return NextResponse.json(
-      { error: "Name, work email, supplier link/name, category, order stage, and main concern are required." },
+      { error: "A valid work email, name, supplier link/name, category, order stage, and main concern are required." },
       { status: 400 },
     );
   }
@@ -257,6 +297,20 @@ export async function POST(request: Request) {
   const assessment = aiAssessment || fallback;
   const source = aiAssessment ? "deepseek" : "rules";
   const emailQueued = await sendLeadEmail(input, assessment, source);
+
+  const completionLog = JSON.stringify({
+    level: emailQueued ? "info" : "warn",
+    event: "risk_screen_completed",
+    route: "/api/risk-screen",
+    requestId,
+    source,
+    riskLevel: assessment.riskLevel,
+    emailQueued,
+    durationMs: Date.now() - startedAt,
+  });
+
+  if (emailQueued) console.log(completionLog);
+  else console.warn(completionLog);
 
   return NextResponse.json({
     ok: true,

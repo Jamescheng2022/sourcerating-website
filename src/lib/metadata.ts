@@ -7,24 +7,24 @@ interface PageMetadata {
   path: string;
   ogImage?: string;
   noIndex?: boolean;
+  keywords?: string[];
 }
 
 export function generatePageMetadata({
   title,
   description,
   path,
-  ogImage = "/images/og-default.jpg",
+  ogImage = "/images/hero-factory-audit.png",
   noIndex = false,
+  keywords,
 }: PageMetadata): Metadata {
   const url = `${siteConfig.url}${path}`;
-  const fullTitle =
-    path === "/"
-      ? `${title} - ${siteConfig.tagline}`
-      : `${title} | ${siteConfig.name}`;
+  const fullTitle = `${title} | ${siteConfig.name}`;
 
   return {
-    title: fullTitle,
+    title: { absolute: fullTitle },
     description,
+    keywords,
     metadataBase: new URL(siteConfig.url),
     alternates: { canonical: url },
     openGraph: {

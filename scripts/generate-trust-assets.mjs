@@ -12,14 +12,6 @@ await mkdir(brandDir, { recursive: true });
 await mkdir(imageDir, { recursive: true });
 await mkdir(downloadDir, { recursive: true });
 
-function escXml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
 function logoSvg({ inverted = false, lockup = true } = {}) {
   const bg = inverted ? "#ffffff" : "#12211f";
   const fg = inverted ? "#12211f" : "#ffffff";
