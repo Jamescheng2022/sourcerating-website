@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { blogPosts } from "@/data/blog";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Blog",
   description: "Practical guides for overseas engineering buyers verifying Chinese suppliers, factories, production, and shipments.",
   keywords: ["China engineering supplier verification guide", "factory audit China", "pre shipment inspection China"],
-};
+  path: "/blog",
+});
 
 export default function BlogPage() {
   return (

@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { services } from "@/data/services";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Services",
   description:
     "China supplier verification, factory audits, pre-shipment inspection, production monitoring, sourcing support, and visit coordination for engineering buyers.",
-};
+  path: "/services",
+  ogImage: "/images/hero-factory-audit.png",
+});
 
 export default function ServicesPage() {
   return (

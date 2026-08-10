@@ -84,6 +84,16 @@ export function RiskScreenForm() {
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.95fr_1.05fr]">
       <form onSubmit={handleSubmit} className="space-y-6 border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+          <label htmlFor="risk-fax-number">Fax number</label>
+          <input
+            id="risk-fax-number"
+            name="fax_number"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="name" className="mb-1.5 block text-sm font-semibold text-gray-800">Name *</label>
@@ -208,7 +218,7 @@ export function RiskScreenForm() {
                 ["Risk level", "A low, moderate, or high preliminary risk view based on order stage and evidence gaps."],
                 ["Evidence list", "A focused request list you can send to the supplier before paying for a visit."],
                 ["Supplier questions", "Practical questions that reveal whether the supplier really controls the work."],
-                ["Human follow-up", "Your submission is forwarded for manual review when email delivery is configured."],
+                ["Human follow-up", "Cases that need judgment are reviewed by James before any paid recommendation."],
               ].map(([title, text]) => (
                 <div key={title} className="border-t border-gray-200 pt-4 first:border-t-0 first:pt-0">
                   <h4 className="font-bold text-gray-950">{title}</h4>
@@ -217,7 +227,7 @@ export function RiskScreenForm() {
               ))}
             </div>
             <p className="mt-8 border-l-4 border-brand-700 bg-white p-4 text-sm leading-6 text-gray-700">
-              No login is required for this MVP. Do not upload confidential drawings yet; summarize the package and send sensitive files by email after we confirm scope.
+              No login or payment is required. Do not send confidential drawings yet; summarize the package first, then share sensitive files only after scope is confirmed.
             </p>
           </div>
         )}

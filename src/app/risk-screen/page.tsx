@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Clock, FileText, ShieldCheck } from "lucide-react";
 import { RiskScreenForm } from "@/components/shared/RiskScreenForm";
 import { siteConfig } from "@/data/site-config";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Free Supplier Risk Screen",
   description:
     "Run a no-login preliminary China supplier risk screen for construction materials, equipment, building systems, and project components before deposit, production, or shipment.",
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     "China factory audit preliminary check",
     "China construction equipment supplier verification",
   ],
-  alternates: { canonical: `${siteConfig.url}/risk-screen` },
-};
+  path: "/risk-screen",
+});
 
 export default function RiskScreenPage() {
   const structuredData = {
@@ -82,7 +82,7 @@ export default function RiskScreenPage() {
             <p className="text-sm font-semibold uppercase text-brand-700">Online risk screen</p>
             <h2 className="mt-3 text-4xl font-bold text-gray-950">Tell us what the supplier must prove.</h2>
             <p className="mt-4 text-base leading-7 text-gray-600">
-              This MVP does not need a database or customer login. The form produces an initial screen and sends the case by email for follow-up. Add a portal later when customers need file history, paid reports, order tracking, or repeated supplier comparisons.
+              Complete the short screen below to receive an immediate preliminary risk view, a focused evidence list, and practical questions to send the supplier. Suitable cases can then move to a human desk review or factory visit.
             </p>
           </div>
           <RiskScreenForm />
@@ -92,14 +92,14 @@ export default function RiskScreenPage() {
       <section className="border-t border-gray-200 bg-[#f4f6f4] py-16">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-[0.45fr_1fr] lg:px-8">
           <div>
-            <p className="text-sm font-semibold uppercase text-brand-700">No-login MVP</p>
-            <h2 className="mt-3 text-3xl font-bold text-gray-950">Why no database yet?</h2>
+            <p className="text-sm font-semibold uppercase text-brand-700">What happens next</p>
+            <h2 className="mt-3 text-3xl font-bold text-gray-950">A useful answer before a sales call.</h2>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
-              ["Faster conversion", "A buyer can test you before creating an account."],
-              ["Lower compliance burden", "No sensitive file storage in the first release."],
-              ["Clear upgrade path", "Add database, uploads, and login when repeat usage proves demand."],
+              ["Immediate first pass", "See the main risk signals and missing evidence without creating an account."],
+              ["Private by default", "Summarize the package first; confidential drawings are requested only when needed."],
+              ["Paid only when useful", "Move to a desk check, factory visit, or inspection only when the risk justifies it."],
             ].map(([title, text]) => (
               <div key={title} className="border border-gray-200 bg-white p-5">
                 <h3 className="font-bold text-gray-950">{title}</h3>

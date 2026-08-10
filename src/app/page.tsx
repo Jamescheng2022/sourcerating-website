@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -14,12 +13,15 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { pricingItems } from "@/data/pricing";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "China Supplier Verification for Construction Buyers",
   description:
     "Factory audits, supplier verification, inspection, and sourcing support in China for construction materials, equipment, fabricated systems, MEP packages, and project components.",
-};
+  path: "/",
+  ogImage: "/images/hero-factory-audit.png",
+});
 
 const materialFocus = [
   "Structural systems",

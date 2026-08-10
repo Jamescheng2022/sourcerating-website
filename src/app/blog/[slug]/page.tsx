@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getBlogPost } from "@/data/blog";
+import { generatePageMetadata } from "@/lib/metadata";
 
 interface PageProps { params: Promise<{ slug: string }>; }
 
@@ -10,7 +11,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) return { title: "Guide not found" };
-  return { title: post.title, description: post.excerpt };
+  return generatePageMetadata({
+    title: post.title,
+    description: post.excerpt,
+    path: `/blog/${post.slug}`,
+  });
 }
 
 export default async function BlogPostPage({ params }: PageProps) {

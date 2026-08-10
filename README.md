@@ -18,6 +18,18 @@ npm run build  # Production build
 4. Add custom domain: `www.sourcerating.com`
 5. Done! Auto-deploys on every push
 
+## Production environment
+
+Configure these variables in Vercel before accepting live inquiries:
+
+- `RESEND_API_KEY` — sends contact and risk-screen leads.
+- `CONTACT_TO` — destination mailbox; defaults to `contact@sourcerating.com`.
+- `DEEPSEEK_API_KEY` — optional AI assessment for the free risk screen. The rules-based screen remains available without it.
+- `DEEPSEEK_MODEL` — optional model override.
+- `NEXT_PUBLIC_GA_ID` — optional Google Analytics property. Vercel Web Analytics and Speed Insights are included independently.
+
+Both public forms apply same-origin checks, payload limits, a honeypot, best-effort per-IP throttling, and structured logs without lead PII. After changing form or email configuration, verify the full browser → API → mailbox path with a clearly marked internal test.
+
 ## Push to GitHub
 
 ```bash
@@ -74,7 +86,6 @@ src/
 ## Next Steps
 
 1. Replace placeholder images in `public/images/`
-2. Connect contact form to Formspree or Resend
-3. Add blog posts to `src/content/blog/`
-4. Review all content in `src/data/` files
-5. Set up Vercel Analytics
+2. Add new buyer guides in `src/data/blog.ts`
+3. Review all content in `src/data/` files
+4. Review Vercel Web Analytics, Speed Insights, and structured form logs after each launch

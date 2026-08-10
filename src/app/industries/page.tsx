@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { industries } from "@/data/industries";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "Industries",
   description: "China supplier verification for construction materials, building systems, structural packages, equipment, civil materials, and made-to-spec project components.",
   keywords: ["China building materials supplier verification", "China construction equipment supplier audit", "construction materials supplier inspection China"],
-};
+  path: "/industries",
+});
 
 export default function IndustriesPage() {
   return (

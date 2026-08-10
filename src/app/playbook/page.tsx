@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -13,8 +12,9 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { siteConfig } from "@/data/site-config";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = generatePageMetadata({
   title: "China Engineering Supplier Verification Playbook",
   description:
     "Read Source Rating's online supplier verification playbook for overseas engineering buyers evaluating Chinese suppliers before deposit, production, or shipment release.",
@@ -26,8 +26,9 @@ export const metadata: Metadata = {
     "steel structure factory audit China",
     "precast concrete supplier verification China",
   ],
-  alternates: { canonical: `${siteConfig.url}/playbook` },
-};
+  path: "/playbook",
+  ogImage: "/images/checklist-report-pack.png",
+});
 
 const navItems = [
   ["how-to-use", "How to use"],
@@ -364,7 +365,7 @@ export default function PlaybookPage() {
                   <FileText className="h-6 w-6 text-brand-700" />
                   <h3 className="mt-4 text-xl font-bold text-gray-950">Release decision</h3>
                   <p className="mt-3 text-sm leading-6 text-gray-600">
-                    Goods should leave only after evidence, documents, packing, and the release recommendation align with the buyer's acceptance criteria.
+                    Goods should leave only after evidence, documents, packing, and the release recommendation align with the buyer&apos;s acceptance criteria.
                   </p>
                 </div>
               </div>
