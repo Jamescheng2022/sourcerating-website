@@ -94,7 +94,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <Image
           src="/images/hero-factory-audit.png"
-          alt="Steel structure factory verification before a buyer pays a supplier deposit"
+          alt={`${post.title} — buyer-side supplier verification guide`}
           width={1600}
           height={900}
           priority
