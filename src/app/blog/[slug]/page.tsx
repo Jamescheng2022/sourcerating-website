@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Check, ShieldAlert } from "lucide-react";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPost } from "@/data/blog";
 import { siteConfig } from "@/data/site-config";
+import { TrackedLink } from "@/components/ui/TrackedLink";
 import { generatePageMetadata } from "@/lib/metadata";
 
 interface PageProps { params: Promise<{ slug: string }>; }
@@ -14,7 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = getBlogPost(slug);
   if (!post) return { title: "Guide not found" };
   return generatePageMetadata({
-    title: post.title,
+    title: post.seoTitle ?? post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
   });
@@ -51,6 +52,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     },
     publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
     image: `${siteConfig.url}/images/hero-factory-audit.png`,
+    ...(post.references ? { citation: post.references.map((reference) => reference.href) } : {}),
   };
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -89,6 +91,9 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-500">
           <span>By <Link href="/about" className="font-semibold text-gray-800 hover:text-brand-700">James Cheng</Link></span>
           <time dateTime={post.date}>Published {new Date(`${post.date}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}</time>
+          {post.dateModified && post.dateModified !== post.date ? (
+            <time dateTime={post.dateModified}>Updated {new Date(`${post.dateModified}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}</time>
+          ) : null}
           <span>{post.readTime}</span>
         </div>
 
@@ -110,7 +115,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {post.keyTakeaways ? (
           <section className="mt-10 rounded-md border border-gray-200 p-6 sm:p-8">
-            <h2 className="text-2xl font-bold text-gray-950">What to verify before the deposit</h2>
+            <h2 className="text-2xl font-bold text-gray-950">{post.keyTakeawaysHeading ?? "What to verify before the deposit"}</h2>
             <ul className="mt-5 space-y-3">
               {post.keyTakeaways.map((item) => (
                 <li key={item} className="flex gap-3 leading-7 text-gray-700">
@@ -145,7 +150,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         {post.checklist ? (
           <section className="mt-14 border-t border-gray-200 pt-12">
             <p className="text-sm font-semibold uppercase text-brand-700">Evidence checklist</p>
-            <h2 className="mt-3 text-3xl font-bold text-gray-950">The minimum deposit-release file</h2>
+            <h2 className="mt-3 text-3xl font-bold text-gray-950">{post.checklistHeading ?? "The minimum deposit-release file"}</h2>
             <div className="mt-7 grid gap-4 sm:grid-cols-2">
               {post.checklist.map((group) => (
                 <div key={group.category} className="border border-gray-200 p-5">
@@ -192,6 +197,42 @@ export default async function BlogPostPage({ params }: PageProps) {
           </section>
         ) : null}
 
+        {post.references ? (
+          <section className="mt-14 border-t border-gray-200 pt-12">
+            <p className="text-sm font-semibold uppercase text-brand-700">Standards context</p>
+            <h2 className="mt-3 text-3xl font-bold text-gray-950">Official references for the project audit brief</h2>
+            <p className="mt-4 max-w-3xl leading-7 text-gray-700">
+              These sources help define the audit questions, but the contract, approved drawings, project specification, destination rules, and current standard editions remain controlling.
+            </p>
+            <div className="mt-7 divide-y divide-gray-200 border-y border-gray-200">
+              {post.references.map((reference) => (
+                <div key={reference.href} className="py-5">
+                  <a href={reference.href} target="_blank" rel="noreferrer" className="font-bold text-brand-700 hover:text-brand-900">
+                    {reference.title}
+                  </a>
+                  <p className="mt-1 text-sm font-semibold text-gray-500">{reference.publisher}</p>
+                  <p className="mt-2 text-sm leading-6 text-gray-700">{reference.note}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        {post.relatedLinks ? (
+          <section className="mt-14 border-t border-gray-200 pt-12">
+            <p className="text-sm font-semibold uppercase text-brand-700">Continue the decision</p>
+            <h2 className="mt-3 text-3xl font-bold text-gray-950">Related buyer guides</h2>
+            <div className="mt-7 grid gap-4 sm:grid-cols-2">
+              {post.relatedLinks.map((related) => (
+                <Link key={related.href} href={related.href} className="border border-gray-200 p-5 hover:border-brand-300 hover:bg-[#fbfcfb]">
+                  <h3 className="font-bold text-gray-950">{related.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-gray-600">{related.description}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         <aside className="mt-14 border-y border-gray-200 bg-[#f7f8f5] p-6 sm:p-8">
           <p className="text-sm font-semibold uppercase text-brand-700">About the author</p>
           <h2 className="mt-3 text-xl font-bold text-gray-950">James Cheng</h2>
@@ -211,12 +252,22 @@ export default async function BlogPostPage({ params }: PageProps) {
             Send one supplier link, product category, destination country, and the issue that worries you most. The launch-stage first-pass risk screen is free and does not require an account.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link href="/risk-screen" className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-brand-950 hover:bg-gray-100">
+            <TrackedLink
+              href={`/risk-screen?source=${post.slug}`}
+              eventName="cta_click"
+              eventParams={{ location: "buyer_guide", label: "risk_screen", guide: post.slug }}
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-brand-950 hover:bg-gray-100"
+            >
               Start the free risk screen <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href="/pricing" className="inline-flex items-center justify-center rounded-md border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">
+            </TrackedLink>
+            <TrackedLink
+              href="/pricing"
+              eventName="pricing_click"
+              eventParams={{ location: "buyer_guide", guide: post.slug }}
+              className="inline-flex items-center justify-center rounded-md border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+            >
               View verification scopes
-            </Link>
+            </TrackedLink>
           </div>
         </div>
       </div>

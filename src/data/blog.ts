@@ -1,12 +1,14 @@
 export interface BlogPost {
   slug: string;
   title: string;
+  seoTitle?: string;
   excerpt: string;
   date: string;
   dateModified?: string;
   category: string;
   readTime: string;
   directAnswer?: string;
+  keyTakeawaysHeading?: string;
   keyTakeaways?: string[];
   sections: Array<{
     heading: string;
@@ -14,9 +16,12 @@ export interface BlogPost {
     bullets?: string[];
     callout?: { label: string; text: string; tone?: "neutral" | "warning" | "positive" };
   }>;
+  checklistHeading?: string;
   checklist?: Array<{ category: string; evidence: string[] }>;
   decisionMatrix?: Array<{ signal: string; decision: "PROCEED" | "HOLD" | "REJECT"; response: string }>;
   faqs?: Array<{ question: string; answer: string }>;
+  references?: Array<{ title: string; publisher: string; href: string; note: string }>;
+  relatedLinks?: Array<{ title: string; href: string; description: string }>;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -210,6 +215,23 @@ export const blogPosts: BlogPost[] = [
           "Use HOLD when the supplier may still be acceptable but a critical evidence gap remains unresolved. Define what must be produced, who verifies it, and the deadline. Reject when evidence is falsified, accountability cannot be established, critical access is refused, or the risk cannot be contractually controlled.",
       },
     ],
+    relatedLinks: [
+      {
+        title: "Steel structure factory audit checklist",
+        href: "/blog/steel-structure-factory-audit-china",
+        description: "Turn the desk-review gaps into an on-site audit of engineering, welding, traceability, subcontracting, capacity, coating, and packing controls.",
+      },
+      {
+        title: "Pre-shipment inspection for engineering materials",
+        href: "/blog/pre-shipment-inspection-engineering-materials",
+        description: "Define the finished-goods and document release gate before the balance payment or shipment.",
+      },
+      {
+        title: "Engineering supplier verification playbook",
+        href: "/playbook",
+        description: "Use the broader evidence scoring and deposit-to-shipment workflow across engineering supplier categories.",
+      },
+    ],
   },
   {
     slug: "china-precast-concrete-supplier-verification",
@@ -239,27 +261,321 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "steel-structure-factory-audit-china",
-    title: "What a Steel Structure Factory Audit in China Should Actually Check",
+    title: "Steel Structure Factory Audit Checklist for China Sourcing",
+    seoTitle: "Steel Structure Factory Audit Checklist in China",
     excerpt:
-      "The workshop questions that matter for fabricated steel: welding control, equipment, subcontracting, coatings, packing, documentation, and schedule realism.",
+      "Buyer-side checklist for verifying a steel fabricator's engineering, welding, traceability, subcontracting, capacity, coating, packing, and delivery controls.",
     date: "2026-05-26",
+    dateModified: "2026-08-11",
     category: "Steel structures",
-    readTime: "6 min read",
+    readTime: "14 min read",
+    directAnswer:
+      "A useful steel-structure factory audit does not ask only whether the workshop exists. It tests whether the named legal and payment entities, the visited factory, and every critical subcontractor can execute your actual drawings, materials, welding, coating, inspection, packing, and delivery sequence. The audit should sample live records and work on the floor, reconcile contradictions, and end with a PROCEED, HOLD, or REJECT decision tied to contract controls.",
+    keyTakeawaysHeading: "What a buyer-side steel factory audit must prove",
+    keyTakeaways: [
+      "The contract party, bank beneficiary, export entity, visited workshop, and process owners form one accountable chain.",
+      "The engineering team controls drawing revisions, technical clarifications, bills of material, shop details, and production release.",
+      "WPS, supporting PQR, welder qualifications, inspection plans, and production records apply to the actual project welds.",
+      "Material certificates and heat or batch identifiers can be followed through the traceability level required by the contract.",
+      "Subcontracted blasting, coating, galvanizing, machining, NDT, or fabrication remains visible and controlled.",
+      "Current workload, bottlenecks, labor, inspection resources, and packing space support the promised schedule.",
+      "Piece marks, packing lists, documents, and loading plans support the buyer's erection sequence—not merely shipment departure.",
+    ],
     sections: [
       {
-        heading: "Separate trading claims from fabrication capability",
+        heading: "1. Set the buyer decision before setting the factory itinerary",
         body:
-          "Many exporters can quote steel structures, but the buyer needs to know who will fabricate, weld, blast, paint, pack, and document the order. A factory audit should identify owned processes, subcontracted processes, and bottlenecks.",
+          "There is no useful universal tour. Define what the audit must decide: supplier approval, deposit release, capacity confirmation, corrective-action closure, or production readiness. Give the auditor the quotation, proposed contract entity, project specification, controlled drawing sample, required codes, quality plan, schedule, and known concerns. Without that brief, the visit will drift toward clean offices, selected machines, and generic certificates.",
+        bullets: [
+          "Exact supplier, factory, and subcontractor sites in scope",
+          "Order stage and the money or production decision that follows the audit",
+          "Project drawing revision, specification, material grades, welding and coating requirements",
+          "Processes and records that must be witnessed rather than accepted remotely",
+          "Critical evidence gaps already found during the desk review",
+        ],
+        callout: {
+          label: "Audit objective",
+          text: "A factory audit evaluates the supplier's ability and control system. A pre-shipment inspection evaluates a defined batch of finished goods. Buyers often need both, at different decision gates.",
+          tone: "neutral",
+        },
       },
       {
-        heading: "Look at welding, coating, and dimensional control",
+        heading: "2. Map the entity and process chain instead of arguing about factory versus trader",
         body:
-          "Useful checks include welding procedure evidence, welder qualification records where applicable, fit-up controls, cutting and drilling equipment, surface preparation, coating environment, thickness checks, and correction records.",
+          "A trading company is not automatically unacceptable, and a registered manufacturer is not automatically capable. Record who sells, signs, invoices, receives payment, exports, details, buys material, fabricates, coats, inspects, packs, and answers for defects. Then verify the relationship among those entities and locations. The decision turns on transparent control and accountability, not the label printed on a brochure.",
+        bullets: [
+          "Chinese legal name, registration identifier, registered address, and operating status",
+          "Contract party, invoice issuer, bank beneficiary, and export entity",
+          "Visited factory address, ownership or lease relationship, and workforce relationship",
+          "In-house and subcontracted process map with named locations",
+          "Authority for technical changes, nonconformity decisions, payment claims, and warranty response",
+        ],
+        callout: {
+          label: "HOLD signal",
+          text: "The sales company arranges the visit but cannot document its relationship with the workshop, explain why another entity receives payment, or identify who is contractually responsible for rework and delay.",
+          tone: "warning",
+        },
       },
       {
-        heading: "Test the schedule against current workload",
+        heading: "3. Challenge engineering control with one live drawing sample",
         body:
-          "Delivery promises should be compared with workshop capacity, active orders, material availability, coating lead time, packing constraints, and export documentation. A low quote is not useful if the project misses the installation window.",
+          "Do not settle for software screenshots or a wall of past projects. Select one representative connection, member, or assembly from the buyer's controlled package and ask the supplier to walk it from technical clarification to shop drawing, bill of material, nesting or CNC data, fabrication traveler, inspection points, piece mark, and packing plan. This reveals whether engineering and production share one revision-controlled system.",
+        bullets: [
+          "Applicable code, design responsibility, scope boundaries, assumptions, and unresolved RFIs",
+          "Shop drawing and connection-detail review, approval, revision, and superseded-file control",
+          "Bill of material, cutting list, nesting, CNC file, and piece-mark consistency",
+          "Treatment of difficult weld access, distortion, tolerances, trial assembly, and erection interfaces",
+          "Evidence that released information reaches the correct workstation before fabrication starts",
+        ],
+      },
+      {
+        heading: "4. Follow one material identity through the system",
+        body:
+          "Choose one current or recent material item relevant to the proposed order. Reconcile the purchase specification, supplier approval, receiving record, mill test certificate, heat or batch identifier, storage marking, cutting record, piece mark, inspection status, packing list, and final dossier. Do not assume that full heat-number traceability is automatic: define the traceability level in the contract and audit the factory against that requirement.",
+        bullets: [
+          "Material grade, product standard, dimensions, quantity, and any toughness or supplementary requirement",
+          "MTC or MTR source, heat or batch number, and consistency with physical stock",
+          "Identification transfer after cutting, drilling, blasting, painting, and repacking where required",
+          "Control of remnants, mixed heats, unidentified stock, and proposed substitutions",
+          "Bolts, welding consumables, coating materials, and other critical bought-out items",
+        ],
+        callout: {
+          label: "Evidence rule",
+          text: "A certificate is useful only when the factory can connect it to the material and component that will be delivered under the buyer's required traceability level.",
+          tone: "neutral",
+        },
+      },
+      {
+        heading: "5. Link WPS, PQR, welder qualifications, and shop practice",
+        body:
+          "Select a project weld and ask the welding coordinator or responsible engineer to identify the applicable WPS, its supporting qualification record, the qualified welder or operator range, the production inspection steps, and the acceptance criteria. Then compare the paperwork with fit-up, consumable handling, machine settings, preheat or interpass control where required, welder identification, visual inspection, NDT, repair, and closeout on the floor.",
+        bullets: [
+          "Contract welding code and edition, joint detail, process, material group, thickness, position, and backing condition",
+          "WPS-to-PQR relationship and approval status for the sampled production weld",
+          "Welder or operator qualification range, identification, and continuity evidence",
+          "Consumable receipt, storage, issue, return, baking, and batch control where applicable",
+          "Inspection and NDT plan, personnel qualifications, report traceability, repair procedure, and re-inspection",
+        ],
+        callout: {
+          label: "Common presentation trap",
+          text: "A large certificate package is not proof of coverage. The factory must show which qualified procedure and person apply to a selected project weld and how the resulting record will be traced.",
+          tone: "warning",
+        },
+      },
+      {
+        heading: "6. Observe dimensional control before defects become expensive",
+        body:
+          "Check how the factory converts approved geometry into controlled fabrication. Sample receiving dimensions, cutting and drilling accuracy, jigs and fixtures, fit-up, tack welding, distortion control, overall dimensions, hole patterns, camber or preset geometry, and trial assembly where the risk requires it. Review calibrated instruments and recent nonconformity records, but also watch operators perform or explain the checks.",
+        bullets: [
+          "Inspection points before welding, before concealed work, and before coating",
+          "Measuring equipment identification, calibration status, range, and condition",
+          "First-off or first-article checks for repeated members and connections",
+          "Tolerance source and escalation path when drawings and specifications conflict",
+          "Segregation, repair approval, re-inspection, and release of nonconforming components",
+        ],
+      },
+      {
+        heading: "7. Make every critical subcontracted process visible",
+        body:
+          "Subcontracting can be commercially sensible, but invisible subcontracting breaks the audit trail. Identify who performs detailing, heavy cutting, machining, bending, welding, galvanizing, blasting, painting, fire protection, NDT, trial assembly, and packing. For each material process, confirm the approved source, documents and drawings issued, inspection access, record return, change approval, and nonconformity responsibility.",
+        bullets: [
+          "Named subcontractor, location, scope, approval status, and current capacity",
+          "Flow-down of project specifications, revisions, quality plan, WPS, and acceptance criteria",
+          "Buyer or inspector access to work and records at the subcontract site",
+          "Traceability and inspection status across transport between facilities",
+          "Written approval before changing a critical factory, process, or subcontractor",
+        ],
+      },
+      {
+        heading: "8. Audit coating and surface preparation as a controlled system",
+        body:
+          "Coating quality cannot be judged from finished color alone. Compare the specified system with surface preparation, environmental conditions, mixing and pot-life control, stripe coats, wet and dry film thickness checks, curing, repair, handling, and final protection. If blasting, painting, or galvanizing is subcontracted, inspect or verify that process owner and its returned records.",
+        bullets: [
+          "Approved coating system, product data, batch numbers, shelf life, and storage",
+          "Surface cleanliness and profile criteria, inspection method, and records",
+          "Temperature, humidity, dew-point margin, mixing, thinning, recoat interval, and cure controls where specified",
+          "Dry film thickness sampling plan, calibration checks, defect repair, and re-inspection",
+          "Protection during stacking, packing, container loading, and long-distance transport",
+        ],
+      },
+      {
+        heading: "9. Build the capacity answer from current work, not installed machines",
+        body:
+          "Installed equipment states theoretical capability; work in progress reveals available capability. Reconcile the proposed schedule with engineering release, material lead time, active orders, bottleneck work centers, qualified labor, inspection and NDT resources, coating throughput, rework, packing space, transport, and planned shutdowns. Ask the factory to defend one promised milestone week by week.",
+        bullets: [
+          "Current and committed tonnage by process—not one undifferentiated monthly capacity number",
+          "Bottleneck machine and labor loading for the buyer's member types and weld volume",
+          "Engineering, QC, NDT, coating, packing, and documentation resources",
+          "Material procurement dates, buyer approval dates, float, recovery plan, and escalation owner",
+          "Evidence from comparable orders delivered with similar complexity and logistics",
+        ],
+      },
+      {
+        heading: "10. Check whether packing supports erection, not just export",
+        body:
+          "A shipment can be commercially complete and still be unusable on site. Trace piece marks to approved drawings, packing lists, zones or erection sequence, bundle tags, fastener packages, document dossiers, and the proposed container or breakbulk loading plan. Check protection of coatings and small parts, lifting points, weight limits, moisture exposure, unloading constraints, and how shortages or transit damage will be reconciled.",
+        bullets: [
+          "Piece mark, drawing, packing list, bundle, container, and erection-zone relationship",
+          "Loose parts, bolts, shims, touch-up materials, templates, and installation accessories",
+          "Bundle stability, dunnage, edge protection, drainage, lifting, and safe unloading",
+          "Photo record before closure and container or shipment identification",
+          "Final document index and release evidence required before goods leave the factory",
+        ],
+      },
+      {
+        heading: "11. Sample claims against documents, people, and the floor",
+        body:
+          "The strongest audit method is reconciliation. For each critical claim, request a controlled document, select a record without allowing the supplier to curate every sample, speak with the responsible person, and inspect the corresponding material, component, workstation, or storage location. Record what was verified, what was supplied by the buyer, what remains a supplier claim, what is missing, and what is an auditor inference.",
+        callout: {
+          label: "Four-level evidence note",
+          text: "Verified observation is not the same as a supplier statement. A useful report keeps observation, document review, claim, and inference separate so the buyer can judge confidence.",
+          tone: "positive",
+        },
+      },
+      {
+        heading: "12. Convert audit findings into payment and production controls",
+        body:
+          "The report should not end with a generic score. For every material gap, name the evidence or corrective action, owner, deadline, verifier, acceptance rule, and commercial consequence. Put approved entities, factories, subcontractors, specifications, inspection hold points, document schedule, change control, and payment-release evidence into the purchase agreement and quality plan.",
+        bullets: [
+          "PROCEED only with the normal contract controls that still apply after supplier approval",
+          "HOLD payment or production release until critical evidence gaps close",
+          "REJECT when accountability, evidence integrity, access, or capability cannot be established",
+          "Require buyer approval before critical material, design, process, factory, or subcontractor changes",
+          "Preserve inspection access and hold points before concealed work, coating, packing, and shipment",
+        ],
+      },
+    ],
+    checklistHeading: "The minimum steel factory audit evidence file",
+    checklist: [
+      {
+        category: "Audit brief and identities",
+        evidence: ["Decision gate and scope", "Legal and payment entity map", "Factory and subcontractor locations", "Project document register", "Known risk list"],
+      },
+      {
+        category: "Engineering control",
+        evidence: ["Design and detailing responsibility", "RFI and clarification log", "Approved drawing register", "Revision and production-release control", "Sample drawing-to-piece trail"],
+      },
+      {
+        category: "Materials and traceability",
+        evidence: ["Purchase specification", "Receiving record", "MTC/MTR and heat or batch link", "Identification-transfer method", "Substitution and remnant control"],
+      },
+      {
+        category: "Welding and NDT",
+        evidence: ["Applicable code and edition", "WPS and supporting PQR", "Welder/operator qualifications", "Consumable records", "Inspection, NDT, repair, and closeout trail"],
+      },
+      {
+        category: "Fabrication and dimensional QC",
+        evidence: ["Process flow and hold points", "First-off and in-process records", "Calibrated measuring equipment", "Tolerance and trial-assembly records", "NCR and re-inspection evidence"],
+      },
+      {
+        category: "Coating and subcontracting",
+        evidence: ["Approved process owners", "Flowed-down requirements", "Surface-preparation records", "Environmental and DFT records", "Subcontract access and change approval"],
+      },
+      {
+        category: "Capacity and schedule",
+        evidence: ["Current workload", "Bottleneck loading", "Qualified labor and QC resources", "Milestone plan and float", "Recovery and escalation plan"],
+      },
+      {
+        category: "Packing and release",
+        evidence: ["Piece-mark and packing-list trail", "Erection-sequence mapping", "Packing and loading method", "Small-parts control", "Document index and shipment hold point"],
+      },
+    ],
+    decisionMatrix: [
+      {
+        signal: "Entities and process owners are transparent, sampled project evidence is consistent, capacity is credible, and only minor dated actions remain.",
+        decision: "PROCEED",
+        response: "Approve the supplier for the defined scope while keeping contract change control, production hold points, and shipment inspection active.",
+      },
+      {
+        signal: "The factory may be capable, but project-specific welding coverage, traceability, subcontractor control, coating evidence, or schedule support remains materially incomplete.",
+        decision: "HOLD",
+        response: "Do not release the affected payment or production gate. Assign each gap, acceptance evidence, verifier, and due date.",
+      },
+      {
+        signal: "Evidence is altered or contradictory, the payment/factory chain cannot be explained, access to critical work is refused, or essential processes and capacity are concealed.",
+        decision: "REJECT",
+        response: "Stop supplier approval for this scope or restart qualification with an independently verifiable factory and evidence chain.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What should a steel structure factory audit check?",
+        answer:
+          "It should check the legal and payment chain, engineering and revision control, material traceability, WPS/PQR and welder coverage, fabrication and dimensional controls, NDT, coating, subcontracting, current capacity, packing, document readiness, and contract controls against the buyer's actual project package.",
+      },
+      {
+        question: "What is the difference between a factory audit and a pre-shipment inspection?",
+        answer:
+          "A factory audit asks whether the supplier's organization, people, processes, and capacity can execute the order. A pre-shipment inspection checks a defined batch of goods and documents before release. Passing one does not replace the other.",
+      },
+      {
+        question: "Is a trading company automatically worse than a factory?",
+        answer:
+          "No. A transparent trading or export company can add useful coordination. The buyer must know who controls engineering, fabrication, quality, subcontractors, payment, export, and corrective action. An unexplained chain is the risk, not the label alone.",
+      },
+      {
+        question: "Do ISO 9001, AISC, EN 1090, or welding certificates replace a project audit?",
+        answer:
+          "No. Valid certificates can support confidence in a defined system or scope, but they do not prove that the sampled factory, people, procedures, materials, capacity, and records cover your current project. Verify certificate validity, scope, site, standard edition, and project application.",
+      },
+      {
+        question: "Can a remote video audit replace an on-site steel factory audit?",
+        answer:
+          "Remote review can screen documents, identities, engineering answers, and obvious inconsistencies. It is weaker when the order is large or complex, evidence is contradictory, subcontracting matters, live work must be sampled, or production and inspection controls need to be witnessed independently.",
+      },
+      {
+        question: "What documents should the buyer send before the audit?",
+        answer:
+          "Send the audit decision, supplier and payment details, proposed scope, controlled drawing sample, specification, applicable codes and editions, material and coating requirements, quality plan, schedule, subcontractor assumptions, and known concerns. Sensitive files can be limited to the smallest package needed for a meaningful test.",
+      },
+    ],
+    references: [
+      {
+        title: "AISC 207 — Standard for Certification Programs",
+        publisher: "American Institute of Steel Construction",
+        href: "https://www.aisc.org/aisc/publications/current-standards/aisc-207/",
+        note: "A current official benchmark for documented quality systems in steel fabrication, erection, and metal component manufacturing when the applicable contract or program uses AISC requirements.",
+      },
+      {
+        title: "AWS D1.1/D1.1M — Structural Welding Code—Steel",
+        publisher: "American Welding Society",
+        href: "https://www.aws.org/standards-and-publications/codes-and-standards/d1-1/",
+        note: "The official code page describes requirements for structural-steel welding, procedure and welder qualification, fabrication, inspection, and acceptance. Confirm the project-specified edition.",
+      },
+      {
+        title: "ISO 3834-1:2021 — Quality requirements for fusion welding",
+        publisher: "International Organization for Standardization",
+        href: "https://www.iso.org/standard/81650.html",
+        note: "The ISO 3834 series provides a framework for selecting welding quality requirement levels in workshops and at field installation sites; it is not a substitute for the buyer's project specification.",
+      },
+      {
+        title: "ISO 9606-1 — Qualification testing of welders for steels",
+        publisher: "International Organization for Standardization",
+        href: "https://www.iso.org/standard/54936.html",
+        note: "Use the official status page to confirm the current standard and then compare a welder's qualified range with the actual project welds.",
+      },
+      {
+        title: "IAF CertSearch — accredited certificate validation",
+        publisher: "International Accreditation Forum",
+        href: "https://www.iafcertsearch.org/",
+        note: "Use the official global database to validate accredited management-system certificates where coverage exists; certificate validity alone does not establish project capability.",
+      },
+    ],
+    relatedLinks: [
+      {
+        title: "Verify a Chinese steel supplier before paying a deposit",
+        href: "/blog/verify-chinese-steel-structure-supplier-before-deposit",
+        description: "Build the identity, engineering, welding, traceability, payment, and contract evidence file before money moves.",
+      },
+      {
+        title: "Pre-shipment inspection for engineering materials",
+        href: "/blog/pre-shipment-inspection-engineering-materials",
+        description: "Use the finished-goods and document gate after supplier approval and production control.",
+      },
+      {
+        title: "Engineering supplier verification playbook",
+        href: "/playbook",
+        description: "Apply Source Rating's broader evidence scoring, supplier questions, and deposit-to-shipment decision workflow.",
       },
     ],
   },

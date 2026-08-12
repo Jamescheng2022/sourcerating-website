@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { AlertTriangle, CheckCircle2, FileSearch, Mail, Send, ShieldCheck } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
@@ -46,10 +46,23 @@ function ResultList({ title, items }: { title: string; items: string[] }) {
   );
 }
 
+function getLandingSource() {
+  if (typeof window === "undefined") return "direct";
+  const source = new URLSearchParams(window.location.search).get("source") || "direct";
+  return source.toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 80) || "direct";
+}
+
 export function RiskScreenForm() {
   const [state, setState] = useState<FormState>("idle");
   const [result, setResult] = useState<RiskScreenResponse | null>(null);
   const [error, setError] = useState("");
+  const hasStarted = useRef(false);
+
+  function handleStart() {
+    if (hasStarted.current) return;
+    hasStarted.current = true;
+    trackEvent("form_start", { form: "risk_screen", landing_source: getLandingSource() });
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -59,6 +72,8 @@ export function RiskScreenForm() {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+    const landingSource = getLandingSource();
+    formData.set("source", landingSource);
     const payload = Object.fromEntries(formData.entries());
 
     const response = await fetch("/api/risk-screen", {
@@ -72,18 +87,26 @@ export function RiskScreenForm() {
     if (response?.ok && data?.assessment) {
       setResult(data as RiskScreenResponse);
       setState("success");
-      trackEvent("form_submit_success", { form: "risk_screen", source: data.source });
+      trackEvent("form_submit_success", {
+        form: "risk_screen",
+        assessment_source: data.source,
+        landing_source: landingSource,
+      });
       return;
     }
 
     setState("error");
     setError(data?.error || "The screen could not run right now. Please email contact@sourcerating.com directly.");
-    trackEvent("form_submit_error", { form: "risk_screen" });
+    trackEvent("form_submit_error", { form: "risk_screen", landing_source: landingSource });
   }
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-      <form onSubmit={handleSubmit} className="space-y-6 border border-gray-200 bg-white p-6 shadow-sm">
+      <form
+        onSubmit={handleSubmit}
+        onFocusCapture={handleStart}
+        className="space-y-6 border border-gray-200 bg-white p-6 shadow-sm"
+      >
         <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
           <label htmlFor="risk-fax-number">Fax number</label>
           <input
