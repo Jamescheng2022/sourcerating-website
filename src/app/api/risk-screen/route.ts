@@ -21,6 +21,7 @@ interface RiskScreenInput {
   targetMarket: string;
   drawingStatus: string;
   concern: string;
+  landingSource: string;
 }
 
 interface RiskAssessment {
@@ -35,6 +36,10 @@ interface RiskAssessment {
 
 function clean(value: unknown, max = 1600) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
+}
+
+function cleanSource(value: unknown) {
+  return clean(value, 80).toLowerCase().replace(/[^a-z0-9_-]/g, "") || "direct";
 }
 
 function normalizeAssessment(value: Partial<RiskAssessment> | null, fallback: RiskAssessment): RiskAssessment {
@@ -186,6 +191,7 @@ async function sendLeadEmail(input: RiskScreenInput, assessment: RiskAssessment,
     "New Source Rating risk screen",
     "",
     `Assessment source: ${source}`,
+    `Landing source: ${input.landingSource}`,
     `Risk level: ${assessment.riskLevel}`,
     `Summary: ${assessment.summary}`,
     "",
@@ -277,6 +283,7 @@ export async function POST(request: Request) {
     targetMarket: clean(body?.targetMarket, 160),
     drawingStatus: clean(body?.drawingStatus, 160),
     concern: clean(body?.concern, 1600),
+    landingSource: cleanSource(body?.source),
   };
 
   if (!input.name || !isValidEmail(input.email) || !input.supplier || !input.category || !input.stage || !input.concern) {
@@ -304,6 +311,7 @@ export async function POST(request: Request) {
     route: "/api/risk-screen",
     requestId,
     source,
+    landingSource: input.landingSource,
     riskLevel: assessment.riskLevel,
     emailQueued,
     durationMs: Date.now() - startedAt,

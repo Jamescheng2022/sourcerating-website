@@ -19,12 +19,9 @@ const staticRoutes = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const buildTime = new Date();
-
   const pages: MetadataRoute.Sitemap = staticRoutes.map(
     ([path, changeFrequency, priority]) => ({
       url: `${siteConfig.url}${path}`,
-      lastModified: buildTime,
       changeFrequency,
       priority,
     }),
@@ -32,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const posts: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${siteConfig.url}/blog/${post.slug}`,
-    lastModified: new Date(`${post.date}T00:00:00Z`),
+    lastModified: new Date(`${post.dateModified ?? post.date}T00:00:00Z`),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
