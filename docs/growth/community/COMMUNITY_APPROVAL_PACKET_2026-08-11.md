@@ -1,140 +1,83 @@
-# Community Approval Packet — 2026-08-11
+# Community Approval Packet — Building Systems Batch
 
-**Batch ID:** CAP-2026-08-11  
-**Publication status:** NOT APPROVED / NOT PUBLISHED  
-**Observation time:** 2026-08-11, America/Los_Angeles
+**Original batch date:** 2026-08-11  
+**Re-scoped:** 2026-08-13  
+**Batch ID:** CAP-2026-08-13-BUILDING  
+**Publication status:** ONE REDDIT COMMENT AWAITING EXACT-TEXT APPROVAL; NOTHING PUBLISHED
 
-## Batch gate
+## Scope correction
 
-The public research session was not authenticated. Before any Reddit publication, confirm that James's intended Reddit account:
+This batch is restricted to James's actual commercial and technical field:
 
-1. is logged in;
-2. has no active restriction or moderator warning;
-3. satisfies the target community's account requirements; and
-4. has enough normal non-promotional participation to satisfy r/Alibaba's 10% self-promotion rule.
+- steel structures and pre-engineered buildings (PEB);
+- prefab and modular buildings;
+- foundations, screw piles, building-envelope interfaces, erection and site coordination;
+- engineering-supplier verification for construction materials and fabricated building systems.
 
-Approval applies only to the exact target and exact text below. Any material change to the thread, community rules, link, disclosure, or wording requires a new check.
+All alloy trading, CNC, injection-molding, generic consumer-product and unrelated mechanical-parts opportunities have been removed.
 
-# Opportunity A — Recommended first batch
+## Opportunity A — Recommended first participation
 
-## Opportunity
+### Live opportunity
+
+- **Platform/community:** Reddit / r/ManufacturedHome
+- **Target:** [Manufactured home / modular home recommendations](https://www.reddit.com/r/ManufacturedHome/comments/1vl1waw/manufactured_home_modular_home_recommendations/)
+- **Observed:** 2026-08-13; approximately two days old; open; seven visible comments.
+- **Question:** What should a landowner understand before choosing a manufactured or modular home, a builder and a retailer?
+- **Existing-answer gap:** Current replies focus on brands, retailer trust and independent inspection. They do not yet separate approval classification from scope responsibility, nor compare complete installed cost.
+
+### Rule and risk check
+
+- No SourceRating link, brand mention, service offer or DM invitation.
+- No claim that one classification or approval path applies without the buyer's location.
+- No criticism of a named manufacturer or retailer.
+- The answer is buyer-side construction guidance, not a sales pitch.
+- The controlled browser is signed out, so publication cannot proceed until James logs in.
+- Exact text below requires approval because it replaces the previously approved Quonset Hut target.
+
+### Proposed exact text — MH1
+
+Start with the approval path and the total installed scope before choosing a company. If you are in the US, confirm whether the home will be treated as a HUD-code manufactured home or a state/local-code modular building. That classification affects the inspections, labels, foundation, site work and approval process.
+
+Ask every retailer or builder for the same responsibility matrix: who owns the house design, foundation, transport, crane and set, utility connections, permits, exterior and interior closeout, inspections and warranty work. Then compare the complete installed price, not only the factory or dealer price.
+
+Before signing, review the approved drawing set, foundation and utility interfaces, change-order rules, milestone payments, inspection rights and the exact conditions for final acceptance. An independent inspection before final sign-off is valuable, but it should not replace checking what was approved and who must correct defects.
+
+When checking references, try to speak with owners whose homes came through the same retailer and were installed by the same local crew. A good factory in another state does not prove that the local set, trim-out and warranty response will be good.
+
+### Publication gate
+
+1. James approves **MH1** exactly as written.
+2. James logs in to the intended Reddit account in the Cloud Browser.
+3. Immediately before submission, recheck that the post is open and that no new answer already covers the same responsibility-matrix method.
+4. Publish once, with no link, no SourceRating mention and no follow-up solicitation.
+
+## Opportunity B — Reserve only
 
 - **Platform/community:** Reddit / r/Alibaba
-- **Target URL:** https://www.reddit.com/r/Alibaba/comments/1uxdlpw/i_got_scammed_out_of_20k_beware_of_shanghai/
-- **Age/status when checked:** Approximately 12 hours old; open and receiving comments.
-- **Buyer question:** What can the buyer still do after material sold as UNS C65500 was reportedly delivered as a much lower-copper alloy, and what evidence should have been controlled before shipment?
-- **Why this audience matters:** The post concerns an engineered metal order, mill documentation, material identity, pre-shipment verification, payment risk, and a specific USD 20K loss—the exact decision context where James has a buyer-side engineering advantage.
-- **Existing-answer gap:** Comments already mention independent XRF/PMI and payment protection. The missing contribution is a usable post-loss evidence file: retained sample, chain of custody, formal lab report tied to the delivered batch, structured non-conformity record, and separation of direct losses.
+- **Target:** [Steel screw piles: DDP delivery and document-control lessons](https://www.reddit.com/r/Alibaba/comments/1v82wms/my_first_alibaba_order_steel_screw_piles_ddp_to/)
+- **Fit:** Construction foundation product; material traceability, welds, galvanizing and logistics are directly relevant.
+- **Decision:** Do not publish now. The thread already has detailed customs and documentation discussion; another reply adds limited value and increases legal/customs accuracy risk.
+- **Reusable buyer insight:** Keep transport/importer evidence separate from the fabricated-product evidence chain: MTC and heat/batch link, shaft and helix dimensions, weld records, coating certificate/readings, design load basis, inspection hold point and packing record.
 
-## Rule check
+## Discarded opportunities
 
-- **Self-promotion:** r/Alibaba prohibits self-promotion/spam, applies a 10% rule, and directs service promotion to a weekly thread.
-- **AI-written content:** The community explicitly warns against generic AI lead-generation copy. The final text must be reviewed and, if needed, adjusted by James so it reflects his real judgment and voice.
-- **Links/DMs:** No link. No "DM me." No offer to inspect, source, or sell a service.
-- **Sensitive claims:** Do not repeat or independently endorse the post's allegations about the named supplier. Do not promise recovery or give a jurisdictional legal conclusion.
-- **Risk level:** Medium. Strong relevance, but strict anti-promotion rules and an active allegation require restrained wording.
+### Quonset Hut reality check
 
-## Proposed final text — exact version A1
+- [Thread](https://www.reddit.com/r/barndominiums/comments/1vj5fqe/i_need_a_reality_check_on_quonset_huts/) was approximately five days old at final check.
+- A visible comment already covers structural efficiency, foundations and anchors, wind/snow loads, enclosure performance, complete finished cost and comparison with straight-wall steel construction.
+- **Decision:** Skip. The approved draft would now be repetitive.
 
-The point now is not to prove the supplier is “bad” in public. It is to create a non-conformity file that a bank, insurer or lawyer can actually use.
+### Chinese modular-home certificates
 
-Please keep several representative pieces; do not scrap everything. Photograph the original packing, labels and any heat/lot marks, then seal one retained sample. Ask an independent accredited materials lab to test with a documented chain of custody. A handheld XRF result is a useful screen, but for a claim I would want a formal report tied to the actual delivered batch and the full C65500 chemistry—not only the copper percentage.
+- [Thread](https://www.reddit.com/r/prefabs/comments/1upt6mu/do_chinese_modular_homes_really_have_proper/) was approximately one month old and already contains detailed discussion of certificates versus site-specific approval.
+- **Decision:** Retain as a buyer-question signal, not a publication target.
 
-Put the quotation/PO that names UNS C65500, the supplied MTR, payment instructions and beneficiary, packing records, messages, photos and lab report into one dated evidence bundle. Separate the material value, testing/cutting cost and any other claimed losses. Send a formal non-conformity notice to both the contracting entity and payment beneficiary; ask the bank immediately about recall or fraud-reporting options, then let cross-border counsel advise on jurisdiction and recovery.
+## LinkedIn native draft — LI-BUILDING-01
 
-For the next order, an MTR is only a claim until it is connected to the goods:
+**Posting method:** James posts or schedules natively in LinkedIn. No third-party auto-posting, automated engagement or DMs.
 
-inspector selects from the shipping batch → sample is sealed and marked → independent test → the same heat/lot and markings are verified at packing → balance is released.
-
-Full disclosure: I run SourceRating, a buyer-side engineering supplier verification service. No link—these steps should stand on their own.
-
-## Identity and disclosure
-
-- **SourceRating mentioned:** Yes, once, only in the disclosure.
-- **Link included:** No.
-- **Disclosure included:** Yes.
-- **Client/supplier/project named by James:** No. The comment does not repeat the supplier's name.
-
-## Recommendation
-
-- **Decision:** Publish only after James approves version A1 and the Reddit account passes the login, account-health, and 10% history checks.
-- **Reason:** This is the strongest combination of recency, engineering relevance, buyer urgency, and an unanswered evidence gap.
-- **Follow-up:** Recheck the thread immediately before publishing; skip if removed, locked, materially changed, or already answered with the same chain-of-custody method.
-
-# Opportunity B — Reserve, not part of the first publication batch
-
-## Opportunity
-
-- **Platform/community:** Reddit / r/procurement
-- **Target URL:** https://www.reddit.com/r/procurement/comments/1uzv7pp/challenges_with_mechanical_parts/
-- **Age/status when checked:** Approximately 1 day old; open; no visible substantive replies.
-- **Buyer question:** How can a buyer make CNC, milling, turning, and sheet-metal sourcing less opaque and more reliable?
-- **Why this audience matters:** It is a professional procurement audience discussing drawings, supplier portfolios, reliability, and communication.
-- **Existing-answer gap:** The thread needs an end-to-end control method rather than a software recommendation.
-
-## Rule check
-
-- **Self-promotion:** r/procurement prohibits solicitation, advertising, marketing, lead harvesting, and disguised consulting pitches outside its designated thread.
-- **AI-written content:** No low-effort or generic AI-generated content.
-- **Account gate:** At least 7 days old and 15 comment karma.
-- **Links/DMs:** No link, no brand name, no service offer, no DM invitation.
-- **Risk level:** Medium-high until account eligibility and non-promotional fit are confirmed.
-
-## Proposed final text — exact reserve version B1
-
-Yes. The difficult part is that a technical RFQ contains risks that most procurement systems cannot see. I normally separate the work into four gates.
-
-First, make the package quote-ready: controlled drawing revision, material and finish, tolerances, critical dimensions, inspection level, annual and lot quantity, packaging, and delivery terms.
-
-Second, compare suppliers by evidence rather than by portfolio size: owned versus subcontracted processes, similar-part samples, metrology capability, material traceability, current capacity, and the quality of their technical questions.
-
-Third, before production, close the DFM/Q&A log, approve a sample or first-article inspection, freeze the drawing revision, and define how deviations must be approved.
-
-Fourth, keep a record by part family: NCR/rework rate, on-time delivery, response time, corrective-action closeout, and cost of poor quality.
-
-Automation helps only after that structure exists. Otherwise it simply sends incomplete RFQs faster and collects quotations that are still not comparable.
-
-My background is buyer-side engineering procurement, so my bias is toward evidence gates rather than marketplace ratings. For critical parts, I also qualify a second source and map every single-source or subcontracted operation.
-
-## Identity and disclosure
-
-- **SourceRating mentioned:** No.
-- **Link included:** No.
-- **Professional interest disclosed:** Yes, as buyer-side engineering procurement experience.
-- **Solicitation:** None.
-
-## Recommendation
-
-- **Decision:** Hold as reserve. Do not publish in the first batch.
-- **Reason:** High topical fit, but the community's anti-marketing and account-eligibility rules are strict. Verify the account and recheck for new substantive answers first.
-
-# Existing-theme revalidation
-
-## Modular/prefab certification versus local approval
-
-- The previously surfaced China modular-home discussion is approximately one year old.
-- **Decision:** Discard as stale.
-- **Learning retained:** A supplier certificate and project-specific local approval are separate decisions. A future response must be location-specific and avoid making code-compliance conclusions without the adopted code and local licensed-professional input.
-
-## Steel screw piles, DDP, and document control
-
-- The current r/Alibaba post is approximately four days old and highly relevant.
-- It already contains detailed discussion of HS classification, importer-of-record visibility, customs documents, VAT, and future compliance concerns.
-- **Decision:** Skip. Another comment would add little and would increase customs/legal accuracy risk.
-- **Learning retained:** Buyers need a practical page distinguishing quoted DDP convenience from landed-cost, importer-of-record, traceability, and document-control consequences.
-
-# LinkedIn native-post package — LI-2026-08-11-A
-
-## Proposed format
-
-- **Format:** Native text post from James Cheng's personal LinkedIn profile.
-- **External link:** None.
-- **Media requirement:** None for version 1. A later original carousel can visualize the evidence chain after the underlying SourceRating guide is live and approved.
-- **Automation:** None. James copies, reviews, and posts or schedules through LinkedIn's own interface.
-
-## Final text
-
-One of the most dangerous documents in steel procurement is a perfectly formatted certificate that is not connected to the goods you are buying.
+One of the most dangerous documents in steel-building procurement is a perfectly formatted certificate that is not connected to the actual members being fabricated.
 
 A Mill Test Certificate is not proof by itself.  
 A WPS is not proof by itself.  
@@ -142,41 +85,33 @@ A factory video is not proof by itself.
 
 The buyer needs an evidence chain:
 
-1. Contract entity → factory → payment beneficiary
-2. Drawing revision → BOM → cutting list → piece mark
+1. Contract entity → actual factory → payment beneficiary
+2. Approved drawing revision → BOM → cutting list → piece mark
 3. MTC → heat number → received material → fabricated member → packing list
-4. WPS → supporting PQR → actual weld, joint, material and thickness
-5. Welder qualification → named production welder → inspection/NDT record
-6. Approved subcontractor → process record → NCR/corrective-action closeout
+4. WPS → supporting PQR → actual joint, material and thickness
+5. Welder qualification → production welder → inspection/NDT record
+6. Approved subcontractor → process record → NCR and corrective-action closeout
 
 Before releasing a deposit, I use three decisions:
 
-**PROCEED** — The chain is complete, and minor gaps have named corrective actions.
+**PROCEED** — The critical chain is complete; minor gaps have named owners and deadlines.
 
 **HOLD** — The supplier may be capable, but a critical identity, welding, traceability, subcontracting or schedule gap remains unresolved.
 
-**REJECT** — The payment beneficiary is unexplained, critical evidence is contradictory or falsified, factory access is refused, or substitutions are concealed.
+**REJECT** — The payment beneficiary is unexplained, evidence is contradictory or falsified, factory access is refused, or material/process substitutions are concealed.
 
-At SourceRating, this is the distinction I want buyers to make:
+Collecting documents is not the same as verifying a steel-building supplier.
 
-Collecting documents is not the same as verifying a supplier.
+Which link in this evidence chain fails most often in your projects?
 
-Which document in your procurement process is trusted too quickly?
+#SteelStructure #PEB #EngineeringProcurement
 
-#SupplierVerification #EngineeringProcurement #SteelFabrication
+## Measurement
 
-## Native posting checklist
+For every approved publication, record:
 
-1. James verifies that every statement reflects his real experience and removes any wording he would not personally use.
-2. Start a native LinkedIn post from James's own profile.
-3. Paste the final text without an external URL.
-4. Confirm the line breaks and bold styling in preview; do not tag unrelated people.
-5. Post or use LinkedIn's own scheduling feature.
-6. Do not use browser bots, third-party auto-posters, auto-commenters, auto-likers, auto-followers, or automated DMs.
-
-## Measurement plan
-
-- **No URL/UTM in version 1:** Measure native post quality rather than clicks.
-- **At 48 hours and 7 days:** Record impressions, relevant profile views/follows where available, saves, substantive comments, and any inbound project conversation that explicitly references the post.
-- **Qualified action:** Risk Screen, inquiry, drawing/BOM/RFQ, or genuine project discussion attributed to the post.
-- **Do not optimize for:** raw impressions, generic reactions, or follower count.
+- exact account, target, text version and time;
+- meaningful replies and saves, not raw reactions alone;
+- relevant profile visits or project conversations;
+- Risk Screen, inquiry, drawing/BOM/RFQ or other attributable qualified action;
+- learning to send to the SEO/GEO Agent.
