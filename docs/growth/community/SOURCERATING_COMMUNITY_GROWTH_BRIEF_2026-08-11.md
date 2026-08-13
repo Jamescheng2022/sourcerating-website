@@ -1,137 +1,112 @@
-# SourceRating Community Growth Brief — Week of 2026-08-11
+# SourceRating Community Growth Brief — Building Systems Focus
 
-## P0 / P1 / P2
+**Original week:** 2026-08-11  
+**Updated:** 2026-08-13
 
-### P0 — Publication blocked by account-state verification
+## Decision
 
-- The public research session is not logged in to Reddit or LinkedIn.
-- Reddit account health, age, karma, moderator notices, recent history, and r/Alibaba 10% self-promotion eligibility could not be verified.
-- No Reddit item may be published until the exact account and exact target are checked in an authenticated session.
-- No content was published, no DM was sent, and no link was placed.
+The Community Promotion Agent is now restricted to SourceRating's real expertise and commercial direction:
 
-### P1 — Strong public evidence page is not live
+- steel structures and PEB;
+- prefab, modular and manufactured building systems;
+- construction materials, foundations, erection, shipping sequence and site interfaces;
+- engineering evidence used to verify Chinese suppliers before deposit, production or shipment.
 
-- Draft PR [#3](https://github.com/Jamescheng2022/sourcerating-website/pull/3) contains the evidence-rich guide *How to Verify a Chinese Steel Structure Supplier Before Paying a Deposit*.
-- It remains a Draft PR and is not a stable Production URL.
-- The first Reddit batch therefore contains no SourceRating link. The LinkedIn draft is also link-free.
+All alloy trading, CNC, injection-molding, generic consumer products and unrelated mechanical-parts promotion work is removed.
 
-### P2 — Community fit is concentrated, not broad
+## Current result
 
-- r/Alibaba has live buyer-loss cases but enforces strict self-promotion, 10% history, no-DM, and no generic AI lead-generation rules.
-- r/procurement has relevant professional questions but prohibits solicitation, marketing, lead harvesting, disguised consulting pitches, and low-effort AI content; it also requires an account at least 7 days old with 15 comment karma.
-- The correct operating posture is low-frequency, evidence-first participation, not a posting quota.
+- **Reddit comments published:** 0
+- **Links or DMs sent:** 0
+- **Active Reddit opportunity:** 1
+- **Skipped after live recheck:** Quonset Hut thread, because the proposed engineering answer is already present.
+- **Prepared LinkedIn drafts:** 1, focused on steel-building evidence chains.
+- **Account state:** Reddit is signed out in the controlled browser.
 
-## Activity
+## Active buyer question
 
-- **Opportunities reviewed:** 4 Reddit threads plus current Reddit, LinkedIn, and community-specific rules.
-- **Current high-fit opportunities retained:** 2.
-- **Reddit drafts prepared:** 2.
-- **Recommended first Reddit batch:** 1 exact comment.
-- **LinkedIn native drafts prepared:** 1.
-- **Approved/published:** 0.
-- **Skipped:** 2.
-  - One approximately one-year-old modular-home thread: stale.
-  - One four-day-old steel screw-pile DDP post: already saturated with detailed customs/document replies.
-- **Removed:** 0 observed.
+The current high-fit thread asks how a landowner should choose between manufactured and modular construction and assess builders and retailers.
 
-## Outcomes
+The missing decision method is:
 
-- **Referral sessions:** Not applicable; nothing published.
-- **Qualified actions:** 0.
-- **Meaningful replies:** Not applicable.
-- **Measurement limitations:** No authenticated Reddit/LinkedIn analytics, GA4, Search Console, or attributable conversion data were available in this run. Public visibility is not being treated as a conversion metric.
+1. determine how the building will be classified and approved at the actual location;
+2. freeze a complete responsibility matrix for design, foundation, transport, crane/set, utilities, permits, inspections, closeout and warranty;
+3. compare complete installed cost rather than factory/dealer price;
+4. review approved drawings, interfaces, changes, payment milestones and final-acceptance conditions;
+5. check references tied to the same retailer and local installation crew.
 
-## Buyer-language insights
+The exact link-free response is version **MH1** in [the approval packet](./COMMUNITY_APPROVAL_PACKET_2026-08-11.md).
 
-### Repeated question
+## Community signals for SEO/GEO
 
-> The supplier sent a professional certificate. How do I know it belongs to the material or work I actually bought?
+### Signal 1 — Complete installed scope for prefab/modular buildings
 
-The live USD 20K alloy-loss discussion makes the gap concrete: buyers confuse a supplier-issued MTR with independent proof tied to the delivered batch.
+Buyers repeatedly compare the shell or dealer price while missing:
 
-### Hidden concern
+- foundation and anchor/interface design;
+- transport, crane and erection/set;
+- local engineering and permit adaptation;
+- utilities and MEP closeout;
+- inspection, commissioning and warranty responsibility.
 
-The deeper fear is not merely “Is the supplier legitimate?” It is:
+**Recommended evidence page:**
 
-> Can I still prove non-conformity after the goods have shipped, been cut, installed, or mixed with other batches?
+*Prefab Building Price vs Total Installed Cost: A Buyer Responsibility Matrix*
 
-This shifts the useful framework from document collection to chain of custody:
+### Signal 2 — Certificate versus project approval
 
-```
-specified grade → controlled batch → inspector-selected sample → independent test
-→ retained sample → packing marks → shipment records → payment release
-```
+The r/prefabs discussion confirms a durable question: ISO, CE or a factory certificate does not by itself establish approval for the buyer's site.
 
-### Second buyer problem
+**Recommended evidence page:**
 
-The CNC/mechanical-parts discussion describes an opaque market, tedious RFQs, and unreliable communication. The recurring decision burden is:
+*Do Chinese Prefab Building Certificates Prove Local Code Compliance?*
 
-- making drawings quote-ready;
-- comparing suppliers on the same evidence;
-- controlling DFM questions and revisions;
-- approving a sample/FAI before production;
-- tracking NCRs, rework, delivery, and corrective-action closure by part family.
+It should distinguish factory management-system certificates, component/material tests, project-specific calculations and local approval or engineering stamp.
 
-### Proposed SEO/GEO input
+### Signal 3 — Steel traceability before shipment
 
-The strongest community-supported next evidence page is already topic #7 in the SEO/GEO cluster:
+The steel screw-pile discussion supports a construction-specific traceability page covering:
 
-**How to verify material certificates and heat-number traceability before shipment**
+- MTC and heat/batch link;
+- dimensions and piece/lot identification;
+- weld records;
+- galvanizing certificate and coating-thickness readings;
+- design load basis;
+- inspection and shipment hold points.
 
-It should independently answer:
+This remains compatible with the planned SEO/GEO page on MTC and heat-number traceability.
 
-1. What an MTR does and does not prove.
-2. How to connect heat/lot numbers to received stock, cutting, piece marks, fabrication, packing, and final documents.
-3. When to use independent PMI/XRF or laboratory testing.
-4. How inspector-selected samples, seals, retained samples, and chain-of-custody records prevent sample swapping.
-5. What evidence changes the decision from PROCEED to HOLD or REJECT.
-6. What to preserve if a mismatch is discovered after delivery.
+## Cross-agent handoff
 
-This page is justified by a real buyer loss and repeated community questions; it is not being requested merely to create something to promote.
+### Send to SEO/GEO Agent
 
-## Cross-agent exchange
+1. Build the MTC/heat-number traceability page already in the queue.
+2. Add the prefab installed-cost/responsibility-matrix page after the welding-qualification and factory-versus-trader priorities.
+3. Add the certificate-versus-local-approval page to the prefab cluster.
+4. Use community language in FAQ headings, but do not copy Reddit text.
+5. Link each page to the Risk Screen with an input appropriate to the decision: supplier link, drawing/BOM, sample MTC or approval concern.
 
-### Sent to SEO/GEO Agent
+### Community Agent receives back
 
-- Buyer wording: “The certificate matched the order, but the delivered alloy did not.”
-- Missing evidence: a practical chain-of-custody and heat-number traceability page.
-- Decision framework: supplier document versus independently verified batch evidence.
-- Conversion fit: buyers with an actual supplier, MTR, material grade, shipment, or payment decision can proceed naturally to the Risk Screen.
-
-### Available from SEO/GEO Agent
-
-- Draft PR #3 provides the entity, engineering, welding, traceability, subcontracting, capacity, and contract-control framework.
-- It can support LinkedIn authority content now, but it should not be linked from community posts until merged and live.
-
-## Policy and platform revalidation
-
-Checked on 2026-08-11:
-
-- [Reddit Rules](https://redditinc.com/policies/reddit-rules): authentic participation, community-rule compliance, no spam or disruptive behavior.
-- [Reddit Help: Spam](https://support.reddithelp.com/hc/en-us/articles/360043504051-Spam): no repeated or unsolicited mass engagement.
-- [r/Alibaba](https://www.reddit.com/r/Alibaba/): strict no-self-promotion/spam controls, 10% rule, no DM traps, no generic AI lead generation, promotions confined to the designated thread.
-- [r/procurement](https://www.reddit.com/r/procurement/): no solicitation/marketing/lead harvesting, no low-effort AI content, and account minimums.
-- [LinkedIn User Agreement](https://www.linkedin.com/legal/user-agreement) and [Automated Activity Help](https://www.linkedin.com/help/linkedin/answer/a1340567): no unauthorized bots or third-party automation for access, posting, commenting, liking, sharing, contacts, or messages.
-- [LinkedIn Professional Community Policies](https://www.linkedin.com/legal/professional-community-policies): true identity, accurate/authentic information, professional conduct, no spam or artificial engagement.
-
-## Next batch awaiting approval
-
-The exact approval packet is in [COMMUNITY_APPROVAL_PACKET_2026-08-11.md](./COMMUNITY_APPROVAL_PACKET_2026-08-11.md).
-
-Recommended first publication batch:
-
-1. One r/Alibaba comment on the current alloy non-conformity case.
-2. No SourceRating link.
-3. One transparent professional disclosure.
-4. No DM invitation or service offer.
-5. Recheck thread status and account history immediately before publication.
-
-The r/procurement mechanical-parts comment remains a reserve item and is not included in the first publication batch.
+- live, evidence-rich pages only after Production verification;
+- one concise answer extract, not promotional copy;
+- the exact claim the page supports;
+- a safe CTA only for platforms and communities that permit it.
 
 ## LinkedIn
 
-One final native, link-free post is ready in the approval packet. It teaches the evidence chain from contract entity and drawings through MTC/heat number, WPS/PQR, welder qualification, subcontractor records, and PROCEED / HOLD / REJECT. James must post or schedule it through LinkedIn's own interface.
+The current native draft teaches the steel-building evidence chain from contracting entity and approved drawings through material heat numbers, WPS/PQR, welder qualifications, subcontractors and PROCEED/HOLD/REJECT.
 
-## One next action
+It remains link-free and must be posted or scheduled through LinkedIn's own interface. No automated likes, comments, follows or DMs.
 
-**James decides whether to approve Reddit draft A1 exactly as written and confirms which Reddit account should be checked for r/Alibaba's 10% history before any controlled publication.**
+## Publication gates
+
+- Reddit: exact target and text approval, authenticated intended account, current rule and duplication check.
+- LinkedIn: James reviews voice and posts natively.
+- No cross-community copy/paste.
+- No SourceRating mention where community rules or account history make it promotional.
+- No response when the same engineering answer is already present.
+
+## Immediate decision required
+
+Approve or revise Reddit version **MH1**. Once approved and the intended Reddit account is logged in, the Agent may perform the final freshness check and submit it once.
