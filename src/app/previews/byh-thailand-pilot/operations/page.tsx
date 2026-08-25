@@ -3,7 +3,17 @@ import Link from "next/link";
 import { Activity, ArrowLeft, Bot, CalendarDays, CheckCircle2, Database, Globe2, Inbox, ShieldCheck, Wrench } from "lucide-react";
 import "./operations.css";
 
-export const metadata: Metadata = { title: "BYH Digital Operations Pilot", robots: { index: false, follow: false } };
+export const metadata: Metadata = {
+  title: { absolute: "BYH Thailand · Digital Operations Pilot" },
+  description: "Website, employee AI, content and maintenance operations concept for BYH Thailand.",
+  robots: { index: false, follow: false },
+  openGraph: {
+    title: "BYH Thailand · Digital Operations Pilot",
+    description: "Website, employee AI, content and maintenance operations concept for BYH Thailand.",
+    siteName: "BYH Thailand Digital Pilot",
+    images: [],
+  },
+};
 
 const health = [
   ["Website", "Healthy", "3 language routes · noindex pilot", Globe2],

@@ -1,0 +1,23 @@
+/*
+ * The pilot is hosted inside the SourceRating application for review only,
+ * but it must render as a standalone BYH experience rather than inheriting
+ * the SourceRating marketing shell.
+ */
+body:has(.byh-preview-boundary) > header,
+body:has(.byh-preview-boundary) > footer {
+  display: none !important;
+}
+
+body:has(.byh-preview-boundary) > main {
+  min-height: 0;
+}
+
+body:has(.byh-preview-boundary) {
+  margin: 0;
+  background: #f4f4f1;
+}
+
+.byh-preview-boundary {
+  min-height: 100vh;
+  isolation: isolate;
+}

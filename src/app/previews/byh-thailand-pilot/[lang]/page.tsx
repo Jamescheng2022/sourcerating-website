@@ -13,10 +13,27 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
+  const title = lang === "th"
+    ? "BYH ประเทศไทย · การผลิตความแม่นยำ"
+    : lang === "zh"
+      ? "BYH 泰国 · 精密制造"
+      : "BYH Thailand · Precision Manufacturing";
   return {
-    title: lang === "th" ? "BYH ประเทศไทย · การผลิตความแม่นยำ" : "BYH Thailand · Precision Manufacturing",
-    description: "Independent evidence-bound digital pilot for BYH New Technology Thailand.",
+    title: { absolute: title },
+    description: "Independent evidence-bound manufacturing website pilot for BYH New Technology Thailand.",
     robots: { index: false, follow: false },
+    openGraph: {
+      title,
+      description: "Independent evidence-bound manufacturing website pilot for BYH New Technology Thailand.",
+      siteName: "BYH Thailand Digital Pilot",
+      images: [],
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description: "Independent evidence-bound manufacturing website pilot for BYH New Technology Thailand.",
+      images: [],
+    },
     alternates: {
       languages: {
         "th-TH": "/previews/byh-thailand-pilot/th",
