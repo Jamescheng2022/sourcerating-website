@@ -127,6 +127,45 @@ export default async function BlogPostPage({ params }: PageProps) {
           </section>
         ) : null}
 
+        {post.evidenceChain ? (
+          <section className="mt-14 border-t border-gray-200 pt-12">
+            <p className="text-sm font-semibold uppercase text-brand-700">Evidence map</p>
+            <h2 className="mt-3 text-3xl font-bold text-gray-950">{post.evidenceChainHeading ?? "The required evidence chain"}</h2>
+            <p className="mt-4 max-w-3xl leading-7 text-gray-700">
+              Each gate must connect to the records before and after it. A complete-looking document at one stage cannot repair a missing link elsewhere.
+            </p>
+            <div className="mt-7 space-y-4 md:hidden">
+              {post.evidenceChain.map((row) => (
+                <div key={row.gate} className="border border-gray-200 p-5">
+                  <h3 className="font-bold text-gray-950">{row.gate}</h3>
+                  <p className="mt-3 text-sm leading-6 text-gray-700">{row.evidence}</p>
+                  <p className="mt-4 border-l-2 border-brand-600 pl-3 text-sm leading-6 text-gray-600">{row.requiredMatch}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-7 hidden overflow-hidden border border-gray-200 md:block">
+              <table className="w-full table-fixed border-collapse text-left">
+                <thead className="bg-[#f4f6f4] text-sm text-gray-900">
+                  <tr>
+                    <th className="w-[22%] border-b border-gray-200 p-4 font-bold">Gate</th>
+                    <th className="w-[39%] border-b border-l border-gray-200 p-4 font-bold">Evidence to collect</th>
+                    <th className="w-[39%] border-b border-l border-gray-200 p-4 font-bold">Required match</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {post.evidenceChain.map((row) => (
+                    <tr key={row.gate} className="align-top">
+                      <th scope="row" className="border-b border-gray-200 p-4 text-sm font-bold leading-6 text-gray-950 last:border-b-0">{row.gate}</th>
+                      <td className="border-b border-l border-gray-200 p-4 text-sm leading-6 text-gray-700 last:border-b-0">{row.evidence}</td>
+                      <td className="border-b border-l border-gray-200 p-4 text-sm leading-6 text-gray-700 last:border-b-0">{row.requiredMatch}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ) : null}
+
         <div className="mt-12 space-y-12 border-t border-gray-200 pt-12">
           {post.sections.map((section) => (
             <section key={section.heading}>
@@ -200,9 +239,9 @@ export default async function BlogPostPage({ params }: PageProps) {
         {post.references ? (
           <section className="mt-14 border-t border-gray-200 pt-12">
             <p className="text-sm font-semibold uppercase text-brand-700">Standards context</p>
-            <h2 className="mt-3 text-3xl font-bold text-gray-950">Official references for the project audit brief</h2>
+            <h2 className="mt-3 text-3xl font-bold text-gray-950">{post.referencesHeading ?? "Official references for the project audit brief"}</h2>
             <p className="mt-4 max-w-3xl leading-7 text-gray-700">
-              These sources help define the audit questions, but the contract, approved drawings, project specification, destination rules, and current standard editions remain controlling.
+              {post.referencesIntro ?? "These sources help define the audit questions, but the contract, approved drawings, project specification, destination rules, and current standard editions remain controlling."}
             </p>
             <div className="mt-7 divide-y divide-gray-200 border-y border-gray-200">
               {post.references.map((reference) => (
@@ -247,9 +286,9 @@ export default async function BlogPostPage({ params }: PageProps) {
         </aside>
 
         <div className="mt-12 rounded-md bg-brand-950 p-7 text-white sm:p-9">
-          <h2 className="text-2xl font-bold">Want this applied to one real supplier?</h2>
+          <h2 className="text-2xl font-bold">{post.ctaHeading ?? "Want this applied to one real supplier?"}</h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-gray-200">
-            Send one supplier link, product category, destination country, and the issue that worries you most. The launch-stage first-pass risk screen is free and does not require an account.
+            {post.ctaBody ?? "Send one supplier link, product category, destination country, and the issue that worries you most. The launch-stage first-pass risk screen is free and does not require an account."}
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <TrackedLink
@@ -258,7 +297,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               eventParams={{ location: "buyer_guide", label: "risk_screen", guide: post.slug }}
               className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-brand-950 hover:bg-gray-100"
             >
-              Start the free risk screen <ArrowRight className="h-4 w-4" />
+              {post.ctaLabel ?? "Start the free risk screen"} <ArrowRight className="h-4 w-4" />
             </TrackedLink>
             <TrackedLink
               href="/pricing"
