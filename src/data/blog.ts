@@ -10,6 +10,8 @@ export interface BlogPost {
   directAnswer?: string;
   keyTakeawaysHeading?: string;
   keyTakeaways?: string[];
+  evidenceChainHeading?: string;
+  evidenceChain?: Array<{ gate: string; evidence: string; requiredMatch: string }>;
   sections: Array<{
     heading: string;
     body: string;
@@ -20,11 +22,351 @@ export interface BlogPost {
   checklist?: Array<{ category: string; evidence: string[] }>;
   decisionMatrix?: Array<{ signal: string; decision: "PROCEED" | "HOLD" | "REJECT"; response: string }>;
   faqs?: Array<{ question: string; answer: string }>;
+  referencesHeading?: string;
+  referencesIntro?: string;
   references?: Array<{ title: string; publisher: string; href: string; note: string }>;
   relatedLinks?: Array<{ title: string; href: string; description: string }>;
+  ctaHeading?: string;
+  ctaBody?: string;
+  ctaLabel?: string;
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "how-to-verify-mill-test-certificates-and-heat-number-traceability-before-steel-shipment",
+    title: "How to Verify Mill Test Certificates and Heat-Number Traceability Before Steel Shipment",
+    seoTitle: "Verify MTC and Heat-Number Traceability",
+    excerpt:
+      "A buyer-side method for proving that a steel MTC, heat number, cut part, fabricated piece mark, and packing list belong to the same shipment.",
+    date: "2026-08-27",
+    category: "Steel materials",
+    readTime: "13 min read",
+    directAnswer:
+      "A mill test certificate is evidence about the inspection unit identified on the document; it is not, by itself, proof that the steel in the workshop or the components in a shipping bundle came from that material. Before final payment or shipment release, sample the chain in both directions: packed piece mark to fabrication and cutting records to received stock and MTC, then selected heat number forward through all cut pieces, remnants, finished members, and packing records. If a critical link is missing, place the affected material or shipment on HOLD rather than accepting a certificate PDF as a substitute for traceability.",
+    keyTakeawaysHeading: "What the shipment-release file must establish",
+    keyTakeaways: [
+      "The order defines the exact grade, product standard, dimensions, delivery condition, tests, inspection-document type, and required traceability level.",
+      "The MTC issuer, document number, heat or cast number, inspection unit, test results, and validation are plausible and consistent with the order.",
+      "Receiving records and physical stock markings connect the delivered plates, sections, or hollow sections to the stated certificate.",
+      "Cutting and nesting records preserve identity after parent material becomes smaller parts, including mixed heats and remnants.",
+      "Fabrication travelers and piece marks carry the approved material identity into inspection status, packing lists, bundles, and shipment documents.",
+      "Payment and release decisions depend on a reconciled evidence chain, not on the presence of a document named MTC or 3.1 certificate.",
+    ],
+    evidenceChainHeading: "The minimum MTC-to-shipment evidence chain",
+    evidenceChain: [
+      {
+        gate: "1. Contract and purchase order",
+        evidence: "Material grade and product standard; size and thickness; delivery condition; supplementary tests; inspection-document type; traceability level; substitution rule.",
+        requiredMatch: "The buyer's approved specification must flow into the fabricator's material purchase order without silent downgrades or omissions.",
+      },
+      {
+        gate: "2. Mill or stockist supply",
+        evidence: "Mill identity; stockist or intermediary chain; MTC/MTR number; heat or cast number; product description; quantity or mass; test results; document validation.",
+        requiredMatch: "The certificate and supply documents must describe material that can satisfy the fabricator's purchase order and the project requirement.",
+      },
+      {
+        gate: "3. Factory receiving",
+        evidence: "Delivery note; receiving inspection; plate, section, or bundle markings; dimensions; quantity and mass; heat number; storage location; acceptance or quarantine status.",
+        requiredMatch: "The physical material received must reconcile with the supply documents and the specific certificate, not merely share a similar grade description.",
+      },
+      {
+        gate: "4. Stock, nesting, and cutting",
+        evidence: "Parent-stock ID; heat number; cutting or nesting plan; issued quantity; generated part marks; identification-transfer record; remnant ID and location.",
+        requiredMatch: "Every cut part and usable remnant must remain linked to one identified parent item under the contract-defined traceability method.",
+      },
+      {
+        gate: "5. Fabrication and inspection",
+        evidence: "Piece mark; drawing and revision; traveler or route card; assembly record; inspection status; NCR, repair, concession, and material-substitution approvals.",
+        requiredMatch: "The released piece mark must point to the approved drawing and material trail, with no unresolved change or nonconformity hiding the link.",
+      },
+      {
+        gate: "6. Packing and final dossier",
+        evidence: "Piece-mark list; bundle and container ID; packing list; shipment quantity and mass; final MTC index; release note; photo record where required.",
+        requiredMatch: "A packed member selected without notice must trace backward to its MTC, and a selected heat must trace forward to all affected shipped pieces and controlled remnants.",
+      },
+    ],
+    sections: [
+      {
+        heading: "1. Know what an MTC can prove—and what it cannot",
+        body:
+          "An MTC or MTR can support the claim that specified inspection and test results were reported for the steel product or inspection unit identified on that document. Depending on the governing product standard, order, and inspection-document type, useful fields may include manufacturer, material designation, heat or cast number, dimensions, quantity, chemical analysis, tensile results, impact results, delivery condition, test dates, and validation. Read those fields against the purchase requirement; do not accept the document title as proof of compliance.",
+        bullets: [
+          "It can support grade, chemistry, mechanical-property, toughness, and delivery-condition checks only to the extent those items are required and actually reported for the applicable inspection unit.",
+          "It does not prove that the PDF is authentic, that the factory received the described material, or that the material remained identified after cutting.",
+          "It does not prove the quantity now in stock, the dimensions of every received item, or that no substitution occurred.",
+          "It does not prove fabrication dimensions, welding quality, coating, packing, or overall conformity of the finished steelwork.",
+          "A heat number identifies production origin at a defined level; it is not automatically a unique serial number for every plate, section, or fabricated member.",
+        ],
+        callout: {
+          label: "The central rule",
+          text: "The MTC describes material evidence. Traceability proves whether that evidence belongs to the actual goods under review. Buyers need both.",
+          tone: "neutral",
+        },
+      },
+      {
+        heading: "2. Specify the evidence chain before the supplier buys steel",
+        body:
+          "Traceability is a contract requirement, not a feature that should be assumed after fabrication. State the material designation, standard and edition, product form, dimensions, delivery condition, required tests, inspection-document type, permitted sources, and identification level. Define whether the buyer needs lot-level, heat-level, parent-item, or piece-level traceability at each stage, and how the link may be maintained after cutting, blasting, painting, galvanizing, assembly, and packing.",
+        bullets: [
+          "Require prior written approval for material grade, standard, mill, stockist, product form, thickness, delivery condition, or testing substitutions.",
+          "Define the records and physical or controlled-system markings that will preserve identity through irreversible operations.",
+          "State who may validate documents, whether stockist-transmitted copies are acceptable, and when originals or mill confirmation are required.",
+          "Reserve access for buyer or third-party sampling and define when PMI, laboratory retesting, or witness testing may be required.",
+          "Tie each payment and production hold point to named evidence rather than to a calendar date or supplier progress claim alone.",
+        ],
+      },
+      {
+        heading: "3. Authenticate the certificate before tracing it",
+        body:
+          "Start with internal consistency, then verify the issuing chain. Compare the mill name, logo, address, document layout, certificate number, heat number, product description, units, specification, grade notation, delivery condition, test methods, test dates, validation, and amendment history. Reconcile the certificate with the mill or stockist order, delivery note, invoice, and factory receiving record. A QR code, stamp, signature, or PDF metadata may help, but none is conclusive on its own.",
+        bullets: [
+          "Obtain the least-transformed copy available and preserve all pages, attachments, revisions, and intermediary statements.",
+          "Check whether the named mill actually produces the stated product form, grade, size range, and delivery condition.",
+          "Use an official mill verification channel when available; do not rely only on contact details printed inside the questioned PDF.",
+          "Look for altered tables, inconsistent fonts or units, missing pages, impossible chronology, duplicated certificate numbers, or repeated test values across unrelated heats.",
+          "Treat translation and reformatting as separate documents; keep the original-language certificate and map every translated field back to it.",
+        ],
+        callout: {
+          label: "Important limitation",
+          text: "A genuine certificate can still be irrelevant to the shipment. Authenticity review must be followed by physical and record traceability.",
+          tone: "warning",
+        },
+      },
+      {
+        heading: "4. Perform a two-way floor check, not a supplier-selected document tour",
+        body:
+          "Use unannounced or buyer-selected samples where the audit scope permits. First work backward: select a packed or finished piece, record its piece mark and inspection status, and trace it through the fabrication traveler, cut list, parent material, receiving record, and MTC. Then work forward: select one certificate heat number and account for its received quantity through stock, issued material, cut parts, remnants, scrap, work in progress, finished members, and packing records. One direction can look complete while the other exposes duplicate use, missing remnants, or unexplained quantities.",
+        bullets: [
+          "Photograph the full item, close-up marking, storage or bundle context, and the contemporaneous record reference—not an isolated heat-number close-up.",
+          "Check the marking method before and after cutting and ask an operator to demonstrate the actual transfer process.",
+          "Compare physical dimensions and approximate mass with receiving, issue, nesting, and packing quantities.",
+          "Sample more than one heat, product form, thickness, production stage, shift, and storage area when the risk and order size warrant it.",
+          "Record separately what was observed, what a controlled document shows, what the supplier stated, and what remains an inference.",
+        ],
+      },
+      {
+        heading: "5. Test the point where most chains break: cutting and remnants",
+        body:
+          "Original mill markings are commonly separated from much of the material when plates or sections are cut. A controlled system may preserve the link through hard stamping, low-stress stamps where permitted, paint marking, durable tags, barcodes, travelers, nesting software, or a documented combination. The acceptable method depends on the product, project, process, and specification. The auditor should verify the method in use, not merely read a procedure.",
+        bullets: [
+          "Parent stock is uniquely identified before the first cut and linked to the released nesting or cut plan.",
+          "New part or piece marks are generated from the correct drawing revision and linked to the parent heat or item.",
+          "Mixed heats are physically segregated or unambiguously controlled in the production system.",
+          "Usable remnants retain identity, size, quantity, location, and inspection status; unidentified remnants are quarantined from project use.",
+          "Scrap, re-cuts, replacements, and rejected parts are recorded so one certificate quantity is not repeatedly claimed for new material.",
+        ],
+        callout: {
+          label: "HOLD signal",
+          text: "The procedure requires identification transfer, but cut pieces and remnants on the floor have no durable mark or contemporaneous system link. A spreadsheet reconstructed for the visit is not equivalent evidence.",
+          tone: "warning",
+        },
+      },
+      {
+        heading: "6. Reconcile substitutions, mixed heats, stockists, and duplicate certificates",
+        body:
+          "Commercial steel supply often includes stockists, split quantities, mixed heats, replacement plates, and remnants. None is automatically unacceptable, but each changes the evidence chain. Record the original mill, every intermediary, delivered quantity, certificate transmission, factory receiving lot, and final disposition. A supplier-created summary should index source documents rather than replace them.",
+        bullets: [
+          "A different grade, product standard, delivery condition, thickness, mill, or source appears without the approval required by the contract.",
+          "One MTC is attached to quantities that exceed the received or reasonably yielded parent material.",
+          "The same certificate appears across unrelated orders with no stock balance or allocation record.",
+          "A stockist certificate or cover sheet cannot be linked back to an original mill document and delivery chain.",
+          "Bundle tags show several heat numbers while the dossier assigns only one, or the physical heat marking is absent from every accessible item.",
+          "Replacement material entered production after an NCR or shortage but did not update the cutting, traveler, inspection, and packing records.",
+        ],
+      },
+      {
+        heading: "7. Use an illustrative sample to challenge the whole chain",
+        body:
+          "Consider a synthetic example—not project evidence. The purchase requirement calls for 25 mm S355J2+N plate to the specified product standard, impact condition, inspection-document type, and heat-level traceability. Receiving record GRN-071 logs eight plates from heat HN-24-0318 against MTC MTC-7842. Released nesting plan CN-114 Rev C maps two parent plates to piece marks B1-WEB-001 through B1-WEB-012; the identification-transfer log and fabrication travelers preserve that relationship. Packing list PK-09 places B1-WEB-001 through B1-WEB-006 in Bundle 4. An auditor should be able to select B1-WEB-004 and trace backward to MTC-7842, then select HN-24-0318 and account forward for every plate, cut piece, remnant, rejection, and shipped member.",
+        bullets: [
+          "Replace every sample identifier with the supplier's current controlled record; do not let the example become a template filled after production.",
+          "Check drawing and nesting revisions as carefully as heat numbers—a perfect material link to a superseded part is still a failed release.",
+          "Reconcile quantity and mass within stated tolerances and explain offcuts, scrap, rework, replacements, and material still in stock.",
+          "Repeat the sample from the packed-goods side and the MTC side. Both paths must reach the same evidence set.",
+        ],
+        callout: {
+          label: "Sample-evidence status",
+          text: "The identifiers above are deliberately fictional and show the required cross-check logic only. They are not a claim about any supplier, mill, or completed project.",
+          tone: "positive",
+        },
+      },
+      {
+        heading: "8. Know when independent testing helps—and what it cannot restore",
+        body:
+          "PMI or independent laboratory testing can reduce uncertainty when markings or documents are questionable, but the method, sampling plan, acceptance criteria, and property limits must fit the material and project. A chemistry check does not automatically prove mechanical properties, impact toughness, heat treatment, lamellar quality, product history, or original mill provenance. Testing may support a disposition decision; it does not retroactively create the missing production records.",
+        bullets: [
+          "Have the responsible engineer or material specialist define the test method and the properties that matter for the actual risk.",
+          "Select samples independently and preserve chain of custody from physical item to test report.",
+          "Do not use a limited elemental screening result as a blanket declaration of grade or full specification compliance.",
+          "Keep the affected material segregated until the buyer accepts the verification or concession in writing.",
+          "If provenance is contractually essential, technically acceptable retest results may still be insufficient for release.",
+        ],
+      },
+      {
+        heading: "9. Tie deposit, production, coating, and shipment to evidence gates",
+        body:
+          "Traceability controls work only when a missing link can stop money or an irreversible operation. Define the evidence required at each gate and who may release it. The percentages are commercial choices; the evidence gates determine whether the claimed progress is real and acceptable.",
+        bullets: [
+          "Before deposit: approve the material specification, permitted sources, document type, traceability level, substitution rule, sample evidence chain, inspection access, and payment entity.",
+          "Before material or progress payment: accept the fabricator's material order, source evidence, receiving record, MTC index, physical stock sample, and discrepancy log.",
+          "Before cutting or production release: approve the drawing and nesting revision, parent-stock identification, transfer method, mixed-heat control, and remnant process.",
+          "Before blasting, coating, galvanizing, or concealed assembly: verify sampled piece-to-heat links, inspection status, and closure of material NCRs or substitutions.",
+          "Before final payment or shipment: complete backward and forward sampling, reconcile quantities and mass, close exceptions, accept the packing list and final MTC index, and retain the release evidence.",
+        ],
+      },
+      {
+        heading: "10. Record exceptions as decisions, not loose comments",
+        body:
+          "For every break, identify the affected heat, parent material, piece marks, bundle, quantity, drawing revision, and payment or shipment gate. State the evidence missing, the supplier's explanation, independent verification required, owner, due date, acceptance rule, and disposition. This keeps one questionable certificate or remnant from contaminating the release decision for an otherwise controlled shipment.",
+        callout: {
+          label: "Practical outcome",
+          text: "A strong traceability review does not merely say documents were checked. It tells the buyer exactly which material may proceed, which is held, and which evidence or corrective action is required before money or goods move.",
+          tone: "positive",
+        },
+      },
+    ],
+    checklistHeading: "The minimum pre-shipment traceability file",
+    checklist: [
+      {
+        category: "Purchase requirements",
+        evidence: ["Approved material specification and edition", "Product form, size, and delivery condition", "Inspection-document type", "Supplementary tests", "Traceability and substitution rules"],
+      },
+      {
+        category: "Certificate source",
+        evidence: ["Original or least-transformed MTC copy", "Mill and intermediary chain", "Document and heat numbers", "Validation and amendment status", "Independent mill confirmation where warranted"],
+      },
+      {
+        category: "Receiving and stock",
+        evidence: ["Delivery note and receiving record", "Physical mill and heat markings", "Dimensions, quantity, and mass", "Storage and inspection status", "Discrepancy or quarantine log"],
+      },
+      {
+        category: "Cutting and remnants",
+        evidence: ["Parent-stock identity", "Released nesting or cut plan", "Part-mark generation", "Identification-transfer record", "Remnant, scrap, and replacement balance"],
+      },
+      {
+        category: "Fabrication control",
+        evidence: ["Piece mark and drawing revision", "Traveler or route card", "Material and inspection status", "NCR, repair, and concession closure", "Approved substitution record"],
+      },
+      {
+        category: "Packing and release",
+        evidence: ["Piece-mark packing list", "Bundle and container IDs", "Final MTC index", "Two-way sample record", "Quantity/mass reconciliation and signed release"],
+      },
+    ],
+    decisionMatrix: [
+      {
+        signal: "The required traceability level is defined, certificate fields are credible, and buyer-selected samples reconcile in both directions through receiving, cutting, fabrication, and packing with only minor closed exceptions.",
+        decision: "PROCEED",
+        response: "Release only the affected contractual gate and retain the sample record, final index, and change-control obligations for the shipment dossier.",
+      },
+      {
+        signal: "The material may be acceptable, but a certificate source, physical marking, quantity balance, cut-part transfer, remnant, substitution, piece mark, or packing link is incomplete or unexplained.",
+        decision: "HOLD",
+        response: "Segregate the affected material or shipment and stop the related payment, irreversible process, or release until specified evidence, independent confirmation, or accepted retesting closes the gap.",
+      },
+      {
+        signal: "A certificate is altered or knowingly reused for unrelated steel, material is deliberately substituted or concealed, key identities contradict physical goods, or the supplier refuses access and independent verification.",
+        decision: "REJECT",
+        response: "Reject the affected lot or shipment and reassess the supplier relationship. Preserve the contradictory evidence and do not cure deliberate falsification with a paperwork-only explanation.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What is a heat number on a steel mill test certificate?",
+        answer:
+          "It is an identifier used to connect steel production and inspection records to a defined heat or cast. Its exact coverage and the associated test unit depend on the product standard, mill system, and order. It should not be treated as a unique serial number for every finished component.",
+      },
+      {
+        question: "Are MTC, MTR, mill certificate, and material certificate the same thing?",
+        answer:
+          "Industry usage varies. Suppliers may use those labels loosely, so the buyer should specify the governing inspection-document type, product standard, required results, issuer, validation, and traceability instead of relying on the informal title alone.",
+      },
+      {
+        question: "Does an EN 10204 type 3.1 certificate prove the fabricated member uses that steel?",
+        answer:
+          "No. It addresses the inspection-document basis and validation for the supplied product; it does not by itself connect a certificate PDF to factory stock, cut parts, fabricated piece marks, or the packing list. That connection requires receiving, identification-transfer, production, and shipment records.",
+      },
+      {
+        question: "How can a buyer check whether an MTC PDF is genuine?",
+        answer:
+          "Check internal fields and chronology, reconcile it with commercial and receiving documents, obtain the least-transformed source copy, verify through an official mill channel when available, and compare physical stock. A QR code, stamp, signature, email attachment, or PDF metadata is only one signal, not conclusive proof.",
+      },
+      {
+        question: "Must every cut steel component carry the original heat number?",
+        answer:
+          "Not universally. The required identification level and permitted transfer method depend on the contract, product and execution standards, risk, and project specification. What matters is that the agreed controlled link remains auditable after cutting and later processes.",
+      },
+      {
+        question: "Can PMI or laboratory testing replace a missing heat-number trail?",
+        answer:
+          "It can reduce defined material uncertainty when the method and sampling are appropriate, but it does not automatically prove all mechanical properties, toughness, heat treatment, product history, or mill provenance. If provenance is a contractual requirement, testing alone may not close the gap.",
+      },
+      {
+        question: "What should the buyer do if traceability breaks after cutting?",
+        answer:
+          "Place the affected parts and remnants on HOLD, identify the full potentially affected population, preserve available records, and define independent verification or retesting with acceptance criteria. Do not recreate a heat-number list from memory and release it as contemporaneous evidence.",
+      },
+      {
+        question: "When should an MTC issue lead to rejection instead of a hold?",
+        answer:
+          "Use HOLD for an unresolved but potentially correctable evidence gap. Reject the affected lot or supplier when documents are deliberately altered or recycled, substitution is concealed, physical and document identities materially contradict one another, or meaningful independent verification is refused.",
+      },
+    ],
+    referencesHeading: "Official standards that define the document—not the whole evidence chain",
+    referencesIntro:
+      "Inspection-document standards explain document types and delivery requirements. The buyer's contract, approved project specification, product and execution standards, destination rules, and current editions determine the required tests and traceability level. None of these references makes an unattached certificate sufficient shipment evidence.",
+    references: [
+      {
+        title: "ISO 10474:2013 — Steel and steel products: Inspection documents",
+        publisher: "International Organization for Standardization",
+        href: "https://www.iso.org/standard/53736.html",
+        note: "The official ISO page states that the standard defines inspection-document types supplied to the purchaser in accordance with the order. ISO lists this edition as current after confirmation in 2023.",
+      },
+      {
+        title: "ISO 404:2013 — General technical delivery requirements",
+        publisher: "International Organization for Standardization",
+        href: "https://www.iso.org/standard/56861.html",
+        note: "The official scope explains that order or product-standard delivery requirements control when they differ from the general requirements, reinforcing the need to specify the evidence before purchase.",
+      },
+      {
+        title: "BS EN 10204:2004 — Metallic products: Types of inspection documents",
+        publisher: "British Standards Institution",
+        href: "https://knowledge.bsigroup.com/products/metallic-products-types-of-inspection-documents",
+        note: "BSI lists the standard as current and describes its coverage of specific and non-specific inspection documents, validation, and transmission by an intermediary. Confirm the contract-required type and edition.",
+      },
+      {
+        title: "AISC 207 — Standard for Certification Programs",
+        publisher: "American Institute of Steel Construction",
+        href: "https://www.aisc.org/aisc/publications/current-standards/aisc-207/",
+        note: "A current official quality-system reference for certified structural-steel fabricators where AISC requirements apply. Certification scope supports—but does not replace—project-specific material and shipment sampling.",
+      },
+    ],
+    relatedLinks: [
+      {
+        title: "Verify a Chinese steel supplier before paying a deposit",
+        href: "/blog/verify-chinese-steel-structure-supplier-before-deposit",
+        description: "Set the entity, capability, material, subcontracting, inspection, and payment controls before money moves.",
+      },
+      {
+        title: "Steel structure factory audit checklist",
+        href: "/blog/steel-structure-factory-audit-china",
+        description: "Test traceability together with engineering, welding, fabrication, coating, capacity, and packing on the factory floor.",
+      },
+      {
+        title: "Pre-shipment inspection for engineering materials",
+        href: "/blog/pre-shipment-inspection-engineering-materials",
+        description: "Combine the MTC trail with quantity, dimensions, markings, finished quality, documents, packing, and release status.",
+      },
+      {
+        title: "Engineering supplier verification playbook",
+        href: "/playbook",
+        description: "Apply Source Rating's broader evidence scoring and deposit-to-shipment decision workflow.",
+      },
+    ],
+    ctaHeading: "Check one supplier and one MTC before release",
+    ctaBody:
+      "Send one supplier link, the required steel grade, and one redacted sample MTC or traceability record for a free first-pass risk screen. We will identify the first evidence gaps; you do not need to create an account.",
+    ctaLabel: "Start the free MTC risk screen",
+  },
   {
     slug: "verify-chinese-steel-structure-supplier-before-deposit",
     title: "How to Verify a Chinese Steel Structure Supplier Before Paying a Deposit",
@@ -216,6 +558,11 @@ export const blogPosts: BlogPost[] = [
       },
     ],
     relatedLinks: [
+      {
+        title: "Verify MTCs and heat-number traceability before shipment",
+        href: "/blog/how-to-verify-mill-test-certificates-and-heat-number-traceability-before-steel-shipment",
+        description: "Follow one steel identity from the certificate and receiving record through cutting, piece marks, packing, and final release.",
+      },
       {
         title: "Steel structure factory audit checklist",
         href: "/blog/steel-structure-factory-audit-china",
@@ -563,6 +910,11 @@ export const blogPosts: BlogPost[] = [
     ],
     relatedLinks: [
       {
+        title: "Verify MTCs and heat-number traceability before shipment",
+        href: "/blog/how-to-verify-mill-test-certificates-and-heat-number-traceability-before-steel-shipment",
+        description: "Apply the audit's material sample as a complete two-way MTC-to-packed-member release check.",
+      },
+      {
         title: "Verify a Chinese steel supplier before paying a deposit",
         href: "/blog/verify-chinese-steel-structure-supplier-before-deposit",
         description: "Build the identity, engineering, welding, traceability, payment, and contract evidence file before money moves.",
@@ -602,6 +954,23 @@ export const blogPosts: BlogPost[] = [
         heading: "Make the release recommendation explicit",
         body:
           "The report should state whether to release, hold, correct, recheck, or request additional evidence. The buyer needs a practical decision, not just a photo album.",
+      },
+    ],
+    relatedLinks: [
+      {
+        title: "Verify MTCs and heat-number traceability before shipment",
+        href: "/blog/how-to-verify-mill-test-certificates-and-heat-number-traceability-before-steel-shipment",
+        description: "Trace the finished-goods material documents back to receiving stock and forward through cutting, fabrication, and packing.",
+      },
+      {
+        title: "Steel structure factory audit checklist",
+        href: "/blog/steel-structure-factory-audit-china",
+        description: "Verify the supplier system before relying on its finished-goods inspection and shipment evidence.",
+      },
+      {
+        title: "Engineering supplier verification playbook",
+        href: "/playbook",
+        description: "Use the broader evidence scoring and deposit-to-shipment workflow across engineering-material purchases.",
       },
     ],
   },
