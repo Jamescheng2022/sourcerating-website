@@ -5,13 +5,14 @@ export const siteConfig = {
   url: "https://www.sourcerating.com",
   description:
     "Thailand-based buyer-side supplier verification, factory audits, inspection, and engineering procurement support across China, Vietnam, and Southeast Asia.",
-  author: "James Cheng / Source Rating",
+  author: "James Cheng",
   locale: "en_US",
   contact: { email: "contact@sourcerating.com", wechat: "SourceRating" },
   social: { linkedin: "https://www.linkedin.com/in/hcrdi" },
   nav: [
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
+    { label: "Buyer Guides", href: "/buyer-decisions" },
     { label: "Pricing", href: "/pricing" },
     { label: "Playbook", href: "/playbook" },
     { label: "About", href: "/about" },
@@ -22,6 +23,7 @@ export const siteConfig = {
       "Buyer-side supplier verification, factory audits, and engineering procurement support across China, Vietnam, and Southeast Asia.",
     quickLinks: [
       { label: "Services", href: "/services" },
+      { label: "Buyer Guides", href: "/buyer-decisions" },
       { label: "Pricing", href: "/pricing" },
       { label: "Playbook", href: "/playbook" },
       { label: "Industries", href: "/industries" },
