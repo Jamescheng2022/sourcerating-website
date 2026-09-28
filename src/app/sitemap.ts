@@ -5,6 +5,7 @@ import { siteConfig } from "@/data/site-config";
 const staticRoutes = [
   ["/", "weekly", 1],
   ["/services", "monthly", 0.9],
+  ["/buyer-decisions", "monthly", 0.95],
   ["/pricing", "monthly", 0.85],
   ["/playbook", "monthly", 0.95],
   ["/risk-screen", "weekly", 0.95],
