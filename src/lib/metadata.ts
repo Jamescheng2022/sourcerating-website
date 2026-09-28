@@ -49,80 +49,56 @@ export function generatePageMetadata({
 }
 
 export function generateOrganizationSchema() {
-  const sameAs = siteConfig.social.linkedin ? [siteConfig.social.linkedin] : undefined;
+  const organizationId = `${siteConfig.url}/#organization`;
+  const serviceId = `${siteConfig.url}/#professional-service`;
+  const personId = `${siteConfig.url}/about#james-cheng`;
 
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    logo: `${siteConfig.url}/brand/source-rating-logo.svg`,
-    image: `${siteConfig.url}/images/hero-factory-audit.png`,
-    description: siteConfig.description,
-    founder: {
-      "@type": "Person",
-      name: "James Cheng",
-      url: siteConfig.social.linkedin,
-    },
-    ...(sameAs ? { sameAs } : {}),
-    contactPoint: {
-      "@type": "ContactPoint",
-      email: siteConfig.contact.email,
-      contactType: "sales",
-      availableLanguage: ["English", "Chinese"],
-    },
-    areaServed: [
-      "China",
-      "Vietnam",
-      "Southeast Asia",
-      "Europe",
-      "North America",
-      "Middle East",
-      "Australia",
-      "United Kingdom",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        logo: `${siteConfig.url}/brand/source-rating-logo.svg`,
+        description: siteConfig.description,
+        founder: { "@id": personId },
+        contactPoint: {
+          "@type": "ContactPoint",
+          email: siteConfig.contact.email,
+          contactType: "sales",
+          availableLanguage: ["English", "Chinese"],
+        },
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": serviceId,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        parentOrganization: { "@id": organizationId },
+        image: `${siteConfig.url}/images/hero-factory-audit.png`,
+        description: siteConfig.description,
+        areaServed: ["China", "Vietnam", "Southeast Asia"],
+        serviceType: [
+          "Engineering supplier verification",
+          "Construction materials factory audit",
+          "Technical supplier review",
+          "Pre-shipment inspection",
+          "Production monitoring",
+          "Buyer-side engineering procurement support",
+          "Free supplier risk screen",
+        ],
+        address: { "@type": "PostalAddress", addressCountry: "TH" },
+      },
+      {
+        "@type": "Person",
+        "@id": personId,
+        name: "James Cheng",
+        url: `${siteConfig.url}/about`,
+        sameAs: [siteConfig.social.linkedin],
+        worksFor: { "@id": organizationId },
+      },
     ],
-    serviceType: [
-      "Engineering supplier verification",
-      "Construction materials factory audit",
-      "Technical supplier review",
-      "Pre-shipment inspection",
-      "Production monitoring",
-      "Buyer-side engineering procurement support",
-      "Supplier sourcing across China, Vietnam, and Southeast Asia",
-      "Free supplier risk screen",
-    ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Engineering supplier verification and procurement services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          name: "Free first-pass supplier risk screen",
-          description: "Desk-based initial risk screen for one engineering supplier during launch.",
-          price: "0",
-          priceCurrency: "USD",
-          availability: "https://schema.org/InStock",
-        },
-        {
-          "@type": "Offer",
-          name: "Engineering supplier background check",
-          description: "Desk-based verification for an engineering or construction supplier.",
-          price: "300",
-          priceCurrency: "USD",
-          availability: "https://schema.org/InStock",
-        },
-        {
-          "@type": "Offer",
-          name: "Factory verification visit",
-          description: "On-site supplier verification before deposit, supplier approval, or a major procurement decision.",
-          priceSpecification: {
-            "@type": "PriceSpecification",
-            priceCurrency: "USD",
-            minPrice: 600,
-          },
-        },
-      ],
-    },
-    address: { "@type": "PostalAddress", addressCountry: "TH" },
   };
 }
