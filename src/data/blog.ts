@@ -37,237 +37,149 @@ export const blogPosts: BlogPost[] = [
     title: "Can Chinese Galvanized Steel Coil Compete in Guatemala?",
     seoTitle: "China Galvanized Steel Coil to Guatemala: Landed-Cost Check",
     excerpt:
-      "Deep Sourcing #001: a buyer-side check of machine fit, import structure, duties, freight, local processing, and the point where a cheap Chinese coil stops being commercially attractive.",
+      "Deep Sourcing #001: a buyer-side look at technical fit, Guatemala's import market, freight, tariff treatment, and when buying locally may still be the better decision.",
     date: "2026-10-05",
     category: "Deep Sourcing #001",
-    readTime: "11 min read",
+    readTime: "8 min read",
     directAnswer:
-      "Verdict: HOLD until qualified. As of October 2026, ordinary galvanized coil from China is not automatically competitive in Guatemala once freight, tariff treatment, local handling, financing, and the existing regional supply network are included. Move to PROCEED only if exact-equivalent material is difficult to obtain locally, the buyer has a real specification, quality, availability, or lead-time problem, and the risk-adjusted landed economics remain meaningfully better than the current alternative.",
-    keyTakeawaysHeading: "What the sourcing decision actually depends on",
+      "Not by default. A low Chinese mill price can disappear once ocean freight, tariff treatment, port and inland costs, financing, and the cost of getting the wrong material are added. Importing becomes worth a closer look when the buyer cannot reliably get the exact coil the production line needs, or when local supply has a real quality, availability, MOQ, or lead-time problem.",
+    keyTakeawaysHeading: "The short version",
     keyTakeaways: [
-      "Do not compare a Chinese domestic spot price, a historical customs average, and a regional delivered price as if they are the same cost basis.",
-      "A narrow galvanized coil can be a machine-specific raw material, not a generic commodity, when width, BMT, strength, coating, camber, burr, coil ID/OD, and batch consistency affect production.",
-      "Guatemala already has established galvanized-steel importers, processors, roll-formers, and regional suppliers. Access to a Chinese mill is not, by itself, an advantage.",
-      "The fastest qualification tool is the buyer's current coil label or MTC plus monthly consumption, current sourcing route, delivered price, and the actual pain point.",
-      "If the local exact-equivalent material is readily available and the risk-adjusted landed-cost gap is small, buying locally can be the better sourcing decision.",
-      "The defensible value layer is specification control, supplier qualification, quality evidence, precision slitting, and second-source resilience—not information arbitrage.",
+      "Compare the same material first: grade, base-metal thickness, coating, slit width, tolerances, coil dimensions, and traceability.",
+      "Check what the buyer already purchases locally before asking overseas mills for prices.",
+      "Use live freight and customs inputs. Historical customs unit values and web price pages are context, not quotations.",
+      "If the exact material is already available locally at a reasonable delivered cost, importing may add risk without adding value.",
     ],
     sections: [
       {
-        heading: "1. Start with the machine, not the steel-price chart",
+        heading: "1. The first comparison is technical, not commercial",
         body:
-          "A narrow galvanized slit coil used by a roll-forming line is a useful example of why procurement must start with the manufacturing process. Scottsdale Steel Frames is one roll-former manufacturer that publishes machine-specific coil-ordering guidance across several standards, including variables such as material grade, base-metal thickness, coating, and dimensions. The lesson is broader than any one brand: a quotation that gives only a nominal galvanized-coil thickness is not enough to establish interchangeability.",
+          "For roll-formed steel, two coils with the same nominal thickness can behave very differently. The buyer needs to know whether the thickness is base metal or total coated thickness, what strength and coating are required, how tight the slit-width and camber limits are, and what coil dimensions the decoiler can accept. Machine makers publish ordering guidance for exactly this reason. If those details are not aligned, a lower price is not yet a comparable offer.",
         bullets: [
-          "Confirm whether thickness means base metal thickness (BMT) or total coated thickness.",
-          "Confirm the governing material standard and required yield strength rather than assuming G350, S350GD, SS50, or another grade.",
-          "Confirm zinc coating mass such as Z275 or G90 using the applicable standard and acceptance method.",
-          "Confirm slit width and tolerance, camber, burr, surface treatment, coil ID/OD, and maximum coil weight.",
-          "Require traceable mill evidence and a trial run when a wrong coil could create forming, punching, or structural-performance problems.",
+          "Match the governing standard and mechanical properties before comparing price.",
+          "Check coating mass, thickness basis, width tolerance, camber, burr, coil ID/OD, and maximum coil weight.",
+          "Keep the shipped material tied to a real mill certificate or equivalent traceable evidence.",
         ],
         callout: {
-          label: "Buyer-side rule",
-          text: "If the machine and design basis are not confirmed, a low price is not yet a comparable quotation.",
-          tone: "warning",
-        },
-      },
-      {
-        heading: "2. Guatemala already has an established import market",
-        body:
-          "As of October 2026, Guatemala's Ministry of Economy records show that case DACE/ADP.01-2024 investigated certain galvanized-steel imports from China and was closed in October 2025 without a determination of unfair trade practice. The official case record identifies multiple local importers and interested parties. The commercial lesson is that a new overseas supplier should not assume supplier discovery alone creates value: buyers in Guatemala can already compare imported material through existing market participants.",
-        bullets: [
-          "Existing importers reduce the value of simple supplier discovery.",
-          "Local processors can combine import, slitting, storage, delivery, and credit in one relationship.",
-          "Regional producers can be competitive even when their mill price is higher because freight, duty, inventory, and claims are handled closer to the buyer.",
-          "A new international supplier needs a specific gap to solve: unavailable specification, inconsistent quality, poor lead time, high MOQ, weak traceability, or lack of a reliable second source.",
-        ],
-      },
-      {
-        heading: "3. Customs averages are useful signals, not executable prices",
-        body:
-          "Banco de Guatemala publishes foreign-trade data by tariff line and origin, which can help establish whether a product is already imported from China and the approximate historical value-per-kilogram range. But an aggregate customs value can mix grades, coatings, widths, contract terms, and shipment sizes. It should be used as a market signal, not as a direct benchmark for a machine-specific coil.",
-        bullets: [
-          "Historical import value divided by weight is not necessarily the buyer's delivered price.",
-          "Different grades and coating masses can materially change the mill price.",
-          "Narrow precision-slit coil may carry conversion, packaging, and minimum-order premiums.",
-          "Related-party declarations or regional export records can be informative but still may not equal an arm's-length domestic sales price.",
-        ],
-      },
-      {
-        heading: "4. Freight and tariff treatment can erase the apparent China advantage",
-        body:
-          "The landed-cost equation is highly sensitive to ocean freight and tariff treatment. Public China-to-Puerto Quetzal container indications can vary materially across dates, so a sourcing decision should never be based on one web freight quote. Guatemala applies the Central American Tariff System (SAC); the exact product classification, current DAI treatment, origin preferences if any, and other import charges must be confirmed by a Guatemala customs broker before any commercial offer is treated as real.",
-        bullets: [
-          "Build scenarios using live forwarder quotations rather than one published freight number.",
-          "Separate FOB material cost, slitting, export packing, ocean freight, insurance, DAI or other tariff cost, port charges, customs clearance, inland delivery, financing, and inspection.",
-          "Check whether regional-origin suppliers benefit from trade-agreement preferences that China-origin material does not.",
-          "Treat import VAT separately from true cost where recoverability depends on the buyer's tax position, while still accounting for cash-flow impact.",
-          "Add a claims reserve when a narrow custom coil would be difficult to resell after rejection.",
-        ],
-        callout: {
-          label: "Sensitivity test",
-          text: "Illustrative only: a USD 1,000 freight change spread across a 25-ton container is about USD 40 per ton before tariff and local charges. Small apparent mill-price advantages can disappear quickly.",
+          label: "What this changes",
+          text: "The sourcing question is not simply 'Who has cheaper galvanized coil?' It is 'Who can repeatedly supply the coil that this line actually needs?'",
           tone: "neutral",
         },
       },
       {
-        heading: "5. The real opportunity is machine-compatible material, not commodity trading",
+        heading: "2. Guatemala is not an empty market",
         body:
-          "A foreign supplier has a stronger role when the buyer cannot obtain the exact material consistently. In that case the commercial product is not simply galvanized coil. It is a controlled raw-material package: verified grade, correct BMT, coating, precision slitting, documented tolerances, traceable MTC, suitable export packing, and repeatable batch quality. That service can justify a margin because it reduces production and sourcing risk.",
+          "Guatemala's Ministry of Economy investigated certain galvanized-steel imports from China under case DACE/ADP.01-2024 and closed the case in October 2025 without a determination of unfair trade practice. The official record also names multiple local importers and interested parties. That matters commercially: a buyer in Guatemala may already have access to Chinese-origin material through local channels, so going direct to an overseas mill only makes sense if it solves a problem the existing route does not.",
         bullets: [
-          "Specify the parent coil source and retain traceability through slitting.",
-          "Use measurable width, camber, burr, coating, and mechanical-property acceptance criteria.",
-          "Keep coil ID, OD, weight, and packaging compatible with the buyer's decoiler and handling equipment.",
-          "Require a real MTC or equivalent evidence tied to the shipped material, not a generic certificate sample.",
-          "Consider a second qualified source so the buyer is not dependent on one mill or one converter.",
+          "Local import channels reduce the value of simply finding another Chinese supplier.",
+          "Banco de Guatemala trade data can show whether a tariff line is already imported from China, but value-per-weight figures are unit values, not market quotations.",
+          "Any claim about current local capability or price still needs to be checked against the buyer's actual source and current delivered cost.",
         ],
       },
       {
-        heading: "6. Ask the buyer four questions before asking mills for prices",
+        heading: "3. A cheap FOB number can disappear on the way to Guatemala",
         body:
-          "The most efficient qualification step is not a long technical questionnaire. Ask for the current coil label or mill certificate, approximate monthly consumption, whether the material is bought locally or imported directly, and the approximate delivered price. Those four items usually reveal enough to decide whether deeper sourcing work is justified.",
+          "Ocean freight to Puerto Quetzal can move sharply, and Guatemala uses the Central American Tariff System (SAC). Before treating any overseas offer as competitive, the exact product classification, current DAI (Derecho Arancelario a la Importación) treatment, origin preferences, port charges, customs clearance, and inland delivery need to be confirmed for the real shipment. A web freight rate or a historical customs average is useful for screening, but not for a buying decision.",
         bullets: [
-          "A coil label or MTC can reveal producer, origin, standard, grade, coating, thickness basis, heat or batch identification, and sometimes the current supply route.",
-          "Monthly and annual tonnage determine whether direct-container sourcing is realistic or whether a local importer or consolidation route is more sensible.",
-          "The current delivered price provides the commercial benchmark that web market prices cannot supply.",
-          "The buyer's pain point—price, shortage, quality, MOQ, lead time, or traceability—defines whether an alternative source can create value.",
+          "Use current forwarder quotations for the intended sailing window.",
+          "Separate material, slitting, export packing, freight, insurance, tariff cost, port charges, inland delivery, financing, and inspection.",
+          "Check whether a regional-origin alternative benefits from tariff preferences that China-origin material does not.",
         ],
         callout: {
-          label: "Keep the trade simple",
-          text: "Technical complexity can often be solved with engineering and inspection. Financing, long credit, speculative inventory, and multi-layer trade structures are much harder to control. If the transaction only works after adding commercial complexity, the sourcing idea is probably weak.",
+          label: "One simple sensitivity check",
+          text: "Illustrative only: a USD 1,000 freight change spread across a 25-ton container changes cost by about USD 40 per ton before tariff and local charges.",
+          tone: "neutral",
+        },
+      },
+      {
+        heading: "4. Look at the current coil before asking mills for prices",
+        body:
+          "The fastest way to understand the real sourcing problem is usually the material the buyer is already using. A current coil label or mill certificate can reveal the standard, grade, coating, thickness basis, producer, and batch traceability. Before contacting any supplier, have a few basic commercial facts on hand as well.",
+        bullets: [
+          "Current coil label or mill certificate.",
+          "Approximate monthly or annual consumption.",
+          "Whether the material is bought locally or imported directly.",
+          "Current delivered price and the real problem: price, shortage, quality, MOQ, lead time, or traceability.",
+        ],
+      },
+      {
+        heading: "5. When importing is worth a serious look",
+        body:
+          "China becomes interesting when the buyer cannot get the required material reliably, when local quality or availability is poor, or when the delivered numbers still leave a meaningful saving after all costs and risks are counted. If local supply already works well and the saving is small, staying local is usually the better decision. The first order should also stay simple: buy against real consumption, use a clear specification, inspect what matters, and avoid a structure that depends on speculative stock or unusually long payment terms.",
+        bullets: [
+          "Import when there is a real specification, quality, availability, MOQ, or lead-time gap and the landed economics still work.",
+          "Wait when the material specification, current price, annual volume, or actual sourcing problem is still unclear.",
+          "Stay local when the exact equivalent is readily available and the overseas route adds more logistics, cash-flow, and claims risk than it removes.",
+        ],
+        callout: {
+          label: "How we approach these checks",
+          text: "For each product, SourceRating looks at five things: technical equivalence, destination-market alternatives, trade and logistics constraints, real landed economics, and execution risk.",
           tone: "positive",
         },
-      },
-      {
-        heading: "7. Use a hard decision gate before contacting multiple suppliers",
-        body:
-          "Once the current material and buyer economics are known, send the same RFQ package to two or three qualified sources. Ask for a price breakdown, material standard, grade, coating, thickness and width tolerances, slitting capability, MTC format, parent-coil source, MOQ, coil dimensions, packing, lead time, payment terms, and FOB plus CFR Puerto Quetzal pricing. Only then compare the risk-adjusted landed cost with the buyer's current exact-equivalent supply.",
-        bullets: [
-          "Do not request ten generic quotations; use two or three sources that can prove the required material and processing capability.",
-          "Compare like-for-like technical specifications before comparing price.",
-          "Do not let an attractive FOB number hide a weak MTC, unproven slitting tolerance, or unsuitable coil packaging.",
-          "For a first transaction, avoid speculative stock and avoid extending unsecured credit.",
-        ],
-      },
-      {
-        heading: "8. The best answer can be 'buy locally'",
-        body:
-          "Deep sourcing research should be allowed to conclude that importing does not make sense. If a local or regional supplier can provide the exact equivalent material reliably and the risk-adjusted international landed-cost advantage is small, the buyer may be better served locally. A sourcing adviser creates value by preventing a bad import decision as well as by finding a good overseas source.",
-        bullets: [
-          "Proceed when there is a meaningful specification, availability, quality, or lead-time gap and the economics remain attractive after all costs.",
-          "Hold when key information such as grade, coating, BMT/TCT, current price, or annual volume is still unknown.",
-          "Reject the direct-import idea when the local exact equivalent is readily available, the price gap is too small, volume is inefficient, or the transaction requires excessive credit and financing risk.",
-        ],
-      },
-      {
-        heading: "9. A reusable Deep Sourcing framework",
-        body:
-          "This Guatemala coil example illustrates a broader Source Rating method that can be applied to industrial products: define technical equivalence first, map the destination-market supply structure, establish a current local benchmark, model the real landed cost, identify the non-price sourcing gap, and then make a PROCEED, HOLD, or REJECT decision. The research should reduce uncertainty before a buyer or supplier spends time on quotations, samples, visits, and contracts. Source Rating may support sourcing qualification for buyers; this article is not a quotation or a supplier recommendation.",
-        bullets: [
-          "Product and exact specification",
-          "Destination market and existing supply chain",
-          "Import structure and trade-policy constraints",
-          "Local and regional alternatives",
-          "Current overseas supply economics",
-          "Landed-cost sensitivity",
-          "Quality and execution risk",
-          "Decision gate and next evidence required",
-        ],
-        callout: {
-          label: "Deep Sourcing method",
-          text: "Product → technical equivalence → destination market → local benchmark → import and logistics structure → risk-adjusted landed cost → PROCEED / HOLD / REJECT.",
-          tone: "neutral",
-        },
-      },
-    ],
-    decisionMatrix: [
-      {
-        signal: "Exact-equivalent material is hard to source locally, the buyer has a real supply or quality problem, volume supports a repeatable route, and risk-adjusted landed economics remain attractive.",
-        decision: "PROCEED",
-        response: "Qualify 2–3 sources, run a controlled sample or trial, confirm customs treatment, and build a simple first-order structure with clear quality evidence.",
-      },
-      {
-        signal: "Grade, coating, BMT/TCT, current delivered price, current source, annual volume, or the actual buyer pain point is still unknown.",
-        decision: "HOLD",
-        response: "Do not quote yet. Obtain the current coil label/MTC and the minimum commercial facts before spending time on supplier RFQs.",
-      },
-      {
-        signal: "A local or regional exact equivalent is readily available, the risk-adjusted gap is small, volume is inefficient, or the transaction only works with heavy credit, speculative inventory, or weak quality evidence.",
-        decision: "REJECT",
-        response: "Do not force the import. Preserve the relationship and revisit only when price, availability, specification, or project conditions change.",
       },
     ],
     faqs: [
       {
         question: "Is China always cheaper for galvanized steel coil?",
         answer:
-          "No. A Chinese mill or FOB price can be lower while the final delivered cost is higher after freight, duty, port charges, inland transport, financing, inventory, and quality risk. The comparison must use an exact-equivalent landed cost.",
+          "No. The mill or FOB price can be lower while the final delivered cost is higher after freight, tariff cost, port charges, inland transport, financing, inventory, and quality risk are included.",
       },
       {
-        question: "Why can a narrow slit coil be different from ordinary galvanized coil?",
+        question: "Why can narrow slit coil be different from ordinary galvanized coil?",
         answer:
-          "Narrow coil used in roll-forming can be machine-specific. Width tolerance, camber, burr, base-metal thickness, grade, coating, coil dimensions, and batch consistency can affect feeding, punching, forming, and the structural properties assumed in design.",
+          "Roll-forming lines can be sensitive to base-metal thickness, material strength, coating, width tolerance, camber, burr, coil dimensions, and batch consistency. Those details can affect feeding, punching, forming, and the properties assumed in design.",
       },
       {
-        question: "What should a buyer send before asking for a sourcing quote?",
+        question: "What should a buyer collect before asking for a sourcing quote?",
         answer:
-          "A photo of the current coil label or MTC, the machine or application, approximate monthly or annual usage, whether the material is bought locally or imported, the approximate delivered price, and the main sourcing problem.",
-      },
-      {
-        question: "When should a buyer choose a local supplier instead?",
-        answer:
-          "When the local exact equivalent is reliable and the international route offers only a small risk-adjusted saving, local supply can be better because it reduces lead time, inventory, financing, customs, and claims exposure.",
+          "Start with the current coil label or mill certificate, the machine or application, approximate usage, the current buying route, delivered price, and the main sourcing problem.",
       },
       {
         question: "What import duty applies to galvanized coil in Guatemala?",
         answer:
-          "There is no safe one-rate answer without the exact product classification and origin treatment. Guatemala uses the Central American Tariff System (SAC), and the current DAI and any preferential treatment should be confirmed against the exact code and shipment with a Guatemala customs broker before quoting.",
-      },
-      {
-        question: "What is Source Rating's role in this type of research?",
-        answer:
-          "Source Rating separates technical equivalence, supplier evidence, destination-market alternatives, landed-cost assumptions, and unresolved risks before recommending whether deeper sourcing work is worth doing.",
+          "There is no safe one-rate answer without the exact product classification and origin treatment. Guatemala uses the Central American Tariff System (SAC), and the current DAI and any preferential treatment should be confirmed for the actual code and shipment with a Guatemala customs broker.",
       },
     ],
     referencesHeading: "Public sources used for this sourcing check",
     referencesIntro:
-      "These sources establish public market and technical context. They do not replace a buyer's current quotation, customs ruling, contract specification, live freight quote, or supplier-specific quality evidence.",
+      "These sources provide technical and market context. They do not replace a current supplier quotation, customs classification, live freight quote, or supplier-specific quality evidence.",
     references: [
       {
         title: "Expert Guide to Steel Coil Ordering in the Global Market",
         publisher: "Scottsdale Steel Frames",
         href: "https://www.scottsdalesteelframes.com/scottsdale-machines/expert-guide-to-steel-coil-ordering-in-the-global-market",
-        note: "Machine-focused guidance on ordering variables such as steel properties, dimensions, and galvanization.",
+        note: "A public example of machine-focused guidance on steel properties, dimensions, and galvanization.",
       },
       {
         title: "DACE/ADP.01-2024 Final Resolution on Galvanized Steel from China",
         publisher: "Ministerio de Economía de Guatemala",
         href: "https://www.mineco.gob.gt/images/viceministerio_integracion_comercio/direccion_administracion_comercio_exterior/defensa_comercial/INVESTIGACIONES_DE_ANTIDUMPING/DACE_ADP_01_2024/PUBLICACION_DCA_Resolucion_000627_07102025.pdf",
-        note: "Official record of the investigation, product scope, interested parties, and the October 2025 decision to end the case without a determination of unfair trade practice.",
+        note: "Official record of the investigation, interested parties, and the October 2025 decision to close the case without a determination of unfair trade practice.",
       },
       {
         title: "Foreign Trade Statistics",
         publisher: "Banco de Guatemala",
-        href: "https://banguat.gob.gt/page/anios-2002-2017-comercio-de-territorio-aduanero",
-        note: "Official portal for Guatemala foreign-trade statistics. Derived value-per-weight figures from customs data are unit values, not executable market prices.",
+        href: "https://banguat.gob.gt/page/ano-2026-13",
+        note: "Banco de Guatemala's 2026 foreign-trade statistics hub, including SAC tariff-line import data and country breakdowns.",
       },
       {
         title: "Sistema Arancelario Centroamericano (SAC)",
         publisher: "Superintendencia de Administración Tributaria de Guatemala",
         href: "https://portal.sat.gob.gt/portal/valoracion-y-clasificacion-de-las-mercancias/sistema-arancelario-centroamericano-sac/",
-        note: "Official tariff-classification context. The final classification and current duty should be confirmed for the exact product before quoting.",
+        note: "Official tariff-classification context. The exact code and current treatment should be confirmed for the real shipment.",
       },
       {
         title: "China Galvanized Steel Coil Price Updates",
         publisher: "iPPGI",
         href: "https://www.ippgi.com/",
-        note: "A secondary market reference for current China galvanized-steel pricing; not an executable quote for machine-specific slit coil.",
+        note: "A secondary market reference for China galvanized-steel pricing, not an executable quotation.",
       },
     ],
     relatedLinks: [
       {
         title: "How to Verify Mill Test Certificates and Heat-Number Traceability",
         href: "/blog/how-to-verify-mill-test-certificates-and-heat-number-traceability-before-steel-shipment",
-        description: "How to connect certificate evidence to the actual material and shipment rather than accepting a PDF at face value.",
+        description: "How to connect certificate evidence to the actual material and shipment.",
       },
       {
         title: "Steel Structure Factory Audit in China",
@@ -277,7 +189,7 @@ export const blogPosts: BlogPost[] = [
     ],
     ctaHeading: "Considering one industrial product from China?",
     ctaBody:
-      "Send the product, destination country, current source or benchmark, and the main commercial or technical concern. Source Rating can structure the evidence needed to decide whether deeper sourcing work is worth doing before you request multiple quotations.",
+      "Send the product, destination country, current source or benchmark, and the main technical or commercial concern. SourceRating can help structure the checks needed before you spend time on multiple quotations. This article is general guidance, not a quotation or a supplier recommendation.",
     ctaLabel: "Start a sourcing risk screen",
   },
   {
