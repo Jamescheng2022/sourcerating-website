@@ -4,9 +4,9 @@ import { blogPosts } from "@/data/blog";
 import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata = generatePageMetadata({
-  title: "Blog",
-  description: "Practical guides for overseas engineering buyers verifying Chinese suppliers, factories, production, and shipments.",
-  keywords: ["China engineering supplier verification guide", "factory audit China", "pre shipment inspection China"],
+  title: "Buyer Guides & Deep Sourcing Research",
+  description: "Evidence-led buyer guides and deep sourcing research on supplier risk, technical equivalence, landed cost, and whether importing from China makes commercial sense.",
+  keywords: ["China sourcing research", "supplier verification China", "landed cost analysis", "factory audit China", "industrial procurement"],
   path: "/blog",
 });
 
@@ -16,12 +16,12 @@ export default function BlogPage() {
       <section className="border-b border-gray-200 bg-[#f7f8f5] pb-16 pt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-sm font-semibold uppercase text-brand-700">Buyer guides</span>
+            <span className="text-sm font-semibold uppercase text-brand-700">Buyer Guides · Deep Sourcing</span>
             <h1 className="mt-3 text-4xl font-bold text-gray-950 sm:text-5xl">
-              Practical notes for engineering buyers sourcing from China.
+              Evidence-led sourcing decisions for industrial buyers.
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-gray-600">
-              Focused guides on supplier verification, factory audits, pre-shipment inspection, and project procurement risk.
+              Supplier verification, technical equivalence, landed-cost checks, destination-market research, and practical go / hold / reject decisions.
             </p>
           </div>
         </div>

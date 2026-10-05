@@ -1,15 +1,24 @@
 import Link from "next/link";
-import { ArrowRight, ClipboardCheck, Factory, SearchCheck } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Factory, Globe2, SearchCheck } from "lucide-react";
 import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata = generatePageMetadata({
   title: "Buyer Decision Guides",
   description:
-    "Evidence-led guides for verifying engineering suppliers before deposit, during factory review, and before shipment release.",
+    "Evidence-led guides for deciding whether to source internationally, verifying suppliers before deposit, reviewing factory capability, and releasing shipments.",
   path: "/buyer-decisions",
 });
 
 const decisions = [
+  {
+    stage: "Deep sourcing",
+    title: "Should this product be imported from China at all?",
+    answer:
+      "Start with technical equivalence, destination-market supply, current local pricing, tariff and freight sensitivity, and the buyer's real pain point. A good sourcing study is allowed to conclude that buying locally is the better decision.",
+    href: "/blog/can-chinese-galvanized-steel-coil-compete-in-guatemala",
+    link: "Deep Sourcing #001",
+    icon: Globe2,
+  },
   {
     stage: "Before deposit",
     title: "Is this a real manufacturer, and can it handle the package?",
@@ -50,7 +59,7 @@ export default function BuyerDecisionsPage() {
               Start with the decision. Then ask for the evidence.
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              These guides are organized around procurement gates: before deposit, during supplier approval and production, and before shipment release. They separate what documents can support from what still needs to be verified on the factory floor.
+              These guides start one step earlier: should the product be sourced internationally at all? Then they move through supplier approval, production evidence, and shipment release. The goal is a buyer decision supported by technical, commercial, and factory evidence.
             </p>
           </div>
         </div>
