@@ -79,7 +79,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "3. A cheap FOB number can disappear on the way to Guatemala",
         body:
-          "Ocean freight to Puerto Quetzal can move sharply, and Guatemala uses the Central American Tariff System (SAC). Before treating any overseas offer as competitive, the exact product classification, current DAI treatment, origin preferences, port charges, customs clearance, and inland delivery need to be confirmed for the real shipment. A web freight rate or a historical customs average is useful for screening, but not for a buying decision.",
+          "Ocean freight to Puerto Quetzal can move sharply, and Guatemala uses the Central American Tariff System (SAC). Before treating any overseas offer as competitive, the exact product classification, current DAI (Derecho Arancelario a la Importación) treatment, origin preferences, port charges, customs clearance, and inland delivery need to be confirmed for the real shipment. A web freight rate or a historical customs average is useful for screening, but not for a buying decision.",
         bullets: [
           "Use current forwarder quotations for the intended sailing window.",
           "Separate material, slitting, export packing, freight, insurance, tariff cost, port charges, inland delivery, financing, and inspection.",
@@ -94,7 +94,7 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "4. Look at the current coil before asking mills for prices",
         body:
-          "The fastest way to understand the real sourcing problem is usually the material the buyer is already using. A current coil label or mill certificate can reveal the standard, grade, coating, thickness basis, producer, and batch traceability. Combine that with a few commercial facts and it becomes much easier to tell whether an overseas alternative is worth the time.",
+          "The fastest way to understand the real sourcing problem is usually the material the buyer is already using. A current coil label or mill certificate can reveal the standard, grade, coating, thickness basis, producer, and batch traceability. Before contacting any supplier, have a few basic commercial facts on hand as well.",
         bullets: [
           "Current coil label or mill certificate.",
           "Approximate monthly or annual consumption.",
@@ -159,8 +159,8 @@ export const blogPosts: BlogPost[] = [
       {
         title: "Foreign Trade Statistics",
         publisher: "Banco de Guatemala",
-        href: "https://banguat.gob.gt/page/anios-2002-2017-comercio-de-territorio-aduanero",
-        note: "Official foreign-trade statistics used to understand import flows and historical unit values.",
+        href: "https://banguat.gob.gt/page/ano-2026-13",
+        note: "Banco de Guatemala's 2026 foreign-trade statistics hub, including SAC tariff-line import data and country breakdowns.",
       },
       {
         title: "Sistema Arancelario Centroamericano (SAC)",
