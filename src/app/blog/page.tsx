@@ -16,7 +16,7 @@ export default function BlogPage() {
       <section className="border-b border-gray-200 bg-[#f7f8f5] pb-16 pt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-sm font-semibold uppercase text-brand-700">Buyer guides + Deep Sourcing</span>
+            <span className="text-sm font-semibold uppercase text-brand-700">Buyer Guides · Deep Sourcing</span>
             <h1 className="mt-3 text-4xl font-bold text-gray-950 sm:text-5xl">
               Evidence-led sourcing decisions for industrial buyers.
             </h1>
