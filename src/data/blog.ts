@@ -112,8 +112,8 @@ export const blogPosts: BlogPost[] = [
           "Stay local when the exact equivalent is readily available and the overseas route adds more logistics, cash-flow, and claims risk than it removes.",
         ],
         callout: {
-          label: "SourceRating Deep Sourcing",
-          text: "For each product, we check five things: technical equivalence, the destination-market alternatives, trade and logistics constraints, real landed economics, and execution risk.",
+          label: "How we approach these checks",
+          text: "For each product, SourceRating looks at five things: technical equivalence, destination-market alternatives, trade and logistics constraints, real landed economics, and execution risk.",
           tone: "positive",
         },
       },
@@ -142,7 +142,7 @@ export const blogPosts: BlogPost[] = [
     ],
     referencesHeading: "Public sources used for this sourcing check",
     referencesIntro:
-      "These sources provide technical and market context. They do not replace a current buyer quotation, customs classification, live freight quote, or supplier-specific quality evidence.",
+      "These sources provide technical and market context. They do not replace a current supplier quotation, customs classification, live freight quote, or supplier-specific quality evidence.",
     references: [
       {
         title: "Expert Guide to Steel Coil Ordering in the Global Market",
