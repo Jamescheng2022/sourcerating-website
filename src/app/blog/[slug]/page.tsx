@@ -1,3 +1,4 @@
+import { ArticleBody } from "@/components/shared/ArticleBody";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -97,14 +98,14 @@ export default async function BlogPostPage({ params }: PageProps) {
           <span>{post.readTime}</span>
         </div>
 
-        <Image
+        {!post.articleBody ? <Image
           src="/images/hero-factory-audit.png"
           alt={`${post.title} — buyer-side supplier verification guide`}
           width={1600}
           height={900}
           priority
           className="mt-10 aspect-[16/9] w-full rounded-md border border-gray-200 object-cover"
-        />
+        /> : null}
 
         {post.directAnswer ? (
           <section className="mt-10 border-l-4 border-brand-700 bg-[#f4f6f4] p-6 sm:p-8">
@@ -166,7 +167,9 @@ export default async function BlogPostPage({ params }: PageProps) {
           </section>
         ) : null}
 
-        <div className="mt-12 space-y-12 border-t border-gray-200 pt-12">
+        {post.articleBody ? <ArticleBody blocks={post.articleBody} /> : null}
+
+        {post.sections.length > 0 ? <div className="mt-12 space-y-12 border-t border-gray-200 pt-12">
           {post.sections.map((section) => (
             <section key={section.heading}>
               <h2 className="text-2xl font-bold text-gray-950">{section.heading}</h2>
@@ -184,7 +187,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               ) : null}
             </section>
           ))}
-        </div>
+        </div> : null}
 
         {post.checklist ? (
           <section className="mt-14 border-t border-gray-200 pt-12">
@@ -285,6 +288,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </aside>
 
+        {!post.articleBody ? (
         <div className="mt-12 rounded-md bg-brand-950 p-7 text-white sm:p-9">
           <h2 className="text-2xl font-bold">{post.ctaHeading ?? "Want this applied to one real supplier?"}</h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-gray-200">
@@ -309,6 +313,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             </TrackedLink>
           </div>
         </div>
+        ) : null}
       </div>
     </article>
   );
