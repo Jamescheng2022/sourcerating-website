@@ -12,6 +12,12 @@ export interface BlogPost {
   keyTakeaways?: string[];
   evidenceChainHeading?: string;
   evidenceChain?: Array<{ gate: string; evidence: string; requiredMatch: string }>;
+  articleBody?: Array<
+    | { type: "heading"; text: string }
+    | { type: "paragraph"; text: string }
+    | { type: "list"; ordered: boolean; items: string[] }
+    | { type: "table"; headers: string[]; rows: string[][] }
+  >;
   sections: Array<{
     heading: string;
     body: string;
@@ -32,6 +38,328 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+{
+  "slug": "compare-industrial-supplier-quotes-like-for-like",
+  "title": "How to Compare Industrial Supplier Quotes Like for Like",
+  "excerpt": "Compare industrial supplier quotes on the same scope. Copy a practical comparison template, flag missing costs, and resolve technical differences before buying.",
+  "date": "2026-10-07",
+  "category": "Buyer guides",
+  "readTime": "7 min read",
+  "sections": [],
+  "articleBody": [
+    {
+      "type": "paragraph",
+      "text": "Before ranking supplier quotations, put every offer against the same product, quantity, specification revision and delivery boundary. Keep the supplier’s original figures alongside your comparison figures, and mark missing information “not stated.” A lower total is useful only when you can explain what it covers and what still needs to be bought or approved."
+    },
+    {
+      "type": "paragraph",
+      "text": "A comparison can become difficult before the calculation even starts. One supplier prices individual pieces, another quotes sets, and a third puts exclusions below the total. A [public procurement discussion](https://www.reddit.com/r/procurement/comments/1mr3p0x/better_way_to_compare_supplier_quotes/) describes the practical frustration: PDF quotations, repeated copying into Excel and urgent comparisons. The post offers one buyer’s account of the work involved in getting quotations ready to compare."
+    },
+    {
+      "type": "paragraph",
+      "text": "The following method is for buyers comparing industrial materials, components or equipment. It produces a comparison that purchasing and engineering can check together."
+    },
+    {
+      "type": "heading",
+      "text": "Set one comparison basis"
+    },
+    {
+      "type": "paragraph",
+      "text": "Write a short basis statement before entering prices:"
+    },
+    {
+      "type": "paragraph",
+      "text": "“Compare [product or package], [quantity and unit], to [drawing numbers and revisions] and [specification editions], delivered to [named destination and delivery boundary], required by [date].”"
+    },
+    {
+      "type": "paragraph",
+      "text": "Attach the document list. Identify required accessories, coating, testing, packing and installation where relevant. If the requirement is still unsettled, label the exercise a budget comparison and record the assumptions."
+    },
+    {
+      "type": "paragraph",
+      "text": "The World Bank’s June 2025 guidance, *How to Write Technical Specifications for Goods, Works, or Nonconsulting Services*, links accurate supplier pricing to clear requirements and recommends involving end users and relevant specialists in specifications. Its Appendix A also calls for deciding what verification evidence is needed. Those principles are useful here, although the document addresses World Bank–financed procurement and does not set rules for every private purchase. See [sections 3–4 and Appendix A](https://documents1.worldbank.org/curated/en/099710507092534067/pdf/IDU-2f5f55a5-f19b-41cb-bf5e-601fd69cce52.pdf)."
+    },
+    {
+      "type": "heading",
+      "text": "Copy the offers before converting them"
+    },
+    {
+      "type": "paragraph",
+      "text": "Retain each original quotation. Record its number, revision, date and page references. Preserve the supplier’s description, unit and exclusions even when they differ from your request."
+    },
+    {
+      "type": "paragraph",
+      "text": "Use these scope labels consistently:"
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Included: explicitly covered by the offer, with a reference.",
+        "Excluded: explicitly outside the offer.",
+        "Not stated: the offer does not resolve the point.",
+        "Conditional: coverage or price depends on a stated condition."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "“Not stated” must never become a zero cost or an assumed inclusion. Extraction software can help populate a sheet, but someone still needs to check units, decimal separators, footnotes and totals against the originals."
+    },
+    {
+      "type": "paragraph",
+      "text": "Copy this blank table for each package or line item. The empty cells are for completion; replace them with a source-backed entry or “not stated” after reading the offer. Put the source page or clause beside each entry."
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Field",
+        "Offer A",
+        "Offer B",
+        "Offer C"
+      ],
+      "rows": [
+        [
+          "Quote ID, revision and date",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Quantity and original unit",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Offered model or grade",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Drawing and specification basis",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Unit price and currency",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Line total and currency",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Inclusions and exclusions",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Delivery term and named place",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Lead time and starting event",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Payment terms and price validity",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Clarification IDs",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "For a long package, keep item rows in one sheet and quote-level terms in another. A delivery promise of “six weeks” needs a starting event: order receipt, deposit, drawing approval or something else."
+    },
+    {
+      "type": "heading",
+      "text": "Keep technical decisions separate from price adjustments"
+    },
+    {
+      "type": "paragraph",
+      "text": "A commercial comparison asks what the required scope will cost on a consistent basis. A technical review asks whether the offered product satisfies the project requirements. Converting currencies cannot resolve a different steel grade, coating system or equipment duty."
+    },
+    {
+      "type": "paragraph",
+      "text": "Use a separate technical register, repeated for each supplier:"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "ID",
+        "Required",
+        "Offered and evidence",
+        "Status",
+        "Reviewer"
+      ],
+      "rows": [
+        [
+          "T01",
+          "[Grade or model]",
+          "[Detail; quote page]",
+          "[Open]",
+          "[Name]"
+        ],
+        [
+          "T02",
+          "[Coating or performance]",
+          "[Detail; data sheet]",
+          "[Open]",
+          "[Name]"
+        ],
+        [
+          "T03",
+          "[Tests and documents]",
+          "[Detail; quote page]",
+          "[Open]",
+          "[Name]"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Record the supplier’s compliance claim separately from the reviewer’s decision. Use statuses such as “evidence requested,” “accepted” or “deviation unresolved,” with a decision date and reference. Material substitutions and safety-critical departures need the responsible engineer or qualified specialist’s assessment. A procurement spreadsheet does not establish technical equivalence."
+    },
+    {
+      "type": "heading",
+      "text": "Build a comparable cost without hiding unknowns"
+    },
+    {
+      "type": "paragraph",
+      "text": "Choose a comparison currency and record the exchange-rate source, date and conversion direction. Keep the original amounts visible."
+    },
+    {
+      "type": "paragraph",
+      "text": "Align quantities only when the pricing basis supports it. A per-piece offer can be converted to a set price once the set contents are confirmed. Do not assume a supplier’s price scales unchanged to a different order quantity or purchase lot."
+    },
+    {
+      "type": "paragraph",
+      "text": "Then list costs needed to reach the same delivery and scope boundary. Depending on the purchase, these may include packing, freight, insurance, destination handling, duties, taxes or installation. Check whether each is already included before adding it. Record the tax treatment used for the comparison and verify destination-specific charges with the appropriate specialist."
+    },
+    {
+      "type": "paragraph",
+      "text": "Use a small adjustment ledger for each offer:"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Adjustment",
+        "Amount and currency",
+        "Evidence",
+        "Cost status"
+      ],
+      "rows": [
+        [
+          "[Required addition]",
+          "[Enter]",
+          "[Quote/reference]",
+          "[Confirmed/estimate/unknown]"
+        ],
+        [
+          "[Removal from scope]",
+          "[Enter]",
+          "[Supplier credit]",
+          "[Confirmed/estimate/unknown]"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Show the original quoted total, confirmed adjustments and estimated allowances separately. Deduct unwanted scope only when a supplier confirms the credit. Label any total containing allowances “estimated comparison total.” If a material cost remains unknown, say “comparison incomplete” rather than treating it as zero. Keep payment exposure, delivery risk and unresolved technical issues beside the cost result."
+    },
+    {
+      "type": "heading",
+      "text": "Work through the differences before choosing"
+    },
+    {
+      "type": "paragraph",
+      "text": "Consider this fictional comparison for a fabricated bracket package. It demonstrates the method, not market pricing or a customer case. The required basis is 40 complete sets, drawing revision C, with the specified coating and export packing."
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Offer",
+        "Stated basis",
+        "Point to resolve"
+      ],
+      "rows": [
+        [
+          "A",
+          "80 pieces; revision B",
+          "Set contents and revision C price"
+        ],
+        [
+          "B",
+          "40 sets; revision C; coating excluded",
+          "Price for required coating"
+        ],
+        [
+          "C",
+          "40 sets; revision C; packing not stated",
+          "Packing scope and price"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Offer A may cover the quantity, but that remains unconfirmed until the set contents are checked. Offer B needs an agreed coating addition or a separately confirmed coating scope. Offer C needs a packing response. None can yet be ranked confidently on a complete, technically accepted basis."
+    },
+    {
+      "type": "heading",
+      "text": "Send questions the supplier can answer precisely"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use numbered questions tied to the quotation. For the example above, adapt these for the relevant supplier:"
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "items": [
+        "“Your quotation [ID/date], item [number], lists 80 pieces. Please confirm the contents of one complete set and requote for 40 complete sets.”",
+        "“Please confirm your price against drawing [number], revision C, dated [date]. Identify any departures and their price or lead-time effect.”",
+        "“Please quote the coating required by specification [reference], including preparation, inspection and documentation within that requirement.”",
+        "“Please state the packing included, any additional charge, and the delivery term, named place and applicable edition.”",
+        "“Please issue a revised quotation incorporating your answers and identify the quotation it supersedes. Confirm validity, payment terms and the event that starts the lead time.”"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Give suppliers the same underlying requirement. For a formal tender, follow its stated clarification and evaluation procedure. Log each response against its question ID, then update both the commercial table and technical register."
+    },
+    {
+      "type": "heading",
+      "text": "Leave a decision someone else can reconstruct"
+    },
+    {
+      "type": "paragraph",
+      "text": "Your recommendation should name the selected offer revision, agreed scope, confirmed or estimated total, remaining exceptions, decision owner and date. Link the supporting quotations and technical decisions. Resolve purchase-critical unknowns before placing the order, and make sure the order documents reflect the agreed scope."
+    },
+    {
+      "type": "paragraph",
+      "text": "Have quotations that are difficult to compare? [Contact SourceRating](https://www.sourcerating.com/contact) with the product, destination, drawings or specifications, and the differences you need resolved. If you have not selected suppliers yet, send the project requirements to discuss an appropriate procurement-support scope."
+    }
+  ]
+},
   {
     slug: "can-chinese-galvanized-steel-coil-compete-in-guatemala",
     title: "Can Chinese Galvanized Steel Coil Compete in Guatemala?",
