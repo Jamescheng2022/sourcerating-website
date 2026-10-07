@@ -1,9 +1,10 @@
 import type { BlogPost } from "@/data/blog";
 
 function InlineText({ text }: { text: string }) {
-  return text.split(/(\[[^\]]+\]\(https?:\/\/[^\s)]+\)|\*[^*]+\*)/g).map((part, index) => {
+  return text.split(/(\[[^\]]+\]\(https?:\/\/[^\s)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, index) => {
     const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
     if (link) return <a key={index} href={link[2]} className="font-medium text-brand-700 underline decoration-brand-300 underline-offset-4 hover:text-brand-900">{link[1]}</a>;
+    if (part.startsWith("**") && part.endsWith("**")) return <strong key={index}>{part.slice(2, -2)}</strong>;
     if (part.startsWith("*") && part.endsWith("*")) return <em key={index}>{part.slice(1, -1)}</em>;
     return part;
   });
