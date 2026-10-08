@@ -39,6 +39,161 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
 {
+  "slug": "cement-baghouse-filter-bags-china-vs-local",
+  "title": "Should a Cement Plant Buy Replacement Baghouse Filters from China?",
+  "excerpt": "A lower filter-bag unit price is not a sourcing decision. Check the installed system, equivalent media, cleaning performance, replacement risk and landed cost before switching suppliers.",
+  "date": "2026-10-08",
+  "category": "Industrial sourcing",
+  "readTime": "7 min read",
+  "sections": [],
+  "articleBody": [
+    {
+      "type": "paragraph",
+      "text": "A cement plant buying a second source for baghouse filters often starts with an apparently simple question: can a Chinese factory supply the same bags for less? The answer can be yes. It can also be an expensive no, even if the sample has the correct diameter and a convincing specification sheet."
+    },
+    {
+      "type": "paragraph",
+      "text": "The first comparison is not China against the United States. It is one technically acceptable replacement against another, under the operating conditions of a particular dust collector. Only after that comparison is defensible does the country-of-origin decision mean anything."
+    },
+    {
+      "type": "heading",
+      "text": "Start with the collector, not the supplier catalogue"
+    },
+    {
+      "type": "paragraph",
+      "text": "Identify the baghouse manufacturer and installed collector model, then obtain the latest approved bag and cage drawings or a fully measured retained sample. Record which process the collector serves: raw mill, cement mill, kiln or another duty. These are not automatically interchangeable applications."
+    },
+    {
+      "type": "paragraph",
+      "text": "Check the cleaning arrangement first. A pulse-jet collector commonly relies on a cage inside each bag and a compressed-air cleaning sequence. Reverse-air and shaker systems use different bag support and cleaning arrangements. The U.S. Environmental Protection Agency explains these distinctions in its [fabric-filter operating guide](https://www.epa.gov/air-emissions-monitoring-knowledge-base/monitoring-control-technique-fabric-filters). A bag described only as 'cement dust filter' does not establish compatibility with either the hardware or the cleaning regime."
+    },
+    {
+      "type": "paragraph",
+      "text": "Ask the plant engineer for the actual temperature range, including start-up and excursions; gas moisture and acid-condensation risk; dust loading and character; air volume; normal differential pressure; cleaning frequency; and current emissions or bag-leak indications. If that information is not available, a supplier can quote dimensions, but should not claim the offered medium will deliver equivalent life or emissions performance."
+    },
+    {
+      "type": "heading",
+      "text": "What 'same specification' has to cover"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Check",
+        "What the buyer should compare",
+        "Common quotation gap"
+      ],
+      "rows": [
+        [
+          "Media",
+          "Base fibre, weight, finish or membrane, approved temperature/chemical duty",
+          "Both quotations say 'high-temperature felt' without identifying construction"
+        ],
+        [
+          "Fit",
+          "Length, diameter, top fixing, bottom closure, seams, cuffs and cage/venturi interface",
+          "Nominal bag dimensions match but the top seal or cage clearance does not"
+        ],
+        [
+          "Performance",
+          "Air permeability/test method, stated particulate performance, pulse-cleaning behaviour",
+          "A seller quotes efficiency without test conditions or a comparable standard"
+        ],
+        [
+          "Quality",
+          "Lot traceability, fabrication controls, seam and dimensional inspection, retained sample",
+          "A catalogue sample is treated as proof of consistent production batches"
+        ],
+        [
+          "Service",
+          "Spare availability, agreed warranty boundary, local troubleshooting and replacement schedule",
+          "A low ex-works price excludes emergency replacement and technical response"
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Do not silently substitute one media family for another. Polyester felt, aramid, PPS and PTFE-based constructions can have different operating limits and chemical or moisture resistance. [Donaldson's current specialty-bag descriptions](https://www.donaldson.com/en/products/bag-filters/specialty-replacement-filters/) show why suppliers offer different media and attachment configurations. Those listings are the manufacturer's product claims, not approval for a different plant's exact operating conditions."
+    },
+    {
+      "type": "paragraph",
+      "text": "Ask each supplier to state exceptions explicitly. The buyer should supply a controlled specification or sample record, and the supplier should confirm which details it has matched, which it has inferred and which it cannot verify without operating data. If a proprietary head fitting or compatible cage is unavailable, an apparently cheap second source may not be a usable second source at all."
+    },
+    {
+      "type": "heading",
+      "text": "Separate the delivered cost from the cost of a failed changeover"
+    },
+    {
+      "type": "paragraph",
+      "text": "A meaningful comparison starts with quoted product value and actual commercial terms. Add verified inland transport, export packing, ocean or air freight, insurance, customs entry and duties, local delivery, inspection or trial costs, installation labour and planned spare stock. Where a changeover requires new cages or sealing components, include them. Use the same Incoterm boundary for both offers; a factory-gate price is not directly comparable with a delivered and supported offer."
+    },
+    {
+      "type": "paragraph",
+      "text": "Do not copy a duty percentage from an unrelated shipment. U.S. tariff treatment depends on the actual product construction, classification, origin and entry date, including any applicable additional measures. The [USITC tariff database](https://dataweb.usitc.gov/tariff/database) states that its short descriptions are advisory and directs classification questions to U.S. Customs and Border Protection. Get the full classification and duty treatment confirmed by a customs broker before using an import-cost model to approve an order."
+    },
+    {
+      "type": "paragraph",
+      "text": "Historical trade records can show that a factory exported bags or cages to a cement buyer. They do not tell you the buyer's current operating specification, purchase price, annual programme, rejection rate or next tender. Customs value divided by shipment weight is a historical unit value, not a live quotation for an equivalent bag."
+    },
+    {
+      "type": "paragraph",
+      "text": "The larger cost is harder to put in a spreadsheet: a leakage event, unexpectedly high pressure loss, cleaning problems or a delayed replacement during a production campaign. EPA identifies differential pressure, inlet temperature, gas flow, fan current and outlet particulate or bag-leak monitoring as operating indicators. Record a credible baseline before comparing alternative bags; otherwise a trial can create anecdotes without evidence."
+    },
+    {
+      "type": "heading",
+      "text": "When a local route may beat an import"
+    },
+    {
+      "type": "paragraph",
+      "text": "Buy locally—or through an established regional distributor—when the plant needs an emergency turnaround, unusual fittings must be checked on site, the initial quantity is small, or the service and inventory response are more valuable than a factory-price discount. That is a legitimate procurement result, not a failure to source internationally."
+    },
+    {
+      "type": "paragraph",
+      "text": "A Chinese second source becomes more interesting when a plant has a repeat replacement programme, a controlled drawing or validated reference sample, sufficient lead time, a viable qualification process and a clear route for local spares and support. The economic case should be based on equivalent installed performance plus total cost, not on a supplier's lower per-bag number. Even then, a qualified local contingency source can remain worthwhile."
+    },
+    {
+      "type": "heading",
+      "text": "A practical next step before an RFQ"
+    },
+    {
+      "type": "paragraph",
+      "text": "Create one technical comparison sheet for the exact installed collector. Attach the existing bag/cage drawings or measured-sample record, duty information, current material specification, acceptance criteria and planned replacement window. Ask both local and overseas suppliers to return that sheet with deviations marked. The plant's responsible engineer should decide whether any sample trial is appropriate and how performance will be measured without creating an emissions or reliability risk."
+    },
+    {
+      "type": "paragraph",
+      "text": "If the offers are truly comparable, request current freight and customs-broker input, then decide whether the landed saving justifies lead time, inventory and qualification costs. If they are not comparable, the right answer is not 'China is cheaper' or 'local is safer'. It is that the purchase decision is not ready."
+    }
+  ],
+  "referencesHeading": "Primary sources and technical context",
+  "references": [
+    {
+      "title": "Monitoring by Control Technique — Fabric Filters",
+      "publisher": "U.S. Environmental Protection Agency",
+      "href": "https://www.epa.gov/air-emissions-monitoring-knowledge-base/monitoring-control-technique-fabric-filters",
+      "note": "Cleaning types, temperature/condensation considerations and operating indicators; not a project-specific replacement approval."
+    },
+    {
+      "title": "Specialty Bag Filters",
+      "publisher": "Donaldson",
+      "href": "https://www.donaldson.com/en/products/bag-filters/specialty-replacement-filters/",
+      "note": "Manufacturer's media and construction descriptions; ratings require application verification."
+    },
+    {
+      "title": "U.S. Tariff Database",
+      "publisher": "U.S. International Trade Commission",
+      "href": "https://dataweb.usitc.gov/tariff/database",
+      "note": "Current tariff information and explicit limits of advisory descriptions; broker confirmation required for an actual entry."
+    }
+  ],
+  "relatedLinks": [
+    {
+      "title": "Talk through a supplier comparison",
+      "href": "/contact",
+      "description": "Bring the process duty, drawing or reference sample and destination to a sourcing discussion."
+    }
+  ]
+},
+
+{
   "slug": "steel-mep-quotation-scope-exclusions-checklist",
   "title": "Steel and MEP Quote Exclusions: A Scope-Gap Checklist",
   "excerpt": "Find gaps in steel and MEP quotations before ordering. Use a scope checklist to assign design, supply, installation, testing and acceptance responsibilities.",
