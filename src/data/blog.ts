@@ -39,6 +39,182 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
 {
+  "slug": "polyurethane-screen-panels-china-vs-local",
+  "title": "Should a Mine Buy Replacement Polyurethane Screen Panels from China?",
+  "excerpt": "A cheaper PU screen panel is not automatically interchangeable. Compare deck fit, fastening, effective open area, wear, cut size, lead time and landed cost before choosing a China second source.",
+  "date": "2026-10-09",
+  "category": "Industrial sourcing",
+  "readTime": "7 min read",
+  "sections": [],
+  "articleBody": [
+    {
+      "type": "paragraph",
+      "text": "A mineral-processing plant can receive three quotations for what appears to be the same polyurethane screen panel. Each may show the correct outside dimensions and aperture size. That does not mean the panels will produce the same cut, remain locked into the deck or last until the next scheduled shutdown."
+    },
+    {
+      "type": "paragraph",
+      "text": "The useful sourcing question is narrower: can a second source deliver panels that fit the existing deck and maintain acceptable screening performance, at a lower total cost over a realistic replacement cycle? Sometimes China is worth qualifying. Sometimes the established local supplier is the cheaper operational choice, even with a higher price per panel."
+    },
+    {
+      "type": "heading",
+      "text": "First identify what is actually being replaced"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with one screen, one deck and one duty. A plant's scalping screen, sizing deck and dewatering screen may use quite different media, even when the purchasing descriptions all say 'polyurethane panels'. Record the machine model, deck position, supporting stringers, installed fastening system, feed material and target product specification. If the current screen uses tensioned wire or rubber rather than modular PU, that is a proposed media conversion—not a like-for-like spare-part quotation."
+    },
+    {
+      "type": "paragraph",
+      "text": "A real [mining discussion about molded screen panels](https://www.reddit.com/r/mining/comments/r9k48u) illustrates the trade-off: operators valued less frequent changeouts, while another questioned the reduction in open area and screening efficiency when replacing wire. Those comments are individual experiences, not controlled performance data or evidence that rubber and polyurethane perform alike. They are a reason to check the actual duty, not a substitute for a plant trial."
+    },
+    {
+      "type": "heading",
+      "text": "Aperture size alone is not a specification"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "What to compare",
+        "Why it matters before a second-source order"
+      ],
+      "rows": [
+        [
+          "Panel and support geometry",
+          "Outside length and width, actual seating surface, deck support spacing, ribs, edge shape, thickness and installed elevation must match the deck."
+        ],
+        [
+          "Fastening",
+          "Pin, snap, rail, clamp, bolt or tensioned-hook geometry must lock correctly under the operating vibration and loading. A nominally matching panel size does not prove engagement."
+        ],
+        [
+          "Aperture",
+          "Record clear aperture, shape, orientation, pitch, taper, open-area calculation and any near-size particle problem. Two nominal 8 mm openings can behave differently."
+        ],
+        [
+          "Polyurethane and reinforcement",
+          "Specify an agreed formulation or performance requirements, hardness method, dimensional tolerances, embedded reinforcement, batch identification and inspection evidence."
+        ],
+        [
+          "Operating duty",
+          "Record feed top size and gradation, solids or moisture, tonnes per hour, impact, spray water, vibration settings, operating temperature and required cut or dewatering performance."
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These distinctions are visible in established suppliers' own product ranges. [Polydeck's POLYDEX range](https://polydeck.com/products/screen-media/polydex/) separates high-open-area, high-wear and legacy-stringer options, with multiple fastening systems. [Durex](https://durexproducts.com/products/screen-media/modular-urethane-and-rubber-screens/) lists different modular fastening families. These are manufacturer descriptions, not evidence that any particular design will fit your deck."
+    },
+    {
+      "type": "paragraph",
+      "text": "A Chinese manufacturer's [published custom-panel example](https://www.qs-wiremesh.com/case-studies/pu-screens/30mm-thickness-pu-modular-screens.html) supplies dimensions, slots, hardness and quantities, showing the kind of information a buyer can request. It is the supplier's account of its own work; it does not independently establish its resin quality, ongoing production control, mining-site results or interchangeability with a protected OEM interface."
+    },
+    {
+      "type": "heading",
+      "text": "More wear life can still mean a worse screen"
+    },
+    {
+      "type": "paragraph",
+      "text": "A thick, durable panel may leave less effective open area. If throughput or product-size distribution is the constraint, the purchase may increase recirculating load, blinding or off-specification material even while reducing panel replacement frequency. The opposite can happen too: a suitable aperture design that resists pegging may preserve useful openings longer than a nominally larger theoretical open area. These are engineering trade-offs, not a universal ranking of rubber, wire and polyurethane."
+    },
+    {
+      "type": "paragraph",
+      "text": "[Polydeck describes](https://polydeck.com/products/screen-media/polydex/) product variants explicitly balancing open area, wear life and blinding; it markets a particular DMAX configuration as a high-open-area option. Treat its stated figures as configuration-specific manufacturer claims, not as guaranteed performance in another mine. [Haver & Boecker Niagara's Ty-Max](https://haverniagara.com/product/ty-max-polyurethane-screen-media/) is an example of a hooked polyurethane product intended for certain existing tensioned decks without deck conversion. That illustrates why installation type matters as much as material label."
+    },
+    {
+      "type": "paragraph",
+      "text": "Before comparing quotations, take a defensible baseline: feed and product size distribution under known operating conditions, wet/dry throughput, recirculation if applicable, effective open area, screen load, maintenance labour, lost hours, panel life and any plugging or breakage locations. A candidate should be evaluated against the plant's actual acceptance criteria. Do not rely on a supplier's generic claim of 'three times longer life' without comparable duty, time basis and test evidence."
+    },
+    {
+      "type": "heading",
+      "text": "Price the operating decision, not the panel alone"
+    },
+    {
+      "type": "paragraph",
+      "text": "For a U.S. buyer, an imported offer should identify the selling entity, material and manufacturing origin, approved drawings, inspection before shipment, minimum order quantity, manufacturing lead time, replacement stock, packing, freight, insurance, customs and final delivery. Installation and any deck modification belong in the same comparison. A local distributor may provide fit verification, nearby inventory and site support that materially reduces the cost of a failed changeover."
+    },
+    {
+      "type": "paragraph",
+      "text": "Do not invent a U.S. tariff code or duty rate from the words 'polyurethane screen'. Classification can depend on the actual construction, function and shipped form; any applicable origin measures and entry-date rules must be checked. The [USITC's current HTS resources](https://www.usitc.gov/harmonized_tariff_information) identify the published schedule and updates. A customs broker should confirm the classification and complete landed-tax treatment for the actual article before purchase economics are approved. Online rate snippets and customs-value-per-kilogram estimates are not executable quotes."
+    },
+    {
+      "type": "paragraph",
+      "text": "A sensible total-cost comparison therefore asks: how many installed hours of acceptable separation will the plant buy, at what delivered and supported cost, and what is the downtime exposure if a lot does not fit? You do not need an invented freight number to establish the decision framework. You need real supplier quotations, an agreed transport basis and a credible replacement plan."
+    },
+    {
+      "type": "heading",
+      "text": "Which route is worth testing?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Use the existing regional or OEM route when the plant faces an emergency shutdown, the fastening is proprietary or poorly documented, only a few panels are needed, or the local supplier carries critical spares and will support an early failure. A low ex-works offer is not compelling if a missing fastener holds an entire deck idle."
+    },
+    {
+      "type": "paragraph",
+      "text": "A Chinese second source becomes more attractive when there is a repeat replacement programme, drawings or measured approved reference samples, enough lead time to qualify an alternative and a practical local spare-stock arrangement. This is especially relevant when multiple identical decks consume predictable quantities. It is not necessary to prove a huge annual order before asking suppliers whether they can manufacture the required module."
+    },
+    {
+      "type": "paragraph",
+      "text": "Do not order a full deck on catalogue photographs alone. Have the plant's responsible engineer approve an equivalence sheet, sample and defined trial plan. Check a trial lot's actual seating and removal, fastening engagement, aperture and slot dimensions, reinforcement and traceability. Where a field trial is appropriate, compare representative feed conditions, product-size results, wear and cleanout behaviour over an agreed interval. Decide in advance who bears rework, return, emergency supply and installation consequences."
+    },
+    {
+      "type": "paragraph",
+      "text": "The outcome may be to qualify an overseas supplier for planned bulk replacements while retaining a local emergency source. It may also be to stay local. Both are better decisions than discovering at shutdown that two panels with the same purchase description are not interchangeable."
+    }
+  ],
+  "referencesHeading": "Technical references and market context",
+  "references": [
+    {
+      "title": "POLYDEX polyurethane screen media",
+      "publisher": "Polydeck",
+      "href": "https://polydeck.com/products/screen-media/polydex/",
+      "note": "Manufacturer descriptions of aperture/open-area trade-offs, different designs, fastening systems, and monitoring wear; not independently validated plant results."
+    },
+    {
+      "title": "Modular Urethane and Rubber Screens",
+      "publisher": "Durex Products",
+      "href": "https://durexproducts.com/products/screen-media/modular-urethane-and-rubber-screens/",
+      "note": "Examples of modular fastening families and polyurethane/rubber distinctions; supplier claims."
+    },
+    {
+      "title": "Ty-Max polyurethane screen media",
+      "publisher": "Haver & Boecker Niagara",
+      "href": "https://haverniagara.com/product/ty-max-polyurethane-screen-media/",
+      "note": "Manufacturer information on hooked polyurethane media intended for tensioned-deck replacement."
+    },
+    {
+      "title": "Custom PU modular screens example",
+      "publisher": "Qisheng Wire Mesh",
+      "href": "https://www.qs-wiremesh.com/case-studies/pu-screens/30mm-thickness-pu-modular-screens.html",
+      "note": "Chinese supplier's own described sample specs; unverified supplier self-report."
+    },
+    {
+      "title": "Harmonized Tariff Information",
+      "publisher": "United States International Trade Commission",
+      "href": "https://www.usitc.gov/harmonized_tariff_information",
+      "note": "Official HTS publication/update resource; actual classification and duty need broker or CBP confirmation."
+    },
+    {
+      "title": "Operators discuss molded screen panel trade-offs",
+      "publisher": "r/mining (public discussion, December 2021)",
+      "href": "https://www.reddit.com/r/mining/comments/r9k48u",
+      "note": "Anecdotal operator questions and experiences; not product testing or current price evidence."
+    }
+  ],
+  "relatedLinks": [
+    {
+      "title": "Compare cement baghouse filter-bag sourcing",
+      "href": "/blog/cement-baghouse-filter-bags-china-vs-local",
+      "description": "A related recurring-MRO example where technical equivalence matters more than nominal unit price."
+    },
+    {
+      "title": "Discuss a second-source screening media specification",
+      "href": "/contact",
+      "description": "Share the deck, duty and existing media details needed for an honest supplier comparison."
+    }
+  ]
+},
+
+{
   "slug": "cement-baghouse-filter-bags-china-vs-local",
   "title": "Should a Cement Plant Buy Replacement Baghouse Filters from China?",
   "excerpt": "A lower filter-bag unit price is not a sourcing decision. Check the installed system, equivalent media, cleaning performance, replacement risk and landed cost before switching suppliers.",
