@@ -134,7 +134,7 @@ export const blogPosts: BlogPost[] = [
     },
     {
       "type": "paragraph",
-      "text": "Do not invent a U.S. tariff code or duty rate from the words 'polyurethane screen'. Classification can depend on the actual construction, function and shipped form; any applicable origin measures and entry-date rules must be checked. The [USITC's current HTS resources](https://www.usitc.gov/harmonized_tariff_information) identify the published schedule and updates. A customs broker should confirm the classification and complete landed-tax treatment for the actual article before purchase economics are approved. Online rate snippets and customs-value-per-kilogram estimates are not executable quotes."
+      "text": "Do not invent a U.S. tariff code or duty rate from the words 'polyurethane screen'. Classification can depend on the actual construction, function and shipped form; any applicable origin measures and entry-date rules must be checked. The [USITC's current HTS resources](https://www.usitc.gov/harmonized_tariff_information) identify the published schedule and updates. Consider a licensed customs broker’s advice on classification and applicable duties; the importer remains responsible for correct entry information and compliance. Online rate snippets and customs-value-per-kilogram estimates are not executable quotes."
     },
     {
       "type": "paragraph",
@@ -162,6 +162,7 @@ export const blogPosts: BlogPost[] = [
     }
   ],
   "referencesHeading": "Technical references and market context",
+  "referencesIntro": "Manufacturer sources describe product options and supplier claims; the public discussion records anecdotal experiences rather than controlled tests. The USITC link provides official tariff context, not a classification decision for a particular shipment. Check compatibility against approved drawings and operating data, and seek qualified advice where needed.",
   "references": [
     {
       "title": "POLYDEX polyurethane screen media",
@@ -183,7 +184,7 @@ export const blogPosts: BlogPost[] = [
     },
     {
       "title": "Custom PU modular screens example",
-      "publisher": "Qisheng Wire Mesh",
+      "publisher": "Hebei Qiusuo Wire Mesh Products Co., Ltd.",
       "href": "https://www.qs-wiremesh.com/case-studies/pu-screens/30mm-thickness-pu-modular-screens.html",
       "note": "Chinese supplier's own described sample specs; unverified supplier self-report."
     },
@@ -191,7 +192,7 @@ export const blogPosts: BlogPost[] = [
       "title": "Harmonized Tariff Information",
       "publisher": "United States International Trade Commission",
       "href": "https://www.usitc.gov/harmonized_tariff_information",
-      "note": "Official HTS publication/update resource; actual classification and duty need broker or CBP confirmation."
+      "note": "Official HTS publication and update resource; broker review is recommended, and the importer remains responsible for classification and compliance."
     },
     {
       "title": "Operators discuss molded screen panel trade-offs",
@@ -357,7 +358,7 @@ export const blogPosts: BlogPost[] = [
       "title": "U.S. Tariff Database",
       "publisher": "U.S. International Trade Commission",
       "href": "https://dataweb.usitc.gov/tariff/database",
-      "note": "Current tariff information and explicit limits of advisory descriptions; broker confirmation required for an actual entry."
+      "note": "Advisory tariff information; broker review is recommended, and the importer remains responsible for compliance."
     }
   ],
   "relatedLinks": [
