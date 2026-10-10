@@ -39,6 +39,135 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
 {
+  "slug": "peru-screen-panels-rubber-pu-import-decision",
+  "title": "Metso Is Making Screen Panels in Peru. Should Mines Still Import?",
+  "excerpt": "Metso's new Lima production is a real local option, but its announced rubber modules are not automatically equivalent to imported polyurethane panels. Compare the installed duty and total replacement cost first.",
+  "date": "2026-10-10",
+  "category": "Industrial sourcing",
+  "readTime": "6 min read",
+  "sections": [],
+  "articleBody": [
+    {
+      "type": "paragraph",
+      "text": "A mine in Peru replacing screen panels has another local option to investigate. On 21 September 2026, Metso announced that its Lima facility had begun manufacturing customized PS screening panels. That changes the sourcing conversation, particularly for planned maintenance and urgent replacements. It does not settle whether a mine should buy locally or import from China."
+    },
+    {
+      "type": "paragraph",
+      "text": "The important detail is the material. Metso describes the newly made panels as injection-molded rubber. Many competing modular screen-media quotations are for polyurethane (PU). A rubber panel and a PU panel may both be offered for mineral screening, but matching outside dimensions and nominal aperture size do not make them technically equivalent."
+    },
+    {
+      "type": "heading",
+      "text": "What Metso has actually announced"
+    },
+    {
+      "type": "paragraph",
+      "text": "According to [Metso's 21 September announcement](https://www.metso.com/es/informacion-corporativa/medios-de-comunicacion/noticias/2026/9/metso-fortalece-capacidades-con-la-fabricacion-de-mallas-para-zarandas-en-peru/), the line is inside its existing mill-lining factory in Lima's Zona Industrial Vulcano. The company says it can produce more than 28,000 panels annually in 1 × 1 ft and 1 × 2 ft formats, using rubber in 40 and 60 Shore grades. It also reports local laboratory capability, first customer deliveries in north-central Peru and testing for another mining customer."
+    },
+    {
+      "type": "paragraph",
+      "text": "These are manufacturer statements about capacity and initial activity, not audited utilization, a guaranteed lead time or proof of acceptance on a buyer's particular screening deck. The announced panel formats do not mean all designs, materials and fastening systems can be manufactured locally. A purchasing team should ask what is actually offered for its installed equipment rather than treating this as a blanket replacement for imported media."
+    },
+    {
+      "type": "heading",
+      "text": "The technical question comes before the country question"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with one machine, one deck and one ore duty. Obtain the screen model, support spacing, panel seating and locking geometry, panel thickness, installed elevation and approved drawings or retained samples. An alternative must suit the actual feed size, moisture, abrasiveness, impact and vibration conditions—and preserve the required separation or dewatering result. Converting from one material or fastening system to another is an engineering change, not a routine reorder."
+    },
+    {
+      "type": "paragraph",
+      "text": "Open area matters, but its nominal percentage can mislead. Thick ribs may reduce available screening surface; a theoretically generous opening may blind with wet feed; a durable panel may still create an unacceptable cut size. Compare effective open area and blinding tendency alongside throughput, product gradation, replacement interval and the hours needed to change panels. The mine's process and maintenance teams should decide how to measure a trial safely."
+    },
+    {
+      "type": "paragraph",
+      "text": "A useful caution comes from [Metso's case study published in June 2026](https://www.metso.com/insights/case-studies/mining-and-metals/increase-screen-efficiency-by-using-ls-ru-panels-in-manganese/). It describes a manganese operation that tested modular rubber in place of PU media because of severe blinding. The installations in that account date to 2016–2017; the performance figures are supplier-reported historical results, not an independent Peru trial or a current universal comparison. The commercial lesson is that a cheaper panel which blocks production is not cheaper in operation."
+    },
+    {
+      "type": "heading",
+      "text": "What should the mine put on the comparison sheet?"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Buyer question",
+        "Evidence to request"
+      ],
+      "rows": [
+        [
+          "Will it physically install?",
+          "Controlled deck drawings, support and locking details, exact panel dimensions, permitted tolerances and sample fit check."
+        ],
+        [
+          "Will the process result hold?",
+          "Feed and moisture conditions, effective open area, blinding history, throughput, product gradation and an agreed trial acceptance method."
+        ],
+        [
+          "How frequently will it be replaced?",
+          "Wear records, damage and replacement causes, changeout hours and quantity of emergency stock."
+        ],
+        [
+          "Who can support a shutdown?",
+          "Written delivery commitments, local inventory, fitting assistance, deviations, batch traceability and replacement arrangements."
+        ],
+        [
+          "What is the real purchase cost?",
+          "Like-for-like written quotations, common Incoterms boundary, freight, customs treatment, local transport, installation and carrying cost of inventory."
+        ]
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Where local supply can win—and where China can still compete"
+    },
+    {
+      "type": "paragraph",
+      "text": "For an unplanned shutdown, a small quantity or a panel that requires rapid on-site adjustments, a local manufacturer or qualified distributor may offer a better result despite a higher piece price. Faster replenishment, closer technical access and smaller emergency stock are plausible benefits. Metso's new facility makes that option worth checking, not assuming: the buyer still needs an actual quotation, compatible design and committed lead time."
+    },
+    {
+      "type": "paragraph",
+      "text": "A China-based second source can still make sense for a repeatable panel with controlled drawings, predictable changeout windows and enough volume to absorb sampling, qualification and logistics. A mine need not choose one source for every deck. It may keep locally supported spares for a critical duty while evaluating an imported alternative on a less time-sensitive replacement cycle."
+    },
+    {
+      "type": "paragraph",
+      "text": "Do not decide from a web-listing price or customs shipment value. Those are not executable delivered prices for technically equivalent panels. For Peru, classification depends on the actual article and construction; the official [SUNAT tariff-treatment service](https://www.gob.pe/17339) identifies duties and other measures by tariff classification. A customs broker should confirm the current classification, origin treatment and taxes before anyone calculates landed savings. This article does not assume a rate or freight quotation."
+    },
+    {
+      "type": "paragraph",
+      "text": "The next purchase decision is practical: issue the same controlled specification to the local and overseas options, mark differences, obtain written delivery and service terms, and decide whether a measured trial is warranted. If a proposed product is a material conversion, let the mine's responsible engineers define the acceptance conditions. The news from Lima broadens the options; it does not remove the need to prove equivalence."
+    }
+  ],
+  "referencesHeading": "Source documents",
+  "references": [
+    {
+      "title": "Metso begins local manufacturing of screening panels in Peru, 21 September 2026",
+      "publisher": "Metso",
+      "href": "https://www.metso.com/es/informacion-corporativa/medios-de-comunicacion/noticias/2026/9/metso-fortalece-capacidades-con-la-fabricacion-de-mallas-para-zarandas-en-peru/",
+      "note": "Manufacturer announcement of location, product formats, rubber grades, nominal production capacity and early deliveries. Not an independent factory or buyer audit."
+    },
+    {
+      "title": "Manganese mine screening case, published 12 June 2026",
+      "publisher": "Metso",
+      "href": "https://www.metso.com/insights/case-studies/mining-and-metals/increase-screen-efficiency-by-using-ls-ru-panels-in-manganese/",
+      "note": "Supplier-reported historical 2016–2017 application. Not evidence that rubber is superior across all duties."
+    },
+    {
+      "title": "Consultar el Tratamiento Arancelario",
+      "publisher": "Peruvian government / SUNAT",
+      "href": "https://www.gob.pe/17339",
+      "note": "Official customs and tariff-treatment lookup; actual classification and import terms require product-specific confirmation."
+    }
+  ],
+  "relatedLinks": [
+    {
+      "title": "Should a mine buy replacement PU screen panels from China?",
+      "href": "/blog/polyurethane-screen-panels-china-vs-local",
+      "description": "A more detailed guide to deck fit, fastening, open area, wear and second-source qualification."
+    }
+  ]
+},
+
+{
   "slug": "polyurethane-screen-panels-china-vs-local",
   "title": "Should a Mine Buy Replacement Polyurethane Screen Panels from China?",
   "excerpt": "A cheaper PU screen panel is not automatically interchangeable. Compare deck fit, fastening, effective open area, wear, cut size, lead time and landed cost before choosing a China second source.",
