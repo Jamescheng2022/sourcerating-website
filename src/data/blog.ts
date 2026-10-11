@@ -7,6 +7,13 @@ export interface BlogPost {
   dateModified?: string;
   category: string;
   readTime: string;
+  coverImage?: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+    caption: string;
+  };
   directAnswer?: string;
   keyTakeawaysHeading?: string;
   keyTakeaways?: string[];
@@ -40,6 +47,13 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
 {
   "slug": "polyurethane-screen-panels-china-vs-local",
+  "coverImage": {
+    "src": "/images/blog/polyurethane-screen-panels-inspection-v2.jpg",
+    "width": 1600,
+    "height": 900,
+    "alt": "Orange polyurethane screening panels with through-slots on a steel inspection bench beside a vernier caliper.",
+    "caption": "AI-generated editorial image; not a photograph of a specific supplier or installation."
+  },
   "title": "Should a Mine Buy Replacement Polyurethane Screen Panels from China?",
   "excerpt": "A cheaper PU screen panel is not automatically interchangeable. Compare deck fit, fastening, effective open area, wear, cut size, lead time and landed cost before choosing a China second source.",
   "date": "2026-10-09",
