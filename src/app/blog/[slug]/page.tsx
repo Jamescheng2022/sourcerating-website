@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: post.seoTitle ?? post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
+    ogImage: post.coverImage,
   });
 }
 
@@ -52,7 +53,13 @@ export default async function BlogPostPage({ params }: PageProps) {
       sameAs: [siteConfig.social.linkedin],
     },
     publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
-    image: `${siteConfig.url}/images/hero-factory-audit.png`,
+    image: post.coverImage ? {
+      "@type": "ImageObject",
+      url: new URL(post.coverImage.src, siteConfig.url).href,
+      width: post.coverImage.width,
+      height: post.coverImage.height,
+      caption: post.coverImage.caption,
+    } : `${siteConfig.url}/images/hero-factory-audit.png`,
     ...(post.references ? { citation: post.references.map((reference) => reference.href) } : {}),
   };
   const breadcrumbSchema = {
@@ -98,7 +105,20 @@ export default async function BlogPostPage({ params }: PageProps) {
           <span>{post.readTime}</span>
         </div>
 
-        {!post.articleBody ? <Image
+        {post.coverImage ? (
+          <figure className="mt-10">
+            <Image
+              src={post.coverImage.src}
+              alt={post.coverImage.alt}
+              width={post.coverImage.width}
+              height={post.coverImage.height}
+              sizes="(max-width: 896px) 100vw, 832px"
+              priority
+              className="h-auto w-full rounded-md border border-gray-200"
+            />
+            <figcaption className="mt-3 text-sm leading-6 text-gray-500">{post.coverImage.caption}</figcaption>
+          </figure>
+        ) : !post.articleBody ? <Image
           src="/images/hero-factory-audit.png"
           alt={`${post.title} — buyer-side supplier verification guide`}
           width={1600}

@@ -5,7 +5,7 @@ interface PageMetadata {
   title: string;
   description: string;
   path: string;
-  ogImage?: string;
+  ogImage?: string | { src: string; width: number; height: number; alt: string };
   noIndex?: boolean;
   keywords?: string[];
 }
@@ -20,6 +20,9 @@ export function generatePageMetadata({
 }: PageMetadata): Metadata {
   const url = `${siteConfig.url}${path}`;
   const fullTitle = `${title} | ${siteConfig.name}`;
+  const image = typeof ogImage === "string"
+    ? { url: ogImage, width: 1200, height: 630, alt: fullTitle }
+    : { url: new URL(ogImage.src, siteConfig.url).href, width: ogImage.width, height: ogImage.height, alt: ogImage.alt };
 
   return {
     title: { absolute: fullTitle },
@@ -34,13 +37,13 @@ export function generatePageMetadata({
       siteName: siteConfig.name,
       locale: siteConfig.locale,
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: fullTitle }],
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [ogImage],
+      images: [typeof ogImage === "string" ? ogImage : image],
     },
     robots: noIndex
       ? { index: false, follow: false }
