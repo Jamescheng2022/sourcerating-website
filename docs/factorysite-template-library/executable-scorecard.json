@@ -1,0 +1,31 @@
+{
+  "version":"1.0.0",
+  "updated_at":"2026-08-25",
+  "scale":"0-100 weighted score",
+  "weights":{"license_and_delivery":18,"build_reliability":12,"industrial_ia":16,"visual_credibility":14,"mobile":10,"accessibility":8,"seo_and_i18n":10,"cms_compatibility":8,"adaptation_cost":4},
+  "admission":{"approved":85,"conditional":72,"reference_only":"license restriction, ambiguous commercial terms, failed build or non-removable proprietary assets"},
+  "scores":[
+    {"id":"TPL-001","name":"Payload official website template","score":94,"status":"approved-foundation","license":100,"build":94,"industrial_ia":80,"visual":84,"mobile":91,"a11y":91,"seo_i18n":90,"cms":100,"adaptation":82},
+    {"id":"TPL-002","name":"AstroWind","score":91,"status":"approved","license":100,"build":95,"industrial_ia":82,"visual":91,"mobile":95,"a11y":90,"seo_i18n":94,"cms":70,"adaptation":92},
+    {"id":"TPL-003","name":"Nextly","score":86,"status":"approved","license":100,"build":91,"industrial_ia":76,"visual":84,"mobile":92,"a11y":86,"seo_i18n":84,"cms":64,"adaptation":95},
+    {"id":"TPL-004","name":"Lonestone Astro","score":92,"status":"approved","license":100,"build":92,"industrial_ia":91,"visual":88,"mobile":92,"a11y":89,"seo_i18n":95,"cms":84,"adaptation":86},
+    {"id":"TPL-005","name":"KeyAstro","score":85,"status":"approved-localization-reference","license":100,"build":86,"industrial_ia":72,"visual":80,"mobile":88,"a11y":84,"seo_i18n":94,"cms":91,"adaptation":83},
+    {"id":"TPL-006","name":"DataNova","score":86,"status":"approved-tech-reference","license":100,"build":86,"industrial_ia":78,"visual":90,"mobile":88,"a11y":83,"seo_i18n":84,"cms":90,"adaptation":83},
+    {"id":"TPL-007","name":"Tailcast","score":86,"status":"approved-visual-reference","license":100,"build":89,"industrial_ia":77,"visual":93,"mobile":90,"a11y":87,"seo_i18n":85,"cms":60,"adaptation":89},
+    {"id":"TPL-008","name":"OpenOcean Payload builder","score":88,"status":"approved-fullstack-reference","license":100,"build":84,"industrial_ia":79,"visual":83,"mobile":86,"a11y":82,"seo_i18n":86,"cms":98,"adaptation":84},
+    {"id":"TPL-012","name":"TailNext","score":88,"status":"approved","license":100,"build":91,"industrial_ia":79,"visual":88,"mobile":92,"a11y":87,"seo_i18n":91,"cms":62,"adaptation":92},
+    {"id":"TPL-013","name":"Astroplate","score":89,"status":"approved-assets-must-be-replaced","license":100,"build":90,"industrial_ia":82,"visual":88,"mobile":92,"a11y":88,"seo_i18n":95,"cms":70,"adaptation":90},
+    {"id":"TPL-014","name":"Locomotive Astro boilerplate","score":81,"status":"conditional-motion-source","license":100,"build":84,"industrial_ia":70,"visual":95,"mobile":82,"a11y":72,"seo_i18n":80,"cms":55,"adaptation":78},
+    {"id":"TPL-015","name":"Foxi Astro","score":86,"status":"approved","license":100,"build":87,"industrial_ia":76,"visual":91,"mobile":90,"a11y":84,"seo_i18n":86,"cms":62,"adaptation":91},
+    {"id":"TPL-016","name":"ThaiUI Astroplate fork","score":84,"status":"approved-thai-reference","license":100,"build":85,"industrial_ia":73,"visual":83,"mobile":89,"a11y":84,"seo_i18n":96,"cms":68,"adaptation":87},
+    {"id":"TPL-017","name":"Flowbite","score":92,"status":"approved-component-source","license":100,"build":96,"industrial_ia":91,"visual":89,"mobile":94,"a11y":90,"seo_i18n":80,"cms":74,"adaptation":96},
+    {"id":"TPL-018","name":"daisyUI","score":90,"status":"approved-component-source","license":100,"build":96,"industrial_ia":84,"visual":88,"mobile":94,"a11y":88,"seo_i18n":80,"cms":72,"adaptation":98},
+    {"id":"TPL-019","name":"Preline UI","score":82,"status":"conditional-terms-and-attribution","license":76,"build":92,"industrial_ia":91,"visual":92,"mobile":94,"a11y":88,"seo_i18n":80,"cms":70,"adaptation":93},
+    {"id":"TPL-020","name":"Astroship free","score":60,"status":"reference-only","license":35,"build":88,"industrial_ia":67,"visual":84,"mobile":89,"a11y":84,"seo_i18n":82,"cms":55,"adaptation":80},
+    {"id":"TPL-021","name":"Ixartz Astro boilerplate","score":85,"status":"approved-technical-base","license":100,"build":94,"industrial_ia":70,"visual":76,"mobile":90,"a11y":88,"seo_i18n":95,"cms":60,"adaptation":91},
+    {"id":"TPL-022","name":"Payload official website source","score":90,"status":"approved-architecture-reference","license":100,"build":82,"industrial_ia":84,"visual":95,"mobile":91,"a11y":90,"seo_i18n":88,"cms":100,"adaptation":68},
+    {"id":"TPL-009","name":"Cruip Open React","score":58,"status":"reference-only-license","license":25,"build":88,"industrial_ia":68,"visual":94,"mobile":91,"a11y":85,"seo_i18n":80,"cms":48,"adaptation":78},
+    {"id":"TPL-010","name":"Themixly Automation","score":43,"status":"rejected-ambiguous-license","license":0,"build":74,"industrial_ia":86,"visual":78,"mobile":82,"a11y":70,"seo_i18n":66,"cms":45,"adaptation":72},
+    {"id":"TPL-011","name":"Themixly Mining","score":42,"status":"rejected-ambiguous-license","license":0,"build":73,"industrial_ia":84,"visual":77,"mobile":80,"a11y":68,"seo_i18n":64,"cms":45,"adaptation":71}
+  ]
+}
