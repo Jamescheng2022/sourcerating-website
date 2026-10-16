@@ -77,7 +77,10 @@ async function main() {
   check('articleBody does not suppress explicit cover',()=>{assert.ok(pu.articleBody);assert.equal(covers.length,1);assert.equal(covers[0].props.src,pu.coverImage.src);assert.equal(nodes(tree,n=>n.type==='ArticleBody').length,1);});
   check('cover intrinsic dimensions/alt and responsive height',()=>{const p=covers[0].props;assert.equal(p.width,1600);assert.equal(p.height,900);assert.equal(p.alt,pu.coverImage.alt);assert.match(p.className,/h-auto w-full/);assert.ok(p.sizes);});
   check('AI caption visibly follows cover',()=>assert.equal(nodes(tree,n=>n.type==='figcaption')[0].props.children,caption));
-  const legacy = data.filter(x=>x.slug!==puSlug);
+  const sampleSlug = 'chinese-steel-standard-edition-implementation-translation-dates';
+  check('exactly the approved sample is added without a cover',()=>{assert.deepEqual(plain(data.filter(x=>!oldData.some(old=>old.slug===x.slug)).map(x=>x.slug)),[sampleSlug]);assert.equal(data.find(x=>x.slug===sampleSlug).coverImage,undefined);assert.equal(data.length,oldData.length+1);});
+  const legacy = oldData.filter(x=>x.slug!==puSlug).map(old=>data.find(x=>x.slug===old.slug));
+  check('all baseline legacy posts remain present',()=>assert.ok(legacy.every(Boolean)));
   for (const post of legacy) {
     const params={params:Promise.resolve({slug:post.slug})};
     const oldPost=oldData.find(x=>x.slug===post.slug);
