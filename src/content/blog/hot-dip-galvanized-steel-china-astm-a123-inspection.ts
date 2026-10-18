@@ -168,6 +168,7 @@ export const hdgInspectionPost: BlogPost = {
   "layout": "editorial",
   "coverImage": {
     "src": "/images/blog/hdg-traceability-editorial-20261019.svg",
+    "mobileSrc": "/images/blog/hdg-traceability-mobile-20261019.svg",
     "width": 1600,
     "height": 900,
     "alt": "Editorial diagram linking approved drawing and piece marks to galvanizing lot, representative coating measurements, and packing register.",
