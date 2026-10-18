@@ -12,6 +12,7 @@ export interface BlogPost {
   readTime: string;
   coverImage?: {
     src: string;
+    mobileSrc?: string;
     width: number;
     height: number;
     alt: string;
