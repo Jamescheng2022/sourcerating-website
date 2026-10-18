@@ -4,6 +4,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   seoTitle?: string;
+  layout?: "editorial" | "guide";
   excerpt: string;
   date: string;
   dateModified?: string;
