@@ -84,7 +84,7 @@ async function main() {
   const editorialMeta=plain(await page.generateMetadata(editorialInput));
   const editorialTree=await page.default(editorialInput);
   check('social preview uses a raster fallback instead of an SVG',()=>assert.ok(editorialMeta.openGraph.images[0].url.endsWith('.png')));
-  check('editorial page renders both mobile and desktop diagram variants',()=>{const variants=nodes(editorialTree,n=>n.type==='Image');assert.equal(variants.length,2);assert.equal(variants[0].props.src,added[0].coverImage.mobileSrc);assert.equal(variants[1].props.src,added[0].coverImage.src);});
+  check('editorial page renders both mobile and desktop diagram variants',()=>{const variants=nodes(editorialTree,n=>n.type==='Image');assert.equal(variants.length,2);assert.equal(variants[0].props.src,added[0].coverImage.mobileSrc);assert.equal(variants[1].props.src,added[0].coverImage.src);assert.match(variants[0].props.className,/2xl:hidden/);assert.match(variants[1].props.className,/2xl:block/);const fig=nodes(editorialTree,n=>n.type==='figure')[0];assert.match(fig.props.className,/2xl:w-/);});
   const legacy = oldData.filter(x=>x.slug!==puSlug);
   for (const post of legacy) {
     const params={params:Promise.resolve({slug:post.slug})};
