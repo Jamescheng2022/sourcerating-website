@@ -108,15 +108,15 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
 
         {post.coverImage ? (
-          <figure className={isEditorial ? "mt-11" : "mt-10"}>
+          <figure className={isEditorial && post.coverImage.mobileSrc ? "mt-11 2xl:relative 2xl:left-1/2 2xl:w-[min(92vw,1400px)] 2xl:-translate-x-1/2" : isEditorial ? "mt-11" : "mt-10"}>
             {post.coverImage.mobileSrc ? (
               <Image
                 src={post.coverImage.mobileSrc}
                 alt={post.coverImage.alt}
                 width={720}
                 height={1180}
-                sizes="(max-width: 639px) 100vw, 0px"
-                className="block h-auto w-full rounded-md border border-stone-200 sm:hidden"
+                sizes="(max-width: 1535px) 100vw, 0px"
+                className="block h-auto w-full rounded-md border border-stone-200 2xl:hidden"
               />
             ) : null}
             <Image
@@ -126,9 +126,9 @@ export default async function BlogPostPage({ params }: PageProps) {
               height={post.coverImage.height}
               sizes="(max-width: 896px) 100vw, 832px"
               priority
-              className={post.coverImage.mobileSrc ? "hidden h-auto w-full rounded-md border border-gray-200 sm:block" : "h-auto w-full rounded-md border border-gray-200"}
+              className={post.coverImage.mobileSrc ? "hidden h-auto w-full rounded-md border border-gray-200 2xl:block" : "h-auto w-full rounded-md border border-gray-200"}
             />
-            <figcaption className="mt-3 text-sm leading-6 text-gray-500">{post.coverImage.caption}</figcaption>
+            <figcaption className={isEditorial ? "mx-auto mt-3 max-w-[760px] text-sm leading-6 text-gray-500" : "mt-3 text-sm leading-6 text-gray-500"}>{post.coverImage.caption}</figcaption>
           </figure>
         ) : !post.articleBody ? <Image
           src="/images/hero-factory-audit.png"
