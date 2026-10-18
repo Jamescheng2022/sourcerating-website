@@ -79,7 +79,12 @@ async function main() {
   check('AI caption visibly follows cover',()=>assert.equal(nodes(tree,n=>n.type==='figcaption')[0].props.children,caption));
   const added = data.filter(x => !oldData.some(prev => prev.slug === x.slug));
   check('only the HDG guide is newly registered',()=>assert.deepEqual(plain(added.map(x=>x.slug)),['hot-dip-galvanized-steel-china-astm-a123-inspection']));
-  check('new editorial guide has original visual and referenced narrative',()=>{const p=added[0];assert.equal(p.layout,'editorial');assert.ok(p.articleBody.length>=18);assert.ok(p.references.length>=5);assert.ok(p.coverImage.src.endsWith('.svg'));assert.ok(fs.existsSync(path.join(root,'public',p.coverImage.src)));});
+  check('new editorial guide has both accessible diagrams and referenced narrative',()=>{const p=added[0];assert.equal(p.layout,'editorial');assert.ok(p.articleBody.length>=18);assert.ok(p.references.length>=5);assert.ok(p.coverImage.src.endsWith('.svg'));assert.ok(p.coverImage.mobileSrc.endsWith('.svg'));assert.ok(fs.existsSync(path.join(root,'public',p.coverImage.src)));assert.ok(fs.existsSync(path.join(root,'public',p.coverImage.mobileSrc)));});
+  const editorialInput={params:Promise.resolve({slug:added[0].slug})};
+  const editorialMeta=plain(await page.generateMetadata(editorialInput));
+  const editorialTree=await page.default(editorialInput);
+  check('social preview uses a raster fallback instead of an SVG',()=>assert.ok(editorialMeta.openGraph.images[0].url.endsWith('.png')));
+  check('editorial page renders both mobile and desktop diagram variants',()=>{const variants=nodes(editorialTree,n=>n.type==='Image');assert.equal(variants.length,2);assert.equal(variants[0].props.src,added[0].coverImage.mobileSrc);assert.equal(variants[1].props.src,added[0].coverImage.src);});
   const legacy = oldData.filter(x=>x.slug!==puSlug);
   for (const post of legacy) {
     const params={params:Promise.resolve({slug:post.slug})};
