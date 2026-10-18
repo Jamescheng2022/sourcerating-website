@@ -77,7 +77,10 @@ async function main() {
   check('articleBody does not suppress explicit cover',()=>{assert.ok(pu.articleBody);assert.equal(covers.length,1);assert.equal(covers[0].props.src,pu.coverImage.src);assert.equal(nodes(tree,n=>n.type==='ArticleBody').length,1);});
   check('cover intrinsic dimensions/alt and responsive height',()=>{const p=covers[0].props;assert.equal(p.width,1600);assert.equal(p.height,900);assert.equal(p.alt,pu.coverImage.alt);assert.match(p.className,/h-auto w-full/);assert.ok(p.sizes);});
   check('AI caption visibly follows cover',()=>assert.equal(nodes(tree,n=>n.type==='figcaption')[0].props.children,caption));
-  const legacy = data.filter(x=>x.slug!==puSlug);
+  const added = data.filter(x => !oldData.some(prev => prev.slug === x.slug));
+  check('only the HDG guide is newly registered',()=>assert.deepEqual(plain(added.map(x=>x.slug)),['hot-dip-galvanized-steel-china-astm-a123-inspection']));
+  check('new guide preserves editorial evidence',()=>{const p=added[0];assert.ok(p.articleBody.length>15);assert.ok(p.references.length>=6);assert.equal(p.coverImage,undefined);});
+  const legacy = oldData.filter(x=>x.slug!==puSlug);
   for (const post of legacy) {
     const params={params:Promise.resolve({slug:post.slug})};
     const oldPost=oldData.find(x=>x.slug===post.slug);

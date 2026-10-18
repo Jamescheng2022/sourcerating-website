@@ -1,3 +1,5 @@
+import { hdgInspectionPost } from "@/content/blog/hot-dip-galvanized-steel-china-astm-a123-inspection";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -45,6 +47,7 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  hdgInspectionPost,
 {
   "slug": "polyurethane-screen-panels-china-vs-local",
   "coverImage": {
