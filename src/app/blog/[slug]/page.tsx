@@ -109,6 +109,16 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {post.coverImage ? (
           <figure className={isEditorial ? "mt-11" : "mt-10"}>
+            {post.coverImage.mobileSrc ? (
+              <Image
+                src={post.coverImage.mobileSrc}
+                alt={post.coverImage.alt}
+                width={720}
+                height={1180}
+                sizes="(max-width: 639px) 100vw, 0px"
+                className="block h-auto w-full rounded-md border border-stone-200 sm:hidden"
+              />
+            ) : null}
             <Image
               src={post.coverImage.src}
               alt={post.coverImage.alt}
@@ -116,7 +126,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               height={post.coverImage.height}
               sizes="(max-width: 896px) 100vw, 832px"
               priority
-              className="h-auto w-full rounded-md border border-gray-200"
+              className={post.coverImage.mobileSrc ? "hidden h-auto w-full rounded-md border border-gray-200 sm:block" : "h-auto w-full rounded-md border border-gray-200"}
             />
             <figcaption className="mt-3 text-sm leading-6 text-gray-500">{post.coverImage.caption}</figcaption>
           </figure>
