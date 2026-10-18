@@ -177,6 +177,10 @@ export const hdgInspectionPost: BlogPost = {
     {
       "type": "paragraph",
       "text": "The buyer's strongest position is to define the evidence before placing the purchase order. “ASTM A123” on its own is a starting specification reference. A defensible shipment release connects the specified process, real fabricated articles, representative test results, authorized exceptions and actual loaded bundles."
+    },
+    {
+      "type": "paragraph",
+      "text": "If you are preparing an RFQ for fabricated galvanized steel, [send the product scope and the inspection question](https://www.sourcerating.com/contact), or [start a supplier risk screen](https://www.sourcerating.com/risk-screen). Include the destination, drawing revision and coating specification so any follow-up can focus on the evidence that matters for your order."
     }
   ],
   "faqs": [
@@ -256,8 +260,5 @@ export const hdgInspectionPost: BlogPost = {
       "href": "/blog/compare-industrial-supplier-quotes-like-for-like",
       "description": "Check specifications, exclusions, total cost and vendor responsibilities before award."
     }
-  ],
-  "ctaHeading": "Need a clearer supplier evidence request?",
-  "ctaBody": "Share the product category, destination, approved drawings and unresolved inspection question. We can help frame a practical buyer-side document review without substituting for the project's responsible engineer.",
-  "ctaLabel": "Discuss the sourcing evidence"
+  ]
 };
