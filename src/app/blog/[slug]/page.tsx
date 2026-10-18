@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: post.seoTitle ?? post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
-    ogImage: post.coverImage,
+    // Editorial SVG diagrams are for the article body; social previews need a raster fallback.
+    ogImage: post.coverImage?.src.endsWith(".svg") ? undefined : post.coverImage,
   });
 }
 
@@ -37,6 +38,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) notFound();
+  const isEditorial = post.layout === "editorial";
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -84,18 +86,18 @@ export default async function BlogPostPage({ params }: PageProps) {
     : null;
 
   return (
-    <article className="bg-white pb-24 pt-32">
+    <article className={isEditorial ? "bg-[#fcfcf9] pb-24 pt-28" : "bg-white pb-24 pt-32"}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {faqSchema ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} /> : null}
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div className={isEditorial ? "mx-auto max-w-[760px] px-5 sm:px-7 lg:px-8" : "mx-auto max-w-4xl px-4 sm:px-6 lg:px-8"}>
         <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-900">
           <ArrowLeft className="h-4 w-4" />
           Back to guides
         </Link>
         <p className="text-sm font-semibold uppercase text-brand-700">{post.category}</p>
-        <h1 className="mt-3 text-4xl font-bold text-gray-950 sm:text-5xl">{post.title}</h1>
-        <p className="mt-5 text-lg leading-8 text-gray-600">{post.excerpt}</p>
+        <h1 className={isEditorial ? "mt-4 font-serif text-[41px] font-normal leading-[1.1] tracking-[-0.035em] text-slate-950 sm:text-[57px]" : "mt-3 text-4xl font-bold text-gray-950 sm:text-5xl"}>{post.title}</h1>
+        <p className={isEditorial ? "mt-6 text-[19px] leading-[1.65] text-slate-600 sm:text-[21px]" : "mt-5 text-lg leading-8 text-gray-600"}>{post.excerpt}</p>
         <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-500">
           <span>By <Link href="/about" className="font-semibold text-gray-800 hover:text-brand-700">James Cheng</Link></span>
           <time dateTime={post.date}>Published {new Date(`${post.date}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}</time>
@@ -106,7 +108,17 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
 
         {post.coverImage ? (
-          <figure className="mt-10">
+          <figure className={isEditorial && post.coverImage.mobileSrc ? "mt-11 2xl:relative 2xl:left-1/2 2xl:w-[min(92vw,1400px)] 2xl:-translate-x-1/2" : isEditorial ? "mt-11" : "mt-10"}>
+            {post.coverImage.mobileSrc ? (
+              <Image
+                src={post.coverImage.mobileSrc}
+                alt={post.coverImage.alt}
+                width={720}
+                height={1180}
+                sizes="(max-width: 1535px) 100vw, 0px"
+                className="block h-auto w-full rounded-md border border-stone-200 2xl:hidden"
+              />
+            ) : null}
             <Image
               src={post.coverImage.src}
               alt={post.coverImage.alt}
@@ -114,9 +126,9 @@ export default async function BlogPostPage({ params }: PageProps) {
               height={post.coverImage.height}
               sizes="(max-width: 896px) 100vw, 832px"
               priority
-              className="h-auto w-full rounded-md border border-gray-200"
+              className={post.coverImage.mobileSrc ? "hidden h-auto w-full rounded-md border border-gray-200 2xl:block" : "h-auto w-full rounded-md border border-gray-200"}
             />
-            <figcaption className="mt-3 text-sm leading-6 text-gray-500">{post.coverImage.caption}</figcaption>
+            <figcaption className={isEditorial ? "mx-auto mt-3 max-w-[760px] text-sm leading-6 text-gray-500" : "mt-3 text-sm leading-6 text-gray-500"}>{post.coverImage.caption}</figcaption>
           </figure>
         ) : !post.articleBody ? <Image
           src="/images/hero-factory-audit.png"
@@ -187,7 +199,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </section>
         ) : null}
 
-        {post.articleBody ? <ArticleBody blocks={post.articleBody} /> : null}
+        {post.articleBody ? (isEditorial ? <ArticleBody blocks={post.articleBody} editorial /> : <ArticleBody blocks={post.articleBody} />) : null}
 
         {post.sections.length > 0 ? <div className="mt-12 space-y-12 border-t border-gray-200 pt-12">
           {post.sections.map((section) => (
@@ -261,8 +273,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {post.references ? (
           <section className="mt-14 border-t border-gray-200 pt-12">
-            <p className="text-sm font-semibold uppercase text-brand-700">Standards context</p>
-            <h2 className="mt-3 text-3xl font-bold text-gray-950">{post.referencesHeading ?? "Official references for the project audit brief"}</h2>
+            <p className="text-sm font-semibold uppercase text-brand-700">{isEditorial ? "Reading notes" : "Standards context"}</p>
+            <h2 className={isEditorial ? "mt-3 font-serif text-[32px] font-normal text-slate-950" : "mt-3 text-3xl font-bold text-gray-950"}>{post.referencesHeading ?? "Official references for the project audit brief"}</h2>
             <p className="mt-4 max-w-3xl leading-7 text-gray-700">
               {post.referencesIntro ?? "These sources help define the audit questions, but the contract, approved drawings, project specification, destination rules, and current standard editions remain controlling."}
             </p>

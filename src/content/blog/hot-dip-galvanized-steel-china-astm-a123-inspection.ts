@@ -1,264 +1,177 @@
 import type { BlogPost } from "@/data/blog";
 
-// One-file editorial entry; keep this exact version tied to its research and review.
+// SourceRating editorial format: one clear procurement question, evidence-led narrative.
 export const hdgInspectionPost: BlogPost = {
   "slug": "hot-dip-galvanized-steel-china-astm-a123-inspection",
-  "title": "Buying Hot-Dip Galvanized Steel from China: What an ASTM A123 Quote Does Not Prove",
-  "seoTitle": "China Hot-Dip Galvanized Steel: ASTM A123 Inspection Checklist",
-  "excerpt": "ASTM A123 on a steel-fabrication quotation is a coating specification, not a shipment inspection record. Check product scope, sampling, zinc thickness, repairs and traceable lots before release.",
+  "title": "A Galvanizing Certificate Won’t Tell You Which Steel Was Tested",
+  "seoTitle": "Buying Hot-Dip Galvanized Steel from China? Follow the Inspection Lot",
+  "excerpt": "A coating-thickness reading may be right and still say little about the steel on your shipment. The missing link is often between the test record, the piece mark and the packing list.",
   "date": "2026-10-19",
   "category": "Industrial sourcing",
-  "readTime": "8 min read",
-  "directAnswer": "Do not approve fabricated galvanized steel solely because a supplier writes “ASTM A123” on its quote or issues a one-page certificate. Match the standard to each product, agree the inspection lot and acceptance method, and review traceable coating-thickness and repair records before shipment.",
-  "keyTakeaways": [
-    "Confirm that the specified galvanizing process fits the actual item: a fabricated frame, spun hardware, reinforcing bar and pre-galvanized sheet are not interchangeable categories.",
-    "Ask for piece and lot identity, representative thickness readings and the applicable acceptance basis—not one unlabeled gauge photo.",
-    "Resolve damaged or uncoated areas, approved repairs and protection during packing before release; a coating certificate is not a substitute for that evidence."
-  ],
+  "readTime": "6 min read",
   "sections": [],
   "articleBody": [
     {
       "type": "paragraph",
-      "text": "An overseas buyer receives two quotations for handrails, supports or other fabricated steel from China. Both say “hot-dip galvanized to ASTM A123.” One supplier is cheaper. The quotations may still describe different coating processes, inspection practices and release risks. The important comparison is not whether the abbreviation appears in the offer; it is whether the exact fabricated pieces can be shown to meet the governing project specification."
+      "text": "A photograph of a coating-thickness gauge can be surprisingly reassuring. There is a piece of steel, a probe and a number on the display. Add a certificate headed “ASTM A123” and the quality file begins to look complete."
     },
     {
       "type": "paragraph",
-      "text": "The checks below are a buyer-side evidence worksheet, not a claim that one country or supplier is more reliable. They also do not replace the project engineer's acceptance criteria or the purchased editions of the governing standards. Source descriptions and standard status were checked on 19 October 2026."
+      "text": "But what does that number tell you about the galvanized steel heading to your site? Not much, if nobody can tell you which piece was measured, which galvanizing lot it came from, and whether that lot is represented on the packing list."
+    },
+    {
+      "type": "paragraph",
+      "text": "This is not automatically evidence of a dishonest supplier. The reading may be genuine. The coating may be sound. The trouble is that a valid test result and evidence about *your order* are two different things. Buyers often discover that distinction only when the inspection report needs to support a shipment decision."
     },
     {
       "type": "heading",
-      "text": "1. First decide which galvanizing standard covers each item"
+      "text": "The missing question is usually a piece number"
     },
     {
       "type": "paragraph",
-      "text": "ASTM A123/A123M addresses zinc coatings on many iron and steel products, including structural fabrications galvanized as articles. That does not make it a universal standard for every item labeled “galvanized steel.” The [American Galvanizers Association's coating-specification guide](https://galvanizeit.org/specification-and-inspection/coating-specifications) distinguishes fabricated products from centrifuged small hardware and reinforcing bars. Its [process comparison](https://galvanizeit.org/knowledgebase/article/continuous-sheet-galvanizing-production-process) also distinguishes continuously galvanized sheet from after-fabrication batch dipping."
-    },
-    {
-      "type": "table",
-      "headers": [
-        "Item in the purchase",
-        "Scope question to settle before accepting a quotation"
-      ],
-      "rows": [
-        [
-          "Welded support, handrail or equipment frame",
-          "Is the complete article to be galvanized after fabrication under the agreed ASTM A123/A123M edition? Which connection surfaces and cavities need special treatment?"
-        ],
-        [
-          "Loose nuts, bolts, washers and small hardware",
-          "Does a hardware- or fastener-specific coating specification apply instead? ASTM A153/A153M is a common hot-dip hardware reference; the fastener specification and fit requirements still matter."
-        ],
-        [
-          "Individual reinforcing bars",
-          "Is the correct reinforcing-bar galvanizing specification required instead of treating these as ordinary fabricated structures?"
-        ],
-        [
-          "Pre-galvanized sheet or a roll-formed item",
-          "Was the feedstock coated on a continuous line, for example under the applicable ASTM A653/A653M product specification, rather than the finished assembly being batch galvanized?"
-        ],
-        [
-          "Destination project specifying ISO standards",
-          "Does the contract require ISO 1461:2022 or a national adoption? Confirm its scope and acceptance requirements instead of assuming it is automatically identical to ASTM A123."
-        ]
-      ]
+      "text": "Fabricated steel rarely arrives as one anonymous object. It has drawing revisions, assembly and piece marks, quantities, sometimes several material thicknesses, and a packing sequence. Galvanizing may be carried out by a company other than the fabricator. By the time a report reaches the purchaser, each of those handoffs can have stripped away a little context."
     },
     {
       "type": "paragraph",
-      "text": "For an international tender, record the *standard, edition, product class, process and responsible party* on the approved purchase specification. The [ISO 1461:2022 scope](https://www.iso.org/standard/81435.html) explicitly addresses batch hot-dip galvanized fabricated iron and steel articles and excludes certain continuously coated products and products governed by particular standards. A generic claim of “ASTM/ISO compliance” without identifying the specific deliverables is too broad to test."
+      "text": "The useful trail starts with the approved drawing and piece-mark register. Those identifiers must remain understandable when the fabrication moves to the galvanizer, when an inspection lot is defined and when the finished pieces are bundled for dispatch. A lot number written on a certificate is useful only when someone can show what that lot represents."
+    },
+    {
+      "type": "paragraph",
+      "text": "That is the point of the illustration above. It is not a demand to test every piece. It is a demand to preserve the relationship between the pieces being sold and the samples chosen to represent them."
     },
     {
       "type": "heading",
-      "text": "2. Agree the fabrication and galvanizing boundary before manufacturing"
+      "text": "A coating standard does not organize the whole purchase for you"
     },
     {
       "type": "paragraph",
-      "text": "A coating certificate cannot resolve an unapproved drawing revision, incomplete welding, incorrect hole size or a frame that cannot be dipped as designed. Freeze the fabrication drawing and bill of materials; identify the fabricator and galvanizer; and mark whether cutting, welding, drilling or thread work occurs before or after dipping. If post-galvanizing operations will disturb the coating, agree in advance how those areas will be addressed."
+      "text": "[ASTM A123/A123M-24](https://store.astm.org/a0123_a0123m-24.html) is a real and useful specification. Its scope includes hot-dip zinc coatings on structural steel fabrications and other relevant iron and steel products. It is not a magic sentence that settles the fabrication drawings, traceability, packaging, and commercial responsibilities of an overseas order."
     },
     {
       "type": "paragraph",
-      "text": "Hollow sections, enclosed volumes and overlapping plates also demand design review for proper venting, drainage and safe processing. The [AGA's design guidance](https://galvanizeit.org/education-and-resources/publications/the-design-of-products-to-be-hot-dip-galvanized-after-fabrication) discusses venting, draining, welding and mixed materials. The owner’s engineer and the galvanizer should agree the actual details; a buyer should not prescribe vent-hole sizes from a generic website diagram."
+      "text": "Nor should “galvanized” be treated as one product category. Welded frames galvanized after fabrication, continuously coated sheet, and loose small hardware can fall under different product standards and inspection rules. An international project that calls for [ISO 1461:2022](https://www.iso.org/standard/81435.html) should be reviewed against that standard's scope and requirements; it is not safe to assume the ASTM and ISO specifications are automatically interchangeable."
+    },
+    {
+      "type": "paragraph",
+      "text": "The contract needs to say which item is being coated, by which process, to which agreed standard and edition, and who is responsible for supplying evidence. Otherwise two quotations that display the same standard number can conceal quite different deliverables."
     },
     {
       "type": "heading",
-      "text": "3. Ask for a coating-thickness record, not a photograph of a gauge"
+      "text": "One good gauge reading is not a batch result"
     },
     {
       "type": "paragraph",
-      "text": "Coating thickness is measured on representative locations and assessed using the sampling and averaging rules of the governing specification. The applicable requirement depends on product category and steel thickness: there is no responsible single minimum thickness to copy into every steel quotation. A lone meter reading without a part ID, measurement location or inspection-lot definition cannot establish batch compliance. The AGA describes [sampling by lot](https://galvanizeit.org/specification-and-inspection/inspection-of-hdg/types-of-inspection/sampling) and [magnetic thickness measurement](https://galvanizeit.org/knowledgebase/article/measuring-zinc-coating-thickness-of-hot-dip-galvanized-steel)."
-    },
-    {
-      "type": "list",
-      "ordered": true,
-      "items": [
-        "Have the supplier identify the galvanizing lot, dates, individual sample pieces, quantity represented and link to the approved drawing or piece-mark list.",
-        "Request the coating-thickness instrument type and calibration or verification information, together with the actual readings, locations and calculated results under the agreed inspection plan.",
-        "Show which standard edition, material category, thickness range and acceptance table or contractual requirement the inspector applied. Do not substitute a sales brochure's generic micrometre target.",
-        "Record the inspector, inspection date, exceptions, reinspection and release status. If an independent third-party inspection was ordered, identify precisely what that inspector witnessed or checked."
-      ]
+      "text": "A coating-thickness inspection does not normally mean putting a gauge on every component. As the [American Galvanizers Association explains](https://galvanizeit.org/specification-and-inspection/inspection-of-hdg/types-of-inspection/sampling), representative specimens are selected from an inspection lot under the applicable specification. The number of pieces and the treatment of large or mixed-thickness fabrications matter. The inspection plan should identify the relevant requirements, not invent a universal micrometre target."
     },
     {
       "type": "paragraph",
-      "text": "For a large fabricated assembly, the inspection plan must also address how distinct steel thicknesses and component types are represented. A measurement on a convenient flat plate is not automatically evidence for every welded item in the truck. Ask for a method statement and a lot-to-piece mapping before selecting independent inspection samples."
-    },
-    {
-      "type": "heading",
-      "text": "4. Separate coating appearance, actual defects and authorized repairs"
+      "text": "A lone reading on a convenient flat surface may be entirely accurate. It still cannot, by itself, explain the results for a fabricated assembly with several member types. The better request is for the actual sampled piece marks, measurement locations, instrument details, the reported readings and the acceptance basis used by the inspector."
     },
     {
       "type": "paragraph",
-      "text": "Visual examination should look for bare or damaged zones, heavy zinc accumulations at functional interfaces, unsafe sharp projections and damage created by handling. Not every colour difference or superficial deposit proves a failed coating. For example, the AGA explains that [wet-storage stain](https://galvanizeit.org/education-and-resources/publications/wet-storage-stain) can develop when moisture is trapped between stored galvanized pieces. The appropriate response depends on extent, remaining coating, project requirements and exposure—not simply whether photographs look uniformly silver."
-    },
-    {
-      "type": "paragraph",
-      "text": "For a bare or damaged area, request its piece mark, location, measured extent, likely cause, proposed method, before/after photographs and inspection sign-off. ASTM A780/A780M describes repair methods for damaged or uncoated hot-dip galvanized coatings, but reference to that practice does not mean unlimited repair is acceptable: allowable extent and acceptance remain subject to the governing product specification and contract. A zinc-rich paint touch-up cannot be silently treated as proof that a complete article was hot-dip galvanized."
-    },
-    {
-      "type": "heading",
-      "text": "5. Tie the inspection result to the actual shipment"
-    },
-    {
-      "type": "paragraph",
-      "text": "A technically correct test report is less useful if it cannot be connected to the loaded steel. Before loading, reconcile piece marks, bundle tags, packing list, galvanizer lot identifiers and inspection exceptions. Confirm how pieces are separated and drained for transport, what will protect finished surfaces, and which parts need extra safeguards against rubbing or trapped moisture. Keep a dated photo record of the actual released bundles; staged catalogue photos are not shipment evidence."
-    },
-    {
-      "type": "paragraph",
-      "text": "The buyer should also compare the true commercial scope: fabrication, transport to and from the galvanizer, process suitability for large components, accepted touch-ups, any required rework, packaging, inspection fees, schedule and delivered cost. The lowest quote is not necessarily cheaper if missing details surface after loading or at the destination site."
-    },
-    {
-      "type": "heading",
-      "text": "6. A compact release-evidence request to send with the RFQ"
-    },
-    {
-      "type": "table",
-      "headers": [
-        "Evidence requested",
-        "What the buyer should be able to verify"
-      ],
-      "rows": [
-        [
-          "Approved drawing and coating schedule",
-          "Drawing revision, piece marks, product category, agreed standard/edition and what is galvanized after fabrication."
-        ],
-        [
-          "Fabricator/galvanizer responsibility",
-          "Which legal or operating entity fabricates, dips, inspects, repairs and issues the final declaration."
-        ],
-        [
-          "Lot and inspection method",
-          "Lot definition, sampling basis, gauge information, raw thickness readings, applicable acceptance basis and named inspector."
-        ],
-        [
-          "Nonconformity and repair record",
-          "Location and extent of any issue, approval of repair approach, finished result and whether the affected item was rechecked."
-        ],
-        [
-          "Shipment reconciliation",
-          "Piece-mark register, bundle/packing list, release photographs and a clear link back to the inspected lot."
-        ]
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "A practical RFQ sentence is: “Please quote galvanizing for the identified fabricated articles to the coating specification and edition in our approved schedule. Before dispatch, supply the lot-to-piece register, the agreed sampling and thickness inspection report, and the register of exceptions and approved repairs. Show any alternative process or standard as a separately identified deviation.” This is a suggested procurement control, not verbatim wording from any standard."
-    },
-    {
-      "type": "heading",
-      "text": "When to proceed, hold or reject"
+      "text": "For a buyer, a compact file should answer four questions without a lengthy email exchange:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**Proceed** when the item scope and standard match the contract, the inspected pieces match the intended shipment, coating evidence meets the agreed acceptance plan, and outstanding exceptions have been closed.",
-        "**Hold** when the quote identifies the right process but sampling, lot traceability, galvanizer details or repair approvals are missing; the supplier may be able to close these gaps without replacing the order.",
-        "**Reject or require rework** when a material nonconformity is established and cannot be resolved under the project requirements. Escalate suspected fabricated inspection records rather than treating a substitute certificate as acceptable."
+        "**Which pieces?** The approved revision, piece marks and quantities represented by the galvanizing lot.",
+        "**Which test?** The chosen samples, locations, gauge or method, readings and standard-specific acceptance basis.",
+        "**Which exceptions?** Bare areas, handling damage or repairs, with locations, agreed disposition and reinspection where required.",
+        "**Which shipment?** Packing list and released bundle identifiers that reconcile to the inspected pieces."
       ]
     },
     {
       "type": "paragraph",
-      "text": "The buyer's strongest position is to define the evidence before placing the purchase order. “ASTM A123” on its own is a starting specification reference. A defensible shipment release connects the specified process, real fabricated articles, representative test results, authorized exceptions and actual loaded bundles."
+      "text": "That record is more helpful than a pile of unlabelled photographs. It also makes an independent inspection easier to scope: an inspector can check the right specimens and the right release documents, rather than simply witness a few attractive readings."
+    },
+    {
+      "type": "heading",
+      "text": "The steel itself may complicate an otherwise neat certificate"
     },
     {
       "type": "paragraph",
-      "text": "If you are preparing an RFQ for fabricated galvanized steel, [send the product scope and the inspection question](https://www.sourcerating.com/contact), or [start a supplier risk screen](https://www.sourcerating.com/risk-screen). Include the destination, drawing revision and coating specification so any follow-up can focus on the evidence that matters for your order."
-    }
-  ],
-  "faqs": [
-    {
-      "question": "Does an ASTM A123 certificate alone prove that all fabricated steel has passed inspection?",
-      "answer": "No. It may declare conformity, but the buyer should check how the declaration relates to the ordered articles, applicable acceptance criteria, inspected lot and test records. Contract requirements may require more than a statement."
+      "text": "Galvanizing happens to a physical fabrication, not a line on a quotation. Hollow members and enclosed spaces need suitable venting and drainage. Welding or drilling after galvanizing can disturb the coating. The [AGA design guide](https://galvanizeit.org/education-and-resources/publications/the-design-of-products-to-be-hot-dip-galvanized-after-fabrication) addresses these practical interfaces between designer, fabricator and galvanizer. The particular details belong to the responsible engineer and galvanizer, not to generic hole-size advice copied from an article."
     },
     {
-      "question": "Is ISO 1461:2022 automatically equivalent to ASTM A123/A123M?",
-      "answer": "No. Both address certain batch hot-dip galvanized fabricated steel products, but scope, sampling and acceptance details must be compared for the contract. Use the exact agreed edition and obtain project-specific approval for a substitution."
+      "type": "paragraph",
+      "text": "The same care is needed with repairs. [ASTM A780/A780M-20](https://store.astm.org/a0780_a0780m-20.html) describes methods for repairing damaged or uncoated areas, but the accepted extent and method must fit the applicable product specification and the contracting parties' agreement. A touch-up photograph should identify the affected piece and the reason for the work; it should not silently replace the coating inspection record."
     },
     {
-      "question": "Can damaged galvanized areas always be repaired with zinc-rich paint?",
-      "answer": "No. ASTM A780/A780M covers recognized repair practices, but acceptable repair area, preparation, method, thickness and approval depend on the governing specification and the purchase contract."
+      "type": "paragraph",
+      "text": "Appearance deserves context too. Colour variation does not automatically mean a failure, while bare zones or mechanical damage need more than a reassuring overall shot. The question is what is actually on the steel, where it is, and whether the ordered acceptance requirements have been met."
+    },
+    {
+      "type": "heading",
+      "text": "Ask for the trail before the truck is loaded"
+    },
+    {
+      "type": "paragraph",
+      "text": "These are easier questions to settle in the RFQ or purchase order than after the shipment is packed. A short requirement can do useful work: *Before dispatch, provide the approved piece-mark register, a galvanizing-lot-to-piece mapping, the representative coating inspection results, the disposition of any repairs, and a packing list reconciled to the released material.*"
+    },
+    {
+      "type": "paragraph",
+      "text": "There is no need to demand dozens of decorative certificates. Ask for the handful of records that connect the steel specified, the steel tested and the steel being shipped. If the supplier can make that connection clearly, a buyer has a much stronger basis for discussing acceptance. If not, another screenshot of a thickness gauge will not solve the problem."
+    },
+    {
+      "type": "paragraph",
+      "text": "For related questions, see our [guide to mill certificates and heat-number traceability](https://www.sourcerating.com/blog/how-to-verify-mill-test-certificates-and-heat-number-traceability-before-steel-shipment). If you need help framing a specific document request, [send the drawing revision and inspection issue](https://www.sourcerating.com/contact)."
     }
   ],
-  "referencesHeading": "Technical references and scope limits",
-  "referencesIntro": "ASTM and ISO identify the relevant standards; AGA is an industry association offering explanatory guidance rather than a substitute for the complete standards or project specifications. Public source pages were checked on 19 October 2026. The final acceptance criteria must follow the contractually adopted editions and the project's responsible engineer.",
+  "referencesHeading": "Source notes",
+  "referencesIntro": "These sources explain the applicable technical framework; they are not evidence that any particular shipment passed inspection. The governing contract and purchased standard editions control acceptance. Sources checked 19 October 2026.",
   "references": [
     {
-      "title": "ASTM A123/A123M-24: Zinc (Hot-Dip Galvanized) Coatings on Iron and Steel Products",
-      "publisher": "ASTM International, official standard catalog",
+      "title": "ASTM A123/A123M-24 — scope of batch hot-dip zinc coating on iron and steel products",
+      "publisher": "ASTM International",
       "href": "https://store.astm.org/a0123_a0123m-24.html",
-      "note": "Official standard identity and scope; not a public inspection certificate or permission to reproduce the standard's requirements."
+      "note": "Official scope for fabricated steel and other covered products; the published page does not substitute for the complete acceptance tables."
     },
     {
-      "title": "ASTM A780/A780M-20: Repair of Damaged and Uncoated Hot-Dip Galvanized Coatings",
-      "publisher": "ASTM International, official standard catalog",
-      "href": "https://store.astm.org/a0780_a0780m-20.html",
-      "note": "Identifies recognized repair-practice scope; product-standard and purchase-order limits still control."
-    },
-    {
-      "title": "ISO 1461:2022: Hot Dip Galvanized Coatings on Fabricated Iron and Steel Articles",
-      "publisher": "International Organization for Standardization",
-      "href": "https://www.iso.org/standard/81435.html",
-      "note": "International standard scope and explicit exclusions. Does not establish automatic equivalence to ASTM."
-    },
-    {
-      "title": "HDG Coating Specifications",
-      "publisher": "American Galvanizers Association",
-      "href": "https://galvanizeit.org/specification-and-inspection/coating-specifications",
-      "note": "Industry explanation of differences among fabricated articles, centrifuged hardware and reinforcing bars."
-    },
-    {
-      "title": "Sampling for HDG Inspection",
+      "title": "Sampling for hot-dip galvanized coating inspection",
       "publisher": "American Galvanizers Association",
       "href": "https://galvanizeit.org/specification-and-inspection/inspection-of-hdg/types-of-inspection/sampling",
-      "note": "Explains representative lot sampling rather than relying on one isolated measurement."
+      "note": "Explains representative lot inspection and multi-specimen issues, not a complete project inspection plan."
+    },
+    {
+      "title": "ISO 1461:2022 — scope and exclusions",
+      "publisher": "International Organization for Standardization",
+      "href": "https://www.iso.org/standard/81435.html",
+      "note": "Identifies covered fabricated items and exclusions; not an assertion of equivalence to ASTM A123."
     },
     {
       "title": "Design of Products to be Hot-Dip Galvanized After Fabrication",
       "publisher": "American Galvanizers Association",
       "href": "https://galvanizeit.org/education-and-resources/publications/the-design-of-products-to-be-hot-dip-galvanized-after-fabrication",
-      "note": "Engineering overview of design, venting, drainage and fabrication concerns."
+      "note": "Industry guidance on fabrication, venting, drainage and coordinated design; not a job-specific venting design."
     },
     {
-      "title": "Continuous Sheet Galvanizing vs Batch Hot-Dip Galvanizing",
-      "publisher": "American Galvanizers Association",
-      "href": "https://galvanizeit.org/knowledgebase/article/continuous-sheet-galvanizing-production-process",
-      "note": "Explains process differences; do not infer product-specific thickness limits from a general overview."
-    },
-    {
-      "title": "Wet Storage Stain",
-      "publisher": "American Galvanizers Association",
-      "href": "https://galvanizeit.org/education-and-resources/publications/wet-storage-stain",
-      "note": "Describes moisture-related surface deposits, an appearance issue requiring context rather than automatic rejection."
+      "title": "ASTM A780/A780M-20 — repair of damaged and uncoated areas",
+      "publisher": "ASTM International",
+      "href": "https://store.astm.org/a0780_a0780m-20.html",
+      "note": "Official repair-practice scope; allowable extent and method still require project and contract agreement."
     }
   ],
   "relatedLinks": [
     {
-      "title": "Verify MTCs and heat-number traceability",
+      "title": "Mill test certificates and heat-number traceability",
       "href": "/blog/how-to-verify-mill-test-certificates-and-heat-number-traceability-before-steel-shipment",
-      "description": "Follow steel-material identity from mill records through fabrication and shipment."
+      "description": "Another place where a valid document must be connected to the delivered steel."
     },
     {
-      "title": "Compare industrial supplier quotes on equivalent scope",
+      "title": "Compare quotes on genuinely equivalent scope",
       "href": "/blog/compare-industrial-supplier-quotes-like-for-like",
-      "description": "Check specifications, exclusions, total cost and vendor responsibilities before award."
+      "description": "Separate price differences from specification and responsibility gaps."
     }
-  ]
+  ],
+  "dateModified": "2026-10-19",
+  "layout": "editorial",
+  "coverImage": {
+    "src": "/images/blog/hdg-traceability-editorial-20261019.svg",
+    "mobileSrc": "/images/blog/hdg-traceability-mobile-20261019.svg",
+    "width": 1600,
+    "height": 900,
+    "alt": "Editorial diagram linking approved drawing and piece marks to galvanizing lot, representative coating measurements, and packing register.",
+    "caption": "The four links a buyer should be able to follow. Original editorial illustration, not a photograph or record of an actual order."
+  }
 };

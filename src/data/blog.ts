@@ -4,6 +4,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   seoTitle?: string;
+  layout?: "editorial" | "guide";
   excerpt: string;
   date: string;
   dateModified?: string;
@@ -11,6 +12,7 @@ export interface BlogPost {
   readTime: string;
   coverImage?: {
     src: string;
+    mobileSrc?: string;
     width: number;
     height: number;
     alt: string;
