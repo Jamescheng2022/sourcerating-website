@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { missingDeployedText, normalizeVisibleArticleText } from "./check-editorial-publication.mjs";
+import { createHash } from "node:crypto";
+import { missingDeployedText, normalizeVisibleArticleText, hasMatchingPublicationDigest } from "./check-editorial-publication.mjs";
 
 const article = {
   slug: "galvanized-inspection",
@@ -93,4 +94,42 @@ test("outdated image caption fails despite unchanged hero URL and article body",
   assert.deepEqual(missingDeployedText(correct, latest), []);
   const stale = correct.replace("conceptual illustration", "documentary photograph");
   assert.ok(missingDeployedText(stale, latest).some(x => x.includes("conceptual illustration")));
+});
+
+test("exact source digest rejects changed reference URLs and short table values", () => {
+  const baseline = {
+    ...article,
+    references: [{ title: "Reference", publisher: "Standards body",
+      href: "https://example.org/old-version", note: "Example technical scope note." }],
+    articleBody: [...article.articleBody, { type: "table",
+      headers: ["Part", "Result"], rows: [["Lot-A", "85"]] }]
+  };
+  const withDigest = (post) => {
+    const digest = createHash("sha256").update(JSON.stringify(post)).digest("hex");
+    return rendered.replace("<article class=\"prose\">",
+      "<article class=\"prose\" data-publication-sha256=\"" + digest + "\">");
+  };
+  const oldPage = withDigest(baseline);
+  assert.equal(hasMatchingPublicationDigest(oldPage, baseline), true);
+
+  const newReference = { ...baseline, references: [
+    { ...baseline.references[0], href: "https://example.org/corrected-version" }
+  ] };
+  const newTable = { ...baseline, articleBody: [
+    ...baseline.articleBody.slice(0, -1), { type: "table",
+      headers: ["Part", "Result"], rows: [["Lot-A", "80"]] }
+  ] };
+  assert.equal(hasMatchingPublicationDigest(oldPage, newReference), false);
+  assert.equal(hasMatchingPublicationDigest(oldPage, newTable), false);
+  assert.equal(hasMatchingPublicationDigest(rendered, baseline), false);
+});
+
+test("source digest rejects image revisions under an unchanged public filename", () => {
+  const a = { ...article, coverImage: { src: "/images/blog/hero.jpg", caption: "Old attribution" } };
+  const b = { ...article, coverImage: { src: "/images/blog/hero.jpg", caption: "New attribution" } };
+  const oldDigest = createHash("sha256").update(JSON.stringify(a)).digest("hex");
+  const oldHtml = rendered.replace("<article class=\"prose\">",
+    "<article class=\"prose\" data-publication-sha256=\"" + oldDigest + "\">");
+  assert.equal(hasMatchingPublicationDigest(oldHtml, a), true);
+  assert.equal(hasMatchingPublicationDigest(oldHtml, b), false);
 });
