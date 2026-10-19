@@ -78,6 +78,7 @@ Run deterministic source and image checks before PR merge:
 ```bash
 npm ci
 npm run check:publication
+npm run test:publication
 node scripts/check-editorial-publication.mjs --slug ARTICLE_SLUG
 npm run build
 ```
