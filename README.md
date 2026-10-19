@@ -1,6 +1,6 @@
 # Source Rating — China Factory Inspection & Industrial Sourcing
 
-Professional service website for [www.sourcerating.com](https://www.sourcerating.com). Built with Next.js 15, Tailwind CSS, and TypeScript. Deployed on Vercel.
+Professional service website for [www.sourcerating.com](https://www.sourcerating.com). Built with Next.js 16, Tailwind CSS, and TypeScript. Deployed on Vercel.
 
 ## Quick Start
 
@@ -64,8 +64,31 @@ src/
 │   └── ui/               # SectionHeading
 ├── data/                 # All content: services, industries, case studies, FAQ, site config
 ├── lib/                  # Utils (cn) + SEO metadata generators
-└── content/blog/         # Add MDX blog posts here
+└── content/blog/         # Typed article files; import them from src/data/blog.ts
 ```
+
+## Publish professional articles
+
+Website publishing is governed by the versioned **[SourceRating Publishing Skill](.agents/skills/sourcerating-publish/SKILL.md)**, alongside the [editorial standard](docs/editorial/SOURCERATING_EDITORIAL_STANDARD.md).
+
+This is a GitHub/Vercel release procedure, not a second scheduled task. Current website routes read the `blogPosts` registry in `src/data/blog.ts`; **uploading a Markdown file into `src/content/blog` alone does not publish an article.**
+
+Run deterministic source and image checks before PR merge:
+
+```bash
+npm ci
+npm run check:publication
+node scripts/check-editorial-publication.mjs --slug ARTICLE_SLUG
+npm run build
+```
+
+After the reviewed PR is merged and Vercel reports the matching **production** commit READY, verify the actual public page, cover, mobile diagrams, index and sitemap:
+
+```bash
+node scripts/check-editorial-publication.mjs --slug ARTICLE_SLUG --live --origin https://www.sourcerating.com
+```
+
+GitHub Actions runs the source preflight and Next build for publication-related PRs. Passing those checks does not replace independent editorial/factual review or production HTTP readback. Keep LinkedIn artwork/drafts separate from claims about an actually published LinkedIn post.
 
 ## Content Editing
 
