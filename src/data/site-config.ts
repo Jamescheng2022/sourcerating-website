@@ -1,27 +1,27 @@
 export const siteConfig = {
   name: "Source Rating",
-  tagline: "Engineering Supplier Verification & Procurement Support",
+  tagline: "Industrial Sourcing Research & Field Notes",
   domain: "www.sourcerating.com",
   url: "https://www.sourcerating.com",
   description:
-    "Thailand-based buyer-side supplier verification, factory audits, inspection, and engineering procurement support across China, Vietnam, and Southeast Asia.",
+    "Original industrial sourcing articles, technical context and buyer field notes, alongside supplier verification and procurement support.",
   author: "James Cheng",
   locale: "en_US",
   contact: { email: "contact@sourcerating.com", wechat: "SourceRating" },
   social: { linkedin: "https://www.linkedin.com/in/hcrdi" },
   nav: [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
+    { label: "Articles", href: "/blog" },
     { label: "Buyer Guides", href: "/buyer-decisions" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Playbook", href: "/playbook" },
+    { label: "Membership", href: "/membership" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
   footer: {
     tagline:
-      "Buyer-side supplier verification, factory audits, and engineering procurement support across China, Vietnam, and Southeast Asia.",
+      "Industrial sourcing, in context. Original articles and practical questions for the people behind a purchase.",
     quickLinks: [
+      { label: "Articles", href: "/blog" },
+      { label: "Membership", href: "/membership" },
       { label: "Services", href: "/services" },
       { label: "Buyer Guides", href: "/buyer-decisions" },
       { label: "Pricing", href: "/pricing" },

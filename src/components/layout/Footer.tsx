@@ -13,7 +13,7 @@ export function Footer() {
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">{siteConfig.footer.tagline}</p>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-white uppercase mb-4">Quick Links</h4>
+            <h4 className="text-sm font-semibold text-white uppercase mb-4">Explore</h4>
             <ul className="space-y-3">{siteConfig.footer.quickLinks.map((link) => (<li key={link.href}><Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">{link.label}</Link></li>))}</ul>
           </div>
           <div>
