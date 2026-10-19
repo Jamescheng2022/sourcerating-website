@@ -100,7 +100,7 @@ async function main() {
   }
   check('absolute custom image URL remains absolute',()=>assert.equal(metadata.generatePageMetadata({title:'x',description:'y',path:'/x',ogImage:{src:'https://cdn.example.com/a.jpg',width:400,height:300,alt:'a'}}).openGraph.images[0].url,'https://cdn.example.com/a.jpg'));
   const list=after('src/app/blog/page.tsx').default();
-  check('blog index presents every registered cover and does not drop cards',()=>{const imgs=nodes(list,n=>n.type==='Image');const coverPaths=data.filter(x=>x.coverImage).map(x=>x.coverImage.src);assert.deepEqual(plain(imgs.map(x=>x.props.src)),coverPaths);assert.equal(nodes(list,n=>n.type==='article').length,data.length);});
+  check('blog index presents every registered cover and does not drop cards',()=>{const imgs=nodes(list,n=>n.type==='Image');const coverPaths=data.filter(x=>x.coverImage).map(x=>x.coverImage.src);assert.deepEqual(plain(imgs.map(x=>x.props.src)),plain(coverPaths));assert.equal(nodes(list,n=>n.type==='article').length,data.length);});
   check('homepage Git content unchanged (checkout CRLF normalized)',()=>assert.equal(fs.readFileSync(path.join(root,'src/app/page.tsx'),'utf8').replace(/\r\n/g,'\n'),original('src/app/page.tsx').toString('utf8')));
   const puOldTree=await oldPage.default(input);
   check('PU CTA links unchanged',()=>assert.deepEqual(plain(nodes(tree,n=>n.type==='TrackedLink')),plain(nodes(puOldTree,n=>n.type==='TrackedLink'))));
