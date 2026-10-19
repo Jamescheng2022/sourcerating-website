@@ -29,6 +29,7 @@ function loader(baseline) {
     const compiledModule = {exports:{}};
     cache.set(file,compiledModule.exports);
     function requireStub(id) {
+      if (id==='node:crypto') return {createHash:crypto.createHash};
       if (id==='react/jsx-runtime') return {jsx:(type,props,key)=>({type,props,key}),jsxs:(type,props,key)=>({type,props,key}),Fragment:'fragment'};
       if (id==='next/image') return {__esModule:true,default:'Image'};
       if (id==='next/link') return {__esModule:true,default:'Link'};
@@ -56,6 +57,7 @@ async function main() {
   const data = after('src/data/blog.ts').blogPosts;
   const puSlug = 'polyurethane-screen-panels-china-vs-local';
   const pu = data.find(x=>x.slug===puSlug);
+  const hdg = data.find(x=>x.slug==='hot-dip-galvanized-steel-china-astm-a123-inspection');
   const oldPage = before('src/app/blog/[slug]/page.tsx');
   const page = after('src/app/blog/[slug]/page.tsx');
   const metadata = after('src/lib/metadata.ts');
@@ -65,7 +67,7 @@ async function main() {
   const tree = await page.default(input);
   const url = 'https://www.sourcerating.com/images/blog/polyurethane-screen-panels-inspection-v2.jpg';
   const caption = 'AI-generated editorial image; not a photograph of a specific supplier or installation.';
-  check('only PU and the new editorial guide receive explicit covers',()=>assert.deepEqual(plain(data.filter(x=>x.coverImage).map(x=>x.slug)),['hot-dip-galvanized-steel-china-astm-a123-inspection',puSlug]));
+  check('the original PU and HDG articles retain their intended covers',()=>{assert.ok(pu?.coverImage);assert.ok(hdg?.coverImage);assert.equal(hdg.coverImage.src,'/images/blog/hdg-inspection-editorial-photo-20261019.avif');});
   check('PU body and editorial content unchanged',()=>{const rest=plain(pu);delete rest.coverImage;assert.deepEqual(rest,plain(oldData.find(x=>x.slug===puSlug)));});
   check('PU OG absolute URL, real dimensions and alt',()=>assert.deepEqual(meta.openGraph.images,[{url,width:1600,height:900,alt:pu.coverImage.alt}]));
   check('PU Twitter matches OG image descriptor',()=>assert.deepEqual(meta.twitter.images,meta.openGraph.images));
@@ -78,27 +80,27 @@ async function main() {
   check('cover intrinsic dimensions/alt and responsive height',()=>{const p=covers[0].props;assert.equal(p.width,1600);assert.equal(p.height,900);assert.equal(p.alt,pu.coverImage.alt);assert.match(p.className,/h-auto w-full/);assert.ok(p.sizes);});
   check('AI caption visibly follows cover',()=>assert.equal(nodes(tree,n=>n.type==='figcaption')[0].props.children,caption));
   const added = data.filter(x => !oldData.some(prev => prev.slug === x.slug));
-  check('only the HDG guide is newly registered',()=>assert.deepEqual(plain(added.map(x=>x.slug)),['hot-dip-galvanized-steel-china-astm-a123-inspection']));
-  check('new editorial guide has the actual hero photo and two responsive diagrams',()=>{const p=added[0];assert.equal(p.layout,'editorial');assert.ok(p.articleBody.length>=18);assert.ok(p.references.length>=5);assert.ok(p.coverImage.src.endsWith('.avif'));assert.equal(p.coverImage.mobileSrc,undefined);assert.ok(fs.existsSync(path.join(root,'public',p.coverImage.src)));const graphic=p.articleBody.find(x=>x.type==='illustration');assert.ok(graphic);assert.ok(graphic.mobileSrc.endsWith('.svg'));assert.ok(fs.existsSync(path.join(root,'public',graphic.src)));assert.ok(fs.existsSync(path.join(root,'public',graphic.mobileSrc)));});
-  const editorialInput={params:Promise.resolve({slug:added[0].slug})};
+  check('the HDG editorial sample remains registered after future posts are added',()=>assert.ok(hdg && added.some(x=>x.slug===hdg.slug)));
+  check('HDG editorial sample has photo and responsive diagrams',()=>{const p=hdg;assert.equal(p.layout,'editorial');assert.ok(p.articleBody.length>=18);assert.ok(p.references.length>=5);assert.ok(p.coverImage.src.endsWith('.avif'));assert.equal(p.coverImage.mobileSrc,undefined);assert.ok(fs.existsSync(path.join(root,'public',p.coverImage.src)));const graphic=p.articleBody.find(x=>x.type==='illustration');assert.ok(graphic);assert.ok(graphic.mobileSrc.endsWith('.svg'));assert.ok(fs.existsSync(path.join(root,'public',graphic.src)));assert.ok(fs.existsSync(path.join(root,'public',graphic.mobileSrc)));});
+  const editorialInput={params:Promise.resolve({slug:hdg.slug})};
   const editorialMeta=plain(await page.generateMetadata(editorialInput));
   const editorialTree=await page.default(editorialInput);
   check('social preview uses a raster fallback instead of an SVG',()=>assert.ok(editorialMeta.openGraph.images[0].url.endsWith('.png')));
-  check('editorial page displays photo hero and passes inline diagram through ArticleBody',()=>{const variants=nodes(editorialTree,n=>n.type==='Image');assert.equal(variants.length,1);assert.equal(variants[0].props.src,added[0].coverImage.src);assert.equal(variants[0].props.alt,added[0].coverImage.alt);const body=nodes(editorialTree,n=>n.type==='ArticleBody');assert.equal(body.length,1);assert.ok(body[0].props.blocks.some(x=>x.type==='illustration'&&x.mobileSrc&&x.src));});
+  check('editorial page displays photo hero and passes inline diagram through ArticleBody',()=>{const variants=nodes(editorialTree,n=>n.type==='Image');assert.equal(variants.length,1);assert.equal(variants[0].props.src,hdg.coverImage.src);assert.equal(variants[0].props.alt,hdg.coverImage.alt);const body=nodes(editorialTree,n=>n.type==='ArticleBody');assert.equal(body.length,1);assert.ok(body[0].props.blocks.some(x=>x.type==='illustration'&&x.mobileSrc&&x.src));});
   const legacy = oldData.filter(x=>x.slug!==puSlug);
   for (const post of legacy) {
     const params={params:Promise.resolve({slug:post.slug})};
     const oldPost=oldData.find(x=>x.slug===post.slug);
     const actualTree=await page.default(params), expectedTree=await oldPage.default(params);
     const actualMeta=await page.generateMetadata(params), expectedMeta=await oldPage.generateMetadata(params);
-    check(`legacy regression: ${post.slug}`,()=>{assert.deepEqual(plain(post),plain(oldPost));assert.deepEqual(plain(actualMeta),plain(expectedMeta));assert.deepEqual(plain(actualTree),plain(expectedTree));});
+    check(`legacy regression: ${post.slug}`,()=>{assert.deepEqual(plain(post),plain(oldPost));assert.deepEqual(plain(actualMeta),plain(expectedMeta));const withProof=plain(actualTree);assert.equal(withProof.props['data-publication-sha256'],crypto.createHash('sha256').update(JSON.stringify(post)).digest('hex'));delete withProof.props['data-publication-sha256'];assert.deepEqual(withProof,plain(expectedTree));});
   }
   for (const ogImage of [undefined,'/custom.jpg']) {
     check(`metadata fallback unchanged: ${ogImage??'default'}`,()=>{const args={title:'Home',description:'test',path:'/',ogImage};assert.deepEqual(plain(metadata.generatePageMetadata(args)),plain(oldMetadata.generatePageMetadata(args)));});
   }
   check('absolute custom image URL remains absolute',()=>assert.equal(metadata.generatePageMetadata({title:'x',description:'y',path:'/x',ogImage:{src:'https://cdn.example.com/a.jpg',width:400,height:300,alt:'a'}}).openGraph.images[0].url,'https://cdn.example.com/a.jpg'));
   const list=after('src/app/blog/page.tsx').default();
-  check('list shows the two intended covers without altering other cards',()=>{const imgs=nodes(list,n=>n.type==='Image');assert.equal(imgs.length,2);assert.equal(imgs[0].props.src,added[0].coverImage.src);assert.equal(imgs[1].props.src,pu.coverImage.src);assert.equal(nodes(list,n=>n.type==='article').length,data.length);});
+  check('blog index presents every registered cover and does not drop cards',()=>{const imgs=nodes(list,n=>n.type==='Image');const coverPaths=data.filter(x=>x.coverImage).map(x=>x.coverImage.src);assert.deepEqual(plain(imgs.map(x=>x.props.src)),plain(coverPaths));assert.equal(nodes(list,n=>n.type==='article').length,data.length);});
   check('homepage Git content unchanged (checkout CRLF normalized)',()=>assert.equal(fs.readFileSync(path.join(root,'src/app/page.tsx'),'utf8').replace(/\r\n/g,'\n'),original('src/app/page.tsx').toString('utf8')));
   const puOldTree=await oldPage.default(input);
   check('PU CTA links unchanged',()=>assert.deepEqual(plain(nodes(tree,n=>n.type==='TrackedLink')),plain(nodes(puOldTree,n=>n.type==='TrackedLink'))));

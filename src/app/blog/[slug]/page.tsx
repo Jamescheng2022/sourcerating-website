@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { ArticleBody } from "@/components/shared/ArticleBody";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -39,6 +40,9 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = getBlogPost(slug);
   if (!post) notFound();
   const isEditorial = post.layout === "editorial";
+  // Exact content revision evidence for publishing readback. The digest covers
+  // URLs, table headers/cells, captions and every other serialized post field.
+  const publicationSha256 = createHash("sha256").update(JSON.stringify(post)).digest("hex");
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -86,7 +90,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     : null;
 
   return (
-    <article className={isEditorial ? "bg-[#fcfcf9] pb-24 pt-28" : "bg-white pb-24 pt-32"}>
+    <article data-publication-sha256={publicationSha256} className={isEditorial ? "bg-[#fcfcf9] pb-24 pt-28" : "bg-white pb-24 pt-32"}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {faqSchema ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} /> : null}
