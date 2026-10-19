@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "generate:trust-assets": "node scripts/generate-trust-assets.mjs && node scripts/generate-professional-checklist.mjs",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check:publication": "node scripts/check-editorial-publication.mjs --all"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
