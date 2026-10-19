@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: post.excerpt,
     path: `/blog/${post.slug}`,
     // Editorial SVG diagrams are for the article body; social previews need a raster fallback.
-    ogImage: post.coverImage?.src.endsWith(".svg") ? undefined : post.coverImage,
+    ogImage: post.coverImage && /\.(?:svg|avif)$/i.test(post.coverImage.src) ? undefined : post.coverImage,
   });
 }
 
