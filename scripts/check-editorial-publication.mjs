@@ -249,6 +249,65 @@ async function getUrl(url, options = {}) {
   return response;
 }
 
+/**
+ * Extract only server-rendered article text; Next.js embeds a second copy of
+ * the page in RSC/JSON scripts, which must NOT satisfy the publication gate.
+ * Keep inline HTML tags adjacent so emphasized/link text is not split.
+ */
+export function normalizeVisibleArticleText(html) {
+  const scope = String(html).match(/<article\b[^>]*>([\s\S]*?)<\/article>/i)?.[1] || "";
+  const withoutScripts = scope
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, " ")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<\/?(?:p|div|h[1-6]|section|header|footer|li|ol|ul|table|tr|td|th|figure|figcaption|br)\b[^>]*>/gi, " ")
+    .replace(/<[^>]+>/g, "");
+  return normalizedText(withoutScripts);
+}
+
+function normalizedText(value) {
+  return String(value ?? "")
+    .replace(/&(#x[0-9a-f]+|#[0-9]+|amp|quot|apos|nbsp|lt|gt|ldquo|rdquo|lsquo|rsquo|mdash|ndash);/gi, (matched, code) => {
+      const lower = code.toLowerCase();
+      if (lower.startsWith("#x")) return String.fromCodePoint(Number.parseInt(lower.slice(2), 16));
+      if (lower.startsWith("#")) return String.fromCodePoint(Number.parseInt(lower.slice(1), 10));
+      return { amp: "&", quot: '"', apos: "'", nbsp: " ", lt: "<", gt: ">",
+        ldquo: "“", rdquo: "”", lsquo: "‘", rsquo: "’", mdash: "—", ndash: "–" }[lower] ?? matched;
+    })
+    .replace(/\u00a0/g, " ")
+    .replace(/\s+/g, " ").trim();
+}
+
+function plainBodyText(value) {
+  return String(value ?? "")
+    .replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1");
+}
+
+export function missingDeployedText(html, post) {
+  const visible = normalizeVisibleArticleText(html);
+  const expected = [post.title, post.excerpt];
+  for (const block of post.articleBody || []) {
+    if (block.type === "paragraph" || block.type === "heading") {
+      expected.push(plainBodyText(block.text));
+    } else if (block.type === "list") {
+      for (const item of block.items || []) expected.push(plainBodyText(item));
+    } else if (block.type === "table") {
+      for (const row of block.rows || []) {
+        for (const value of row) expected.push(String(value));
+      }
+    }
+  }
+  for (const section of post.sections || []) {
+    expected.push(section.heading, plainBodyText(section.body));
+    for (const bullet of section.bullets || []) expected.push(plainBodyText(bullet));
+  }
+  const meaningful = expected.map(normalizedText).filter(value => value.length >= 12);
+  if (!meaningful.length || !visible) return ["No rendered article text or no expected editorial text found"];
+  return meaningful.filter(value => !visible.includes(value));
+}
+
 async function verifyLive(post, origin) {
   const slug = post.slug;
   const articlePath = "/blog/" + slug;
@@ -257,7 +316,13 @@ async function verifyLive(post, origin) {
   assert(articleResponse.status === 200, "production article returns 200: " + articleUrl);
   if (articleResponse.status !== 200) return;
   const html = await articleResponse.text();
-  assert(html.includes(slug) && html.includes("<h1"), "article HTML includes expected route and headline");
+  assert(html.includes(slug) && /<h1\b/i.test(html), "article HTML includes expected route and headline");
+  // Unlike a slug/image-only check, this catches stale deployments of revised
+  // articles whose URL and media filenames stayed identical.
+  const missing = missingDeployedText(html, post);
+  assert(missing.length === 0,
+    "production rendered article title, excerpt and all prose match the reviewed version" +
+    (missing.length ? "; first missing: " + missing[0].slice(0, 130) : ""));
   assert(html.includes(post.coverImage?.src.split("/").pop() || post.slug) ||
          (!post.coverImage && html.includes(post.title)),
     "article HTML includes expected hero asset");
@@ -327,7 +392,7 @@ async function run() {
   if (errors.length) process.exitCode = 1;
 }
 
-run().catch(error => {
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) run().catch(error => {
   console.error(JSON.stringify({
     status: "FAIL", cause: String(error.message || error), errors, warnings
   }, null, 2));
