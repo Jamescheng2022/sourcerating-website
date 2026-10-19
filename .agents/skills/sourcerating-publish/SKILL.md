@@ -58,6 +58,7 @@ In a checkout with Node dependencies installed, run:
 ```bash
 npm ci
 npm run check:publication
+npm run test:publication
 node scripts/check-editorial-publication.mjs --slug ARTICLE_SLUG
 npm run build
 ```
