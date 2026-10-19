@@ -62,3 +62,35 @@ test("missing server-rendered article body fails even if RSC text is present", (
     article.title + article.excerpt + article.articleBody[1].text + "</script></body>";
   assert.ok(missingDeployedText(fake, article).length > 0);
 });
+
+test("short table header or unit revision fails even with unchanged rows and title", () => {
+  const latest = {
+    ...article,
+    articleBody: [
+      ...article.articleBody,
+      { type: "table", headers: ["Part ID", "µm"], rows: [["A-01", "85"]] }
+    ]
+  };
+  const table = "<table><thead><tr><th>Part ID</th><th>µm</th></tr></thead>" +
+    "<tbody><tr><th>A-01</th><td>85</td></tr></tbody></table>";
+  const html = rendered.replace("</article>", table + "</article>");
+  assert.deepEqual(missingDeployedText(html, latest), []);
+  const stale = html.replace("<th>µm</th>", "<th>mm</th>");
+  assert.ok(missingDeployedText(stale, latest).some(x => x.includes("Missing current table header row")));
+});
+
+test("outdated image caption fails despite unchanged hero URL and article body", () => {
+  const latest = {
+    ...article,
+    coverImage: {
+      src: "/images/blog/test.jpg",
+      caption: "This is a conceptual illustration rather than a real inspection photo."
+    }
+  };
+  const caption = "<figure><img src=\"/images/blog/test.jpg\"/>" +
+    "<figcaption>This is a conceptual illustration rather than a real inspection photo.</figcaption></figure>";
+  const correct = rendered.replace("</article>", caption + "</article>");
+  assert.deepEqual(missingDeployedText(correct, latest), []);
+  const stale = correct.replace("conceptual illustration", "documentary photograph");
+  assert.ok(missingDeployedText(stale, latest).some(x => x.includes("conceptual illustration")));
+});
