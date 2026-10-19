@@ -27,6 +27,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -37,5 +39,7 @@ jobs:
         run: npm run check:publication
       - name: Regression-test stale publication detection
         run: npm run test:publication
+      - name: Preserve pinned legacy blog and cover regressions
+        run: node scripts/verify-blog-cover.mjs
       - name: Build Next.js website
         run: npm run build
