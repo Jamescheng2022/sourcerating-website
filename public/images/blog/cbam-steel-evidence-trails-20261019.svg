@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#f8f7f1"/>
+<rect x="0" y="0" width="1600" height="12" fill="#0d332c"/>
+<text x="94" y="96" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700" letter-spacing="4" fill="#2b7361">SOURCERATING / BUYER'S FIELD NOTES</text>
+<text x="94" y="162" font-family="Arial,Helvetica,sans-serif" font-size="52" font-weight="700" fill="#102f29">One steel import. Two evidence trails.</text>
+<text x="94" y="196" font-family="Arial,Helvetica,sans-serif" font-size="23" fill="#586963">A material certificate and a CBAM emissions record answer different questions.</text>
+<rect x="92" y="214" rx="14" width="1416" height="186" fill="#e7eef0" stroke="#d6e1e1" stroke-width="2"/>
+<text x="123" y="253" font-size="22" font-weight="700" font-family="Arial,Helvetica,sans-serif" letter-spacing="2" fill="#376d5f">GOODS &amp; CUSTOMS</text>
+<rect x="123" y="271" rx="9" width="434" height="103" fill="#ffffff" stroke="#d6e1e1" stroke-width="2"/>
+ <text x="142" y="310" font-size="27" font-weight="700" font-family="Arial,Helvetica,sans-serif" fill="#17362f">Order line + CN code</text>
+ <text x="142" y="344" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#586963">Verify Annex I scope</text><rect x="594" y="271" rx="9" width="434" height="103" fill="#ffffff" stroke="#d6e1e1" stroke-width="2"/>
+ <text x="613" y="310" font-size="27" font-weight="700" font-family="Arial,Helvetica,sans-serif" fill="#17362f">Quantity + shipment</text>
+ <text x="613" y="344" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#586963">Customs records by period</text><rect x="1065" y="271" rx="9" width="434" height="103" fill="#ffffff" stroke="#d6e1e1" stroke-width="2"/>
+ <text x="1084" y="310" font-size="27" font-weight="700" font-family="Arial,Helvetica,sans-serif" fill="#17362f">EU declarant</text>
+ <text x="1084" y="344" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#586963">Owns CBAM declaration</text>
+<rect x="92" y="444" rx="14" width="1416" height="186" fill="#e8eee9" stroke="#d7e2d7" stroke-width="2"/>
+<text x="123" y="483" font-size="22" font-weight="700" font-family="Arial,Helvetica,sans-serif" letter-spacing="2" fill="#376d5f">PRODUCTION &amp; EMISSIONS</text>
+<rect x="123" y="501" rx="9" width="434" height="103" fill="#ffffff" stroke="#d7e2d7" stroke-width="2"/>
+ <text x="142" y="540" font-size="27" font-weight="700" font-family="Arial,Helvetica,sans-serif" fill="#17362f">Producing installation</text>
+ <text x="142" y="574" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#586963">Upstream plant may differ</text><rect x="594" y="501" rx="9" width="434" height="103" fill="#ffffff" stroke="#d7e2d7" stroke-width="2"/>
+ <text x="613" y="540" font-size="27" font-weight="700" font-family="Arial,Helvetica,sans-serif" fill="#17362f">Monitoring method</text>
+ <text x="613" y="574" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#586963">Route, inputs and period</text><rect x="1065" y="501" rx="9" width="434" height="103" fill="#ffffff" stroke="#d7e2d7" stroke-width="2"/>
+ <text x="1084" y="540" font-size="27" font-weight="700" font-family="Arial,Helvetica,sans-serif" fill="#17362f">Emissions data route</text>
+ <text x="1084" y="574" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#586963">Verified actual or EU default</text>
+
+<path d="M 777 639 L 777 678" stroke="#2d6656" stroke-width="5"/>
+<polygon points="777,693 763,673 791,673" fill="#2d6656"/>
+<rect x="91" y="696" rx="14" width="1416" height="104" fill="#0d332c"/>
+<text x="124" y="740" font-size="32" font-weight="700" font-family="Arial,Helvetica,sans-serif" fill="#ffffff">2027 annual declaration &amp; certificate surrender</text>
+<text x="124" y="772" font-size="21" font-family="Arial,Helvetica,sans-serif" fill="#d1e4dc">First declaration covers 2026 imports; deadline: 30 September 2027.</text>
+<text x="94" y="851" font-size="19" font-family="Arial,Helvetica,sans-serif" fill="#576c66">Original conceptual illustration, not a supplier record, verified report or customs declaration. As of 19 Oct 2026.</text>
+</svg>
