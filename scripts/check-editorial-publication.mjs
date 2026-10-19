@@ -285,27 +285,83 @@ function plainBodyText(value) {
     .replace(/\*([^*]+)\*/g, "$1");
 }
 
+function visibleTableHeaderRows(html) {
+  const article = String(html).match(/<article\b[^>]*>([\s\S]*?)<\/article>/i)?.[1] || "";
+  const rows = [];
+  for (const table of article.matchAll(/<table\b[^>]*>([\s\S]*?)<\/table\s*>/gi)) {
+    const head = table[1].match(/<thead\b[^>]*>([\s\S]*?)<\/thead\s*>/i)?.[1] || "";
+    const headers = Array.from(head.matchAll(/<th\b[^>]*>([\s\S]*?)<\/th\s*>/gi),
+      part => normalizedText(part[1].replace(/<[^>]+>/g, "")));
+    if (headers.length) rows.push(headers);
+  }
+  return rows;
+}
+
 export function missingDeployedText(html, post) {
   const visible = normalizeVisibleArticleText(html);
-  const expected = [post.title, post.excerpt];
+  const expected = [post.title, post.excerpt, post.coverImage?.caption];
+  const requestedHeaders = [];
+  if (post.directAnswer) expected.push(post.directAnswer);
+  if (post.keyTakeaways?.length) {
+    expected.push(post.keyTakeawaysHeading);
+    expected.push(...post.keyTakeaways);
+  }
+  if (post.evidenceChain?.length) {
+    expected.push(post.evidenceChainHeading);
+    for (const row of post.evidenceChain) {
+      expected.push(row.gate, row.evidence, row.requiredMatch);
+    }
+  }
   for (const block of post.articleBody || []) {
     if (block.type === "paragraph" || block.type === "heading") {
       expected.push(plainBodyText(block.text));
     } else if (block.type === "list") {
       for (const item of block.items || []) expected.push(plainBodyText(item));
     } else if (block.type === "table") {
+      requestedHeaders.push(block.headers.map(normalizedText));
       for (const row of block.rows || []) {
         for (const value of row) expected.push(String(value));
       }
+    } else if (block.type === "illustration") {
+      expected.push(block.caption);
     }
   }
   for (const section of post.sections || []) {
     expected.push(section.heading, plainBodyText(section.body));
     for (const bullet of section.bullets || []) expected.push(plainBodyText(bullet));
+    if (section.callout) expected.push(section.callout.label, section.callout.text);
   }
-  const meaningful = expected.map(normalizedText).filter(value => value.length >= 12);
+  if (post.checklist?.length) {
+    expected.push(post.checklistHeading);
+    for (const group of post.checklist) expected.push(group.category, ...group.evidence);
+  }
+  for (const row of post.decisionMatrix || []) expected.push(row.signal, row.response);
+  for (const faq of post.faqs || []) expected.push(faq.question, faq.answer);
+  if (post.references?.length) {
+    expected.push(post.referencesHeading, post.referencesIntro);
+    for (const reference of post.references) expected.push(reference.title, reference.publisher, reference.note);
+  }
+  for (const related of post.relatedLinks || []) expected.push(related.title, related.description);
+  if (!post.articleBody?.length) expected.push(post.ctaHeading, post.ctaBody, post.ctaLabel);
+
+  // Prose and captions must match actual server-rendered article text. An RSC
+  // hydration script, canonical slug or metadata copy cannot satisfy this gate.
+  const meaningful = expected.filter(value => value != null && String(value).trim())
+    .map(normalizedText).filter(value => value.length >= 8);
   if (!meaningful.length || !visible) return ["No rendered article text or no expected editorial text found"];
-  return meaningful.filter(value => !visible.includes(value));
+  const missing = meaningful.filter(value => !visible.includes(value));
+
+  // Exact table THEAD comparisons catch changes in short headers, units, or
+  // acceptance categories that would be too short for prose substring checks.
+  const availableHeaders = visibleTableHeaderRows(html);
+  for (const expectedHeaders of requestedHeaders) {
+    const index = availableHeaders.findIndex(row =>
+      row.length === expectedHeaders.length &&
+      row.every((value, i) => value === expectedHeaders[i]));
+    if (index === -1) missing.push("Missing current table header row: " + expectedHeaders.join(" | "));
+    else availableHeaders.splice(index, 1);
+  }
+  return missing;
 }
 
 async function verifyLive(post, origin) {
