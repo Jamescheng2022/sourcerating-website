@@ -12,6 +12,7 @@
  * node scripts/check-editorial-publication.mjs --slug <slug> --live --origin https://www.sourcerating.com
  */
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
@@ -297,6 +298,17 @@ function visibleTableHeaderRows(html) {
   return rows;
 }
 
+/**
+ * Canonical source-record proof: any changed URL, numeric table cell, image
+ * caption or other post property must change the server-rendered digest.
+ */
+export function hasMatchingPublicationDigest(html, post) {
+  const articleTag = String(html).match(/<article\b[^>]*>/i)?.[0] || "";
+  const found = articleTag.match(/\bdata-publication-sha256=["']([a-f0-9]{64})["']/i)?.[1] || "";
+  const expected = createHash("sha256").update(JSON.stringify(post)).digest("hex");
+  return !!found && found === expected;
+}
+
 export function missingDeployedText(html, post) {
   const visible = normalizeVisibleArticleText(html);
   const expected = [post.title, post.excerpt, post.coverImage?.caption];
@@ -373,6 +385,8 @@ async function verifyLive(post, origin) {
   if (articleResponse.status !== 200) return;
   const html = await articleResponse.text();
   assert(html.includes(slug) && /<h1\b/i.test(html), "article HTML includes expected route and headline");
+  assert(hasMatchingPublicationDigest(html, post),
+    "production source revision SHA256 matches the exact current registered post (including URLs, table cells and captions)");
   // Unlike a slug/image-only check, this catches stale deployments of revised
   // articles whose URL and media filenames stayed identical.
   const missing = missingDeployedText(html, post);
@@ -416,9 +430,21 @@ async function verifyLive(post, origin) {
     }
   }
   for (const asset of assets) {
-    const response = await getUrl(origin + asset, { method: "HEAD" });
-    assert(response.status === 200 && (response.headers.get("content-type") || "").startsWith("image/"),
-      "public visual is accessible: " + asset);
+    // The exact public file path must serve the same bytes as the reviewed
+    // checkout, even if a publisher reuses an old image filename.
+    const expectedPath = localAsset(asset, "production image " + asset);
+    if (!expectedPath) continue;
+    const response = await getUrl(origin + asset);
+    if (response.status !== 200 ||
+        !(response.headers.get("content-type") || "").startsWith("image/")) {
+      fail("public visual returns non-image or non-200: " + asset);
+      continue;
+    }
+    const reviewedBytes = fs.readFileSync(expectedPath);
+    const liveBytes = Buffer.from(await response.arrayBuffer());
+    const sha256 = value => createHash("sha256").update(value).digest("hex");
+    assert(sha256(liveBytes) === sha256(reviewedBytes),
+      "production asset bytes match the reviewed file SHA256: " + asset);
   }
 }
 
