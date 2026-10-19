@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="title desc">
+<title id="title">From reading to real steel: four links in the galvanized-steel evidence chain</title>
+<desc id="desc">Editorial diagram connecting approved drawing, galvanizing lot, representative coating measurements, and packing list. This is an illustration, not a real test result or shipment record.</desc>
+<defs>
+ <pattern id="grain" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r="0.8" fill="#17313a" opacity=".07"/></pattern>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d2ddd9"/><stop offset=".55" stop-color="#7e969a"/><stop offset="1" stop-color="#425a61"/></linearGradient>
+</defs>
+<rect width="1600" height="900" fill="#f7f5ef"/><rect width="1600" height="900" fill="url(#grain)" />
+<path d="M90 78H1510" stroke="#b4b5ad" stroke-width="2"/>
+<text x="92" y="125" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" letter-spacing="6" fill="#a46739">SOURCE RATING  /  FIELD NOTES</text>
+<text x="92" y="228" font-family="Georgia,Times New Roman,serif" font-size="80" fill="#183039">From reading to real steel</text>
+<text x="94" y="279" font-family="Arial,Helvetica,sans-serif" font-size="31" fill="#506168">A certificate is not a shipment ID.</text>
+<path d="M92 338H1508" stroke="#a8b5af" stroke-width="1.6"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<!-- drawing panel -->
+<text x="100" y="406" font-size="21" letter-spacing="4" font-weight="700" fill="#a46739">01  DEFINE</text>
+<text x="100" y="444" font-size="30" fill="#183039" font-weight="700">Approved drawing</text>
+<text x="100" y="482" font-size="22" fill="#566a6f">Revision and piece marks</text>
+<rect x="110" y="532" width="210" height="164" rx="5" fill="#fff" stroke="#98aaa8" stroke-width="4"/>
+<path d="M136 573H296M136 590H246" stroke="#c3cfca" stroke-width="7"/>
+<path d="M139 647l45-34 52 21 45-29" stroke="#41616b" stroke-width="7" stroke-linecap="round" fill="none"/>
+<circle cx="139" cy="647" r="8" fill="#b47746"/><circle cx="184" cy="613" r="8" fill="#b47746"/><circle cx="236" cy="634" r="8" fill="#b47746"/><circle cx="281" cy="605" r="8" fill="#b47746"/>
+<text x="138" y="683" font-size="19" fill="#6a7a7b">DWG / REV / MARK</text>
+<!-- process panel -->
+<text x="468" y="406" font-size="21" letter-spacing="4" font-weight="700" fill="#a46739">02  PROCESS</text>
+<text x="468" y="444" font-size="30" fill="#183039" font-weight="700">Galvanizing lot</text>
+<text x="468" y="482" font-size="22" fill="#566a6f">Plant, date and lot identity</text>
+<path d="M476 603h224v98H476z" fill="#263f48"/><path d="M478 610h220v22H478z" fill="#a4bbb3"/>
+<path d="M496 615l42-65h20l42 65" fill="none" stroke="#4f6a71" stroke-width="18" stroke-linejoin="round"/>
+<path d="M617 615l30-65h20l30 65" fill="none" stroke="#7b9293" stroke-width="18"/>
+<circle cx="586" cy="661" r="21" fill="#d8e0dc"/><path d="M572 661h28M586 647v28" stroke="#667a7a" stroke-width="5"/>
+<text x="532" y="735" font-size="21" fill="#647677">LOT ≠ ORDER</text>
+<!-- sample panel -->
+<text x="841" y="406" font-size="21" letter-spacing="4" font-weight="700" fill="#a46739">03  MEASURE</text>
+<text x="841" y="444" font-size="30" fill="#183039" font-weight="700">Inspection sample</text>
+<text x="841" y="482" font-size="22" fill="#566a6f">Method, readings and link</text>
+<rect x="879" y="532" width="150" height="171" rx="16" fill="#243e48"/>
+<rect x="897" y="553" width="114" height="72" rx="7" fill="#dce8e0"/>
+<text x="912" y="603" font-size="32" font-weight="700" fill="#41616b">•••</text>
+<path d="M930 704v29m0 0h25" fill="none" stroke="#263f48" stroke-width="10" stroke-linecap="round"/>
+<path d="M1011 684q49 18 58-26" fill="none" stroke="#5b747b" stroke-width="8" stroke-linecap="round"/>
+<circle cx="1075" cy="649" r="15" fill="#ae7749"/>
+<text x="864" y="769" font-size="19" fill="#647677">Representative, not every piece</text>
+<!-- shipment panel -->
+<text x="1191" y="406" font-size="21" letter-spacing="4" font-weight="700" fill="#a46739">04  RECONCILE</text>
+<text x="1191" y="444" font-size="30" fill="#183039" font-weight="700">Packing register</text>
+<text x="1191" y="482" font-size="22" fill="#566a6f">Marks and released bundles</text>
+<rect x="1204" y="589" width="256" height="118" rx="6" fill="#eff1eb" stroke="#829595" stroke-width="5"/>
+<path d="M1235 611h190M1235 633h190M1235 655h190M1235 677h140" stroke="#91aaa6" stroke-width="9" stroke-linecap="round"/>
+<path d="M1225 563l30-33h154l30 33" stroke="#627f83" fill="none" stroke-width="15" stroke-linecap="round"/>
+<path d="M1225 728h214" stroke="#ae7749" stroke-width="12" stroke-linecap="round"/>
+<text x="1242" y="770" font-size="20" fill="#647677">MARK / QTY / RELEASE</text>
+</g>
+<g fill="none" stroke="#aa7448" stroke-width="8" stroke-linejoin="round" stroke-linecap="round">
+<path d="M343 610h96m-17-17 17 17-17 17"/>
+<path d="M716 610h94m-17-17 17 17-17 17"/>
+<path d="M1108 610h54m-17-17 17 17-17 17"/>
+</g>
+<rect x="0" y="826" width="1600" height="74" fill="#17323c"/>
+<text x="92" y="874" font-family="Arial,Helvetica,sans-serif" font-size="21" letter-spacing="1" fill="#f7f5ef">Follow the identity of the steel—not just the paperwork.</text>
+<text x="1510" y="874" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="17" fill="#b8c6c4">Illustrative diagram · Not an inspection record</text>
+</svg>

@@ -1,7 +1,10 @@
+import { hdgInspectionPost } from "@/content/blog/hot-dip-galvanized-steel-china-astm-a123-inspection";
+
 export interface BlogPost {
   slug: string;
   title: string;
   seoTitle?: string;
+  layout?: "editorial" | "guide";
   excerpt: string;
   date: string;
   dateModified?: string;
@@ -9,6 +12,7 @@ export interface BlogPost {
   readTime: string;
   coverImage?: {
     src: string;
+    mobileSrc?: string;
     width: number;
     height: number;
     alt: string;
@@ -24,6 +28,7 @@ export interface BlogPost {
     | { type: "paragraph"; text: string }
     | { type: "list"; ordered: boolean; items: string[] }
     | { type: "table"; headers: string[]; rows: string[][] }
+    | { type: "illustration"; src: string; mobileSrc?: string; width: number; height: number; alt: string; caption: string }
   >;
   sections: Array<{
     heading: string;
@@ -45,6 +50,7 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  hdgInspectionPost,
 {
   "slug": "chinese-steel-standard-edition-implementation-translation-dates",
   "title": "Three Dates Behind a Chinese Steel Standard",
