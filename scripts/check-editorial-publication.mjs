@@ -58,7 +58,10 @@ function parseArgs() {
 function pass(description) { checks.push(description); }
 function fail(description) { errors.push(description); }
 function warn(description) { warnings.push(description); }
-function assert(condition, description) { condition ? pass(description) : fail(description); }
+function assert(condition, description) {
+  if (condition) pass(description);
+  else fail(description);
+}
 
 function loadBlogPosts() {
   // TypeScript CommonJS transpilation is deliberately scoped to the checked-in blog modules.
@@ -80,8 +83,8 @@ function loadBlogPosts() {
     });
     const problems = (output.diagnostics ?? []).filter(x => x.category === ts.DiagnosticCategory.Error);
     if (problems.length) throw new Error("TypeScript syntax error in " + safePath);
-    const module = { exports: {} };
-    cache.set(safePath, module.exports);
+    const compiledModule = { exports: {} };
+    cache.set(safePath, compiledModule.exports);
     function requireLocal(specifier) {
       if (!specifier.startsWith(importPrefix)) {
         throw new Error("Unexpected blog registry import: " + specifier);
@@ -89,9 +92,9 @@ function loadBlogPosts() {
       return load("src/content/blog/" + specifier.slice(importPrefix.length) + ".ts");
     }
     vm.runInNewContext(output.outputText, {
-      module, exports: module.exports, require: requireLocal
+      module: compiledModule, exports: compiledModule.exports, require: requireLocal
     }, { filename: safePath, timeout: 2500 });
-    return module.exports;
+    return compiledModule.exports;
   }
   const posts = load("src/data/blog.ts").blogPosts;
   if (!Array.isArray(posts)) throw new Error("The blogPosts registry was not an array.");

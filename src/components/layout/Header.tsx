@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -8,44 +8,56 @@ import { siteConfig } from "@/data/site-config";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/ui/Logo";
 
-export function Header() {
+const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700";
+
+function HeaderNavigation({ pathname }: { pathname: string }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const toggle = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const dismiss = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        toggle.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", dismiss);
+    return () => window.removeEventListener("keydown", dismiss);
+  }, [mobileMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-brand-950/15 bg-[#f7f6f2]">
+      <nav aria-label="Main navigation" className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="flex h-16 items-center justify-between gap-4">
           <Logo />
-          <div className="hidden lg:flex items-center gap-1">
-            {siteConfig.nav.map((item) => (
-              <Link key={item.href} href={item.href} className={cn("px-3 py-2 text-sm font-medium rounded-md transition-colors", pathname === item.href ? "text-brand-700 bg-brand-50" : "text-gray-600 hover:text-brand-700 hover:bg-gray-50")}>
+          <div className="hidden items-center gap-1 lg:flex">
+            {siteConfig.nav.map(item => (
+              <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined} className={cn("px-3 py-2 text-sm font-medium transition-colors", focus, pathname === item.href ? "text-brand-700 underline underline-offset-4" : "text-gray-700 hover:text-brand-700")}>
                 {item.label}
               </Link>
             ))}
+            <Link href="/services" className={`ml-3 border-l border-brand-950/20 py-2 pl-5 text-sm text-gray-600 hover:text-brand-700 ${focus}`}>Services</Link>
           </div>
-          <div className="hidden lg:flex items-center gap-3">
-            <a href={`mailto:${siteConfig.contact.email}`} className="text-sm font-medium text-gray-600 hover:text-brand-700 transition-colors">{siteConfig.contact.email}</a>
-            <Link href="/risk-screen" className="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-brand-950 rounded-md hover:bg-brand-800 transition-colors">Free Risk Screen</Link>
-          </div>
-          <button type="button" className="lg:hidden p-2 text-gray-600" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          <button ref={toggle} type="button" className={`inline-flex h-11 w-11 shrink-0 items-center justify-center text-brand-950 lg:hidden ${focus}`} onClick={() => setMobileMenuOpen(open => !open)} aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileMenuOpen} aria-controls="mobile-navigation">
+            {mobileMenuOpen ? <X aria-hidden="true" className="h-6 w-6" /> : <Menu aria-hidden="true" className="h-6 w-6" />}
           </button>
         </div>
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-100 py-4">
-            <div className="flex flex-col gap-1">
-              {siteConfig.nav.map((item) => (
-                <Link key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)} className={cn("px-3 py-2.5 text-base font-medium rounded-md", pathname === item.href ? "text-brand-700 bg-brand-50" : "text-gray-600 hover:text-brand-700 hover:bg-gray-50")}>
-                  {item.label}
-                </Link>
-              ))}
-              <a href={`mailto:${siteConfig.contact.email}`} className="px-3 py-2 text-sm font-medium text-gray-600">{siteConfig.contact.email}</a>
-              <Link href="/risk-screen" onClick={() => setMobileMenuOpen(false)} className="mt-2 inline-flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-brand-950 rounded-md hover:bg-brand-800">Free Risk Screen</Link>
-            </div>
+        <div id="mobile-navigation" hidden={!mobileMenuOpen} className="absolute inset-x-0 top-16 max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-brand-950/20 bg-[#f7f6f2] px-5 py-5 shadow-sm lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1">
+            {siteConfig.nav.map(item => <Link key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)} aria-current={pathname === item.href ? "page" : undefined} className={cn("px-3 py-3 text-base font-medium", focus, pathname === item.href ? "bg-brand-50 text-brand-700" : "text-gray-700 hover:text-brand-700")}>{item.label}</Link>)}
+            <Link href="/services" onClick={() => setMobileMenuOpen(false)} className={`mt-3 border-t border-brand-950/15 px-3 pt-5 pb-3 text-gray-700 ${focus}`}>Services</Link>
+            <a href={`mailto:${siteConfig.contact.email}`} onClick={() => setMobileMenuOpen(false)} className={`break-all px-3 py-3 text-sm text-gray-600 ${focus}`}>{siteConfig.contact.email}</a>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );
+}
+
+export function Header() {
+  const pathname = usePathname() ?? "/";
+  // Navigation, including browser back/forward, resets the disclosure without an
+  // effect that leaves a stale menu open on the destination page.
+  return <HeaderNavigation key={pathname} pathname={pathname} />;
 }
