@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { BlogPost } from "@/data/blog";
 
 function InlineText({ text, editorial = false }: { text: string; editorial?: boolean }) {
@@ -19,6 +20,17 @@ export function ArticleBody({ blocks, editorial = false }: { blocks: NonNullable
         if (block.type === "list") {
           const Tag = block.ordered ? "ol" : "ul";
           return <Tag key={index} className={editorial ? `space-y-4 pl-6 text-[17px] leading-[1.85] text-slate-800 sm:text-[18px] ${block.ordered ? "list-decimal" : "list-disc"}` : `space-y-3 pl-6 leading-8 text-gray-700 ${block.ordered ? "list-decimal" : "list-disc"}`}>{block.items.map((item, itemIndex) => <li key={itemIndex}><InlineText text={item} editorial={editorial} /></li>)}</Tag>;
+        }
+        if (block.type === "illustration") {
+          return (
+            <figure key={index} className={editorial ? "my-12 xl:relative xl:left-1/2 xl:w-[min(92vw,1150px)] xl:-translate-x-1/2" : "my-10"}>
+              {block.mobileSrc ? (
+                <Image src={block.mobileSrc} alt={block.alt} width={720} height={1180} sizes="(max-width: 1279px) 100vw, 0px" className="block h-auto w-full rounded-md border border-stone-200 xl:hidden" />
+              ) : null}
+              <Image src={block.src} alt={block.alt} width={block.width} height={block.height} sizes="(min-width: 1280px) 1150px, 100vw" className={block.mobileSrc ? "hidden h-auto w-full rounded-md border border-stone-200 xl:block" : "h-auto w-full rounded-md border border-stone-200"} />
+              <figcaption className="mt-3 text-sm leading-6 text-gray-500">{block.caption}</figcaption>
+            </figure>
+          );
         }
         return (
           <div key={index} role="region" aria-label={`Article table ${index + 1}`} tabIndex={0} className="max-w-full overflow-x-auto rounded-md border border-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-700">

@@ -28,6 +28,7 @@ export interface BlogPost {
     | { type: "paragraph"; text: string }
     | { type: "list"; ordered: boolean; items: string[] }
     | { type: "table"; headers: string[]; rows: string[][] }
+    | { type: "illustration"; src: string; mobileSrc?: string; width: number; height: number; alt: string; caption: string }
   >;
   sections: Array<{
     heading: string;

@@ -36,6 +36,15 @@ export const hdgInspectionPost: BlogPost = {
       "text": "The useful trail starts with the approved drawing and piece-mark register. Those identifiers must remain understandable when the fabrication moves to the galvanizer, when an inspection lot is defined and when the finished pieces are bundled for dispatch. A lot number written on a certificate is useful only when someone can show what that lot represents."
     },
     {
+      "type": "illustration",
+      "src": "/images/blog/hdg-traceability-editorial-20261019.svg",
+      "mobileSrc": "/images/blog/hdg-traceability-mobile-20261019.svg",
+      "width": 1600,
+      "height": 900,
+      "alt": "Editorial evidence-flow illustration connecting approved drawing and piece marks with galvanizing lot, representative thickness measurements, and packing register.",
+      "caption": "How the shipment's piece identity should connect to the inspection record. Original editorial illustration, not an actual order document."
+    },
+    {
       "type": "paragraph",
       "text": "That is the point of the illustration above. It is not a demand to test every piece. It is a demand to preserve the relationship between the pieces being sold and the samples chosen to represent them."
     },
@@ -167,11 +176,10 @@ export const hdgInspectionPost: BlogPost = {
   "dateModified": "2026-10-19",
   "layout": "editorial",
   "coverImage": {
-    "src": "/images/blog/hdg-traceability-editorial-20261019.svg",
-    "mobileSrc": "/images/blog/hdg-traceability-mobile-20261019.svg",
-    "width": 1600,
-    "height": 900,
-    "alt": "Editorial diagram linking approved drawing and piece marks to galvanizing lot, representative coating measurements, and packing register.",
-    "caption": "The four links a buyer should be able to follow. Original editorial illustration, not a photograph or record of an actual order."
+    "src": "/images/blog/hdg-inspection-editorial-photo-20261019.avif",
+    "width": 800,
+    "height": 533,
+    "alt": "Illustrative industrial scene: worker checking the zinc coating on a galvanized steel fabrication using a thickness gauge; tagged parts behind.",
+    "caption": "AI-generated editorial illustration. Not a photograph of a particular factory, supplier or inspection."
   }
 };
