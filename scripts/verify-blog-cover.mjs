@@ -29,6 +29,7 @@ function loader(baseline) {
     const compiledModule = {exports:{}};
     cache.set(file,compiledModule.exports);
     function requireStub(id) {
+      if (id==='node:crypto') return {createHash:crypto.createHash};
       if (id==='react/jsx-runtime') return {jsx:(type,props,key)=>({type,props,key}),jsxs:(type,props,key)=>({type,props,key}),Fragment:'fragment'};
       if (id==='next/image') return {__esModule:true,default:'Image'};
       if (id==='next/link') return {__esModule:true,default:'Link'};
@@ -92,7 +93,7 @@ async function main() {
     const oldPost=oldData.find(x=>x.slug===post.slug);
     const actualTree=await page.default(params), expectedTree=await oldPage.default(params);
     const actualMeta=await page.generateMetadata(params), expectedMeta=await oldPage.generateMetadata(params);
-    check(`legacy regression: ${post.slug}`,()=>{assert.deepEqual(plain(post),plain(oldPost));assert.deepEqual(plain(actualMeta),plain(expectedMeta));assert.deepEqual(plain(actualTree),plain(expectedTree));});
+    check(`legacy regression: ${post.slug}`,()=>{assert.deepEqual(plain(post),plain(oldPost));assert.deepEqual(plain(actualMeta),plain(expectedMeta));const withProof=plain(actualTree);assert.equal(withProof.props['data-publication-sha256'],crypto.createHash('sha256').update(JSON.stringify(post)).digest('hex'));delete withProof.props['data-publication-sha256'];assert.deepEqual(withProof,plain(expectedTree));});
   }
   for (const ogImage of [undefined,'/custom.jpg']) {
     check(`metadata fallback unchanged: ${ogImage??'default'}`,()=>{const args={title:'Home',description:'test',path:'/',ogImage};assert.deepEqual(plain(metadata.generatePageMetadata(args)),plain(oldMetadata.generatePageMetadata(args)));});
