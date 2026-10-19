@@ -1,0 +1,39 @@
+name: SourceRating editorial preflight
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.agents/skills/sourcerating-publish/**'
+      - '.github/workflows/source-rating-editorial-preflight.yml'
+      - 'docs/editorial/**'
+      - 'scripts/check-editorial-publication.mjs'
+      - 'src/content/blog/**'
+      - 'src/data/blog.ts'
+      - 'src/app/blog/**'
+      - 'src/components/shared/ArticleBody.tsx'
+      - 'public/images/blog/**'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Article registry, images and Next build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Deterministic publication preflight for all registered articles
+        run: npm run check:publication
+      - name: Build Next.js website
+        run: npm run build
