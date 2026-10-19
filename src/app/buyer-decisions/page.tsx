@@ -61,6 +61,12 @@ export default function BuyerDecisionsPage() {
             <p className="mt-6 text-lg leading-8 text-gray-600">
               These guides start one step earlier: should the product be sourced internationally at all? Then they move through supplier approval, production evidence, and shipment release. The goal is a buyer decision supported by technical, commercial, and factory evidence.
             </p>
+            <Link
+              href="/blog"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-700"
+            >
+              Browse all articles <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

@@ -36,6 +36,7 @@ function loader(baseline) {
       if (id==='lucide-react') return Object.fromEntries(['ArrowLeft','ArrowRight','Check','ShieldAlert','Calendar','Clock'].map(x=>[x,x]));
       if (id==='@/components/shared/ArticleBody') return {ArticleBody:'ArticleBody'};
       if (id==='@/components/ui/TrackedLink') return {TrackedLink:'TrackedLink'};
+      if (id==='@/components/blog/BlogDirectory') return {BlogDirectory:'BlogDirectory'};
       if (id.startsWith('@/')) return load('src/'+id.slice(2)+'.ts');
       throw new Error('Unexpected dependency '+id);
     }
