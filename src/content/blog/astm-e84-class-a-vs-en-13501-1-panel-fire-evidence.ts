@@ -9,6 +9,14 @@ export const panelFireClassificationPost: BlogPost = {
   date: "2026-10-20",
   category: "Buyer's Field Notes",
   readTime: "7 min read",
+  coverImage: {
+    src: "/images/blog/panel-fire-evidence-20261020.png",
+    mobileSrc: "/images/blog/panel-fire-evidence-mobile-20261020.png",
+    width: 1200,
+    height: 630,
+    alt: "An original comparison graphic separates ASTM E84 surface-burning indices from EN 13501-1 reaction-to-fire classification, and connects both reports to the product and installation.",
+    caption: "Original SourceRating explanatory graphic. The methods answer different questions; this is not a test report, a classification conversion or evidence of a particular supplier or project."
+  },
   sections: [],
   articleBody: [
     { type: "paragraph", text: "A panel quotation can look unusually complete. The supplier has named the core, listed the skins and sent a laboratory report. Next to ‘Fire performance’ sits a reassuring phrase: ASTM E84 Class A. But the project specification asks for EN 13501-1 B-s1,d0. The difference is not a matter of translating two labels into the same language. The buyer has been given an answer to a different test question." },
