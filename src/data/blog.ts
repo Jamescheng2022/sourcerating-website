@@ -1,3 +1,4 @@
+import { panelFireClassificationPost } from "@/content/blog/astm-e84-class-a-vs-en-13501-1-panel-fire-evidence";
 import { hdgInspectionPost } from "@/content/blog/hot-dip-galvanized-steel-china-astm-a123-inspection";
 
 export interface BlogPost {
@@ -50,6 +51,7 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  panelFireClassificationPost,
   hdgInspectionPost,
 {
   "slug": "polyurethane-screen-panels-china-vs-local",
