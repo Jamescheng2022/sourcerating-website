@@ -2,7 +2,7 @@ import type { BlogPost } from "@/data/blog";
 export const plywoodPackingPost: BlogPost = {
  slug:"plywood-crate-solid-wood-skids-ispm15",title:"The Crate Is Plywood. What Are the Skids Made Of?",
  excerpt:"The label on the quotation may describe the walls of a crate, not everything supporting the cargo. Look underneath before assuming the whole packing arrangement falls outside wood-packaging controls.",date:"2026-10-21",category:"Buyer's Field Notes",layout:"editorial",readTime:"4 min read",sections:[],
- coverImage:{src:"/images/blog/plywood-skids-20261021.svg",width:1200,height:900,alt:"Original cutaway-style diagram distinguishes plywood crate walls, supporting skids and separate container bracing.",caption:"Conceptual packing diagram, not a certified design or a photograph of a particular shipment. Component materials must be verified."},
+ coverImage:{src:"/images/blog/plywood-skids-20261021.svg",width:1200,height:900,alt:"Conceptual inspection diagram of a closed crate and its supporting skids; additional bracing is explicitly not shown.",caption:"Conceptual packing diagram, not a certified design or a photograph of a particular shipment. Component materials must be verified."},
  articleBody:[
  {type:"paragraph",text:"'Plywood case' is a convenient line on an export quotation. It tells a buyer something about the enclosure. It may say nothing about the runners underneath it, the blocks inside it or the timber added when the case is secured in a container."},
  {type:"paragraph",text:"That gap matters because the packing arrangement is made of components, while the sales description often names only its most visible material."},
