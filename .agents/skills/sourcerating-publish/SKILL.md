@@ -33,14 +33,23 @@ Read `docs/editorial/SOURCERATING_EDITORIAL_STANDARD.md` **at execution time**. 
 - Choose an appropriate form: Industry Intelligence, Buyer's Field Notes or Deep Research. Headings, tables, FAQ, direct-answer cards and key-takeaway cards are optional, **never a universal template**. End with an actual insight or next practical question.
 - Write a self-contained free article. For any future paid offering, provide additional *real* research utility instead of withholding the answer from the free reader.
 
-## 3. Prepare actual images, not just image prompts
+## 3. Mandatory magazine-style visual story — enforced gate (2026-10-22)
 
-1. For a substantial article consider a documentary-style editorial photo and/or a technical explanatory visual; every chosen visual must help understanding, not just add decoration.
-2. Secure actual image bytes, confirm rights, add to `public/images/blog/` (or another proven public path), and check format, dimensions, responsive layout, alt, caption and attribution. Any generated factory scene must be labeled as an **AI-generated illustration, not evidence of a particular facility, product inspection or customer**.
-3. Place the real media path in the article's `coverImage` or an inline `articleBody` `illustration` block. **Generated in the chat, stored in Library or mentioned in a draft is not the same as present in the production webpage.**
-4. Use an actual mobile-specific layout for text-heavy wide diagrams (the current article renderer supports `mobileSrc`). Confirm caption stays with the corresponding visual.
-5. The image shared on LinkedIn or in Open Graph must be a compatible raster image (typically JPG/PNG). The site body may use SVG or AVIF with a raster social fallback. Check the *actual production* `og:image`, not just the source filename.
-6. No copyrighted third-party visual copied without permission. If an image cannot be obtained or truthfully attributed, use a suitable original graphic or publish without that image and explain the limitation.
+The owner has **replaced the former 'one strong image is optional' advice with a binding release requirement** for every new or substantially revised SourceRating article, including reviewed drafts awaiting merge and previously published articles being revised. **A cover alone is a FAIL.** Never say an article meets this standard until the final public page has the real visuals and mobile rendering.
+
+**Quantified floor (not a maximum):** one real cover image **plus distinct inline explanatory figures**: 2 figures for articles of 600 English body words or less; 3 for 601–1,200 words; 4 for longer articles. Count distinct visual concepts and image files, not the extra mobile variant of a figure. More images are welcome when they help; images repeated under new filenames, purely decorative crops or irrelevant AI scenes **do not earn credit**.
+
+1. Work out the visual storyline at outline time: product/process photo or genuinely useful opening visual, intermediate annotated details / comparison / diagram, and final decision-evidence or workflow visual. **Distribute illustrations through the sections**—not all at the beginning, end or in a single stacked gallery. Keep every image beside the paragraph it helps explain.
+2. Upload actual original or properly licensed files to `public/images/blog/`. The website must reference the exact `coverImage.src` and `articleBody` blocks of `type: "illustration"`; a design prompt, Library attachment, LinkedIn image, file that exists only in GitHub or unregistered Markdown does not count as rendered inline artwork.
+3. Every cover and figure needs correct dimensions, informative alt text, an accurate factual caption and provenance/rights. Never portray AI-generated workers, defective products, actual inspections or factory premises as real evidence. Label generated scenes as editorial illustrations; avoid confusing speculative diagrams with an actual report.
+4. Prefer *different kinds of evidence:* details of a specification, drawings, inspection traceability, quality decisions, materials, logistics, side-by-side distinctions. **Do not game the minimum with repetitive graphics.** Check that diagrams are technically true and legible on a narrow phone display. Wide text-heavy diagrams require a specifically authored mobile-readable `mobileSrc` (a resized copy is inadequate).
+5. Prior to any approval, an **independent reviewer** must explicitly record `IMAGE_EDITORIAL_PASS` tied to the **exact post/media revision** after checking visual variety, semantic value, rights, mobile readability and factual consistency. If unreviewed or failed, the release is held regardless of how many files exist.
+6. The deterministic `npm run check:publication:changed` **fails the PR** for too few distinct images, missing/undecodable media, missing provenance/alt/caption, clustered figures or file duplicates. This is the *objective minimum*, not an automatic editorial-quality endorsement.
+7. After merge, validate article cover, **every inline image and mobile variant** in the actual production HTML, verify reachable image bytes and matching SHA, and open the phone layout where a graphical viewer is available. Don't count a metadata `og:image` as a body illustration.
+
+**Legacy work:** Many already-published old pieces predate this floor. Keep them accessible without turning unrelated documentation changes into a sitewide failure. Track them for image-rich revision, **starting with `accepted-sampling-lot-not-zero-defects`**; on any revised piece enforce the full modern floor. Never describe an unrevised legacy article as visually compliant merely because it has a cover.
+
+The quantitative rule cannot replace judgment. An article that satisfies 1+3 by inserting filler art is still an editorial FAIL.
 
 ## 4. Stage the article in the live data model
 
@@ -58,6 +67,7 @@ In a checkout with Node dependencies installed, run:
 ```bash
 npm ci
 npm run check:publication
+npm run check:publication:changed
 npm run test:publication
 node scripts/check-editorial-publication.mjs --slug ARTICLE_SLUG
 npm run build
