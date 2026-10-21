@@ -25,10 +25,17 @@ Use only components the story needs. Neither FAQ, a direct-answer callout, a tak
 ## Visual editing
 
 - Favor evidence diagrams, accurately labeled photo documentation (with permission), annotated drawings, material/process close-ups, real comparison tables and carefully art-directed editorial illustration.
-- One strong image per substantial article is the default aim, not a pretext to use decorative stock. A technical image must explain something; if there is no warranted image, publish without one.
+- **Publication blocker (owner revision 2026-10-22):** every new or revised article requires one cover **and** a minimum of 2 distinct inline figures (≤600 English body words), 3 (601–1,200), or 4 (>1,200). These are minimums, not decorative quotas; achieve richness through distinct factual visual explanations. If useful/rights-cleared figures are unavailable, hold publication and improve the research rather than padding with stock.
 - Label generated or conceptual visuals clearly as **illustration / not a photograph or inspection record of a specific project**. Never imply a generated image documents an actual supplier, worker, defect or test result.
 - Always provide alt text, attribution/rights, a factual caption and a mobile readability check. Do not put essential meaning exclusively in tiny letters within an image.
 - Reading column: about 680–760 CSS px; body type about 17–18px with generous line spacing. Use open spacing, restrained colors and minimal boxed callouts. Tables must work on small screens.
+
+
+### Image-rich mobile reading and independent review — mandatory
+
+Place actual `articleBody` illustration blocks **inside the narrative at different sections**, not just a hero or gallery. Mobile figure and caption must be large enough to read without zooming or horizontal swiping; for wide data-rich diagrams create a real mobile-specific vertical representation, not a renamed resized copy. Accept factual process photography, annotated product details, standards-scope comparisons, buyer decision diagrams and proven provenance; avoid fake evidence, unnecessary decorations, repeated visual concepts and unclear licensing. A LinkedIn image does not satisfy on-site body artwork.
+
+A separate reviewer must produce an explicit `IMAGE_EDITORIAL_PASS` tied to the **exact final post version and media**: number and diversity, factual correspondence with text, licensing/provenance, caption/alt accuracy, phone readability, absence of made-up inspections. An automated count can fail missing media but never award editorial merit. Without `IMAGE_EDITORIAL_PASS`, the draft remains held; the GitHub preflight additionally **fails** numeric and structural minimums for every new or substantively changed article. Published older articles are queued for upgrades; any revision must meet the new floor before re-release. Production acceptance reads back the public cover, every inline figure, mobile variants and SHA-matched image files.
 
 ## Free content and future paid depth
 
