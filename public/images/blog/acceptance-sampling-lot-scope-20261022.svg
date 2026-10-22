@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" width="900" height="1125" role="img" aria-labelledby="title desc"><title id="title">Inspect the defined lot, not an imagined uniform shipment</title><desc id="desc">Illustration separating varied manufacturing revisions in a defined shipment from the specific sample and characteristics examined.</desc><rect width="900" height="1125" fill="#f6f2ea"/><path d="M65 70H835" stroke="#b8b4a7" stroke-width="2"/><text x="65" y="118" fill="#a16842" font-size="29" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="4">SOURCE RATING / FIELD NOTES</text>
+<text x="65" y="207" fill="#17343b" font-size="60" font-family="Georgia,serif">Define the lot.</text><text x="65" y="277" fill="#17343b" font-size="60" font-family="Georgia,serif">Then define the test.</text>
+<text x="65" y="346" fill="#607277" font-size="36" font-family="Arial,Helvetica,sans-serif">A report can only speak for its scope.</text>
+<rect x="63" y="395" width="775" height="266" rx="9" fill="#e2e7de" stroke="#82948c" stroke-width="3"/>
+<text x="94" y="450" fill="#17343b" font-size="37" font-weight="700" font-family="Arial,Helvetica,sans-serif">SHIPMENT / LOT DEFINITION</text>
+<g stroke="#24474e" stroke-width="3">
+<rect x="95" y="493" width="120" height="107" fill="#b9cbc1"/><rect x="239" y="493" width="120" height="107" fill="#b9cbc1"/><rect x="383" y="493" width="120" height="107" fill="#d6ad81"/><rect x="527" y="493" width="120" height="107" fill="#b9cbc1"/><rect x="671" y="493" width="120" height="107" fill="#d6ad81"/>
+</g>
+<g font-size="32" font-family="Arial,Helvetica,sans-serif" fill="#17343b" text-anchor="middle">
+<text x="155" y="557">A</text><text x="299" y="557">A</text><text x="443" y="557">B</text><text x="587" y="557">A</text><text x="731" y="557">B</text>
+</g>
+<text x="94" y="635" fill="#51656c" font-family="Arial,Helvetica,sans-serif" font-size="29">Example: different revisions or batches</text>
+<path d="M450 671v52m-16-16 16 16 16-16" stroke="#a16842" stroke-width="7" fill="none"/>
+<rect x="63" y="749" width="775" height="259" rx="9" fill="#fffdfa" stroke="#b9b7aa" stroke-width="3"/>
+<text x="95" y="803" fill="#17343b" font-size="36" font-weight="700" font-family="Arial,Helvetica,sans-serif">SAMPLE + CHECKED FEATURES</text>
+<rect x="97" y="841" width="144" height="109" rx="5" fill="#e0ad7e"/><rect x="268" y="841" width="144" height="109" rx="5" fill="#e0ad7e"/>
+<g stroke="#17343b" fill="none" stroke-width="6"><path d="M116 904l31 24 46-59"/><path d="M289 904l32 24 47-59"/></g>
+<text x="457" y="876" fill="#17343b" font-size="30" font-family="Arial,Helvetica,sans-serif">Dimensions</text><text x="457" y="914" fill="#17343b" font-size="30" font-family="Arial,Helvetica,sans-serif">Appearance</text><text x="457" y="952" fill="#17343b" font-size="30" font-family="Arial,Helvetica,sans-serif">Specified functions</text>
+<text x="94" y="990" fill="#6c7978" font-size="25" font-family="Arial,Helvetica,sans-serif">Example categories; no actual lot sizes shown</text>
+<rect x="0" y="1063" width="900" height="62" fill="#17343b"/><text x="65" y="1104" fill="#f7f1e7" font-size="27" font-family="Arial,Helvetica,sans-serif">Concept illustration — not an actual inspection report</text></svg>
