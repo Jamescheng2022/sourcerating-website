@@ -37,6 +37,8 @@ jobs:
         run: npm ci
       - name: Deterministic publication preflight for all registered articles
         run: npm run check:publication
+      - name: Block PRs with too few or unverified inline article images
+        run: npm run check:publication:changed
       - name: Regression-test stale publication detection
         run: npm run test:publication
       - name: Preserve pinned legacy blog and cover regressions
