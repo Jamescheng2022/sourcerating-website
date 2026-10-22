@@ -133,3 +133,44 @@ test("source digest rejects image revisions under an unchanged public filename",
   assert.equal(hasMatchingPublicationDigest(oldHtml, a), true);
   assert.equal(hasMatchingPublicationDigest(oldHtml, b), false);
 });
+
+test("image-rich short article must have cover and at least 2 inline figures", async () => {
+  const { assessVisualComposition, minimumInlineFigures } = await import("./check-editorial-publication.mjs");
+  const base = {
+    coverImage: {src: "/images/blog/cover.jpg", alt: "A conceptually useful image", caption: "Original visual"},
+    articleBody: [
+      {type: "paragraph", text: "A buyer needs to understand the true scope."},
+      {type: "illustration", src: "/images/blog/one.svg", caption: "Distinct first explanation"},
+      {type: "paragraph", text: "The second question concerns evidence."},
+      {type: "illustration", src: "/images/blog/two.svg", caption: "Distinct second explanation"},
+      {type: "paragraph", text: "Verify shipment documentation."}
+    ]
+  };
+  assert.equal(minimumInlineFigures(base), 2);
+  assert.deepEqual(assessVisualComposition(base).errors, []);
+  assert.ok(assessVisualComposition({...base,articleBody:base.articleBody.filter(b => b.src!=="/images/blog/two.svg")}).errors.some(e=>e.includes("Only 1 inline")));
+  assert.ok(assessVisualComposition({...base,coverImage:null}).errors.some(e=>e.includes("Cover image")));
+});
+
+test("visual gate rejects duplicate sources and adjacent decorative pileups", async () => {
+  const {assessVisualComposition}=await import("./check-editorial-publication.mjs");
+  const blocks=[
+    {type:"paragraph",text:"A buyer-side analysis of testing."},
+    {type:"illustration",src:"/images/x.svg",caption:"Same explanation"},
+    {type:"illustration",src:"/images/x.svg",caption:"Same explanation"},
+    {type:"paragraph",text:"Closing note."}
+  ];
+  const v=assessVisualComposition({coverImage:{src:"/images/hero.jpg"},articleBody:blocks});
+  assert.ok(v.errors.some(e=>e.includes("reuse an image source")));
+  assert.ok(v.errors.some(e=>e.includes("duplicate captions")));
+  assert.ok(v.errors.some(e=>e.includes("Adjacent figures")));
+});
+
+test("longer articles require more inline images, independent of cover", async () => {
+  const {minimumInlineFigures}=await import("./check-editorial-publication.mjs");
+  const post=n=>({articleBody:[{type:"paragraph",text:Array(n).fill("buyer").join(" ")}]});
+  assert.equal(minimumInlineFigures(post(600)),2);
+  assert.equal(minimumInlineFigures(post(601)),3);
+  assert.equal(minimumInlineFigures(post(1200)),3);
+  assert.equal(minimumInlineFigures(post(1201)),4);
+});
