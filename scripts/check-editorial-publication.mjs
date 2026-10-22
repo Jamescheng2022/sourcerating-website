@@ -8,11 +8,13 @@
  * It does NOT replace independent fact, copyright, editorial or code review.
  *
  * npm run check:publication
+ * npm run check:publication:changed    # mandatory new/revised article visual gate
  * node scripts/check-editorial-publication.mjs --slug <slug>
  * node scripts/check-editorial-publication.mjs --slug <slug> --live --origin https://www.sourcerating.com
  */
 import fs from "node:fs";
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
@@ -30,23 +32,28 @@ const checks = [];
 const imageCache = new Map();
 
 function usage() {
-  console.log("Usage: node scripts/check-editorial-publication.mjs --all | --slug <slug> [--live] [--origin https://www.sourcerating.com]");
+  console.log("Usage: node scripts/check-editorial-publication.mjs --all | --changed [--base-ref origin/main] | --slug <slug> [--live] [--origin https://www.sourcerating.com]");
 }
 
 function parseArgs() {
-  const options = { all: false, slug: null, live: false, origin: DEFAULT_ORIGIN };
+  const options = { all: false, changed: false, slug: null, live: false, baseRef: "origin/main", origin: DEFAULT_ORIGIN };
   const args = process.argv.slice(2);
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (arg === "--all") options.all = true;
+    else if (arg === "--changed") options.changed = true;
+    else if (arg === "--base-ref") options.baseRef = args[++i];
     else if (arg === "--slug") options.slug = args[++i];
     else if (arg === "--live") options.live = true;
     else if (arg === "--origin") options.origin = args[++i];
     else if (arg === "--help" || arg === "-h") { usage(); process.exit(0); }
     else throw new Error("Unknown argument: " + arg);
   }
-  if ((options.all && options.slug) || (!options.all && !options.slug)) {
-    throw new Error("Choose exactly one of --all or --slug <slug>.");
+  if ([options.all, options.changed, !!options.slug].filter(Boolean).length !== 1) {
+    throw new Error("Choose exactly one of --all, --changed or --slug <slug>.");
+  }
+  if (!/^[A-Za-z0-9_.\/-]+$/.test(options.baseRef) || options.baseRef.startsWith("-")) {
+    throw new Error("Invalid --base-ref.");
   }
   if (options.live && !options.slug) throw new Error("--live requires --slug.");
   const base = new URL(options.origin);
@@ -60,7 +67,7 @@ function fail(description) { errors.push(description); }
 function warn(description) { warnings.push(description); }
 function assert(condition, description) { condition ? pass(description) : fail(description); }
 
-function loadBlogPosts() {
+function loadBlogPosts(readSource = safePath => fs.readFileSync(path.join(ROOT, safePath), "utf8")) {
   // TypeScript CommonJS transpilation is deliberately scoped to the checked-in blog modules.
   // The canonical registry is src/data/blog.ts; the markdown content directory alone is not a route.
   const cache = new Map();
@@ -71,8 +78,7 @@ function loadBlogPosts() {
       throw new Error("Unexpected module path " + relativePath);
     }
     if (cache.has(safePath)) return cache.get(safePath);
-    const absolutePath = path.join(ROOT, safePath);
-    const source = fs.readFileSync(absolutePath, "utf8");
+    const source = readSource(safePath);
     const output = ts.transpileModule(source, {
       fileName: safePath,
       compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
@@ -182,6 +188,102 @@ function verifyLinks(post, slugs) {
       // post block a documentation-only PR.
       if (!slugs.has(relatedSlug)) warn(post.slug + ": related article not registered: " + relatedSlug);
     }
+  }
+}
+
+// A cover and a rich, distributed inline visual story are independent.
+export function bodyWordCount(post) {
+  const values = [];
+  for (const block of post.articleBody || []) {
+    if (block.type === "paragraph") values.push(block.text || "");
+    if (block.type === "list") values.push(...(block.items || []));
+    if (block.type === "table") values.push(...(block.headers || []), ...(block.rows || []).flat());
+  }
+  for (const section of post.sections || []) {
+    values.push(section.heading || "", section.body || "", ...(section.bullets || []));
+  }
+  return (values.join(" ").match(/[A-Za-z0-9]+(?:['’\-][A-Za-z0-9]+)*/g) || []).length;
+}
+
+export function minimumInlineFigures(post) {
+  const words = bodyWordCount(post);
+  return words <= 600 ? 2 : words <= 1200 ? 3 : 4;
+}
+
+/** Testable structural minimum; value and accuracy still require independent editorial review. */
+export function assessVisualComposition(post) {
+  const notes = [];
+  const blocks = post.articleBody || [];
+  const indexed = blocks.map((b, i) => ({b, i})).filter(x => x.b?.type === "illustration");
+  const required = minimumInlineFigures(post);
+  if (!post.coverImage?.src) notes.push("Cover image is missing");
+  if (indexed.length < required) notes.push("Only " + indexed.length + " inline illustrations; need at least " + required + " for " + bodyWordCount(post) + " words, in addition to the cover");
+  if (!Array.isArray(post.articleBody) || !post.articleBody.length) notes.push("articleBody required for inline visual story");
+  const artwork = [post.coverImage, ...indexed.map(x => x.b)].filter(Boolean);
+  const sources = artwork.map(b => b.src);
+  if (sources.some(src => typeof src !== "string" || !src.startsWith("/"))) notes.push("Every image needs real local source path");
+  if (new Set(sources).size !== sources.length) notes.push("Cover and inline artwork reuse an image source");
+  const descriptions = indexed.map(x => String(x.b.caption || "").trim().toLowerCase()).filter(Boolean);
+  if (new Set(descriptions).size !== descriptions.length) notes.push("Inline figures have duplicate captions; no fake variety");
+  if (indexed.length >= 2 && blocks.length) {
+    const first = indexed[0].i, last = indexed[indexed.length-1].i;
+    if (first / blocks.length > 0.55) notes.push("First figure too late; distribute imagery into first half");
+    if (last / blocks.length < 0.45) notes.push("Last figure too early; distribute imagery through later sections");
+    if (indexed.some((x, i) => i > 0 && x.i - indexed[i-1].i < 2)) notes.push("Adjacent figures with no intervening prose");
+  }
+  return { words: bodyWordCount(post), inlineCount: indexed.length,
+    minimumInline: required, totalImages: indexed.length + (post.coverImage?.src ? 1 : 0), errors: notes };
+}
+
+function compareAgainstBase(posts, baseRef) {
+  // Parse the actual base main registry, so edits to legacy or one-file posts are covered.
+  const base = loadBlogPosts(safePath => execFileSync("git",
+    ["show", baseRef + ":" + safePath], { cwd: ROOT, encoding: "utf8", maxBuffer: 16 * 1024 * 1024 }));
+  const old = new Map(base.map(p => [p.slug, JSON.stringify(p)]));
+  const files = execFileSync("git", ["diff", "--name-only", baseRef + "...HEAD"],
+    { cwd: ROOT, encoding: "utf8", maxBuffer: 4 * 1024 * 1024 })
+    .split("\n").map(s => s.trim()).filter(Boolean);
+  const assetChanges = new Set(files.filter(s => s.startsWith("public/")).map(s => "/" + s.slice("public/".length)));
+  const selected = posts.filter(post => {
+    if (JSON.stringify(post) !== old.get(post.slug)) return true;
+    const media = [post.coverImage?.src, post.coverImage?.mobileSrc,
+      ...(post.articleBody || []).filter(b => b.type === "illustration").flatMap(b => [b.src,b.mobileSrc])].filter(Boolean);
+    return media.some(src => assetChanges.has(src));
+  });
+  return { selected, changedFiles: files, added: selected.filter(p => !old.has(p.slug)).length };
+}
+
+async function verifyVisualGate(post) {
+  const label = "VISUAL HARD GATE " + post.slug;
+  const composition = assessVisualComposition(post);
+  for (const note of composition.errors) fail(label + ": " + note);
+  if (!post.coverImage?.src) return;
+  const media = [post.coverImage, ...(post.articleBody || []).filter(b => b.type === "illustration")];
+  const hashes = new Map();
+  for (const visual of media) {
+    const filename = localAsset(visual.src, label + " asset");
+    if (!filename) continue;
+    const digest = createHash("sha256").update(fs.readFileSync(filename)).digest("hex");
+    if (hashes.has(digest)) fail(label + ": duplicate binary at " + visual.src + " and " + hashes.get(digest));
+    hashes.set(digest, visual.src);
+    const info = await imageInfo(visual.src, label + " desktop " + visual.src, visual.width, visual.height);
+    if (!info) continue;
+    if (info.width < 720) fail(label + ": image too small for mobile/desktop clarity: " + visual.src);
+    if (typeof visual.alt !== "string" || visual.alt.trim().length < 18) fail(label + ": informative alt missing " + visual.src);
+    if (typeof visual.caption !== "string" || visual.caption.trim().length < 18) fail(label + ": factual caption missing " + visual.src);
+    const wideTextSvg = info.ext === ".svg" && info.width / info.height > 1.4 &&
+      /<text\b/i.test(fs.readFileSync(info.file, "utf8"));
+    if (wideTextSvg && !visual.mobileSrc) fail(label + ": wide text diagram needs independent portrait mobileSrc " + visual.src);
+    if (visual.mobileSrc) {
+      const small = await imageInfo(visual.mobileSrc, label + " mobile " + visual.mobileSrc);
+      if (!small) continue;
+      if (small.width / small.height >= 1.1) fail(label + ": mobile figure should be portrait/square " + visual.mobileSrc);
+      if (small.width < 720) fail(label + ": mobile figure too small " + visual.mobileSrc);
+      if (visual.mobileSrc === visual.src) fail(label + ": mobileSrc must not equal src");
+    }
+  }
+  if (!composition.errors.length && hashes.size === media.length) {
+    pass(label + ": cover 1 + inline " + composition.inlineCount + " (min " + composition.minimumInline + ") unique valid artwork and distributed placements");
   }
 }
 
@@ -458,16 +560,21 @@ async function run() {
   }
   assert(posts.length > 0, "blog registry contains articles");
   assert(slugs.size === posts.length, "no duplicate blog slugs");
-  const selected = options.all ? posts : posts.filter(post => post.slug === options.slug);
-  if (!selected.length) fail("Requested slug not found in registered blogPosts: " + options.slug);
-  for (const post of selected) await verifyPost(post, slugs);
+  const comparison = options.changed ? compareAgainstBase(posts, options.baseRef) : null;
+  const selected = options.all ? posts : options.changed ? comparison.selected : posts.filter(post => post.slug === options.slug);
+  if (!selected.length && !options.changed) fail("Requested slug not found in registered blogPosts: " + options.slug);
+  for (const post of selected) {
+    await verifyPost(post, slugs);
+    if (options.changed || !!options.slug) await verifyVisualGate(post);
+  }
   if (options.live && selected.length && errors.length === 0) {
     await verifyLive(selected[0], options.origin);
   }
   const result = {
     status: errors.length ? "FAIL" : "PASS",
-    mode: options.live ? "production-readback" : "source-preflight",
-    slug: options.slug || "all", articles: selected.length,
+    mode: options.live ? "production-readback" : options.changed ? "changed-article-hard-visual-gate" : "source-preflight",
+    slug: options.slug || (options.changed ? "changed" : "all"), articles: selected.length,
+    ...(comparison ? {baseRef: options.baseRef, changedFiles: comparison.changedFiles.length, added: comparison.added} : {}),
     checks: checks.length, warnings, errors
   };
   console.log(JSON.stringify(result, null, 2));
