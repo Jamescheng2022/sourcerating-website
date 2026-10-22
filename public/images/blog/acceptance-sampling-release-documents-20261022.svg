@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" width="900" height="1125" role="img" aria-labelledby="title desc"><title id="title">The four records behind a shipment release decision</title><desc id="desc">A four-stage illustrated document trail that connects the lot ID, sample plan, recorded findings, and outstanding exceptions with packed goods.</desc><rect width="900" height="1125" fill="#f6f2ea"/><path d="M65 70H835" stroke="#b8b4a7" stroke-width="2"/><text x="65" y="118" fill="#a16842" font-size="29" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="4">SOURCE RATING / FIELD NOTES</text>
+<text x="65" y="205" fill="#17343b" font-family="Georgia,serif" font-size="59">Before releasing</text><text x="65" y="272" fill="#17343b" font-family="Georgia,serif" font-size="59">the shipment</text>
+<text x="66" y="344" fill="#607277" font-family="Arial,Helvetica,sans-serif" font-size="35">Four things the report must connect.</text>
+<path d="M144 428V932" stroke="#a6b4ac" stroke-width="9" stroke-dasharray="16 18"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<circle cx="144" cy="449" r="60" fill="#244a50"/><text x="144" y="463" text-anchor="middle" font-size="42" fill="#f6f2ea" font-weight="700">01</text>
+<rect x="242" y="395" width="591" height="119" rx="9" fill="#e3e9df"/>
+<text x="267" y="439" fill="#17343b" font-size="38" font-weight="700">LOT IDENTITY</text><text x="267" y="485" fill="#52696a" font-size="31">Pieces and drawing revisions</text>
+<circle cx="144" cy="608" r="60" fill="#244a50"/><text x="144" y="622" text-anchor="middle" font-size="42" fill="#f6f2ea" font-weight="700">02</text>
+<rect x="242" y="554" width="591" height="119" rx="9" fill="#fffdfa" stroke="#a6b4ac" stroke-width="3"/>
+<text x="267" y="598" fill="#17343b" font-size="38" font-weight="700">THE PLAN</text><text x="267" y="644" fill="#52696a" font-size="31">Characteristics + acceptance rule</text>
+<circle cx="144" cy="767" r="60" fill="#244a50"/><text x="144" y="781" text-anchor="middle" font-size="42" fill="#f6f2ea" font-weight="700">03</text>
+<rect x="242" y="713" width="591" height="119" rx="9" fill="#e3e9df"/>
+<text x="267" y="757" fill="#17343b" font-size="38" font-weight="700">ACTUAL FINDINGS</text><text x="267" y="803" fill="#52696a" font-size="31">What the sample showed</text>
+<circle cx="144" cy="926" r="60" fill="#a86b49"/><text x="144" y="940" text-anchor="middle" font-size="42" fill="#fffdfa" font-weight="700">04</text>
+<rect x="242" y="872" width="591" height="119" rx="9" fill="#f1e0d3"/>
+<text x="267" y="916" fill="#17343b" font-size="38" font-weight="700">EXCEPTIONS + PACKING</text><text x="267" y="962" fill="#6f5b50" font-size="31">Unresolved items and released goods</text>
+</g>
+<rect x="0" y="1063" width="900" height="62" fill="#17343b"/><text x="65" y="1104" fill="#f7f1e7" font-size="27" font-family="Arial,Helvetica,sans-serif">Concept illustration — not an actual inspection report</text></svg>
