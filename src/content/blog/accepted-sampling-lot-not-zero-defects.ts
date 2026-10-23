@@ -12,6 +12,7 @@ export const acceptanceSamplingPost: BlogPost = {
   sections: [],
   coverImage: {
     src: "/images/blog/acceptance-sampling-field-note-20261021.svg",
+    mobileSrc: "/images/blog/acceptance-sampling-field-note-mobile-20261023.svg",
     width: 1200,
     height: 900,
     alt: "Conceptual diagram separating the complete shipment, the selected inspection sample and the resulting lot decision.",
