@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 1180" width="720" height="1180" role="img" aria-labelledby="t d">
+<title id="t">What does a passed sampling inspection mean?</title>
+<desc id="d">An original portrait editorial diagram distinguishing the entire defined shipment, a smaller sample selected for inspection, and the conditional lot acceptance decision. It does not represent real inspection data or a zero-defect promise.</desc>
+<rect width="720" height="1180" fill="#f5f1e8"/>
+<path d="M42 48H678" stroke="#b7bbae" stroke-width="2"/>
+<text x="42" y="90" font-size="25" font-family="Arial,Helvetica,sans-serif" letter-spacing="4" fill="#8b5739">SOURCE RATING</text>
+<text x="42" y="157" font-size="50" font-family="Georgia,serif" fill="#173a40">What does</text>
+<text x="42" y="215" font-size="50" font-family="Georgia,serif" fill="#173a40">PASS mean?</text>
+<text x="42" y="274" font-size="26" font-family="Arial,Helvetica,sans-serif" fill="#536a6a">Three different things. One decision.</text>
+<rect x="42" y="316" width="636" height="226" rx="12" fill="#e2e9e0"/>
+<text x="67" y="368" font-size="33" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#173a40">THE SHIPMENT</text>
+<g stroke="#24494e" stroke-width="3" fill="#adbeaF">
+<rect x="67" y="402" width="95" height="84"/><rect x="185" y="402" width="95" height="84"/><rect x="303" y="402" width="95" height="84"/><rect x="421" y="402" width="95" height="84"/><rect x="539" y="402" width="95" height="84"/>
+</g>
+<text x="68" y="520" font-size="23" font-family="Arial,Helvetica,sans-serif" fill="#536a6a">A defined lot of items or bundles</text>
+<path d="M360 557v45m-15-15 15 15 15-15" stroke="#a26b4e" stroke-width="6" fill="none" stroke-linecap="round"/>
+<rect x="42" y="618" width="636" height="182" rx="12" fill="#f9f5ec" stroke="#c5c5b6" stroke-width="2"/>
+<text x="67" y="672" font-size="33" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#173a40">THE SAMPLE</text>
+<g fill="#d29b6c" stroke="#24494e" stroke-width="3"><rect x="67" y="705" width="113" height="71"/><rect x="198" y="705" width="113" height="71"/></g>
+<text x="339" y="738" font-size="25" font-family="Arial,Helvetica,sans-serif" fill="#536a6a">Selected items,</text>
+<text x="339" y="773" font-size="25" font-family="Arial,Helvetica,sans-serif" fill="#536a6a">specified checks</text>
+<path d="M360 814v46m-15-15 15 15 15-15" stroke="#a26b4e" stroke-width="6" fill="none" stroke-linecap="round"/>
+<rect x="42" y="878" width="636" height="152" rx="12" fill="#173a40"/>
+<text x="67" y="926" font-size="33" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#f5f1e8">THE DECISION</text>
+<text x="67" y="972" font-size="31" font-family="Arial,Helvetica,sans-serif" fill="#f5f1e8">Accept the defined lot</text>
+<text x="67" y="1008" font-size="24" font-family="Arial,Helvetica,sans-serif" fill="#e8d6c8">only under the agreed plan</text>
+<text x="42" y="1093" font-size="27" font-family="Georgia,serif" fill="#173a40">A decision, not a zero-defect promise.</text>
+<text x="42" y="1143" font-size="19" font-family="Arial,Helvetica,sans-serif" fill="#657477">Conceptual illustration — not inspection evidence</text>
+</svg>
