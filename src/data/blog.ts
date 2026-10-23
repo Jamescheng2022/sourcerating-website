@@ -10,11 +10,13 @@ import { plywoodPackingPost } from "@/content/blog/plywood-crate-solid-wood-skid
 import { containerMassPost } from "@/content/blog/packing-list-weight-container-vgm";
 import { tariffCodePost } from "@/content/blog/supplier-hs-code-destination-import-classification";
 import { epdComparisonPost } from "@/content/blog/epd-carbon-comparison-functional-unit-boundary";
+import { weldEvidencePost } from "@/content/blog/weld-photo-not-joint-release-evidence";
 
 export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
 export const blogPosts: BlogPost[] = [
+  weldEvidencePost,
   isoScopePost,
   calibrationPost,
   saltSprayPost,
