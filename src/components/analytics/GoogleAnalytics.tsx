@@ -1,21 +1,10 @@
-import Script from "next/script";
+import { GoogleAnalytics as NextGoogleAnalytics } from "@next/third-parties/google";
 
 export function GoogleAnalytics() {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
-  if (!gaId) return null;
+  const gaId = (process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_ID || "").trim();
+  if (process.env.VERCEL_ENV !== "production" || !/^G-[A-Z0-9]+$/.test(gaId) || /^G-X+$/.test(gaId)) return null;
 
-  return (
-    <>
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          window.gtag = gtag;
-          gtag('js', new Date());
-          gtag('config', '${gaId}');
-        `}
-      </Script>
-    </>
-  );
+  // GA4 Enhanced Measurement owns history-based page views. Do not add a
+  // second router listener or a GTM GA4 tag for this same stream.
+  return <NextGoogleAnalytics gaId={gaId} />;
 }
