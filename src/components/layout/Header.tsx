@@ -30,7 +30,6 @@ export function Header() {
           </div>
           <div className="flex lg:hidden items-center gap-1">
             <Link href="/risk-screen" onClick={() => setMobileMenuOpen(false)} className="inline-flex min-h-11 items-center justify-center px-3 text-xs sm:text-sm font-semibold whitespace-nowrap text-white bg-brand-950 rounded-md hover:bg-brand-800 transition-colors">Free Risk Screen</Link>
-            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="inline-flex min-h-11 items-center px-2 text-sm font-medium text-gray-600 hover:text-brand-700 transition-colors">Contact</Link>
             <button type="button" className="min-h-11 min-w-11 inline-flex items-center justify-center text-gray-600" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu" aria-expanded={mobileMenuOpen} aria-controls="mobile-navigation">
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
