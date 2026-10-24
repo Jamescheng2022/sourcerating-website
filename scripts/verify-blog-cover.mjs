@@ -37,6 +37,7 @@ function loader(baseline) {
       if (id==='lucide-react') return Object.fromEntries(['ArrowLeft','ArrowRight','Check','ShieldAlert','Calendar','Clock'].map(x=>[x,x]));
       if (id==='@/components/shared/ArticleBody') return {ArticleBody:'ArticleBody'};
       if (id==='@/components/ui/TrackedLink') return {TrackedLink:'TrackedLink'};
+      if (id==='@/components/blog/BlogDirectory') return {BlogDirectory:'BlogDirectory'};
       if (id.startsWith('@/')) return load('src/'+id.slice(2)+'.ts');
       throw new Error('Unexpected dependency '+id);
     }
@@ -101,7 +102,22 @@ async function main() {
   check('absolute custom image URL remains absolute',()=>assert.equal(metadata.generatePageMetadata({title:'x',description:'y',path:'/x',ogImage:{src:'https://cdn.example.com/a.jpg',width:400,height:300,alt:'a'}}).openGraph.images[0].url,'https://cdn.example.com/a.jpg'));
   const list=after('src/app/blog/page.tsx').default();
   check('blog index presents every registered cover and does not drop cards',()=>{const imgs=nodes(list,n=>n.type==='Image');const coverPaths=data.filter(x=>x.coverImage).map(x=>x.coverImage.src);assert.deepEqual(plain(imgs.map(x=>x.props.src)),plain(coverPaths));assert.equal(nodes(list,n=>n.type==='article').length,data.length);});
-  check('homepage Git content unchanged (checkout CRLF normalized)',()=>assert.equal(fs.readFileSync(path.join(root,'src/app/page.tsx'),'utf8').replace(/\r\n/g,'\n'),original('src/app/page.tsx').toString('utf8')));
+  check('redesigned homepage and navigation retain real destinations',()=>{
+    const home=after('src/app/page.tsx').default();
+    assert.equal(nodes(home,n=>n.type==='h1')[0].props.children,'Industrial sourcing, in context.');
+    assert.ok(nodes(home,n=>n.type==='Link'&&n.props.href==='/blog').length);
+    const recent=[...data].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4);
+    const cards=nodes(home,n=>n.type==='article');
+    assert.equal(cards.length,recent.length);
+    assert.deepEqual(plain(cards.map(card=>nodes(card,n=>n.type==='Link')[0].props.href)),recent.map(p=>'/blog/'+p.slug));
+    const config=after('src/data/site-config.ts').siteConfig;
+    assert.ok(config.nav.some(x=>x.href==='/membership'));
+    const member=after('src/app/membership/page.tsx').default();
+    const links=[...nodes(home,n=>!!n.props?.href),...nodes(member,n=>!!n.props?.href)].map(x=>x.props.href);
+    assert.ok(!links.some(href=>href.includes('gumroad.com')||href.includes('/go/membership')));
+    const destinations=new Set([...links,...config.nav.map(x=>x.href),...config.footer.quickLinks.map(x=>x.href),...config.footer.company.map(x=>x.href),...config.footer.legal.map(x=>x.href)]);
+    for(const href of destinations){assert.ok(href.startsWith('/')&&!href.includes('?'),href);if(href.startsWith('/blog/'))assert.ok(data.some(p=>href==='/blog/'+p.slug),href);else assert.ok(fs.existsSync(path.join(root,'src/app',href,'page.tsx')),href);}
+  });
   const puOldTree=await oldPage.default(input);
   check('PU CTA links unchanged',()=>assert.deepEqual(plain(nodes(tree,n=>n.type==='TrackedLink')),plain(nodes(puOldTree,n=>n.type==='TrackedLink'))));
   let did404=false;try {await page.default({params:Promise.resolve({slug:'missing-test'})});}catch(error){did404=error.message==='NOT_FOUND';}
