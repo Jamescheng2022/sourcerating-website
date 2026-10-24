@@ -41,7 +41,15 @@ export async function POST(request: Request) {
       existing.push(entry);
       await fs.writeFile(filePath, JSON.stringify(existing, null, 2), "utf-8");
     } catch {
-      // If file system is read-only in certain serverless environments, gracefully continue
+      // Read-only filesystem (e.g. serverless preview) — do not claim success for an entry we did not persist.
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "This preview environment's filesystem is read-only, so the submission could not be saved. No entry was recorded.",
+        },
+        { status: 503 }
+      );
     }
 
     return NextResponse.json({

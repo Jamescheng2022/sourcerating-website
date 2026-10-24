@@ -64,6 +64,11 @@ export function MobileIaProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== "undefined") {
       try {
         localStorage.setItem("sr_ia_mode", mode);
+        const url = new URL(window.location.href);
+        if (url.searchParams.has("ia")) {
+          url.searchParams.set("ia", mode);
+          window.history.replaceState(window.history.state, "", url.toString());
+        }
         window.dispatchEvent(new Event("sr-ia-change"));
       } catch {
         // ignore
