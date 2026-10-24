@@ -34,6 +34,7 @@ export function Header() {
     { label: "Resources", href: "/resources" },
     { label: "Intelligence", href: "/intelligence" },
     { label: "Field Kits", href: "/field-kits" },
+    { label: "Membership", href: "/membership" },
     { label: "Services", href: "/services" },
     { label: "Buyer Guides", href: "/buyer-decisions" },
     { label: "Playbook", href: "/playbook" },
@@ -48,11 +49,11 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-3">
             <Logo />
-            {/* Mode badge for reviewers on mobile & desktop */}
+            {/* Mode badge for reviewers on sm+ viewports; on mobile it's in drawer & floating pill */}
             <button
               type="button"
               onClick={toggleIaMode}
-              className="inline-flex min-h-[32px] items-center gap-1 rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] font-bold text-gray-700 hover:bg-gray-100 transition-colors"
+              className="hidden sm:inline-flex min-h-[32px] items-center gap-1 rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] font-bold text-gray-700 hover:bg-gray-100 transition-colors"
               title="Toggle between Direction A (Trade Directory) and Direction B (Editorial Journal)"
               aria-label={`Toggle mobile IA mode. Current: ${iaMode}`}
             >
@@ -105,7 +106,7 @@ export function Header() {
           <div className="flex xl:hidden items-center gap-2">
             <Link
               href="/risk-screen"
-              className="inline-flex min-h-[38px] items-center px-3 py-1.5 text-xs font-bold text-white bg-brand-950 rounded-lg"
+              className="hidden sm:inline-flex min-h-[38px] items-center px-3 py-1.5 text-xs font-bold text-white bg-brand-950 rounded-lg hover:bg-brand-800 transition-colors"
             >
               Risk Screen
             </Link>
@@ -268,6 +269,13 @@ export function Header() {
                       <Building2 className="h-4 w-4" /> About SourceRating
                     </Link>
                     <Link
+                      href="/membership"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="inline-flex min-h-[44px] items-center gap-1.5 font-semibold text-gray-700 hover:text-brand-900"
+                    >
+                      Membership
+                    </Link>
+                    <Link
                       href="/contact"
                       onClick={() => setMobileMenuOpen(false)}
                       className="inline-flex min-h-[44px] items-center gap-1.5 font-semibold text-gray-700 hover:text-brand-900"
@@ -339,6 +347,22 @@ export function Header() {
                         </span>
                         <span className="text-xs text-gray-500">
                           Three-gate engineering procurement methodology
+                        </span>
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-gray-400" />
+                    </Link>
+
+                    <Link
+                      href="/membership"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-between p-3.5 hover:bg-gray-50"
+                    >
+                      <div>
+                        <span className="text-sm font-bold text-gray-950 block">
+                          Research Membership
+                        </span>
+                        <span className="text-xs text-gray-500">
+                          In preparation · Deep context and readable source notes
                         </span>
                       </div>
                       <ArrowRight className="h-4 w-4 text-gray-400" />

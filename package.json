@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "check:publication": "node scripts/check-editorial-publication.mjs --all",
     "test:publication": "node --test scripts/test-editorial-publication.mjs",
-    "verify:mobile-ia": "node scripts/verify-mobile-ia.mjs"
+    "verify:mobile-ia": "node scripts/verify-mobile-ia.mjs",
+    "verify:membership": "node scripts/verify-hosted-membership.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
