@@ -30,15 +30,26 @@ export function AppWaitlistForm() {
         body: JSON.stringify({ email, role, region, priorityFeature }),
       });
 
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
-        throw new Error(data.error || "Failed to record preview waitlist entry.");
+      let data: { ok?: boolean; error?: string } | null = null;
+      try {
+        data = await res.json();
+      } catch {
+        // Non-JSON response (e.g. serverless proxy 503 HTML)
+      }
+
+      if (!res.ok || !data?.ok) {
+        setIsSuccess(false);
+        throw new Error(data?.error || "The submission could not be saved. Please try again later.");
       }
 
       setIsSuccess(true);
     } catch (err: unknown) {
-      // In preview mode, even if network fails locally, allow simulated success for UI inspection
-      const message = err instanceof Error ? err.message : "Submission error";
+      // Honest failure handling: never imply success when the storage write was rejected
+      setIsSuccess(false);
+      const message =
+        err instanceof Error
+          ? err.message
+          : "The submission could not be saved. Please try again later.";
       setErrorMessage(message);
     } finally {
       setIsSubmitting(false);
@@ -91,7 +102,10 @@ export function AppWaitlistForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {errorMessage && (
-        <div className="flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-900">
+        <div
+          role="alert"
+          className="flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-900"
+        >
           <AlertCircle className="h-4 w-4 shrink-0 mt-0.5 text-red-600" />
           <span>{errorMessage}</span>
         </div>
@@ -148,8 +162,7 @@ export function AppWaitlistForm() {
             <option value="China">China</option>
             <option value="Vietnam">Vietnam</option>
             <option value="Thailand">Thailand</option>
-            <option value="Indonesia / Malaysia">Indonesia / Malaysia</option>
-            <option value="Global / Other">Global / Other</option>
+            <option value="Other Southeast Asia">Other Southeast Asia</option>
           </select>
         </div>
       </div>
@@ -157,7 +170,7 @@ export function AppWaitlistForm() {
       {/* Priority Feature */}
       <div>
         <label htmlFor="app-feature" className="block text-xs font-bold uppercase tracking-wider text-gray-700">
-          Feature of Highest Interest
+          Highest Priority Feature You Want Tested
         </label>
         <select
           id="app-feature"
@@ -165,10 +178,10 @@ export function AppWaitlistForm() {
           onChange={(e) => setPriorityFeature(e.target.value)}
           className="mt-1 block w-full min-h-[48px] rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 focus:border-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-700/20"
         >
-          <option value="MTC Verification">Offline MTC Heat-Number Verifier</option>
-          <option value="Photo Audit Stamps">Tamper-Evident Photo Logging (GPS/Time)</option>
-          <option value="Bilingual Dispute Cards">Bilingual Factory Floor Communication Cards</option>
-          <option value="Gate Scoring">Pre-Deposit & Pre-Shipment Gate Scoring</option>
+          <option value="MTC Verification">Offline MTC & Heat Chemistry Verifier</option>
+          <option value="Photo Audit Stamps">Tamper-Proof Photo & GPS Inspection Logs</option>
+          <option value="Bilingual Dispute Cards">Bilingual Chinese/English Non-Conformance Cards</option>
+          <option value="Supplier Scoring Matrix">3-Gate Factory Evaluation Scorecards</option>
         </select>
       </div>
 
@@ -176,22 +189,17 @@ export function AppWaitlistForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-2 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-brand-950 px-5 py-3 text-sm font-bold text-white shadow hover:bg-brand-800 disabled:opacity-50 transition-colors"
+        className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-brand-950 px-6 py-3 text-sm font-bold text-white shadow hover:bg-brand-800 disabled:opacity-50 transition-colors"
       >
-        {isSubmitting ? (
-          <span>Recording Preview Submission...</span>
-        ) : (
-          <>
-            <Send className="h-4 w-4" />
-            <span>Join Early Access Waitlist (Preview)</span>
-          </>
-        )}
+        <Send className="h-4 w-4" />
+        <span>{isSubmitting ? "Submitting Preview Interest..." : "Join Free Mobile App Preview"}</span>
       </button>
 
-      <p className="text-center text-[11px] text-gray-400">
-        <Sparkles className="inline h-3 w-3 text-brand-600 mr-1" />
-        Preview environment testing: records locally, no marketing newsletters or third-party CRM hooks.
-      </p>
+      {/* Trust Notice */}
+      <div className="flex items-center justify-center gap-1.5 text-[11px] text-gray-600 pt-1">
+        <Sparkles className="h-3 w-3 text-brand-700" />
+        <span>Free alpha preview. No commitment, credit card, or payment required.</span>
+      </div>
     </form>
   );
 }

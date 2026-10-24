@@ -21,19 +21,29 @@ const MobileIaContext = createContext<MobileIaContextType>({
   toggleIaMode: () => {},
 });
 
-function subscribe(callback: () => void) {
+let inMemoryIaMode: IaMode | null = null;
+
+export function subscribe(callback: () => void) {
   if (typeof window === "undefined") return () => {};
-  window.addEventListener("storage", callback);
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === "sr_ia_mode" || !event.key) {
+      if (event.newValue === "editorial" || event.newValue === "directory") {
+        inMemoryIaMode = event.newValue;
+      } else if (event.newValue === null) {
+        inMemoryIaMode = null;
+      }
+      callback();
+    }
+  };
+  window.addEventListener("storage", handleStorage);
   window.addEventListener("sr-ia-change", callback);
   return () => {
-    window.removeEventListener("storage", callback);
+    window.removeEventListener("storage", handleStorage);
     window.removeEventListener("sr-ia-change", callback);
   };
 }
 
-let inMemoryIaMode: IaMode | null = null;
-
-function getSnapshot(): IaMode {
+export function getSnapshot(): IaMode {
   if (typeof window === "undefined") return "directory";
   try {
     const params = new URLSearchParams(window.location.search);
@@ -44,6 +54,12 @@ function getSnapshot(): IaMode {
   } catch {
     // ignore
   }
+
+  // Session override wins when the active tab chose a mode (including when storage write failed)
+  if (inMemoryIaMode) {
+    return inMemoryIaMode;
+  }
+
   try {
     const saved = localStorage.getItem("sr_ia_mode");
     if (saved === "editorial" || saved === "directory") {
@@ -52,14 +68,45 @@ function getSnapshot(): IaMode {
   } catch {
     // ignore security / storage restrictions
   }
-  if (inMemoryIaMode) {
-    return inMemoryIaMode;
-  }
+
   return "directory";
 }
 
-function getServerSnapshot(): IaMode {
+export function getServerSnapshot(): IaMode {
   return "directory";
+}
+
+export function setIaMode(mode: IaMode) {
+  if (typeof window === "undefined") return;
+
+  // Record session in-memory override first so failed storage writes do not revert the UI
+  inMemoryIaMode = mode;
+
+  try {
+    localStorage.setItem("sr_ia_mode", mode);
+  } catch {
+    // Storage blocked / private browsing mode / quota exceeded
+  }
+
+  try {
+    const url = new URL(window.location.href);
+    if (url.searchParams.has("ia")) {
+      url.searchParams.set("ia", mode);
+      window.history.replaceState(window.history.state, "", url.toString());
+    }
+  } catch {
+    // Invalid URL or history API blocked
+  }
+
+  try {
+    window.dispatchEvent(new Event("sr-ia-change"));
+  } catch {
+    // Event dispatch error
+  }
+}
+
+export function resetIaModeForTesting() {
+  inMemoryIaMode = null;
 }
 
 export function MobileIaProvider({ children }: { children: React.ReactNode }) {
@@ -69,41 +116,19 @@ export function MobileIaProvider({ children }: { children: React.ReactNode }) {
     getServerSnapshot
   );
 
-  const setIaMode = useCallback((mode: IaMode) => {
-    if (typeof window === "undefined") return;
-
-    inMemoryIaMode = mode;
-
-    try {
-      localStorage.setItem("sr_ia_mode", mode);
-    } catch {
-      // Storage blocked / private browsing mode / quota exceeded
-    }
-
-    try {
-      const url = new URL(window.location.href);
-      if (url.searchParams.has("ia")) {
-        url.searchParams.set("ia", mode);
-        window.history.replaceState(window.history.state, "", url.toString());
-      }
-    } catch {
-      // Invalid URL or history API blocked
-    }
-
-    try {
-      window.dispatchEvent(new Event("sr-ia-change"));
-    } catch {
-      // Event dispatch error
-    }
+  const setIaModeCallback = useCallback((mode: IaMode) => {
+    setIaMode(mode);
   }, []);
 
   const toggleIaMode = useCallback(() => {
     const nextMode = iaMode === "directory" ? "editorial" : "directory";
     setIaMode(nextMode);
-  }, [iaMode, setIaMode]);
+  }, [iaMode]);
 
   return (
-    <MobileIaContext.Provider value={{ iaMode, setIaMode, toggleIaMode }}>
+    <MobileIaContext.Provider
+      value={{ iaMode, setIaMode: setIaModeCallback, toggleIaMode }}
+    >
       {children}
     </MobileIaContext.Provider>
   );

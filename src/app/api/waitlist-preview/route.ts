@@ -2,6 +2,12 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 
+// TODO (Owner Gate): The local filesystem (data/preview-waitlist.json) is read-only on Vercel serverless deployments.
+// When ready to accept public production waitlist signups, the Owner must provision persistent storage:
+// e.g. Vercel KV / Upstash Redis (KV_REST_API_URL / KV_REST_API_TOKEN) or PostgreSQL database (DATABASE_URL)
+// and wire it here. Until persistent storage is provided, serverless attempts return 503 so the UI honestly reports the failure.
+// DO NOT integrate or mock an unapproved store here; storage selection remains an Owner gate.
+
 // Serialize local storage updates within this Node process.
 let previewWriteQueue: Promise<void> = Promise.resolve();
 

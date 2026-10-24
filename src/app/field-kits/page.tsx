@@ -19,19 +19,19 @@ export const metadata = generatePageMetadata({
 
 export default function FieldKitsPage() {
   return (
-    <div className="min-h-screen bg-[#f7f8f6] pb-24 pt-24 sm:pt-28">
+    <div className="min-h-screen bg-[#f7f8f6] pb-24 pt-24 sm:pt-28 overflow-x-hidden w-full max-w-full">
       {/* Hero section */}
-      <section className="border-b border-gray-200 bg-brand-950 text-white">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand-800/80 px-3 py-1 text-xs font-semibold text-brand-200">
-              <Wrench className="h-3.5 w-3.5" />
-              <span>Engineering Procurement Toolkits · 实战工具包</span>
+      <section className="border-b border-gray-200 bg-brand-950 text-white w-full min-w-0">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 w-full min-w-0">
+          <div className="max-w-3xl min-w-0">
+            <span className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full bg-brand-800/80 px-3 py-1 text-xs font-semibold text-brand-200">
+              <Wrench className="h-3.5 w-3.5 shrink-0" />
+              <span className="break-words">Engineering Procurement Toolkits · 实战工具包</span>
             </span>
-            <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
+            <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl break-words">
               Turn Ambiguous Mill Promises Into Verifiable Evidence.
             </h1>
-            <p className="mt-4 text-base leading-relaxed text-gray-200 sm:text-lg">
+            <p className="mt-4 text-base leading-relaxed text-gray-200 sm:text-lg break-words">
               Bilingual spreadsheets, ASTM/EN formula checkbooks, and factory floor
               non-conformance notice templates designed for buyers and inspectors
               verifying Chinese and Southeast Asian manufacturers.
@@ -58,16 +58,16 @@ export default function FieldKitsPage() {
       </section>
 
       {/* Main Kits Catalog */}
-      <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8 w-full min-w-0">
         {/* Preview Concept Disclosure Banner */}
-        <div className="mb-8 rounded-xl border border-gray-200 bg-white p-5 shadow-xs">
-          <div className="flex items-start gap-3">
+        <div className="mb-8 rounded-xl border border-gray-200 bg-white p-5 shadow-xs min-w-0">
+          <div className="flex items-start gap-3 min-w-0">
             <Lock className="h-5 w-5 text-brand-700 shrink-0 mt-0.5" />
-            <div>
-              <h2 className="text-sm font-bold uppercase tracking-wider text-gray-900">
+            <div className="min-w-0 flex-1">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-gray-900 break-words">
                 Editorial Preview & Toolkit Concept
               </h2>
-              <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm">
+              <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:text-sm break-words">
                 These field kits are currently undergoing pilot testing on active
                 factory audits in China and Thailand. Detail pages below show full
                 worksheets, formula samples, and inspection procedures. No
@@ -78,14 +78,14 @@ export default function FieldKitsPage() {
         </div>
 
         {/* Kits Grid */}
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 min-w-0 w-full">
           {fieldKits.map((kit) => (
             <div
               key={kit.slug}
-              className="flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-xs transition-shadow hover:border-brand-300 hover:shadow-md sm:p-6"
+              className="min-w-0 flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-4 sm:p-6 shadow-xs transition-shadow hover:border-brand-300 hover:shadow-md"
             >
-              <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3 min-w-0">
                   <span className="rounded bg-brand-50 px-2 py-0.5 font-mono text-[11px] font-bold text-brand-900">
                     {kit.stage}
                   </span>
@@ -94,7 +94,7 @@ export default function FieldKitsPage() {
                   </span>
                 </div>
 
-                <h3 className="mt-4 text-lg font-bold text-gray-950 sm:text-xl">
+                <h3 className="mt-4 text-lg font-bold text-gray-950 sm:text-xl break-words">
                   <Link
                     href={`/field-kits/${kit.slug}`}
                     className="hover:text-brand-700 hover:underline"
@@ -102,37 +102,37 @@ export default function FieldKitsPage() {
                     {kit.title}
                   </Link>
                 </h3>
-                <p className="mt-1 text-sm font-semibold text-brand-800" lang="zh">
+                <p className="mt-1 text-sm font-semibold text-brand-800 break-words" lang="zh">
                   {kit.chinese}
                 </p>
 
-                <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:text-sm line-clamp-3">
+                <p className="mt-3 text-xs leading-relaxed text-gray-600 sm:text-sm break-words line-clamp-3">
                   {kit.summary}
                 </p>
 
                 {/* What's included preview */}
-                <div className="mt-4 rounded-lg bg-gray-50 p-3">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-gray-700">
-                    <FileSpreadsheet className="h-3.5 w-3.5 text-brand-700" />
-                    <span>Includes {kit.items.length} Practical Assets:</span>
+                <div className="mt-4 min-w-0 rounded-lg bg-gray-50 p-3">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-gray-700 min-w-0">
+                    <FileSpreadsheet className="h-3.5 w-3.5 text-brand-700 shrink-0" />
+                    <span className="break-words">Includes {kit.items.length} Practical Assets:</span>
                   </div>
-                  <ul className="mt-2 space-y-1 text-xs text-gray-600">
+                  <ul className="mt-2 space-y-1.5 text-xs text-gray-600 min-w-0">
                     {kit.items.map((item, i) => (
-                      <li key={i} className="truncate">
-                        • {item.name} ({item.format})
+                      <li key={i} className="min-w-0 break-words leading-relaxed">
+                        • {item.name} <span className="text-gray-400 font-mono text-[11px]">({item.format})</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              <div className="mt-6 border-t border-gray-100 pt-4 flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+              <div className="mt-6 border-t border-gray-100 pt-4 flex flex-wrap items-center justify-between gap-2 min-w-0">
+                <span className="text-xs font-bold uppercase tracking-wider text-gray-400 shrink-0">
                   Concept Preview
                 </span>
                 <Link
                   href={`/field-kits/${kit.slug}`}
-                  className="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-bold text-brand-800 hover:text-brand-950"
+                  className="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-bold text-brand-800 hover:text-brand-950 shrink-0"
                 >
                   <span>Inspect Kit Contents</span>
                   <ArrowRight className="h-4 w-4" />
@@ -143,13 +143,13 @@ export default function FieldKitsPage() {
         </div>
 
         {/* Bottom Context Callout */}
-        <div className="mt-12 rounded-xl bg-brand-950 p-6 text-white sm:p-8">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="max-w-2xl">
-              <h2 className="text-lg font-bold text-white sm:text-xl">
+        <div className="mt-12 rounded-xl bg-brand-950 p-6 text-white sm:p-8 min-w-0">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between min-w-0">
+            <div className="max-w-2xl min-w-0">
+              <h2 className="text-lg font-bold text-white sm:text-xl break-words">
                 Need On-Site Factory Verification in Asia Right Now?
               </h2>
-              <p className="mt-1 text-xs leading-relaxed text-gray-300 sm:text-sm">
+              <p className="mt-1 text-xs leading-relaxed text-gray-300 sm:text-sm break-words">
                 While our digital field kits are being finalized, our team is
                 actively auditing steel fabricators, precast suppliers, and MEP
                 manufacturers in China, Vietnam, and Thailand.
@@ -157,7 +157,7 @@ export default function FieldKitsPage() {
             </div>
             <Link
               href="/risk-screen"
-              className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-5 py-2.5 text-xs font-bold text-brand-950 shadow hover:bg-gray-100 transition-colors"
+              className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-5 py-2.5 text-xs font-bold text-brand-950 shadow hover:bg-gray-100 transition-colors w-full sm:w-auto"
             >
               <Shield className="h-4 w-4 text-brand-800" />
               <span>Request Free Risk Screen</span>
