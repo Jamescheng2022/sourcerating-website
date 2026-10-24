@@ -53,8 +53,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           ok: false,
-          error:
-            "This preview environment's filesystem is read-only, so the submission could not be saved. No entry was recorded.",
+          error: "The submission could not be saved. Please try again later.",
         },
         { status: 503 }
       );

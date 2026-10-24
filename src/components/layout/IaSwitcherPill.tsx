@@ -8,7 +8,7 @@ export function IaSwitcherPill() {
   const { iaMode, setIaMode } = useMobileIa();
 
   return (
-    <div className="fixed bottom-16 right-3 z-40 sm:bottom-4 sm:right-4">
+    <div className="fixed bottom-16 right-3 z-40 sm:right-4 lg:bottom-4">
       <div className="flex items-center gap-1 rounded-full border border-gray-300 bg-white/95 px-2 py-1 shadow-lg backdrop-blur-md">
         <span className="hidden items-center gap-1 pl-1 text-[11px] font-bold uppercase tracking-wider text-gray-500 sm:inline-flex">
           <SlidersHorizontal className="h-3 w-3 text-brand-700" />

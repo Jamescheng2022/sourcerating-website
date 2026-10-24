@@ -31,6 +31,8 @@ function subscribe(callback: () => void) {
   };
 }
 
+let inMemoryIaMode: IaMode | null = null;
+
 function getSnapshot(): IaMode {
   if (typeof window === "undefined") return "directory";
   try {
@@ -39,12 +41,19 @@ function getSnapshot(): IaMode {
     if (urlIa === "editorial" || urlIa === "directory") {
       return urlIa;
     }
+  } catch {
+    // ignore
+  }
+  try {
     const saved = localStorage.getItem("sr_ia_mode");
     if (saved === "editorial" || saved === "directory") {
       return saved;
     }
   } catch {
     // ignore security / storage restrictions
+  }
+  if (inMemoryIaMode) {
+    return inMemoryIaMode;
   }
   return "directory";
 }
@@ -61,18 +70,30 @@ export function MobileIaProvider({ children }: { children: React.ReactNode }) {
   );
 
   const setIaMode = useCallback((mode: IaMode) => {
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem("sr_ia_mode", mode);
-        const url = new URL(window.location.href);
-        if (url.searchParams.has("ia")) {
-          url.searchParams.set("ia", mode);
-          window.history.replaceState(window.history.state, "", url.toString());
-        }
-        window.dispatchEvent(new Event("sr-ia-change"));
-      } catch {
-        // ignore
+    if (typeof window === "undefined") return;
+
+    inMemoryIaMode = mode;
+
+    try {
+      localStorage.setItem("sr_ia_mode", mode);
+    } catch {
+      // Storage blocked / private browsing mode / quota exceeded
+    }
+
+    try {
+      const url = new URL(window.location.href);
+      if (url.searchParams.has("ia")) {
+        url.searchParams.set("ia", mode);
+        window.history.replaceState(window.history.state, "", url.toString());
       }
+    } catch {
+      // Invalid URL or history API blocked
+    }
+
+    try {
+      window.dispatchEvent(new Event("sr-ia-change"));
+    } catch {
+      // Event dispatch error
     }
   }, []);
 
