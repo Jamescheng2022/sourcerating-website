@@ -5,15 +5,17 @@
 **Author Agent:** Antigravity (Phase 2 Successor)  
 **Target Reviewer:** Claude Lead  
 **Review Date:** October 24, 2026  
-**Status:** Complete · All Gates Clean · Production Build Verified  
+**Status:** Complete · All Gates Clean · Rebased on origin/main (`f16de36`) · 0 Regressions  
 
 ---
 
 ## 1. Executive Summary & Scope
 
-In accordance with the Phase 2 mandate, this branch delivers a mobile-first information architecture (IA) redesign for `sourcerating.com` without regressing any existing surfaces (`/`, `/services`, `/pricing`, `/playbook`, `/buyer-decisions`, `/about`, `/contact`, and the 18+ existing buyer guides).
+In accordance with the Phase 2 mandate and Claude Lead's verification requirements, this branch delivers a mobile-first information architecture (IA) redesign for `sourcerating.com` while maintaining complete parity with `origin/main`'s content and editorial tooling.
 
-All work has been conducted in isolation on branch `agent/sr-mobile-ia-20261024` without modifying `main` or merging sibling PRs. Commercial boundaries have been strictly enforced: zero real payment checkouts, zero fabricated SKU commitments, zero external email/CRM pipeline webhooks, and zero personal-data storage.
+Following Claude Lead's review, the branch was rebased on `origin/main` (`f16de36`), restoring the 3 latest published articles (`accepted-sampling-lot-not-zero-defects`, `iso-9001-certificate-factory-scope`, `weld-photo-not-joint-release-evidence`) and all associated SVG evidence figures. In addition, the editorial tooling scripts (`scripts/check-editorial-publication.mjs` and `scripts/test-editorial-publication.mjs`) have been preserved and verified passing.
+
+Commercial boundaries have been strictly enforced: zero real payment checkouts, zero fabricated SKU commitments, zero external email/CRM pipeline webhooks, and zero personal-data storage.
 
 ---
 
@@ -118,6 +120,57 @@ Both directions are live and toggleable on mobile and desktop via:
 
 ## 4. Technical Validation Evidence
 
+### Editorial Pipeline & Publication Gates
+Per Claude Lead's verification requirements, the repository was rebased on `origin/main` (`f16de36`), restoring the editorial publication tooling scripts and content files. Both verification scripts were executed directly:
+
+```bash
+# 1. Editorial publication preflight across all registered articles
+$ npm run check:publication
+> node scripts/check-editorial-publication.mjs --all
+{
+  "status": "PASS",
+  "mode": "source-preflight",
+  "slug": "all",
+  "articles": 30,
+  "checks": 383,
+  "errors": []
+}
+
+# 2. Editorial test suite (Node.js native test runner)
+$ npm run test:publication
+> node --test scripts/test-editorial-publication.mjs
+✔ current SSR article passes real rendered content comparison (2.0522ms)
+✔ old body is rejected even if the route, title, excerpt and image are unchanged (1.3107ms)
+✔ old title is rejected for revisions preserving slug and image (0.157ms)
+✔ Next RSC hydration scripts cannot fake the missing visible article (0.1508ms)
+✔ inline tags do not split the visible text into false negatives (0.1227ms)
+✔ missing server-rendered article body fails even if RSC text is present (0.2163ms)
+✔ short table header or unit revision fails even with unchanged rows and title (0.5968ms)
+✔ outdated image caption fails despite unchanged hero URL and article body (0.2149ms)
+✔ exact source digest rejects changed reference URLs and short table values (0.7977ms)
+✔ source digest rejects image revisions under an unchanged public filename (0.231ms)
+ℹ tests 10
+ℹ pass 10
+ℹ fail 0
+
+# 3. Content Parity Verification
+# All 13 modular content files in src/content/blog/ match origin/main exactly:
+# 1. accepted-sampling-lot-not-zero-defects.ts (slug: accepted-sampling-lot-not-zero-defects)
+# 2. accredited-laboratory-specific-test-scope.ts (slug: accredited-laboratory-specific-test-scope)
+# 3. calibration-sticker-measurement-tolerance.ts (slug: calibration-sticker-measurement-tolerance)
+# 4. epd-carbon-comparison-functional-unit-boundary.ts (slug: epd-carbon-comparison-functional-unit-boundary)
+# 5. hot-dip-galvanized-steel-china-astm-a123-inspection.ts (slug: hot-dip-galvanized-steel-china-astm-a123-inspection)
+# 6. iso-9001-certificate-factory-scope.ts (slug: iso-9001-certificate-factory-scope)
+# 7. packing-list-weight-container-vgm.ts (slug: packing-list-weight-container-vgm)
+# 8. plywood-crate-solid-wood-skids-ispm15.ts (slug: plywood-crate-solid-wood-skids-ispm15)
+# 9. salt-spray-hours-not-service-life.ts (slug: salt-spray-hours-not-service-life)
+# 10. supplier-hs-code-destination-import-classification.ts (slug: supplier-hs-code-destination-import-classification)
+# 11. weld-photo-not-joint-release-evidence.ts (slug: weld-photo-not-joint-release-evidence)
+# 12. xrf-316l-carbon-verification.ts (slug: xrf-316l-carbon-verification)
+# 13. legacy-posts.ts (re-exports legacy guides, ensuring 30 total articles in src/data/blog.ts)
+# git diff origin/main -- src/data/blog.ts src/content/blog/ public/images/blog/ returns zero diff.
+```
+
 ### Build & Compiler Gates
 All validation commands executed directly in PowerShell in `agent-sr-mobile-ia-20261024`:
 
@@ -130,14 +183,17 @@ $ npx tsc --noEmit
 $ npm run lint
 # Exit Code: 0 (Zero errors, zero warnings)
 
-# 3. Next.js Turbopack Production Build
+# 3. Automated Mobile IA & Responsive Verification Check
+$ npm run verify:mobile-ia
+# Exit Code: 0 (All 18 checks passed)
+
+# 4. Next.js Turbopack Production Build
 $ npm run build
 # Exit Code: 0
-# Successfully generated all 48 static / SSG pages and dynamic API routes
+# Successfully generated all 60 static / SSG pages and dynamic API routes
 ```
 
 ### Automated Verification Script (`npm run verify:mobile-ia`)
-We introduced an automated verification test suite at `scripts/verify-mobile-ia.mjs`:
 ```
 === Mobile IA & Responsive Verification ===
 ✓ PASS: SSG HTML artifact: resources.html (Size: 109 KB)
@@ -148,7 +204,7 @@ We introduced an automated verification test suite at `scripts/verify-mobile-ia.
 ✓ PASS: SSG HTML artifact: field-kits/steel-mill-test-certificate-audit-kit.html (Size: 74 KB)
 ✓ PASS: SSG HTML artifact: field-kits/factory-audit-acceptance-kit.html (Size: 72 KB)
 ✓ PASS: SSG HTML artifact: field-kits/cbam-steel-emissions-verification-kit.html (Size: 70 KB)
-✓ PASS: CSV index asset exists (Size: 7794 bytes)
+✓ PASS: CSV index asset exists (Size: 7808 bytes)
 ✓ PASS: Field Kit CTA is non-functional / preview-only (Disabled attribute present, zero live checkout links)
 ✓ PASS: Intelligence is explanation-only (no payment/signup commitments) (No external checkout or billing hooks)
 ✓ PASS: Waitlist API has zero external email/CRM hooks (Local file-based capture only)
@@ -183,7 +239,7 @@ To ensure complete transparency during Claude Lead's consolidation review:
 | Surface / Feature | Status | Details & Implementation Evidence |
 | :--- | :--- | :--- |
 | **Resource Library (`/resources`)** | **Fully Built** | 14 curated sources, live client-side search, category chips, CSV export, dual card/dense layout toggle. |
-| **Intelligence Research (`/intelligence`)** | **Fully Built** | Integrates all 18+ live research articles, category filters, and structured concept dossier roadmaps. |
+| **Intelligence Research (`/intelligence`)** | **Fully Built** | Integrates all 30 live articles, category filters, and structured concept dossier roadmaps. |
 | **Intelligence Paid Subscription** | **Concept / Explanation Only** | Clearly framed as "In Preparation". Zero payment buttons, zero price commitments, zero user paywalls. Public articles stay 100% free. |
 | **Field Kits Catalog & Detail (`/field-kits`)** | **Fully Built Template** | Rich specification for 3 kits, including worksheets, inspection matrices, factory failure scenarios, and excerpt tables. |
 | **Gumroad Checkout Integration** | **Blocked by Policy (Disabled State)** | Wired to nothing real as instructed. Styled as a disabled Gumroad button (`cursor-not-allowed`) with explicit preview notice. |
@@ -191,6 +247,7 @@ To ensure complete transparency during Claude Lead's consolidation review:
 | **App Waitlist Pipeline** | **Local Preview Only** | Client form validation connected to local `/api/waitlist-preview` route. Writes to local `data/preview-waitlist.json`. Real email/CRM marketing webhooks intentionally blocked. |
 | **Mobile IA Two Directions** | **Fully Built & Switchable** | Direction A (Trade Directory & Workstation) and Direction B (Intelligence Journal & Dossiers) switchable in real time. |
 | **Proposal Showcase (`/ia-proposal`)** | **Fully Built** | Live interactive viewer comparing both directions with trade-off matrices and design rationales. |
+| **Editorial Tooling Pipeline** | **Fully Preserved & Verified** | `check:publication` and `test:publication` pass cleanly with zero failures. |
 
 ---
 
@@ -226,6 +283,8 @@ To ensure complete transparency during Claude Lead's consolidation review:
   * `src/app/sitemap.ts` (Added all new static & SSG routes)
   * `public/llms.txt` (Updated reference URLs)
 * **Testing & Tooling:**
+  * `scripts/check-editorial-publication.mjs` (Preserved and verified passing)
+  * `scripts/test-editorial-publication.mjs` (Preserved and verified passing)
   * `scripts/verify-mobile-ia.mjs` (Automated responsive and non-commercial compliance check)
-  * `package.json` (Added `verify:mobile-ia` script)
+  * `package.json` (Includes `check:publication`, `test:publication`, and `verify:mobile-ia`)
   * `docs/editorial/proposals/sr-mobile-ia-20261024-agy-report.md` (This document)
