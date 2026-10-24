@@ -1,9 +1,14 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog";
+import { fieldKits } from "@/data/field-kits";
 import { siteConfig } from "@/data/site-config";
 
 const staticRoutes = [
   ["/", "weekly", 1],
+  ["/resources", "weekly", 0.95],
+  ["/intelligence", "weekly", 0.9],
+  ["/field-kits", "weekly", 0.9],
+  ["/app", "monthly", 0.8],
   ["/services", "monthly", 0.9],
   ["/buyer-decisions", "monthly", 0.95],
   ["/pricing", "monthly", 0.85],
@@ -15,6 +20,7 @@ const staticRoutes = [
   ["/contact", "monthly", 0.9],
   ["/blog", "weekly", 0.7],
   ["/faq", "monthly", 0.7],
+  ["/ia-proposal", "monthly", 0.7],
   ["/privacy", "yearly", 0.3],
   ["/terms", "yearly", 0.3],
 ] as const;
@@ -35,5 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...pages, ...posts];
+  const kits: MetadataRoute.Sitemap = fieldKits.map((kit) => ({
+    url: `${siteConfig.url}/field-kits/${kit.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  return [...pages, ...posts, ...kits];
 }

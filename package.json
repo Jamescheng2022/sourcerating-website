@@ -10,7 +10,8 @@
     "generate:trust-assets": "node scripts/generate-trust-assets.mjs && node scripts/generate-professional-checklist.mjs",
     "lint": "eslint .",
     "check:publication": "node scripts/check-editorial-publication.mjs --all",
-    "test:publication": "node --test scripts/test-editorial-publication.mjs"
+    "test:publication": "node --test scripts/test-editorial-publication.mjs",
+    "verify:mobile-ia": "node scripts/verify-mobile-ia.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

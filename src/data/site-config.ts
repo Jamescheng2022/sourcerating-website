@@ -11,10 +11,14 @@ export const siteConfig = {
   social: { linkedin: "https://www.linkedin.com/in/hcrdi" },
   nav: [
     { label: "Home", href: "/" },
+    { label: "Resources", href: "/resources" },
+    { label: "Intelligence", href: "/intelligence" },
+    { label: "Field Kits", href: "/field-kits" },
     { label: "Services", href: "/services" },
     { label: "Buyer Guides", href: "/buyer-decisions" },
-    { label: "Pricing", href: "/pricing" },
     { label: "Playbook", href: "/playbook" },
+    { label: "App", href: "/app" },
+    { label: "Pricing", href: "/pricing" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
@@ -22,6 +26,10 @@ export const siteConfig = {
     tagline:
       "Buyer-side supplier verification, factory audits, and engineering procurement support across China, Vietnam, and Southeast Asia.",
     quickLinks: [
+      { label: "Free Resources", href: "/resources" },
+      { label: "Intelligence", href: "/intelligence" },
+      { label: "Field Kits", href: "/field-kits" },
+      { label: "Mobile App Preview", href: "/app" },
       { label: "Services", href: "/services" },
       { label: "Buyer Guides", href: "/buyer-decisions" },
       { label: "Pricing", href: "/pricing" },
@@ -32,6 +40,7 @@ export const siteConfig = {
     company: [
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
+      { label: "IA Design Proposal", href: "/ia-proposal" },
     ],
     legal: [
       { label: "Privacy Policy", href: "/privacy" },
