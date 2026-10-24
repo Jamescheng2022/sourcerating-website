@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 
+// Serialize local storage updates within this Node process.
+let previewWriteQueue: Promise<void> = Promise.resolve();
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -30,16 +33,21 @@ export async function POST(request: Request) {
     const filePath = path.join(previewDir, "preview-waitlist.json");
 
     try {
-      await fs.mkdir(previewDir, { recursive: true });
-      let existing: unknown[] = [];
-      try {
-        const fileContent = await fs.readFile(filePath, "utf-8");
-        existing = JSON.parse(fileContent);
-      } catch {
-        existing = [];
-      }
-      existing.push(entry);
-      await fs.writeFile(filePath, JSON.stringify(existing, null, 2), "utf-8");
+      const write = previewWriteQueue.then(async () => {
+        await fs.mkdir(previewDir, { recursive: true });
+        let existing: unknown[] = [];
+        try {
+          const fileContent = await fs.readFile(filePath, "utf-8");
+          existing = JSON.parse(fileContent);
+        } catch {
+          existing = [];
+        }
+        existing.push(entry);
+        await fs.writeFile(filePath, JSON.stringify(existing, null, 2), "utf-8");
+      });
+      // Keep later submissions running even if this write fails.
+      previewWriteQueue = write.catch(() => {});
+      await write;
     } catch {
       // Read-only filesystem (e.g. serverless preview) — do not claim success for an entry we did not persist.
       return NextResponse.json(
