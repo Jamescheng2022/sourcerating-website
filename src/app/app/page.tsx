@@ -52,7 +52,7 @@ export default function AppPage() {
                 href="#waitlist"
                 className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-xs font-bold text-brand-950 shadow hover:bg-gray-100 transition-colors"
               >
-                <span>Request Early Access</span>
+                <span>View Early Access Status</span>
                 <ArrowRight className="h-4 w-4" />
               </a>
               <Link
@@ -183,7 +183,7 @@ export default function AppPage() {
               Closed Preview Cohort
             </span>
             <h2 className="mt-3 text-2xl font-bold text-gray-950 sm:text-3xl">
-              Register for Mobile App Early Access
+              Mobile App Early Access Status
             </h2>
             <p className="mt-2 text-xs text-gray-600 sm:text-sm">
               We are inviting engineering buyers, QA inspectors, and sourcing
