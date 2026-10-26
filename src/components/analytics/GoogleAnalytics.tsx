@@ -1,4 +1,4 @@
-import { GoogleAnalytics as NextGoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalyticsConsent } from "./GoogleAnalyticsConsent";
 
 export function GoogleAnalytics() {
   const gaId = (process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_ID || "").trim();
@@ -6,5 +6,5 @@ export function GoogleAnalytics() {
 
   // GA4 Enhanced Measurement owns history-based page views. Do not add a
   // second router listener or a GTM GA4 tag for this same stream.
-  return <NextGoogleAnalytics gaId={gaId} />;
+  return <GoogleAnalyticsConsent gaId={gaId} debugMode={process.env.GA4_DEBUG_MODE === "true"} />;
 }

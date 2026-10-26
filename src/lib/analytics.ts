@@ -21,5 +21,11 @@ export function trackEvent(eventName: string, params?: AnalyticsParams) {
     // Analytics must never interrupt the conversion path.
   }
 
-  window.gtag?.("event", eventName, definedParams);
+  // Google receives only bounded event labels, never form values or arbitrary strings.
+  const keys = new Set(["form", "location", "label", "guide", "landing_source", "assessment_source"]);
+  const googleParams = Object.fromEntries(Object.entries(definedParams).filter(([key, value]) =>
+    keys.has(key) && (typeof value === "boolean" || (typeof value === "number" && Number.isFinite(value)) ||
+      (typeof value === "string" && /^[a-z0-9_-]{1,120}$/i.test(value)))
+  ));
+  window.gtag?.("event", eventName, googleParams);
 }
