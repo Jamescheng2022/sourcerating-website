@@ -5,13 +5,13 @@ import {
   BookOpen,
   Wrench,
   ShieldAlert,
-  Search,
   Clock,
   Calendar,
   Compass,
 } from "lucide-react";
 import { blogPosts } from "@/data/blog";
 import { generatePageMetadata } from "@/lib/metadata";
+import { HomeSearch } from "@/components/home/HomeSearch";
 
 export const metadata = generatePageMetadata({
   title: "Industrial Sourcing Research & Buyer Field Notes",
@@ -20,33 +20,6 @@ export const metadata = generatePageMetadata({
   path: "/",
   ogImage: "/images/hero-factory-audit.png",
 });
-
-const quickTopics = [
-  {
-    label: "MTC Traceability",
-    href: "/blog/how-to-verify-mill-test-certificates-and-heat-number-traceability-before-steel-shipment",
-  },
-  {
-    label: "ASTM A123 HDG",
-    href: "/blog/hot-dip-galvanized-steel-china-astm-a123-inspection",
-  },
-  {
-    label: "ISO 9001 Scope",
-    href: "/blog/iso-9001-certificate-factory-scope",
-  },
-  {
-    label: "Weld Evidence",
-    href: "/blog/weld-photo-not-joint-release-evidence",
-  },
-  {
-    label: "Acceptance Sampling",
-    href: "/blog/accepted-sampling-lot-not-zero-defects",
-  },
-  {
-    label: "All 31 Articles",
-    href: "/blog",
-  },
-];
 
 const topics = [
   {
@@ -101,44 +74,8 @@ export default function HomePage() {
               industrial purchase.
             </p>
 
-            {/* Clearer Search & Fast Navigation */}
-            <div className="mt-6">
-              <div className="relative max-w-xl">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
-                  <Search className="h-4 w-4 text-gray-400" aria-hidden="true" />
-                </div>
-                <input
-                  type="text"
-                  readOnly
-                  placeholder="Quick lookup: ASTM, GB/T, MTC chemistry, ISO scope..."
-                  className="block w-full min-h-[44px] rounded-lg border border-gray-300 bg-gray-50/70 pl-10 pr-24 text-xs text-gray-900 sm:text-sm focus:border-brand-700 focus:outline-none"
-                />
-                <div className="absolute inset-y-1 right-1 flex items-center">
-                  <Link
-                    href="/resources"
-                    className="inline-flex min-h-[36px] items-center rounded-md bg-brand-950 px-3 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-brand-800 transition-colors"
-                  >
-                    <span>Search</span>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Recommended Topic Chips */}
-              <div className="mt-3.5 flex flex-wrap items-center gap-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
-                  Recommended:
-                </span>
-                {quickTopics.map((topic) => (
-                  <Link
-                    key={topic.label}
-                    href={topic.href}
-                    className="inline-flex min-h-[32px] items-center rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-700 hover:border-brand-700 hover:bg-brand-50 hover:text-brand-900 transition-colors"
-                  >
-                    {topic.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            {/* Interactive Research & Sourcing Search */}
+            <HomeSearch />
           </div>
         </section>
 

@@ -38,6 +38,7 @@ function loader(baseline) {
       if (id==='@/components/shared/ArticleBody') return {ArticleBody:'ArticleBody'};
       if (id==='@/components/ui/TrackedLink') return {TrackedLink:'TrackedLink'};
       if (id==='@/components/blog/BlogDirectory') return {BlogDirectory:'BlogDirectory'};
+      if (id==='@/components/home/HomeSearch') return {HomeSearch:'HomeSearch'};
       if (id.startsWith('@/')) return load('src/'+id.slice(2)+'.ts');
       throw new Error('Unexpected dependency '+id);
     }
