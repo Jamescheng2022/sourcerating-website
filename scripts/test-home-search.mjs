@@ -34,10 +34,16 @@ function load(file) {
       URLSearchParams,
       Response,
       AbortController,
+      window: {
+        get gtag() {
+          return globalThis.__gtag;
+        },
+      },
       fetch: forbidden,
       console: { log: forbidden, error: forbidden, warn: forbidden },
       process: new Proxy({}, { get: forbidden }),
       require(id) {
+        if (id === "@vercel/analytics") return { track: () => {} };
         assert.ok(id.startsWith(".") || id.startsWith("@/"), `Unexpected dependency: ${id}`);
         const base = id.startsWith("@/")
           ? path.join(root, "src", id.slice(2))
@@ -265,4 +271,53 @@ test("Homepage page.tsx integrates HomeSearch and retains required SEO invariant
   assert.ok(homeSource.includes('href="/resources"'), "Link to /resources preserved");
   assert.ok(homeSource.includes('href="/field-kits"'), "Link to /field-kits preserved");
   assert.ok(homeSource.includes('href="/risk-screen"'), "Link to /risk-screen preserved");
+});
+
+test("GA4 regression: trackEvent forwards only bounded event labels and strips arbitrary/PII data", () => {
+  const analyticsLib = load(path.join(root, "src/lib/analytics.ts"));
+  let gtagCalled = false;
+  let gtagEvent = "";
+  let gtagParams = {};
+
+  globalThis.__gtag = (cmd, eventName, params) => {
+    gtagCalled = true;
+    gtagEvent = eventName;
+    gtagParams = params;
+  };
+
+  analyticsLib.trackEvent("cta_click", {
+    form: "risk_screen",
+    location: "header",
+    label: "hero_search",
+    email: "user@example.com", // sensitive / PII
+    token: "secret_12345", // token
+    userInput: "<script>alert(1)</script>", // arbitrary/XSS
+    landing_source: "google_search",
+  });
+
+  assert.equal(gtagCalled, true);
+  assert.equal(gtagEvent, "cta_click");
+  assert.equal(gtagParams.form, "risk_screen");
+  assert.equal(gtagParams.location, "header");
+  assert.equal(gtagParams.label, "hero_search");
+  assert.equal(gtagParams.landing_source, "google_search");
+  // Sensitive and unapproved keys must be stripped
+  assert.equal(gtagParams.email, undefined, "Email must not be forwarded to GA4");
+  assert.equal(gtagParams.token, undefined, "Token must not be forwarded to GA4");
+  assert.equal(gtagParams.userInput, undefined, "Arbitrary input must not be forwarded to GA4");
+
+  delete globalThis.__gtag;
+});
+
+test("GA4 regression: GoogleAnalyticsConsent gates on consent and blocks private paths", () => {
+  const consentSource = fs.readFileSync(
+    path.join(root, "src/components/analytics/GoogleAnalyticsConsent.tsx"),
+    "utf8"
+  );
+  assert.ok(consentSource.includes("ga4_analytics_consent_v1"), "Consent key must be v1");
+  assert.ok(consentSource.includes("/jbxz"), "Must block /jbxz private path");
+  assert.ok(consentSource.includes("/admin"), "Must block /admin private path");
+  assert.ok(consentSource.includes("ad_storage:'denied'"), "Ad storage must be denied by default");
+  assert.ok(consentSource.includes("ad_user_data:'denied'"), "Ad user data must be denied by default");
+  assert.ok(consentSource.includes("ad_personalization:'denied'"), "Personalization must be denied by default");
 });
