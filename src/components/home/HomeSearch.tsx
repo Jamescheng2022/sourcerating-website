@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useTransition, useRef } from "react";
+import React, { useState, useEffect, useCallback, useTransition } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -14,36 +14,14 @@ import {
   Loader2,
   RotateCcw,
 } from "lucide-react";
+import {
+  ResearchKind,
+  SearchResultItem,
+  HomeSearchManager,
+  isSearchInputDirty,
+} from "@/lib/home-search-controller";
 
-export type ResearchKind = "all" | "article" | "resource" | "kit" | "research";
-
-export interface SearchResultItem {
-  id: string;
-  kind: ResearchKind;
-  title: string;
-  summary: string;
-  category: string;
-  url: string;
-  status: string;
-  updatedAt?: string;
-  provenance?: Array<{ title: string; url: string }>;
-}
-
-export interface SearchResponse {
-  query: string;
-  kind: string;
-  category: string;
-  total: number;
-  limit: number;
-  offset: number;
-  results: SearchResultItem[];
-  categories: string[];
-  researchBridge: {
-    mode: string;
-    available: number;
-    liveResearch: boolean;
-  };
-}
+export type { ResearchKind, SearchResultItem } from "@/lib/home-search-controller";
 
 const filterKinds: Array<{ id: ResearchKind; label: string; count: number; desc: string }> = [
   { id: "all", label: "All Items", count: 48, desc: "Articles, Resources, Field Kits" },
@@ -68,6 +46,8 @@ const focusLink =
 export function HomeSearch() {
   const [query, setQuery] = useState("");
   const [activeKind, setActiveKind] = useState<ResearchKind>("all");
+  const [submittedQuery, setSubmittedQuery] = useState("");
+  const [submittedKind, setSubmittedKind] = useState<ResearchKind>("all");
   const [results, setResults] = useState<SearchResultItem[] | null>(null);
   const [total, setTotal] = useState<number>(0);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "empty" | "error">("idle");
@@ -75,8 +55,6 @@ export function HomeSearch() {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [loadMoreError, setLoadMoreError] = useState<string | null>(null);
 
-  const abortControllerRef = useRef<AbortController | null>(null);
-  const requestIdRef = useRef<number>(0);
   const [, startTransition] = useTransition();
 
   const syncUrl = useCallback((q: string, kind: ResearchKind) => {
@@ -95,130 +73,33 @@ export function HomeSearch() {
     window.history.replaceState(null, "", url.toString());
   }, []);
 
-  const performSearch = useCallback(
-    async (searchQuery: string, kind: ResearchKind) => {
-      const trimmed = searchQuery.trim();
-      syncUrl(trimmed, kind);
-
-      // Abort any in-flight request
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-
-      // Bump sequence counter so older responses are discarded
-      const currentRequestId = ++requestIdRef.current;
-
-      // Reset load-more states on fresh search
-      setIsLoadingMore(false);
-      setLoadMoreError(null);
-
-      // If user typed nothing and kind is 'all', return to idle state
-      if (!trimmed && kind === "all") {
-        setResults(null);
-        setTotal(0);
-        setStatus("idle");
-        setErrorMessage(null);
-        return;
-      }
-
-      setStatus("loading");
-      setErrorMessage(null);
-
-      const controller = new AbortController();
-      abortControllerRef.current = controller;
-
-      try {
-        const params = new URLSearchParams();
-        if (trimmed) params.set("q", trimmed);
-        if (kind !== "all") params.set("kind", kind);
-        params.set("limit", "20");
-        params.set("offset", "0");
-
-        const res = await fetch(`/api/research/search?${params.toString()}`, {
-          signal: controller.signal,
-        });
-
-        if (!res.ok) {
-          const errData = await res.json().catch(() => ({}));
-          if (currentRequestId === requestIdRef.current) {
-            setStatus("error");
-            setErrorMessage(errData.error || `Search failed with status ${res.status}`);
-          }
-          return;
-        }
-
-        const data: SearchResponse = await res.json();
-        if (currentRequestId === requestIdRef.current && !controller.signal.aborted) {
+  const [manager] = useState(
+    () =>
+      new HomeSearchManager({
+        onStateChange: (next) => {
           startTransition(() => {
-            setResults(data.results || []);
-            setTotal(data.total ?? 0);
-            setStatus((data.results || []).length === 0 ? "empty" : "success");
+            setQuery(next.query);
+            setActiveKind(next.activeKind);
+            setSubmittedQuery(next.submittedQuery);
+            setSubmittedKind(next.submittedKind);
+            setResults(next.results);
+            setTotal(next.total);
+            setStatus(next.status);
+            setErrorMessage(next.errorMessage);
+            setIsLoadingMore(next.isLoadingMore);
+            setLoadMoreError(next.loadMoreError);
           });
-        }
-      } catch (err) {
-        if (
-          !(err instanceof DOMException && err.name === "AbortError") &&
-          currentRequestId === requestIdRef.current
-        ) {
-          setStatus("error");
-          setErrorMessage(
-            err instanceof Error ? err.message : "Network error. Please check connection and try again."
-          );
-        }
-      }
-    },
-    [syncUrl]
+        },
+      })
   );
 
-  const handleLoadMore = async () => {
-    if (isLoadingMore || !results || results.length >= total) return;
-    setIsLoadingMore(true);
-    setLoadMoreError(null);
-
-    const nextOffset = results.length;
-    const currentRequestId = ++requestIdRef.current;
-    const controller = new AbortController();
-    abortControllerRef.current = controller;
-
-    try {
-      const params = new URLSearchParams();
-      const trimmed = query.trim();
-      if (trimmed) params.set("q", trimmed);
-      if (activeKind !== "all") params.set("kind", activeKind);
-      params.set("limit", "20");
-      params.set("offset", String(nextOffset));
-
-      const res = await fetch(`/api/research/search?${params.toString()}`, {
-        signal: controller.signal,
-      });
-
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        if (currentRequestId === requestIdRef.current) {
-          setLoadMoreError(errData.error || `Failed to load more (status ${res.status})`);
-          setIsLoadingMore(false);
-        }
-        return;
-      }
-
-      const data: SearchResponse = await res.json();
-      if (currentRequestId === requestIdRef.current && !controller.signal.aborted) {
-        startTransition(() => {
-          setResults((prev) => [...(prev || []), ...(data.results || [])]);
-          setTotal(data.total ?? 0);
-          setIsLoadingMore(false);
-        });
-      }
-    } catch (err) {
-      if (
-        !(err instanceof DOMException && err.name === "AbortError") &&
-        currentRequestId === requestIdRef.current
-      ) {
-        setLoadMoreError(err instanceof Error ? err.message : "Failed to load more results.");
-        setIsLoadingMore(false);
-      }
-    }
-  };
+  const performSearch = useCallback(
+    async (searchQuery: string, kind: ResearchKind) => {
+      syncUrl(searchQuery.trim(), kind);
+      await manager.search(searchQuery, kind);
+    },
+    [manager, syncUrl]
+  );
 
   // Initialize search from URL on mount
   useEffect(() => {
@@ -238,8 +119,6 @@ export function HomeSearch() {
 
     if (initialQ || initialKind !== "all") {
       const timer = setTimeout(() => {
-        setQuery(initialQ);
-        setActiveKind(initialKind);
         void performSearch(initialQ, initialKind);
       }, 0);
       return () => clearTimeout(timer);
@@ -248,39 +127,33 @@ export function HomeSearch() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    performSearch(query, activeKind);
+    void performSearch(query, activeKind);
   };
 
   const handleKindChange = (newKind: ResearchKind) => {
     setActiveKind(newKind);
+    manager.setActiveKind(newKind);
     if (status !== "idle" || query.trim() || newKind !== "all") {
-      performSearch(query, newKind);
+      void performSearch(query, newKind);
     }
   };
 
   const handleTopicClick = (topicQuery: string) => {
     setQuery(topicQuery);
-    performSearch(topicQuery, activeKind);
+    manager.setQuery(topicQuery);
+    void performSearch(topicQuery, activeKind);
   };
 
   const handleClear = () => {
-    // Abort active request and increment sequence ID so late arrivals never overwrite cleared state
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-      abortControllerRef.current = null;
-    }
-    requestIdRef.current++;
-
-    setQuery("");
-    setActiveKind("all");
-    setResults(null);
-    setTotal(0);
-    setStatus("idle");
-    setErrorMessage(null);
-    setIsLoadingMore(false);
-    setLoadMoreError(null);
+    manager.clear();
     syncUrl("", "all");
   };
+
+  const handleLoadMore = () => {
+    void manager.loadMore();
+  };
+
+  const isDirty = isSearchInputDirty(query, submittedQuery);
 
   const kindBadge = (kind: ResearchKind, itemStatus: string) => {
     switch (kind) {
@@ -337,7 +210,10 @@ export function HomeSearch() {
             id="home-search-input"
             type="search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              manager.setQuery(e.target.value);
+            }}
             placeholder="Search 48 records: ASTM, GB/T, MTC chemistry, ISO scope, weld inspection..."
             className="block w-full min-h-[48px] rounded-xl border border-gray-300 bg-white pl-10 pr-28 text-xs text-gray-900 placeholder:text-gray-400 shadow-xs focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700 sm:text-sm"
           />
@@ -446,7 +322,7 @@ export function HomeSearch() {
               <p className="mt-1 text-red-700">{errorMessage || "Unknown error encountered."}</p>
               <button
                 type="button"
-                onClick={() => performSearch(query, activeKind)}
+                onClick={() => void performSearch(query, activeKind)}
                 className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 rounded-md bg-red-800 px-4 py-2 text-xs font-bold text-white hover:bg-red-900"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
@@ -463,8 +339,8 @@ export function HomeSearch() {
               className="py-6 text-center text-xs sm:text-sm text-gray-600"
             >
               <p className="font-bold text-gray-900">
-                No matches found for &ldquo;{query}&rdquo;
-                {activeKind !== "all" ? ` under category ${activeKind}` : ""}
+                No matches found for &ldquo;{submittedQuery || query}&rdquo;
+                {submittedKind !== "all" ? ` under category ${submittedKind}` : ""}
               </p>
               <p className="mt-1.5 text-gray-500 max-w-lg mx-auto leading-relaxed">
                 Matches are computed across 31 full article texts, 14 official standards/customs
@@ -493,16 +369,16 @@ export function HomeSearch() {
                   Showing <span className="font-bold text-brand-950">{results.length}</span> of{" "}
                   <span className="font-bold text-brand-950">{total}</span> matching{" "}
                   {total === 1 ? "record" : "records"}
-                  {query && (
+                  {submittedQuery && (
                     <span>
                       {" "}
-                      for &ldquo;<span className="text-brand-900">{query}</span>&rdquo;
+                      for &ldquo;<span className="text-brand-900">{submittedQuery}</span>&rdquo;
                     </span>
                   )}
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-[11px] text-gray-500">
-                    Filter: <strong>{filterKinds.find((k) => k.id === activeKind)?.label}</strong>
+                    Filter: <strong>{filterKinds.find((k) => k.id === submittedKind)?.label}</strong>
                   </span>
                   <button
                     type="button"
@@ -515,7 +391,7 @@ export function HomeSearch() {
               </div>
 
               {/* Research bridge advisory if user selected research filter */}
-              {activeKind === "research" && total === 0 && (
+              {submittedKind === "research" && total === 0 && (
                 <div className="mt-3 rounded-lg border border-purple-200 bg-purple-50/70 p-3 text-xs text-purple-900">
                   <strong>HyperResearch Public Bridge:</strong> Currently 0 audited public research
                   exports are published. In accordance with safety policies, no internal worker or
@@ -598,6 +474,14 @@ export function HomeSearch() {
               <div className="mt-5 flex flex-col items-center justify-center gap-2 pt-3 border-t border-gray-200/60">
                 {results.length < total ? (
                   <div className="flex flex-col items-center gap-2 w-full sm:w-auto">
+                    {isDirty && (
+                      <div
+                        role="status"
+                        className="text-xs text-amber-800 bg-amber-50 p-2.5 rounded-lg border border-amber-200 w-full text-center"
+                      >
+                        Search input changed to &ldquo;{query.trim()}&rdquo;. Press <strong>Search</strong> to query new term.
+                      </div>
+                    )}
                     {loadMoreError && (
                       <div
                         role="alert"
@@ -609,8 +493,12 @@ export function HomeSearch() {
                     <button
                       type="button"
                       onClick={handleLoadMore}
-                      disabled={isLoadingMore}
-                      aria-label={`Load more records (${results.length} of ${total} currently displayed)`}
+                      disabled={isLoadingMore || isDirty}
+                      aria-label={
+                        isDirty
+                          ? `Search input has changed. Click Search to query '${query.trim()}'`
+                          : `Load more records (${results.length} of ${total} currently displayed)`
+                      }
                       className={`inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-brand-950 px-6 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-brand-800 disabled:opacity-50 transition-colors ${focusLink}`}
                     >
                       {isLoadingMore ? (
@@ -621,7 +509,9 @@ export function HomeSearch() {
                       ) : (
                         <>
                           <span>
-                            Load More Results ({results.length} of {total})
+                            {isDirty
+                              ? "Click Search to Query New Term"
+                              : `Load More Results (${results.length} of ${total})`}
                           </span>
                           <ArrowRight className="h-3.5 w-3.5" />
                         </>

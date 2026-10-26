@@ -33,6 +33,7 @@ function load(file) {
       URL,
       URLSearchParams,
       Response,
+      AbortController,
       fetch: forbidden,
       console: { log: forbidden, error: forbidden, warn: forbidden },
       process: new Proxy({}, { get: forbidden }),
@@ -55,8 +56,24 @@ function load(file) {
 
 const lib = load(path.join(root, "src/lib/research-catalog.ts"));
 const route = load(path.join(root, "src/app/api/research/search/route.ts"));
+const controller = load(path.join(root, "src/lib/home-search-controller.ts"));
 const catalog = lib.buildResearchCatalog();
 const query = (params) => lib.searchResearch(new URLSearchParams(params), catalog);
+
+function createMockFetch(delayMs = 0) {
+  return async (url, init) => {
+    if (delayMs > 0) {
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+    if (init?.signal?.aborted) {
+      const err = new Error("This operation was aborted");
+      err.name = "AbortError";
+      throw err;
+    }
+    const fullUrl = new URL(url, "https://sourcerating.com");
+    return route.GET(new Request(fullUrl.toString(), { signal: init?.signal }));
+  };
+}
 
 test("B search endpoint delivers 31 articles, 14 official resources and 3 field kits to homepage", () => {
   const allResult = query("").body;
@@ -111,108 +128,97 @@ test("HTTP GET handler returns JSON with search results matching query", async (
   assert.ok(data.results.every((r) => r.kind === "article"));
 });
 
-test("Defect 2 reproduction: 31 articles paginate correctly via limit & offset (Load More logic)", () => {
-  // Batch 1: First 20 articles
-  const batch1 = query("kind=article&limit=20&offset=0").body;
-  assert.equal(batch1.total, 31, "Total articles must be 31");
-  assert.equal(batch1.results.length, 20, "Batch 1 must contain exactly 20 articles");
-  assert.equal(batch1.offset, 0);
+test("REAL CONTROLLER: pagination pins to submitted query and rejects unsubmitted input divergence", async () => {
+  const manager = new controller.HomeSearchManager({ fetchFn: createMockFetch() });
 
-  // Batch 2: Remaining 11 articles
-  const batch2 = query("kind=article&limit=20&offset=20").body;
-  assert.equal(batch2.total, 31);
-  assert.equal(batch2.results.length, 11, "Batch 2 must contain the remaining 11 articles");
-  assert.equal(batch2.offset, 20);
+  // 1. Initial query: fetch articles (total 31, first 20)
+  const ok = await manager.search("", "article");
+  assert.ok(ok);
+  let state = manager.getState();
+  assert.equal(state.status, "success");
+  assert.equal(state.total, 31);
+  assert.equal(state.results.length, 20);
+  assert.equal(state.submittedQuery, "");
+  assert.equal(state.submittedKind, "article");
 
-  // Combine batches as HomeSearch does
-  const combined = [...batch1.results, ...batch2.results];
-  assert.equal(combined.length, 31, "Combined results must reach all 31 articles");
+  // 2. User types "ISO" into the input box but DOES NOT submit search
+  manager.setQuery("ISO");
+  state = manager.getState();
+  assert.equal(state.query, "ISO");
+  assert.equal(state.submittedQuery, "");
 
-  // Verify zero duplicates across batches
-  const uniqueIds = new Set(combined.map((item) => item.id));
-  assert.equal(uniqueIds.size, 31, "Every article in paginated sequence must be unique");
+  // Assert dirty detection: live query !== submitted query
+  assert.equal(controller.isSearchInputDirty(state.query, state.submittedQuery), true);
 
-  // Offset at or beyond total returns empty array
-  const batch3 = query("kind=article&limit=20&offset=31").body;
-  assert.equal(batch3.results.length, 0, "Offset at total must return 0 items");
+  // Assert getPaginationParams uses submittedQuery (""), NOT unsubmitted live query ("ISO")
+  const params = controller.getPaginationParams({
+    submittedQuery: state.submittedQuery,
+    submittedKind: state.submittedKind,
+    currentCount: state.results.length,
+    limit: 20,
+  });
+  assert.equal(params.q, "");
+  assert.equal(params.kind, "article");
+  assert.equal(params.offset, 20);
 
-  // Changing kind resets pagination to 0
-  const kitBatch = query("kind=kit&limit=20&offset=0").body;
-  assert.equal(kitBatch.total, 3);
-  assert.equal(kitBatch.results.length, 3);
-  assert.equal(kitBatch.offset, 0);
+  // LoadMore must be blocked while input is dirty
+  const loadMoreAttempt = await manager.loadMore();
+  assert.equal(loadMoreAttempt, false, "Load more must refuse to execute while input is unsubmitted/dirty");
+  assert.equal(manager.getState().results.length, 20, "Result set must not change");
+
+  // 3. User reverts input back to "" (or clears unsubmitted text)
+  manager.setQuery("");
+  assert.equal(controller.isSearchInputDirty(manager.getState().query, manager.getState().submittedQuery), false);
+
+  // Now LoadMore proceeds using the submittedQuery baseline ("")
+  const loadMoreOk = await manager.loadMore();
+  assert.ok(loadMoreOk);
+  state = manager.getState();
+  assert.equal(state.results.length, 31, "Accumulated results reach all 31 articles");
+  assert.equal(state.total, 31);
+
+  // Verify all 31 IDs are unique
+  const uniqueIds = new Set(state.results.map((r) => r.id));
+  assert.equal(uniqueIds.size, 31, "All 31 paginated articles must be unique");
+
+  // End of results: further loadMore returns false
+  const endAttempt = await manager.loadMore();
+  assert.equal(endAttempt, false, "Load more returns false when all results are loaded");
 });
 
-test("Defect 1 reproduction: clearing search cancels in-flight request and stale response never overwrites", async () => {
-  // Simulate client-side search controller state machine with requestId counter and abort signal
-  let requestId = 0;
-  let activeAbort = null;
-  let clientState = { status: "idle", results: null, total: 0, query: "" };
-
-  function simulateStartSearch(searchQuery, kind = "all") {
-    if (activeAbort) {
-      activeAbort.aborted = true;
-    }
-    const currentAbort = { aborted: false };
-    activeAbort = currentAbort;
-    const currentRequestId = ++requestId;
-    clientState = { status: "loading", results: clientState.results, total: clientState.total, query: searchQuery };
-
-    return async (delayedMs) => {
-      // Simulate network delay
-      await new Promise((r) => setTimeout(r, delayedMs));
-      const res = query(`q=${encodeURIComponent(searchQuery)}&kind=${kind}&limit=20&offset=0`).body;
-
-      // Controller check: discard if superseded or aborted
-      if (currentRequestId !== requestId || currentAbort.aborted) {
-        return { discarded: true, currentRequestId, latestRequestId: requestId };
+test("REAL CONTROLLER: clearing search aborts in-flight request and stale response never overwrites", async () => {
+  let delay = 30;
+  const manager = new controller.HomeSearchManager({
+    fetchFn: async (url, init) => {
+      await new Promise((r) => setTimeout(r, delay));
+      if (init?.signal?.aborted) {
+        const err = new Error("Aborted");
+        err.name = "AbortError";
+        throw err;
       }
+      return route.GET(new Request(new URL(url, "https://sourcerating.com").toString()));
+    },
+  });
 
-      clientState = { status: "success", results: res.results, total: res.total, query: searchQuery };
-      return { discarded: false, currentRequestId };
-    };
-  }
+  // Start slow search
+  delay = 50;
+  const searchPromise = manager.search("ASTM", "article");
+  assert.equal(manager.getState().status, "loading");
 
-  function simulateClear() {
-    if (activeAbort) {
-      activeAbort.aborted = true;
-      activeAbort = null;
-    }
-    requestId++;
-    clientState = { status: "idle", results: null, total: 0, query: "" };
-  }
-
-  // Scenario 1: Request 1 starts, user clears before it finishes
-  const request1Promise = simulateStartSearch("ASTM", "article");
-  assert.equal(clientState.status, "loading");
-
-  // User hits clear after 5ms
+  // Clear search after 5ms
   await new Promise((r) => setTimeout(r, 5));
-  simulateClear();
-  assert.equal(clientState.status, "idle");
-  assert.equal(clientState.results, null);
+  manager.clear();
+  assert.equal(manager.getState().status, "idle");
+  assert.equal(manager.getState().results, null);
+  assert.equal(manager.getState().submittedQuery, "");
 
-  // Request 1 arrives late (20ms)
-  const res1 = await request1Promise(20);
-  assert.equal(res1.discarded, true, "Late response after clear must be discarded");
-  assert.equal(clientState.status, "idle", "Client state must remain idle");
-  assert.equal(clientState.results, null, "Client results must remain null");
-
-  // Scenario 2: Rapid successive queries - slower older query does not overwrite newer query
-  const slowRequest = simulateStartSearch("ASTM"); // requestId = 3
-  const fastRequest = simulateStartSearch("ISO");  // requestId = 4
-
-  // fastRequest finishes in 10ms
-  await fastRequest(10);
-  assert.equal(clientState.status, "success");
-  assert.equal(clientState.query, "ISO");
-  assert.ok(clientState.results.some((r) => r.id.includes("iso")));
-
-  // slowRequest finishes later in 30ms
-  const slowRes = await slowRequest(30);
-  assert.equal(slowRes.discarded, true, "Older request must be discarded");
-  assert.equal(clientState.query, "ISO", "Newer query must remain active");
-  assert.ok(clientState.results.some((r) => r.id.includes("iso")), "Results must belong to newer query");
+  // Wait for the slow search to finish
+  await searchPromise;
+  // Assert state remains completely idle and clean!
+  const state = manager.getState();
+  assert.equal(state.status, "idle", "Status must remain idle after late response");
+  assert.equal(state.results, null, "Results must remain null");
+  assert.equal(state.submittedQuery, "");
 });
 
 test("Touch Target Audit: HomeSearch.tsx has all interactive targets >= 44px", () => {
@@ -227,13 +233,6 @@ test("Touch Target Audit: HomeSearch.tsx has all interactive targets >= 44px", (
   assert.ok(!source.includes("min-h-[32px]"), "No elements should have 32px height");
   assert.ok(!source.includes("min-h-[36px]"), "No elements should have 36px height");
   assert.ok(!source.includes("min-h-[38px]"), "No elements should have 38px height");
-
-  // Verify AbortController & Request Sequence IDs
-  assert.ok(source.includes("abortControllerRef"), "Must have abortControllerRef for network cancellation");
-  assert.ok(source.includes("requestIdRef"), "Must have requestIdRef for sequence/staleness guard");
-  assert.ok(source.includes("controller.signal"), "Must pass signal to fetch");
-  assert.ok(source.includes("handleLoadMore"), "Must have handleLoadMore function");
-  assert.ok(source.includes("isLoadingMore"), "Must have isLoadingMore state");
 
   // Accessibility checks
   assert.ok(source.includes('role="search"'), "Search form should have role=search");
