@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useTransition } from "react";
+import React, { useState, useEffect, useCallback, useTransition, useRef } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -72,6 +72,11 @@ export function HomeSearch() {
   const [total, setTotal] = useState<number>(0);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "empty" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState<string | null>(null);
+
+  const abortControllerRef = useRef<AbortController | null>(null);
+  const requestIdRef = useRef<number>(0);
   const [, startTransition] = useTransition();
 
   const syncUrl = useCallback((q: string, kind: ResearchKind) => {
@@ -95,6 +100,18 @@ export function HomeSearch() {
       const trimmed = searchQuery.trim();
       syncUrl(trimmed, kind);
 
+      // Abort any in-flight request
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+
+      // Bump sequence counter so older responses are discarded
+      const currentRequestId = ++requestIdRef.current;
+
+      // Reset load-more states on fresh search
+      setIsLoadingMore(false);
+      setLoadMoreError(null);
+
       // If user typed nothing and kind is 'all', return to idle state
       if (!trimmed && kind === "all") {
         setResults(null);
@@ -107,35 +124,101 @@ export function HomeSearch() {
       setStatus("loading");
       setErrorMessage(null);
 
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
+
       try {
         const params = new URLSearchParams();
         if (trimmed) params.set("q", trimmed);
         if (kind !== "all") params.set("kind", kind);
         params.set("limit", "20");
+        params.set("offset", "0");
 
-        const res = await fetch(`/api/research/search?${params.toString()}`);
+        const res = await fetch(`/api/research/search?${params.toString()}`, {
+          signal: controller.signal,
+        });
+
         if (!res.ok) {
           const errData = await res.json().catch(() => ({}));
-          setStatus("error");
-          setErrorMessage(errData.error || `Search failed with status ${res.status}`);
+          if (currentRequestId === requestIdRef.current) {
+            setStatus("error");
+            setErrorMessage(errData.error || `Search failed with status ${res.status}`);
+          }
           return;
         }
 
         const data: SearchResponse = await res.json();
-        startTransition(() => {
-          setResults(data.results || []);
-          setTotal(data.total ?? 0);
-          setStatus((data.results || []).length === 0 ? "empty" : "success");
-        });
+        if (currentRequestId === requestIdRef.current && !controller.signal.aborted) {
+          startTransition(() => {
+            setResults(data.results || []);
+            setTotal(data.total ?? 0);
+            setStatus((data.results || []).length === 0 ? "empty" : "success");
+          });
+        }
       } catch (err) {
-        setStatus("error");
-        setErrorMessage(
-          err instanceof Error ? err.message : "Network error. Please check connection and try again."
-        );
+        if (
+          !(err instanceof DOMException && err.name === "AbortError") &&
+          currentRequestId === requestIdRef.current
+        ) {
+          setStatus("error");
+          setErrorMessage(
+            err instanceof Error ? err.message : "Network error. Please check connection and try again."
+          );
+        }
       }
     },
     [syncUrl]
   );
+
+  const handleLoadMore = async () => {
+    if (isLoadingMore || !results || results.length >= total) return;
+    setIsLoadingMore(true);
+    setLoadMoreError(null);
+
+    const nextOffset = results.length;
+    const currentRequestId = ++requestIdRef.current;
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
+    try {
+      const params = new URLSearchParams();
+      const trimmed = query.trim();
+      if (trimmed) params.set("q", trimmed);
+      if (activeKind !== "all") params.set("kind", activeKind);
+      params.set("limit", "20");
+      params.set("offset", String(nextOffset));
+
+      const res = await fetch(`/api/research/search?${params.toString()}`, {
+        signal: controller.signal,
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        if (currentRequestId === requestIdRef.current) {
+          setLoadMoreError(errData.error || `Failed to load more (status ${res.status})`);
+          setIsLoadingMore(false);
+        }
+        return;
+      }
+
+      const data: SearchResponse = await res.json();
+      if (currentRequestId === requestIdRef.current && !controller.signal.aborted) {
+        startTransition(() => {
+          setResults((prev) => [...(prev || []), ...(data.results || [])]);
+          setTotal(data.total ?? 0);
+          setIsLoadingMore(false);
+        });
+      }
+    } catch (err) {
+      if (
+        !(err instanceof DOMException && err.name === "AbortError") &&
+        currentRequestId === requestIdRef.current
+      ) {
+        setLoadMoreError(err instanceof Error ? err.message : "Failed to load more results.");
+        setIsLoadingMore(false);
+      }
+    }
+  };
 
   // Initialize search from URL on mount
   useEffect(() => {
@@ -181,12 +264,21 @@ export function HomeSearch() {
   };
 
   const handleClear = () => {
+    // Abort active request and increment sequence ID so late arrivals never overwrite cleared state
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+    requestIdRef.current++;
+
     setQuery("");
     setActiveKind("all");
     setResults(null);
     setTotal(0);
     setStatus("idle");
     setErrorMessage(null);
+    setIsLoadingMore(false);
+    setLoadMoreError(null);
     syncUrl("", "all");
   };
 
@@ -247,16 +339,16 @@ export function HomeSearch() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search 48 records: ASTM, GB/T, MTC chemistry, ISO scope, weld inspection..."
-            className="block w-full min-h-[48px] rounded-xl border border-gray-300 bg-white pl-10 pr-24 text-xs text-gray-900 placeholder:text-gray-400 shadow-xs focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700 sm:text-sm"
+            className="block w-full min-h-[48px] rounded-xl border border-gray-300 bg-white pl-10 pr-28 text-xs text-gray-900 placeholder:text-gray-400 shadow-xs focus:border-brand-700 focus:outline-none focus:ring-1 focus:ring-brand-700 sm:text-sm"
           />
 
-          <div className="absolute inset-y-1.5 right-1.5 flex items-center gap-1">
+          <div className="absolute inset-y-0.5 right-0.5 flex items-center gap-1">
             {query && (
               <button
                 type="button"
                 onClick={handleClear}
                 aria-label="Clear search input"
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+                className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -265,7 +357,7 @@ export function HomeSearch() {
               type="submit"
               disabled={status === "loading"}
               aria-label="Submit search query"
-              className={`inline-flex min-h-[38px] items-center gap-1.5 rounded-lg bg-brand-950 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs hover:bg-brand-800 disabled:opacity-50 transition-colors ${focusLink}`}
+              className={`inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-brand-950 px-4 py-2 text-xs font-bold text-white shadow-xs hover:bg-brand-800 disabled:opacity-50 transition-colors ${focusLink}`}
             >
               {status === "loading" ? (
                 <>
@@ -280,8 +372,8 @@ export function HomeSearch() {
         </div>
       </form>
 
-      {/* Filter Tabs by Content Kind */}
-      <div className="mt-3 flex items-center gap-1.5 overflow-x-auto pb-1 pt-0.5 no-scrollbar">
+      {/* Filter Tabs by Content Kind - all with >=44px touch height */}
+      <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 no-scrollbar">
         <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 shrink-0 mr-1 hidden sm:inline">
           Filter:
         </span>
@@ -293,7 +385,7 @@ export function HomeSearch() {
               type="button"
               onClick={() => handleKindChange(filter.id)}
               aria-pressed={isSelected}
-              className={`inline-flex min-h-[36px] items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold whitespace-nowrap transition-colors shrink-0 ${
+              className={`inline-flex min-h-[44px] items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold whitespace-nowrap transition-colors shrink-0 ${
                 isSelected
                   ? "bg-brand-950 text-white shadow-xs"
                   : "bg-gray-100/80 text-gray-700 hover:bg-gray-200 hover:text-gray-900 border border-gray-200/60"
@@ -301,7 +393,7 @@ export function HomeSearch() {
             >
               <span>{filter.label}</span>
               <span
-                className={`rounded-full px-1.5 py-0.2 text-[10px] font-bold ${
+                className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
                   isSelected ? "bg-brand-800 text-brand-100" : "bg-gray-200 text-gray-600"
                 }`}
               >
@@ -312,8 +404,8 @@ export function HomeSearch() {
         })}
       </div>
 
-      {/* Recommended Topic Chips (Shown when idle or can be clicked anytime) */}
-      <div className="mt-3 flex flex-wrap items-center gap-1.5">
+      {/* Recommended Topic Chips with >=44px touch height */}
+      <div className="mt-3 flex flex-wrap items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mr-1">
           Recommended:
         </span>
@@ -322,7 +414,7 @@ export function HomeSearch() {
             key={topic.label}
             type="button"
             onClick={() => handleTopicClick(topic.query)}
-            className="inline-flex min-h-[32px] items-center rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-700 hover:border-brand-700 hover:bg-brand-50 hover:text-brand-900 transition-colors"
+            className="inline-flex min-h-[44px] items-center rounded-full border border-gray-200 bg-gray-50 px-3.5 py-2 text-xs font-medium text-gray-700 hover:border-brand-700 hover:bg-brand-50 hover:text-brand-900 transition-colors"
           >
             {topic.label}
           </button>
@@ -355,7 +447,7 @@ export function HomeSearch() {
               <button
                 type="button"
                 onClick={() => performSearch(query, activeKind)}
-                className="mt-3 inline-flex min-h-[36px] items-center gap-1.5 rounded-md bg-red-800 px-3 py-1.5 text-xs font-bold text-white hover:bg-red-900"
+                className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 rounded-md bg-red-800 px-4 py-2 text-xs font-bold text-white hover:bg-red-900"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
                 <span>Retry</span>
@@ -383,7 +475,7 @@ export function HomeSearch() {
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="inline-flex min-h-[36px] items-center gap-1.5 rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-bold text-gray-800 hover:bg-gray-50 shadow-xs"
+                  className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-gray-300 bg-white px-4 py-2 text-xs font-bold text-gray-800 hover:bg-gray-50 shadow-xs"
                 >
                   <RotateCcw className="h-3.5 w-3.5" />
                   <span>Clear Search</span>
@@ -398,7 +490,8 @@ export function HomeSearch() {
               {/* Results Header Bar */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-gray-200 pb-3">
                 <div className="text-xs font-semibold text-gray-800">
-                  Found <span className="font-bold text-brand-950">{total}</span> matching{" "}
+                  Showing <span className="font-bold text-brand-950">{results.length}</span> of{" "}
+                  <span className="font-bold text-brand-950">{total}</span> matching{" "}
                   {total === 1 ? "record" : "records"}
                   {query && (
                     <span>
@@ -414,7 +507,7 @@ export function HomeSearch() {
                   <button
                     type="button"
                     onClick={handleClear}
-                    className="text-[11px] font-bold text-brand-700 underline hover:text-brand-900 ml-2"
+                    className="inline-flex min-h-[44px] items-center px-3 text-xs font-bold text-brand-700 underline hover:text-brand-900 ml-2"
                   >
                     Clear results
                   </button>
@@ -479,26 +572,67 @@ export function HomeSearch() {
                             href={item.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex min-h-[32px] items-center gap-1 text-xs font-bold text-brand-900 hover:text-brand-700 underline underline-offset-2"
+                            className="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-bold text-brand-900 hover:text-brand-700 underline underline-offset-2"
                           >
                             <span>Open Official Registry</span>
-                            <ExternalLink className="h-3 w-3" />
+                            <ExternalLink className="h-3.5 w-3.5" />
                           </a>
                         ) : (
                           <Link
                             href={item.url}
-                            className="inline-flex min-h-[32px] items-center gap-1 text-xs font-bold text-brand-900 hover:text-brand-700 underline underline-offset-2"
+                            className="inline-flex min-h-[44px] items-center gap-1.5 text-xs font-bold text-brand-900 hover:text-brand-700 underline underline-offset-2"
                           >
                             <span>
                               {item.kind === "article" ? "Read Article" : "View Field Kit"}
                             </span>
-                            <ArrowRight className="h-3 w-3" />
+                            <ArrowRight className="h-3.5 w-3.5" />
                           </Link>
                         )}
                       </div>
                     </article>
                   );
                 })}
+              </div>
+
+              {/* Load More Button or Complete End State */}
+              <div className="mt-5 flex flex-col items-center justify-center gap-2 pt-3 border-t border-gray-200/60">
+                {results.length < total ? (
+                  <div className="flex flex-col items-center gap-2 w-full sm:w-auto">
+                    {loadMoreError && (
+                      <div
+                        role="alert"
+                        className="text-xs text-red-700 bg-red-50 p-2.5 rounded-lg border border-red-200 w-full text-center"
+                      >
+                        {loadMoreError}
+                      </div>
+                    )}
+                    <button
+                      type="button"
+                      onClick={handleLoadMore}
+                      disabled={isLoadingMore}
+                      aria-label={`Load more records (${results.length} of ${total} currently displayed)`}
+                      className={`inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-brand-950 px-6 py-2.5 text-xs font-bold text-white shadow-xs hover:bg-brand-800 disabled:opacity-50 transition-colors ${focusLink}`}
+                    >
+                      {isLoadingMore ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          <span>Loading more records...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>
+                            Load More Results ({results.length} of {total})
+                          </span>
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </>
+                      )}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="text-xs font-medium text-gray-500 py-2">
+                    ✓ All {total} matching {total === 1 ? "record" : "records"} loaded
+                  </div>
+                )}
               </div>
             </div>
           )}
