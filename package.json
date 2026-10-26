@@ -17,6 +17,7 @@
     "verify:membership": "node scripts/verify-hosted-membership.mjs"
   },
   "dependencies": {
+    "@next/third-parties": "16.3.3",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "clsx": "^2.1.1",
