@@ -51,9 +51,9 @@ export function GoogleAnalyticsConsent({ gaId, debugMode }: { gaId: string; debu
     </>}
     {consent === null ? <section aria-label="Analytics preferences" style={{position:"fixed",bottom:16,left:16,right:16,zIndex:1000,padding:16,background:"#fff",color:"#17202a",border:"1px solid #89939e",borderRadius:8,maxWidth:560,boxShadow:"0 3px 18px #0002"}}>
       <p style={{margin:"0 0 12px"}}>Allow Google Analytics cookies to help us understand visits? Optional analytics stays off until you allow it. You can change this choice at any time.</p>
-      <button type="button" onClick={() => choose("granted")} style={{padding:"8px 14px",marginRight:12,border:"1px solid currentColor",borderRadius:4}}>Allow analytics</button>
-      <button type="button" onClick={() => choose("denied")} style={{padding:"8px 14px",border:"1px solid currentColor",borderRadius:4}}>Reject analytics</button>
-    </section> : <button type="button" aria-label={consent === "granted" ? "Turn off Google Analytics" : "Allow Google Analytics"} onClick={() => choose(consent === "granted" ? "denied" : "granted")} style={{position:"fixed",bottom:8,left:8,zIndex:900,padding:"4px 8px",background:"#fff",color:"#17202a",fontSize:12,border:"1px solid #89939e",borderRadius:4}}>
+      <button type="button" onClick={() => choose("granted")} style={{padding:"8px 14px",marginRight:12,border:"1px solid currentColor",borderRadius:4,minHeight:44,display:"inline-flex",alignItems:"center"}}>Allow analytics</button>
+      <button type="button" onClick={() => choose("denied")} style={{padding:"8px 14px",border:"1px solid currentColor",borderRadius:4,minHeight:44,display:"inline-flex",alignItems:"center"}}>Reject analytics</button>
+    </section> : <button type="button" aria-label={consent === "granted" ? "Turn off Google Analytics" : "Allow Google Analytics"} onClick={() => choose(consent === "granted" ? "denied" : "granted")} style={{position:"fixed",bottom:8,left:8,zIndex:900,padding:"4px 10px",background:"#fff",color:"#17202a",fontSize:12,border:"1px solid #89939e",borderRadius:4,minHeight:44,display:"inline-flex",alignItems:"center"}}>
       Analytics: {consent === "granted" ? "on — turn off" : "off — allow"}
     </button>}
   </>;
