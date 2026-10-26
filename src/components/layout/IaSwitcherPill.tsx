@@ -19,7 +19,7 @@ export function IaSwitcherPill() {
         <button
           type="button"
           onClick={() => setIaMode("directory")}
-          className={`inline-flex min-h-[38px] items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold transition-all ${
+          className={`inline-flex min-h-[44px] items-center gap-1 rounded-full px-3 py-1.5 text-xs font-bold transition-all ${
             iaMode === "directory"
               ? "bg-brand-950 text-white shadow-xs"
               : "text-gray-600 hover:bg-gray-100"
@@ -35,7 +35,7 @@ export function IaSwitcherPill() {
         <button
           type="button"
           onClick={() => setIaMode("editorial")}
-          className={`inline-flex min-h-[38px] items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold transition-all ${
+          className={`inline-flex min-h-[44px] items-center gap-1 rounded-full px-3 py-1.5 text-xs font-bold transition-all ${
             iaMode === "editorial"
               ? "bg-brand-950 text-white shadow-xs"
               : "text-gray-600 hover:bg-gray-100"
@@ -50,7 +50,7 @@ export function IaSwitcherPill() {
         {/* Link to Proposal doc */}
         <Link
           href="/ia-proposal"
-          className="ml-0.5 inline-flex min-h-[36px] min-w-[36px] items-center justify-center rounded-full text-[11px] font-semibold text-gray-400 hover:text-brand-900"
+          className="ml-0.5 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-xs font-bold text-gray-400 hover:text-brand-900"
           title="View Mobile IA Redesign Proposal"
         >
           ?
