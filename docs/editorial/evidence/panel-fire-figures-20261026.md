@@ -1,3 +1,5 @@
+> **27 October active-map correction, NOT a review PASS:** Below is the 26 October historical SVG-only candidate inventory, not today's active media. The article now uses a real licensed photograph as cover; its body uses the methods SVG only for Figure 1, a real insulated-roof photograph for Figure 2 and a real delivery-stack photograph for Figure 3. See [new image bytes, rights, SHA and remaining holds](panel-fire-photo-rights-20261027.md). This remains unpublished and subject to independent Lead visual review.
+
 # Panel fire-classification illustrations — 2026-10-26
 
 **Article:** `astm-e84-class-a-vs-en-13501-1-panel-fire-evidence`, existing Draft PR #23 only.
