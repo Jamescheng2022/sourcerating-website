@@ -19,25 +19,29 @@ All four active photographs are independently sourced real images (no AI project
 | **ACTIVE COVER:** panel-wall-pur-core-desktop-20261027.jpg | 1280×853 | 33ec3c209b9d48d0c216da852cf3305bf4b4891fd58aa10c3f1992c10a7b5c0e | 2265cb16f864299aca856f53500ca3a8718430c7 |
 | **ACTIVE MOBILE COVER:** panel-wall-pur-core-mobile-20261027.jpg | 960×640 | 9272bd101ec6b5c222dbd6b4406084ce65ffb2b9aef4eb036b7371954de9ba78 | ed53857a740d52a602ca75ae54c9b97a5c6610dc |
 | panel-core-photograph-desktop-20261027.jpg | 1200×900 | bbc5f5bf389284f7cc1fae4b0d8bf6aa7d6b9e6c85dc4428aeb3f2a18a512c3a | 3abca1b2f6d016d6f2a99c0ce6e9805259a46caa |
-| panel-core-photograph-mobile-20261027.jpg | 720×540 | 09bc7f4542f3d281635fc19cf25d1e28818a29c2569a6cc9e9bba1bfb6461265 | edd8145d5192ea0d01d574bb81719e0f853df6a3 |
+| panel-core-photograph-mobile-20261027.jpg | 960×720 | 09bc7f4542f3d281635fc19cf25d1e28818a29c2569a6cc9e9bba1bfb6461265 | edd8145d5192ea0d01d574bb81719e0f853df6a3 |
 | panel-roof-photograph-desktop-20261027.jpg | 1200×900 | 2b71c921173f7046bba7439627912d0eba088943d2d383f17be5917fa94f06a2 | 1bd6eafcad8bb7081c3ec2ef32f85b7c5a9c0a85 |
-| panel-roof-photograph-mobile-20261027.jpg | 720×540 | 582d92e97819b75bed65892608bed1569154a32e87a478cbf4e6a203bee57784 | 21d793bda67efac2b82e989f97d2982dae3f3cd6 |
+| panel-roof-photograph-mobile-20261027.jpg | 960×720 | 582d92e97819b75bed65892608bed1569154a32e87a478cbf4e6a203bee57784 | 21d793bda67efac2b82e989f97d2982dae3f3cd6 |
 | **ACTIVE FIGURE 3:** panel-wall-joint-desktop-20261027.jpg | 1200×881 | e0d606738ad3ff4fef74f4551ec1c1bea7522f9c9e7ad0d4c086be28c03a581b | d3c3f8755b1bc41f2576904f2b34d2914836d72a |
 | **ACTIVE FIGURE 3 MOBILE:** panel-wall-joint-mobile-20261027.jpg | 720×1180 | 16e59e8a44d6b8634b02c46c467e285aa93e502ec42fba3ef84789b539d287a1 | 4ffe7e50efcc86f305749c566bf26ca6946c033a |
 | panel-delivery-photograph-desktop-20261027.jpg | 1200×766 | eca471f83ff767612420e09911dcc2f9c53c9f6263a69c19d3ce6f891d889a21 | 731ebe0d0153e44434470b3620ff8a1962d14637 |
-| panel-delivery-photograph-mobile-20261027.jpg | 720×459 | 2935fd0e33d3625105e34813ad0d0ca47bf6a4abac60a9c93e9e09eff626e0a6 | b387b60c127eb5537a9d5513536d33214c1065c1 |
+| panel-delivery-photograph-mobile-20261027.jpg | 960×612 | 2935fd0e33d3625105e34813ad0d0ca47bf6a4abac60a9c93e9e09eff626e0a6 | b387b60c127eb5537a9d5513536d33214c1065c1 |
 
 The superseded `panel-core-photograph-*` JPEGs remain in Git history and current tree only for audit, **not referenced as the active cover**. The replacement cover has the exact author/rights link above; the linked 1280px and 960px renditions are the canonical source-resized copies, without color manipulation or falsified factory claims. No claim of a real tested project is made.
 
 Original full-size photos (unchanged remote source SHA256): Acheolg `3ddc9df9f88b5a3da622628ea32505ba37af679d0567af7169da88df43210492`; Sarang `e2e65f0a32953e852659585e7fb12a8ee59efe53660682b77a4ec98c04245d3d`; Dirk H. Urbanek `d6549c3f323e4e7218e573fbd716ac240010430f5bd27fc84afe3d55242cd34f`. New sizes are published Commons JPEG renditions, not synthetic re-creations. Actual blob bytes uploaded via GitHub blob API and tree-committed; no prompt or unattached ChatGPT media passes as a site asset.
 
+### 27 October follow-up: image-byte metadata correction
+
+After reading the actual committed JPEG file headers, the author corrected two earlier *dimension-inventory errors*: Figure 2 mobile roof JPEG is **960×720** (not 720×540), and Figure 4 mobile delivery JPEG is **960×612** (not 720×459). Both old values were the same aspect ratios scaled down, but were not the actual file dimensions. The corresponding typed article metadata and this manifest now match the JPEG SOF dimensions. Cover 960×640, Figure 3 720×1180 and SVG Figure 1 720×1190 were already correct. **No image file, caption, technical claim, photo rights or release state changed.** This is still an author-side static-file check, NOT an independent Lead image review or real browser QA.
+
 ### 27 October evening — responsive intrinsic-dimensions repair (staged, NOT a mobile review PASS)
 
-The author verified a concrete mismatch in the existing Next.js article renderer: every mobile asset had been declared as 720×1180, regardless of its real pixel dimensions. As a result, the 960×640 cover and 720×540/459 photo variants risked distorted mobile aspect ratios. The same Draft PR #23 now stages a narrow, backwards-compatible repair in code commit `176ff879ea5f7b28461020af25a79a4a887290d0`:
+The author verified a concrete mismatch in the existing Next.js article renderer: every mobile asset had been declared as 720×1180, regardless of its real pixel dimensions. As a result, the 960×640 cover and 960×720/459 photo variants risked distorted mobile aspect ratios. The same Draft PR #23 now stages a narrow, backwards-compatible repair in code commit `176ff879ea5f7b28461020af25a79a4a887290d0`:
 
 - `BlogPost.coverImage` and `articleBody.illustration` accept optional `mobileWidth`/`mobileHeight` in `src/data/blog.ts`.
 - Both existing article renderers use the supplied intrinsic dimensions, falling back to 720×1180 only for unchanged older posts.
-- This article declares its actual mobile media sizes: cover **960×640**, Figure 1 SVG **720×1190**, Figure 2 photo **720×540**, Figure 3 photo **720×1180**, Figure 4 photo **720×459**.
+- This article declares its actual mobile media sizes: cover **960×640**, Figure 1 SVG **720×1190**, Figure 2 photo **960×720**, Figure 3 photo **720×1180**, Figure 4 photo **960×612**.
 - No image pixels, authorship/rights, article argument or author-controlled paid/publication setting changed. No preview/browser invocation was attempted: the previous denied protected-Preview path remains HELD.
 
 The commit's combined Vercel status returned `success` (source checkout/build status only). **This is a proposed code fix, not a physical 320/375/390/430px screenshot pass.** Claude Lead must independently inspect the exact latest PR head and confirm mobile geometry, figure content and licensing before resolving the conflict, reviewing and publishing. The prior historical note below describes the pre-fix defect, not an authorization to bypass its acceptance gate.
