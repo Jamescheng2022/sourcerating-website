@@ -10,12 +10,12 @@ export const panelFireClassificationPost: BlogPost = {
   category: "Buyer's Field Notes",
   readTime: "7 min read",
   coverImage: {
-    src: "/images/blog/panel-core-photograph-desktop-20261027.jpg",
-    mobileSrc: "/images/blog/panel-core-photograph-mobile-20261027.jpg",
-    width: 1200,
-    height: 900,
-    alt: "A real honeycomb sandwich-structured composite sample held in a workshop; it illustrates how a core and facing define the product but is not this article's wall panel or evidence of its fire classification.",
-    caption: "Photograph of a honeycomb sandwich-structured composite, not a fire-tested wall panel. Acheolg / Wikimedia Commons, CC BY-SA 4.0, resized under the same license; source and license linked below."
+    src: "/images/blog/panel-wall-pur-core-desktop-20261027.jpg",
+    mobileSrc: "/images/blog/panel-wall-pur-core-mobile-20261027.jpg",
+    width: 1280,
+    height: 853,
+    alt: "Actual steel-faced PUR-foam sandwich wall panels stacked to show their profiled edges and exposed insulation core; an illustrative material photograph, not a tested specimen or fire-performance certificate.",
+    caption: "Metal-faced insulated wall panels with a visible polyurethane core. Photograph: HNB Nordbleche GmbH / Wikimedia Commons, CC BY-SA 3.0 (resized). Illustrative only—not the tested configuration and not evidence of a fire classification."
   },
   sections: [],
   articleBody: [
@@ -72,8 +72,7 @@ export const panelFireClassificationPost: BlogPost = {
     { title: "BS EN 13501-1:2018: Classification using data from reaction-to-fire tests", publisher: "BSI", href: "https://knowledge.bsigroup.com/products/fire-classification-of-construction-products-and-building-elements-classification-using-data-from-reaction-to-fire-tests", note: "Current catalog edition, classification purpose and relationship to end-use application; not a reading of the full standard." },
     { title: "Commission Delegated Regulation (EU) 2016/364", publisher: "European Commission / EUR-Lex", href: "https://eur-lex.europa.eu/eli/reg_del/2016/364/oj/eng", note: "2016 classification framework under Regulation (EU) No 305/2011; the original text was verified through the official archive linked in this source record. This is a dated classification reference, not a determination of the current regime applicable to every product or project." },
     { title: "Approved Document B: Fire safety - frequently asked questions", publisher: "UK government", href: "https://www.gov.uk/guidance/approved-document-b-fire-safety-frequently-asked-questions", note: "Question 18 explains the tested configuration, field of application and installation context. Jurisdiction: England, not a global rule." },
-    { title: "Sandwich composite sample photograph and license", publisher: "Acheolg / Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Composites_sandwich_panel.jpg", note: "Photograph by Acheolg. CC BY-SA 4.0, resized under the same license; license: https://creativecommons.org/licenses/by-sa/4.0/. Aluminum honeycomb composite, NOT the article's specified foam-core wall." },
-    { title: "CC BY-SA 4.0 license for the composite sample photo", publisher: "Creative Commons", href: "https://creativecommons.org/licenses/by-sa/4.0/", note: "The resized desktop and mobile copies of Acheolg's photograph are distributed under CC BY-SA 4.0 with credit and source link." },
+    { title: "Steel-faced insulated wall sandwich-panels photograph", publisher: "HNB Nordbleche GmbH / Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Sandwichplatten_Fassade.jpg", note: "Actual PUR-foam wall sandwich panels with metal facings and profiled edges, photographed by HNB Nordbleche GmbH (18 July 2013). CC BY-SA 3.0 Unported: https://creativecommons.org/licenses/by-sa/3.0/. Resized desktop and mobile derivatives share the license, credit, and source. Not a test specimen, fire-classification record or the product proposed by any actual supplier." },
     { title: "Insulated panel roof photograph", publisher: "Sarang / Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Sandwichpaneel-Dach07.jpg", note: "Genuine PUR-core roof-panel photograph released to the public domain; resized. Not a fire-classification report or the proposed wall system." },
     { title: "Delivered construction sandwich-panels photograph", publisher: "Dirk H. Urbanek / Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:Sandwichelemente_im_Paket.JPG", note: "Genuine stacked sandwich-panel photograph released to the public domain; resized. No tested rating or actual supplier is alleged." },
   ],
