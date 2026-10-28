@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "updated_at": "2026-08-25",
+  "foundation": {
+    "preferred": "Payload Official Website Template",
+    "reason": "One maintainable full-stack CMS/RFQ/SEO/preview foundation; visual diversity is implemented as frontend design families rather than separate backends."
+  },
+  "resources": [
+    {"id":"TPL-001","name":"Payload Official Website Template","url":"https://github.com/payloadcms/payload/tree/main/templates/website","type":"fullstack-foundation","license":"MIT","commercial_delivery":"approved","stack":"Next.js + Payload CMS + Tailwind + shadcn/ui","family":"foundation","fit":"CMS, RFQ, SEO, auth, access control, layout builder, live preview"},
+    {"id":"TPL-002","name":"AstroWind","url":"https://github.com/arthelokyo/astrowind","type":"frontend-template","license":"MIT","commercial_delivery":"approved","stack":"Astro 6 + Tailwind 4","family":"global-corporate-clean","fit":"listed manufacturers, international industrial groups, engineering firms"},
+    {"id":"TPL-003","name":"Nextly","url":"https://github.com/web3templates/nextly-template","type":"frontend-template","license":"MIT","commercial_delivery":"approved","stack":"Next.js + TypeScript + Tailwind","family":"light-b2b-conversion","fit":"machinery SMEs, industrial services, OEM/ODM"},
+    {"id":"TPL-004","name":"Lonestone Astro Template","url":"https://github.com/lonestone/astro-template","type":"frontend-template-with-file-cms","license":"MIT","commercial_delivery":"approved","stack":"Astro 6 + MDX + Tailwind 4","family":"technical-documentation-corporate","fit":"technical manufacturers, application notes, case studies, downloads"},
+    {"id":"TPL-005","name":"KeyAstro","url":"https://github.com/kosuke-satake/keyastro","type":"multilingual-cms-reference","license":"MIT","commercial_delivery":"approved","stack":"Astro + Tailwind + Keystatic","family":"multilingual-editorial","fit":"multilingual architecture and editor workflow"},
+    {"id":"TPL-006","name":"DataNova","url":"https://github.com/mearashadowfax/DataNova","type":"frontend-cms-reference","license":"MIT","commercial_delivery":"approved","stack":"Astro + Tailwind + Keystatic + Astro DB","family":"technology-industrial","fit":"electronics, controls, automation, PCB, EV"},
+    {"id":"TPL-007","name":"Tailcast","url":"https://github.com/matt765/Tailcast","type":"frontend-template","license":"MIT","commercial_delivery":"approved","stack":"Astro 6 + TypeScript + Tailwind 4","family":"dark-precision-tech","fit":"precision machining, die casting, EV components, advanced materials"},
+    {"id":"TPL-008","name":"OpenOcean Payload Website Builder","url":"https://github.com/OpenOceanHQ/payloadcms-website-template","type":"fullstack-reference","license":"MIT","commercial_delivery":"approved","stack":"Next.js + Payload CMS","family":"block-builder","fit":"reusable content blocks and client-editable pages"},
+    {"id":"TPL-009","name":"Cruip Open React Template","url":"https://github.com/cruip/open-react-template","type":"visual-reference","license":"GPL plus project-specific redistribution wording","commercial_delivery":"reference-only","stack":"Next.js + Tailwind","family":"modern-dark-marketing","fit":"visual polish study only; do not use as delivered source without legal review"},
+    {"id":"TPL-010","name":"Themixly Automation Industrial Template","url":"https://github.com/themixlyweb/nextjs-automation-website-template","type":"industrial-ia-reference","license":"ambiguous: repo license vs README free-use restriction","commercial_delivery":"rejected-pending-clarification","stack":"Next.js + Bootstrap + SCSS","family":"industrial-automation","fit":"industrial IA ideas only"},
+    {"id":"TPL-011","name":"Themixly Mining Template","url":"https://github.com/themixlyweb/nextjs-mining-website-template","type":"heavy-industry-ia-reference","license":"ambiguous: repo license vs README free-use restriction","commercial_delivery":"rejected-pending-clarification","stack":"Next.js + Bootstrap + SCSS","family":"materials-heavy-industry","fit":"materials/mining IA ideas only"},
+    {"id":"TPL-012","name":"TailNext","url":"https://github.com/arthelokyo/tailnext","type":"frontend-template","license":"MIT","commercial_delivery":"approved","stack":"Next.js + Tailwind","family":"nextjs-global-corporate","fit":"production-ready Next.js corporate shell, SEO, sitemap, image optimization"},
+    {"id":"TPL-013","name":"Astroplate","url":"https://github.com/zeon-studio/astroplate","type":"frontend-template","license":"MIT","commercial_delivery":"approved-with-asset-replacement","stack":"Astro + Tailwind + TypeScript","family":"multilingual-content-rich","fit":"multilingual, search, contact, high performance; demo images must be replaced"},
+    {"id":"TPL-014","name":"Locomotive Astro Boilerplate","url":"https://github.com/locomotivemtl/astro-boilerplate","type":"motion-frontend-reference","license":"MIT","commercial_delivery":"approved","stack":"Astro + Tailwind + Swup + Locomotive Scroll","family":"premium-motion-industrial","fit":"controlled premium motion for machinery/engineering brands"},
+    {"id":"TPL-015","name":"Foxi Astro Theme","url":"https://github.com/oxygenna-themes/foxi-astro-theme","type":"frontend-template","license":"MIT","commercial_delivery":"approved","stack":"Astro + Tailwind","family":"modern-clean-technology","fit":"electronics, automation, innovative manufacturing groups"},
+    {"id":"TPL-016","name":"ThaiUI Astroplate Fork","url":"https://github.com/ThaiUI/astroplate","type":"thai-localization-reference","license":"MIT","commercial_delivery":"approved","stack":"Astro + Tailwind","family":"thai-localization","fit":"Thai font, Thai content and localization implementation reference"},
+    {"id":"TPL-017","name":"Flowbite","url":"https://github.com/themesberg/flowbite","type":"component-library","license":"MIT","commercial_delivery":"approved","stack":"Tailwind CSS components","family":"component-source","fit":"forms, mega menus, tables, file input, galleries, timelines, contact/RFQ UI"},
+    {"id":"TPL-018","name":"daisyUI","url":"https://github.com/saadeghi/daisyui","type":"component-library","license":"MIT","commercial_delivery":"approved","stack":"Tailwind component system","family":"component-source","fit":"rapid theme variation and reusable UI primitives"},
+    {"id":"TPL-019","name":"Preline UI","url":"https://github.com/htmlstreamofficial/preline","type":"component-library","license":"MIT + Preline Fair Use terms","commercial_delivery":"approved-with-attribution-and-terms-check","stack":"Tailwind UI components","family":"component-source","fit":"high-quality navigation, forms and content blocks; retain required attribution/license notices"},
+    {"id":"TPL-020","name":"Astroship","url":"https://github.com/surjithctly/astroship","type":"visual-reference","license":"GPL-3.0 free version / separate commercial Pro","commercial_delivery":"reference-only","stack":"Astro + Tailwind","family":"startup-clean-reference","fit":"page structure study only for our source-delivery model"},
+    {"id":"TPL-021","name":"Ixartz Astro Boilerplate","url":"https://github.com/ixartz/Astro-boilerplate","type":"technical-boilerplate","license":"MIT","commercial_delivery":"approved","stack":"Astro + TypeScript + Tailwind","family":"technical-base","fit":"SEO, responsive architecture and engineering-quality boilerplate"},
+    {"id":"TPL-022","name":"Payload Official Website Source","url":"https://github.com/payloadcms/website","type":"fullstack-design-reference","license":"MIT","commercial_delivery":"approved","stack":"Next.js + Payload + TypeScript + SCSS + MDX","family":"premium-fullstack-reference","fit":"complex real-world CMS architecture and high-end production implementation reference"}
+  ],
+  "design_families_required": [
+    "global-corporate-clean",
+    "precision-engineering",
+    "industrial-product-catalog",
+    "electronics-advanced-technology",
+    "heavy-industry-materials",
+    "engineering-project",
+    "japanese-minimal-trust",
+    "german-technical-documentation",
+    "sustainability-global-group",
+    "sme-export-manufacturer"
+  ],
+  "next_gate": {
+    "resume_autonomous_company_builds_when": [
+      "20+ resources researched",
+      "8+ design families have approved implementation skeletons",
+      "shared Payload content schema exists",
+      "industrial section library exists",
+      "three production-grade template implementations pass QA",
+      "one researched Thailand factory case is rebuilt and accepted by James"
+    ]
+  }
+}
