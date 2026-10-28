@@ -1,9 +1,9 @@
 ---
 name: sourcerating-publish
-description: Research, edit, illustrate, check, publish and verify SourceRating.com website buyer-research articles via the canonical GitHub repository and Vercel. Use for new or revised industrial sourcing articles, magazine visuals, blog publishing failures, daily article operations and their release receipts.
+description: Research, edit, illustrate and stage SourceRating.com buyer-research articles in the canonical website GitHub repository; independently reviewed releases and public verification are owned only by Claude Lead.
 ---
 
-# SourceRating website publisher
+# SourceRating website editorial staging and Claude Lead release
 
 **Canonical website repo:** `Jamescheng2022/sourcerating-website`, branch `main`. **Vercel project:** `sourcerating-website`, team `jamescheng2022s-projects`, project `prj_2dv2ZpoNaeZD438vuWtgeSdsB2B1`, public canonical origin `https://www.sourcerating.com`.
 
@@ -12,6 +12,7 @@ This repository Skill is the workflow contract, **not an autonomous scheduler**,
 ## 0. Boundaries and ownership
 
 - Work only in this website repository, not `Jamescheng2022/sourcerating` (the separate application), and not An-Thai, NEWMEDA, Precast or mail.
+- **Ownership override (2026-10-23):** ChatGPT is the website article/image author and may create/update the existing content branch and **Draft PR only**. Claude Lead is the **sole independent final reviewer, main-merge owner and production publisher**, working through the original `Jamescheng2022/agent-bus` `claude/BOARD.md`, `claude/LEAD.md` and `to-claude/` handoff. ChatGPT must not merge, deploy or substitute another reviewer when Claude is unavailable. Do not create parallel writers, publishers, workflows, accounts or scheduled jobs.
 - For ordinary content and editorial images, use the connected GitHub tools directly, independent of a local PC or Codex queue. Do not silently change billing, DNS, authentication, payment plans, credentials, marketing identity or frontend ownership.
 - Existing explicit platform denials, held drafts, AGY ownership restrictions and other project-specific permissions remain binding. A new GitHub/API path is not permission to retry a refused operation.
 - The website Skill handles its own articles. LinkedIn is a **separate destination**: a LinkedIn draft or image does not count as a posted update. Verify the original authorized account, posting connector, review and public permalink separately.
@@ -35,12 +36,12 @@ Read `docs/editorial/SOURCERATING_EDITORIAL_STANDARD.md` **at execution time**. 
 
 ## 3. Prepare actual images, not just image prompts
 
-1. For a substantial article consider a documentary-style editorial photo and/or a technical explanatory visual; every chosen visual must help understanding, not just add decoration.
-2. Secure actual image bytes, confirm rights, add to `public/images/blog/` (or another proven public path), and check format, dimensions, responsive layout, alt, caption and attribution. Any generated factory scene must be labeled as an **AI-generated illustration, not evidence of a particular facility, product inspection or customer**.
+1. **Mandatory editorial threshold (Owner 2026-10-25):** stage **one real cover image** plus **at least 2 separate body figures for <=600 English words; 3 for 601–1200; 4 for >1200**. Do not count the cover, OG, mobile duplicate, social image, prompt or unattached asset as an inline figure. Every figure must independently advance the reader's understanding; longer articles may need more. Prefer licensed real industrial photography or compelling high-resolution, physically plausible AI-generated photographic editorial concepts; accurate technical schematics are limited exceptions, requiring a reviewer to justify their specific information value. A file count never establishes image editorial quality.
+2. Secure actual image bytes, confirm rights, add to `public/images/blog/` (or another proven public path), and check format, dimensions, responsive layout, alt, caption and attribution. For **each** AI-created concept include in its alt, caption and rights record the exact distinction: **“AI-generated conceptual editorial image; not a photograph or evidence of a specific project, factory, inspection or product”**. Never fabricate certificate identifiers, readings, test outcomes, company logos or realistic-looking evidence.
 3. Place the real media path in the article's `coverImage` or an inline `articleBody` `illustration` block. **Generated in the chat, stored in Library or mentioned in a draft is not the same as present in the production webpage.**
 4. Use an actual mobile-specific layout for text-heavy wide diagrams (the current article renderer supports `mobileSrc`). Confirm caption stays with the corresponding visual.
 5. The image shared on LinkedIn or in Open Graph must be a compatible raster image (typically JPG/PNG). The site body may use SVG or AVIF with a raster social fallback. Check the *actual production* `og:image`, not just the source filename.
-6. No copyrighted third-party visual copied without permission. If an image cannot be obtained or truthfully attributed, use a suitable original graphic or publish without that image and explain the limitation.
+6. Never copy third-party visual material without an appropriate license or permission. Preserve attribution, license/source link and the nature of any transformation. If a relevant, rights-cleared image cannot be supplied at the mandatory threshold, **hold the Draft PR** for the existing editorial chain; do not release with fewer body figures, decorative fillers or unverified rights.
 
 ## 4. Stage the article in the live data model
 
@@ -65,14 +66,14 @@ npm run build
 
 - `npm run check:publication` checks **all registered articles** for structural/asset/link failures; `--slug` checks the exact article. The GitHub PR preflight workflow should also run these deterministic checks.
 - The checker tests local files and metadata only; it **cannot verify factual truth, design taste, copyright or legal compliance**. A writer's self-review is not an independent acceptance.
-- Obtain a truly independent editorial/fact/source review and the available GitHub code review on the exact final content and asset revision. Fix findings; a review of an older SHA is not approval of a different article.
+- Obtain a truly independent editorial/fact/source review and the available GitHub code review on the exact final content and asset revision. Claude Lead must record a separate **`IMAGE_EDITORIAL_PASS` on each full-size cover and inline figure** (physical credibility, distinct information value, license, disclosure, responsive mobile legibility) and an exact-head final decision. Fix findings in the **same original Draft PR**; a review of an older SHA is not approval of a different article.
 - Confirm Preview build is READY. For public/previews actually accessible to a tester, check full body, actual hero, internal illustration, captions, links, mobile appearance and SEO. If preview requires authentication, state that openly, do not claim it was visually inspected.
 - If a check fails, a reviewer flags a material issue, a PR is conflicted or access is refused, stop **that release**. Preserve completed work; never bypass a denial by switching identities or weakening access controls.
 
 ## 6. Release by GitHub and verify production
 
 1. Use a focused feature/content branch and PR to `main`. Confirm changed files are within scope, independent content review and automated checks pass, and there are no current unresolved blockers.
-2. Merge with the expected final PR head SHA under the established ordinary publishing authorization. No force pushes, no unrelated secret, payment or configuration changes.
+2. **Claude Lead alone**, after his independent review and all prior platform permission/quality gates, resolves legitimate conflicts and merges the exact reviewed final PR head to `main`, then owns production deployment. The ChatGPT author cannot merge, publish, override a held review, or change reviewer identity. No force pushes, no unrelated secret, payment or configuration changes.
 3. Check the **exact merged commit** is deployed to the verified Vercel project's **production** target and state is `READY`. A Preview is not production.
 4. Then fetch the **public** article URL, blog index, sitemap and media; verify title, full body, images including mobile diagram asset, captions, intended links and raster OG image. Run:
 
@@ -85,6 +86,6 @@ node scripts/check-editorial-publication.mjs --slug ARTICLE_SLUG --live --origin
 
 ## 7. Respond with real outcomes
 
-Use a short Chinese receipt: **published/verified** URLs and count, **only drafted** count, image state, PR/commit, and actual blockers. Do not report scheduled, submitted, previewed, PR-open or a file in GitHub as if it were a publicly published article.
+Use a concise Chinese factual receipt: original Draft PR URL, **precise new head SHA**, article and cover/inline **distinct image counts and committed byte paths**, Claude Lead acknowledgement (`UNKNOWN` unless evidenced), independent `IMAGE_EDITORIAL_PASS`, mergeability and actual production/public readback; distinguish each from CI/Preview. For the one daily LinkedIn item report its complete 200–450 word independent English copy, actual JPG/PNG and real already-published article URL, or mark manual sharing if no connected account. Never report scheduled, drafted, previewed or PR-open as public publication.
 
 For repeat daily runs, re-read this Skill from `main`, check the current branch/product scope and restore only verifiable unfinished work. Do not delete originals or repeat a previously rejected release action.
