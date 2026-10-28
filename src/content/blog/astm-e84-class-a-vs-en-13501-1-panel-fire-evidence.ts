@@ -47,8 +47,8 @@ export const panelFireClassificationPost: BlogPost = {
       mobileSrc: "/images/blog/panel-roof-photograph-mobile-20261027.jpg",
     mobileWidth: 960,
     mobileHeight: 720,
-      width: 1200,
-      height: 900,
+      width: 1280,
+      height: 960,
       alt: "A real profiled metal roof made from insulated PUR-core sandwich panels with visible panel edges; this unrelated roof is not the specified wall or tested classification specimen.",
       caption: "Figure 2. The installation configuration of real PUR-core roof panels matters; this unrelated roof is neither the specified wall nor evidence of a fire-test class. Photograph by Sarang, Wikimedia Commons, public domain."
     },
@@ -73,8 +73,8 @@ export const panelFireClassificationPost: BlogPost = {
       mobileSrc: "/images/blog/panel-delivery-photograph-mobile-20261027.jpg",
     mobileWidth: 960,
     mobileHeight: 612,
-      width: 1200,
-      height: 766,
+      width: 1280,
+      height: 817,
       alt: "Real stacked insulated sandwich panels with profiled metal facings and visible core edges; appearance cannot establish the linked laboratory report or ordered product revision.",
       caption: "Figure 4. A photograph of delivered construction panels does not connect them to any particular laboratory report, product revision or approval. Dirk H. Urbanek / Wikimedia Commons, public domain; unrelated illustrative site."
     },
