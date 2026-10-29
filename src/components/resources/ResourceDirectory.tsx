@@ -146,10 +146,9 @@ export function ResourceDirectory({
     };
 
     window.addEventListener("popstate", applyUrlParams);
-    const timer = setTimeout(applyUrlParams, 0);
+    applyUrlParams();
     return () => {
       window.removeEventListener("popstate", applyUrlParams);
-      clearTimeout(timer);
     };
   }, []);
 

@@ -293,7 +293,7 @@ export const officialResources: ProcurementResource[] = [
     rights: "Government dataset; check specific terms before redistribution",
     distribution: "Link only; not a global sanctions clearance",
     lastReviewDate: "2026-10-24",
-    destinations: ["US", "Global"],
+    destinations: ["US"],
     sectors: ["compliance"],
     stageKey: "screening",
   },

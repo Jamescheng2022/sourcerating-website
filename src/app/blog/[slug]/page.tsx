@@ -24,7 +24,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ? (/\.(?:jpe?g|png)$/i.test(post.coverImage.src)
           ? post.coverImage
           : { src: post.coverImage.src.replace(/\.(?:svg|avif)$/i, ".png"), width: 1200, height: 630, alt: post.coverImage.alt })
-      : undefined,
+      : (slug === "chinese-steel-standard-edition-implementation-translation-dates"
+          ? { src: "/images/blog/cards/chinese-steel-standard-edition-implementation-translation-dates-social-card.png", width: 1200, height: 630, alt: post.title }
+          : undefined),
   });
 }
 

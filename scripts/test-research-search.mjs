@@ -127,6 +127,14 @@ test('procurement resource classification integrity: zero substring false-positi
   assert.equal(screeningResources.length, 1, 'Counterparty screening must match strictly 1 resource');
   assert.equal(screeningResources[0].id, 'CO-01', 'Counterparty screening must match strictly CO-01, zero tariff compliance false positives');
 
+  // CO-01 must strictly target US destination (not Global)
+  const co01 = officialResources.find(r => r.id === 'CO-01');
+  assert.ok(co01, 'CO-01 must exist');
+  assert.deepEqual(Array.from(co01.destinations), ['US'], 'CO-01 destinations must strictly be US only');
+  assert.equal(co01.destinations.includes('Global'), false, 'CO-01 must NOT have Global tag');
+  assert.deepEqual(Array.from(co01.sectors), ['compliance']);
+  assert.equal(co01.stageKey, 'screening');
+
   // 2. DO-01 (Common Export Documents Guide) must match US, Global, logistics, shipment
   const do01 = officialResources.find(r => r.id === 'DO-01');
   assert.ok(do01, 'DO-01 must exist');
@@ -150,4 +158,39 @@ test('procurement resource classification integrity: zero substring false-positi
   // 6. Stage "cost" must match CB-04, TR-01, TR-02, TR-03, TR-04, TR-05
   const costResources = officialResources.filter(r => r.stageKey === 'cost');
   assert.deepEqual(Array.from(costResources.map(r => r.id)), ['CB-04', 'TR-01', 'TR-02', 'TR-03', 'TR-04', 'TR-05']);
+
+  // 7. Fixed mapping test for all 14 resources (destinations and sectors fixed integrity)
+  const expectedTags = {
+    'SR-01': { destinations: ['Global'], sectors: ['manufacturing', 'steel'], stageKey: 'deposit' },
+    'CB-01': { destinations: ['EU'], sectors: ['steel'], stageKey: 'technical' },
+    'CB-02': { destinations: ['EU'], sectors: ['steel'], stageKey: 'technical' },
+    'CB-03': { destinations: ['EU'], sectors: ['steel'], stageKey: 'technical' },
+    'CB-04': { destinations: ['EU'], sectors: ['steel'], stageKey: 'cost' },
+    'TR-01': { destinations: ['EU', 'Global'], sectors: ['manufacturing', 'compliance'], stageKey: 'cost' },
+    'TR-02': { destinations: ['EU'], sectors: ['compliance', 'manufacturing'], stageKey: 'cost' },
+    'TR-03': { destinations: ['US'], sectors: ['compliance', 'manufacturing'], stageKey: 'cost' },
+    'TR-04': { destinations: ['UK'], sectors: ['compliance', 'manufacturing'], stageKey: 'cost' },
+    'DO-01': { destinations: ['US', 'Global'], sectors: ['logistics'], stageKey: 'shipment' },
+    'DO-02': { destinations: ['US'], sectors: ['logistics'], stageKey: 'shipment' },
+    'DO-03': { destinations: ['Global'], sectors: ['logistics', 'compliance'], stageKey: 'deposit' },
+    'CO-01': { destinations: ['US'], sectors: ['compliance'], stageKey: 'screening' },
+    'TR-05': { destinations: ['US'], sectors: ['compliance', 'manufacturing'], stageKey: 'cost' },
+  };
+
+  for (const [id, expected] of Object.entries(expectedTags)) {
+    const res = officialResources.find(r => r.id === id);
+    assert.ok(res, `Resource ${id} must exist in officialResources`);
+    assert.deepEqual(Array.from(res.destinations), expected.destinations, `${id} destinations must match fixed expectation`);
+    assert.deepEqual(Array.from(res.sectors), expected.sectors, `${id} sectors must match fixed expectation`);
+    assert.equal(res.stageKey, expected.stageKey, `${id} stageKey must match fixed expectation`);
+  }
+
+  // Steel sector integrity
+  const steelResources = officialResources.filter(r => r.sectors.includes('steel'));
+  assert.deepEqual(Array.from(steelResources.map(r => r.id)), ['SR-01', 'CB-01', 'CB-02', 'CB-03', 'CB-04'], 'Steel sector must match exactly SR-01 and CB-01 to CB-04');
+
+  // Tariffs resources integrity
+  const tariffResources = officialResources.filter(r => r.id.startsWith('TR-'));
+  assert.equal(tariffResources.length, 5, 'Must have exactly 5 tariff resources (TR-01 to TR-05)');
+  assert.ok(tariffResources.every(r => r.stageKey === 'cost'), 'All tariff resources must be categorized under cost stage');
 });
