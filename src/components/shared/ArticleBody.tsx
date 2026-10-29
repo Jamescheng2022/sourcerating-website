@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { BlogPost } from "@/data/blog";
 
-function InlineText({ text, editorial = false }: { text: string; editorial?: boolean }) {
+export function InlineText({ text, editorial = false }: { text: string; editorial?: boolean }) {
   return text.split(/(\[[^\]]+\]\(https?:\/\/[^\s)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, index) => {
     const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
     if (link) return <a key={index} href={link[2]} className={editorial ? "font-medium text-slate-900 underline decoration-[#ac8054] decoration-1 underline-offset-[3px] hover:text-brand-700" : "font-medium text-brand-700 underline decoration-brand-300 underline-offset-4 hover:text-brand-900"}>{link[1]}</a>;
@@ -28,7 +28,7 @@ export function ArticleBody({ blocks, editorial = false }: { blocks: NonNullable
                 <Image src={block.mobileSrc} alt={block.alt} width={block.mobileWidth ?? 720} height={block.mobileHeight ?? 1180} sizes="(max-width: 1279px) 100vw, 0px" className="block h-auto w-full rounded-md border border-stone-200 xl:hidden" />
               ) : null}
               <Image src={block.src} alt={block.alt} width={block.width} height={block.height} sizes="(min-width: 1280px) 1150px, 100vw" className={block.mobileSrc ? "hidden h-auto w-full rounded-md border border-stone-200 xl:block" : "h-auto w-full rounded-md border border-stone-200"} />
-              <figcaption className="mt-3 text-sm leading-6 text-gray-500">{block.caption}</figcaption>
+              <figcaption className="mt-3 text-sm leading-6 text-gray-500"><InlineText text={block.caption} editorial={editorial} /></figcaption>
             </figure>
           );
         }
