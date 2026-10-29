@@ -191,7 +191,7 @@ export function HomeSearch() {
   };
 
   return (
-    <div className="mt-6 w-full max-w-4xl">
+    <div className="mt-4 sm:mt-6 w-full max-w-4xl">
       {/* Search Bar Form */}
       <form
         role="search"
@@ -249,7 +249,7 @@ export function HomeSearch() {
       </form>
 
       {/* Filter Tabs by Content Kind - all with >=44px touch height */}
-      <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 no-scrollbar">
+      <div className="mt-2.5 sm:mt-3 flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 no-scrollbar">
         <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 shrink-0 mr-1 hidden sm:inline">
           Filter:
         </span>
@@ -281,8 +281,8 @@ export function HomeSearch() {
       </div>
 
       {/* Recommended Topic Chips with >=44px touch height */}
-      <div className="mt-3 flex flex-wrap items-center gap-2">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mr-1">
+      <div className="mt-2.5 sm:mt-3 flex items-center gap-1.5 sm:gap-2 overflow-x-auto sm:flex-wrap pb-1 pt-0.5 no-scrollbar">
+        <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 mr-1 shrink-0">
           Recommended:
         </span>
         {quickTopics.map((topic) => (
@@ -290,7 +290,7 @@ export function HomeSearch() {
             key={topic.label}
             type="button"
             onClick={() => handleTopicClick(topic.query)}
-            className="inline-flex min-h-[44px] items-center rounded-full border border-gray-200 bg-gray-50 px-3.5 py-2 text-xs font-medium text-gray-700 hover:border-brand-700 hover:bg-brand-50 hover:text-brand-900 transition-colors"
+            className="inline-flex min-h-[44px] items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-medium text-gray-700 hover:border-brand-700 hover:bg-brand-50 hover:text-brand-900 transition-colors shrink-0 whitespace-nowrap"
           >
             {topic.label}
           </button>

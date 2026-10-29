@@ -1,10 +1,9 @@
-#!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
-import ts from "typescript";
 import sharp from "sharp";
+import ts from "typescript";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputDir = path.join(root, "public", "images", "blog", "cards");
@@ -46,7 +45,7 @@ const categoryColors = {
 };
 
 function escapeXml(unsafe) {
-  return String(unsafe || "")
+  return String(unsafe)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -58,20 +57,29 @@ function wrapText(text, maxCharsPerLine, maxLines = 4) {
   const words = text.split(/\s+/);
   const lines = [];
   let currentLine = "";
+  let truncated = false;
 
-  for (const word of words) {
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
     const testLine = currentLine ? `${currentLine} ${word}` : word;
     if (testLine.length <= maxCharsPerLine) {
       currentLine = testLine;
     } else {
       if (currentLine) lines.push(currentLine);
-      currentLine = word;
       if (lines.length === maxLines - 1) {
+        const remaining = words.slice(i).join(" ");
+        if (remaining.length <= maxCharsPerLine) {
+          lines.push(remaining);
+        } else {
+          lines.push(remaining.slice(0, maxCharsPerLine - 1).trim() + "…");
+        }
+        truncated = true;
         break;
       }
+      currentLine = word;
     }
   }
-  if (currentLine && lines.length < maxLines) {
+  if (!truncated && currentLine && lines.length < maxLines) {
     lines.push(currentLine);
   }
   return lines;
@@ -103,28 +111,29 @@ async function generateCard(post) {
   const height = 630;
   const colors = categoryColors[post.category] || { bg: "#1e293b", text: "#94a3b8", border: "#0ea5e9" };
 
-  // Dynamic font size and line height based on title length to prevent any truncation
+  // Dynamic font sizing and line wrapping based on title length
   const titleLen = post.title.length;
-  let titleFontSize = 44;
-  let titleLineHeight = 52;
-  let maxCharsPerTitleLine = 40;
+  let titleFontSize = 42;
+  let titleLineHeight = 50;
+  let maxCharsPerTitleLine = 42;
 
   if (titleLen > 80) {
-    titleFontSize = 34;
-    titleLineHeight = 42;
-    maxCharsPerTitleLine = 52;
-  } else if (titleLen > 50) {
-    titleFontSize = 38;
-    titleLineHeight = 46;
-    maxCharsPerTitleLine = 46;
+    titleFontSize = 33;
+    titleLineHeight = 40;
+    maxCharsPerTitleLine = 54;
+  } else if (titleLen > 60) {
+    titleFontSize = 36;
+    titleLineHeight = 44;
+    maxCharsPerTitleLine = 48;
   }
 
-  const titleLines = wrapText(post.title, maxCharsPerTitleLine, 4);
-  const excerptLines = wrapText(post.excerpt, 68, 3);
+  const titleLines = wrapText(post.title, maxCharsPerTitleLine, 3);
+  // Excerpts: comfortably fit 75-80 chars per line, up to 3 lines with zero truncation
+  const excerptLines = wrapText(post.excerpt, 78, 3);
 
-  const titleY = 195;
-  const excerptY = titleY + titleLines.length * titleLineHeight + 28;
-  const excerptLineHeight = 30;
+  const titleY = 190;
+  const excerptY = titleY + titleLines.length * titleLineHeight + 24;
+  const excerptLineHeight = 28;
 
   const fontStack = "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
@@ -133,11 +142,14 @@ async function generateCard(post) {
     .join("\n    ");
 
   const excerptSvg = excerptLines
-    .map((line, idx) => `<text x="80" y="${excerptY + idx * excerptLineHeight}" font-family="${fontStack}" font-size="20" font-weight="400" fill="#94a3b8" letter-spacing="0.1">${escapeXml(line)}</text>`)
+    .map((line, idx) => `<text x="80" y="${excerptY + idx * excerptLineHeight}" font-family="${fontStack}" font-size="19" font-weight="400" fill="#94a3b8" letter-spacing="0.1">${escapeXml(line)}</text>`)
     .join("\n    ");
 
   const badgeText = `FIELD NOTE · ${post.category.toUpperCase()}`;
   const badgeWidth = Math.max(160, badgeText.length * 8.5 + 28);
+
+  // Bottom metadata: split URL and disclosure into clean, non-colliding rows
+  const displaySlug = post.slug.length > 52 ? post.slug.slice(0, 50) + "…" : post.slug;
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
   <!-- Dignified solid editorial background (no generic SaaS gradients) -->
@@ -146,15 +158,15 @@ async function generateCard(post) {
   <!-- Clean inner architectural border -->
   <rect x="32" y="32" width="${width - 64}" height="${height - 64}" rx="8" fill="none" stroke="#1e293b" stroke-width="2" />
 
-  <!-- Top bar: Brand & Section cleanly separated with zero overlap -->
-  <g transform="translate(80, 75)">
+  <!-- Top bar: Brand cleanly separated with letter spacing -->
+  <g transform="translate(80, 72)">
     <text x="0" y="20" font-family="${fontStack}" font-size="20" font-weight="900" fill="#f8fafc" letter-spacing="4">SOURCERATING</text>
   </g>
 
   <!-- Category & Section Badge: Distinct FIELD NOTE badge positioned safely below brand -->
-  <g transform="translate(80, 115)">
-    <rect x="0" y="0" width="${badgeWidth}" height="30" rx="15" fill="${colors.bg}" stroke="${colors.border}" stroke-width="1.5" />
-    <text x="14" y="20" font-family="${fontStack}" font-size="12" font-weight="700" fill="${colors.text}" letter-spacing="0.8">${escapeXml(badgeText)}</text>
+  <g transform="translate(80, 112)">
+    <rect x="0" y="0" width="${badgeWidth}" height="28" rx="14" fill="${colors.bg}" stroke="${colors.border}" stroke-width="1.5" />
+    <text x="14" y="19" font-family="${fontStack}" font-size="12" font-weight="700" fill="${colors.text}" letter-spacing="0.8">${escapeXml(badgeText)}</text>
   </g>
 
   <!-- Title & Excerpt -->
@@ -164,10 +176,14 @@ async function generateCard(post) {
   <!-- Lower divider rule -->
   <line x1="80" y1="${height - 95}" x2="${width - 80}" y2="${height - 95}" stroke="#1e293b" stroke-width="1.5" />
 
-  <!-- Bottom metadata bar -->
-  <g transform="translate(80, ${height - 55})">
-    <text x="0" y="0" font-family="${fontStack}" font-size="15" font-weight="600" fill="#64748b">sourcerating.com/blog/${escapeXml(post.slug)}</text>
-    <text x="${width - 160}" y="0" text-anchor="end" font-family="${fontStack}" font-size="13" font-weight="500" fill="#64748b">SourceRating Editorial Field Note • Typographic layout card (not a photograph / not AI art)</text>
+  <!-- Bottom metadata bar: Two distinct non-colliding rows -->
+  <g transform="translate(80, ${height - 58})">
+    <text x="0" y="0" font-family="${fontStack}" font-size="14" font-weight="600" fill="#64748b">sourcerating.com/blog/${escapeXml(displaySlug)}</text>
+    <text x="${width - 160}" y="0" text-anchor="end" font-family="${fontStack}" font-size="13" font-weight="600" fill="#64748b">SourceRating Editorial Field Note</text>
+  </g>
+  <g transform="translate(80, ${height - 34})">
+    <text x="0" y="0" font-family="${fontStack}" font-size="12" font-weight="500" fill="#475569">Typographic layout card • Original editorial analysis (not a photograph / not AI art)</text>
+    <text x="${width - 160}" y="0" text-anchor="end" font-family="${fontStack}" font-size="12" font-weight="500" fill="#475569">SourceRating Sourcing Intelligence</text>
   </g>
 </svg>`;
 
@@ -198,17 +214,42 @@ async function generateHdgCard() {
   console.log(`Updated HDG social card with explicit AI disclosure: ${path.basename(outPngPath)}`);
 }
 
+// Composite explicit AI disclosure badge on PU raster social card (WITHOUT modifying original locked JPG)
+async function generatePuCard() {
+  const jpgPath = path.join(root, "public", "images", "blog", "polyurethane-screen-panels-inspection-v2.jpg");
+  const outPngPath = path.join(root, "public", "images", "blog", "cards", "polyurethane-screen-panels-china-vs-local-social-card.png");
+
+  const fontStack = "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+  const badgeSvg = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="555" width="1200" height="75" fill="rgba(11, 17, 32, 0.92)" />
+    <line x1="0" y1="555" x2="1200" y2="555" stroke="#334155" stroke-width="1.5" />
+    <text x="40" y="600" font-family="${fontStack}" font-size="16" font-weight="700" fill="#f8fafc" letter-spacing="2">SOURCERATING EDITORIAL</text>
+    <text x="1160" y="600" text-anchor="end" font-family="${fontStack}" font-size="15" font-weight="500" fill="#cbd5e1">AI-generated editorial illustration • Not a photograph of a specific supplier or installation</text>
+  </svg>`);
+
+  await sharp(jpgPath)
+    .resize(1200, 630, { fit: "cover", position: "center" })
+    .composite([{ input: badgeSvg, top: 0, left: 0 }])
+    .png({ quality: 95, compressionLevel: 8 })
+    .toFile(outPngPath);
+
+  console.log(`Generated PU social card with explicit AI disclosure: ${path.basename(outPngPath)} (original locked JPG untouched)`);
+}
+
 async function main() {
-  console.log(`Generating ${targetSlugs.length} independent typographic social cards...`);
+  console.log(`Generating social cards for ${targetSlugs.length} articles...`);
   for (const slug of targetSlugs) {
     const post = posts.find((p) => p.slug === slug);
-    if (!post) throw new Error(`Post not found: ${slug}`);
+    if (!post) {
+      console.warn(`Post not found: ${slug}`);
+      continue;
+    }
     const out = await generateCard(post);
-    const stat = fs.statSync(out);
-    console.log(`Generated: ${path.basename(out)} (${stat.size} bytes)`);
+    console.log(`Generated: ${path.basename(out)}`);
   }
   await generateHdgCard();
-  console.log("All 18 independent social cards + HDG AI card successfully generated!");
+  await generatePuCard();
+  console.log("All social cards generated successfully.");
 }
 
 main().catch((err) => {

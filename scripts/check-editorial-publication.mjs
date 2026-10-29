@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* eslint-disable */
+
 /**
  * Deterministic SourceRating article preflight.
  *

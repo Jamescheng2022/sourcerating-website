@@ -130,9 +130,9 @@ export const blogSocialCards: Record<string, BlogSocialCard> = {
   },
   "polyurethane-screen-panels-china-vs-local": {
     slug: "polyurethane-screen-panels-china-vs-local",
-    src: "/images/blog/polyurethane-screen-panels-inspection-v2.jpg",
-    width: 1600,
-    height: 900,
+    src: "/images/blog/cards/polyurethane-screen-panels-china-vs-local-social-card.png",
+    width: 1200,
+    height: 630,
     alt: "Orange polyurethane screening panels with through-slots on a steel inspection bench beside a vernier caliper.",
     cardType: "ai-illustration",
     attribution: "AI-generated editorial image; not a photograph of a specific supplier or installation.",

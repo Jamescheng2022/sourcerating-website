@@ -1,0 +1,830 @@
+{
+  "status": "PASS",
+  "timestamp": "2026-10-29T02:19:56.064Z",
+  "headSha": "d99ceb51d0bdd8ca95345c4e0315d26a1ecae1ef",
+  "sourceTreeDirty": false,
+  "gitStatusSummary": [],
+  "buildId": "9WrA0BgeGLHfkR1FElP7B",
+  "serverPort": 62371,
+  "testGaId": "G-TEST000000",
+  "telemetryScopeDeclaration": "Telemetry interception is strictly scoped to the 5 pre-armed Google Analytics domain patterns (*://*.google-analytics.com/*, *://*.googletagmanager.com/*, *://*.analytics.google.com/*, *://stats.g.doubleclick.net/*, *://*.googleadservices.com/*) via CDP Network.setBlockedURLs at the browser page layer; no out-of-band OS-level firewall is claimed.",
+  "monitoredTelemetryPatterns": [
+    "*://*.google-analytics.com/*",
+    "*://*.googletagmanager.com/*",
+    "*://*.analytics.google.com/*",
+    "*://stats.g.doubleclick.net/*",
+    "*://*.googleadservices.com/*"
+  ],
+  "builtBlogHtmlAudit": {
+    "verifiedCount": 31,
+    "zeroFallback": true
+  },
+  "safeArea": {
+    "physicalDeviceSafeAreaTested": false,
+    "note": "Physical hardware safe area insets (notches, dynamic island, hardware navigation bar) require physical devices; headless Chrome emulation verifies CSS env(safe-area-inset-bottom, 0px) fallbacks, calc offsets and fixed dock clearance only."
+  },
+  "occlusionChecks": {
+    "home375": {
+      "foundFloating": true,
+      "floatingRect": {
+        "left": 209,
+        "right": 363,
+        "top": 559,
+        "bottom": 603,
+        "height": 44,
+        "width": 154
+      },
+      "overlapsDock": false,
+      "visibleInteractiveCount": 10,
+      "overlappingCount": 0,
+      "overlapping": []
+    },
+    "home320": {
+      "foundFloating": true,
+      "floatingRect": {
+        "left": 154,
+        "right": 308,
+        "top": 532,
+        "bottom": 576,
+        "height": 44,
+        "width": 154
+      },
+      "overlapsDock": false,
+      "visibleInteractiveCount": 9,
+      "overlappingCount": 0,
+      "overlapping": []
+    },
+    "resources375": {
+      "foundFloating": true,
+      "floatingRect": {
+        "left": 209,
+        "right": 363,
+        "top": 559,
+        "bottom": 603,
+        "height": 44,
+        "width": 154
+      },
+      "overlapsDock": false,
+      "visibleInteractiveCount": 4,
+      "overlappingCount": 0,
+      "overlapping": []
+    },
+    "resources320": {
+      "foundFloating": true,
+      "floatingRect": {
+        "left": 154,
+        "right": 308,
+        "top": 532,
+        "bottom": 576,
+        "height": 44,
+        "width": 154
+      },
+      "overlapsDock": false,
+      "visibleInteractiveCount": 4,
+      "overlappingCount": 0,
+      "overlapping": []
+    }
+  },
+  "telemetryAudit": {
+    "totalBlocked": 4,
+    "allBlockedWithInspector": true,
+    "containsTestId": true,
+    "blockedRequests": [
+      {
+        "requestId": "22484.68",
+        "url": "https://www.googletagmanager.com/gtag/js?id=G-TEST000000",
+        "method": "GET",
+        "blockedReason": "inspector",
+        "errorText": "",
+        "canceled": false,
+        "timestamp": "2026-10-29T02:20:00.490Z"
+      },
+      {
+        "requestId": "22484.69",
+        "url": "https://www.googletagmanager.com/gtag/js?id=G-TEST000000",
+        "method": "GET",
+        "blockedReason": "inspector",
+        "errorText": "",
+        "canceled": false,
+        "timestamp": "2026-10-29T02:20:00.490Z"
+      },
+      {
+        "requestId": "22484.330",
+        "url": "https://www.googletagmanager.com/gtag/js?id=G-TEST000000",
+        "method": "GET",
+        "blockedReason": "inspector",
+        "errorText": "",
+        "canceled": false,
+        "timestamp": "2026-10-29T02:20:16.151Z"
+      },
+      {
+        "requestId": "22484.331",
+        "url": "https://www.googletagmanager.com/gtag/js?id=G-TEST000000",
+        "method": "GET",
+        "blockedReason": "inspector",
+        "errorText": "",
+        "canceled": false,
+        "timestamp": "2026-10-29T02:20:16.151Z"
+      }
+    ]
+  },
+  "pagesAudited": {
+    "home": {
+      "gaClearance": {
+        "overlapsDock": false,
+        "overlapsHome": false,
+        "verticalClearancePx": 11,
+        "gaHeight": 174
+      },
+      "homeHitTestsByVp": {
+        "320px": [
+          {
+            "name": "center",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "375px": [
+          {
+            "name": "center",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "390px": [
+          {
+            "name": "center",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "430px": [
+          {
+            "name": "center",
+            "tag": "h3",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "768px": [
+          {
+            "name": "center",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "nav",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "nav",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "aside",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "aside",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "1024px": [
+          {
+            "name": "center",
+            "tag": "input",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "nav",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "nav",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "section",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "1440px": [
+          {
+            "name": "center",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "header",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "header",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "section",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ]
+      },
+      "rejectResult": {
+        "storageKey": "denied",
+        "bannerHidden": true,
+        "hasToggle": true,
+        "toggleHeight": 44
+      },
+      "allowResult": {
+        "storageKey": "granted",
+        "hasToggleOn": true
+      },
+      "revokedKey": "denied",
+      "occlusionChecks": {
+        "home375": {
+          "foundFloating": true,
+          "floatingRect": {
+            "left": 209,
+            "right": 363,
+            "top": 559,
+            "bottom": 603,
+            "height": 44,
+            "width": 154
+          },
+          "overlapsDock": false,
+          "visibleInteractiveCount": 10,
+          "overlappingCount": 0,
+          "overlapping": []
+        },
+        "home320": {
+          "foundFloating": true,
+          "floatingRect": {
+            "left": 154,
+            "right": 308,
+            "top": 532,
+            "bottom": 576,
+            "height": 44,
+            "width": 154
+          },
+          "overlapsDock": false,
+          "visibleInteractiveCount": 9,
+          "overlappingCount": 0,
+          "overlapping": []
+        }
+      },
+      "searchHitResult": {
+        "totalMatchedLinks": 22
+      },
+      "searchZeroResult": {
+        "isZero": true
+      },
+      "chipHitResult": {
+        "inputValue": "ASTM A123",
+        "totalMatchedLinks": 22
+      }
+    },
+    "resources": {
+      "filterAudit": {
+        "screeningCount": 1,
+        "screeningTitles": [
+          "U.S. Consolidated Screening List (CSL)"
+        ]
+      },
+      "destAudit": {
+        "usHasDo01": true,
+        "usHasCo01": true,
+        "globalHasDo01": true,
+        "globalHasCo01": false
+      },
+      "resourcesHitTestsByVp": {
+        "320px": [
+          {
+            "name": "center",
+            "tag": "p",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "375px": [
+          {
+            "name": "center",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "390px": [
+          {
+            "name": "center",
+            "tag": "p",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "430px": [
+          {
+            "name": "center",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "button",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "a",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "768px": [
+          {
+            "name": "center",
+            "tag": "span",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "nav",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "nav",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "aside",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "aside",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "1024px": [
+          {
+            "name": "center",
+            "tag": "p",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "nav",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "nav",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ],
+        "1440px": [
+          {
+            "name": "center",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topLeft",
+            "tag": "header",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "topRight",
+            "tag": "header",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomLeft",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          },
+          {
+            "name": "bottomRight",
+            "tag": "div",
+            "hasElement": true,
+            "isConnected": true
+          }
+        ]
+      },
+      "occlusionChecks": {
+        "resources375": {
+          "foundFloating": true,
+          "floatingRect": {
+            "left": 209,
+            "right": 363,
+            "top": 559,
+            "bottom": 603,
+            "height": 44,
+            "width": 154
+          },
+          "overlapsDock": false,
+          "visibleInteractiveCount": 4,
+          "overlappingCount": 0,
+          "overlapping": []
+        },
+        "resources320": {
+          "foundFloating": true,
+          "floatingRect": {
+            "left": 154,
+            "right": 308,
+            "top": 532,
+            "bottom": 576,
+            "height": 44,
+            "width": 154
+          },
+          "overlapsDock": false,
+          "visibleInteractiveCount": 4,
+          "overlappingCount": 0,
+          "overlapping": []
+        }
+      }
+    },
+    "article": {
+      "hasBottomDock": false,
+      "genericCtaSuppressed": true,
+      "strayParensFound": false,
+      "ogImage": "https://www.sourcerating.com/images/blog/weld-photo-evidence-hero-20261023.png",
+      "twitterImage": "https://www.sourcerating.com/images/blog/weld-photo-evidence-hero-20261023.png",
+      "navBackResult": {
+        "prevUrl": "http://127.0.0.1:62371/blog/weld-photo-not-joint-release-evidence",
+        "navigatedUrl": "http://127.0.0.1:62371/playbook",
+        "returnedUrl": "http://127.0.0.1:62371/blog/weld-photo-not-joint-release-evidence",
+        "backSuccess": true
+      }
+    }
+  },
+  "screenshots": [
+    {
+      "page": "home",
+      "viewport": "320px",
+      "file": "home-320px.png"
+    },
+    {
+      "page": "home",
+      "viewport": "375px",
+      "file": "home-375px.png"
+    },
+    {
+      "page": "home",
+      "viewport": "390px",
+      "file": "home-390px.png"
+    },
+    {
+      "page": "home",
+      "viewport": "430px",
+      "file": "home-430px.png"
+    },
+    {
+      "page": "home",
+      "viewport": "768px",
+      "file": "home-768px.png"
+    },
+    {
+      "page": "home",
+      "viewport": "1024px",
+      "file": "home-1024px.png"
+    },
+    {
+      "page": "home",
+      "viewport": "1440px",
+      "file": "home-1440px.png"
+    },
+    {
+      "page": "home",
+      "state": "consent-banner",
+      "viewport": "375px",
+      "file": "home-consent-banner-375px.png"
+    },
+    {
+      "page": "home",
+      "state": "consent-dismissed",
+      "viewport": "375px",
+      "file": "home-consent-dismissed-375px.png"
+    },
+    {
+      "page": "resources",
+      "viewport": "320px",
+      "file": "resources-320px.png"
+    },
+    {
+      "page": "resources",
+      "viewport": "375px",
+      "file": "resources-375px.png"
+    },
+    {
+      "page": "resources",
+      "viewport": "390px",
+      "file": "resources-390px.png"
+    },
+    {
+      "page": "resources",
+      "viewport": "430px",
+      "file": "resources-430px.png"
+    },
+    {
+      "page": "resources",
+      "viewport": "768px",
+      "file": "resources-768px.png"
+    },
+    {
+      "page": "resources",
+      "viewport": "1024px",
+      "file": "resources-1024px.png"
+    },
+    {
+      "page": "resources",
+      "viewport": "1440px",
+      "file": "resources-1440px.png"
+    },
+    {
+      "page": "resources",
+      "state": "filtered-screening",
+      "viewport": "375px",
+      "file": "resources-filtered-screening-375px.png"
+    },
+    {
+      "page": "article",
+      "viewport": "320px",
+      "file": "article-320px.png"
+    },
+    {
+      "page": "article",
+      "viewport": "375px",
+      "file": "article-375px.png"
+    },
+    {
+      "page": "article",
+      "viewport": "390px",
+      "file": "article-390px.png"
+    },
+    {
+      "page": "article",
+      "viewport": "430px",
+      "file": "article-430px.png"
+    },
+    {
+      "page": "article",
+      "viewport": "768px",
+      "file": "article-768px.png"
+    },
+    {
+      "page": "article",
+      "viewport": "1024px",
+      "file": "article-1024px.png"
+    },
+    {
+      "page": "article",
+      "viewport": "1440px",
+      "file": "article-1440px.png"
+    }
+  ]
+}

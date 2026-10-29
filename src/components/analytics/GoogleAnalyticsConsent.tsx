@@ -103,7 +103,7 @@ export function GoogleAnalyticsConsent({ gaId, debugMode }: { gaId: string; debu
           aria-label={consent === "granted" ? "Turn off Google Analytics" : "Allow Google Analytics"}
           onClick={() => choose(consent === "granted" ? "denied" : "granted")}
           className={cn(
-            "fixed right-3 lg:right-4 z-[900] px-3 py-1.5 bg-white text-[#17202a] text-xs font-medium border border-[#89939e] rounded-full min-h-[36px] inline-flex items-center shadow-md hover:bg-gray-50 transition-colors",
+            "fixed right-3 lg:right-4 z-[900] px-3.5 py-2 bg-white text-[#17202a] text-xs font-medium border border-[#89939e] rounded-full min-h-[44px] min-w-[44px] inline-flex items-center shadow-md hover:bg-gray-50 transition-colors",
             hasBottomBar
               ? "bottom-[calc(3.5rem+env(safe-area-inset-bottom,0px)+8px)] lg:bottom-3"
               : "bottom-[calc(env(safe-area-inset-bottom,0px)+8px)] lg:bottom-3"

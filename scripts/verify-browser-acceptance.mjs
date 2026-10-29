@@ -1,14 +1,16 @@
 // Comprehensive CDP browser verification for SourceRating redesign.
 // Enforces:
-// 1. Provenance Binding: Clean final source tree SHA, BUILD_ID check, ephemeral isolated port (no 3100 reuse).
+// 1. Provenance Binding: HEAD SHA, BUILD_ID check, ephemeral isolated port (no 3100 reuse).
 // 2. Zero-outbound telemetry policy with pre-armed aborts on about:blank for monitored domains.
 // 3. 21 Screenshots (3 pages x 7 viewports) + 2 additional state screenshots (consent dismissed, filtered results).
-// 4. Interactive acceptance: search hits and zero-results, filter integrity (CO-01 / DO-01), navigation and back.
-// 5. Consent lifecycle: reject, allow, revoke.
-// 6. elementFromPoint at center and 4 edges + real clicks across viewports.
-// 7. Persistent toggle clearance: zero occlusion of homepage chips and resource CTA.
+// 4. Interactive acceptance with genuine CDP input: search hits and zero-results, filter integrity (CO-01 / DO-01), navigation and back.
+// 5. Consent lifecycle: reject, allow, revoke using CDP mouse clicks.
+// 6. elementFromPoint at center and 4 edges across viewports.
+// 7. Persistent toggle clearance: zero occlusion of homepage chips, resource CTAs, and all interactive controls.
 // 8. Physical safe-area disclaimer: emulation tests CSS env fallbacks; physical notch insets require physical hardware.
 // 9. All 31 built blog HTML files verified on disk for explicit unique social cards and zero fallback to hero-factory-audit.png.
+// 10. Persistence: Saves complete execution report to screenshots/acceptance-report.json.
+
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
@@ -210,7 +212,10 @@ await new Promise((resolve, reject) => {
 
 let msgId = 1;
 const pending = new Map();
-const interceptedRequests = [];
+
+// GA request tracking via requestId correlation
+const sentRequestsByReqId = new Map();
+const blockedTelemetryEvents = [];
 
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
@@ -220,30 +225,37 @@ ws.onmessage = (event) => {
     if (data.error) reject(new Error(data.error.message));
     else resolve(data.result);
   }
-  if (data.method === "Network.loadingFailed") {
-    interceptedRequests.push({
-      timestamp: new Date().toISOString(),
-      event: "LOADING_FAILED",
-      requestId: data.params.requestId,
-      blockedReason: data.params.blockedReason,
-      canceled: data.params.canceled,
-      errorText: data.params.errorText,
-    });
-  }
+
+  // Correlate requests sent with loadingFailed via requestId
   if (data.method === "Network.requestWillBeSent") {
     const url = data.params.request.url;
     if (
       url.includes("google-analytics.com") ||
       url.includes("googletagmanager.com") ||
-      url.includes("google.com/g/collect") ||
-      url.includes("analytics.google.com")
+      url.includes("analytics.google.com") ||
+      url.includes("doubleclick.net") ||
+      url.includes("googleadservices.com")
     ) {
-      interceptedRequests.push({
-        timestamp: new Date().toISOString(),
-        event: "ARMED_ROUTE_INTERCEPTED",
+      sentRequestsByReqId.set(data.params.requestId, {
         requestId: data.params.requestId,
         url,
         method: data.params.request.method,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }
+
+  if (data.method === "Network.loadingFailed") {
+    const req = sentRequestsByReqId.get(data.params.requestId);
+    if (req) {
+      blockedTelemetryEvents.push({
+        requestId: data.params.requestId,
+        url: req.url,
+        method: req.method,
+        blockedReason: data.params.blockedReason,
+        errorText: data.params.errorText,
+        canceled: data.params.canceled,
+        timestamp: new Date().toISOString(),
       });
     }
   }
@@ -276,6 +288,137 @@ async function captureScreenshot(filename) {
   return outPath;
 }
 
+// Genuine CDP Input Helpers (using CDP Input.dispatchMouseEvent and Input.insertText / dispatchKeyEvent)
+async function cdpClick(selectorOrFn) {
+  const isFunctionString = typeof selectorOrFn === "string" && (selectorOrFn.trim().startsWith("(") || selectorOrFn.trim().startsWith("function"));
+  const getCoordsExpr = isFunctionString
+    ? `(() => {
+        const el = (${selectorOrFn})();
+        if (!el) return null;
+        el.scrollIntoView({ block: 'center', inline: 'center' });
+        const r = el.getBoundingClientRect();
+        return { x: Math.round(r.left + r.width / 2), y: Math.round(r.top + r.height / 2), width: r.width, height: r.height };
+      })()`
+    : typeof selectorOrFn === "string"
+    ? `(() => {
+        const el = document.querySelector(${JSON.stringify(selectorOrFn)});
+        if (!el) return null;
+        el.scrollIntoView({ block: 'center', inline: 'center' });
+        const r = el.getBoundingClientRect();
+        return { x: Math.round(r.left + r.width / 2), y: Math.round(r.top + r.height / 2), width: r.width, height: r.height };
+      })()`
+    : `(() => {
+        const el = (${selectorOrFn})();
+        if (!el) return null;
+        el.scrollIntoView({ block: 'center', inline: 'center' });
+        const r = el.getBoundingClientRect();
+        return { x: Math.round(r.left + r.width / 2), y: Math.round(r.top + r.height / 2), width: r.width, height: r.height };
+      })()`;
+
+  const coords = await evalJs(getCoordsExpr);
+  if (!coords || coords.width === 0 || coords.height === 0) {
+    throw new Error(`Target not found or zero dimensions for CDP click: ${selectorOrFn}`);
+  }
+  const { x, y } = coords;
+  await send("Input.dispatchMouseEvent", { type: "mouseMoved", x, y });
+  await send("Input.dispatchMouseEvent", { type: "mousePressed", x, y, button: "left", clickCount: 1 });
+  await send("Input.dispatchMouseEvent", { type: "mouseReleased", x, y, button: "left", clickCount: 1 });
+}
+
+async function cdpType(selector, text) {
+  await cdpClick(selector);
+  await new Promise((r) => setTimeout(r, 60));
+  await send("Input.insertText", { text });
+  // Ensure React input event triggers
+  await evalJs(`
+    (() => {
+      const el = document.querySelector(${JSON.stringify(selector)});
+      if (el) {
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    })()
+  `);
+}
+
+async function cdpClearInput(selector) {
+  await evalJs(`
+    (() => {
+      const el = document.querySelector(${JSON.stringify(selector)});
+      if (el) {
+        const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
+        if (setter) setter.call(el, "");
+        else el.value = "";
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    })()
+  `);
+}
+
+// Thorough Occlusion Assertion:
+// Inspects floating toggle button / banner against ALL visible interactive controls (a, button, input, select, [role=button]) in viewport.
+async function assertNoInteractiveOcclusion(pageName, viewportName) {
+  const res = await evalJs(`
+    (() => {
+      const toggle = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes("Analytics:"));
+      const banner = document.querySelector('section[aria-label="Analytics preferences"]');
+      const floating = toggle || banner;
+      if (!floating) return { foundFloating: false, visibleInteractiveCount: 0, overlappingCount: 0, overlapping: [] };
+
+      const fR = floating.getBoundingClientRect();
+      const dock = document.querySelector('aside[aria-label="Workstation quick dock"]');
+      const dR = dock ? dock.getBoundingClientRect() : null;
+
+      const overlapsDock = dR
+        ? !(fR.bottom <= dR.top || fR.top >= dR.bottom || fR.right <= dR.left || fR.left >= dR.right)
+        : false;
+
+      // Find all interactive elements in DOM
+      const allInteractive = Array.from(document.querySelectorAll('a, button, input, select, [role="button"]'));
+      
+      // Filter strictly to visible interactive elements in viewport, excluding floating controls and dock controls
+      const visibleInteractive = allInteractive.filter(el => {
+        if (floating.contains(el)) return false;
+        if (dock && dock.contains(el)) return false;
+        const style = window.getComputedStyle(el);
+        if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") return false;
+        if (el.getAttribute("aria-hidden") === "true") return false;
+        const r = el.getBoundingClientRect();
+        if (r.width === 0 || r.height === 0) return false;
+        return (r.bottom > 0 && r.top < window.innerHeight && r.right > 0 && r.left < window.innerWidth);
+      });
+
+      const overlapping = visibleInteractive.filter(el => {
+        const r = el.getBoundingClientRect();
+        return !(fR.bottom <= r.top || fR.top >= r.bottom || fR.right <= r.left || fR.left >= r.right);
+      }).map(el => {
+        const text = (el.textContent || el.getAttribute("aria-label") || el.tagName).trim().replace(/\\s+/g, " ");
+        const r = el.getBoundingClientRect();
+        return {
+          tag: el.tagName.toLowerCase(),
+          text: text.slice(0, 40),
+          rect: { left: Math.round(r.left), right: Math.round(r.right), top: Math.round(r.top), bottom: Math.round(r.bottom) }
+        };
+      });
+
+      return {
+        foundFloating: true,
+        floatingRect: { left: Math.round(fR.left), right: Math.round(fR.right), top: Math.round(fR.top), bottom: Math.round(fR.bottom), height: Math.round(fR.height), width: Math.round(fR.width) },
+        overlapsDock,
+        visibleInteractiveCount: visibleInteractive.length,
+        overlappingCount: overlapping.length,
+        overlapping,
+      };
+    })()
+  `);
+
+  assert.equal(res.overlapsDock, false, `${pageName} ${viewportName}: Floating control must not overlap workstation bottom dock`);
+  assert.ok(res.visibleInteractiveCount > 0, `${pageName} ${viewportName}: Viewport must contain visible interactive product links/buttons (found ${res.visibleInteractiveCount})`);
+  assert.equal(res.overlappingCount, 0, `${pageName} ${viewportName}: Floating control must NOT occlude any visible interactive element! Overlapping: ${JSON.stringify(res.overlapping)}`);
+  return res;
+}
+
 // 4. Pre-arm network aborts on about:blank BEFORE ANY navigation
 const initialUrl = await evalJs("window.location.href");
 assert.equal(initialUrl, "about:blank", "Must be on about:blank before arming aborts");
@@ -285,11 +428,11 @@ await send("Page.enable");
 await send("Runtime.enable");
 
 const monitoredTelemetryPatterns = [
-  "*google-analytics.com*",
-  "*google.com/g/collect*",
-  "*googletagmanager.com*",
-  "*analytics.google.com*",
-  "*.google.com/g/collect*",
+  "*://*.google-analytics.com/*",
+  "*://*.googletagmanager.com/*",
+  "*://*.analytics.google.com/*",
+  "*://stats.g.doubleclick.net/*",
+  "*://*.googleadservices.com/*",
 ];
 
 await send("Network.setBlockedURLs", { urls: monitoredTelemetryPatterns });
@@ -310,16 +453,20 @@ const report = {
   status: "IN_PROGRESS",
   timestamp: new Date().toISOString(),
   headSha,
+  sourceTreeDirty: Boolean(gitStatus),
+  gitStatusSummary: gitStatus ? gitStatus.split("\n").map(l => l.trim()) : [],
   buildId,
   serverPort: SERVER_PORT,
   testGaId: "G-TEST000000",
+  telemetryScopeDeclaration: "Telemetry interception is strictly scoped to the 5 pre-armed Google Analytics domain patterns (*://*.google-analytics.com/*, *://*.googletagmanager.com/*, *://*.analytics.google.com/*, *://stats.g.doubleclick.net/*, *://*.googleadservices.com/*) via CDP Network.setBlockedURLs at the browser page layer; no out-of-band OS-level firewall is claimed.",
   monitoredTelemetryPatterns,
   builtBlogHtmlAudit: { verifiedCount: builtBlogHtmlAudit.length, zeroFallback: true },
   safeArea: {
     physicalDeviceSafeAreaTested: false,
     note: "Physical hardware safe area insets (notches, dynamic island, hardware navigation bar) require physical devices; headless Chrome emulation verifies CSS env(safe-area-inset-bottom, 0px) fallbacks, calc offsets and fixed dock clearance only.",
   },
-  interceptedRequests: [],
+  occlusionChecks: {},
+  telemetryAudit: {},
   pagesAudited: {},
   screenshots: [],
 };
@@ -359,11 +506,11 @@ for (const vp of viewports) {
       ];
       return points.map(p => {
         const el = document.elementFromPoint(p.x, p.y);
-        return { name: p.name, tag: el ? el.tagName.toLowerCase() : null, hasElement: !!el };
+        return { name: p.name, tag: el ? el.tagName.toLowerCase() : null, hasElement: !!el, isConnected: el ? el.isConnected : false };
       });
     })()
   `);
-  assert.ok(hitTest.every(p => p.hasElement), `Homepage ${vp.name} hitTest failed`);
+  assert.ok(hitTest.every(p => p.hasElement && p.isConnected), `Homepage ${vp.name} hitTest failed`);
   homeHitTestsByVp[vp.name] = hitTest;
 
   const file = `home-${vp.name}.png`;
@@ -401,7 +548,7 @@ assert.equal(homeGaClearance.overlapsDock, false);
 assert.equal(homeGaClearance.overlapsHome, false);
 assert.ok(homeGaClearance.verticalClearancePx >= 0);
 assert.ok(homeGaClearance.gaHeight >= 44);
-console.log(`✓ Homepage 375px GA Clearance: ${homeGaClearance.verticalClearancePx}px, overlapsHome = false`);
+console.log(`✓ Homepage 375px GA Clearance: ${homeGaClearance.verticalClearancePx}px, overlapsHome = false, banner height >= 44px`);
 
 // Capture banner screenshot
 const bannerShot = "home-consent-banner-375px.png";
@@ -409,64 +556,50 @@ await captureScreenshot(bannerShot);
 report.screenshots.push({ page: "home", state: "consent-banner", viewport: "375px", file: bannerShot });
 
 // GA Consent Lifecycle: Reject -> Verify Off -> Allow -> Verify On -> Revoke -> Verify Denied
-console.log("Testing GA Consent lifecycle (Reject -> Allow -> Revoke)...");
+// (Using genuine CDP clicks)
+console.log("Testing GA Consent lifecycle using genuine CDP Input clicks...");
 
-// Step A: Click "Reject analytics"
+// Step A: Click "Reject analytics" via genuine CDP Input
+await cdpClick("() => Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Reject analytics'))");
+await new Promise((r) => setTimeout(r, 400));
+
 const rejectResult = await evalJs(`
-  (async () => {
-    const rejectBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes("Reject analytics"));
-    if (!rejectBtn) return { error: "Reject button not found" };
-    rejectBtn.click();
-    await new Promise(r => setTimeout(r, 400));
+  (() => {
     const storageKey = localStorage.getItem("ga4_analytics_consent_v1");
     const bannerHidden = document.querySelector('section[aria-label="Analytics preferences"]') === null;
     const toggleBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes("Analytics: off"));
-    return { storageKey, bannerHidden, hasToggle: !!toggleBtn };
+    const toggleHeight = toggleBtn ? toggleBtn.getBoundingClientRect().height : 0;
+    return { storageKey, bannerHidden, hasToggle: !!toggleBtn, toggleHeight };
   })()
 `);
 assert.equal(rejectResult.storageKey, "denied", "Consent key must be denied after reject");
 assert.equal(rejectResult.bannerHidden, true, "Banner must be hidden after reject");
 assert.equal(rejectResult.hasToggle, true, "Toggle button must appear after reject");
-console.log(`✓ GA Consent Reject: state = ${rejectResult.storageKey}, toggle = off`);
+assert.ok(rejectResult.toggleHeight >= 44, `Toggle button height must be >= 44px (got ${rejectResult.toggleHeight}px)`);
+console.log(`✓ GA Consent Reject (CDP click): state = ${rejectResult.storageKey}, toggle = off (height ${rejectResult.toggleHeight}px >= 44px)`);
 
-// Verify persistent button occlusion on Homepage (at right-3)
-const homeToggleOcclusion = await evalJs(`
-  (() => {
-    const toggle = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes("Analytics:"));
-    if (!toggle) return { found: false };
-    const tR = toggle.getBoundingClientRect();
-    const dock = document.querySelector('aside[aria-label="Workstation quick dock"]');
-    const dR = dock ? dock.getBoundingClientRect() : null;
-    const overlapsDock = dR ? !(tR.bottom <= dR.top || tR.top >= dR.bottom || tR.right <= dR.left || tR.left >= dR.right) : false;
+// Verify persistent button occlusion on Homepage at 375px and 320px across ALL interactive elements
+console.log("Verifying zero occlusion across ALL visible interactive elements (a, button, input, select, [role=button])...");
+const homeOcc375 = await assertNoInteractiveOcclusion("Homepage", "375px");
+report.occlusionChecks.home375 = homeOcc375;
+console.log(`✓ Homepage 375px interactive clearance: ${homeOcc375.visibleInteractiveCount} controls verified visible, 0 occluded`);
 
-    // Check overlaps with interactive links or inputs outside dock
-    const interactive = Array.from(document.querySelectorAll('a, input')).filter(el => !dock || !dock.contains(el));
-    const overlapping = interactive.filter(el => {
-      const r = el.getBoundingClientRect();
-      if (r.width === 0 || r.height === 0) return false;
-      return !(tR.bottom <= r.top || tR.top >= r.bottom || tR.right <= r.left || tR.left >= r.right);
-    }).map(el => el.textContent.trim().slice(0, 30));
+await send("Emulation.setDeviceMetricsOverride", { width: 320, height: 640, deviceScaleFactor: 2, mobile: true });
+await new Promise((r) => setTimeout(r, 150));
+const homeOcc320 = await assertNoInteractiveOcclusion("Homepage", "320px");
+report.occlusionChecks.home320 = homeOcc320;
+console.log(`✓ Homepage 320px interactive clearance: ${homeOcc320.visibleInteractiveCount} controls verified visible, 0 occluded`);
 
-    return {
-      found: true,
-      rect: { left: tR.left, right: tR.right, top: tR.top, bottom: tR.bottom },
-      overlapsDock,
-      overlappingCount: overlapping.length,
-      overlapping,
-    };
-  })()
-`);
-assert.equal(homeToggleOcclusion.overlapsDock, false, "Toggle button must not overlap bottom dock");
-assert.equal(homeToggleOcclusion.overlappingCount, 0, `Toggle button must not occlude interactive elements`);
-console.log(`✓ Homepage persistent toggle clearance: overlapsDock = false, overlappingCount = 0`);
+// Restore 375px for subsequent interactions
+await send("Emulation.setDeviceMetricsOverride", { width: 375, height: 667, deviceScaleFactor: 2, mobile: true });
+await new Promise((r) => setTimeout(r, 150));
 
-// Step B: Click toggle to Allow
+// Step B: Click toggle to Allow via genuine CDP Input
+await cdpClick("() => Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Analytics: off'))");
+await new Promise((r) => setTimeout(r, 600));
+
 const allowResult = await evalJs(`
-  (async () => {
-    const toggleBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes("Analytics: off"));
-    if (!toggleBtn) return { error: "Toggle button not found" };
-    toggleBtn.click();
-    await new Promise(r => setTimeout(r, 600));
+  (() => {
     const storageKey = localStorage.getItem("ga4_analytics_consent_v1");
     const toggleOn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes("Analytics: on"));
     return { storageKey, hasToggleOn: !!toggleOn };
@@ -474,7 +607,7 @@ const allowResult = await evalJs(`
 `);
 assert.equal(allowResult.storageKey, "granted", "Consent key must be granted after allow click");
 assert.equal(allowResult.hasToggleOn, true, "Toggle button must show 'Analytics: on'");
-console.log(`✓ GA Consent Allow: state = ${allowResult.storageKey}, toggle = on`);
+console.log(`✓ GA Consent Allow (CDP click): state = ${allowResult.storageKey}, toggle = on`);
 
 // Capture additional screenshot: home-consent-dismissed-375px.png
 const dismissedShot = "home-consent-dismissed-375px.png";
@@ -483,69 +616,65 @@ report.screenshots.push({ page: "home", state: "consent-dismissed", viewport: "3
 console.log(`✓ Captured additional state screenshot: screenshots/${dismissedShot}`);
 
 // Step C: Test Revocation: Click toggle button to revoke to denied (triggers window.location.reload())
-await send("Runtime.evaluate", {
-  expression: `(() => {
-    const toggleBtn = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes("Analytics: on"));
-    if (toggleBtn) {
-      setTimeout(() => toggleBtn.click(), 50);
-    }
-  })()`,
-});
-await new Promise((r) => setTimeout(r, 1200));
+await cdpClick("() => Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Analytics: on'))");
+await new Promise((r) => setTimeout(r, 1500));
+
 const revokedKey = await evalJs(`localStorage.getItem("ga4_analytics_consent_v1")`);
 assert.equal(revokedKey, "denied", "Consent must transition to denied upon toggle click");
-console.log(`✓ GA Consent Revoke: state = ${revokedKey}`);
+console.log(`✓ GA Consent Revoke (CDP click): state = ${revokedKey}`);
 
-// Interactive Search on Homepage: Hit test ("ASTM") & Zero results test ("ZZZNONEXISTENTQUERY999")
-console.log("Testing Homepage Search (hits and zero results)...");
+// Interactive Search on Homepage via genuine CDP Input: Hit test ("ASTM") & Zero results test ("ZZZNONEXISTENTQUERY999")
+console.log("Testing Homepage Search with genuine CDP Input (hits and zero results)...");
+
+// Step 1: Hit test for "ASTM"
+await cdpType("#home-search-input", "ASTM");
+await new Promise((r) => setTimeout(r, 100));
+await cdpClick('button[aria-label="Submit search query"]');
+await new Promise((r) => setTimeout(r, 1000));
+
 const searchHitResult = await evalJs(`
-  (async () => {
-    const input = document.getElementById('home-search-input');
-    const form = document.querySelector('form[role="search"]');
-    if (!input || !form) return { error: "Search elements not found" };
-
-    const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-    setter.call(input, "ASTM");
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-
-    await new Promise(r => setTimeout(r, 1000));
-
+  (() => {
     const items = Array.from(document.querySelectorAll('a')).filter(a => a.href.includes('/blog/') || a.href.includes('/resources'));
-
-    return {
-      totalMatchedLinks: items.length
-    };
+    return { totalMatchedLinks: items.length };
   })()
 `);
-assert.ok(searchHitResult.totalMatchedLinks > 0, "Searching ASTM must return matched links");
-console.log(`✓ Homepage search HIT ('ASTM'): ${searchHitResult.totalMatchedLinks} results found`);
+assert.ok(searchHitResult.totalMatchedLinks > 0, "Searching ASTM via CDP input must return matched links");
+console.log(`✓ Homepage search HIT ('ASTM') via CDP Input: ${searchHitResult.totalMatchedLinks} results found`);
+
+// Step 2: Zero results test for "ZZZNONEXISTENTQUERY999"
+await cdpClearInput("#home-search-input");
+await cdpType("#home-search-input", "ZZZNONEXISTENTQUERY999");
+await new Promise((r) => setTimeout(r, 100));
+await cdpClick('button[aria-label="Submit search query"]');
+await new Promise((r) => setTimeout(r, 1000));
 
 const searchZeroResult = await evalJs(`
-  (async () => {
-    const input = document.getElementById('home-search-input');
-    const form = document.querySelector('form[role="search"]');
-    if (!input || !form) return { error: "Search elements not found" };
-
-    const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-    setter.call(input, "ZZZNONEXISTENTQUERY999");
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-
-    await new Promise(r => setTimeout(r, 1200));
-
-    const emptyBox = document.querySelector('[aria-label="No search results found"]') || document.body;
+  (() => {
     const bodyText = document.body.innerText;
-    const isZero = bodyText.includes("No matches found") || bodyText.includes("0 matching") || bodyText.includes("No search results found");
-
-    return {
-      bodySnippet: emptyBox.textContent.slice(0, 100),
-      isZero
-    };
+    const isZero = bodyText.includes("No matching records found") ||
+                   bodyText.includes("No matches found") ||
+                   bodyText.includes("0 matching") ||
+                   bodyText.includes("No search results found");
+    return { isZero };
   })()
 `);
-assert.equal(searchZeroResult.isZero, true, "Search for non-existent term must report 0 results");
-console.log(`✓ Homepage search ZERO RESULTS ('ZZZNONEXISTENTQUERY999'): "${searchZeroResult.statusText}"`);
+assert.equal(searchZeroResult.isZero, true, "Search for non-existent term via CDP input must report 0 results");
+console.log(`✓ Homepage search ZERO RESULTS ('ZZZNONEXISTENTQUERY999') via CDP Input verified`);
+
+// Step 3: Recommended topic chip click via genuine CDP input
+console.log("Testing Recommended Topic Chip click via genuine CDP Input...");
+await cdpClick("() => Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('ASTM A123 HDG'))");
+await new Promise((r) => setTimeout(r, 800));
+const chipHitResult = await evalJs(`
+  (() => {
+    const inputValue = document.getElementById('home-search-input')?.value || "";
+    const items = Array.from(document.querySelectorAll('a')).filter(a => a.href.includes('/blog/') || a.href.includes('/resources'));
+    return { inputValue, totalMatchedLinks: items.length };
+  })()
+`);
+assert.ok(chipHitResult.inputValue.includes("ASTM A123"), "Chip click must populate search query input");
+assert.ok(chipHitResult.totalMatchedLinks > 0, "Chip click must return matching results");
+console.log(`✓ Homepage Chip Click ('ASTM A123 HDG') via CDP Input verified: query = "${chipHitResult.inputValue}", results = ${chipHitResult.totalMatchedLinks}`);
 
 report.pagesAudited.home = {
   gaClearance: homeGaClearance,
@@ -553,9 +682,10 @@ report.pagesAudited.home = {
   rejectResult,
   allowResult,
   revokedKey,
-  homeToggleOcclusion,
+  occlusionChecks: { home375: homeOcc375, home320: homeOcc320 },
   searchHitResult,
   searchZeroResult,
+  chipHitResult,
 };
 
 // ==========================================
@@ -593,11 +723,11 @@ for (const vp of viewports) {
       ];
       return points.map(p => {
         const el = document.elementFromPoint(p.x, p.y);
-        return { name: p.name, tag: el ? el.tagName.toLowerCase() : null, hasElement: !!el };
+        return { name: p.name, tag: el ? el.tagName.toLowerCase() : null, hasElement: !!el, isConnected: el ? el.isConnected : false };
       });
     })()
   `);
-  assert.ok(hitTest.every(p => p.hasElement), `Resources ${vp.name} hitTest failed`);
+  assert.ok(hitTest.every(p => p.hasElement && p.isConnected), `Resources ${vp.name} hitTest failed`);
   resourcesHitTestsByVp[vp.name] = hitTest;
 
   const file = `resources-${vp.name}.png`;
@@ -606,45 +736,31 @@ for (const vp of viewports) {
   console.log(`✓ Resources ${vp.name}: captured screenshots/${file}, zero overflow, elementFromPoint passed`);
 }
 
-// Check Resource CTA Occlusion at 375px
-await send("Emulation.setDeviceMetricsOverride", {
-  width: 375,
-  height: 667,
-  deviceScaleFactor: 2,
-  mobile: true,
-});
+// Verify persistent button occlusion on Resources page at 375px and 320px
+await send("Emulation.setDeviceMetricsOverride", { width: 375, height: 667, deviceScaleFactor: 2, mobile: true });
 await new Promise((r) => setTimeout(r, 150));
 
-const resourcesToggleOcclusion = await evalJs(`
-  (() => {
-    const toggle = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes("Analytics:"));
-    if (!toggle) return { found: false };
-    const tR = toggle.getBoundingClientRect();
+const resourcesOcc375 = await assertNoInteractiveOcclusion("Resources", "375px");
+report.occlusionChecks.resources375 = resourcesOcc375;
+console.log(`✓ Resources 375px interactive clearance: ${resourcesOcc375.visibleInteractiveCount} controls verified visible, 0 occluded`);
 
-    const cta = Array.from(document.querySelectorAll('a')).find(a => a.textContent.includes("Need an order-specific supplier risk assessment?"));
-    const ctaR = cta ? cta.getBoundingClientRect() : null;
-    const overlapsCta = ctaR ? !(tR.bottom <= ctaR.top || tR.top >= ctaR.bottom || tR.right <= ctaR.left || tR.left >= ctaR.right) : false;
+await send("Emulation.setDeviceMetricsOverride", { width: 320, height: 640, deviceScaleFactor: 2, mobile: true });
+await new Promise((r) => setTimeout(r, 150));
 
-    const dock = document.querySelector('aside[aria-label="Workstation quick dock"]');
-    const dR = dock ? dock.getBoundingClientRect() : null;
-    const overlapsDock = dR ? !(tR.bottom <= dR.top || tR.top >= dR.bottom || tR.right <= dR.left || tR.left >= dR.right) : false;
+const resourcesOcc320 = await assertNoInteractiveOcclusion("Resources", "320px");
+report.occlusionChecks.resources320 = resourcesOcc320;
+console.log(`✓ Resources 320px interactive clearance: ${resourcesOcc320.visibleInteractiveCount} controls verified visible, 0 occluded`);
 
-    return {
-      found: true,
-      overlapsCta,
-      overlapsDock,
-    };
-  })()
-`);
-assert.equal(resourcesToggleOcclusion.overlapsCta, false, "Persistent toggle must not occlude Resource CTA");
-assert.equal(resourcesToggleOcclusion.overlapsDock, false, "Persistent toggle must not occlude bottom dock");
-console.log(`✓ Resources persistent toggle clearance: overlapsCta = false, overlapsDock = false`);
+// Restore 375px for filtered screenshot
+await send("Emulation.setDeviceMetricsOverride", { width: 375, height: 667, deviceScaleFactor: 2, mobile: true });
+await new Promise((r) => setTimeout(r, 150));
 
 // Interactive filter verification on /resources:
 // 1. Stage "screening" -> MUST return strictly CO-01 (CSL)
-// 2. Capture screenshot of filtered state: resources-filtered-screening-375px.png
-// 3. Destination "US" -> MUST include DO-01 and CO-01
-// 4. Destination "Global" -> MUST include DO-01, but NOT CO-01 (CO-01 corrected to US-only)
+// 2. Scroll filtered result into view so CO-01 card is clearly visible in the screenshot
+// 3. Capture screenshot: resources-filtered-screening-375px.png
+// 4. Destination "US" -> MUST include DO-01 and CO-01
+// 5. Destination "Global" -> MUST include DO-01, but NOT CO-01 (CO-01 corrected to US-only)
 const filterAudit = await evalJs(`
   (() => {
     const stageSelect = document.getElementById('stage-select');
@@ -672,11 +788,22 @@ assert.equal(filterAudit.screeningCount, 1, "Screening stage must return strictl
 assert.ok(filterAudit.screeningTitles[0].includes("Consolidated Screening List"), "Screening card must be CSL");
 console.log(`✓ Resources filter: screening = 1 card (CSL strictly)`);
 
-// Capture additional screenshot: resources-filtered-screening-375px.png
+// Scroll the filtered result card into view so it is prominently visible in the screenshot!
+await evalJs(`
+  (() => {
+    const card = document.querySelector('[data-resource-id="CO-01"]') || document.querySelector('article, h3');
+    if (card) {
+      card.scrollIntoView({ block: 'center', inline: 'center' });
+    }
+  })()
+`);
+await new Promise((r) => setTimeout(r, 250));
+
+// Capture filtered screenshot with visible card: resources-filtered-screening-375px.png
 const filteredShot = "resources-filtered-screening-375px.png";
 await captureScreenshot(filteredShot);
 report.screenshots.push({ page: "resources", state: "filtered-screening", viewport: "375px", file: filteredShot });
-console.log(`✓ Captured additional state screenshot: screenshots/${filteredShot}`);
+console.log(`✓ Captured additional state screenshot (scrolled to visible results): screenshots/${filteredShot}`);
 
 // Check destinations US and Global
 const destAudit = await evalJs(`
@@ -720,7 +847,7 @@ assert.equal(destAudit.globalHasDo01, true, "Destination Global must include DO-
 assert.equal(destAudit.globalHasCo01, false, "Destination Global must NOT include CO-01 (CSL is US-only)");
 console.log(`✓ Destinations audit PASS: DO-01 in US=true, DO-01 in Global=true, CO-01 in US=true, CO-01 in Global=false (corrected)`);
 
-report.pagesAudited.resources = { filterAudit, destAudit, resourcesHitTestsByVp, resourcesToggleOcclusion };
+report.pagesAudited.resources = { filterAudit, destAudit, resourcesHitTestsByVp, occlusionChecks: { resources375: resourcesOcc375, resources320: resourcesOcc320 } };
 
 // ==========================================
 // PAGE 3: REPRESENTATIVE ARTICLE (/blog/weld-photo-not-joint-release-evidence)
@@ -776,34 +903,23 @@ assert.ok(articleAudit.ogImage.endsWith(".png"), "Article OG image must point to
 assert.ok(articleAudit.twitterImage.endsWith(".png"), "Article Twitter image must point to raster PNG card");
 console.log(`✓ Article invariants PASS: hasBottomDock = false, genericCtaSuppressed = true, ogImage = ${articleAudit.ogImage}`);
 
-// Test Navigation & History Back
-console.log("Testing navigation and history back...");
-const navBackResult = await evalJs(`
-  (async () => {
-    const prevUrl = window.location.href;
-    const authorLink = Array.from(document.querySelectorAll('a')).find(a => a.href.includes('/playbook'));
-    if (!authorLink) return { error: "Playbook link not found" };
+// Test Navigation & History Back via genuine CDP Input
+console.log("Testing navigation and history back with genuine CDP click...");
+const prevUrl = await evalJs("window.location.href");
+await cdpClick("() => Array.from(document.querySelectorAll('a')).find(a => a.href.includes('/playbook'))");
+await new Promise((r) => setTimeout(r, 800));
 
-    authorLink.click();
-    await new Promise(r => setTimeout(r, 600));
-    const navigatedUrl = window.location.href;
+const navigatedUrl = await evalJs("window.location.href");
+assert.ok(navigatedUrl.includes("/playbook"), `Navigation via CDP click failed: ${navigatedUrl}`);
 
-    window.history.back();
-    await new Promise(r => setTimeout(r, 600));
-    const returnedUrl = window.location.href;
+await evalJs("window.history.back()");
+await new Promise((r) => setTimeout(r, 800));
 
-    return {
-      prevUrl,
-      navigatedUrl,
-      returnedUrl,
-      backSuccess: returnedUrl === prevUrl
-    };
-  })()
-`);
-assert.equal(navBackResult.backSuccess, true, "Navigation and back must restore original article route");
-console.log(`✓ Navigation and back PASS: ${navBackResult.navigatedUrl} -> ${navBackResult.returnedUrl}`);
+const returnedUrl = await evalJs("window.location.href");
+assert.equal(returnedUrl, prevUrl, `History back failed: returned ${returnedUrl}, expected ${prevUrl}`);
+console.log(`✓ Navigation and back PASS (CDP click): ${prevUrl} -> ${navigatedUrl} -> ${returnedUrl}`);
 
-report.pagesAudited.article = { ...articleAudit, navBackResult };
+report.pagesAudited.article = { ...articleAudit, navBackResult: { prevUrl, navigatedUrl, returnedUrl, backSuccess: true } };
 
 // ==========================================
 // TELEMETRY ABORT VERIFICATION
@@ -812,28 +928,47 @@ console.log("\n--- Triggering GA consent to record intercepted telemetry ---");
 await send("Page.navigate", { url: `http://127.0.0.1:${SERVER_PORT}/` });
 await new Promise((r) => setTimeout(r, 1000));
 
-await evalJs(`
-  (() => {
-    const toggle = Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Analytics:'));
-    if (toggle && toggle.textContent.includes('off')) {
-      toggle.click();
-    }
-  })()
-`);
-await new Promise((r) => setTimeout(r, 1200));
+// Click toggle button to Allow analytics via genuine CDP click
+await cdpClick("() => Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Analytics:'))");
+await new Promise((r) => setTimeout(r, 1500));
 
-report.interceptedRequests = [...interceptedRequests];
-assert.ok(report.interceptedRequests.length > 0, "Must record intercepted telemetry requests");
+// Verify that all intercepted telemetry requests are correlated by requestId and blocked with inspector
+assert.ok(blockedTelemetryEvents.length > 0, "Must record intercepted telemetry requests");
 
-// Check for blockedReason inspector or loading failed
-const inspectorBlocks = report.interceptedRequests.filter(r => r.blockedReason === "inspector" || r.errorText?.includes("BLOCKED_BY_CLIENT"));
-assert.ok(inspectorBlocks.length > 0, "Must confirm telemetry blocked with blockedReason: inspector");
-console.log(`✓ Monitored telemetry intercepted: ${report.interceptedRequests.length} requests captured (${inspectorBlocks.length} verified blockedReason: inspector)`);
+for (const item of blockedTelemetryEvents) {
+  assert.equal(
+    item.blockedReason,
+    "inspector",
+    `Telemetry request ${item.url} (requestId: ${item.requestId}) must be blocked with blockedReason: inspector`
+  );
+}
+
+const hasTestIdRequest = blockedTelemetryEvents.some((r) => r.url.includes("G-TEST000000"));
+assert.ok(
+  hasTestIdRequest,
+  "At least one blocked telemetry request URL must explicitly contain the test ID G-TEST000000"
+);
+
+console.log(`✓ Monitored telemetry intercepted: ${blockedTelemetryEvents.length} requests correlated via requestId`);
+console.log(`✓ All ${blockedTelemetryEvents.length} requests blocked with blockedReason: 'inspector'`);
+console.log(`✓ Confirmed at least one URL contains test ID 'G-TEST000000'`);
 console.log(`  (Monitored patterns: ${monitoredTelemetryPatterns.join(", ")})`);
 
+report.telemetryAudit = {
+  totalBlocked: blockedTelemetryEvents.length,
+  allBlockedWithInspector: true,
+  containsTestId: hasTestIdRequest,
+  blockedRequests: blockedTelemetryEvents,
+};
+
 report.status = "PASS";
+
+// Save complete report to disk
+const reportFile = path.join(screenshotDir, "acceptance-report.json");
+fs.writeFileSync(reportFile, JSON.stringify(report, null, 2), "utf8");
+console.log(`✓ Saved acceptance report to disk: screenshots/acceptance-report.json`);
+
 console.log("\n=== Acceptance Suite Succeeded! ===");
 console.log(`Total real screenshots captured: ${report.screenshots.length} (21 base + 2 state screenshots = 23 total)`);
-console.log(JSON.stringify(report, null, 2));
 
 cleanup();

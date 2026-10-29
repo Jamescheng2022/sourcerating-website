@@ -46,29 +46,29 @@ export default function HomePage() {
   const recent = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 4);
 
   return (
-    <div className="bg-[#f7f6f2] pb-20 pt-24 text-brand-950 sm:pt-28">
+    <div className="bg-[#f7f6f2] pb-20 pt-18 text-brand-950 sm:pt-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ========================================================= */}
         {/* MOBILE-FIRST COMPACT HERO & SEARCH BAR                    */}
         {/* ========================================================= */}
         <section
           aria-labelledby="home-heading"
-          className="rounded-2xl border border-brand-950/15 bg-white p-5 shadow-xs sm:p-8 lg:p-10"
+          className="rounded-2xl border border-brand-950/15 bg-white p-4 shadow-xs sm:p-8 lg:p-10"
         >
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-900">
+            <div className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-2.5 py-0.5 text-[11px] font-bold text-brand-900 sm:px-3 sm:py-1 sm:text-xs">
               <Compass className="h-3.5 w-3.5 text-brand-700" />
               <span>Field Verification · Primary Evidence · Sourcing Intelligence</span>
             </div>
 
             <h1
               id="home-heading"
-              className="mt-4 text-2xl font-bold tracking-tight text-brand-950 sm:text-4xl lg:text-5xl"
+              className="mt-3 text-2xl font-bold tracking-tight text-brand-950 sm:mt-4 sm:text-4xl lg:text-5xl"
             >
               Industrial sourcing, in context.
             </h1>
 
-            <p className="mt-3 text-sm leading-relaxed text-gray-700 sm:text-base sm:leading-7 max-w-2xl">
+            <p className="mt-2 text-xs leading-relaxed text-gray-700 sm:mt-3 sm:text-base sm:leading-7 max-w-2xl">
               The specification, the supplier record, the shipment. Original engineering articles
               and practical field inspection checklists that look closely at the evidence behind an
               industrial purchase.

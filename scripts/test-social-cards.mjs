@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
+import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import ts from "typescript";
 import sharp from "sharp";
@@ -57,16 +58,24 @@ test("all 31 social card files exist on disk with valid raster formats", () => {
   }
 });
 
-test("all 31 social cards have strict per-article uniqueness (zero duplicate generic cards)", () => {
+test("all 31 social cards have strict per-article uniqueness and unique SHA-256 digests", () => {
   const { blogSocialCards } = loadModule("src/data/blog-social-cards.ts");
   const seenSrcs = new Set();
+  const seenHashes = new Set();
 
   for (const [slug, card] of Object.entries(blogSocialCards)) {
-    assert.ok(!seenSrcs.has(card.src), `Duplicate social card detected for ${slug}: ${card.src}`);
+    assert.ok(!seenSrcs.has(card.src), `Duplicate social card src detected for ${slug}: ${card.src}`);
     seenSrcs.add(card.src);
+
+    const filePath = path.join(root, "public", card.src.slice(1));
+    const bytes = fs.readFileSync(filePath);
+    const hash = crypto.createHash("sha256").update(bytes).digest("hex");
+    assert.ok(!seenHashes.has(hash), `Duplicate social card SHA-256 detected for ${slug}: ${hash}`);
+    seenHashes.add(hash);
   }
 
-  assert.equal(seenSrcs.size, 31, "All 31 articles must have completely unique social card files");
+  assert.equal(seenSrcs.size, 31, "All 31 articles must have completely unique social card paths");
+  assert.equal(seenHashes.size, 31, "All 31 articles must have completely unique SHA-256 digests");
 });
 
 test("social cards decode cleanly and match declared dimensions", async () => {
@@ -118,16 +127,16 @@ test("HDG, PU and typographic cards disclose real attributes honestly without fa
     "pre-shipment-inspection-engineering-materials",
   ];
 
-  assert.equal(editorialCardSlugs.length, 18, "Exactly 18 typographic cards must be tracked");
-
   for (const slug of editorialCardSlugs) {
     const card = blogSocialCards[slug];
-    assert.equal(card.cardType, "editorial-card", `${slug} must be typed as editorial-card`);
-    assert.match(card.attribution, /not a photograph/i, `${slug} must state not a photograph`);
+    assert.ok(card, `Card must exist for ${slug}`);
+    assert.equal(card.cardType, "editorial-card", `${slug}: must be editorial-card`);
+    assert.match(card.attribution, /typographic editorial card/i, `${slug}: must disclose as typographic card`);
+    assert.match(card.attribution, /not a photograph or AI image/i, `${slug}: must not claim photo/AI`);
   }
 
-  // 3. Technical diagrams must be declared as technical diagrams
-  const diagramSlugs = [
+  // 3. Technical diagrams must be declared as technical-diagram
+  const technicalDiagramSlugs = [
     "weld-photo-not-joint-release-evidence",
     "iso-9001-certificate-factory-scope",
     "calibration-sticker-measurement-tolerance",
@@ -141,10 +150,11 @@ test("HDG, PU and typographic cards disclose real attributes honestly without fa
     "accepted-sampling-lot-not-zero-defects",
   ];
 
-  assert.equal(diagramSlugs.length, 11, "Exactly 11 technical diagrams must be tracked");
-
-  for (const slug of diagramSlugs) {
+  for (const slug of technicalDiagramSlugs) {
     const card = blogSocialCards[slug];
-    assert.equal(card.cardType, "technical-diagram", `${slug} must be typed as technical-diagram`);
+    assert.ok(card, `Card must exist for ${slug}`);
+    assert.equal(card.cardType, "technical-diagram", `${slug}: must be technical-diagram`);
+    assert.match(card.attribution, /technical schematic illustration/i);
+    assert.match(card.attribution, /not a photograph/i);
   }
 });

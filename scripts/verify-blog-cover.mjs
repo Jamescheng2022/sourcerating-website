@@ -67,11 +67,14 @@ async function main() {
   const input = {params:Promise.resolve({slug:puSlug})};
   const meta = plain(await page.generateMetadata(input));
   const tree = await page.default(input);
+  const { blogSocialCards } = after('src/data/blog-social-cards.ts');
+  const puCard = blogSocialCards[puSlug];
+  const puCardUrl = 'https://www.sourcerating.com' + puCard.src;
   const url = 'https://www.sourcerating.com/images/blog/polyurethane-screen-panels-inspection-v2.jpg';
   const caption = 'AI-generated editorial image; not a photograph of a specific supplier or installation.';
   check('the original PU and HDG articles retain their intended covers',()=>{assert.ok(pu?.coverImage);assert.ok(hdg?.coverImage);assert.equal(hdg.coverImage.src,'/images/blog/hdg-inspection-editorial-photo-20261019.avif');});
   check('PU body and editorial content unchanged',()=>{const rest=plain(pu);delete rest.coverImage;assert.deepEqual(rest,plain(oldData.find(x=>x.slug===puSlug)));});
-  check('PU OG absolute URL, real dimensions and alt',()=>assert.deepEqual(meta.openGraph.images,[{url,width:1600,height:900,alt:pu.coverImage.alt}]));
+  check('PU OG absolute URL, real dimensions and alt',()=>assert.deepEqual(meta.openGraph.images,[{url:puCardUrl,width:puCard.width,height:puCard.height,alt:pu.coverImage.alt}]));
   check('PU Twitter matches OG image descriptor',()=>assert.deepEqual(meta.twitter.images,meta.openGraph.images));
   check('PU canonical retained',()=>assert.equal(meta.alternates.canonical,'https://www.sourcerating.com/blog/'+puSlug));
   const article = nodes(tree,n=>n.type==='script').map(n=>JSON.parse(n.props.dangerouslySetInnerHTML.__html)).find(x=>x['@type']==='Article');
@@ -89,7 +92,6 @@ async function main() {
   const editorialTree=await page.default(editorialInput);
   check('social preview uses a raster fallback instead of an SVG',()=>assert.ok(editorialMeta.openGraph.images[0].url.endsWith('.png')));
   check('editorial page displays photo hero and passes inline diagram through ArticleBody',()=>{const variants=nodes(editorialTree,n=>n.type==='Image');assert.equal(variants.length,1);assert.equal(variants[0].props.src,hdg.coverImage.src);assert.equal(variants[0].props.alt,hdg.coverImage.alt);const body=nodes(editorialTree,n=>n.type==='ArticleBody');assert.equal(body.length,1);assert.ok(body[0].props.blocks.some(x=>x.type==='illustration'&&x.mobileSrc&&x.src));});
-  const { blogSocialCards } = after('src/data/blog-social-cards.ts');
   const socialCardsSha256 = {};
   for (const post of data) {
     const card = blogSocialCards[post.slug];
@@ -122,6 +124,8 @@ async function main() {
       seenSrcs.add(card.src);
     }
     assert.equal(seenSrcs.size, 31, 'All 31 cards must be unique');
+    const seenHashes = new Set(Object.values(socialCardsSha256).map(x => x.sha256));
+    assert.equal(seenHashes.size, 31, 'All 31 social card files must have completely unique sha256 digests');
   });
 
   const legacy = oldData.filter(x=>x.slug!==puSlug);

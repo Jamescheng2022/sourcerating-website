@@ -22,19 +22,19 @@ export const metadata = generatePageMetadata({
 
 export default function ResourcesPage() {
   return (
-    <div className="min-h-screen bg-[#f7f8f6] pb-24 pt-24 sm:pt-28">
+    <div className="min-h-screen bg-[#f7f8f6] pb-36 pt-18 sm:pt-28">
       {/* Hero section */}
       <section className="border-b border-gray-200 bg-brand-950 text-white">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-brand-800/80 px-3 py-1 text-xs font-semibold text-brand-200">
               <BookOpen className="h-3.5 w-3.5" />
               <span>Free Engineering Procurement Library · 免费资源导航</span>
             </span>
-            <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
+            <h1 className="mt-3 text-2xl font-extrabold tracking-tight sm:mt-4 sm:text-5xl">
               Official Procurement Documents, Organised by Real Decisions.
             </h1>
-            <p className="mt-4 text-base leading-relaxed text-gray-200 sm:text-lg">
+            <p className="mt-2 text-sm leading-relaxed text-gray-200 sm:mt-4 sm:text-lg">
               {officialResources.length} reviewed entry points for international
               engineering buyers. Direct links to official European Commission,
               USITC, USDA, and ICC publishers — paired with practical Chinese
@@ -42,25 +42,25 @@ export default function ResourcesPage() {
             </p>
 
             {/* Quick Action Badges */}
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-4 flex items-center gap-2.5 overflow-x-auto sm:flex-wrap no-scrollbar pb-1 pt-0.5 sm:mt-6 sm:gap-3">
               <a
                 href="/downloads/sourcerating-resource-index-20261024.csv"
                 download
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-xs font-bold text-brand-950 shadow hover:bg-gray-100 transition-colors"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-xs font-bold text-brand-950 shadow hover:bg-gray-100 transition-colors shrink-0 whitespace-nowrap"
               >
                 <Download className="h-4 w-4" />
                 <span>Download Bilingual Index (CSV)</span>
               </a>
               <Link
                 href="/playbook"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/30 px-4 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/30 px-4 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors shrink-0 whitespace-nowrap"
               >
                 <span>Supplier Playbook</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/risk-screen"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-brand-500/50 bg-brand-900/40 px-4 py-2.5 text-xs font-semibold text-brand-200 hover:bg-brand-900 transition-colors"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-brand-500/50 bg-brand-900/40 px-4 py-2.5 text-xs font-semibold text-brand-200 hover:bg-brand-900 transition-colors shrink-0 whitespace-nowrap"
               >
                 <span>Free Risk Screen</span>
                 <ArrowRight className="h-4 w-4" />
