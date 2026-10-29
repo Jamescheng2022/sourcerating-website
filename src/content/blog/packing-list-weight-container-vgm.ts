@@ -1,7 +1,7 @@
 import type { BlogPost } from "@/data/blog";
 export const containerMassPost: BlogPost = {
  slug:"packing-list-weight-container-vgm",title:"The Packing List Adds Up. The Container Weight Still Doesn’t.",
- excerpt:"A correct cargo total is not automatically the verified mass of the packed container. The missing weight may sit in the packaging, securing material or container itself—and the missing responsibility at a handover.",
+ excerpt:"A correct cargo total is not automatically the verified mass of the packed container. The missing weight may sit in the packaging, securing material or container itself, and the missing responsibility at a handover.",
  date:"2026-10-21",category:"Buyer's Field Notes",layout:"editorial",readTime:"4 min read",sections:[],
  coverImage:{src:"/images/blog/vgm-loading-desktop-20261029.jpg",mobileSrc:"/images/blog/vgm-loading-mobile-20261029.jpg",mobileWidth:960,mobileHeight:1280,width:1280,height:1707,alt:"Real photograph of a forklift loading palletized cargo into a shipping container at a Thailand warehouse; no weight record is shown.",caption:"Photo by Goterrestrial (CC BY 4.0, Wikimedia Commons), resized for desktop and mobile. Editorial context, not the container or a weighing record in any specific shipment."},
  articleBody:[
@@ -20,7 +20,7 @@ export const containerMassPost: BlogPost = {
  {type:"heading",text:"Put the owner of the number in the booking file"},
  {type:"paragraph",text:"Before loading, record who obtains the verified mass, who checks its link to the container and who submits it. Confirm the actual carrier and terminal cut-off with the parties handling the booking. A universal number of hours copied from another route is not a reliable substitute for those instructions."},
  {type:"paragraph",text:"Also agree the response when the record is missing or disputed. Ask the service provider what authorized weighing or correction arrangements are available and how any extra cost will be handled. A plan agreed before the truck departs is more useful than discovering at the terminal that everyone expected somebody else to provide the figure."},
- {type:"paragraph",text:"The procurement file does not need another decorative certificate. It needs a number tied to an identifiable packed container, obtained by the applicable method and owned by a clearly identified party. A tidy packing list remains useful—but it should not be asked to prove something it never measured."},
+ {type:"paragraph",text:"The procurement file does not need another decorative certificate. It needs a number tied to an identifiable packed container, obtained by the applicable method and owned by a clearly identified party. A tidy packing list remains useful, but it should not be asked to prove something it never measured."},
  {type:"paragraph",text:"For another packing handover, see [why plywood crate walls do not describe every skid and brace](https://www.sourcerating.com/blog/plywood-crate-solid-wood-skids-ispm15)."}
  ],
  referencesHeading:"Source notes",referencesIntro:"Official IMO explanations checked on 21 October 2026. This article offers purchasing and handover questions, not an approved weighing method, port-specific cut-off or legal allocation of responsibility for a particular shipment.",
