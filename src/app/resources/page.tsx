@@ -22,7 +22,7 @@ export const metadata = generatePageMetadata({
 
 export default function ResourcesPage() {
   return (
-    <div className="min-h-screen bg-[#f7f8f6] pb-36 pt-18 sm:pt-28">
+    <div className="min-h-screen bg-[#f7f8f6] pb-36 pt-20 sm:pt-28">
       {/* Hero section */}
       <section className="border-b border-gray-200 bg-brand-950 text-white">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
@@ -41,30 +41,32 @@ export default function ResourcesPage() {
               operational notes without repackaged copyright files.
             </p>
 
-            {/* Quick Action Badges */}
-            <div className="mt-4 flex items-center gap-2.5 overflow-x-auto sm:flex-wrap no-scrollbar pb-1 pt-0.5 sm:mt-6 sm:gap-3">
+            {/* Quick Action Badges - Discoverable and accessible responsive layout */}
+            <div className="mt-4 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-3 sm:mt-6">
               <a
                 href="/downloads/sourcerating-resource-index-20261024.csv"
                 download
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-xs font-bold text-brand-950 shadow hover:bg-gray-100 transition-colors shrink-0 whitespace-nowrap"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-xs font-bold text-brand-950 shadow hover:bg-gray-100 transition-colors"
               >
                 <Download className="h-4 w-4" />
                 <span>Download Bilingual Index (CSV)</span>
               </a>
-              <Link
-                href="/playbook"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/30 px-4 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors shrink-0 whitespace-nowrap"
-              >
-                <span>Supplier Playbook</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/risk-screen"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-brand-500/50 bg-brand-900/40 px-4 py-2.5 text-xs font-semibold text-brand-200 hover:bg-brand-900 transition-colors shrink-0 whitespace-nowrap"
-              >
-                <span>Free Risk Screen</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-3">
+                <Link
+                  href="/playbook"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg border border-white/30 px-3 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors text-center"
+                >
+                  <span>Supplier Playbook</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <Link
+                  href="/risk-screen"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg border border-brand-500/50 bg-brand-900/40 px-3 py-2.5 text-xs font-semibold text-brand-200 hover:bg-brand-900 transition-colors text-center"
+                >
+                  <span>Free Risk Screen</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
             </div>
 
             <p className="mt-4 text-[11px] text-gray-400">

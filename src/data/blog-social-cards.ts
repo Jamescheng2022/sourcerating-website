@@ -133,7 +133,7 @@ export const blogSocialCards: Record<string, BlogSocialCard> = {
     src: "/images/blog/cards/polyurethane-screen-panels-china-vs-local-social-card.png",
     width: 1200,
     height: 630,
-    alt: "Orange polyurethane screening panels with through-slots on a steel inspection bench beside a vernier caliper.",
+    alt: "Orange polyurethane screening panels with through-slots on a steel inspection bench beside a vernier caliper (AI-generated conceptual illustration; not a photograph).",
     cardType: "ai-illustration",
     attribution: "AI-generated editorial image; not a photograph of a specific supplier or installation.",
   },

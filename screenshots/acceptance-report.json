@@ -1,11 +1,34 @@
 {
   "status": "PASS",
-  "timestamp": "2026-10-29T02:19:56.064Z",
-  "headSha": "d99ceb51d0bdd8ca95345c4e0315d26a1ecae1ef",
-  "sourceTreeDirty": false,
-  "gitStatusSummary": [],
-  "buildId": "9WrA0BgeGLHfkR1FElP7B",
-  "serverPort": 62371,
+  "timestamp": "2026-10-29T02:50:27.441Z",
+  "headSha": "a1782b8b1425ff737ef6aa8e67acfd31d3d8d283",
+  "sourceTreeDirty": true,
+  "gitStatusSummary": [
+    "M screenshots/acceptance-report.json",
+    "M screenshots/home-320px.png",
+    "M screenshots/home-375px.png",
+    "M screenshots/home-390px.png",
+    "M screenshots/home-430px.png",
+    "M screenshots/home-768px.png",
+    "M screenshots/home-consent-banner-375px.png",
+    "M screenshots/home-consent-dismissed-375px.png",
+    "M screenshots/resources-1024px.png",
+    "M screenshots/resources-1440px.png",
+    "M screenshots/resources-320px.png",
+    "M screenshots/resources-375px.png",
+    "M screenshots/resources-390px.png",
+    "M screenshots/resources-430px.png",
+    "M screenshots/resources-768px.png",
+    "M screenshots/resources-filtered-screening-375px.png",
+    "M scripts/verify-browser-acceptance.mjs",
+    "M src/app/globals.css",
+    "M src/app/page.tsx",
+    "M src/app/resources/page.tsx",
+    "M src/content/blog/legacy-posts.ts",
+    "M src/data/blog-social-cards.ts"
+  ],
+  "buildId": "Qe5w9RKRwGg4dajl6vQEU",
+  "serverPort": 52382,
   "testGaId": "G-TEST000000",
   "telemetryScopeDeclaration": "Telemetry interception is strictly scoped to the 5 pre-armed Google Analytics domain patterns (*://*.google-analytics.com/*, *://*.googletagmanager.com/*, *://*.analytics.google.com/*, *://stats.g.doubleclick.net/*, *://*.googleadservices.com/*) via CDP Network.setBlockedURLs at the browser page layer; no out-of-band OS-level firewall is claimed.",
   "monitoredTelemetryPatterns": [
@@ -23,6 +46,44 @@
     "physicalDeviceSafeAreaTested": false,
     "note": "Physical hardware safe area insets (notches, dynamic island, hardware navigation bar) require physical devices; headless Chrome emulation verifies CSS env(safe-area-inset-bottom, 0px) fallbacks, calc offsets and fixed dock clearance only."
   },
+  "headerClearance": {
+    "home-375px": {
+      "headerBottom": 65,
+      "heroTop": 80,
+      "clearancePx": 15,
+      "isCovered": false
+    },
+    "home-320px": {
+      "headerBottom": 65,
+      "heroTop": 80,
+      "clearancePx": 15,
+      "isCovered": false
+    },
+    "resources-375px": {
+      "headerBottom": 65,
+      "heroTop": 80,
+      "clearancePx": 15,
+      "isCovered": false
+    },
+    "resources-320px": {
+      "headerBottom": 65,
+      "heroTop": 80,
+      "clearancePx": 15,
+      "isCovered": false
+    }
+  },
+  "dockNavAudit": {
+    "homeCenter": {
+      "x": 38,
+      "y": 639
+    },
+    "resCenter": {
+      "x": 113,
+      "y": 639
+    },
+    "homeHitMatches": true,
+    "resHitMatches": true
+  },
   "occlusionChecks": {
     "home375": {
       "foundFloating": true,
@@ -35,7 +96,7 @@
         "width": 154
       },
       "overlapsDock": false,
-      "visibleInteractiveCount": 10,
+      "visibleInteractiveCount": 9,
       "overlappingCount": 0,
       "overlapping": []
     },
@@ -65,7 +126,7 @@
         "width": 154
       },
       "overlapsDock": false,
-      "visibleInteractiveCount": 4,
+      "visibleInteractiveCount": 5,
       "overlappingCount": 0,
       "overlapping": []
     },
@@ -80,51 +141,56 @@
         "width": 154
       },
       "overlapsDock": false,
-      "visibleInteractiveCount": 4,
+      "visibleInteractiveCount": 5,
       "overlappingCount": 0,
       "overlapping": []
     }
   },
   "telemetryAudit": {
+    "emittedCount": 4,
+    "interceptedCount": 4,
+    "countsMatch": true,
     "totalBlocked": 4,
     "allBlockedWithInspector": true,
     "containsTestId": true,
+    "collectBeaconObserved": false,
+    "collectBeaconNote": "GA collect beacon was not observed because the primary GTM tag loader (gtag/js?id=G-TEST000000) was blocked immediately upon issuance with blockedReason: inspector, preventing downstream execution and beacon generation.",
     "blockedRequests": [
       {
-        "requestId": "22484.68",
+        "requestId": "44564.68",
         "url": "https://www.googletagmanager.com/gtag/js?id=G-TEST000000",
         "method": "GET",
         "blockedReason": "inspector",
         "errorText": "",
         "canceled": false,
-        "timestamp": "2026-10-29T02:20:00.490Z"
+        "timestamp": "2026-10-29T02:50:32.161Z"
       },
       {
-        "requestId": "22484.69",
+        "requestId": "44564.69",
         "url": "https://www.googletagmanager.com/gtag/js?id=G-TEST000000",
         "method": "GET",
         "blockedReason": "inspector",
         "errorText": "",
         "canceled": false,
-        "timestamp": "2026-10-29T02:20:00.490Z"
+        "timestamp": "2026-10-29T02:50:32.162Z"
       },
       {
-        "requestId": "22484.330",
+        "requestId": "44564.346",
         "url": "https://www.googletagmanager.com/gtag/js?id=G-TEST000000",
         "method": "GET",
         "blockedReason": "inspector",
         "errorText": "",
         "canceled": false,
-        "timestamp": "2026-10-29T02:20:16.151Z"
+        "timestamp": "2026-10-29T02:50:52.521Z"
       },
       {
-        "requestId": "22484.331",
+        "requestId": "44564.347",
         "url": "https://www.googletagmanager.com/gtag/js?id=G-TEST000000",
         "method": "GET",
         "blockedReason": "inspector",
         "errorText": "",
         "canceled": false,
-        "timestamp": "2026-10-29T02:20:16.151Z"
+        "timestamp": "2026-10-29T02:50:52.521Z"
       }
     ]
   },
@@ -140,7 +206,7 @@
         "320px": [
           {
             "name": "center",
-            "tag": "button",
+            "tag": "div",
             "hasElement": true,
             "isConnected": true
           },
@@ -172,7 +238,7 @@
         "375px": [
           {
             "name": "center",
-            "tag": "button",
+            "tag": "input",
             "hasElement": true,
             "isConnected": true
           },
@@ -236,7 +302,7 @@
         "430px": [
           {
             "name": "center",
-            "tag": "h3",
+            "tag": "div",
             "hasElement": true,
             "isConnected": true
           },
@@ -385,7 +451,7 @@
             "width": 154
           },
           "overlapsDock": false,
-          "visibleInteractiveCount": 10,
+          "visibleInteractiveCount": 9,
           "overlappingCount": 0,
           "overlapping": []
         },
@@ -414,6 +480,18 @@
       "chipHitResult": {
         "inputValue": "ASTM A123",
         "totalMatchedLinks": 22
+      },
+      "dockNavAudit": {
+        "homeCenter": {
+          "x": 38,
+          "y": 639
+        },
+        "resCenter": {
+          "x": 113,
+          "y": 639
+        },
+        "homeHitMatches": true,
+        "resHitMatches": true
       }
     },
     "resources": {
@@ -465,7 +543,7 @@
         "375px": [
           {
             "name": "center",
-            "tag": "div",
+            "tag": "p",
             "hasElement": true,
             "isConnected": true
           },
@@ -497,7 +575,7 @@
         "390px": [
           {
             "name": "center",
-            "tag": "p",
+            "tag": "span",
             "hasElement": true,
             "isConnected": true
           },
@@ -529,7 +607,7 @@
         "430px": [
           {
             "name": "center",
-            "tag": "div",
+            "tag": "p",
             "hasElement": true,
             "isConnected": true
           },
@@ -667,7 +745,7 @@
             "width": 154
           },
           "overlapsDock": false,
-          "visibleInteractiveCount": 4,
+          "visibleInteractiveCount": 5,
           "overlappingCount": 0,
           "overlapping": []
         },
@@ -682,7 +760,7 @@
             "width": 154
           },
           "overlapsDock": false,
-          "visibleInteractiveCount": 4,
+          "visibleInteractiveCount": 5,
           "overlappingCount": 0,
           "overlapping": []
         }
@@ -695,9 +773,9 @@
       "ogImage": "https://www.sourcerating.com/images/blog/weld-photo-evidence-hero-20261023.png",
       "twitterImage": "https://www.sourcerating.com/images/blog/weld-photo-evidence-hero-20261023.png",
       "navBackResult": {
-        "prevUrl": "http://127.0.0.1:62371/blog/weld-photo-not-joint-release-evidence",
-        "navigatedUrl": "http://127.0.0.1:62371/playbook",
-        "returnedUrl": "http://127.0.0.1:62371/blog/weld-photo-not-joint-release-evidence",
+        "prevUrl": "http://127.0.0.1:52382/blog/weld-photo-not-joint-release-evidence",
+        "navigatedUrl": "http://127.0.0.1:52382/playbook",
+        "returnedUrl": "http://127.0.0.1:52382/blog/weld-photo-not-joint-release-evidence",
         "backSuccess": true
       }
     }

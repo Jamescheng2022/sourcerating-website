@@ -46,7 +46,7 @@ export default function HomePage() {
   const recent = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 4);
 
   return (
-    <div className="bg-[#f7f6f2] pb-20 pt-18 text-brand-950 sm:pt-28">
+    <div className="bg-[#f7f6f2] pb-20 pt-20 text-brand-950 sm:pt-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ========================================================= */}
         {/* MOBILE-FIRST COMPACT HERO & SEARCH BAR                    */}

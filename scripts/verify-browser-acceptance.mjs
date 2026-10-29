@@ -3,13 +3,16 @@
 // 1. Provenance Binding: HEAD SHA, BUILD_ID check, ephemeral isolated port (no 3100 reuse).
 // 2. Zero-outbound telemetry policy with pre-armed aborts on about:blank for monitored domains.
 // 3. 21 Screenshots (3 pages x 7 viewports) + 2 additional state screenshots (consent dismissed, filtered results).
-// 4. Interactive acceptance with genuine CDP input: search hits and zero-results, filter integrity (CO-01 / DO-01), navigation and back.
-// 5. Consent lifecycle: reject, allow, revoke using CDP mouse clicks.
-// 6. elementFromPoint at center and 4 edges across viewports.
-// 7. Persistent toggle clearance: zero occlusion of homepage chips, resource CTAs, and all interactive controls.
-// 8. Physical safe-area disclaimer: emulation tests CSS env fallbacks; physical notch insets require physical hardware.
-// 9. All 31 built blog HTML files verified on disk for explicit unique social cards and zero fallback to hero-factory-audit.png.
-// 10. Persistence: Saves complete execution report to screenshots/acceptance-report.json.
+// 4. Header clearance assertion: Fixed header (h-14) must not cover top hero content (clearancePx >= 12).
+// 5. Bottom dock: Home and Resources exact center point elementFromPoint and genuine CDP clicks.
+// 6. Interactive acceptance with genuine CDP input: search hits and zero-results, filter integrity (CO-01 / DO-01) via CDP keyboard input, navigation and back.
+// 7. Consent lifecycle: reject, allow, revoke using CDP mouse clicks.
+// 8. elementFromPoint at center and 4 edges across viewports.
+// 9. Persistent toggle clearance: zero occlusion of homepage chips, resource CTAs, and all interactive controls.
+// 10. Telemetry audit: Emitted vs intercepted request count matching, blockedReason inspector, test GA ID verification, collect beacon status.
+// 11. Physical safe-area disclaimer: emulation tests CSS env fallbacks; physical notch insets require physical hardware.
+// 12. All 31 built blog HTML files verified on disk for explicit unique social cards and zero fallback to hero-factory-audit.png.
+// 13. Persistence: Saves complete execution report to screenshots/acceptance-report.json.
 
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -220,9 +223,9 @@ const blockedTelemetryEvents = [];
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
   if (data.id && pending.has(data.id)) {
-    const { resolve, reject } = pending.get(data.id);
+    const { resolve, reject, method, params } = pending.get(data.id);
     pending.delete(data.id);
-    if (data.error) reject(new Error(data.error.message));
+    if (data.error) reject(new Error(`${data.error.message} (method: ${method}, params: ${JSON.stringify(params)})`));
     else resolve(data.result);
   }
 
@@ -264,7 +267,7 @@ ws.onmessage = (event) => {
 function send(method, params = {}) {
   const id = msgId++;
   return new Promise((resolve, reject) => {
-    pending.set(id, { resolve, reject });
+    pending.set(id, { resolve, reject, method, params });
     ws.send(JSON.stringify({ id, method, params }));
   });
 }
@@ -465,6 +468,8 @@ const report = {
     physicalDeviceSafeAreaTested: false,
     note: "Physical hardware safe area insets (notches, dynamic island, hardware navigation bar) require physical devices; headless Chrome emulation verifies CSS env(safe-area-inset-bottom, 0px) fallbacks, calc offsets and fixed dock clearance only.",
   },
+  headerClearance: {},
+  dockNavAudit: {},
   occlusionChecks: {},
   telemetryAudit: {},
   pagesAudited: {},
@@ -519,13 +524,34 @@ for (const vp of viewports) {
   console.log(`✓ Homepage ${vp.name}: captured screenshots/${file}, zero overflow, elementFromPoint passed`);
 }
 
+// Fixed Header vs Hero Content Clearance Assertions (at 375px and 320px)
+for (const vp of [{ width: 375, height: 667, name: "375px" }, { width: 320, height: 640, name: "320px" }]) {
+  await send("Emulation.setDeviceMetricsOverride", { width: vp.width, height: vp.height, deviceScaleFactor: 2, mobile: true });
+  await new Promise((r) => setTimeout(r, 150));
+
+  const headerClearance = await evalJs(`
+    (() => {
+      const header = document.querySelector('header');
+      const hero = document.querySelector('section[aria-labelledby="home-heading"]');
+      if (!header || !hero) return { error: "Missing elements" };
+      const hR = header.getBoundingClientRect();
+      const cR = hero.getBoundingClientRect();
+      return {
+        headerBottom: Math.round(hR.bottom),
+        heroTop: Math.round(cR.top),
+        clearancePx: Math.round(cR.top - hR.bottom),
+        isCovered: cR.top < hR.bottom,
+      };
+    })()
+  `);
+  assert.equal(headerClearance.isCovered, false, `Homepage ${vp.name}: Hero must NOT be covered by fixed header`);
+  assert.ok(headerClearance.clearancePx >= 12, `Homepage ${vp.name}: Header clearance must be >= 12px (got ${headerClearance.clearancePx}px)`);
+  report.headerClearance[`home-${vp.name}`] = headerClearance;
+  console.log(`✓ Homepage ${vp.name} Header Clearance: ${headerClearance.clearancePx}px (heroTop: ${headerClearance.heroTop}px > headerBottom: ${headerClearance.headerBottom}px)`);
+}
+
 // Check 375px GA Banner Clearance on Homepage
-await send("Emulation.setDeviceMetricsOverride", {
-  width: 375,
-  height: 667,
-  deviceScaleFactor: 2,
-  mobile: true,
-});
+await send("Emulation.setDeviceMetricsOverride", { width: 375, height: 667, deviceScaleFactor: 2, mobile: true });
 await new Promise((r) => setTimeout(r, 150));
 
 const homeGaClearance = await evalJs(`
@@ -676,6 +702,72 @@ assert.ok(chipHitResult.inputValue.includes("ASTM A123"), "Chip click must popul
 assert.ok(chipHitResult.totalMatchedLinks > 0, "Chip click must return matching results");
 console.log(`✓ Homepage Chip Click ('ASTM A123 HDG') via CDP Input verified: query = "${chipHitResult.inputValue}", results = ${chipHitResult.totalMatchedLinks}`);
 
+// Step 4: Bottom Workstation Dock Home & Resources actual center point elementFromPoint and CDP clicks
+console.log("Testing Bottom Workstation Dock Home & Resources center elementFromPoint and CDP clicks...");
+const dockNavAudit = await evalJs(`
+  (() => {
+    const dock = document.querySelector('aside[aria-label="Workstation quick dock"]');
+    if (!dock) return { error: "Bottom dock not found" };
+    const homeLink = dock.querySelector('a[href="/"]');
+    const resLink = dock.querySelector('a[href="/resources"]');
+    if (!homeLink || !resLink) return { error: "Dock nav links not found" };
+
+    const hR = homeLink.getBoundingClientRect();
+    const rR = resLink.getBoundingClientRect();
+    const hx = Math.round(hR.left + hR.width / 2);
+    const hy = Math.round(hR.top + hR.height / 2);
+    const rx = Math.round(rR.left + rR.width / 2);
+    const ry = Math.round(rR.top + rR.height / 2);
+
+    const hitHomeEl = document.elementFromPoint(hx, hy);
+    const hitResEl = document.elementFromPoint(rx, ry);
+
+    return {
+      homeCenter: { x: hx, y: hy },
+      resCenter: { x: rx, y: ry },
+      homeHitMatches: Boolean(hitHomeEl && (hitHomeEl === homeLink || homeLink.contains(hitHomeEl))),
+      resHitMatches: Boolean(hitResEl && (hitResEl === resLink || resLink.contains(hitResEl))),
+    };
+  })()
+`);
+assert.equal(dockNavAudit.homeHitMatches, true, "elementFromPoint at Home center must hit Home link or child");
+assert.equal(dockNavAudit.resHitMatches, true, "elementFromPoint at Resources center must hit Resources link or child");
+report.dockNavAudit = dockNavAudit;
+console.log(`✓ Bottom dock elementFromPoint: Home center = (${dockNavAudit.homeCenter.x}, ${dockNavAudit.homeCenter.y}), Resources center = (${dockNavAudit.resCenter.x}, ${dockNavAudit.resCenter.y}) both hit valid nav links`);
+
+// CDP click on dock Resources button to navigate
+const { x: rx, y: ry } = dockNavAudit.resCenter;
+await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: rx, y: ry });
+await send("Input.dispatchMouseEvent", { type: "mousePressed", x: rx, y: ry, button: "left", clickCount: 1 });
+await send("Input.dispatchMouseEvent", { type: "mouseReleased", x: rx, y: ry, button: "left", clickCount: 1 });
+await new Promise((r) => setTimeout(r, 1000));
+
+const dockNavToRes = await evalJs("window.location.pathname");
+assert.equal(dockNavToRes, "/resources", "CDP click on bottom dock Resources button must navigate to /resources");
+console.log(`✓ Bottom dock Resources CDP click navigated successfully to: ${dockNavToRes}`);
+
+// From /resources, perform genuine CDP click on Home link in bottom dock to return
+const homeCenterOnRes = await evalJs(`
+  (() => {
+    const dock = document.querySelector('aside[aria-label="Workstation quick dock"]');
+    if (!dock) return null;
+    const homeLink = dock.querySelector('a[href="/"]');
+    if (!homeLink) return null;
+    const r = homeLink.getBoundingClientRect();
+    return { x: Math.round(r.left + r.width / 2), y: Math.round(r.top + r.height / 2) };
+  })()
+`);
+assert.ok(homeCenterOnRes, "Home link in dock must be present on /resources");
+const { x: hx, y: hy } = homeCenterOnRes;
+await send("Input.dispatchMouseEvent", { type: "mouseMoved", x: hx, y: hy });
+await send("Input.dispatchMouseEvent", { type: "mousePressed", x: hx, y: hy, button: "left", clickCount: 1 });
+await send("Input.dispatchMouseEvent", { type: "mouseReleased", x: hx, y: hy, button: "left", clickCount: 1 });
+await new Promise((r) => setTimeout(r, 1000));
+
+const dockNavBackHome = await evalJs("window.location.pathname");
+assert.equal(dockNavBackHome, "/", "CDP click on bottom dock Home button must navigate back to /");
+console.log(`✓ Bottom dock Home CDP click navigated successfully back to: ${dockNavBackHome}`);
+
 report.pagesAudited.home = {
   gaClearance: homeGaClearance,
   homeHitTestsByVp,
@@ -686,6 +778,7 @@ report.pagesAudited.home = {
   searchHitResult,
   searchZeroResult,
   chipHitResult,
+  dockNavAudit,
 };
 
 // ==========================================
@@ -736,6 +829,32 @@ for (const vp of viewports) {
   console.log(`✓ Resources ${vp.name}: captured screenshots/${file}, zero overflow, elementFromPoint passed`);
 }
 
+// Fixed Header vs Hero Content Clearance Assertions on Resources (at 375px and 320px)
+for (const vp of [{ width: 375, height: 667, name: "375px" }, { width: 320, height: 640, name: "320px" }]) {
+  await send("Emulation.setDeviceMetricsOverride", { width: vp.width, height: vp.height, deviceScaleFactor: 2, mobile: true });
+  await new Promise((r) => setTimeout(r, 150));
+
+  const headerClearance = await evalJs(`
+    (() => {
+      const header = document.querySelector('header');
+      const hero = document.querySelector('section');
+      if (!header || !hero) return { error: "Missing elements" };
+      const hR = header.getBoundingClientRect();
+      const cR = hero.getBoundingClientRect();
+      return {
+        headerBottom: Math.round(hR.bottom),
+        heroTop: Math.round(cR.top),
+        clearancePx: Math.round(cR.top - hR.bottom),
+        isCovered: cR.top < hR.bottom,
+      };
+    })()
+  `);
+  assert.equal(headerClearance.isCovered, false, `Resources ${vp.name}: Hero must NOT be covered by fixed header`);
+  assert.ok(headerClearance.clearancePx >= 12, `Resources ${vp.name}: Header clearance must be >= 12px (got ${headerClearance.clearancePx}px)`);
+  report.headerClearance[`resources-${vp.name}`] = headerClearance;
+  console.log(`✓ Resources ${vp.name} Header Clearance: ${headerClearance.clearancePx}px (heroTop: ${headerClearance.heroTop}px > headerBottom: ${headerClearance.headerBottom}px)`);
+}
+
 // Verify persistent button occlusion on Resources page at 375px and 320px
 await send("Emulation.setDeviceMetricsOverride", { width: 375, height: 667, deviceScaleFactor: 2, mobile: true });
 await new Promise((r) => setTimeout(r, 150));
@@ -755,38 +874,35 @@ console.log(`✓ Resources 320px interactive clearance: ${resourcesOcc320.visibl
 await send("Emulation.setDeviceMetricsOverride", { width: 375, height: 667, deviceScaleFactor: 2, mobile: true });
 await new Promise((r) => setTimeout(r, 150));
 
-// Interactive filter verification on /resources:
-// 1. Stage "screening" -> MUST return strictly CO-01 (CSL)
-// 2. Scroll filtered result into view so CO-01 card is clearly visible in the screenshot
-// 3. Capture screenshot: resources-filtered-screening-375px.png
-// 4. Destination "US" -> MUST include DO-01 and CO-01
-// 5. Destination "Global" -> MUST include DO-01, but NOT CO-01 (CO-01 corrected to US-only)
-const filterAudit = await evalJs(`
-  (() => {
-    const stageSelect = document.getElementById('stage-select');
-    const destSelect = document.getElementById('destination-select');
-    const sectorSelect = document.getElementById('sector-select');
+// Interactive filter verification on /resources via GENUINE CDP KEYBOARD INPUT:
+// 1. Focus stage-select via CDP click
+// 2. Send 5 ArrowDown key presses to reach "screening"
+// 3. Scroll filtered result into view so CO-01 card is clearly visible in the screenshot
+// 4. Capture screenshot: resources-filtered-screening-375px.png
+// 5. Test Destination US and Global via CDP keyboard input
+console.log("Testing Resources filters via genuine CDP Keyboard Input...");
 
-    if (!stageSelect || !destSelect || !sectorSelect) {
-      return { error: "Select elements missing" };
-    }
+// Focus stage-select
+await cdpClick("#stage-select");
+await evalJs("document.getElementById('stage-select')?.focus()");
+await new Promise((r) => setTimeout(r, 100));
 
-    // Test 1: Stage screening
-    stageSelect.value = "screening";
-    stageSelect.dispatchEvent(new Event('change', { bubbles: true }));
-    const screeningCount = document.querySelectorAll('h3').length;
-    const screeningTitles = Array.from(document.querySelectorAll('h3')).map(h => h.textContent.trim());
+// Navigate down 5 options via genuine CDP ArrowDown events to select 'screening'
+for (let i = 0; i < 5; i++) {
+  await send("Input.dispatchKeyEvent", { type: "rawKeyDown", key: "ArrowDown", code: "ArrowDown", windowsVirtualKeyCode: 40 });
+  await send("Input.dispatchKeyEvent", { type: "keyUp", key: "ArrowDown", code: "ArrowDown", windowsVirtualKeyCode: 40 });
+  await new Promise((r) => setTimeout(r, 60));
+}
+await new Promise((r) => setTimeout(r, 400));
 
-    return {
-      screeningCount,
-      screeningTitles,
-    };
-  })()
-`);
+const currentStageVal = await evalJs("document.getElementById('stage-select')?.value");
+assert.equal(currentStageVal, "screening", `Stage select must be 'screening' via CDP keyboard input (got '${currentStageVal}')`);
 
-assert.equal(filterAudit.screeningCount, 1, "Screening stage must return strictly 1 card (CO-01)");
-assert.ok(filterAudit.screeningTitles[0].includes("Consolidated Screening List"), "Screening card must be CSL");
-console.log(`✓ Resources filter: screening = 1 card (CSL strictly)`);
+const screeningCount = await evalJs("document.querySelectorAll('h3').length");
+const screeningTitles = await evalJs("Array.from(document.querySelectorAll('h3')).map(h => h.textContent.trim())");
+assert.equal(screeningCount, 1, "Screening stage must return strictly 1 card (CO-01)");
+assert.ok(screeningTitles[0].includes("Consolidated Screening List"), "Screening card must be CSL");
+console.log(`✓ Resources filter via CDP keyboard input: screening = 1 card (CSL strictly)`);
 
 // Scroll the filtered result card into view so it is prominently visible in the screenshot!
 await evalJs(`
@@ -805,49 +921,63 @@ await captureScreenshot(filteredShot);
 report.screenshots.push({ page: "resources", state: "filtered-screening", viewport: "375px", file: filteredShot });
 console.log(`✓ Captured additional state screenshot (scrolled to visible results): screenshots/${filteredShot}`);
 
-// Check destinations US and Global
-const destAudit = await evalJs(`
-  (() => {
-    const stageSelect = document.getElementById('stage-select');
-    const destSelect = document.getElementById('destination-select');
+// Reset stage-select back to All via CDP keyboard Home key
+await evalJs("document.getElementById('stage-select')?.focus()");
+await send("Input.dispatchKeyEvent", { type: "rawKeyDown", key: "Home", code: "Home", windowsVirtualKeyCode: 36 });
+await send("Input.dispatchKeyEvent", { type: "keyUp", key: "Home", code: "Home", windowsVirtualKeyCode: 36 });
+await new Promise((r) => setTimeout(r, 200));
 
-    // Reset stage
-    stageSelect.value = "All";
-    stageSelect.dispatchEvent(new Event('change', { bubbles: true }));
+// Test Destination US via CDP keyboard input
+await cdpClick("#destination-select");
+await evalJs("document.getElementById('destination-select')?.focus()");
+await new Promise((r) => setTimeout(r, 100));
+for (let i = 0; i < 2; i++) {
+  await send("Input.dispatchKeyEvent", { type: "rawKeyDown", key: "ArrowDown", code: "ArrowDown", windowsVirtualKeyCode: 40 });
+  await send("Input.dispatchKeyEvent", { type: "keyUp", key: "ArrowDown", code: "ArrowDown", windowsVirtualKeyCode: 40 });
+  await new Promise((r) => setTimeout(r, 60));
+}
+await new Promise((r) => setTimeout(r, 300));
 
-    // Test US
-    destSelect.value = "US";
-    destSelect.dispatchEvent(new Event('change', { bubbles: true }));
-    const usTitles = Array.from(document.querySelectorAll('h3')).map(h => h.textContent.trim());
-    const usHasDo01 = usTitles.some(t => t.includes("Common Export Documents Guide"));
-    const usHasCo01 = usTitles.some(t => t.includes("Consolidated Screening List"));
+const usVal = await evalJs("document.getElementById('destination-select')?.value");
+assert.equal(usVal, "US", `Destination select must be 'US' via CDP keyboard input (got '${usVal}')`);
 
-    // Test Global
-    destSelect.value = "Global";
-    destSelect.dispatchEvent(new Event('change', { bubbles: true }));
-    const globalTitles = Array.from(document.querySelectorAll('h3')).map(h => h.textContent.trim());
-    const globalHasDo01 = globalTitles.some(t => t.includes("Common Export Documents Guide"));
-    const globalHasCo01 = globalTitles.some(t => t.includes("Consolidated Screening List"));
+const usTitles = await evalJs("Array.from(document.querySelectorAll('h3')).map(h => h.textContent.trim())");
+const usHasDo01 = usTitles.some(t => t.includes("Common Export Documents Guide"));
+const usHasCo01 = usTitles.some(t => t.includes("Consolidated Screening List"));
+assert.equal(usHasDo01, true, "Destination US must include DO-01");
+assert.equal(usHasCo01, true, "Destination US must include CO-01");
 
-    // Reset
-    destSelect.value = "All";
-    destSelect.dispatchEvent(new Event('change', { bubbles: true }));
+// Test Destination Global via CDP keyboard input (2 more ArrowDown presses)
+for (let i = 0; i < 2; i++) {
+  await send("Input.dispatchKeyEvent", { type: "rawKeyDown", key: "ArrowDown", code: "ArrowDown", windowsVirtualKeyCode: 40 });
+  await send("Input.dispatchKeyEvent", { type: "keyUp", key: "ArrowDown", code: "ArrowDown", windowsVirtualKeyCode: 40 });
+  await new Promise((r) => setTimeout(r, 60));
+}
+await new Promise((r) => setTimeout(r, 300));
 
-    return {
-      usHasDo01,
-      usHasCo01,
-      globalHasDo01,
-      globalHasCo01
-    };
-  })()
-`);
-assert.equal(destAudit.usHasDo01, true, "Destination US must include DO-01");
-assert.equal(destAudit.usHasCo01, true, "Destination US must include CO-01");
-assert.equal(destAudit.globalHasDo01, true, "Destination Global must include DO-01");
-assert.equal(destAudit.globalHasCo01, false, "Destination Global must NOT include CO-01 (CSL is US-only)");
-console.log(`✓ Destinations audit PASS: DO-01 in US=true, DO-01 in Global=true, CO-01 in US=true, CO-01 in Global=false (corrected)`);
+const globalVal = await evalJs("document.getElementById('destination-select')?.value");
+assert.equal(globalVal, "Global", `Destination select must be 'Global' via CDP keyboard input (got '${globalVal}')`);
 
-report.pagesAudited.resources = { filterAudit, destAudit, resourcesHitTestsByVp, occlusionChecks: { resources375: resourcesOcc375, resources320: resourcesOcc320 } };
+const globalTitles = await evalJs("Array.from(document.querySelectorAll('h3')).map(h => h.textContent.trim())");
+const globalHasDo01 = globalTitles.some(t => t.includes("Common Export Documents Guide"));
+const globalHasCo01 = globalTitles.some(t => t.includes("Consolidated Screening List"));
+assert.equal(globalHasDo01, true, "Destination Global must include DO-01");
+assert.equal(globalHasCo01, false, "Destination Global must NOT include CO-01 (CSL is US-only)");
+
+// Reset destination select back to All via CDP keyboard Home key
+await evalJs("document.getElementById('destination-select')?.focus()");
+await send("Input.dispatchKeyEvent", { type: "rawKeyDown", key: "Home", code: "Home", windowsVirtualKeyCode: 36 });
+await send("Input.dispatchKeyEvent", { type: "keyUp", key: "Home", code: "Home", windowsVirtualKeyCode: 36 });
+await new Promise((r) => setTimeout(r, 200));
+
+console.log(`✓ Destinations audit PASS via CDP keyboard input: DO-01 in US=true, DO-01 in Global=true, CO-01 in US=true, CO-01 in Global=false (corrected)`);
+
+report.pagesAudited.resources = {
+  filterAudit: { screeningCount, screeningTitles },
+  destAudit: { usHasDo01, usHasCo01, globalHasDo01, globalHasCo01 },
+  resourcesHitTestsByVp,
+  occlusionChecks: { resources375: resourcesOcc375, resources320: resourcesOcc320 },
+};
 
 // ==========================================
 // PAGE 3: REPRESENTATIVE ARTICLE (/blog/weld-photo-not-joint-release-evidence)
@@ -922,7 +1052,7 @@ console.log(`✓ Navigation and back PASS (CDP click): ${prevUrl} -> ${navigated
 report.pagesAudited.article = { ...articleAudit, navBackResult: { prevUrl, navigatedUrl, returnedUrl, backSuccess: true } };
 
 // ==========================================
-// TELEMETRY ABORT VERIFICATION
+// TELEMETRY ABORT & COUNT MATCH VERIFICATION
 // ==========================================
 console.log("\n--- Triggering GA consent to record intercepted telemetry ---");
 await send("Page.navigate", { url: `http://127.0.0.1:${SERVER_PORT}/` });
@@ -932,8 +1062,16 @@ await new Promise((r) => setTimeout(r, 1000));
 await cdpClick("() => Array.from(document.querySelectorAll('button')).find(b => b.textContent.includes('Analytics:'))");
 await new Promise((r) => setTimeout(r, 1500));
 
-// Verify that all intercepted telemetry requests are correlated by requestId and blocked with inspector
-assert.ok(blockedTelemetryEvents.length > 0, "Must record intercepted telemetry requests");
+// Verify that all emitted telemetry requests are intercepted and counts match
+const emittedCount = sentRequestsByReqId.size;
+const interceptedCount = blockedTelemetryEvents.length;
+
+assert.ok(emittedCount > 0, "Must record emitted telemetry requests");
+assert.equal(
+  emittedCount,
+  interceptedCount,
+  `All emitted telemetry requests (${emittedCount}) must be strictly intercepted (${interceptedCount})`
+);
 
 for (const item of blockedTelemetryEvents) {
   assert.equal(
@@ -949,15 +1087,23 @@ assert.ok(
   "At least one blocked telemetry request URL must explicitly contain the test ID G-TEST000000"
 );
 
-console.log(`✓ Monitored telemetry intercepted: ${blockedTelemetryEvents.length} requests correlated via requestId`);
+const collectBeaconObserved = blockedTelemetryEvents.some((r) => r.url.includes("/collect"));
+
+console.log(`✓ Telemetry requests emitted: ${emittedCount}, intercepted: ${interceptedCount} (counts strictly match: ${emittedCount === interceptedCount})`);
 console.log(`✓ All ${blockedTelemetryEvents.length} requests blocked with blockedReason: 'inspector'`);
 console.log(`✓ Confirmed at least one URL contains test ID 'G-TEST000000'`);
+console.log(`✓ GA collect beacon observed: ${collectBeaconObserved} (unobserved as GTM loader was blocked before beacon generation)`);
 console.log(`  (Monitored patterns: ${monitoredTelemetryPatterns.join(", ")})`);
 
 report.telemetryAudit = {
+  emittedCount,
+  interceptedCount,
+  countsMatch: emittedCount === interceptedCount,
   totalBlocked: blockedTelemetryEvents.length,
   allBlockedWithInspector: true,
   containsTestId: hasTestIdRequest,
+  collectBeaconObserved,
+  collectBeaconNote: "GA collect beacon was not observed because the primary GTM tag loader (gtag/js?id=G-TEST000000) was blocked immediately upon issuance with blockedReason: inspector, preventing downstream execution and beacon generation.",
   blockedRequests: blockedTelemetryEvents,
 };
 
