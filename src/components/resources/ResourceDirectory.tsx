@@ -23,6 +23,8 @@ import {
   resourceCategories,
   type ProcurementResource,
   type ResourceCategory,
+  type ResourceDestinationKey,
+  type ResourceSectorKey,
   sourceReviewDate,
 } from "@/data/free-resources";
 
@@ -56,53 +58,19 @@ const stageOptions = [
   { id: "screening", label: "Counterparty Screening (交易对手背景审查)", shortLabel: "Counterparty Screening" },
 ] as const;
 
-function matchesDestination(resRegion: string, dest: string): boolean {
+function matchesDestination(res: ProcurementResource, dest: string): boolean {
   if (dest === "All") return true;
-  const r = resRegion.toLowerCase();
-  if (dest === "EU") return r.includes("eu");
-  if (dest === "US") return r.includes("united states") || r.includes("us ") || r.includes("(us") || r.includes("us export");
-  if (dest === "UK") return r.includes("united kingdom") || r.includes("uk");
-  if (dest === "Global") return r.includes("global") || r.includes("cross-border") || r.includes("china");
-  return true;
+  return res.destinations.includes(dest as ResourceDestinationKey);
 }
 
 function matchesSector(res: ProcurementResource, sectorId: string): boolean {
   if (sectorId === "All") return true;
-  const searchable = `${res.category} ${res.title} ${res.chinese} ${res.summary} ${res.summaryEn}`.toLowerCase();
-  if (sectorId === "steel") {
-    return res.category === "CBAM / steel" || searchable.includes("steel") || searchable.includes("iron") || searchable.includes("cbam") || searchable.includes("钢");
-  }
-  if (sectorId === "logistics") {
-    return res.category === "Shipping documents" || searchable.includes("packaging") || searchable.includes("wood") || searchable.includes("ispm") || searchable.includes("shipping") || searchable.includes("container") || searchable.includes("vgm") || searchable.includes("包装") || searchable.includes("运输");
-  }
-  if (sectorId === "compliance") {
-    return res.category === "Restricted-party checks" || searchable.includes("screening") || searchable.includes("sanction") || searchable.includes("restricted") || searchable.includes("受限") || searchable.includes("审查");
-  }
-  if (sectorId === "manufacturing") {
-    return res.category === "Supplier checks" || res.category === "Tariffs & origin" || searchable.includes("tariff") || searchable.includes("customs") || searchable.includes("hts") || searchable.includes("taric") || searchable.includes("playbook");
-  }
-  return true;
+  return res.sectors.includes(sectorId as ResourceSectorKey);
 }
 
 function matchesStage(res: ProcurementResource, stageId: string): boolean {
   if (stageId === "All") return true;
-  const text = `${res.stage} ${res.stageZh}`.toLowerCase();
-  if (stageId === "deposit") {
-    return text.includes("deposit") || text.includes("rfq") || text.includes("定金") || text.includes("询价") || text.includes("合同");
-  }
-  if (stageId === "technical") {
-    return text.includes("technical") || text.includes("emissions") || text.includes("exchange") || text.includes("技术") || text.includes("碳数据") || text.includes("数据交换");
-  }
-  if (stageId === "cost") {
-    return text.includes("cost") || text.includes("tariff") || text.includes("compliance") || text.includes("classification") || text.includes("成本") || text.includes("关税") || text.includes("税则");
-  }
-  if (stageId === "shipment") {
-    return text.includes("shipment") || text.includes("packaging") || text.includes("出货") || text.includes("包装");
-  }
-  if (stageId === "screening") {
-    return text.includes("counterparty") || text.includes("screening") || text.includes("对手") || text.includes("审查");
-  }
-  return true;
+  return res.stageKey === stageId;
 }
 
 export function ResourceDirectory({
@@ -221,7 +189,7 @@ export function ResourceDirectory({
       const matchesSec = matchesSector(res, selectedSector);
       if (!matchesSec) return false;
 
-      const matchesDest = matchesDestination(res.region, selectedRegion);
+      const matchesDest = matchesDestination(res, selectedRegion);
       if (!matchesDest) return false;
 
       const matchesStg = matchesStage(res, selectedStage);

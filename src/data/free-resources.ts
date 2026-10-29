@@ -1,3 +1,7 @@
+export type ResourceStageKey = "deposit" | "technical" | "cost" | "shipment" | "screening";
+export type ResourceSectorKey = "steel" | "manufacturing" | "logistics" | "compliance";
+export type ResourceDestinationKey = "EU" | "US" | "UK" | "Global";
+
 export interface ProcurementResource {
   id: string;
   category: string;
@@ -14,6 +18,9 @@ export interface ProcurementResource {
   rights: string;
   distribution: string;
   lastReviewDate: string;
+  destinations: ResourceDestinationKey[];
+  sectors: ResourceSectorKey[];
+  stageKey: ResourceStageKey;
 }
 
 export const sourceReviewDate = "2026-10-24";
@@ -46,6 +53,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "SourceRating-owned original; link to live version",
     distribution: "Self-owned, direct site link",
     lastReviewDate: "2026-10-24",
+    destinations: ["Global"],
+    sectors: ["manufacturing", "steel"],
+    stageKey: "deposit",
   },
   {
     id: "CB-01",
@@ -63,6 +73,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "EU general CC BY 4.0 may apply to Commission-owned content; verify item-level rights",
     distribution: "Source link only; do not mirror individual files without rights review",
     lastReviewDate: "2026-10-24",
+    destinations: ["EU"],
+    sectors: ["steel"],
+    stageKey: "technical",
   },
   {
     id: "CB-02",
@@ -80,6 +93,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "EU general CC BY may apply; confirm item-level rights",
     distribution: "Source link only",
     lastReviewDate: "2026-10-24",
+    destinations: ["EU"],
+    sectors: ["steel"],
+    stageKey: "technical",
   },
   {
     id: "CB-03",
@@ -97,6 +113,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "EU general CC BY may apply; check specific file rights",
     distribution: "Source link only; guidance dated Aug 2026 on source page",
     lastReviewDate: "2026-10-24",
+    destinations: ["EU"],
+    sectors: ["steel"],
+    stageKey: "technical",
   },
   {
     id: "CB-04",
@@ -114,6 +133,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "Data file rights may differ; legal acts govern",
     distribution: "Source link only; not a substitute for legal text",
     lastReviewDate: "2026-10-24",
+    destinations: ["EU"],
+    sectors: ["steel"],
+    stageKey: "cost",
   },
   {
     id: "TR-01",
@@ -131,6 +153,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "Some datasets explicitly restrict resale/redistribution",
     distribution: "Link only; no export or reuse of underlying database",
     lastReviewDate: "2026-10-24",
+    destinations: ["EU", "Global"],
+    sectors: ["manufacturing", "compliance"],
+    stageKey: "cost",
   },
   {
     id: "TR-02",
@@ -148,6 +173,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "Use source website; dataset licensing and version require review",
     distribution: "Link only",
     lastReviewDate: "2026-10-24",
+    destinations: ["EU"],
+    sectors: ["compliance", "manufacturing"],
+    stageKey: "cost",
   },
   {
     id: "TR-03",
@@ -165,6 +193,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "US government resource; license review before mirroring datasets",
     distribution: "Link only; use official current revision",
     lastReviewDate: "2026-10-24",
+    destinations: ["US"],
+    sectors: ["compliance", "manufacturing"],
+    stageKey: "cost",
   },
   {
     id: "TR-04",
@@ -182,6 +213,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "UK OGL can apply to marked information, verify item-level terms",
     distribution: "Link only",
     lastReviewDate: "2026-10-24",
+    destinations: ["UK"],
+    sectors: ["compliance", "manufacturing"],
+    stageKey: "cost",
   },
   {
     id: "DO-01",
@@ -199,6 +233,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "Official reference; reproduction rights not individually assessed",
     distribution: "Link only; country-specific applicability",
     lastReviewDate: "2026-10-24",
+    destinations: ["US", "Global"],
+    sectors: ["logistics"],
+    stageKey: "shipment",
   },
   {
     id: "DO-02",
@@ -216,6 +253,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "Official reference; reproduction rights not individually assessed",
     distribution: "Link only",
     lastReviewDate: "2026-10-24",
+    destinations: ["US"],
+    sectors: ["logistics"],
+    stageKey: "shipment",
   },
   {
     id: "DO-03",
@@ -233,6 +273,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "ICC copyrighted, trademarked; no mirroring or translating rules",
     distribution: "Link only; ICC is not affiliated with SourceRating",
     lastReviewDate: "2026-10-24",
+    destinations: ["Global"],
+    sectors: ["logistics", "compliance"],
+    stageKey: "deposit",
   },
   {
     id: "CO-01",
@@ -250,6 +293,9 @@ export const officialResources: ProcurementResource[] = [
     rights: "Government dataset; check specific terms before redistribution",
     distribution: "Link only; not a global sanctions clearance",
     lastReviewDate: "2026-10-24",
+    destinations: ["US", "Global"],
+    sectors: ["compliance"],
+    stageKey: "screening",
   },
   {
     id: "TR-05",
@@ -267,5 +313,8 @@ export const officialResources: ProcurementResource[] = [
     rights: "Official reference; reproduction rights not individually assessed",
     distribution: "Link only",
     lastReviewDate: "2026-10-24",
+    destinations: ["US"],
+    sectors: ["compliance", "manufacturing"],
+    stageKey: "cost",
   },
 ];

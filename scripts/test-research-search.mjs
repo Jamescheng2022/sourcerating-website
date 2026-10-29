@@ -117,3 +117,37 @@ test('real HTTP handler returns bounded JSON without full index/private fields',
   assert.ok(body.results.every(item => !('searchText' in item)));
   assert.equal(route.GET(new Request('https://sourcerating.com/api/research/search?limit=999')).status, 400);
 });
+
+test('procurement resource classification integrity: zero substring false-positives for screening and DO-01', () => {
+  const { officialResources } = load(path.join(root, 'src/data/free-resources.ts'));
+  assert.equal(officialResources.length, 14);
+
+  // 1. Stage "screening" must match ONLY CO-01 (U.S. Consolidated Screening List)
+  const screeningResources = officialResources.filter(r => r.stageKey === 'screening');
+  assert.equal(screeningResources.length, 1, 'Counterparty screening must match strictly 1 resource');
+  assert.equal(screeningResources[0].id, 'CO-01', 'Counterparty screening must match strictly CO-01, zero tariff compliance false positives');
+
+  // 2. DO-01 (Common Export Documents Guide) must match US, Global, logistics, shipment
+  const do01 = officialResources.find(r => r.id === 'DO-01');
+  assert.ok(do01, 'DO-01 must exist');
+  assert.ok(do01.destinations.includes('US'), 'DO-01 must match US destination');
+  assert.ok(do01.destinations.includes('Global'), 'DO-01 must match Global destination');
+  assert.ok(do01.sectors.includes('logistics'), 'DO-01 must match logistics sector');
+  assert.equal(do01.stageKey, 'shipment', 'DO-01 stage must be shipment');
+
+  // 3. Stage "shipment" must match DO-01 and DO-02 only
+  const shipmentResources = officialResources.filter(r => r.stageKey === 'shipment');
+  assert.deepEqual(Array.from(shipmentResources.map(r => r.id)), ['DO-01', 'DO-02']);
+
+  // 4. Stage "deposit" must match SR-01 and DO-03 only
+  const depositResources = officialResources.filter(r => r.stageKey === 'deposit');
+  assert.deepEqual(Array.from(depositResources.map(r => r.id)), ['SR-01', 'DO-03']);
+
+  // 5. Stage "technical" must match CB-01, CB-02, CB-03
+  const technicalResources = officialResources.filter(r => r.stageKey === 'technical');
+  assert.deepEqual(Array.from(technicalResources.map(r => r.id)), ['CB-01', 'CB-02', 'CB-03']);
+
+  // 6. Stage "cost" must match CB-04, TR-01, TR-02, TR-03, TR-04, TR-05
+  const costResources = officialResources.filter(r => r.stageKey === 'cost');
+  assert.deepEqual(Array.from(costResources.map(r => r.id)), ['CB-04', 'TR-01', 'TR-02', 'TR-03', 'TR-04', 'TR-05']);
+});
