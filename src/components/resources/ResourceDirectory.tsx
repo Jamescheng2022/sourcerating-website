@@ -13,6 +13,9 @@ import {
   LayoutGrid,
   ListFilter,
   RotateCcw,
+  Globe,
+  Calendar,
+  Compass,
 } from "lucide-react";
 import {
   officialResources,
@@ -27,6 +30,42 @@ interface ResourceDirectoryProps {
   defaultDense?: boolean;
 }
 
+const destinationOptions = [
+  { id: "All", label: "All Destinations (全部目的地)" },
+  { id: "EU", label: "EU / Europe (欧洲)" },
+  { id: "US", label: "US / North America (美国)" },
+  { id: "UK", label: "United Kingdom (英国)" },
+  { id: "Global", label: "Global / China (全球/中国)" },
+] as const;
+
+const stageOptions = [
+  { id: "All", label: "All Stages (全部阶段)" },
+  { id: "deposit", label: "Pre-Deposit (付定金前)" },
+  { id: "technical", label: "Technical & CBAM (技术核验与碳关税)" },
+  { id: "cost", label: "Landed Cost & Tariffs (到岸成本与关税)" },
+  { id: "shipment", label: "Shipping & Packing (出货交接与包装)" },
+  { id: "screening", label: "Counterparty Screening (主体审查)" },
+] as const;
+
+function matchesDestination(resRegion: string, dest: string): boolean {
+  if (dest === "All") return true;
+  if (dest === "EU") return resRegion.includes("EU");
+  if (dest === "US") return resRegion.includes("United States") || resRegion.includes("US");
+  if (dest === "UK") return resRegion.includes("United Kingdom") || resRegion.includes("UK");
+  if (dest === "Global") return resRegion.includes("Global") || resRegion.includes("China") || resRegion.includes("Cross-border");
+  return true;
+}
+
+function matchesStage(res: ProcurementResource, stageId: string): boolean {
+  if (stageId === "All") return true;
+  if (stageId === "deposit") return res.id === "SR-01" || res.id === "DO-03";
+  if (stageId === "technical") return res.id === "CB-01" || res.id === "CB-02" || res.id === "CB-03";
+  if (stageId === "cost") return res.id === "CB-04" || res.id === "TR-01" || res.id === "TR-02" || res.id === "TR-03" || res.id === "TR-04" || res.id === "TR-05";
+  if (stageId === "shipment") return res.id === "DO-01" || res.id === "DO-02";
+  if (stageId === "screening") return res.id === "CO-01";
+  return true;
+}
+
 export function ResourceDirectory({
   initialCategory = "All",
   defaultDense = false,
@@ -34,18 +73,26 @@ export function ResourceDirectory({
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState<ResourceCategory>(initialCategory);
+  const [selectedRegion, setSelectedRegion] = useState<string>("All");
+  const [selectedStage, setSelectedStage] = useState<string>("All");
   const [isDense, setIsDense] = useState(defaultDense);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [, startTransition] = useTransition();
 
-  // Filter logic
+  // Multi-dimensional filter logic: Category + Destination + Stage + Search Query
   const filteredResources = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return officialResources.filter((res) => {
-      const matchesCategory =
+      const matchesCat =
         selectedCategory === "All" || res.category === selectedCategory;
+      if (!matchesCat) return false;
 
-      if (!matchesCategory) return false;
+      const matchesDest = matchesDestination(res.region, selectedRegion);
+      if (!matchesDest) return false;
+
+      const matchesStg = matchesStage(res, selectedStage);
+      if (!matchesStg) return false;
+
       if (!q) return true;
 
       const searchableText = [
@@ -60,13 +107,14 @@ export function ResourceDirectory({
         res.summary,
         res.summaryEn,
         res.region,
+        res.rights,
       ]
         .join(" ")
         .toLowerCase();
 
       return searchableText.includes(q);
     });
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, selectedRegion, selectedStage]);
 
   const handleCopyLink = (res: ProcurementResource) => {
     if (navigator?.clipboard) {
@@ -80,6 +128,8 @@ export function ResourceDirectory({
     startTransition(() => {
       setSearchQuery("");
       setSelectedCategory("All");
+      setSelectedRegion("All");
+      setSelectedStage("All");
     });
   };
 
@@ -88,7 +138,7 @@ export function ResourceDirectory({
       {/* Search & Mode Switcher Bar */}
       <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          {/* Search Input with min-44px touch target */}
+          {/* Search Input with min-48px touch height */}
           <div className="relative flex-1">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
               <Search className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -157,12 +207,12 @@ export function ResourceDirectory({
           </div>
         </div>
 
-        {/* Category Filter Chips - Clean scroll on mobile with touch targets >= 44px */}
+        {/* Primary Filter: Procurement Decision / Category */}
         <div className="mt-4 border-t border-gray-100 pt-3">
           <div className="flex items-center justify-between pb-2 text-xs font-medium text-gray-500">
             <span className="inline-flex items-center gap-1.5">
               <Filter className="h-3.5 w-3.5 text-gray-400" />
-              <span>Filter by procurement stage:</span>
+              <span>Procurement Decision / Category (采购决策与主题):</span>
             </span>
             <span>
               Showing {filteredResources.length} of {officialResources.length}
@@ -201,17 +251,70 @@ export function ResourceDirectory({
             })}
           </div>
         </div>
+
+        {/* Secondary Filters: Destination & Stage */}
+        <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-gray-100 pt-3">
+          {/* Destination / Market Filter */}
+          <div>
+            <label htmlFor="destination-select" className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1.5">
+              <Globe className="h-3.5 w-3.5 text-gray-400" />
+              <span>Destination Market (目的地筛选):</span>
+            </label>
+            <select
+              id="destination-select"
+              value={selectedRegion}
+              onChange={(e) => setSelectedRegion(e.target.value)}
+              className="block w-full min-h-[44px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-800 shadow-xs focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+            >
+              {destinationOptions.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Procurement Stage Filter */}
+          <div>
+            <label htmlFor="stage-select" className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1.5">
+              <Compass className="h-3.5 w-3.5 text-gray-400" />
+              <span>Procurement Stage (采购阶段筛选):</span>
+            </label>
+            <select
+              id="stage-select"
+              value={selectedStage}
+              onChange={(e) => setSelectedStage(e.target.value)}
+              className="block w-full min-h-[44px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-800 shadow-xs focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+            >
+              {stageOptions.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
 
       {/* Active filters summary */}
-      {(searchQuery || selectedCategory !== "All") && (
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-lg bg-brand-50/70 px-4 py-2 text-xs text-brand-900">
+      {(searchQuery || selectedCategory !== "All" || selectedRegion !== "All" || selectedStage !== "All") && (
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-lg bg-brand-50/70 px-4 py-2.5 text-xs text-brand-900">
           <div className="flex flex-wrap items-center gap-2">
             <ListFilter className="h-3.5 w-3.5 text-brand-700" />
             <span>Active filters:</span>
             {selectedCategory !== "All" && (
               <span className="inline-flex items-center gap-1 rounded bg-white px-2 py-0.5 font-semibold shadow-xs">
                 Category: {selectedCategory}
+              </span>
+            )}
+            {selectedRegion !== "All" && (
+              <span className="inline-flex items-center gap-1 rounded bg-white px-2 py-0.5 font-semibold shadow-xs">
+                Destination: {destinationOptions.find((d) => d.id === selectedRegion)?.label.split(" ")[0]}
+              </span>
+            )}
+            {selectedStage !== "All" && (
+              <span className="inline-flex items-center gap-1 rounded bg-white px-2 py-0.5 font-semibold shadow-xs">
+                Stage: {stageOptions.find((s) => s.id === selectedStage)?.label.split(" ")[0]}
               </span>
             )}
             {searchQuery && (
@@ -226,7 +329,7 @@ export function ResourceDirectory({
             className="inline-flex min-h-[36px] items-center gap-1 font-semibold text-brand-700 underline underline-offset-2 hover:text-brand-950"
           >
             <RotateCcw className="h-3 w-3" />
-            Clear all
+            Reset all filters
           </button>
         </div>
       )}
@@ -240,8 +343,7 @@ export function ResourceDirectory({
               No matching resources found
             </h3>
             <p className="mt-2 text-sm text-gray-500">
-              We couldn&apos;t find any source documents matching &quot;{searchQuery}
-              &quot; in category &quot;{selectedCategory}&quot;.
+              We couldn&apos;t find any source documents matching the current combination of filters.
             </p>
             <button
               type="button"
@@ -253,7 +355,7 @@ export function ResourceDirectory({
             </button>
           </div>
         ) : isDense ? (
-          /* DENSE DIRECTORY VIEW (ThomasNet style) */
+          /* DENSE DIRECTORY VIEW */
           <div className="divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white shadow-xs">
             {filteredResources.map((res) => (
               <div
@@ -274,6 +376,10 @@ export function ResourceDirectory({
                         {res.stage}
                       </span>
                       <span className="text-gray-400">· {res.publisher}</span>
+                      <span className="inline-flex items-center gap-1 text-gray-400">
+                        <Calendar className="h-3 w-3" />
+                        Audited: {res.lastReviewDate}
+                      </span>
                     </div>
 
                     {/* Titles */}
@@ -307,10 +413,12 @@ export function ResourceDirectory({
                       {res.summaryEn}
                     </p>
 
-                    {/* Rights note */}
-                    <p className="mt-2 text-[11px] text-gray-400 break-words">
-                      Rights: {res.rights}
-                    </p>
+                    {/* Rights & Region note */}
+                    <div className="mt-2 flex flex-wrap items-center gap-3 text-[11px] text-gray-400 break-words">
+                      <span>Region: <strong>{res.region}</strong></span>
+                      <span>·</span>
+                      <span>Rights: {res.rights}</span>
+                    </div>
                   </div>
 
                   {/* Action buttons */}
@@ -350,7 +458,7 @@ export function ResourceDirectory({
             ))}
           </div>
         ) : (
-          /* EDITORIAL CARD VIEW (SupplyChainDive / Freightos style) */
+          /* EDITORIAL CARD VIEW */
           <div className="grid gap-5 md:grid-cols-2">
             {filteredResources.map((res) => (
               <article
@@ -368,9 +476,16 @@ export function ResourceDirectory({
                         {res.category}
                       </span>
                     </div>
-                    <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-[11px] font-medium text-gray-600">
-                      {res.stage}
-                    </span>
+                    <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+                      <span className="rounded-full bg-gray-100 px-2.5 py-0.5 font-medium text-gray-600">
+                        {res.stage}
+                      </span>
+                      <span className="hidden sm:inline text-gray-300">·</span>
+                      <span className="hidden sm:inline-flex items-center gap-1 text-gray-400">
+                        <Calendar className="h-3 w-3" />
+                        {res.lastReviewDate}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Title & Chinese name */}
@@ -418,7 +533,7 @@ export function ResourceDirectory({
                     <span>
                       Publisher: <strong className="text-gray-700">{res.publisher}</strong>
                     </span>
-                    <span>Region: {res.region}</span>
+                    <span>Region: <strong className="text-gray-700">{res.region}</strong></span>
                   </div>
                   <p className="mt-1.5 text-[11px] text-gray-400 break-words">
                     Rights: {res.rights}

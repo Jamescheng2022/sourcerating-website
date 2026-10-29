@@ -6,7 +6,6 @@ import { Footer } from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { MobileIaProvider } from "@/components/layout/MobileIaContext";
 import { BottomWorkstationBar } from "@/components/layout/BottomWorkstationBar";
-import { IaSwitcherPill } from "@/components/layout/IaSwitcherPill";
 import { generateOrganizationSchema } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
 import "./globals.css";
@@ -44,7 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
           <Footer />
           <BottomWorkstationBar />
-          <IaSwitcherPill />
           <Analytics />
           <SpeedInsights />
           <GoogleAnalytics />

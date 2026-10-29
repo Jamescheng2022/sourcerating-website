@@ -16,8 +16,7 @@ import {
   DollarSign,
   HelpCircle,
   Mail,
-  ArrowRight,
-  SlidersHorizontal,
+  ArrowRight
 } from "lucide-react";
 import { siteConfig } from "@/data/site-config";
 import { cn } from "@/lib/utils";
@@ -27,7 +26,7 @@ import { useMobileIa } from "./MobileIaContext";
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { iaMode, toggleIaMode } = useMobileIa();
+  const { iaMode } = useMobileIa();
 
   // Highlight key nav items for desktop
   const desktopNavItems = [
@@ -49,17 +48,6 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-3">
             <Logo />
-            {/* Mode badge for reviewers on sm+ viewports; on mobile it's in drawer & floating pill */}
-            <button
-              type="button"
-              onClick={toggleIaMode}
-              className="hidden sm:inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-bold text-gray-700 hover:bg-gray-100 transition-colors"
-              title="Toggle between Direction A (Trade Directory) and Direction B (Editorial Journal)"
-              aria-label={`Toggle mobile IA mode. Current: ${iaMode}`}
-            >
-              <SlidersHorizontal className="h-3 w-3 text-brand-700" />
-              <span>{iaMode === "directory" ? "Dir A" : "Dir B"}</span>
-            </button>
           </div>
 
           {/* Desktop Nav */}
@@ -129,24 +117,6 @@ export function Header() {
         {/* MOBILE NAVIGATION DRAWER */}
         {mobileMenuOpen && (
           <div className="xl:hidden border-t border-gray-100 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
-            {/* Header info showing current direction */}
-            <div className="mb-4 flex items-center justify-between rounded-lg bg-gray-50 p-2.5 text-xs text-gray-600">
-              <span className="font-medium">
-                Active Direction:{" "}
-                <strong className="text-gray-900">
-                  {iaMode === "directory"
-                    ? "A: Trade Directory & Workstation"
-                    : "B: Intelligence Journal & Dossiers"}
-                </strong>
-              </span>
-              <button
-                type="button"
-                onClick={toggleIaMode}
-                className="font-bold text-brand-800 underline underline-offset-2 min-h-[44px] inline-flex items-center px-2"
-              >
-                Switch to {iaMode === "directory" ? "Dir B" : "Dir A"}
-              </button>
-            </div>
 
             {iaMode === "directory" ? (
               /* ======================================================== */

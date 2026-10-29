@@ -79,9 +79,7 @@ export default function AppPage() {
               </strong>{" "}
               The SourceRating mobile application is currently under private
               alpha development and closed field testing. It is not currently
-              downloadable from the iOS App Store or Google Play. The form below
-              allows testing stakeholders and procurement teams to register early
-              evaluation interest.
+              downloadable from the iOS App Store or Google Play. Public download is not currently active and waitlist registration is paused. Real-time factory verification needs are serviced through our free resources and on-ground engineering teams below.
             </div>
           </div>
         </div>
@@ -186,8 +184,7 @@ export default function AppPage() {
               Mobile App Early Access Status
             </h2>
             <p className="mt-2 text-xs text-gray-600 sm:text-sm">
-              We are inviting engineering buyers, QA inspectors, and sourcing
-              managers to participate in private field testing in Asia.
+              The mobile field verifier is currently undergoing closed engineering testing. Public intake is paused; no personal information or email addresses are collected.
             </p>
           </div>
 
