@@ -37,6 +37,8 @@ function loader(baseline) {
       if (id==='lucide-react') return Object.fromEntries(['ArrowLeft','ArrowRight','Check','ShieldAlert','Calendar','Clock'].map(x=>[x,x]));
       if (id==='@/components/shared/ArticleBody') return {ArticleBody:'ArticleBody'};
       if (id==='@/components/ui/TrackedLink') return {TrackedLink:'TrackedLink'};
+      if (id==='@/components/blog/BlogDirectory') return {BlogDirectory:'BlogDirectory'};
+      if (id==='@/components/home/HomeSearch') return {HomeSearch:'HomeSearch'};
       if (id.startsWith('@/')) return load('src/'+id.slice(2)+'.ts');
       throw new Error('Unexpected dependency '+id);
     }
@@ -65,11 +67,14 @@ async function main() {
   const input = {params:Promise.resolve({slug:puSlug})};
   const meta = plain(await page.generateMetadata(input));
   const tree = await page.default(input);
+  const { blogSocialCards } = after('src/data/blog-social-cards.ts');
+  const puCard = blogSocialCards[puSlug];
+  const puCardUrl = 'https://www.sourcerating.com' + puCard.src;
   const url = 'https://www.sourcerating.com/images/blog/polyurethane-screen-panels-inspection-v2.jpg';
   const caption = 'AI-generated editorial image; not a photograph of a specific supplier or installation.';
   check('the original PU and HDG articles retain their intended covers',()=>{assert.ok(pu?.coverImage);assert.ok(hdg?.coverImage);assert.equal(hdg.coverImage.src,'/images/blog/hdg-inspection-editorial-photo-20261019.avif');});
   check('PU body and editorial content unchanged',()=>{const rest=plain(pu);delete rest.coverImage;assert.deepEqual(rest,plain(oldData.find(x=>x.slug===puSlug)));});
-  check('PU OG absolute URL, real dimensions and alt',()=>assert.deepEqual(meta.openGraph.images,[{url,width:1600,height:900,alt:pu.coverImage.alt}]));
+  check('PU OG absolute URL, real dimensions and alt',()=>assert.deepEqual(meta.openGraph.images,[{url:puCardUrl,width:puCard.width,height:puCard.height,alt:pu.coverImage.alt}]));
   check('PU Twitter matches OG image descriptor',()=>assert.deepEqual(meta.twitter.images,meta.openGraph.images));
   check('PU canonical retained',()=>assert.equal(meta.alternates.canonical,'https://www.sourcerating.com/blog/'+puSlug));
   const article = nodes(tree,n=>n.type==='script').map(n=>JSON.parse(n.props.dangerouslySetInnerHTML.__html)).find(x=>x['@type']==='Article');
@@ -87,13 +92,76 @@ async function main() {
   const editorialTree=await page.default(editorialInput);
   check('social preview uses a raster fallback instead of an SVG',()=>assert.ok(editorialMeta.openGraph.images[0].url.endsWith('.png')));
   check('editorial page displays photo hero and passes inline diagram through ArticleBody',()=>{const variants=nodes(editorialTree,n=>n.type==='Image');assert.equal(variants.length,1);assert.equal(variants[0].props.src,hdg.coverImage.src);assert.equal(variants[0].props.alt,hdg.coverImage.alt);const body=nodes(editorialTree,n=>n.type==='ArticleBody');assert.equal(body.length,1);assert.ok(body[0].props.blocks.some(x=>x.type==='illustration'&&x.mobileSrc&&x.src));});
+  const socialCardsSha256 = {};
+  for (const post of data) {
+    const card = blogSocialCards[post.slug];
+    assert.ok(card, `Card missing for ${post.slug}`);
+    const cardPath = path.join(root, 'public', card.src.slice(1));
+    assert.ok(fs.existsSync(cardPath), `Card file does not exist on disk: ${cardPath}`);
+    const fileBytes = fs.readFileSync(cardPath);
+    const meta = await sharp(fileBytes).metadata();
+    assert.equal(meta.width, card.width, `${post.slug}: width mismatch`);
+    assert.equal(meta.height, card.height, `${post.slug}: height mismatch`);
+    const fileSha = crypto.createHash('sha256').update(fileBytes).digest('hex');
+    socialCardsSha256[post.slug] = {
+      src: card.src,
+      width: card.width,
+      height: card.height,
+      alt: card.alt,
+      cardType: card.cardType,
+      sha256: fileSha,
+    };
+  }
+  check('social card registry covers all 31 articles with unique real raster files', () => {
+    assert.equal(data.length, 31, 'Expected 31 articles');
+    assert.equal(Object.keys(blogSocialCards).length, 31, 'Expected 31 social cards in registry');
+    const seenSrcs = new Set();
+    for (const post of data) {
+      const card = blogSocialCards[post.slug];
+      assert.ok(card.src.startsWith('/images/'), `${post.slug}: src must be in /images/`);
+      assert.ok(!card.src.includes('hero-factory-audit'), `${post.slug}: must not fall back to hero-factory-audit`);
+      assert.ok(!seenSrcs.has(card.src), `Duplicate social card detected for ${post.slug}: ${card.src}`);
+      seenSrcs.add(card.src);
+    }
+    assert.equal(seenSrcs.size, 31, 'All 31 cards must be unique');
+    const seenHashes = new Set(Object.values(socialCardsSha256).map(x => x.sha256));
+    assert.equal(seenHashes.size, 31, 'All 31 social card files must have completely unique sha256 digests');
+  });
+
   const legacy = oldData.filter(x=>x.slug!==puSlug);
   for (const post of legacy) {
     const params={params:Promise.resolve({slug:post.slug})};
     const oldPost=oldData.find(x=>x.slug===post.slug);
     const actualTree=await page.default(params), expectedTree=await oldPage.default(params);
-    const actualMeta=await page.generateMetadata(params), expectedMeta=await oldPage.generateMetadata(params);
-    check(`legacy regression: ${post.slug}`,()=>{assert.deepEqual(plain(post),plain(oldPost));assert.deepEqual(plain(actualMeta),plain(expectedMeta));const withProof=plain(actualTree);assert.equal(withProof.props['data-publication-sha256'],crypto.createHash('sha256').update(JSON.stringify(post)).digest('hex'));delete withProof.props['data-publication-sha256'];assert.deepEqual(withProof,plain(expectedTree));});
+    const actualMeta=plain(await page.generateMetadata(params)), expectedMeta=plain(await oldPage.generateMetadata(params));
+    const card = blogSocialCards[post.slug];
+
+    check(`legacy regression: ${post.slug}`,()=>{
+      assert.deepEqual(plain(post),plain(oldPost));
+
+      const actualOgImages = actualMeta.openGraph?.images;
+      const actualTwitterImages = actualMeta.twitter?.images;
+      delete actualMeta.openGraph?.images;
+      delete actualMeta.twitter?.images;
+      delete expectedMeta.openGraph?.images;
+      delete expectedMeta.twitter?.images;
+      assert.deepEqual(actualMeta, expectedMeta);
+
+      const expectedUrl = 'https://www.sourcerating.com' + card.src;
+      assert.deepEqual(actualOgImages, [{
+        url: expectedUrl,
+        width: card.width,
+        height: card.height,
+        alt: card.alt,
+      }]);
+      assert.deepEqual(actualTwitterImages, actualOgImages);
+      assert.notEqual(card.src, '/images/hero-factory-audit.png');
+
+      const withProof=plain(actualTree);
+      assert.equal(withProof.props['data-publication-sha256'],crypto.createHash('sha256').update(JSON.stringify(post)).digest('hex'));
+      delete withProof.props['data-publication-sha256'];
+      assert.deepEqual(withProof,plain(expectedTree));
+    });
   }
   for (const ogImage of [undefined,'/custom.jpg']) {
     check(`metadata fallback unchanged: ${ogImage??'default'}`,()=>{const args={title:'Home',description:'test',path:'/',ogImage};assert.deepEqual(plain(metadata.generatePageMetadata(args)),plain(oldMetadata.generatePageMetadata(args)));});
@@ -101,7 +169,22 @@ async function main() {
   check('absolute custom image URL remains absolute',()=>assert.equal(metadata.generatePageMetadata({title:'x',description:'y',path:'/x',ogImage:{src:'https://cdn.example.com/a.jpg',width:400,height:300,alt:'a'}}).openGraph.images[0].url,'https://cdn.example.com/a.jpg'));
   const list=after('src/app/blog/page.tsx').default();
   check('blog index presents every registered cover and does not drop cards',()=>{const imgs=nodes(list,n=>n.type==='Image');const coverPaths=data.filter(x=>x.coverImage).map(x=>x.coverImage.src);assert.deepEqual(plain(imgs.map(x=>x.props.src)),plain(coverPaths));assert.equal(nodes(list,n=>n.type==='article').length,data.length);});
-  check('homepage Git content unchanged (checkout CRLF normalized)',()=>assert.equal(fs.readFileSync(path.join(root,'src/app/page.tsx'),'utf8').replace(/\r\n/g,'\n'),original('src/app/page.tsx').toString('utf8')));
+  check('redesigned homepage and navigation retain real destinations',()=>{
+    const home=after('src/app/page.tsx').default();
+    assert.equal(nodes(home,n=>n.type==='h1')[0].props.children,'Industrial sourcing, in context.');
+    assert.ok(nodes(home,n=>n.type==='Link'&&n.props.href==='/blog').length);
+    const recent=[...data].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4);
+    const cards=nodes(home,n=>n.type==='article');
+    assert.equal(cards.length,recent.length);
+    assert.deepEqual(plain(cards.map(card=>nodes(card,n=>n.type==='Link')[0].props.href)),recent.map(p=>'/blog/'+p.slug));
+    const config=after('src/data/site-config.ts').siteConfig;
+    assert.ok(config.nav.some(x=>x.href==='/membership'));
+    const member=after('src/app/membership/page.tsx').default();
+    const links=[...nodes(home,n=>!!n.props?.href),...nodes(member,n=>!!n.props?.href)].map(x=>x.props.href);
+    assert.ok(!links.some(href=>href.includes('gumroad.com')||href.includes('/go/membership')));
+    const destinations=new Set([...links,...config.nav.map(x=>x.href),...config.footer.quickLinks.map(x=>x.href),...config.footer.company.map(x=>x.href),...config.footer.legal.map(x=>x.href)]);
+    for(const href of destinations){assert.ok(href.startsWith('/')&&!href.includes('?'),href);if(href.startsWith('/blog/'))assert.ok(data.some(p=>href==='/blog/'+p.slug),href);else assert.ok(fs.existsSync(path.join(root,'src/app',href,'page.tsx')),href);}
+  });
   const puOldTree=await oldPage.default(input);
   check('PU CTA links unchanged',()=>assert.deepEqual(plain(nodes(tree,n=>n.type==='TrackedLink')),plain(nodes(puOldTree,n=>n.type==='TrackedLink'))));
   let did404=false;try {await page.default({params:Promise.resolve({slug:'missing-test'})});}catch(error){did404=error.message==='NOT_FOUND';}
@@ -111,7 +194,7 @@ async function main() {
   check('real JPEG dimensions match all declarations',()=>{assert.equal(info.format,'jpeg');assert.equal(info.width,1600);assert.equal(info.height,900);assert.equal(bytes[0],0xff);assert.equal(bytes[1],0xd8);});
   const asset={derivative:{sha256:'aef330e40b3d9ffb6b039fc3c6ae0a5c20c610376e08d62223eb60833b8754b8'}};
   check('derivative SHA256 matches recorded asset',()=>assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),asset.derivative.sha256));
-  const report={status:'PASS',checks,articles:data.length,legacyArticles:legacy.length,toolchain:{typescript:ts.version,sharp:sharp.versions.sharp},scope:'Isolated transpiled source execution with framework stubs; not project typecheck, Next build, HTTP metadata rendering or browser verification.',withoutIndependentCover:legacy.map(x=>({slug:x.slug,title:x.title})),sourceReady:false};
+  const report={status:'PASS',checks,articles:data.length,legacyArticles:legacy.length,socialImageWired:data.length,toolchain:{typescript:ts.version,sharp:sharp.versions.sharp},scope:'Isolated transpiled source execution with framework stubs; not project typecheck, Next build, HTTP metadata rendering or browser verification.',withoutBodyCover:legacy.map(x=>({slug:x.slug,title:x.title})),socialCardsSha256,sourceReady:true};
   console.log(JSON.stringify(report, null, 2));
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});

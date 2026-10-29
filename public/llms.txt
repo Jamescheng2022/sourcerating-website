@@ -20,6 +20,10 @@ Core material focus:
 
 Key URLs:
 - Home: https://www.sourcerating.com/
+- Free Resource Library: https://www.sourcerating.com/resources
+- Intelligence & Deep Sourcing: https://www.sourcerating.com/intelligence
+- Bilingual Field Kits: https://www.sourcerating.com/field-kits
+- Mobile App Preview: https://www.sourcerating.com/app
 - Services: https://www.sourcerating.com/services
 - Pricing: https://www.sourcerating.com/pricing
 - Supplier Verification Playbook: https://www.sourcerating.com/playbook

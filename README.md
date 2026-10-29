@@ -27,6 +27,7 @@ Configure these variables in Vercel before accepting live inquiries:
 - `DEEPSEEK_API_KEY` — optional AI assessment for the free risk screen. The rules-based screen remains available without it.
 - `DEEPSEEK_MODEL` — optional model override.
 - `NEXT_PUBLIC_GA_ID` — optional Google Analytics property. Vercel Web Analytics and Speed Insights are included independently.
+- `KV_REST_API_URL` & `KV_REST_API_TOKEN` (or `DATABASE_URL`) — **Owner Gate for Mobile App Waitlist:** Public waitlist intake is currently disabled / in-preparation with the `/api/waitlist-preview` route kept fail-closed (HTTP 503). Before public launch, the Owner must provision persistent storage (e.g. Vercel KV / Upstash Redis via `KV_REST_API_URL`/`KV_REST_API_TOKEN` or PostgreSQL via `DATABASE_URL`) and connect it in `src/app/api/waitlist-preview/route.ts`.
 
 Both public forms apply same-origin checks, payload limits, a honeypot, best-effort per-IP throttling, and structured logs without lead PII. After changing form or email configuration, verify the full browser → API → mailbox path with a clearly marked internal test.
 

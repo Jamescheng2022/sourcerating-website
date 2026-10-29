@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, ShieldAlert } from "lucide-react";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPost } from "@/data/blog";
+import { blogSocialCards } from "@/data/blog-social-cards";
 import { siteConfig } from "@/data/site-config";
 import { TrackedLink } from "@/components/ui/TrackedLink";
 import { generatePageMetadata } from "@/lib/metadata";
@@ -16,12 +17,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) return { title: "Guide not found" };
+  const card = blogSocialCards[slug];
   return generatePageMetadata({
     title: post.seoTitle ?? post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
-    // Editorial SVG diagrams are for the article body; social previews need a raster fallback.
-    ogImage: post.coverImage && /\.(?:svg|avif)$/i.test(post.coverImage.src) ? undefined : post.coverImage,
+    ogImage: card
+      ? { src: card.src, width: card.width, height: card.height, alt: card.alt }
+      : undefined,
   });
 }
 

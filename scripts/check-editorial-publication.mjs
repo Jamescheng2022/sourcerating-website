@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 /**
  * Deterministic SourceRating article preflight.
  *

@@ -57,7 +57,7 @@ export const blogPosts: BlogPost[] = [
     "src": "/images/blog/polyurethane-screen-panels-inspection-v2.jpg",
     "width": 1600,
     "height": 900,
-    "alt": "Orange polyurethane screening panels with through-slots on a steel inspection bench beside a vernier caliper.",
+    "alt": "Orange polyurethane screening panels with through-slots on a steel inspection bench beside a vernier caliper (AI-generated conceptual illustration; not a photograph).",
     "caption": "AI-generated editorial image; not a photograph of a specific supplier or installation."
   },
   "title": "Should a Mine Buy Replacement Polyurethane Screen Panels from China?",

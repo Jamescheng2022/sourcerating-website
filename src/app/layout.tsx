@@ -4,6 +4,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { MobileIaProvider } from "@/components/layout/MobileIaContext";
+import { BottomWorkstationBar } from "@/components/layout/BottomWorkstationBar";
 import { generateOrganizationSchema } from "@/lib/metadata";
 import { siteConfig } from "@/data/site-config";
 import "./globals.css";
@@ -36,12 +38,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(generateOrganizationSchema()) }} />
       </head>
       <body className="font-sans antialiased">
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-        <Analytics />
-        <SpeedInsights />
-        <GoogleAnalytics />
+        <MobileIaProvider>
+          <Header />
+          <main className="min-h-screen pb-16 lg:pb-0">{children}</main>
+          <Footer />
+          <BottomWorkstationBar />
+          <Analytics />
+          <SpeedInsights />
+          <GoogleAnalytics />
+        </MobileIaProvider>
       </body>
     </html>
   );
