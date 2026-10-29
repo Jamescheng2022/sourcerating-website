@@ -133,9 +133,9 @@ export const blogSocialCards: Record<string, BlogSocialCard> = {
     src: "/images/blog/polyurethane-screen-panels-inspection-v2.jpg",
     width: 1600,
     height: 900,
-    alt: "Inspection of polyurethane screen panels: verifying dimensions, apertures and deck seating",
-    cardType: "photo",
-    attribution: "Editorial reference photo",
+    alt: "Orange polyurethane screening panels with through-slots on a steel inspection bench beside a vernier caliper.",
+    cardType: "ai-illustration",
+    attribution: "AI-generated editorial image; not a photograph of a specific supplier or installation.",
   },
   "cement-baghouse-filter-bags-china-vs-local": {
     slug: "cement-baghouse-filter-bags-china-vs-local",

@@ -68,7 +68,7 @@ export default function ResourcesPage() {
             </div>
 
             <p className="mt-4 text-[11px] text-gray-400">
-              Official publisher sources verified on {sourceReviewDate}. Check
+              Official publisher sources reviewed on {sourceReviewDate}. Check
               current revisions, destination customs rules, and qualified advice
               before entering commercial contracts.
             </p>

@@ -82,14 +82,19 @@ test("social cards decode cleanly and match declared dimensions", async () => {
   }
 });
 
-test("HDG and typographic cards disclose real attributes honestly without faking photos", () => {
+test("HDG, PU and typographic cards disclose real attributes honestly without faking photos", () => {
   const { blogSocialCards } = loadModule("src/data/blog-social-cards.ts");
 
-  // 1. HDG must be disclosed as an AI editorial illustration, NOT a real photo
+  // 1. HDG and PU must be disclosed as AI editorial illustrations, NOT real photos
   const hdg = blogSocialCards["hot-dip-galvanized-steel-china-astm-a123-inspection"];
   assert.equal(hdg.cardType, "ai-illustration");
   assert.match(hdg.attribution, /AI-generated editorial illustration/i);
   assert.match(hdg.attribution, /Not a photograph/i);
+
+  const pu = blogSocialCards["polyurethane-screen-panels-china-vs-local"];
+  assert.equal(pu.cardType, "ai-illustration");
+  assert.match(pu.attribution, /AI-generated editorial image/i);
+  assert.match(pu.attribution, /not a photograph/i);
 
   // 2. The 18 typographic cards must be declared as editorial cards
   const editorialCardSlugs = [

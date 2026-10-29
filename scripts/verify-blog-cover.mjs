@@ -89,13 +89,75 @@ async function main() {
   const editorialTree=await page.default(editorialInput);
   check('social preview uses a raster fallback instead of an SVG',()=>assert.ok(editorialMeta.openGraph.images[0].url.endsWith('.png')));
   check('editorial page displays photo hero and passes inline diagram through ArticleBody',()=>{const variants=nodes(editorialTree,n=>n.type==='Image');assert.equal(variants.length,1);assert.equal(variants[0].props.src,hdg.coverImage.src);assert.equal(variants[0].props.alt,hdg.coverImage.alt);const body=nodes(editorialTree,n=>n.type==='ArticleBody');assert.equal(body.length,1);assert.ok(body[0].props.blocks.some(x=>x.type==='illustration'&&x.mobileSrc&&x.src));});
+  const { blogSocialCards } = after('src/data/blog-social-cards.ts');
+  const socialCardsSha256 = {};
+  for (const post of data) {
+    const card = blogSocialCards[post.slug];
+    assert.ok(card, `Card missing for ${post.slug}`);
+    const cardPath = path.join(root, 'public', card.src.slice(1));
+    assert.ok(fs.existsSync(cardPath), `Card file does not exist on disk: ${cardPath}`);
+    const fileBytes = fs.readFileSync(cardPath);
+    const meta = await sharp(fileBytes).metadata();
+    assert.equal(meta.width, card.width, `${post.slug}: width mismatch`);
+    assert.equal(meta.height, card.height, `${post.slug}: height mismatch`);
+    const fileSha = crypto.createHash('sha256').update(fileBytes).digest('hex');
+    socialCardsSha256[post.slug] = {
+      src: card.src,
+      width: card.width,
+      height: card.height,
+      alt: card.alt,
+      cardType: card.cardType,
+      sha256: fileSha,
+    };
+  }
+  check('social card registry covers all 31 articles with unique real raster files', () => {
+    assert.equal(data.length, 31, 'Expected 31 articles');
+    assert.equal(Object.keys(blogSocialCards).length, 31, 'Expected 31 social cards in registry');
+    const seenSrcs = new Set();
+    for (const post of data) {
+      const card = blogSocialCards[post.slug];
+      assert.ok(card.src.startsWith('/images/'), `${post.slug}: src must be in /images/`);
+      assert.ok(!card.src.includes('hero-factory-audit'), `${post.slug}: must not fall back to hero-factory-audit`);
+      assert.ok(!seenSrcs.has(card.src), `Duplicate social card detected for ${post.slug}: ${card.src}`);
+      seenSrcs.add(card.src);
+    }
+    assert.equal(seenSrcs.size, 31, 'All 31 cards must be unique');
+  });
+
   const legacy = oldData.filter(x=>x.slug!==puSlug);
   for (const post of legacy) {
     const params={params:Promise.resolve({slug:post.slug})};
     const oldPost=oldData.find(x=>x.slug===post.slug);
     const actualTree=await page.default(params), expectedTree=await oldPage.default(params);
-    const actualMeta=await page.generateMetadata(params), expectedMeta=await oldPage.generateMetadata(params);
-    check(`legacy regression: ${post.slug}`,()=>{assert.deepEqual(plain(post),plain(oldPost));assert.deepEqual(plain(actualMeta),plain(expectedMeta));const withProof=plain(actualTree);assert.equal(withProof.props['data-publication-sha256'],crypto.createHash('sha256').update(JSON.stringify(post)).digest('hex'));delete withProof.props['data-publication-sha256'];assert.deepEqual(withProof,plain(expectedTree));});
+    const actualMeta=plain(await page.generateMetadata(params)), expectedMeta=plain(await oldPage.generateMetadata(params));
+    const card = blogSocialCards[post.slug];
+
+    check(`legacy regression: ${post.slug}`,()=>{
+      assert.deepEqual(plain(post),plain(oldPost));
+
+      const actualOgImages = actualMeta.openGraph?.images;
+      const actualTwitterImages = actualMeta.twitter?.images;
+      delete actualMeta.openGraph?.images;
+      delete actualMeta.twitter?.images;
+      delete expectedMeta.openGraph?.images;
+      delete expectedMeta.twitter?.images;
+      assert.deepEqual(actualMeta, expectedMeta);
+
+      const expectedUrl = 'https://www.sourcerating.com' + card.src;
+      assert.deepEqual(actualOgImages, [{
+        url: expectedUrl,
+        width: card.width,
+        height: card.height,
+        alt: card.alt,
+      }]);
+      assert.deepEqual(actualTwitterImages, actualOgImages);
+      assert.notEqual(card.src, '/images/hero-factory-audit.png');
+
+      const withProof=plain(actualTree);
+      assert.equal(withProof.props['data-publication-sha256'],crypto.createHash('sha256').update(JSON.stringify(post)).digest('hex'));
+      delete withProof.props['data-publication-sha256'];
+      assert.deepEqual(withProof,plain(expectedTree));
+    });
   }
   for (const ogImage of [undefined,'/custom.jpg']) {
     check(`metadata fallback unchanged: ${ogImage??'default'}`,()=>{const args={title:'Home',description:'test',path:'/',ogImage};assert.deepEqual(plain(metadata.generatePageMetadata(args)),plain(oldMetadata.generatePageMetadata(args)));});
@@ -128,7 +190,7 @@ async function main() {
   check('real JPEG dimensions match all declarations',()=>{assert.equal(info.format,'jpeg');assert.equal(info.width,1600);assert.equal(info.height,900);assert.equal(bytes[0],0xff);assert.equal(bytes[1],0xd8);});
   const asset={derivative:{sha256:'aef330e40b3d9ffb6b039fc3c6ae0a5c20c610376e08d62223eb60833b8754b8'}};
   check('derivative SHA256 matches recorded asset',()=>assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),asset.derivative.sha256));
-  const report={status:'PASS',checks,articles:data.length,legacyArticles:legacy.length,toolchain:{typescript:ts.version,sharp:sharp.versions.sharp},scope:'Isolated transpiled source execution with framework stubs; not project typecheck, Next build, HTTP metadata rendering or browser verification.',withoutIndependentCover:legacy.map(x=>({slug:x.slug,title:x.title})),sourceReady:false};
+  const report={status:'PASS',checks,articles:data.length,legacyArticles:legacy.length,socialImageWired:data.length,toolchain:{typescript:ts.version,sharp:sharp.versions.sharp},scope:'Isolated transpiled source execution with framework stubs; not project typecheck, Next build, HTTP metadata rendering or browser verification.',withoutBodyCover:legacy.map(x=>({slug:x.slug,title:x.title})),socialCardsSha256,sourceReady:true};
   console.log(JSON.stringify(report, null, 2));
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});

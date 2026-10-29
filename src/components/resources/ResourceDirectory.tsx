@@ -707,7 +707,7 @@ export function ResourceDirectory({
 
       {/* Review date footer note */}
       <div className="mt-8 text-center text-xs text-gray-500">
-        All {officialResources.length} official publisher sources verified on {sourceReviewDate}.
+        All {officialResources.length} official publisher sources reviewed on {sourceReviewDate}.
         Check current revisions, destination customs rules, and qualified advice before entering commercial contracts.
       </div>
     </div>

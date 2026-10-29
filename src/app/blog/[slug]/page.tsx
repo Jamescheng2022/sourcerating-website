@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, ShieldAlert } from "lucide-react";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPost } from "@/data/blog";
+import { blogSocialCards } from "@/data/blog-social-cards";
 import { siteConfig } from "@/data/site-config";
 import { TrackedLink } from "@/components/ui/TrackedLink";
 import { generatePageMetadata } from "@/lib/metadata";
@@ -16,17 +17,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) return { title: "Guide not found" };
+  const card = blogSocialCards[slug];
   return generatePageMetadata({
     title: post.seoTitle ?? post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
-    ogImage: post.coverImage
-      ? (/\.(?:jpe?g|png)$/i.test(post.coverImage.src)
-          ? post.coverImage
-          : { src: post.coverImage.src.replace(/\.(?:svg|avif)$/i, ".png"), width: 1200, height: 630, alt: post.coverImage.alt })
-      : (slug === "chinese-steel-standard-edition-implementation-translation-dates"
-          ? { src: "/images/blog/cards/chinese-steel-standard-edition-implementation-translation-dates-social-card.png", width: 1200, height: 630, alt: post.title }
-          : undefined),
+    ogImage: card
+      ? { src: card.src, width: card.width, height: card.height, alt: card.alt }
+      : undefined,
   });
 }
 
