@@ -324,8 +324,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </aside>
 
-        (
-        {/* Resource and Consultation Pathway */}
+        {!post.articleBody ? (
         <div className="mt-12 rounded-md bg-brand-950 p-7 text-white sm:p-9">
           <h2 className="text-2xl font-bold">{post.ctaHeading ?? "Want this applied to one real supplier?"}</h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-gray-200">
@@ -350,7 +349,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             </TrackedLink>
           </div>
         </div>
-        )
+        ) : null}
       </div>
     </article>
   );

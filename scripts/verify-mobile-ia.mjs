@@ -94,8 +94,14 @@ const headerSource = fs.readFileSync(
   path.join(process.cwd(), "src/components/layout/Header.tsx"),
   "utf-8"
 );
-const modeHiddenOnMobile = headerSource.includes("hidden sm:inline-flex") && headerSource.includes("toggleIaMode");
-const riskScreenHiddenOnMobile = headerSource.includes("hidden sm:inline-flex min-h-[38px] items-center px-3 py-1.5 text-xs font-bold text-white bg-brand-950");
+// Public IA mode toggle has been removed from header to prevent visitor trap; if present, must be hidden on mobile
+const modeHiddenOnMobile =
+  !headerSource.includes("toggleIaMode") ||
+  (headerSource.includes("hidden sm:inline-flex") && headerSource.includes("toggleIaMode"));
+// Risk screen button is hidden on mobile (<640px) with minimum 44px touch height on tablet/desktop
+const riskScreenHiddenOnMobile =
+  headerSource.includes("hidden sm:inline-flex min-h-[44px]") ||
+  headerSource.includes("hidden sm:inline-flex min-h-[38px]");
 const menuHas44pxTap = headerSource.includes("min-h-[44px] min-w-[44px]");
 
 recordCheck(

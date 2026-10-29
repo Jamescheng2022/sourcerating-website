@@ -7,6 +7,7 @@ export const metadata = generatePageMetadata({
   description:
     "Comprehensive comparison of Direction A (Trade Directory & Workstation) vs Direction B (Intelligence Journal & Decision Brief) for sourcerating.com mobile redesign.",
   path: "/ia-proposal",
+  noIndex: true,
 });
 
 export default function IaProposalPage() {

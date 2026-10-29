@@ -79,7 +79,7 @@ export default function AppPage() {
               </strong>{" "}
               The SourceRating mobile application is currently under private
               alpha development and closed field testing. It is not currently
-              downloadable from the iOS App Store or Google Play. Public download is not currently active and waitlist registration is paused. Real-time factory verification needs are serviced through our free resources and on-ground engineering teams below.
+              downloadable from the iOS App Store or Google Play. Public download is not currently active and waitlist registration is paused. Explore our free web resources and published inspection guides below.
             </div>
           </div>
         </div>

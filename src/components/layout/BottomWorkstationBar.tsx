@@ -18,8 +18,13 @@ export function BottomWorkstationBar() {
   const { iaMode } = useMobileIa();
   const pathname = usePathname();
 
-  // In Direction B (Editorial), the bottom dock is hidden to keep the editorial reading canvas clean
-  if (iaMode !== "directory") {
+  // Do not render bottom workstation dock on long-form article reading pages or private pages
+  if (pathname.startsWith("/blog/") || pathname.startsWith("/admin") || pathname.startsWith("/jbxz")) {
+    return null;
+  }
+
+  // On /ia-proposal, hide bottom dock when evaluating Direction B (Editorial canvas)
+  if (pathname === "/ia-proposal" && iaMode === "editorial") {
     return null;
   }
 

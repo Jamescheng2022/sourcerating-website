@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useTransition } from "react";
+import { useState, useMemo, useEffect, useCallback, useTransition } from "react";
 import {
   Search,
   X,
@@ -16,6 +16,7 @@ import {
   Globe,
   Calendar,
   Compass,
+  Factory,
 } from "lucide-react";
 import {
   officialResources,
@@ -31,38 +32,76 @@ interface ResourceDirectoryProps {
 }
 
 const destinationOptions = [
-  { id: "All", label: "All Destinations (全部目的地)" },
-  { id: "EU", label: "EU / Europe (欧洲)" },
-  { id: "US", label: "US / North America (美国)" },
-  { id: "UK", label: "United Kingdom (英国)" },
-  { id: "Global", label: "Global / China (全球/中国)" },
+  { id: "All", label: "All Destinations (全部目的地)", shortLabel: "All Destinations" },
+  { id: "EU", label: "EU / Europe (欧洲)", shortLabel: "EU / Europe" },
+  { id: "US", label: "United States (美国)", shortLabel: "United States" },
+  { id: "UK", label: "United Kingdom (英国)", shortLabel: "United Kingdom" },
+  { id: "Global", label: "Global / Cross-Border (全球与跨国)", shortLabel: "Global / Cross-Border" },
+] as const;
+
+const sectorOptions = [
+  { id: "All", label: "All Sectors (全部行业)", shortLabel: "All Sectors" },
+  { id: "steel", label: "Steel & Metallurgy (钢铁与金属结构)", shortLabel: "Steel & Metals" },
+  { id: "manufacturing", label: "Industrial & Manufacturing (通用工业与装备)", shortLabel: "Industrial & Mfg" },
+  { id: "logistics", label: "Logistics & Packaging (物流与木质包装)", shortLabel: "Logistics & Packaging" },
+  { id: "compliance", label: "Trade Compliance (贸易合规与主体审查)", shortLabel: "Trade Compliance" },
 ] as const;
 
 const stageOptions = [
-  { id: "All", label: "All Stages (全部阶段)" },
-  { id: "deposit", label: "Pre-Deposit (付定金前)" },
-  { id: "technical", label: "Technical & CBAM (技术核验与碳关税)" },
-  { id: "cost", label: "Landed Cost & Tariffs (到岸成本与关税)" },
-  { id: "shipment", label: "Shipping & Packing (出货交接与包装)" },
-  { id: "screening", label: "Counterparty Screening (主体审查)" },
+  { id: "All", label: "All Stages (全部阶段)", shortLabel: "All Stages" },
+  { id: "deposit", label: "Pre-Deposit & RFQ (付定金前与询价)", shortLabel: "Pre-Deposit & RFQ" },
+  { id: "technical", label: "Technical & Emissions (技术核验与碳数据)", shortLabel: "Technical & Emissions" },
+  { id: "cost", label: "Landed Cost & Tariffs (到岸成本与关税核算)", shortLabel: "Cost & Tariffs" },
+  { id: "shipment", label: "Pre-Shipment & Packaging (出货交接与包装)", shortLabel: "Pre-Shipment & Pkg" },
+  { id: "screening", label: "Counterparty Screening (交易对手背景审查)", shortLabel: "Counterparty Screening" },
 ] as const;
 
 function matchesDestination(resRegion: string, dest: string): boolean {
   if (dest === "All") return true;
-  if (dest === "EU") return resRegion.includes("EU");
-  if (dest === "US") return resRegion.includes("United States") || resRegion.includes("US");
-  if (dest === "UK") return resRegion.includes("United Kingdom") || resRegion.includes("UK");
-  if (dest === "Global") return resRegion.includes("Global") || resRegion.includes("China") || resRegion.includes("Cross-border");
+  const r = resRegion.toLowerCase();
+  if (dest === "EU") return r.includes("eu");
+  if (dest === "US") return r.includes("united states") || r.includes("us ") || r.includes("(us") || r.includes("us export");
+  if (dest === "UK") return r.includes("united kingdom") || r.includes("uk");
+  if (dest === "Global") return r.includes("global") || r.includes("cross-border") || r.includes("china");
+  return true;
+}
+
+function matchesSector(res: ProcurementResource, sectorId: string): boolean {
+  if (sectorId === "All") return true;
+  const searchable = `${res.category} ${res.title} ${res.chinese} ${res.summary} ${res.summaryEn}`.toLowerCase();
+  if (sectorId === "steel") {
+    return res.category === "CBAM / steel" || searchable.includes("steel") || searchable.includes("iron") || searchable.includes("cbam") || searchable.includes("钢");
+  }
+  if (sectorId === "logistics") {
+    return res.category === "Shipping documents" || searchable.includes("packaging") || searchable.includes("wood") || searchable.includes("ispm") || searchable.includes("shipping") || searchable.includes("container") || searchable.includes("vgm") || searchable.includes("包装") || searchable.includes("运输");
+  }
+  if (sectorId === "compliance") {
+    return res.category === "Restricted-party checks" || searchable.includes("screening") || searchable.includes("sanction") || searchable.includes("restricted") || searchable.includes("受限") || searchable.includes("审查");
+  }
+  if (sectorId === "manufacturing") {
+    return res.category === "Supplier checks" || res.category === "Tariffs & origin" || searchable.includes("tariff") || searchable.includes("customs") || searchable.includes("hts") || searchable.includes("taric") || searchable.includes("playbook");
+  }
   return true;
 }
 
 function matchesStage(res: ProcurementResource, stageId: string): boolean {
   if (stageId === "All") return true;
-  if (stageId === "deposit") return res.id === "SR-01" || res.id === "DO-03";
-  if (stageId === "technical") return res.id === "CB-01" || res.id === "CB-02" || res.id === "CB-03";
-  if (stageId === "cost") return res.id === "CB-04" || res.id === "TR-01" || res.id === "TR-02" || res.id === "TR-03" || res.id === "TR-04" || res.id === "TR-05";
-  if (stageId === "shipment") return res.id === "DO-01" || res.id === "DO-02";
-  if (stageId === "screening") return res.id === "CO-01";
+  const text = `${res.stage} ${res.stageZh}`.toLowerCase();
+  if (stageId === "deposit") {
+    return text.includes("deposit") || text.includes("rfq") || text.includes("定金") || text.includes("询价") || text.includes("合同");
+  }
+  if (stageId === "technical") {
+    return text.includes("technical") || text.includes("emissions") || text.includes("exchange") || text.includes("技术") || text.includes("碳数据") || text.includes("数据交换");
+  }
+  if (stageId === "cost") {
+    return text.includes("cost") || text.includes("tariff") || text.includes("compliance") || text.includes("classification") || text.includes("成本") || text.includes("关税") || text.includes("税则");
+  }
+  if (stageId === "shipment") {
+    return text.includes("shipment") || text.includes("packaging") || text.includes("出货") || text.includes("包装");
+  }
+  if (stageId === "screening") {
+    return text.includes("counterparty") || text.includes("screening") || text.includes("对手") || text.includes("审查");
+  }
   return true;
 }
 
@@ -74,18 +113,113 @@ export function ResourceDirectory({
   const [selectedCategory, setSelectedCategory] =
     useState<ResourceCategory>(initialCategory);
   const [selectedRegion, setSelectedRegion] = useState<string>("All");
+  const [selectedSector, setSelectedSector] = useState<string>("All");
   const [selectedStage, setSelectedStage] = useState<string>("All");
   const [isDense, setIsDense] = useState(defaultDense);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [, startTransition] = useTransition();
 
-  // Multi-dimensional filter logic: Category + Destination + Stage + Search Query
+  // URL state synchronization helper
+  const syncUrl = useCallback(
+    (q: string, cat: string, dest: string, sec: string, stg: string) => {
+      if (typeof window === "undefined") return;
+      try {
+        const url = new URL(window.location.href);
+        if (q.trim()) url.searchParams.set("q", q.trim());
+        else url.searchParams.delete("q");
+
+        if (cat !== "All") url.searchParams.set("category", cat);
+        else url.searchParams.delete("category");
+
+        if (dest !== "All") url.searchParams.set("dest", dest);
+        else url.searchParams.delete("dest");
+
+        if (sec !== "All") url.searchParams.set("sector", sec);
+        else url.searchParams.delete("sector");
+
+        if (stg !== "All") url.searchParams.set("stage", stg);
+        else url.searchParams.delete("stage");
+
+        window.history.replaceState(null, "", url.toString());
+      } catch {
+        // history API blocked
+      }
+    },
+    []
+  );
+
+  // Initialize and synchronize filters from URL on client mount and browser popstate
+  useEffect(() => {
+    const applyUrlParams = () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const urlQ = params.get("q") ?? "";
+        const urlCat = params.get("category") ?? "All";
+        const urlDest = params.get("dest") ?? "All";
+        const urlSec = params.get("sector") ?? "All";
+        const urlStg = params.get("stage") ?? "All";
+
+        if (urlQ) setSearchQuery(urlQ);
+        if (resourceCategories.includes(urlCat as ResourceCategory)) {
+          setSelectedCategory(urlCat as ResourceCategory);
+        }
+        if (destinationOptions.some((d) => d.id === urlDest)) {
+          setSelectedRegion(urlDest);
+        }
+        if (sectorOptions.some((s) => s.id === urlSec)) {
+          setSelectedSector(urlSec);
+        }
+        if (stageOptions.some((s) => s.id === urlStg)) {
+          setSelectedStage(urlStg);
+        }
+      } catch {
+        // ignore
+      }
+    };
+
+    window.addEventListener("popstate", applyUrlParams);
+    const timer = setTimeout(applyUrlParams, 0);
+    return () => {
+      window.removeEventListener("popstate", applyUrlParams);
+      clearTimeout(timer);
+    };
+  }, []);
+
+  const handleSearchChange = (val: string) => {
+    setSearchQuery(val);
+    syncUrl(val, selectedCategory, selectedRegion, selectedSector, selectedStage);
+  };
+
+  const handleCategoryChange = (cat: ResourceCategory) => {
+    setSelectedCategory(cat);
+    syncUrl(searchQuery, cat, selectedRegion, selectedSector, selectedStage);
+  };
+
+  const handleRegionChange = (dest: string) => {
+    setSelectedRegion(dest);
+    syncUrl(searchQuery, selectedCategory, dest, selectedSector, selectedStage);
+  };
+
+  const handleSectorChange = (sec: string) => {
+    setSelectedSector(sec);
+    syncUrl(searchQuery, selectedCategory, selectedRegion, sec, selectedStage);
+  };
+
+  const handleStageChange = (stg: string) => {
+    setSelectedStage(stg);
+    syncUrl(searchQuery, selectedCategory, selectedRegion, selectedSector, stg);
+  };
+
+  // Multi-dimensional filter logic: Category + Sector + Destination + Stage + Search Query
   const filteredResources = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return officialResources.filter((res) => {
       const matchesCat =
         selectedCategory === "All" || res.category === selectedCategory;
       if (!matchesCat) return false;
+
+      const matchesSec = matchesSector(res, selectedSector);
+      if (!matchesSec) return false;
 
       const matchesDest = matchesDestination(res.region, selectedRegion);
       if (!matchesDest) return false;
@@ -114,7 +248,7 @@ export function ResourceDirectory({
 
       return searchableText.includes(q);
     });
-  }, [searchQuery, selectedCategory, selectedRegion, selectedStage]);
+  }, [searchQuery, selectedCategory, selectedSector, selectedRegion, selectedStage]);
 
   const handleCopyLink = (res: ProcurementResource) => {
     if (navigator?.clipboard) {
@@ -129,7 +263,9 @@ export function ResourceDirectory({
       setSearchQuery("");
       setSelectedCategory("All");
       setSelectedRegion("All");
+      setSelectedSector("All");
       setSelectedStage("All");
+      syncUrl("", "All", "All", "All", "All");
     });
   };
 
@@ -146,7 +282,7 @@ export function ResourceDirectory({
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search by keyword, task, CBAM, HS code, or standard..."
               className="block w-full min-h-[48px] rounded-lg border border-gray-300 bg-gray-50 py-3 pl-11 pr-11 text-base text-gray-900 placeholder:text-gray-400 focus:border-brand-600 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-600/20 sm:text-sm"
               aria-label="Search resources"
@@ -154,7 +290,7 @@ export function ResourceDirectory({
             {searchQuery && (
               <button
                 type="button"
-                onClick={() => setSearchQuery("")}
+                onClick={() => handleSearchChange("")}
                 className="absolute inset-y-0 right-0 flex min-h-[48px] min-w-[44px] items-center justify-center p-2 text-gray-400 hover:text-gray-700 focus:outline-none"
                 aria-label="Clear search query"
               >
@@ -229,7 +365,7 @@ export function ResourceDirectory({
                 <button
                   key={cat}
                   type="button"
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => handleCategoryChange(cat)}
                   className={`inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-brand-600/30 ${
                     isSelected
                       ? "bg-brand-900 text-white shadow-sm"
@@ -252,8 +388,28 @@ export function ResourceDirectory({
           </div>
         </div>
 
-        {/* Secondary Filters: Destination & Stage */}
-        <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-gray-100 pt-3">
+        {/* Secondary Multi-Dimensional Filters: Sector, Destination & Stage */}
+        <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-gray-100 pt-3">
+          {/* Industry / Sector Filter */}
+          <div>
+            <label htmlFor="sector-select" className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1.5">
+              <Factory className="h-3.5 w-3.5 text-gray-400" />
+              <span>Industry Sector (行业筛选):</span>
+            </label>
+            <select
+              id="sector-select"
+              value={selectedSector}
+              onChange={(e) => handleSectorChange(e.target.value)}
+              className="block w-full min-h-[44px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-800 shadow-xs focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
+            >
+              {sectorOptions.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Destination / Market Filter */}
           <div>
             <label htmlFor="destination-select" className="block text-xs font-medium text-gray-600 mb-1 flex items-center gap-1.5">
@@ -263,7 +419,7 @@ export function ResourceDirectory({
             <select
               id="destination-select"
               value={selectedRegion}
-              onChange={(e) => setSelectedRegion(e.target.value)}
+              onChange={(e) => handleRegionChange(e.target.value)}
               className="block w-full min-h-[44px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-800 shadow-xs focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
             >
               {destinationOptions.map((opt) => (
@@ -283,7 +439,7 @@ export function ResourceDirectory({
             <select
               id="stage-select"
               value={selectedStage}
-              onChange={(e) => setSelectedStage(e.target.value)}
+              onChange={(e) => handleStageChange(e.target.value)}
               className="block w-full min-h-[44px] rounded-lg border border-gray-300 bg-white px-3 py-2 text-xs text-gray-800 shadow-xs focus:border-brand-600 focus:outline-none focus:ring-1 focus:ring-brand-600"
             >
               {stageOptions.map((opt) => (
@@ -297,7 +453,7 @@ export function ResourceDirectory({
       </div>
 
       {/* Active filters summary */}
-      {(searchQuery || selectedCategory !== "All" || selectedRegion !== "All" || selectedStage !== "All") && (
+      {(searchQuery || selectedCategory !== "All" || selectedSector !== "All" || selectedRegion !== "All" || selectedStage !== "All") && (
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-lg bg-brand-50/70 px-4 py-2.5 text-xs text-brand-900">
           <div className="flex flex-wrap items-center gap-2">
             <ListFilter className="h-3.5 w-3.5 text-brand-700" />
@@ -307,14 +463,19 @@ export function ResourceDirectory({
                 Category: {selectedCategory}
               </span>
             )}
+            {selectedSector !== "All" && (
+              <span className="inline-flex items-center gap-1 rounded bg-white px-2 py-0.5 font-semibold shadow-xs">
+                Sector: {sectorOptions.find((s) => s.id === selectedSector)?.shortLabel}
+              </span>
+            )}
             {selectedRegion !== "All" && (
               <span className="inline-flex items-center gap-1 rounded bg-white px-2 py-0.5 font-semibold shadow-xs">
-                Destination: {destinationOptions.find((d) => d.id === selectedRegion)?.label.split(" ")[0]}
+                Destination: {destinationOptions.find((d) => d.id === selectedRegion)?.shortLabel}
               </span>
             )}
             {selectedStage !== "All" && (
               <span className="inline-flex items-center gap-1 rounded bg-white px-2 py-0.5 font-semibold shadow-xs">
-                Stage: {stageOptions.find((s) => s.id === selectedStage)?.label.split(" ")[0]}
+                Stage: {stageOptions.find((s) => s.id === selectedStage)?.shortLabel}
               </span>
             )}
             {searchQuery && (
@@ -378,7 +539,7 @@ export function ResourceDirectory({
                       <span className="text-gray-400">· {res.publisher}</span>
                       <span className="inline-flex items-center gap-1 text-gray-400">
                         <Calendar className="h-3 w-3" />
-                        Audited: {res.lastReviewDate}
+                        Reviewed: {res.lastReviewDate}
                       </span>
                     </div>
 
@@ -483,7 +644,7 @@ export function ResourceDirectory({
                       <span className="hidden sm:inline text-gray-300">·</span>
                       <span className="hidden sm:inline-flex items-center gap-1 text-gray-400">
                         <Calendar className="h-3 w-3" />
-                        {res.lastReviewDate}
+                        Reviewed: {res.lastReviewDate}
                       </span>
                     </div>
                   </div>
@@ -579,9 +740,8 @@ export function ResourceDirectory({
 
       {/* Review date footer note */}
       <div className="mt-8 text-center text-xs text-gray-500">
-        All {officialResources.length} sources independently audited and
-        verified on {sourceReviewDate}. Terms and official file versions must be
-        reviewed prior to real commercial transactions.
+        All {officialResources.length} official publisher sources verified on {sourceReviewDate}.
+        Check current revisions, destination customs rules, and qualified advice before entering commercial contracts.
       </div>
     </div>
   );

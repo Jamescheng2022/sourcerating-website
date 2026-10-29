@@ -27,6 +27,8 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { iaMode } = useMobileIa();
+  const isProposal = pathname === "/ia-proposal";
+  const effectiveMode = isProposal ? iaMode : "directory";
 
   // Highlight key nav items for desktop
   const desktopNavItems = [
@@ -118,7 +120,7 @@ export function Header() {
         {mobileMenuOpen && (
           <div className="xl:hidden border-t border-gray-100 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
 
-            {iaMode === "directory" ? (
+            {effectiveMode === "directory" ? (
               /* ======================================================== */
               /* DIRECTION A: DENSE TRADE DIRECTORY GRID (ThomasNet Style) */
               /* ======================================================== */

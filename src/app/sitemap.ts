@@ -21,7 +21,6 @@ const staticRoutes = [
   ["/contact", "monthly", 0.9],
   ["/blog", "weekly", 0.7],
   ["/faq", "monthly", 0.7],
-  ["/ia-proposal", "monthly", 0.7],
   ["/privacy", "yearly", 0.3],
   ["/terms", "yearly", 0.3],
 ] as const;
