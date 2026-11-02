@@ -8,6 +8,9 @@ on:
       - '.github/workflows/source-rating-editorial-preflight.yml'
       - 'docs/editorial/**'
       - 'scripts/check-editorial-publication.mjs'
+      - 'scripts/cdp-capture-harness.mjs'
+      - 'scripts/test-cdp-harness-static.mjs'
+      - 'scripts/validate-ci-bundle.mjs'
       - 'src/content/blog/**'
       - 'src/data/blog.ts'
       - 'src/app/blog/**'
@@ -26,20 +29,289 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+
+      - name: Initialize early evidence and status receipt
+        id: early_evidence
+        run: |
+          mkdir -p docs/editorial/evidence/runs
+          cat <<RECEIPT > docs/editorial/evidence/runs/job-status-receipt.json
+          {
+            "status": "INITIALIZED",
+            "headSha": "${{ github.event.pull_request.head.sha || github.sha }}",
+            "baseSha": "${{ github.event.pull_request.base.sha || 'origin/main' }}",
+            "runId": "${{ github.run_id }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          RECEIPT
+
+      - name: Set up Node.js
+        id: setup_node
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
+
       - name: Install locked dependencies
+        id: npm_ci
         run: npm ci
+
+      - name: Verify sharp availability and full-pixel decode from locked npm ci
+        id: verify_sharp
+        run: |
+          node -e "
+            const sharp = require('sharp');
+            console.log('Sharp version loaded from lockfile:', sharp.version || '0.35.3');
+            const semver = require('sharp/package.json').version;
+            if (semver !== '0.35.3') {
+              console.error('Expected sharp 0.35.3 from lockfile, found: ' + semver);
+              process.exit(1);
+            }
+            sharp({ create: { width: 1, height: 1, channels: 3, background: { r: 0, g: 0, b: 0 } } })
+              .png()
+              .toBuffer()
+              .then(b => sharp(b).raw().toBuffer())
+              .then(() => console.log('Sharp full-pixel decode verified cleanly.'));
+          "
+
       - name: Deterministic publication preflight for all registered articles
+        id: check_pub
         run: npm run check:publication
+
       - name: Regression-test stale publication detection
+        id: test_pub
         run: npm run test:publication
+
       - name: Preserve pinned legacy blog and cover regressions
+        id: legacy_cover
         run: node scripts/verify-blog-cover.mjs
+
+      - name: Run deterministic offline CDP harness verification suite
+        id: offline_harness
+        run: node scripts/test-cdp-harness-static.mjs
+
       - name: Build Next.js website
+        id: build_next
         run: npm run build
+
+      - name: Run headless CDP capture against local production server
+        id: capture_harness
+        run: |
+          set -euo pipefail
+
+          # 1. Verify Google Chrome availability on runner
+          CHROME_EXEC=""
+          if command -v google-chrome-stable >/dev/null 2>&1; then
+            CHROME_EXEC="$(command -v google-chrome-stable)"
+          elif command -v google-chrome >/dev/null 2>&1; then
+            CHROME_EXEC="$(command -v google-chrome)"
+          elif command -v chromium-browser >/dev/null 2>&1; then
+            CHROME_EXEC="$(command -v chromium-browser)"
+          elif command -v chromium >/dev/null 2>&1; then
+            CHROME_EXEC="$(command -v chromium)"
+          else
+            echo "::error::Google Chrome or Chromium not found on runner PATH."
+            mkdir -p docs/editorial/evidence/runs
+            cat <<FAIL_RECEIPT > docs/editorial/evidence/runs/chrome-failure-receipt.json
+          {
+            "failureStage": "CHROME_BIN_LOOKUP",
+            "error": "Google Chrome or Chromium binary not found on runner PATH",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          FAIL_RECEIPT
+            exit 1
+          fi
+          echo "Verified Chrome executable: $CHROME_EXEC"
+          export CHROME_BIN="$CHROME_EXEC"
+
+          # 2. Start owned localhost production Next.js server directly
+          echo "Starting local Next.js production server directly on port 3000..."
+          node node_modules/next/dist/bin/next start --hostname 127.0.0.1 -p 3000 > next-server.log 2>&1 &
+          SERVER_PID=$!
+          echo "Started Next.js server with PID $SERVER_PID"
+
+          # Robust server cleanup handler: disables recursion, bounded wait, escalation, reap-after-exit, preserves exit code
+          cleanup_server() {
+            local orig_rc=$?
+            trap - EXIT
+            echo "Initiating server cleanup (PID ${SERVER_PID:-none}, original exit code: $orig_rc)..."
+            local cleanup_failed=0
+            if [ -n "${SERVER_PID:-}" ] && kill -0 "$SERVER_PID" 2>/dev/null; then
+              kill -TERM "$SERVER_PID" 2>/dev/null || true
+              local waited=0
+              while kill -0 "$SERVER_PID" 2>/dev/null && [ "$waited" -lt 5 ]; do
+                sleep 1
+                waited=$((waited + 1))
+              done
+
+              if kill -0 "$SERVER_PID" 2>/dev/null; then
+                echo "Server did not exit after 5s graceful wait, sending SIGKILL..."
+                kill -KILL "$SERVER_PID" 2>/dev/null || true
+                local kill_waited=0
+                while kill -0 "$SERVER_PID" 2>/dev/null && [ "$kill_waited" -lt 2 ]; do
+                  sleep 1
+                  kill_waited=$((kill_waited + 1))
+                done
+              fi
+
+              # Never wait on a live PID: if still alive after SIGKILL, fail immediately without wait
+              if kill -0 "$SERVER_PID" 2>/dev/null; then
+                echo "::error::Failed to terminate Next.js server process $SERVER_PID (still alive after SIGKILL)"
+                cleanup_failed=1
+                mkdir -p docs/editorial/evidence/runs
+                cat <<CLEANUP_FAIL > docs/editorial/evidence/runs/cleanup-failure-receipt.json
+          {
+            "status": "CLEANUP_FAILURE",
+            "serverPid": $SERVER_PID,
+            "serverAliveAfterKill": true,
+            "originalExitCode": $orig_rc,
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          CLEANUP_FAIL
+              else
+                # Only reap after confirmed exit
+                wait "$SERVER_PID" 2>/dev/null || true
+                echo "Verified Next.js server process $SERVER_PID exited cleanly."
+              fi
+            fi
+
+            if [ "$cleanup_failed" -ne 0 ]; then
+              exit 1
+            fi
+            exit "$orig_rc"
+          }
+          trap cleanup_server EXIT
+
+          # 3. Wall-clock 30-second route readiness deadline (date +%s) with dynamic budget-capped curl
+          echo "Awaiting route readiness at http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance (deadline: 30s)..."
+          START_TIME=$(date +%s)
+          DEADLINE=$((START_TIME + 30))
+          READY=0
+          ATTEMPT=0
+
+          while true; do
+            NOW=$(date +%s)
+            REMAINING=$((DEADLINE - NOW))
+            if [ "$REMAINING" -le 0 ]; then
+              break
+            fi
+            ATTEMPT=$((ATTEMPT + 1))
+            CONN_TIMEOUT=2
+            [ "$CONN_TIMEOUT" -gt "$REMAINING" ] && CONN_TIMEOUT="$REMAINING"
+            MAX_TIMEOUT=5
+            [ "$MAX_TIMEOUT" -gt "$REMAINING" ] && MAX_TIMEOUT="$REMAINING"
+
+            if curl -s -f -o /dev/null --connect-timeout "$CONN_TIMEOUT" --max-time "$MAX_TIMEOUT" "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance"; then
+              ELAPSED=$(( $(date +%s) - START_TIME ))
+              echo "Target route is ready (attempt $ATTEMPT, elapsed: ${ELAPSED}s)."
+              READY=1
+              break
+            fi
+            sleep 1
+          done
+
+          if [ "$READY" -ne 1 ]; then
+            ELAPSED=$(( $(date +%s) - START_TIME ))
+            mkdir -p docs/editorial/evidence/runs
+            cat <<RECEIPT > docs/editorial/evidence/runs/workflow-failure-receipt.json
+          {
+            "failureStage": "ROUTE_READINESS_TIMEOUT",
+            "route": "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance",
+            "deadlineSeconds": 30,
+            "elapsedSeconds": $ELAPSED,
+            "attempts": $ATTEMPT,
+            "gitCommitSha": "${{ github.event.pull_request.head.sha || github.sha }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          RECEIPT
+            echo "::error::Target route failed to become ready within ${ELAPSED}s (monotonic 30s deadline exceeded)."
+            cat next-server.log || true
+            exit 1
+          fi
+
+          # 4. Run 4-width reviewed CDP harness
+          echo "Executing CDP capture harness..."
+          HARNESS_STATUS=0
+          node scripts/cdp-capture-harness.mjs || HARNESS_STATUS=$?
+
+          if [ "$HARNESS_STATUS" -ne 0 ]; then
+            mkdir -p docs/editorial/evidence/runs
+            cat <<HARNESS_FAIL > docs/editorial/evidence/runs/harness-failure-receipt.json
+          {
+            "failureStage": "CDP_HARNESS_EXECUTION",
+            "exitCode": $HARNESS_STATUS,
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          HARNESS_FAIL
+            echo "::error::CDP capture harness failed with exit code $HARNESS_STATUS."
+            exit "$HARNESS_STATUS"
+          fi
+
+          # 5. Deterministic Node CI bundle validator (full-pixel decode & safe build-identity)
+          echo "Executing CI bundle validator..."
+          export HEAD_SHA="${{ github.event.pull_request.head.sha || github.sha }}"
+          export BASE_SHA="${{ github.event.pull_request.base.sha || 'origin/main' }}"
+          node scripts/validate-ci-bundle.mjs
+
+          # Copy server log into validated bundle directory
+          RUN_DIR="$(find docs/editorial/evidence/runs -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          if [ -n "$RUN_DIR" ] && [ -d "$RUN_DIR" ]; then
+            cp next-server.log "$RUN_DIR/next-server.log" || true
+          fi
+
+      - name: Finalize job status receipt
+        id: finalize_receipt
+        if: always()
+        run: |
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+            const steps = {
+              checkout: "${{ steps.checkout.outcome }}",
+              early_evidence: "${{ steps.early_evidence.outcome }}",
+              setup_node: "${{ steps.setup_node.outcome }}",
+              npm_ci: "${{ steps.npm_ci.outcome }}",
+              verify_sharp: "${{ steps.verify_sharp.outcome }}",
+              check_pub: "${{ steps.check_pub.outcome }}",
+              test_pub: "${{ steps.test_pub.outcome }}",
+              legacy_cover: "${{ steps.legacy_cover.outcome }}",
+              offline_harness: "${{ steps.offline_harness.outcome }}",
+              build_next: "${{ steps.build_next.outcome }}",
+              capture_harness: "${{ steps.capture_harness.outcome }}"
+            };
+            let failedStage = null;
+            for (const [name, outcome] of Object.entries(steps)) {
+              if (outcome === "failure" || outcome === "cancelled") {
+                failedStage = name;
+                break;
+              }
+            }
+            const runsDir = path.resolve("docs/editorial/evidence/runs");
+            fs.mkdirSync(runsDir, { recursive: true });
+            const receipt = {
+              status: failedStage ? "FAIL" : "PASS",
+              failedStage: failedStage || null,
+              stepOutcomes: steps,
+              headSha: "${{ github.event.pull_request.head.sha || github.sha }}",
+              baseSha: "${{ github.event.pull_request.base.sha || 'origin/main' }}",
+              githubRunId: "${{ github.run_id }}",
+              timestamp: new Date().toISOString()
+            };
+            fs.writeFileSync(path.join(runsDir, "job-status-receipt.json"), JSON.stringify(receipt, null, 2));
+            console.log("Finalized job-status-receipt.json with status: " + receipt.status + (failedStage ? " (failed stage: " + failedStage + ")" : ""));
+          '
+
+      - name: Always upload CDP evidence run bundle and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cdp-evidence-run-bundle-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            docs/editorial/evidence/runs/
+            next-server.log
+          if-no-files-found: error
