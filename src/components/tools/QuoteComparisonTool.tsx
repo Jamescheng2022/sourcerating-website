@@ -48,7 +48,7 @@ const compute = (q: Quote): Computed => {
 const csvSafe = (value: string | number) => {
   let s = String(value);
   // User-entered supplier names/refs may not become spreadsheet formulas.
-  if (/^[=+@\t\r]/.test(s.trimStart())) s = "'" + s;
+  if (/^[=+@\-\t\r]/.test(s.trimStart())) s = "'" + s;
   return '"' + s.replaceAll('"', '""') + '"';
 };
 
