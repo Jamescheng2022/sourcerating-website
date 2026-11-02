@@ -114,6 +114,14 @@ export async function validateCiBundle(options = {}) {
     assert.equal(scrolledDecoded.info.height, expectedScrolledHeight, `${scrolledFileName} pixel height mismatch: expected ${expectedScrolledHeight}, got ${scrolledDecoded.info.height}`);
     assert.ok(typeof metricEntry.scrolledViewportEvidence.scrollPosition?.scrollY === "number", `scrolledViewportEvidence missing scrollY for ${width}px`);
     assert.ok(metricEntry.scrolledViewportEvidence.scrollPosition.scrollY > 0, `scrolledViewportEvidence scrollY must be > 0 at ${width}px`);
+
+    // Verify scrolled screenshot is not blank / solid uniform color
+    const scrolledStats = await sharp(scrolledBuf).stats();
+    const isScrolledBlank = scrolledStats.channels.slice(0, 3).every((c) => c.min === c.max || c.stdev < 1);
+    if (isScrolledBlank) {
+      throw new Error(`Scrolled viewport screenshot ${scrolledFileName} is completely blank (solid uniform color RGB ${scrolledStats.channels.slice(0, 3).map((c) => c.min).join(",")})`);
+    }
+
     screenshotHashes[`scrolled_${width}px`] = sha256(scrolledBuf);
 
     const fileName = `calibration-viewport-${width}px.png`;
@@ -136,6 +144,13 @@ export async function validateCiBundle(options = {}) {
     assert.equal(decoded.info.width, expectedPixelWidth, `${fileName} pixel width mismatch: expected ${expectedPixelWidth}, got ${decoded.info.width}`);
     assert.equal(decoded.info.height, expectedPixelHeight, `${fileName} pixel height mismatch: expected ${expectedPixelHeight} (scrollHeight ${metricEntry.metrics.scrollHeight} * DPR ${DEVICE_SCALE_FACTOR}), got ${decoded.info.height}`);
     assert.equal(manifestEntry.pixelDimensions, `${expectedPixelWidth}x${expectedPixelHeight}`, `Manifest pixelDimensions mismatch for ${width}px`);
+
+    // Verify full-page screenshot is not blank / solid uniform color
+    const fullStats = await sharp(buf).stats();
+    const isFullBlank = fullStats.channels.slice(0, 3).every((c) => c.min === c.max || c.stdev < 1);
+    if (isFullBlank) {
+      throw new Error(`Screenshot ${fileName} is completely blank (solid uniform color RGB ${fullStats.channels.slice(0, 3).map((c) => c.min).join(",")})`);
+    }
 
     screenshotHashes[`${width}px`] = sha256(buf);
     console.log(`[CI Validator] Verified PNG ${fileName}: ${decoded.info.width}x${decoded.info.height} (${buf.length} bytes, SHA256: ${screenshotHashes[`${width}px`].slice(0, 16)}...)`);

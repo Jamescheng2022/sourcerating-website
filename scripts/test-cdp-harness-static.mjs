@@ -50,15 +50,27 @@ console.log("ROUND 4 DETERMINISTIC OFFLINE BEHAVIORAL VERIFICATION SUITE");
 console.log("=================================================================\n");
 
 // Helper: Generates a genuine Sharp PNG buffer
-async function createGenuineSharpPng(width = 640, height = 4900) {
-  return await sharp({
+async function createGenuineSharpPng(width = 640, height = 4900, isBlank = false) {
+  const base = sharp({
     create: {
       width,
       height,
       channels: 4,
       background: { r: 255, g: 255, b: 255, alpha: 1 }
     }
-  }).png().toBuffer();
+  });
+  if (isBlank) {
+    return await base.png().toBuffer();
+  }
+  // Include non-blank pixel content (opaque black square) so standard test PNGs have genuine color variance
+  const blackBox = Buffer.alloc(400);
+  for (let i = 0; i < 400; i += 4) {
+    blackBox[i] = 0;
+    blackBox[i + 1] = 0;
+    blackBox[i + 2] = 0;
+    blackBox[i + 3] = 255;
+  }
+  return await base.composite([{ input: blackBox, raw: { width: 10, height: 10, channels: 4 }, top: 0, left: 0 }]).png().toBuffer();
 }
 
 // Helper: Baseline valid DOM metrics for tests
@@ -460,7 +472,7 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
           reply({ id: msg.id, result: { result: { type: "undefined" } } });
         }
       } else if (msg.method === "Page.captureScreenshot") {
-        const h = msg.params?.clip?.height || 2450;
+        const h = msg.params?.clip?.height || INITIAL_VIEWPORT_HEIGHT;
         const shotPng = await createGenuineSharpPng(currentWidth * 2, h * 2);
         reply({ id: msg.id, result: { data: shotPng.toString("base64") } });
       } else {
@@ -594,7 +606,7 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
         else if (expr.includes("resolveImgUrl")) reply({ id: msg.id, result: { result: { type: "object", value: createValidBaselineMetrics(currentWidth, 2) } } });
         else reply({ id: msg.id, result: { result: { type: "undefined" } } });
       } else if (msg.method === "Page.captureScreenshot") {
-        const h = msg.params?.clip?.height || 2450;
+        const h = msg.params?.clip?.height || INITIAL_VIEWPORT_HEIGHT;
         const shotPng = await createGenuineSharpPng(currentWidth * 2, h * 2);
         reply({ id: msg.id, result: { data: shotPng.toString("base64") } });
       }
@@ -1016,6 +1028,36 @@ async function testCiBundleValidator() {
     assert.ok(missingScrolledErr !== null, "Must fail if scrolled viewport PNG is missing");
     assert.match(missingScrolledErr.message, /Missing representative scrolled viewport screenshot/);
     console.log("  PASS: Missing scrolled viewport PNG strictly fails validation.");
+
+    // 5.6 Negative probe: solid blank representative scrolled viewport PNG
+    const validScrolled390 = await createGenuineSharpPng(390 * DEVICE_SCALE_FACTOR, expectedScrolledHeight);
+    fs.writeFileSync(path.join(testBundleDir, "calibration-scrolled-viewport-390px.png"), validScrolled390);
+
+    const blankScrolledPng = await createGenuineSharpPng(390 * DEVICE_SCALE_FACTOR, expectedScrolledHeight, true);
+    fs.writeFileSync(path.join(testBundleDir, "calibration-scrolled-viewport-390px.png"), blankScrolledPng);
+    let blankScrolledErr = null;
+    try {
+      await validateCiBundle({ bundleDir: testBundleDir });
+    } catch (err) {
+      blankScrolledErr = err;
+    }
+    assert.ok(blankScrolledErr !== null, "Must fail if scrolled viewport PNG is completely blank");
+    assert.match(blankScrolledErr.message, /completely blank/);
+    console.log("  PASS: Solid blank scrolled viewport PNG strictly fails validation.");
+
+    // 5.7 Negative probe: solid blank full-page viewport PNG
+    fs.writeFileSync(path.join(testBundleDir, "calibration-scrolled-viewport-390px.png"), validScrolled390);
+    const blankFullPng = await createGenuineSharpPng(320 * DEVICE_SCALE_FACTOR, expectedPixelHeight, true);
+    fs.writeFileSync(path.join(testBundleDir, "calibration-viewport-320px.png"), blankFullPng);
+    let blankFullErr = null;
+    try {
+      await validateCiBundle({ bundleDir: testBundleDir });
+    } catch (err) {
+      blankFullErr = err;
+    }
+    assert.ok(blankFullErr !== null, "Must fail if full viewport PNG is completely blank");
+    assert.match(blankFullErr.message, /completely blank/);
+    console.log("  PASS: Solid blank full viewport PNG strictly fails validation.");
   } finally {
     fs.rmSync(testBundleDir, { recursive: true, force: true });
   }

@@ -1048,17 +1048,11 @@ export async function runHarness(options = {}) {
         };
       })()`);
 
+      // Capture visible viewport without document-origin clip to avoid off-viewport blank rendering
       const scrolledShotRes = await send("Page.captureScreenshot", {
         format: "png",
         captureBeyondViewport: false,
-        fromSurface: true,
-        clip: {
-          x: 0,
-          y: 0,
-          width,
-          height: INITIAL_VIEWPORT_HEIGHT,
-          scale: 1
-        }
+        fromSurface: true
       });
 
       const scrolledFileName = `calibration-scrolled-viewport-${width}px.png`;
@@ -1072,6 +1066,13 @@ export async function runHarness(options = {}) {
       if (scrolledMeta.width !== expectedScrolledWidth || scrolledMeta.height !== expectedScrolledHeight) {
         throw new Error(
           `Scrolled viewport PNG dimension mismatch at ${width}px: expected ${expectedScrolledWidth}x${expectedScrolledHeight}, got ${scrolledMeta.width}x${scrolledMeta.height}`
+        );
+      }
+      const scrolledStats = await sharp(scrolledBuffer).stats();
+      const isBlankScrolled = scrolledStats.channels.slice(0, 3).every((c) => c.min === c.max || c.stdev < 1);
+      if (isBlankScrolled) {
+        throw new Error(
+          `Scrolled viewport screenshot at ${width}px is blank (solid color RGB ${scrolledStats.channels.slice(0, 3).map((c) => c.min).join(",")}): check capture coordinates/clip`
         );
       }
       await sharp(scrolledBuffer).raw().toBuffer();
