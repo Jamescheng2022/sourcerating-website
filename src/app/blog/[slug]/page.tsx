@@ -311,6 +311,31 @@ export default async function BlogPostPage({ params }: PageProps) {
           </section>
         ) : null}
 
+        {post.slug === "compare-industrial-supplier-quotes-like-for-like" ? (
+          <section className="mt-14 rounded-md border border-emerald-200 bg-[#f2f9f6] p-6 sm:p-8" aria-label="Quote comparison buyer tool">
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">Practical buyer asset</p>
+            <h2 className="mt-3 text-2xl font-bold text-gray-950">Turn quote PDFs into a comparable decision file</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-700">
+              Use a free browser-based cost normalizer and export your own editable CSV.
+              FX, freight, duty, tax and inspection must be entered from your own verified sources;
+              no supplier quote or technical acceptance is assumed. For complex RFQs,
+              a separately scoped paid technical supplier review is also available.
+            </p>
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+              <TrackedLink href="/tools/quote-comparison" eventName="resource_click"
+                eventParams={{ location: "buyer_guide", label: "quote_comparison", guide: post.slug }}
+                className="inline-flex items-center justify-center rounded-md bg-brand-950 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-800">
+                Open free comparison tool <ArrowRight className="ml-2 h-4 w-4" />
+              </TrackedLink>
+              <TrackedLink href="/pricing" eventName="pricing_click"
+                eventParams={{ location: "buyer_guide", label: "technical_review", guide: post.slug }}
+                className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-brand-900 hover:border-brand-700">
+                Paid technical review scope
+              </TrackedLink>
+            </div>
+          </section>
+        ) : null}
+
         <aside className="mt-14 border-y border-gray-200 bg-[#f7f8f5] p-6 sm:p-8">
           <p className="text-sm font-semibold uppercase text-brand-700">About the author</p>
           <h2 className="mt-3 text-xl font-bold text-gray-950">James Cheng</h2>
