@@ -65,11 +65,20 @@ jobs:
         id: verify_sharp
         run: |
           node -e "
+            const fs = require('fs');
+            const lock = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+            const pinnedVersion =
+              (lock.packages && lock.packages['node_modules/sharp'] && lock.packages['node_modules/sharp'].version) ||
+              (lock.dependencies && lock.dependencies['sharp'] && lock.dependencies['sharp'].version);
+            if (!pinnedVersion) {
+              console.error('Missing sharp entry in package-lock.json');
+              process.exit(1);
+            }
             const sharp = require('sharp');
-            console.log('Sharp version loaded from lockfile:', sharp.version || '0.35.3');
-            const semver = require('sharp/package.json').version;
-            if (semver !== '0.35.3') {
-              console.error('Expected sharp 0.35.3 from lockfile, found: ' + semver);
+            const actualVersion = (sharp.versions && sharp.versions.sharp) || sharp.version;
+            console.log('Sharp version from lockfile:', pinnedVersion, 'Loaded runtime version:', actualVersion);
+            if (actualVersion !== pinnedVersion) {
+              console.error('Version mismatch: expected ' + pinnedVersion + ' from lockfile, found ' + actualVersion);
               process.exit(1);
             }
             sharp({ create: { width: 1, height: 1, channels: 3, background: { r: 0, g: 0, b: 0 } } })
