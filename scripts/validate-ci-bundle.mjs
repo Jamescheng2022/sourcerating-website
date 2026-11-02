@@ -13,8 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 
-const TARGET_WIDTHS = [320, 375, 390, 430];
-const DEVICE_SCALE_FACTOR = 2;
+import { TARGET_WIDTHS, INITIAL_VIEWPORT_HEIGHT, DEVICE_SCALE_FACTOR } from "./cdp-capture-harness.mjs";
 const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
 const HISTORIC_REJECTED_HASHES = {
@@ -92,6 +91,30 @@ export async function validateCiBundle(options = {}) {
     const metricEntry = metrics.viewports.find(v => v.widthCssPx === width);
     assert.ok(metricEntry, `Missing metric entry for width ${width}`);
     assert.ok(metricEntry.metrics && typeof metricEntry.metrics.scrollHeight === "number", `Metric entry for ${width}px missing scrollHeight`);
+    assert.equal(metricEntry.metrics.scrollY, 0, `Metric entry for ${width}px scrollY must be 0`);
+    assert.ok(metricEntry.metrics.header, `Metric entry for ${width}px missing header rect`);
+    if (metricEntry.metrics.h1 && typeof metricEntry.metrics.h1.top === "number") {
+      assert.ok(metricEntry.metrics.header.bottom <= metricEntry.metrics.h1.top, `Header bottom (${metricEntry.metrics.header.bottom}px) must not exceed H1 top (${metricEntry.metrics.h1.top}px) at ${width}px`);
+    }
+    // Mandatory representative scrolled viewport PNG for visual review
+    assert.ok(metricEntry.scrolledViewportEvidence, `Metric entry for ${width}px missing scrolledViewportEvidence`);
+    const scrolledFileName = metricEntry.scrolledViewportEvidence.fileName || `calibration-scrolled-viewport-${width}px.png`;
+    const scrolledFilePath = path.join(bundleDir, scrolledFileName);
+    if (!fs.existsSync(scrolledFilePath)) {
+      throw new Error(`Missing representative scrolled viewport screenshot ${scrolledFileName} in bundle ${bundleDir}`);
+    }
+    const scrolledBuf = fs.readFileSync(scrolledFilePath);
+    if (scrolledBuf.length < 8 || !scrolledBuf.subarray(0, 8).equals(PNG_SIGNATURE)) {
+      throw new Error(`Scrolled viewport screenshot ${scrolledFileName} is not a valid PNG (magic signature mismatch)`);
+    }
+    const scrolledDecoded = await sharp(scrolledBuf).raw().toBuffer({ resolveWithObject: true });
+    const expectedScrolledWidth = width * DEVICE_SCALE_FACTOR;
+    const expectedScrolledHeight = INITIAL_VIEWPORT_HEIGHT * DEVICE_SCALE_FACTOR;
+    assert.equal(scrolledDecoded.info.width, expectedScrolledWidth, `${scrolledFileName} pixel width mismatch: expected ${expectedScrolledWidth}, got ${scrolledDecoded.info.width}`);
+    assert.equal(scrolledDecoded.info.height, expectedScrolledHeight, `${scrolledFileName} pixel height mismatch: expected ${expectedScrolledHeight}, got ${scrolledDecoded.info.height}`);
+    assert.ok(typeof metricEntry.scrolledViewportEvidence.scrollPosition?.scrollY === "number", `scrolledViewportEvidence missing scrollY for ${width}px`);
+    assert.ok(metricEntry.scrolledViewportEvidence.scrollPosition.scrollY > 0, `scrolledViewportEvidence scrollY must be > 0 at ${width}px`);
+    screenshotHashes[`scrolled_${width}px`] = sha256(scrolledBuf);
 
     const fileName = `calibration-viewport-${width}px.png`;
     const filePath = path.join(bundleDir, fileName);

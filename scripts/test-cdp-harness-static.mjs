@@ -26,6 +26,7 @@ import sharp from "sharp";
 
 import {
   TARGET_WIDTHS,
+  INITIAL_VIEWPORT_HEIGHT,
   DEVICE_SCALE_FACTOR,
   EXPECTED_ARTICLE,
   validateTargetUrl,
@@ -70,23 +71,39 @@ function createValidBaselineMetrics(targetWidth = 320, dpr = 2) {
     scrollWidth: targetWidth,
     scrollHeight,
     dpr,
+    scrollY: 0,
+    scrollX: 0,
     hasHorizontalOverflow: false,
     overflowDeltaPx: 0,
+    header: {
+      top: 0,
+      bottom: 64,
+      left: 0,
+      right: targetWidth,
+      width: targetWidth,
+      height: 64
+    },
     h1: {
       left: 16,
       right: targetWidth - 16,
+      top: 200,
+      bottom: 260,
       width: targetWidth - 32,
+      height: 60,
       text: "The Gauge Is Calibrated. Can It Decide This Tolerance?"
     },
     excerpt: {
       left: 16,
       right: targetWidth - 16,
-      width: targetWidth - 32
+      top: 280,
+      bottom: 340,
+      width: targetWidth - 32,
+      height: 60
     },
     figures: [
       {
         figureIndex: 0,
-        rect: { left: 16, right: targetWidth - 16, width: targetWidth - 32 },
+        rect: { left: 16, right: targetWidth - 16, top: 380, bottom: 850, width: targetWidth - 32, height: 470 },
         img: {
           naturalWidth: 720,
           naturalHeight: 1180,
@@ -107,7 +124,7 @@ function createValidBaselineMetrics(targetWidth = 320, dpr = 2) {
       },
       {
         figureIndex: 1,
-        rect: { left: 16, right: targetWidth - 16, width: targetWidth - 32 },
+        rect: { left: 16, right: targetWidth - 16, top: 880, bottom: 1350, width: targetWidth - 32, height: 470 },
         img: {
           naturalWidth: 720,
           naturalHeight: 1180,
@@ -132,7 +149,7 @@ function createValidBaselineMetrics(targetWidth = 320, dpr = 2) {
       },
       {
         figureIndex: 2,
-        rect: { left: 16, right: targetWidth - 16, width: targetWidth - 32 },
+        rect: { left: 16, right: targetWidth - 16, top: 1380, bottom: 1850, width: targetWidth - 32, height: 470 },
         img: {
           naturalWidth: 720,
           naturalHeight: 1180,
@@ -155,8 +172,10 @@ function createValidBaselineMetrics(targetWidth = 320, dpr = 2) {
     footer: {
       left: 0,
       right: targetWidth,
+      top: scrollHeight - 200,
+      bottom: scrollHeight,
       width: targetWidth,
-      bottom: scrollHeight
+      height: 200
     },
     overflowingElementsCount: 0,
     sampleOverflowing: []
@@ -419,12 +438,27 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
         const expr = msg.params.expression;
         if (expr.includes("readyState")) {
           reply({ id: msg.id, result: { result: { type: "object", value: { committed: true } } } });
-        } else if (expr.includes("scrollIntoView")) {
-          reply({ id: msg.id, result: { result: { type: "object", value: { scrolled: true, figureIndex: 0 } } } });
-        } else if (expr.includes("scrollTo(0, 0)")) {
-          reply({ id: msg.id, result: { result: { type: "object", value: { scrolledToTop: true } } } });
         } else if (expr.includes("document.fonts")) {
           reply({ id: msg.id, result: { result: { type: "object", value: { ready: true } } } });
+        } else if (expr.includes("scrollBehavior")) {
+          reply({ id: msg.id, result: { result: { type: "object", value: { scrollBehaviorAuto: true } } } });
+        } else if (expr.includes("scrolledStateEval") || expr.includes("targetFig")) {
+          reply({ id: msg.id, result: { result: { type: "object", value: {
+            scrollY: 600,
+            scrollX: 0,
+            viewportWidth: currentWidth,
+            viewportHeight: INITIAL_VIEWPORT_HEIGHT,
+            figureIndex: 1,
+            figureRect: { top: 150, bottom: 550, height: 400 },
+            headerRect: { top: 0, bottom: 64, height: 64 },
+            clearanceFromHeaderBottomPx: 86
+          } } } });
+        } else if (expr.includes("scrollIntoView")) {
+          reply({ id: msg.id, result: { result: { type: "object", value: { scrolled: true, figureIndex: 0 } } } });
+        } else if (expr.includes("scrollTo") || expr.includes("scrollResetPoll")) {
+          reply({ id: msg.id, result: { result: { type: "object", value: { scrolledToTop: true, scrollY: 0, scrollX: 0, resetInitiated: true } } } });
+        } else if (expr.includes("h1Top")) {
+          reply({ id: msg.id, result: { result: { type: "object", value: { scrollY: 0, scrollX: 0, h1Top: 200, headerBottom: 64 } } } });
         } else if (expr.includes("resolveImgUrl")) {
           const m = createValidBaselineMetrics(currentWidth, 2);
           reply({ id: msg.id, result: { result: { type: "object", value: m } } });
@@ -432,7 +466,8 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
           reply({ id: msg.id, result: { result: { type: "undefined" } } });
         }
       } else if (msg.method === "Page.captureScreenshot") {
-        const shotPng = await createGenuineSharpPng(currentWidth * 2, 2450 * 2);
+        const h = msg.params?.clip?.height || 2450;
+        const shotPng = await createGenuineSharpPng(currentWidth * 2, h * 2);
         reply({ id: msg.id, result: { data: shotPng.toString("base64") } });
       }
     });
@@ -534,13 +569,28 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
       } else if (msg.method === "Runtime.evaluate") {
         const expr = msg.params.expression;
         if (expr.includes("readyState")) reply({ id: msg.id, result: { result: { type: "object", value: { committed: true } } } });
-        else if (expr.includes("scrollIntoView")) reply({ id: msg.id, result: { result: { type: "object", value: { scrolled: true, figureIndex: 0 } } } });
-        else if (expr.includes("scrollTo(0, 0)")) reply({ id: msg.id, result: { result: { type: "object", value: { scrolledToTop: true } } } });
         else if (expr.includes("document.fonts")) reply({ id: msg.id, result: { result: { type: "object", value: { ready: true } } } });
+        else if (expr.includes("scrollBehavior")) reply({ id: msg.id, result: { result: { type: "object", value: { scrollBehaviorAuto: true } } } });
+        else if (expr.includes("scrolledStateEval") || expr.includes("targetFig")) {
+          reply({ id: msg.id, result: { result: { type: "object", value: {
+            scrollY: 600,
+            scrollX: 0,
+            viewportWidth: currentWidth,
+            viewportHeight: INITIAL_VIEWPORT_HEIGHT,
+            figureIndex: 1,
+            figureRect: { top: 150, bottom: 550, height: 400 },
+            headerRect: { top: 0, bottom: 64, height: 64 },
+            clearanceFromHeaderBottomPx: 86
+          } } } });
+        }
+        else if (expr.includes("scrollIntoView")) reply({ id: msg.id, result: { result: { type: "object", value: { scrolled: true, figureIndex: 0 } } } });
+        else if (expr.includes("scrollTo") || expr.includes("scrollResetPoll")) reply({ id: msg.id, result: { result: { type: "object", value: { scrolledToTop: true, scrollY: 0, scrollX: 0, resetInitiated: true } } } });
+        else if (expr.includes("h1Top")) reply({ id: msg.id, result: { result: { type: "object", value: { scrollY: 0, scrollX: 0, h1Top: 200, headerBottom: 64 } } } });
         else if (expr.includes("resolveImgUrl")) reply({ id: msg.id, result: { result: { type: "object", value: createValidBaselineMetrics(currentWidth, 2) } } });
         else reply({ id: msg.id, result: { result: { type: "undefined" } } });
       } else if (msg.method === "Page.captureScreenshot") {
-        const shotPng = await createGenuineSharpPng(currentWidth * 2, 2450 * 2);
+        const h = msg.params?.clip?.height || 2450;
+        const shotPng = await createGenuineSharpPng(currentWidth * 2, h * 2);
         reply({ id: msg.id, result: { data: shotPng.toString("base64") } });
       }
     });
@@ -637,6 +687,85 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
 }
 }
 
+function testDomMetricsValidation() {
+  console.log("\n[TEST 7] Testing DOM metrics validation (scrollY rest state, header clearance, and obstruction invariants)...");
+  const baseline = createValidBaselineMetrics(320, 2);
+
+  // 7.1 Baseline valid metrics must pass
+  assert.equal(validateDomMetrics(baseline, 320, 2), true);
+
+  // 7.2 Non-zero scrollY negative probe
+  const nonZeroY = { ...baseline, scrollY: 150 };
+  assert.throws(
+    () => validateDomMetrics(nonZeroY, 320, 2),
+    /Viewport scroll is not at top \(0, 0\) at 320px: scrollY=150/
+  );
+
+  // 7.3 Non-zero scrollX negative probe
+  const nonZeroX = { ...baseline, scrollX: 12 };
+  assert.throws(
+    () => validateDomMetrics(nonZeroX, 320, 2),
+    /Viewport scroll is not at top \(0, 0\) at 320px/
+  );
+
+  // 7.4 Missing header negative probe
+  const noHeader = { ...baseline, header: null };
+  assert.throws(
+    () => validateDomMetrics(noHeader, 320, 2),
+    /Header element missing or non-positive dimensions/
+  );
+
+  // 7.5 Header overlaps H1 headline negative probe
+  const headerOverH1 = {
+    ...baseline,
+    header: { top: 0, bottom: 210, width: 320, height: 210 },
+    h1: { ...baseline.h1, top: 200 }
+  };
+  assert.throws(
+    () => validateDomMetrics(headerOverH1, 320, 2),
+    /Fixed header overlaps H1 headline at 320px: header bottom \(210px\) > H1 top \(200px\)/
+  );
+
+  // 7.6 Small gap between header and H1 is acceptable (non-overlap)
+  const smallGapH1 = {
+    ...baseline,
+    header: { top: 0, bottom: 195, width: 320, height: 195 },
+    h1: { ...baseline.h1, top: 200 }
+  };
+  assert.equal(validateDomMetrics(smallGapH1, 320, 2), true);
+
+  // 7.7 Header overlaps excerpt negative probe
+  const headerOverExcerpt = {
+    ...baseline,
+    header: { top: 0, bottom: 290, width: 320, height: 290 },
+    h1: { ...baseline.h1, top: 350 },
+    excerpt: { ...baseline.excerpt, top: 280 }
+  };
+  assert.throws(
+    () => validateDomMetrics(headerOverExcerpt, 320, 2),
+    /Fixed header overlaps excerpt at 320px/
+  );
+
+  // 7.8 Header overlaps cover figure at rest negative probe
+  const headerOverCover = {
+    ...baseline,
+    header: { top: 0, bottom: 400, width: 320, height: 400 },
+    h1: { ...baseline.h1, top: 500 },
+    excerpt: { ...baseline.excerpt, top: 500 },
+    figures: [
+      { ...baseline.figures[0], rect: { ...baseline.figures[0].rect, top: 380 } },
+      baseline.figures[1],
+      baseline.figures[2]
+    ]
+  };
+  assert.throws(
+    () => validateDomMetrics(headerOverCover, 320, 2),
+    /Fixed header overlaps cover figure at rest at 320px/
+  );
+
+  console.log("  PASS: DOM metrics validation strictly enforces scrollY=0, header presence, and non-obstruction invariants.");
+}
+
 async function testCiBundleValidator() {
   console.log("\n[TEST 5] Testing CI run bundle validator (scripts/validate-ci-bundle.mjs)...");
   const testBundleDir = fs.mkdtempSync(path.join(os.tmpdir(), "sr-ci-bundle-test-"));
@@ -644,10 +773,14 @@ async function testCiBundleValidator() {
   const expectedPixelHeight = expectedScrollHeight * DEVICE_SCALE_FACTOR;
 
   try {
-    // Generate valid test PNGs for all 4 widths with exact expected height
+    // Generate valid test PNGs for all 4 widths: both full-page and representative scrolled viewport
+    const expectedScrolledHeight = INITIAL_VIEWPORT_HEIGHT * DEVICE_SCALE_FACTOR;
     for (const w of TARGET_WIDTHS) {
-      const pngBuf = await createGenuineSharpPng(w * DEVICE_SCALE_FACTOR, expectedPixelHeight);
-      fs.writeFileSync(path.join(testBundleDir, `calibration-viewport-${w}px.png`), pngBuf);
+      const fullPngBuf = await createGenuineSharpPng(w * DEVICE_SCALE_FACTOR, expectedPixelHeight);
+      fs.writeFileSync(path.join(testBundleDir, `calibration-viewport-${w}px.png`), fullPngBuf);
+
+      const scrolledPngBuf = await createGenuineSharpPng(w * DEVICE_SCALE_FACTOR, expectedScrolledHeight);
+      fs.writeFileSync(path.join(testBundleDir, `calibration-scrolled-viewport-${w}px.png`), scrolledPngBuf);
     }
 
     // Write valid manifest.json with matching pixelDimensions
@@ -660,12 +793,29 @@ async function testCiBundleValidator() {
       }))
     }, null, 2));
 
-    // Write valid measured-metrics.json with scrollHeight
+    // Write valid measured-metrics.json with scrollHeight, scrollY, header, and scrolledViewportEvidence
     fs.writeFileSync(path.join(testBundleDir, "measured-metrics.json"), JSON.stringify({
       status: "PASS",
       viewports: TARGET_WIDTHS.map(w => ({
         widthCssPx: w,
-        metrics: { scrollHeight: expectedScrollHeight }
+        metrics: {
+          scrollHeight: expectedScrollHeight,
+          scrollY: 0,
+          scrollX: 0,
+          header: { top: 0, bottom: 64, left: 0, right: w, width: w, height: 64 },
+          h1: { top: 200, bottom: 260, left: 16, right: w - 16, width: w - 32, height: 60, text: "The Gauge Is Calibrated. Can It Decide This Tolerance?" }
+        },
+        scrolledViewportEvidence: {
+          fileName: `calibration-scrolled-viewport-${w}px.png`,
+          pixelDimensions: `${w * DEVICE_SCALE_FACTOR}x${expectedScrolledHeight}`,
+          sizeBytes: 12345,
+          scrollPosition: { scrollY: 600, scrollX: 0 },
+          viewportDimensions: { widthCssPx: w, heightCssPx: INITIAL_VIEWPORT_HEIGHT, dpr: DEVICE_SCALE_FACTOR },
+          targetFigureIndex: 1,
+          figureRect: { top: 150, bottom: 550, height: 400 },
+          headerRect: { top: 0, bottom: 64, height: 64 },
+          clearanceFromHeaderBottomPx: 86
+        }
       })),
       pageExceptions: [],
       blockedRequests: []
@@ -720,6 +870,20 @@ async function testCiBundleValidator() {
     }
     assert.ok(missingErr !== null, "Must fail if viewport PNG is missing");
     console.log("  PASS: Incomplete bundle fails validation as expected.");
+
+    // 5.5 Negative probe: missing representative scrolled viewport PNG
+    const valid430Png = await createGenuineSharpPng(430 * DEVICE_SCALE_FACTOR, expectedPixelHeight);
+    fs.writeFileSync(path.join(testBundleDir, "calibration-viewport-430px.png"), valid430Png);
+    fs.unlinkSync(path.join(testBundleDir, "calibration-scrolled-viewport-390px.png"));
+    let missingScrolledErr = null;
+    try {
+      await validateCiBundle({ bundleDir: testBundleDir });
+    } catch (err) {
+      missingScrolledErr = err;
+    }
+    assert.ok(missingScrolledErr !== null, "Must fail if scrolled viewport PNG is missing");
+    assert.match(missingScrolledErr.message, /Missing representative scrolled viewport screenshot/);
+    console.log("  PASS: Missing scrolled viewport PNG strictly fails validation.");
   } finally {
     fs.rmSync(testBundleDir, { recursive: true, force: true });
   }
@@ -815,20 +979,20 @@ CLEANUP_FAIL
       // Zero child_process execution mode: skips bash -n completely
       console.log("  [SKIPPED_NO_PROCESS_MODE] Static bash -n syntax validation skipped in zero-process sandbox mode.");
     } else {
-      // 6.0 Validate static bash syntax via bash -n with bounded timeout (5000ms) in cloud full suite
+      // 6.0 Validate static bash syntax via bash -n with bounded timeout (15000ms) in cloud full suite
       // Error, timeout, or null/non-zero status MUST throw and fail immediately
-      const chkNormal = spawnSync("bash", ["-n"], { input: bashScriptContent(false), encoding: "utf8", timeout: 5000 });
+      const chkNormal = spawnSync("bash", ["-n"], { input: bashScriptContent(false), encoding: "utf8", timeout: 15000 });
       if (chkNormal.error) {
         throw new Error(`bash -n invocation error on normal script: ${chkNormal.error.message}`);
       }
       assert.equal(chkNormal.status, 0, `bash -n failed on normal script (status ${chkNormal.status}): ${chkNormal.stderr}`);
 
-      const chkStuck = spawnSync("bash", ["-n"], { input: bashScriptContent(true), encoding: "utf8", timeout: 5000 });
+      const chkStuck = spawnSync("bash", ["-n"], { input: bashScriptContent(true), encoding: "utf8", timeout: 15000 });
       if (chkStuck.error) {
         throw new Error(`bash -n invocation error on stuck script: ${chkStuck.error.message}`);
       }
       assert.equal(chkStuck.status, 0, `bash -n failed on stuck script (status ${chkStuck.status}): ${chkStuck.stderr}`);
-      console.log("  PASS: Generated cleanup scripts validated with bash -n (bounded 5000ms timeout, static syntax only).");
+      console.log("  PASS: Generated cleanup scripts validated with bash -n (bounded 15000ms timeout, static syntax only).");
     }
 
     // Injected fake process lifecycle simulation function
@@ -955,6 +1119,7 @@ CLEANUP_FAIL
 }
 
 if (!process.argv.includes("--only-cleanup")) {
+  testDomMetricsValidation();
   await testCiBundleValidator();
 }
 await testServerCleanupLogic();

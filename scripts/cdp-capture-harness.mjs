@@ -244,6 +244,11 @@ export function unpackCdpEvaluateResponse(evalResult) {
  */
 export function buildReadinessScript(targetWidth) {
   return `(async () => {
+    // 0. Mandatory scroll position at rest at top
+    if (window.scrollY !== 0 || window.scrollX !== 0) {
+      return { ready: false, reason: 'scroll_not_at_top', scrollY: window.scrollY, scrollX: window.scrollX };
+    }
+
     // 1. Mandatory fonts check
     if (!document.fonts) {
       return { ready: false, reason: 'fonts_api_missing' };
@@ -330,6 +335,12 @@ export function buildGeometryScript() {
     const dpr = window.devicePixelRatio;
     const pathname = window.location.pathname;
 
+    const scrollY = window.scrollY;
+    const scrollX = window.scrollX;
+
+    const header = document.querySelector('header');
+    const headerRect = header ? header.getBoundingClientRect() : null;
+
     const footer = document.querySelector('footer');
     const footerRect = footer ? footer.getBoundingClientRect() : null;
     const footerBottom = footer ? Math.ceil(footerRect.bottom + window.scrollY) : 0;
@@ -362,7 +373,14 @@ export function buildGeometryScript() {
 
       return {
         figureIndex: idx,
-        rect: { left: Math.round(fR.left), right: Math.round(fR.right), width: Math.round(fR.width) },
+        rect: {
+          left: Math.round(fR.left),
+          right: Math.round(fR.right),
+          top: Math.round(fR.top),
+          bottom: Math.round(fR.bottom),
+          width: Math.round(fR.width),
+          height: Math.round(fR.height)
+        },
         img: {
           naturalWidth: visibleImg ? visibleImg.naturalWidth : 0,
           naturalHeight: visibleImg ? visibleImg.naturalHeight : 0,
@@ -398,25 +416,43 @@ export function buildGeometryScript() {
       scrollWidth,
       scrollHeight,
       dpr,
+      scrollY,
+      scrollX,
       hasHorizontalOverflow: scrollWidth > clientWidth,
       overflowDeltaPx: Math.max(0, scrollWidth - clientWidth),
+      header: headerRect ? {
+        top: Math.round(headerRect.top),
+        bottom: Math.round(headerRect.bottom),
+        left: Math.round(headerRect.left),
+        right: Math.round(headerRect.right),
+        width: Math.round(headerRect.width),
+        height: Math.round(headerRect.height)
+      } : null,
       h1: h1R ? {
         left: Math.round(h1R.left),
         right: Math.round(h1R.right),
+        top: Math.round(h1R.top),
+        bottom: Math.round(h1R.bottom),
         width: Math.round(h1R.width),
+        height: Math.round(h1R.height),
         text: h1 ? h1.textContent.trim() : ''
       } : null,
       excerpt: excerptR ? {
         left: Math.round(excerptR.left),
         right: Math.round(excerptR.right),
-        width: Math.round(excerptR.width)
+        top: Math.round(excerptR.top),
+        bottom: Math.round(excerptR.bottom),
+        width: Math.round(excerptR.width),
+        height: Math.round(excerptR.height)
       } : null,
       figures,
       footer: footerRect ? {
         left: Math.round(footerRect.left),
         right: Math.round(footerRect.right),
+        top: Math.round(footerRect.top),
+        bottom: footerBottom,
         width: Math.round(footerRect.width),
-        bottom: footerBottom
+        height: Math.round(footerRect.height)
       } : null,
       overflowingElementsCount: overflowing.length,
       sampleOverflowing: overflowing.slice(0, 3)
@@ -430,6 +466,18 @@ export function buildGeometryScript() {
 export function validateDomMetrics(metrics, targetWidth, expectedDpr = DEVICE_SCALE_FACTOR) {
   if (!metrics) {
     throw new Error(`DOM metrics object is null or undefined for ${targetWidth}px`);
+  }
+
+  // 1. Assert scroll position at rest at top
+  if (metrics.scrollY !== 0 || metrics.scrollX !== 0) {
+    throw new Error(
+      `Viewport scroll is not at top (0, 0) at ${targetWidth}px: scrollY=${metrics.scrollY}, scrollX=${metrics.scrollX}`
+    );
+  }
+
+  // 2. Assert header presence and non-zero dimensions
+  if (!metrics.header || metrics.header.width <= 0 || metrics.header.height <= 0) {
+    throw new Error(`Header element missing or non-positive dimensions at ${targetWidth}px: ${JSON.stringify(metrics.header)}`);
   }
 
   if (metrics.innerWidth !== targetWidth) {
@@ -466,8 +514,26 @@ export function validateDomMetrics(metrics, targetWidth, expectedDpr = DEVICE_SC
     throw new Error(`H1 left edge (${metrics.h1.left}px) is off-screen left at ${targetWidth}px`);
   }
 
+  // 3. Assert header does not obstruct H1 headline (require non-overlap, smaller gap acceptable)
+  if (typeof metrics.h1?.top === "number" && typeof metrics.header?.bottom === "number") {
+    if (metrics.header.bottom > metrics.h1.top) {
+      throw new Error(
+        `Fixed header overlaps H1 headline at ${targetWidth}px: header bottom (${metrics.header.bottom}px) > H1 top (${metrics.h1.top}px)`
+      );
+    }
+  }
+
   if (metrics.excerpt && metrics.excerpt.right > metrics.clientWidth) {
     throw new Error(`Excerpt right edge (${metrics.excerpt.right}px) exceeds clientWidth (${metrics.clientWidth}px) at ${targetWidth}px`);
+  }
+
+  // 4. Assert header does not obstruct excerpt
+  if (metrics.excerpt && typeof metrics.excerpt.top === "number" && typeof metrics.header.bottom === "number") {
+    if (metrics.header.bottom > metrics.excerpt.top) {
+      throw new Error(
+        `Fixed header overlaps excerpt at ${targetWidth}px: header bottom (${metrics.header.bottom}px) > excerpt top (${metrics.excerpt.top}px)`
+      );
+    }
   }
 
   if (!metrics.footer || metrics.footer.width <= 0) {
@@ -489,6 +555,15 @@ export function validateDomMetrics(metrics, targetWidth, expectedDpr = DEVICE_SC
     }
     if (actual.img.naturalWidth <= 0 || actual.img.naturalHeight <= 0) {
       throw new Error(`Figure ${i} (${expected.role}) image not loaded (naturalWidth=${actual.img.naturalWidth}, naturalHeight=${actual.img.naturalHeight}) at ${targetWidth}px`);
+    }
+
+    // Check cover figure is not obstructed by header at rest
+    if (i === 0 && typeof actual.rect.top === "number" && typeof metrics.header.bottom === "number") {
+      if (metrics.header.bottom > actual.rect.top) {
+        throw new Error(
+          `Fixed header overlaps cover figure at rest at ${targetWidth}px: header bottom (${metrics.header.bottom}px) > cover top (${actual.rect.top}px)`
+        );
+      }
     }
 
     if (targetWidth <= 430) {
@@ -920,6 +995,14 @@ export async function runHarness(options = {}) {
       }
       console.log(`[CDP Harness] Document committed in ${Date.now() - docCommitStart}ms. Triggering lazy image loading...`);
 
+      // Explicitly override CSS smooth scrolling behavior so all scrolls are instantaneous
+      await evaluate(`(() => {
+        if (document.documentElement) document.documentElement.style.scrollBehavior = 'auto';
+        if (document.body) document.body.style.scrollBehavior = 'auto';
+        return { scrollBehaviorAuto: true };
+      })()`);
+
+      // 1. Scroll through figures to trigger lazy image loading
       for (let figIdx = 0; figIdx < 3; figIdx++) {
         await evaluate(`(() => {
           const figures = document.querySelectorAll('figure');
@@ -932,7 +1015,119 @@ export async function runHarness(options = {}) {
         await new Promise((r) => setTimeout(r, 200));
       }
 
-      await evaluate(`(() => { window.scrollTo(0, 0); return { scrolledToTop: true }; })()`);
+      // 2. Capture bounded representative scrolled viewport PNG for visual review (scrolled to Figure 1)
+      console.log(`[CDP Harness] Capturing representative scrolled viewport at ${width}px...`);
+      await evaluate(`(() => {
+        const figures = document.querySelectorAll('figure');
+        const targetFig = figures[1] || figures[0];
+        if (targetFig) {
+          targetFig.scrollIntoView({ behavior: 'instant', block: 'center' });
+        }
+        return { scrollInitiated: true };
+      })()`);
+      await new Promise((r) => setTimeout(r, 150));
+
+      // Sample settled scrolled geometry immediately before capture to bind actual state
+      const scrolledState = await evaluate(`(() => {
+        /* scrolledStateEval */
+        const figures = document.querySelectorAll('figure');
+        const header = document.querySelector('header');
+        const targetFig = figures[1] || figures[0];
+        const fRect = targetFig ? targetFig.getBoundingClientRect() : null;
+        const hRect = header ? header.getBoundingClientRect() : null;
+        return {
+          scrollY: Math.round(window.scrollY),
+          scrollX: Math.round(window.scrollX),
+          viewportWidth: window.innerWidth,
+          viewportHeight: window.innerHeight,
+          figureIndex: targetFig ? 1 : 0,
+          figureRect: fRect ? { top: Math.round(fRect.top), bottom: Math.round(fRect.bottom), height: Math.round(fRect.height) } : null,
+          headerRect: hRect ? { top: Math.round(hRect.top), bottom: Math.round(hRect.bottom), height: Math.round(hRect.height) } : null,
+          clearanceFromHeaderBottomPx: (fRect && hRect) ? Math.round(fRect.top - hRect.bottom) : null
+        };
+      })()`);
+
+      const scrolledShotRes = await send("Page.captureScreenshot", {
+        format: "png",
+        captureBeyondViewport: false,
+        fromSurface: true,
+        clip: {
+          x: 0,
+          y: 0,
+          width,
+          height: INITIAL_VIEWPORT_HEIGHT,
+          scale: 1
+        }
+      });
+
+      const scrolledFileName = `calibration-scrolled-viewport-${width}px.png`;
+      const scrolledFilePath = path.join(runBundleDir, scrolledFileName);
+      const scrolledBuffer = Buffer.from(scrolledShotRes.data, "base64");
+      fs.writeFileSync(scrolledFilePath, scrolledBuffer);
+
+      const scrolledMeta = await sharp(scrolledBuffer).metadata();
+      const expectedScrolledWidth = width * DEVICE_SCALE_FACTOR;
+      const expectedScrolledHeight = INITIAL_VIEWPORT_HEIGHT * DEVICE_SCALE_FACTOR;
+      if (scrolledMeta.width !== expectedScrolledWidth || scrolledMeta.height !== expectedScrolledHeight) {
+        throw new Error(
+          `Scrolled viewport PNG dimension mismatch at ${width}px: expected ${expectedScrolledWidth}x${expectedScrolledHeight}, got ${scrolledMeta.width}x${scrolledMeta.height}`
+        );
+      }
+      await sharp(scrolledBuffer).raw().toBuffer();
+      expectedArtifacts.push(scrolledFileName);
+
+      const scrolledViewportEvidence = {
+        fileName: scrolledFileName,
+        pixelDimensions: `${expectedScrolledWidth}x${expectedScrolledHeight}`,
+        sizeBytes: scrolledBuffer.length,
+        scrollPosition: {
+          scrollY: scrolledState.scrollY,
+          scrollX: scrolledState.scrollX
+        },
+        viewportDimensions: {
+          widthCssPx: width,
+          heightCssPx: INITIAL_VIEWPORT_HEIGHT,
+          dpr: DEVICE_SCALE_FACTOR
+        },
+        targetFigureIndex: scrolledState.figureIndex,
+        figureRect: scrolledState.figureRect,
+        headerRect: scrolledState.headerRect,
+        clearanceFromHeaderBottomPx: scrolledState.clearanceFromHeaderBottomPx
+      };
+
+      // 3. Instantaneous top reset: explicitly override smooth scroll and assert scroll coordinates reach (0, 0)
+      console.log(`[CDP Harness] Executing instantaneous top reset at ${width}px...`);
+      await evaluate(`(() => {
+        if (document.documentElement) document.documentElement.style.scrollBehavior = 'auto';
+        if (document.body) document.body.style.scrollBehavior = 'auto';
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        return {
+          scrollY: window.scrollY,
+          scrollX: window.scrollX,
+          resetInitiated: true
+        };
+      })()`);
+
+      let scrollResetClean = false;
+      const scrollResetStart = Date.now();
+      while (Date.now() - scrollResetStart < 5000) {
+        if (abortController.signal.aborted) throw abortController.signal.reason;
+        const pos = await evaluate(`(() => {
+          /* scrollResetPoll */
+          if (window.scrollY !== 0 || window.scrollX !== 0) {
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          }
+          return { scrollY: window.scrollY, scrollX: window.scrollX };
+        })()`);
+        if (pos && pos.scrollY === 0 && pos.scrollX === 0) {
+          scrollResetClean = true;
+          break;
+        }
+        await new Promise((r) => setTimeout(r, 100));
+      }
+      if (!scrollResetClean) {
+        throw new Error(`Scroll position failed to reset cleanly to (0, 0) at ${width}px within 5s`);
+      }
 
       console.log(`[CDP Harness] Polling for full DOM, font, and image decode readiness...`);
       const readinessStartTime = Date.now();
@@ -952,9 +1147,36 @@ export async function runHarness(options = {}) {
       }
       console.log(`[CDP Harness] Readiness verified in ${Date.now() - readinessStartTime}ms.`);
 
+      // Verify geometry stability before capture: sample scrollY, H1 and header rect across 100ms
+      console.log(`[CDP Harness] Verifying geometry stability before capture at ${width}px...`);
+      const stab1 = await evaluate(`(() => ({
+        scrollY: window.scrollY,
+        scrollX: window.scrollX,
+        h1Top: Math.round(document.querySelector('h1')?.getBoundingClientRect()?.top ?? 0),
+        headerBottom: Math.round(document.querySelector('header')?.getBoundingClientRect()?.bottom ?? 0)
+      }))()`);
+      await new Promise((r) => setTimeout(r, 100));
+      const stab2 = await evaluate(`(() => ({
+        scrollY: window.scrollY,
+        scrollX: window.scrollX,
+        h1Top: Math.round(document.querySelector('h1')?.getBoundingClientRect()?.top ?? 0),
+        headerBottom: Math.round(document.querySelector('header')?.getBoundingClientRect()?.bottom ?? 0)
+      }))()`);
+
+      if (stab1.scrollY !== 0 || stab2.scrollY !== 0 || stab1.scrollX !== 0 || stab2.scrollX !== 0) {
+        throw new Error(
+          `Unstable scroll state at ${width}px: sample1=(${stab1.scrollX},${stab1.scrollY}), sample2=(${stab2.scrollX},${stab2.scrollY})`
+        );
+      }
+      if (Math.abs(stab1.h1Top - stab2.h1Top) > 1 || Math.abs(stab1.headerBottom - stab2.headerBottom) > 1) {
+        throw new Error(
+          `Geometry shifted during stabilization at ${width}px: H1 top ${stab1.h1Top} -> ${stab2.h1Top}, Header bottom ${stab1.headerBottom} -> ${stab2.headerBottom}`
+        );
+      }
+
       const metrics = await evaluate(buildGeometryScript());
       validateDomMetrics(metrics, width, DEVICE_SCALE_FACTOR);
-      console.log(`[CDP Harness] DOM metrics validated cleanly: scrollWidth=${metrics.scrollWidth}, clientWidth=${metrics.clientWidth}, H1 right=${metrics.h1.right}px`);
+      console.log(`[CDP Harness] DOM metrics validated cleanly: scrollWidth=${metrics.scrollWidth}, clientWidth=${metrics.clientWidth}, H1 right=${metrics.h1.right}px, clearance=${metrics.h1.top - metrics.header.bottom}px`);
 
       if (pageExceptions.length > 0) {
         throw new Error(`Page threw unhandled exception(s) during execution: ${JSON.stringify(pageExceptions)}`);
@@ -989,7 +1211,8 @@ export async function runHarness(options = {}) {
         pixelHeight: pngDims.height,
         fileName,
         sizeBytes: imgBuffer.length,
-        metrics
+        metrics,
+        scrolledViewportEvidence
       });
     }
 
