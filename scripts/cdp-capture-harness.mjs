@@ -687,6 +687,7 @@ export async function runHarness(options = {}) {
   const fetchImpl = options.fetchImpl || globalThis.fetch;
   const WebSocketImpl = options.WebSocketImpl || globalThis.WebSocket;
   const rmSyncImpl = options.rmSync || fs.rmSync;
+  const sleepImpl = options.sleepImpl || ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
   const checkPortImpl = options.checkPort || checkPortAvailable;
   const chromePath = options.chromePath || CHROME_PATH;
   const runsBaseDir = options.runsBaseDir || RUNS_BASE_DIR;
@@ -1277,14 +1278,43 @@ export async function runHarness(options = {}) {
       cleanupError = new Error(`Cleanup failure: Chrome PID ${chromeProc.pid} is still alive after SIGKILL`);
     }
 
-    try {
-      if (tempProfileDir && fs.existsSync(tempProfileDir)) {
-        rmSyncImpl(tempProfileDir, { recursive: true, force: true });
-        console.log(`[CDP Harness] Removed temporary profile: ${tempProfileDir}`);
+    const ownChromeExited = !chromeProc || chromeExited;
+    if (tempProfileDir && fs.existsSync(tempProfileDir)) {
+      if (!ownChromeExited) {
+        // Unconfirmed own-Chrome exit: SKIP profile deletion entirely (0 rm calls)
+        // Calling recursive rmSync while Chrome process may still be active is unsafe;
+        // preserve tempProfileDir path in HOLD receipt for inspection.
+        console.warn(`[CDP Harness] Skipping temporary profile deletion: Chrome PID ${chromeProc.pid} exit is unconfirmed`);
+      } else {
+        // Bounded retry for hypothesized transient ENOTEMPTY / EBUSY directory lock only AFTER verified own-Chrome exit
+        // Strictly targeted to own generated tempProfileDir; zero process enumeration or external kills
+        const MAX_RM_ATTEMPTS = 5;
+        let profileRemoved = false;
+        let lastRmErr = null;
+
+        for (let attempt = 1; attempt <= MAX_RM_ATTEMPTS; attempt++) {
+          try {
+            // maxRetries not nested so outer 5 attempts is true five-attempt bound
+            rmSyncImpl(tempProfileDir, { recursive: true, force: true });
+            profileRemoved = true;
+            console.log(`[CDP Harness] Removed temporary profile: ${tempProfileDir}${attempt > 1 ? ` (on attempt ${attempt})` : ""}`);
+            break;
+          } catch (e) {
+            lastRmErr = e;
+            const isTransient = e.code === "ENOTEMPTY" || e.code === "EBUSY" || /ENOTEMPTY|directory not empty|EBUSY|resource busy/i.test(e.message);
+            if (isTransient && attempt < MAX_RM_ATTEMPTS) {
+              await sleepImpl(100);
+              continue;
+            }
+            break;
+          }
+        }
+
+        if (!profileRemoved && lastRmErr) {
+          const rmErr = new Error(`Cleanup failure: Could not remove temporary profile ${tempProfileDir}: ${lastRmErr.message}`);
+          cleanupError = cleanupError ? new Error(`${cleanupError.message}; ${rmErr.message}`) : rmErr;
+        }
       }
-    } catch (e) {
-      const rmErr = new Error(`Cleanup failure: Could not remove temporary profile ${tempProfileDir}: ${e.message}`);
-      cleanupError = cleanupError ? new Error(`${cleanupError.message}; ${rmErr.message}`) : rmErr;
     }
 
     const ownedResourcesUnresolved = {

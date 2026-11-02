@@ -420,22 +420,16 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
     };
   }
 
-  // 4.1 Happy Path Lifecycle:
-  // Verifies owned cleanup completes BEFORE writing manifest.json.
-  console.log("  [4.1] Testing happy path: owned cleanup completes before writing manifest...");
-  {
-    let cleanupOccurred = false;
+  function createHappyPathCdpWsHandler() {
     let currentWidth = 320;
-
-    const fakeProc = createFakeChromeProc();
-    const fakeWS = createFakeWebSocket(async (msg, reply) => {
+    return async (msg, reply) => {
       if (msg.method === "Emulation.setDeviceMetricsOverride") {
         currentWidth = msg.params.width;
         reply({ id: msg.id, result: {} });
       } else if (msg.method === "Page.enable" || msg.method === "Runtime.enable" || msg.method === "DOM.enable" || msg.method === "Network.enable" || msg.method === "Fetch.enable" || msg.method === "Emulation.setUserAgentOverride" || msg.method === "Page.navigate") {
         reply({ id: msg.id, result: {} });
       } else if (msg.method === "Runtime.evaluate") {
-        const expr = msg.params.expression;
+        const expr = msg.params?.expression || "";
         if (expr.includes("readyState")) {
           reply({ id: msg.id, result: { result: { type: "object", value: { committed: true } } } });
         } else if (expr.includes("document.fonts")) {
@@ -469,8 +463,19 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
         const h = msg.params?.clip?.height || 2450;
         const shotPng = await createGenuineSharpPng(currentWidth * 2, h * 2);
         reply({ id: msg.id, result: { data: shotPng.toString("base64") } });
+      } else {
+        reply({ id: msg.id, result: {} });
       }
-    });
+    };
+  }
+
+  // 4.1 Happy Path Lifecycle:
+  // Verifies owned cleanup completes BEFORE writing manifest.json.
+  console.log("  [4.1] Testing happy path: owned cleanup completes before writing manifest...");
+  {
+    let cleanupOccurred = false;
+    const fakeProc = createFakeChromeProc();
+    const fakeWS = createFakeWebSocket(createHappyPathCdpWsHandler());
 
     const res = await runHarness({
       url: "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance",
@@ -681,9 +686,136 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
     console.log("    -> Simultaneous run and cleanup failure verified: both errors and unresolved resources preserved.");
   }
 
+  // 4.6 Transient ENOTEMPTY on verified own-Chrome exit:
+  // Verifies that when own Chrome has verified exited and rmSync encounters a transient ENOTEMPTY,
+  // harness retries boundedly, removes the profile on attempt 2, and cleanly records VALIDATED_PASS.
+  console.log("  [4.6] Testing transient ENOTEMPTY on verified own-Chrome exit: recovers on retry, writes PASS...");
+  {
+    const fakeProc = createFakeChromeProc();
+    const fakeWS = createFakeWebSocket(createHappyPathCdpWsHandler());
+
+    let rmAttempts = 0;
+    let sleepCalls = 0;
+    const res = await runHarness({
+      url: "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance",
+      targetPort: 3000,
+      port: 9222,
+      runsBaseDir: testRunsDir,
+      spawnChrome: () => fakeProc,
+      fetchImpl: createFakeFetch(),
+      WebSocketImpl: fakeWS,
+      checkPort: async () => true,
+      rmSync: (dir) => {
+        rmAttempts++;
+        if (rmAttempts === 1) {
+          const err = new Error(`ENOTEMPTY: directory not empty, rmdir '${dir}/Default'`);
+          err.code = "ENOTEMPTY";
+          throw err;
+        }
+        fs.rmSync(dir, { recursive: true, force: true });
+      },
+      sleepImpl: async () => {
+        sleepCalls++;
+      }
+    });
+
+    assert.equal(rmAttempts, 2, "Must retry exactly once after transient ENOTEMPTY");
+    assert.equal(sleepCalls, 1, "Must call sleepImpl between retries");
+    assert.equal(res.manifest.status, "VALIDATED_PASS", "Must validate PASS after successful retry");
+    console.log("    -> Transient ENOTEMPTY verified: recovered on attempt 2, PASS manifest recorded.");
+  }
+
+  // 4.7 Persistent ENOTEMPTY on verified own-Chrome exit:
+  // Verifies that when transient error persists past MAX_RM_ATTEMPTS (5), harness halts,
+  // records HOLD_CLEANUP_FAILURE receipt, preserves tempProfileLocked, and does NOT write PASS manifest.
+  console.log("  [4.7] Testing persistent ENOTEMPTY: exhausts max attempts, records HOLD, preserves resource...");
+  {
+    const fakeProc = createFakeChromeProc();
+    const fakeWS = createFakeWebSocket(createHappyPathCdpWsHandler());
+
+    let rmAttempts = 0;
+    let sleepCalls = 0;
+    let rejectedErr = null;
+    try {
+      await runHarness({
+        url: "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance",
+        targetPort: 3000,
+        port: 9222,
+        runsBaseDir: testRunsDir,
+        spawnChrome: () => fakeProc,
+        fetchImpl: createFakeFetch(),
+        WebSocketImpl: fakeWS,
+        checkPort: async () => true,
+        rmSync: (dir) => {
+          rmAttempts++;
+          const err = new Error(`ENOTEMPTY: directory not empty, rmdir '${dir}/Default'`);
+          err.code = "ENOTEMPTY";
+          throw err;
+        },
+        sleepImpl: async () => {
+          sleepCalls++;
+        }
+      });
+    } catch (err) {
+      rejectedErr = err;
+    }
+
+    assert(rejectedErr !== null, "Must reject on exhausted retries");
+    assert.match(rejectedErr.message, /Cleanup failure: Could not remove temporary profile/);
+    assert.equal(rmAttempts, 5, "Must attempt exactly 5 times before failing");
+    assert.equal(sleepCalls, 4, "Must sleep 4 times between 5 attempts");
+
+    const runs = fs.readdirSync(testRunsDir).map((d) => path.join(testRunsDir, d));
+    const latestRun = runs[runs.length - 1];
+    assert(fs.existsSync(path.join(latestRun, "hold-receipt.json")), "hold-receipt.json must be written");
+    assert(!fs.existsSync(path.join(latestRun, "manifest.json")), "PASS manifest must NOT be written");
+
+    const holdData = JSON.parse(fs.readFileSync(path.join(latestRun, "hold-receipt.json"), "utf-8"));
+    assert.equal(holdData.status, "HOLD_CLEANUP_FAILURE");
+    assert.match(holdData.cleanupError.message, /ENOTEMPTY/);
+    assert.equal(holdData.ownedResourcesUnresolved.chromePidAlive, null);
+    assert(holdData.ownedResourcesUnresolved.tempProfileLocked !== null);
+    console.log("    -> Persistent ENOTEMPTY verified: bounded at 5 attempts, HOLD receipt recorded, locked path preserved.");
+  }
+
+  // 4.8 Unverified Chrome exit (stuck Chrome):
+  // Verifies that if own Chrome did NOT exit, harness skips profile deletion entirely (0 rmSync calls).
+  console.log("  [4.8] Testing unverified Chrome exit: zero rmSync calls on unconfirmed process...");
+  {
+    const stuckProc = createFakeChromeProc({ ignoresKill: true });
+    const fakeWS = createFakeWebSocket(createHappyPathCdpWsHandler());
+
+    let rmAttempts = 0;
+    let rejectedErr = null;
+    try {
+      await runHarness({
+        url: "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance",
+        targetPort: 3000,
+        port: 9222,
+        runsBaseDir: testRunsDir,
+        spawnChrome: () => stuckProc,
+        fetchImpl: createFakeFetch(),
+        WebSocketImpl: fakeWS,
+        checkPort: async () => true,
+        rmSync: () => {
+          rmAttempts++;
+          throw new Error("ENOTEMPTY: should not be called");
+        },
+        sleepImpl: async () => {}
+      });
+    } catch (err) {
+      rejectedErr = err;
+    }
+
+    assert(rejectedErr !== null, "Must reject on stuck chrome");
+    assert.equal(rmAttempts, 0, "Must skip profile deletion entirely (0 rmSync calls) if own Chrome exit is unverified");
+    assert.match(rejectedErr.message, /Chrome PID 99999 is still alive/);
+    console.log("    -> Unverified Chrome exit invariant verified: zero rmSync calls on unconfirmed process, path preserved in HOLD.");
+  }
+
   // Clean up test directories
   fs.rmSync(testRunsDir, { recursive: true, force: true });
-  console.log("  PASS: All 5 runHarness lifecycle states verified via injected primitives.");
+  console.log("  PASS: All 8 runHarness lifecycle states verified via injected primitives.");
 }
 }
 
