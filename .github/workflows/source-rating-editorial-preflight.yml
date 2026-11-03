@@ -107,6 +107,7 @@ jobs:
           REVIEWED_ALLOWLIST=(
             ".github/workflows/source-rating-editorial-preflight.yml"
             "scripts/cdp-capture-harness.mjs"
+            "scripts/test-cdp-harness-static.mjs"
             "scripts/validate-ci-bundle.mjs"
           )
 
@@ -118,6 +119,7 @@ jobs:
             case "$f" in
               ".github/workflows/source-rating-editorial-preflight.yml" | \
               "scripts/cdp-capture-harness.mjs" | \
+              "scripts/test-cdp-harness-static.mjs" | \
               "scripts/validate-ci-bundle.mjs")
                 ;;
               *)
@@ -141,6 +143,7 @@ jobs:
             case "$f" in
               ".github/workflows/source-rating-editorial-preflight.yml" | \
               "scripts/cdp-capture-harness.mjs" | \
+              "scripts/test-cdp-harness-static.mjs" | \
               "scripts/validate-ci-bundle.mjs")
                 ;;
               *)
@@ -172,6 +175,7 @@ jobs:
             "reviewedAllowlist": [
               ".github/workflows/source-rating-editorial-preflight.yml",
               "scripts/cdp-capture-harness.mjs",
+              "scripts/test-cdp-harness-static.mjs",
               "scripts/validate-ci-bundle.mjs"
             ],
             "nonTestDiffFromPassedHead": "CLEAN_ZERO_DIFF",

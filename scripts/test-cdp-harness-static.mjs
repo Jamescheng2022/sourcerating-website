@@ -41,7 +41,9 @@ import {
   validateScreenshotPng,
   createRunBundleDir,
   validateBundleComplete,
-  runHarness
+  runHarness,
+  testVisibleImageRoiProbes,
+  testBorderOnlyBlankProbe
 } from "./cdp-capture-harness.mjs";
 import { validateCiBundle } from "./validate-ci-bundle.mjs";
 
@@ -70,7 +72,7 @@ async function createGenuineSharpPng(width = 640, height = 4900, isBlank = false
     blackBox[i + 2] = 0;
     blackBox[i + 3] = 255;
   }
-  return await base.composite([{ input: blackBox, raw: { width: 10, height: 10, channels: 4 }, top: 0, left: 0 }]).png().toBuffer();
+  return await base.composite([{ input: blackBox, raw: { width: 10, height: 10, channels: 4 }, top: 0, left: 0 }, { input: blackBox, raw: { width: 10, height: 10, channels: 4 }, top: 400, left: 100 }]).png().toBuffer();
 }
 
 // Helper: Baseline valid DOM metrics for tests
@@ -252,7 +254,10 @@ console.log("[TEST 1] Testing full-pixel Sharp decompression, corrupt IDAT & exp
     "validateScreenshotPng must strictly reject expected-size JPEG files"
   );
 
-  console.log("  PASS: Exact corrupt IDAT stream rejected; expected-size JPEG rejected; full pixel decode verified.");
+  // 1.4 Target figure interior ROI negative probes & border-only blank buffer check
+  testVisibleImageRoiProbes();
+  await testBorderOnlyBlankProbe();
+  console.log("  PASS: Exact corrupt IDAT stream rejected; expected-size JPEG rejected; border-only blank vs varied interior verified; full pixel decode verified.");
 }
 
 // =============================================================================
@@ -455,7 +460,8 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
             viewportWidth: currentWidth,
             viewportHeight: INITIAL_VIEWPORT_HEIGHT,
             figureIndex: 1,
-            figureRect: { top: 150, bottom: 550, height: 400 },
+            figureRect: { top: 150, bottom: 550, height: 400, left: 16, right: currentWidth - 16, width: currentWidth - 32 },
+            imageRect: { top: 160, bottom: 460, height: 300, left: 16, right: currentWidth - 16, width: currentWidth - 32 },
             headerRect: { top: 0, bottom: 64, height: 64 },
             clearanceFromHeaderBottomPx: 86
           } } } });
@@ -595,7 +601,8 @@ console.log("\n[TEST 4] Testing actual runHarness lifecycle via injected fake pr
             viewportWidth: currentWidth,
             viewportHeight: INITIAL_VIEWPORT_HEIGHT,
             figureIndex: 1,
-            figureRect: { top: 150, bottom: 550, height: 400 },
+            figureRect: { top: 150, bottom: 550, height: 400, left: 16, right: currentWidth - 16, width: currentWidth - 32 },
+            imageRect: { top: 160, bottom: 460, height: 300, left: 16, right: currentWidth - 16, width: currentWidth - 32 },
             headerRect: { top: 0, bottom: 64, height: 64 },
             clearanceFromHeaderBottomPx: 86
           } } } });

@@ -31,6 +31,7 @@
  *    for 100% deterministic testing of the real code path without launching external browsers.
  */
 
+import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import net from "node:net";
@@ -359,6 +360,512 @@ export function buildReadinessScript(targetWidth) {
 
     return { ready: true };
   })()`;
+}
+
+/**
+ * Generates browser-side script to wait for and assert target figure image load and decode.
+ * Strictly verifies complete === true, natural dimensions > 0, awaits img.decode(), and ensures fonts ready.
+ */
+export function buildTargetFigureReadinessScript(targetFigureIndex = 1) {
+  return `(async () => {
+    // 0. Ensure fonts are ready
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch {}
+    }
+    if (document.fonts && document.fonts.status !== 'loaded') {
+      return { ready: false, reason: 'fonts_not_loaded', status: document.fonts.status };
+    }
+
+    // 1. Target figure existence
+    const figures = document.querySelectorAll('figure');
+    const targetFig = figures[${targetFigureIndex}] || figures[0];
+    if (!targetFig) {
+      return { ready: false, reason: 'target_figure_missing', targetIndex: ${targetFigureIndex} };
+    }
+
+    // 2. Target visible img element existence
+    const img = targetFig.querySelector('img');
+    if (!img) {
+      return { ready: false, reason: 'target_img_element_missing', targetIndex: ${targetFigureIndex} };
+    }
+
+    // 3. Await decode promise if available (bounded to 4s to prevent indefinite browser-side hang)
+    if (typeof img.decode === 'function') {
+      try {
+        await Promise.race([
+          img.decode(),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('decode_timeout')), 4000))
+        ]);
+      } catch (err) {
+        return { ready: false, reason: 'img_decode_failed', error: String(err), src: img.currentSrc || img.src };
+      }
+    }
+
+    // 4. Strictly assert complete and non-zero natural dimensions
+    if (!img.complete || img.naturalWidth <= 0 || img.naturalHeight <= 0) {
+      return {
+        ready: false,
+        reason: 'target_img_not_decoded',
+        complete: img.complete,
+        naturalWidth: img.naturalWidth,
+        naturalHeight: img.naturalHeight,
+        currentSrc: img.currentSrc || img.src
+      };
+    }
+
+    // 5. Ensure non-zero rendered bounding box
+    const rect = img.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) {
+      return {
+        ready: false,
+        reason: 'target_img_zero_rendered_dimensions',
+        width: rect.width,
+        height: rect.height
+      };
+    }
+
+    return {
+      ready: true,
+      complete: img.complete,
+      naturalWidth: img.naturalWidth,
+      naturalHeight: img.naturalHeight,
+      renderedWidth: Math.round(rect.width),
+      renderedHeight: Math.round(rect.height),
+      currentSrc: img.currentSrc || img.src
+    };
+  })()`;
+}
+
+/**
+ * Self-test / negative probe for target figure image readiness script logic.
+ * Evaluates the readiness script string against mock DOM environments to assert fail-closed behavior.
+ */
+export async function testTargetFigureReadinessProbe() {
+  const scriptStr = buildTargetFigureReadinessScript(1);
+  const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
+
+  // Probe 1: Target figure missing -> returns target_figure_missing
+  {
+    const mockDocument = { querySelectorAll: () => [] };
+    const fn = new AsyncFunction("document", "return await " + scriptStr);
+    const res = await fn(mockDocument);
+    assert.equal(res.ready, false);
+    assert.equal(res.reason, "target_figure_missing");
+  }
+
+  // Probe 2: Target img missing -> returns target_img_element_missing
+  {
+    const mockFig = { querySelector: () => null };
+    const mockDocument = { querySelectorAll: () => [mockFig, mockFig] };
+    const fn = new AsyncFunction("document", "return await " + scriptStr);
+    const res = await fn(mockDocument);
+    assert.equal(res.ready, false);
+    assert.equal(res.reason, "target_img_element_missing");
+  }
+
+  // Probe 3: Img not complete or zero naturalWidth -> returns target_img_not_decoded
+  {
+    const mockImg = { complete: false, naturalWidth: 0, naturalHeight: 0, decode: async () => {} };
+    const mockFig = { querySelector: () => mockImg };
+    const mockDocument = { querySelectorAll: () => [mockFig, mockFig] };
+    const fn = new AsyncFunction("document", "return await " + scriptStr);
+    const res = await fn(mockDocument);
+    assert.equal(res.ready, false);
+    assert.equal(res.reason, "target_img_not_decoded");
+  }
+
+  // Probe 4: Img decode rejects -> returns img_decode_failed
+  {
+    const mockImg = {
+      complete: true,
+      naturalWidth: 100,
+      naturalHeight: 100,
+      decode: async () => { throw new Error("GPU decode error"); }
+    };
+    const mockFig = { querySelector: () => mockImg };
+    const mockDocument = { querySelectorAll: () => [mockFig, mockFig] };
+    const fn = new AsyncFunction("document", "return await " + scriptStr);
+    const res = await fn(mockDocument);
+    assert.equal(res.ready, false);
+    assert.equal(res.reason, "img_decode_failed");
+  }
+
+  // Probe 5: Happy path -> returns ready: true
+  {
+    const mockImg = {
+      complete: true,
+      naturalWidth: 800,
+      naturalHeight: 600,
+      getBoundingClientRect: () => ({ width: 350, height: 200 }),
+      decode: async () => {}
+    };
+    const mockFig = { querySelector: () => mockImg };
+    const mockDocument = { querySelectorAll: () => [mockFig, mockFig] };
+    const fn = new AsyncFunction("document", "return await " + scriptStr);
+    const res = await fn(mockDocument);
+    assert.equal(res.ready, true);
+    assert.equal(res.naturalWidth, 800);
+  }
+}
+
+/**
+ * Computes the true geometric intersection of an element's bounding client rect with the viewport,
+ * inset by borderInsetCss pixels from unclipped image edges to sample strictly the image INTERIOR
+ * (excluding borders, outlines, antialiased rounded corners, and drop-shadows),
+ * scaled to backing-store pixels by devicePixelRatio (DPR).
+ *
+ * Fails closed (throws) if:
+ * 1. imageRect is missing, null, or undefined.
+ * 2. Any coordinate (left, top, width, height, right, bottom) is missing, non-finite (NaN, Infinity),
+ *    or width/height <= 0.
+ * 3. There is no intersection (completely above, left, below, or right of viewport).
+ * 4. The resulting visible interior intersection is smaller than minDimensionPx (default 20px)
+ *    in width or height, preventing false passes on subpixel edges or slivers.
+ */
+export function computeVisibleImageRoi(imageRect, viewportWidth, viewportHeight, dpr = 1, minDimensionPx = 20, borderInsetCss = 6) {
+  if (!imageRect) {
+    throw new Error("Cannot compute visible image ROI: imageRect is missing or undefined");
+  }
+
+  if (
+    imageRect.left === undefined ||
+    imageRect.top === undefined ||
+    imageRect.width === undefined ||
+    imageRect.height === undefined
+  ) {
+    throw new Error(`Cannot compute visible image ROI: missing required coordinates in imageRect ${JSON.stringify(imageRect)}`);
+  }
+
+  const imgLeft = Number(imageRect.left);
+  const imgTop = Number(imageRect.top);
+  const imgWidth = Number(imageRect.width);
+  const imgHeight = Number(imageRect.height);
+  const imgRight = imageRect.right !== undefined ? Number(imageRect.right) : imgLeft + imgWidth;
+  const imgBottom = imageRect.bottom !== undefined ? Number(imageRect.bottom) : imgTop + imgHeight;
+
+  if (
+    !Number.isFinite(imgLeft) ||
+    !Number.isFinite(imgTop) ||
+    !Number.isFinite(imgWidth) ||
+    !Number.isFinite(imgHeight) ||
+    !Number.isFinite(imgRight) ||
+    !Number.isFinite(imgBottom)
+  ) {
+    throw new Error(`Cannot compute visible image ROI: non-finite coordinates in imageRect ${JSON.stringify(imageRect)}`);
+  }
+
+  if (imgWidth <= 0 || imgHeight <= 0) {
+    throw new Error(`Cannot compute visible image ROI: non-positive image dimensions (${imgWidth}x${imgHeight}) in imageRect ${JSON.stringify(imageRect)}`);
+  }
+
+  // 1. Compute true visible intersection in CSS viewport coordinates
+  const interLeftCss = Math.max(0, imgLeft);
+  const interTopCss = Math.max(0, imgTop);
+  const interRightCss = Math.min(viewportWidth, imgRight);
+  const interBottomCss = Math.min(viewportHeight, imgBottom);
+
+  if (interRightCss <= interLeftCss || interBottomCss <= interTopCss) {
+    throw new Error(
+      `No visible intersection between target image (${imgWidth}x${imgHeight} at [${imgLeft},${imgTop}]) and viewport (${viewportWidth}x${viewportHeight})`
+    );
+  }
+
+  // 2. Inset from genuine image boundaries to strictly sample the INTERIOR
+  // If an edge is inside the viewport (i.e. is the image's physical border), inset by borderInsetCss.
+  // If an edge is clipped by the viewport boundary, that boundary is already deep inside the image.
+  const insetLeft = (imgLeft >= 0) ? borderInsetCss : 0;
+  const insetRight = (imgRight <= viewportWidth) ? borderInsetCss : 0;
+  const insetTop = (imgTop >= 0) ? borderInsetCss : 0;
+  const insetBottom = (imgBottom <= viewportHeight) ? borderInsetCss : 0;
+
+  const interiorLeftCss = interLeftCss + insetLeft;
+  const interiorRightCss = interRightCss - insetRight;
+  const interiorTopCss = interTopCss + insetTop;
+  const interiorBottomCss = interBottomCss - insetBottom;
+
+  const interiorWidthCss = Math.max(0, interiorRightCss - interiorLeftCss);
+  const interiorHeightCss = Math.max(0, interiorBottomCss - interiorTopCss);
+
+  // 3. Scaled pixel coordinates in backing screenshot buffer
+  const totalVpWidth = Math.round(viewportWidth * dpr);
+  const totalVpHeight = Math.round(viewportHeight * dpr);
+
+  const cropLeft = Math.max(0, Math.floor(interiorLeftCss * dpr));
+  const cropTop = Math.max(0, Math.floor(interiorTopCss * dpr));
+  const cropRight = Math.min(totalVpWidth, Math.floor(interiorRightCss * dpr));
+  const cropBottom = Math.min(totalVpHeight, Math.floor(interiorBottomCss * dpr));
+
+  const cropWidth = Math.max(0, cropRight - cropLeft);
+  const cropHeight = Math.max(0, cropBottom - cropTop);
+
+  // 4. Fail closed on minimum interior size threshold
+  if (cropWidth < minDimensionPx || cropHeight < minDimensionPx) {
+    throw new Error(
+      `No meaningful visible interior intersection between target image (${imgWidth}x${imgHeight} at [${imgLeft},${imgTop}]) and viewport (${viewportWidth}x${viewportHeight}): visible interior ROI is only ${cropWidth}x${cropHeight}px (minimum threshold is ${minDimensionPx}px)`
+    );
+  }
+
+  return {
+    left: cropLeft,
+    top: cropTop,
+    width: cropWidth,
+    height: cropHeight,
+    borderInsetCss,
+    cssIntersection: {
+      left: interLeftCss,
+      top: interTopCss,
+      right: interRightCss,
+      bottom: interBottomCss,
+      width: interRightCss - interLeftCss,
+      height: interBottomCss - interTopCss
+    },
+    cssInterior: {
+      left: interiorLeftCss,
+      top: interiorTopCss,
+      right: interiorRightCss,
+      bottom: interiorBottomCss,
+      width: interiorWidthCss,
+      height: interiorHeightCss
+    }
+  };
+}
+
+/**
+ * Self-test / deterministic negative probes for computeVisibleImageRoi logic.
+ * Exercises:
+ * 1. undefined / null imageRect -> throws
+ * 2. non-finite (NaN, Infinity) endpoints -> throws
+ * 3. non-positive dimensions -> throws
+ * 4. completely offscreen (above, left, below, right) -> throws
+ * 5. visible interior sliver below minimum threshold (< 20px) -> throws
+ * 6. DPR scaling and interior insets.
+ */
+export function testVisibleImageRoiProbes() {
+  const vpWidth = 390;
+  const vpHeight = 844;
+
+  // 1. Missing / undefined / null imageRect
+  assert.throws(
+    () => computeVisibleImageRoi(undefined, vpWidth, vpHeight, 1),
+    /imageRect is missing or undefined/
+  );
+  assert.throws(
+    () => computeVisibleImageRoi(null, vpWidth, vpHeight, 1),
+    /imageRect is missing or undefined/
+  );
+
+  // 2. Missing required coordinates
+  assert.throws(
+    () => computeVisibleImageRoi({ left: 10, top: 20 }, vpWidth, vpHeight, 1),
+    /missing required coordinates/
+  );
+
+  // 3. NaN / non-finite endpoints
+  assert.throws(
+    () => computeVisibleImageRoi({ left: NaN, top: 100, width: 350, height: 200 }, vpWidth, vpHeight, 1),
+    /non-finite coordinates/
+  );
+  assert.throws(
+    () => computeVisibleImageRoi({ left: 20, top: NaN, width: 350, height: 200 }, vpWidth, vpHeight, 1),
+    /non-finite coordinates/
+  );
+  assert.throws(
+    () => computeVisibleImageRoi({ left: 20, top: 100, width: NaN, height: 200 }, vpWidth, vpHeight, 1),
+    /non-finite coordinates/
+  );
+  assert.throws(
+    () => computeVisibleImageRoi({ left: 20, top: 100, width: 350, height: NaN }, vpWidth, vpHeight, 1),
+    /non-finite coordinates/
+  );
+  assert.throws(
+    () => computeVisibleImageRoi({ left: 20, top: 100, width: 350, height: 200, right: NaN }, vpWidth, vpHeight, 1),
+    /non-finite coordinates/
+  );
+  assert.throws(
+    () => computeVisibleImageRoi({ left: 20, top: 100, width: 350, height: 200, bottom: NaN }, vpWidth, vpHeight, 1),
+    /non-finite coordinates/
+  );
+  assert.throws(
+    () => computeVisibleImageRoi({ left: 20, top: 100, width: 350, height: 200, right: Infinity }, vpWidth, vpHeight, 1),
+    /non-finite coordinates/
+  );
+
+  // 4. Non-positive image dimensions
+  assert.throws(
+    () => computeVisibleImageRoi({ left: 20, top: 100, width: 0, height: 200 }, vpWidth, vpHeight, 1),
+    /non-positive image dimensions/
+  );
+  assert.throws(
+    () => computeVisibleImageRoi({ left: 20, top: 100, width: 350, height: -10 }, vpWidth, vpHeight, 1),
+    /non-positive image dimensions/
+  );
+
+  // 5. Fully visible interior image (happy path, DPR=1, borderInset=6)
+  {
+    const rect = { left: 20, top: 100, width: 350, height: 200, right: 370, bottom: 300 };
+    const roi = computeVisibleImageRoi(rect, vpWidth, vpHeight, 1, 20, 6);
+    assert.equal(roi.left, 26);  // 20 + 6
+    assert.equal(roi.top, 106);  // 100 + 6
+    assert.equal(roi.width, 338); // (370 - 6) - (20 + 6) = 364 - 26 = 338
+    assert.equal(roi.height, 188); // (300 - 6) - (100 + 6) = 294 - 106 = 188
+  }
+
+  // 6. Partially offscreen above (top < 0, bottom inside viewport)
+  // Top boundary is viewport edge (already deep inside image), so top inset is 0
+  // Bottom boundary is physical image border, so bottom inset is 6
+  {
+    const rect = { left: 10, top: -100, width: 350, height: 300, right: 360, bottom: 200 };
+    const roi = computeVisibleImageRoi(rect, vpWidth, vpHeight, 1, 20, 6);
+    assert.equal(roi.left, 16); // 10 + 6
+    assert.equal(roi.top, 0);   // interTop is 0, clipped edge: 0 inset
+    assert.equal(roi.width, 338); // (360 - 6) - (10 + 6) = 354 - 16 = 338
+    assert.equal(roi.height, 194); // (200 - 6) - 0 = 194
+  }
+
+  // 7. Partially offscreen left (left < 0, right inside viewport)
+  {
+    const rect = { left: -50, top: 50, width: 300, height: 200, right: 250, bottom: 250 };
+    const roi = computeVisibleImageRoi(rect, vpWidth, vpHeight, 1, 20, 6);
+    assert.equal(roi.left, 0);  // interLeft is 0, clipped edge: 0 inset
+    assert.equal(roi.top, 56);  // 50 + 6
+    assert.equal(roi.width, 244); // (250 - 6) - 0 = 244
+    assert.equal(roi.height, 188); // (250 - 6) - (50 + 6) = 188
+  }
+
+  // 8. Partially offscreen bottom (bottom > vpHeight)
+  {
+    const rect = { left: 20, top: 750, width: 350, height: 200, right: 370, bottom: 950 };
+    const roi = computeVisibleImageRoi(rect, vpWidth, vpHeight, 1, 20, 6);
+    assert.equal(roi.left, 26);
+    assert.equal(roi.top, 756); // 750 + 6
+    assert.equal(roi.width, 338);
+    assert.equal(roi.height, 88); // 844 - (750 + 6) = 88
+  }
+
+  // 9. Completely offscreen above (bottom <= 0) -> throws
+  {
+    const rect = { left: 0, top: -300, width: 350, height: 200, right: 350, bottom: -100 };
+    assert.throws(
+      () => computeVisibleImageRoi(rect, vpWidth, vpHeight, 1),
+      /No visible intersection/
+    );
+  }
+
+  // 10. Completely offscreen left (right <= 0) -> throws
+  {
+    const rect = { left: -400, top: 100, width: 350, height: 200, right: -50, bottom: 300 };
+    assert.throws(
+      () => computeVisibleImageRoi(rect, vpWidth, vpHeight, 1),
+      /No visible intersection/
+    );
+  }
+
+  // 11. Completely offscreen below (top >= vpHeight) -> throws
+  {
+    const rect = { left: 0, top: 900, width: 350, height: 200, right: 350, bottom: 1100 };
+    assert.throws(
+      () => computeVisibleImageRoi(rect, vpWidth, vpHeight, 1),
+      /No visible intersection/
+    );
+  }
+
+  // 12. Sliver below minimum threshold (10px visible < 20px threshold) -> throws
+  {
+    const rect = { left: 0, top: -190, width: 350, height: 200, right: 350, bottom: 10 };
+    assert.throws(
+      () => computeVisibleImageRoi(rect, vpWidth, vpHeight, 1, 20, 0),
+      /visible interior ROI is only.*minimum threshold/
+    );
+  }
+
+  // 13. DPR scaling verification (DPR=2)
+  {
+    const rect = { left: 10, top: 20, width: 100, height: 100, right: 110, bottom: 120 };
+    const roi = computeVisibleImageRoi(rect, vpWidth, vpHeight, 2, 20, 5);
+    // Inset CSS: left = 15, top = 25, right = 105, bottom = 115
+    // Scaled DPR=2: left = 30, top = 50, right = 210, bottom = 230
+    // width = 180, height = 180
+    assert.equal(roi.left, 30);
+    assert.equal(roi.top, 50);
+    assert.equal(roi.width, 180);
+    assert.equal(roi.height, 180);
+  }
+}
+
+/**
+ * Deterministic negative probe: Border-only blank box vs genuine varied interior (Sharp buffer probe).
+ * 1. Creates a bordered blank box (2px dark border, solid white interior).
+ *    Proves that full un-inset extraction would falsely pass (stdev > 1),
+ *    while computeVisibleImageRoi with borderInsetCss=6 extracts pure interior (stdev < 1),
+ *    strictly failing the blank check!
+ * 2. Creates a genuinely varied image and proves it passes.
+ */
+export async function testBorderOnlyBlankProbe() {
+  const boxWidth = 200;
+  const boxHeight = 150;
+  const borderPx = 2;
+
+  // Create a 200x150 buffer with a 2px dark border (RGB 50,50,50) and solid white interior (RGB 255,255,255)
+  const rawBox = Buffer.alloc(boxWidth * boxHeight * 3, 255);
+  for (let y = 0; y < boxHeight; y++) {
+    for (let x = 0; x < boxWidth; x++) {
+      if (x < borderPx || x >= boxWidth - borderPx || y < borderPx || y >= boxHeight - borderPx) {
+        const idx = (y * boxWidth + x) * 3;
+        rawBox[idx] = 50;
+        rawBox[idx + 1] = 50;
+        rawBox[idx + 2] = 50;
+      }
+    }
+  }
+  const borderOnlyPng = await sharp(rawBox, { raw: { width: boxWidth, height: boxHeight, channels: 3 } }).png().toBuffer();
+
+  // Verify un-inset extraction would falsely pass: standard deviation > 1 due to border pixels!
+  const uninsetStats = await sharp(borderOnlyPng).stats();
+  assert.ok(
+    uninsetStats.channels[0].stdev > 1,
+    "Un-inset extraction on bordered blank box must have stdev > 1 (confirming false-PASS risk)"
+  );
+
+  // Verify computeVisibleImageRoi with borderInsetCss=6 excludes the border:
+  const mockRect = { left: 10, top: 10, width: boxWidth, height: boxHeight, right: 10 + boxWidth, bottom: 10 + boxHeight };
+  const interiorRoi = computeVisibleImageRoi(mockRect, 390, 844, 1, 20, 6);
+
+  // Extract the interior from the borderOnlyPng
+  const interiorBuf = await sharp(borderOnlyPng)
+    .extract({ left: interiorRoi.borderInsetCss, top: interiorRoi.borderInsetCss, width: interiorRoi.width, height: interiorRoi.height })
+    .toBuffer();
+  const interiorStats = await sharp(interiorBuf).stats();
+
+  // Interior must be pure uniform white (stdev === 0), strictly failing the non-blank check
+  const isInteriorBlank = interiorStats.channels.slice(0, 3).every((c) => c.min === c.max || c.stdev < 1);
+  assert.equal(
+    isInteriorBlank,
+    true,
+    "Interior extraction on bordered blank box must strictly detect blank interior (stdev < 1)"
+  );
+
+  // Create genuine varied interior: add non-uniform gradient in the interior
+  const variedRaw = Buffer.from(rawBox);
+  for (let y = 20; y < boxHeight - 20; y++) {
+    for (let x = 20; x < boxWidth - 20; x++) {
+      const idx = (y * boxWidth + x) * 3;
+      variedRaw[idx] = (x * 7 + y * 13) % 256;
+      variedRaw[idx + 1] = (x * 11 + y * 5) % 256;
+      variedRaw[idx + 2] = (x * 3 + y * 17) % 256;
+    }
+  }
+  const variedPng = await sharp(variedRaw, { raw: { width: boxWidth, height: boxHeight, channels: 3 } }).png().toBuffer();
+  const variedInteriorBuf = await sharp(variedPng)
+    .extract({ left: interiorRoi.borderInsetCss, top: interiorRoi.borderInsetCss, width: interiorRoi.width, height: interiorRoi.height })
+    .toBuffer();
+  const variedInteriorStats = await sharp(variedInteriorBuf).stats();
+  const isVariedBlank = variedInteriorStats.channels.slice(0, 3).every((c) => c.min === c.max || c.stdev < 1);
+  assert.equal(
+    isVariedBlank,
+    false,
+    "Interior extraction on genuinely varied image must PASS (isInteriorBlank === false)"
+  );
+  assert.ok(variedInteriorStats.channels[0].stdev > 10, "Varied interior must have substantial variance");
 }
 
 /**
@@ -867,6 +1374,10 @@ export async function runHarness(options = {}) {
   let allViewportsPassed = false;
 
   try {
+    // Round 5: Verify target figure readiness and ROI logic via negative probes before launch
+    await testTargetFigureReadinessProbe();
+    testVisibleImageRoiProbes();
+
     console.log(`[CDP Harness] Launching headless Chrome (isolated profile, port ${cdpPort})...`);
     const chromeArgs = buildChromeArgs({ cdpPort, userDataDir: tempProfileDir });
     chromeProc = spawnChrome(chromePath, chromeArgs, { stdio: ["ignore", "ignore", "pipe"] });
@@ -878,8 +1389,8 @@ export async function runHarness(options = {}) {
     const { childDevToolsWsUrl, childGuid } = await new Promise((resolve, reject) => {
       let stderrAccum = "";
       const timer = setTimeout(() => {
-        reject(new Error(`Timed out waiting for Chrome DevTools listening log from PID ${chromeProc?.pid}`));
-      }, 10000);
+        reject(new Error(`Timed out waiting for Chrome DevTools listening log from PID ${chromeProc?.pid}. Stderr: [${stderrAccum.trim()}]`));
+      }, 15000);
 
       chromeProc.stderr.on("data", (chunk) => {
         const text = chunk.toString();
@@ -898,12 +1409,12 @@ export async function runHarness(options = {}) {
 
       chromeProc.once("error", (err) => {
         clearTimeout(timer);
-        reject(new Error(`Chrome spawn error: ${err.message}`));
+        reject(new Error(`Chrome spawn error: ${err.message}. Stderr: [${stderrAccum.trim()}]`));
       });
 
       chromeProc.once("exit", (code, signal) => {
         clearTimeout(timer);
-        reject(new Error(`Chrome exited prematurely with code ${code}, signal ${signal}`));
+        reject(new Error(`Chrome exited prematurely with code ${code}, signal ${signal}. Stderr: [${stderrAccum.trim()}]`));
       });
     });
 
@@ -1080,39 +1591,52 @@ export async function runHarness(options = {}) {
         }
 
         console.log(`[CDP Harness] Awaiting new document commitment...`);
+        const DOC_COMMIT_BUDGET_MS = 15000;
         const docCommitStart = Date.now();
         let docCommitted = false;
-        while (Date.now() - docCommitStart < 15000) {
-          if (abortController.signal.aborted) throw abortController.signal.reason;
-          const state = await evaluate(`(() => {
-            if (document.readyState !== 'interactive' && document.readyState !== 'complete') {
-              return { committed: false, reason: 'readyState_' + document.readyState };
-            }
-            if (window.location.pathname !== '${article.pathname}') {
-              return { committed: false, reason: 'wrong_pathname_' + window.location.pathname };
-            }
-            const h1 = document.querySelector('h1');
-            if (!h1 || h1.textContent.trim() !== ${JSON.stringify(article.title)}) {
-              return { committed: false, reason: 'wrong_h1_' + (h1 ? h1.textContent.trim() : 'missing') };
-            }
-            const figures = document.querySelectorAll('figure');
-            if (figures.length < ${article.expectedFiguresCount || 3}) {
-              return { committed: false, reason: 'figures_count_' + figures.length };
-            }
-            return { committed: true };
-          })()`);
+        let lastDocCommitError = null;
 
-          if (state?.committed) {
-            docCommitted = true;
-            break;
+        while (Date.now() - docCommitStart < DOC_COMMIT_BUDGET_MS) {
+          if (abortController.signal.aborted) throw abortController.signal.reason;
+          const remainingMs = Math.max(0, DOC_COMMIT_BUDGET_MS - (Date.now() - docCommitStart));
+          if (remainingMs <= 100) break;
+          const perEvalTimeoutMs = Math.max(500, Math.min(PER_COMMAND_TIMEOUT_MS, remainingMs));
+          try {
+            const state = await evaluate(`(() => {
+              if (document.readyState !== 'interactive' && document.readyState !== 'complete') {
+                return { committed: false, reason: 'readyState_' + document.readyState };
+              }
+              if (window.location.pathname !== '${article.pathname}') {
+                return { committed: false, reason: 'wrong_pathname_' + window.location.pathname };
+              }
+              const h1 = document.querySelector('h1');
+              if (!h1 || h1.textContent.trim() !== ${JSON.stringify(article.title)}) {
+                return { committed: false, reason: 'wrong_h1_' + (h1 ? h1.textContent.trim() : 'missing') };
+              }
+              const figures = document.querySelectorAll('figure');
+              if (figures.length < ${article.expectedFiguresCount || 3}) {
+                return { committed: false, reason: 'figures_count_' + figures.length };
+              }
+              return { committed: true };
+            })()`, perEvalTimeoutMs);
+
+            if (state?.committed) {
+              docCommitted = true;
+              break;
+            }
+          } catch (err) {
+            lastDocCommitError = err;
           }
           await new Promise((r) => setTimeout(r, 250));
         }
 
+        const docCommitElapsedMs = Date.now() - docCommitStart;
         if (!docCommitted) {
-          throw new Error(`Document failed to commit expected article ${article.slug} at ${width}px within 15s`);
+          throw new Error(
+            `Document failed to commit expected article ${article.slug} at ${width}px within ${Math.round(docCommitElapsedMs / 1000)}s (budget ${DOC_COMMIT_BUDGET_MS / 1000}s). Last error: ${lastDocCommitError ? lastDocCommitError.message : "none"}`
+          );
         }
-        console.log(`[CDP Harness] Document committed in ${Date.now() - docCommitStart}ms. Triggering lazy image loading...`);
+        console.log(`[CDP Harness] Document committed in ${docCommitElapsedMs}ms. Triggering lazy image loading...`);
 
         // Explicitly override CSS smooth scrolling behavior so all scrolls are instantaneous
         await evaluate(`(() => {
@@ -1135,7 +1659,7 @@ export async function runHarness(options = {}) {
         }
 
         // 2. Capture bounded representative scrolled viewport PNG for visual review (scrolled to Figure 1)
-        console.log(`[CDP Harness] Capturing representative scrolled viewport at ${width}px for ${article.slug}...`);
+        console.log(`[CDP Harness] Scrolling to target figure at ${width}px for ${article.slug}...`);
         await evaluate(`(() => {
           const figures = document.querySelectorAll('figure');
           const targetFig = figures[1] || figures[0];
@@ -1144,14 +1668,58 @@ export async function runHarness(options = {}) {
           }
           return { scrollInitiated: true };
         })()`);
-        await new Promise((r) => setTimeout(r, 150));
+        await new Promise((r) => setTimeout(r, 100));
+
+        // Bounded wait for target figure actual visible image load + decode
+        console.log(`[CDP Harness] Waiting for target figure image load and decode at ${width}px for ${article.slug}...`);
+        const TARGET_FIG_READINESS_BUDGET_MS = 15000;
+        const targetFigStartTime = Date.now();
+        let targetFigReadiness = null;
+        let lastTargetFigError = null;
+
+        while (Date.now() - targetFigStartTime < TARGET_FIG_READINESS_BUDGET_MS) {
+          if (abortController.signal.aborted) throw abortController.signal.reason;
+          const remainingMs = Math.max(0, TARGET_FIG_READINESS_BUDGET_MS - (Date.now() - targetFigStartTime));
+          if (remainingMs <= 100) break;
+          const perEvalTimeoutMs = Math.max(500, Math.min(PER_COMMAND_TIMEOUT_MS, remainingMs));
+          try {
+            targetFigReadiness = await evaluate(buildTargetFigureReadinessScript(1), perEvalTimeoutMs);
+            if (targetFigReadiness?.ready) {
+              break;
+            }
+          } catch (err) {
+            lastTargetFigError = err;
+          }
+          await new Promise((r) => setTimeout(r, 100));
+        }
+
+        const targetFigElapsedMs = Date.now() - targetFigStartTime;
+        if (!targetFigReadiness?.ready) {
+          throw new Error(
+            `Target figure image failed to load and decode at ${width}px for ${article.slug} within ${Math.round(targetFigElapsedMs / 1000)}s (budget ${TARGET_FIG_READINESS_BUDGET_MS / 1000}s). State: ${JSON.stringify(targetFigReadiness)}, Last error: ${lastTargetFigError ? lastTargetFigError.message : "none"}`
+          );
+        }
+        console.log(`[CDP Harness] Target figure image loaded & decoded (${targetFigReadiness.naturalWidth}x${targetFigReadiness.naturalHeight}) in ${targetFigElapsedMs}ms.`);
+
+        // Re-center after image decode layout settlement
+        await evaluate(`(() => {
+          const figures = document.querySelectorAll('figure');
+          const targetFig = figures[1] || figures[0];
+          if (targetFig) {
+            targetFig.scrollIntoView({ behavior: 'instant', block: 'center' });
+          }
+          return { reCentered: true };
+        })()`);
+        await new Promise((r) => setTimeout(r, 100));
 
         // Sample settled scrolled geometry immediately before capture to bind actual state
         const scrolledState = await evaluate(`(() => {
           const figures = document.querySelectorAll('figure');
           const header = document.querySelector('header');
           const targetFig = figures[1] || figures[0];
+          const img = targetFig ? targetFig.querySelector('img') : null;
           const fRect = targetFig ? targetFig.getBoundingClientRect() : null;
+          const iRect = img ? img.getBoundingClientRect() : null;
           const hRect = header ? header.getBoundingClientRect() : null;
           return {
             scrollY: Math.round(window.scrollY),
@@ -1159,7 +1727,8 @@ export async function runHarness(options = {}) {
             viewportWidth: window.innerWidth,
             viewportHeight: window.innerHeight,
             figureIndex: targetFig ? 1 : 0,
-            figureRect: fRect ? { top: Math.round(fRect.top), bottom: Math.round(fRect.bottom), height: Math.round(fRect.height) } : null,
+            figureRect: fRect ? { top: Math.round(fRect.top), bottom: Math.round(fRect.bottom), height: Math.round(fRect.height), left: Math.round(fRect.left), right: Math.round(fRect.right), width: Math.round(fRect.width) } : null,
+            imageRect: iRect ? { top: Math.round(iRect.top), bottom: Math.round(iRect.bottom), height: Math.round(iRect.height), left: Math.round(iRect.left), right: Math.round(iRect.right), width: Math.round(iRect.width) } : null,
             headerRect: hRect ? { top: Math.round(hRect.top), bottom: Math.round(hRect.bottom), height: Math.round(hRect.height) } : null,
             clearanceFromHeaderBottomPx: (fRect && hRect) ? Math.round(fRect.top - hRect.bottom) : null
           };
@@ -1193,6 +1762,34 @@ export async function runHarness(options = {}) {
             `Scrolled viewport screenshot at ${width}px for ${article.slug} is blank (solid color RGB ${scrolledStats.channels.slice(0, 3).map((c) => c.min).join(",")}): check capture coordinates/clip`
           );
         }
+
+        // Verify target figure image subregion is not an empty/blank box using true geometric interior intersection
+        if (!scrolledState?.imageRect) {
+          throw new Error(
+            `Target figure image rect is missing or undefined at ${width}px for ${article.slug}: target figure image element or bounding box was not resolved`
+          );
+        }
+
+        const visibleRoi = computeVisibleImageRoi(
+          scrolledState.imageRect,
+          width,
+          INITIAL_VIEWPORT_HEIGHT,
+          DEVICE_SCALE_FACTOR,
+          20,
+          6
+        );
+
+        const imgSubBuffer = await sharp(scrolledBuffer)
+          .extract({ left: visibleRoi.left, top: visibleRoi.top, width: visibleRoi.width, height: visibleRoi.height })
+          .toBuffer();
+        const imgSubStats = await sharp(imgSubBuffer).stats();
+        const isImgSubBlank = imgSubStats.channels.slice(0, 3).every((c) => c.min === c.max || c.stdev < 1);
+        if (isImgSubBlank) {
+          throw new Error(
+            `Scrolled viewport target figure image interior region at ${width}px for ${article.slug} is blank / empty box (solid RGB ${imgSubStats.channels.slice(0, 3).map((c) => c.min).join(",")}, interior ROI ${visibleRoi.width}x${visibleRoi.height} at [${visibleRoi.left},${visibleRoi.top}], borderInset ${visibleRoi.borderInsetCss}px)`
+          );
+        }
+
         await sharp(scrolledBuffer).raw().toBuffer();
         expectedArtifacts.push(scrolledFileName);
 
@@ -1211,6 +1808,8 @@ export async function runHarness(options = {}) {
           },
           targetFigureIndex: scrolledState.figureIndex,
           figureRect: scrolledState.figureRect,
+          imageRect: scrolledState.imageRect,
+          visibleRoi,
           headerRect: scrolledState.headerRect,
           clearanceFromHeaderBottomPx: scrolledState.clearanceFromHeaderBottomPx
         };
