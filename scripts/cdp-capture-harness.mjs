@@ -80,6 +80,15 @@ export const EXPECTED_ARTICLE = {
   slug: "calibration-sticker-measurement-tolerance",
   pathname: "/blog/calibration-sticker-measurement-tolerance",
   title: "The Gauge Is Calibrated. Can It Decide This Tolerance?",
+  metadata: {
+    canonical: "https://www.sourcerating.com/blog/calibration-sticker-measurement-tolerance",
+    ogTitle: "The Gauge Is Calibrated. Can It Decide This Tolerance? | Source Rating",
+    ogUrl: "https://www.sourcerating.com/blog/calibration-sticker-measurement-tolerance",
+    ogImage: "https://www.sourcerating.com/images/blog/calibration-photo-20261031-calibration-lab-desktop.jpg",
+    twitterCard: "summary_large_image",
+    twitterTitle: "The Gauge Is Calibrated. Can It Decide This Tolerance? | Source Rating",
+    twitterImage: "https://www.sourcerating.com/images/blog/calibration-photo-20261031-calibration-lab-desktop.jpg"
+  },
   expectedFiguresCount: 3,
   figures: [
     {
@@ -110,10 +119,51 @@ export const EXPECTED_ARTICLE = {
   ]
 };
 
+export const PLYWOOD_ARTICLE = {
+  slug: "plywood-crate-solid-wood-skids-ispm15",
+  pathname: "/blog/plywood-crate-solid-wood-skids-ispm15",
+  title: "The Crate Is Plywood. What Are the Skids Made Of?",
+  metadata: {
+    canonical: "https://www.sourcerating.com/blog/plywood-crate-solid-wood-skids-ispm15",
+    ogTitle: "The Crate Is Plywood. What Are the Skids Made Of? | Source Rating",
+    ogUrl: "https://www.sourcerating.com/blog/plywood-crate-solid-wood-skids-ispm15",
+    ogImage: "https://www.sourcerating.com/images/blog/plywood-crate-photography-cover-20261030-desktop.jpg",
+    twitterCard: "summary_large_image",
+    twitterTitle: "The Crate Is Plywood. What Are the Skids Made Of? | Source Rating",
+    twitterImage: "https://www.sourcerating.com/images/blog/plywood-crate-photography-cover-20261030-desktop.jpg"
+  },
+  expectedFiguresCount: 3,
+  figures: [
+    {
+      index: 0,
+      role: "cover",
+      expectedDesktopSrc: "plywood-crate-photography-cover-20261030-desktop.jpg",
+      expectedMobileSrc: "plywood-crate-photography-cover-20261030-mobile.jpg",
+      captionSubstring: "Plywood-clad shipping cases"
+    },
+    {
+      index: 1,
+      role: "inline-1",
+      expectedDesktopSrc: "plywood-crate-skids-inspection-20261030-desktop.jpg",
+      expectedMobileSrc: "plywood-crate-skids-inspection-20261030-mobile.jpg",
+      captionSubstring: "support and forklift-entry geometry"
+    },
+    {
+      index: 2,
+      role: "inline-2",
+      expectedDesktopSrc: "plywood-crate-ispm15-mark-20261030-desktop.jpg",
+      expectedMobileSrc: "plywood-crate-ispm15-mark-20261030-mobile.jpg",
+      captionSubstring: "photographed ISPM 15 mark"
+    }
+  ]
+};
+
+export const SMOKE_ARTICLES = [EXPECTED_ARTICLE, PLYWOOD_ARTICLE];
+
 /**
  * Validates target URL against canonical origin, protocol, slug, and forbidden preview tokens.
  */
-export function validateTargetUrl(urlStr, allowedPort = DEFAULT_PORT) {
+export function validateTargetUrl(urlStr, allowedPort = DEFAULT_PORT, allowedPathnames = [EXPECTED_ARTICLE.pathname, PLYWOOD_ARTICLE.pathname]) {
   let parsed;
   try {
     parsed = new URL(urlStr);
@@ -128,8 +178,9 @@ export function validateTargetUrl(urlStr, allowedPort = DEFAULT_PORT) {
   if (parsed.origin !== canonicalOrigin127 && parsed.origin !== canonicalOriginLocalhost) {
     throw new Error(`Disallowed target origin: expected ${canonicalOrigin127} or ${canonicalOriginLocalhost} (got: ${parsed.origin})`);
   }
-  if (parsed.pathname !== EXPECTED_ARTICLE.pathname) {
-    throw new Error(`Disallowed target path: expected ${EXPECTED_ARTICLE.pathname} (got: ${parsed.pathname})`);
+  const allowedList = Array.isArray(allowedPathnames) ? allowedPathnames : [allowedPathnames];
+  if (!allowedList.includes(parsed.pathname)) {
+    throw new Error(`Disallowed target path: expected one of [${allowedList.join(', ')}] (got: ${parsed.pathname})`);
   }
   if (parsed.searchParams.has("vercel") || parsed.pathname.includes("_preview")) {
     throw new Error("Disallowed: protected preview routes or query params are forbidden");
@@ -463,7 +514,7 @@ export function buildGeometryScript() {
 /**
  * Validates DOM geometry and article content identity against expected invariants.
  */
-export function validateDomMetrics(metrics, targetWidth, expectedDpr = DEVICE_SCALE_FACTOR) {
+export function validateDomMetrics(metrics, targetWidth, expectedDpr = DEVICE_SCALE_FACTOR, expectedArticle = EXPECTED_ARTICLE) {
   if (!metrics) {
     throw new Error(`DOM metrics object is null or undefined for ${targetWidth}px`);
   }
@@ -501,11 +552,11 @@ export function validateDomMetrics(metrics, targetWidth, expectedDpr = DEVICE_SC
     );
   }
 
-  if (metrics.pathname !== EXPECTED_ARTICLE.pathname) {
-    throw new Error(`Wrong article pathname at ${targetWidth}px: expected '${EXPECTED_ARTICLE.pathname}', got '${metrics.pathname}'`);
+  if (metrics.pathname !== expectedArticle.pathname) {
+    throw new Error(`Wrong article pathname at ${targetWidth}px: expected '${expectedArticle.pathname}', got '${metrics.pathname}'`);
   }
-  if (!metrics.h1 || metrics.h1.text !== EXPECTED_ARTICLE.title) {
-    throw new Error(`Wrong article headline at ${targetWidth}px: expected '${EXPECTED_ARTICLE.title}', got '${metrics.h1?.text}'`);
+  if (!metrics.h1 || metrics.h1.text !== expectedArticle.title) {
+    throw new Error(`Wrong article headline at ${targetWidth}px: expected '${expectedArticle.title}', got '${metrics.h1?.text}'`);
   }
   if (metrics.h1.right > metrics.clientWidth) {
     throw new Error(`H1 right edge (${metrics.h1.right}px) exceeds clientWidth (${metrics.clientWidth}px) at ${targetWidth}px`);
@@ -543,12 +594,12 @@ export function validateDomMetrics(metrics, targetWidth, expectedDpr = DEVICE_SC
     throw new Error(`Footer bottom (${metrics.footer.bottom}) is non-positive at ${targetWidth}px`);
   }
 
-  if (!Array.isArray(metrics.figures) || metrics.figures.length !== EXPECTED_ARTICLE.expectedFiguresCount) {
-    throw new Error(`Expected ${EXPECTED_ARTICLE.expectedFiguresCount} figures, found ${metrics.figures?.length} at ${targetWidth}px`);
+  if (!Array.isArray(metrics.figures) || metrics.figures.length !== expectedArticle.expectedFiguresCount) {
+    throw new Error(`Expected ${expectedArticle.expectedFiguresCount} figures, found ${metrics.figures?.length} at ${targetWidth}px`);
   }
 
-  for (let i = 0; i < EXPECTED_ARTICLE.figures.length; i++) {
-    const expected = EXPECTED_ARTICLE.figures[i];
+  for (let i = 0; i < expectedArticle.figures.length; i++) {
+    const expected = expectedArticle.figures[i];
     const actual = metrics.figures[i];
     if (!actual) {
       throw new Error(`Figure ${i} (${expected.role}) missing at ${targetWidth}px`);
@@ -579,11 +630,13 @@ export function validateDomMetrics(metrics, targetWidth, expectedDpr = DEVICE_SC
         `Figure ${i} (${expected.role}) caption mismatch at ${targetWidth}px: expected to include '${expected.captionSubstring}', got '${actual.caption.text}'`
       );
     }
-    const hasLink = actual.caption.links && actual.caption.links.some((l) => l.href.includes(expected.expectedLinkHref));
-    if (!hasLink) {
-      throw new Error(
-        `Figure ${i} (${expected.role}) caption credit link missing at ${targetWidth}px: expected link containing '${expected.expectedLinkHref}', got links: ${JSON.stringify(actual.caption.links)}`
-      );
+    if (expected.expectedLinkHref) {
+      const hasLink = actual.caption.links && actual.caption.links.some((l) => l.href.includes(expected.expectedLinkHref));
+      if (!hasLink) {
+        throw new Error(
+          `Figure ${i} (${expected.role}) caption credit link missing at ${targetWidth}px: expected link containing '${expected.expectedLinkHref}', got links: ${JSON.stringify(actual.caption.links)}`
+        );
+      }
     }
     if (expected.expectedLicenseHref) {
       const hasLicense = actual.caption.links && actual.caption.links.some((l) => l.href.includes(expected.expectedLicenseHref));
@@ -598,6 +651,61 @@ export function validateDomMetrics(metrics, targetWidth, expectedDpr = DEVICE_SC
     }
   }
 
+  return true;
+}
+
+/**
+ * Generates browser-side DOM metadata extraction script for canonical, OpenGraph, and Twitter tags.
+ */
+export function buildMetadataScript() {
+  return `(() => {
+    const getMeta = (attr) => {
+      const el = document.querySelector(\`meta[property="\${attr}"], meta[name="\${attr}"]\`);
+      return el ? el.getAttribute('content') : null;
+    };
+    const canonicalEl = document.querySelector('link[rel="canonical"]');
+    return {
+      canonical: canonicalEl ? canonicalEl.getAttribute('href') : null,
+      ogTitle: getMeta('og:title'),
+      ogUrl: getMeta('og:url'),
+      ogImage: getMeta('og:image'),
+      twitterCard: getMeta('twitter:card'),
+      twitterTitle: getMeta('twitter:title'),
+      twitterImage: getMeta('twitter:image')
+    };
+  })()`;
+}
+
+/**
+ * Validates actual rendered page metadata against expected canonical, OpenGraph, and Twitter tags.
+ */
+export function validatePageMetadata(actual, expectedArticle) {
+  if (!expectedArticle || !expectedArticle.metadata) return true;
+  const exp = expectedArticle.metadata;
+  if (!actual) {
+    throw new Error(`Rendered page metadata missing for ${expectedArticle.slug}`);
+  }
+  if (actual.canonical !== exp.canonical) {
+    throw new Error(`Canonical URL mismatch for ${expectedArticle.slug}: expected '${exp.canonical}', got '${actual.canonical}'`);
+  }
+  if (actual.ogTitle !== exp.ogTitle) {
+    throw new Error(`OG title mismatch for ${expectedArticle.slug}: expected '${exp.ogTitle}', got '${actual.ogTitle}'`);
+  }
+  if (actual.ogUrl !== exp.ogUrl) {
+    throw new Error(`OG url mismatch for ${expectedArticle.slug}: expected '${exp.ogUrl}', got '${actual.ogUrl}'`);
+  }
+  if (actual.ogImage !== exp.ogImage) {
+    throw new Error(`OG image mismatch for ${expectedArticle.slug}: expected '${exp.ogImage}', got '${actual.ogImage}'`);
+  }
+  if (actual.twitterCard !== exp.twitterCard) {
+    throw new Error(`Twitter card mismatch for ${expectedArticle.slug}: expected '${exp.twitterCard}', got '${actual.twitterCard}'`);
+  }
+  if (actual.twitterTitle !== exp.twitterTitle) {
+    throw new Error(`Twitter title mismatch for ${expectedArticle.slug}: expected '${exp.twitterTitle}', got '${actual.twitterTitle}'`);
+  }
+  if (actual.twitterImage !== exp.twitterImage) {
+    throw new Error(`Twitter image mismatch for ${expectedArticle.slug}: expected '${exp.twitterImage}', got '${actual.twitterImage}'`);
+  }
   return true;
 }
 
@@ -692,9 +800,15 @@ export async function runHarness(options = {}) {
   const chromePath = options.chromePath || CHROME_PATH;
   const runsBaseDir = options.runsBaseDir || RUNS_BASE_DIR;
 
+  const isSmoke390 = Boolean(options.smoke390 || process.argv.includes("--smoke-390"));
+  const targetArticles = isSmoke390 ? (options.articles || SMOKE_ARTICLES) : [options.article || EXPECTED_ARTICLE];
+  const targetWidths = isSmoke390 ? [390] : (options.widths || TARGET_WIDTHS);
+
   const url = options.url || DEFAULT_URL;
   const targetPort = options.targetPort || DEFAULT_PORT;
-  validateTargetUrl(url, targetPort);
+  if (!isSmoke390) {
+    validateTargetUrl(url, targetPort);
+  }
 
   const cdpPort = options.port || 9222;
   const overallTimeoutMs = options.overallTimeoutMs || OVERALL_HARNESS_TIMEOUT_MS;
@@ -934,288 +1048,302 @@ export async function runHarness(options = {}) {
       patterns: [{ urlPattern: "*", requestStage: "Request" }]
     });
 
-    for (const width of TARGET_WIDTHS) {
-      if (abortController.signal.aborted) {
-        throw abortController.signal.reason || new Error("Run aborted");
-      }
+    for (const article of targetArticles) {
+      const articleUrl = `http://127.0.0.1:${targetPort}${article.pathname}`;
+      validateTargetUrl(articleUrl, targetPort);
 
-      console.log(`\n======================================================`);
-      console.log(`[CDP Harness] Viewport: ${width} CSS px (DPR: ${DEVICE_SCALE_FACTOR})`);
-      console.log(`======================================================`);
+      for (const width of targetWidths) {
+        if (abortController.signal.aborted) {
+          throw abortController.signal.reason || new Error("Run aborted");
+        }
 
-      await send("Emulation.setDeviceMetricsOverride", {
-        width,
-        height: INITIAL_VIEWPORT_HEIGHT,
-        deviceScaleFactor: DEVICE_SCALE_FACTOR,
-        mobile: true,
-        screenOrientation: { angle: 0, type: "portraitPrimary" }
-      });
+        console.log(`\n======================================================`);
+        console.log(`[CDP Harness] Article: ${article.slug} | Viewport: ${width} CSS px (DPR: ${DEVICE_SCALE_FACTOR})`);
+        console.log(`======================================================`);
 
-      await send("Emulation.setUserAgentOverride", {
-        userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
-      });
+        await send("Emulation.setDeviceMetricsOverride", {
+          width,
+          height: INITIAL_VIEWPORT_HEIGHT,
+          deviceScaleFactor: DEVICE_SCALE_FACTOR,
+          mobile: true,
+          screenOrientation: { angle: 0, type: "portraitPrimary" }
+        });
 
-      console.log(`[CDP Harness] Navigating to ${url}...`);
-      const navRes = await send("Page.navigate", { url });
-      if (navRes.errorText) {
-        throw new Error(`Navigation failed at ${width}px: ${navRes.errorText}`);
-      }
+        await send("Emulation.setUserAgentOverride", {
+          userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+        });
 
-      console.log(`[CDP Harness] Awaiting new document commitment...`);
-      const docCommitStart = Date.now();
-      let docCommitted = false;
-      while (Date.now() - docCommitStart < 15000) {
-        if (abortController.signal.aborted) throw abortController.signal.reason;
-        const state = await evaluate(`(() => {
-          if (document.readyState !== 'interactive' && document.readyState !== 'complete') {
-            return { committed: false, reason: 'readyState_' + document.readyState };
+        console.log(`[CDP Harness] Navigating to ${articleUrl}...`);
+        const navRes = await send("Page.navigate", { url: articleUrl });
+        if (navRes.errorText) {
+          throw new Error(`Navigation failed at ${width}px for ${article.slug}: ${navRes.errorText}`);
+        }
+
+        console.log(`[CDP Harness] Awaiting new document commitment...`);
+        const docCommitStart = Date.now();
+        let docCommitted = false;
+        while (Date.now() - docCommitStart < 15000) {
+          if (abortController.signal.aborted) throw abortController.signal.reason;
+          const state = await evaluate(`(() => {
+            if (document.readyState !== 'interactive' && document.readyState !== 'complete') {
+              return { committed: false, reason: 'readyState_' + document.readyState };
+            }
+            if (window.location.pathname !== '${article.pathname}') {
+              return { committed: false, reason: 'wrong_pathname_' + window.location.pathname };
+            }
+            const h1 = document.querySelector('h1');
+            if (!h1 || h1.textContent.trim() !== ${JSON.stringify(article.title)}) {
+              return { committed: false, reason: 'wrong_h1_' + (h1 ? h1.textContent.trim() : 'missing') };
+            }
+            const figures = document.querySelectorAll('figure');
+            if (figures.length < ${article.expectedFiguresCount || 3}) {
+              return { committed: false, reason: 'figures_count_' + figures.length };
+            }
+            return { committed: true };
+          })()`);
+
+          if (state?.committed) {
+            docCommitted = true;
+            break;
           }
-          if (window.location.pathname !== '${EXPECTED_ARTICLE.pathname}') {
-            return { committed: false, reason: 'wrong_pathname_' + window.location.pathname };
-          }
-          const h1 = document.querySelector('h1');
-          if (!h1 || h1.textContent.trim() !== ${JSON.stringify(EXPECTED_ARTICLE.title)}) {
-            return { committed: false, reason: 'wrong_h1_' + (h1 ? h1.textContent.trim() : 'missing') };
-          }
-          const figures = document.querySelectorAll('figure');
-          if (figures.length < 3) {
-            return { committed: false, reason: 'figures_count_' + figures.length };
-          }
-          return { committed: true };
+          await new Promise((r) => setTimeout(r, 250));
+        }
+
+        if (!docCommitted) {
+          throw new Error(`Document failed to commit expected article ${article.slug} at ${width}px within 15s`);
+        }
+        console.log(`[CDP Harness] Document committed in ${Date.now() - docCommitStart}ms. Triggering lazy image loading...`);
+
+        // Explicitly override CSS smooth scrolling behavior so all scrolls are instantaneous
+        await evaluate(`(() => {
+          if (document.documentElement) document.documentElement.style.scrollBehavior = 'auto';
+          if (document.body) document.body.style.scrollBehavior = 'auto';
+          return { scrollBehaviorAuto: true };
         })()`);
 
-        if (state?.committed) {
-          docCommitted = true;
-          break;
+        // 1. Scroll through figures to trigger lazy image loading
+        for (let figIdx = 0; figIdx < (article.expectedFiguresCount || 3); figIdx++) {
+          await evaluate(`(() => {
+            const figures = document.querySelectorAll('figure');
+            if (figures[${figIdx}]) {
+              figures[${figIdx}].scrollIntoView({ behavior: 'instant', block: 'center' });
+              return { scrolled: true, figureIndex: ${figIdx} };
+            }
+            return { scrolled: false, figureIndex: ${figIdx} };
+          })()`);
+          await new Promise((r) => setTimeout(r, 200));
         }
-        await new Promise((r) => setTimeout(r, 250));
-      }
 
-      if (!docCommitted) {
-        throw new Error(`Document failed to commit expected article at ${width}px within 15s`);
-      }
-      console.log(`[CDP Harness] Document committed in ${Date.now() - docCommitStart}ms. Triggering lazy image loading...`);
-
-      // Explicitly override CSS smooth scrolling behavior so all scrolls are instantaneous
-      await evaluate(`(() => {
-        if (document.documentElement) document.documentElement.style.scrollBehavior = 'auto';
-        if (document.body) document.body.style.scrollBehavior = 'auto';
-        return { scrollBehaviorAuto: true };
-      })()`);
-
-      // 1. Scroll through figures to trigger lazy image loading
-      for (let figIdx = 0; figIdx < 3; figIdx++) {
+        // 2. Capture bounded representative scrolled viewport PNG for visual review (scrolled to Figure 1)
+        console.log(`[CDP Harness] Capturing representative scrolled viewport at ${width}px for ${article.slug}...`);
         await evaluate(`(() => {
           const figures = document.querySelectorAll('figure');
-          if (figures[${figIdx}]) {
-            figures[${figIdx}].scrollIntoView({ behavior: 'instant', block: 'center' });
-            return { scrolled: true, figureIndex: ${figIdx} };
+          const targetFig = figures[1] || figures[0];
+          if (targetFig) {
+            targetFig.scrollIntoView({ behavior: 'instant', block: 'center' });
           }
-          return { scrolled: false, figureIndex: ${figIdx} };
+          return { scrollInitiated: true };
         })()`);
-        await new Promise((r) => setTimeout(r, 200));
-      }
+        await new Promise((r) => setTimeout(r, 150));
 
-      // 2. Capture bounded representative scrolled viewport PNG for visual review (scrolled to Figure 1)
-      console.log(`[CDP Harness] Capturing representative scrolled viewport at ${width}px...`);
-      await evaluate(`(() => {
-        const figures = document.querySelectorAll('figure');
-        const targetFig = figures[1] || figures[0];
-        if (targetFig) {
-          targetFig.scrollIntoView({ behavior: 'instant', block: 'center' });
+        // Sample settled scrolled geometry immediately before capture to bind actual state
+        const scrolledState = await evaluate(`(() => {
+          const figures = document.querySelectorAll('figure');
+          const header = document.querySelector('header');
+          const targetFig = figures[1] || figures[0];
+          const fRect = targetFig ? targetFig.getBoundingClientRect() : null;
+          const hRect = header ? header.getBoundingClientRect() : null;
+          return {
+            scrollY: Math.round(window.scrollY),
+            scrollX: Math.round(window.scrollX),
+            viewportWidth: window.innerWidth,
+            viewportHeight: window.innerHeight,
+            figureIndex: targetFig ? 1 : 0,
+            figureRect: fRect ? { top: Math.round(fRect.top), bottom: Math.round(fRect.bottom), height: Math.round(fRect.height) } : null,
+            headerRect: hRect ? { top: Math.round(hRect.top), bottom: Math.round(hRect.bottom), height: Math.round(hRect.height) } : null,
+            clearanceFromHeaderBottomPx: (fRect && hRect) ? Math.round(fRect.top - hRect.bottom) : null
+          };
+        })()`);
+
+        // Capture visible viewport without document-origin clip to avoid off-viewport blank rendering
+        const scrolledShotRes = await send("Page.captureScreenshot", {
+          format: "png",
+          captureBeyondViewport: false,
+          fromSurface: true
+        });
+
+        const filePrefix = isSmoke390 ? `${article.slug}` : "calibration";
+        const scrolledFileName = `${filePrefix}-scrolled-viewport-${width}px.png`;
+        const scrolledFilePath = path.join(runBundleDir, scrolledFileName);
+        const scrolledBuffer = Buffer.from(scrolledShotRes.data, "base64");
+        fs.writeFileSync(scrolledFilePath, scrolledBuffer);
+
+        const scrolledMeta = await sharp(scrolledBuffer).metadata();
+        const expectedScrolledWidth = width * DEVICE_SCALE_FACTOR;
+        const expectedScrolledHeight = INITIAL_VIEWPORT_HEIGHT * DEVICE_SCALE_FACTOR;
+        if (scrolledMeta.width !== expectedScrolledWidth || scrolledMeta.height !== expectedScrolledHeight) {
+          throw new Error(
+            `Scrolled viewport PNG dimension mismatch at ${width}px for ${article.slug}: expected ${expectedScrolledWidth}x${expectedScrolledHeight}, got ${scrolledMeta.width}x${scrolledMeta.height}`
+          );
         }
-        return { scrollInitiated: true };
-      })()`);
-      await new Promise((r) => setTimeout(r, 150));
+        const scrolledStats = await sharp(scrolledBuffer).stats();
+        const isBlankScrolled = scrolledStats.channels.slice(0, 3).every((c) => c.min === c.max || c.stdev < 1);
+        if (isBlankScrolled) {
+          throw new Error(
+            `Scrolled viewport screenshot at ${width}px for ${article.slug} is blank (solid color RGB ${scrolledStats.channels.slice(0, 3).map((c) => c.min).join(",")}): check capture coordinates/clip`
+          );
+        }
+        await sharp(scrolledBuffer).raw().toBuffer();
+        expectedArtifacts.push(scrolledFileName);
 
-      // Sample settled scrolled geometry immediately before capture to bind actual state
-      const scrolledState = await evaluate(`(() => {
-        /* scrolledStateEval */
-        const figures = document.querySelectorAll('figure');
-        const header = document.querySelector('header');
-        const targetFig = figures[1] || figures[0];
-        const fRect = targetFig ? targetFig.getBoundingClientRect() : null;
-        const hRect = header ? header.getBoundingClientRect() : null;
-        return {
-          scrollY: Math.round(window.scrollY),
-          scrollX: Math.round(window.scrollX),
-          viewportWidth: window.innerWidth,
-          viewportHeight: window.innerHeight,
-          figureIndex: targetFig ? 1 : 0,
-          figureRect: fRect ? { top: Math.round(fRect.top), bottom: Math.round(fRect.bottom), height: Math.round(fRect.height) } : null,
-          headerRect: hRect ? { top: Math.round(hRect.top), bottom: Math.round(hRect.bottom), height: Math.round(hRect.height) } : null,
-          clearanceFromHeaderBottomPx: (fRect && hRect) ? Math.round(fRect.top - hRect.bottom) : null
+        const scrolledViewportEvidence = {
+          fileName: scrolledFileName,
+          pixelDimensions: `${expectedScrolledWidth}x${expectedScrolledHeight}`,
+          sizeBytes: scrolledBuffer.length,
+          scrollPosition: {
+            scrollY: scrolledState.scrollY,
+            scrollX: scrolledState.scrollX
+          },
+          viewportDimensions: {
+            widthCssPx: width,
+            heightCssPx: INITIAL_VIEWPORT_HEIGHT,
+            dpr: DEVICE_SCALE_FACTOR
+          },
+          targetFigureIndex: scrolledState.figureIndex,
+          figureRect: scrolledState.figureRect,
+          headerRect: scrolledState.headerRect,
+          clearanceFromHeaderBottomPx: scrolledState.clearanceFromHeaderBottomPx
         };
-      })()`);
 
-      // Capture visible viewport without document-origin clip to avoid off-viewport blank rendering
-      const scrolledShotRes = await send("Page.captureScreenshot", {
-        format: "png",
-        captureBeyondViewport: false,
-        fromSurface: true
-      });
+        // 3. Instantaneous top reset: explicitly override smooth scroll and assert scroll coordinates reach (0, 0)
+        console.log(`[CDP Harness] Executing instantaneous top reset at ${width}px for ${article.slug}...`);
+        await evaluate(`(() => {
+          if (document.documentElement) document.documentElement.style.scrollBehavior = 'auto';
+          if (document.body) document.body.style.scrollBehavior = 'auto';
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          return {
+            scrollY: window.scrollY,
+            scrollX: window.scrollX,
+            resetInitiated: true
+          };
+        })()`);
 
-      const scrolledFileName = `calibration-scrolled-viewport-${width}px.png`;
-      const scrolledFilePath = path.join(runBundleDir, scrolledFileName);
-      const scrolledBuffer = Buffer.from(scrolledShotRes.data, "base64");
-      fs.writeFileSync(scrolledFilePath, scrolledBuffer);
+        let scrollResetClean = false;
+        const scrollResetStart = Date.now();
+        while (Date.now() - scrollResetStart < 5000) {
+          if (abortController.signal.aborted) throw abortController.signal.reason;
+          const pos = await evaluate(`(() => {
+            if (window.scrollY !== 0 || window.scrollX !== 0) {
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            }
+            return { scrollY: window.scrollY, scrollX: window.scrollX };
+          })()`);
+          if (pos && pos.scrollY === 0 && pos.scrollX === 0) {
+            scrollResetClean = true;
+            break;
+          }
+          await new Promise((r) => setTimeout(r, 100));
+        }
+        if (!scrollResetClean) {
+          throw new Error(`Scroll position failed to reset cleanly to (0, 0) at ${width}px for ${article.slug} within 5s`);
+        }
 
-      const scrolledMeta = await sharp(scrolledBuffer).metadata();
-      const expectedScrolledWidth = width * DEVICE_SCALE_FACTOR;
-      const expectedScrolledHeight = INITIAL_VIEWPORT_HEIGHT * DEVICE_SCALE_FACTOR;
-      if (scrolledMeta.width !== expectedScrolledWidth || scrolledMeta.height !== expectedScrolledHeight) {
-        throw new Error(
-          `Scrolled viewport PNG dimension mismatch at ${width}px: expected ${expectedScrolledWidth}x${expectedScrolledHeight}, got ${scrolledMeta.width}x${scrolledMeta.height}`
-        );
-      }
-      const scrolledStats = await sharp(scrolledBuffer).stats();
-      const isBlankScrolled = scrolledStats.channels.slice(0, 3).every((c) => c.min === c.max || c.stdev < 1);
-      if (isBlankScrolled) {
-        throw new Error(
-          `Scrolled viewport screenshot at ${width}px is blank (solid color RGB ${scrolledStats.channels.slice(0, 3).map((c) => c.min).join(",")}): check capture coordinates/clip`
-        );
-      }
-      await sharp(scrolledBuffer).raw().toBuffer();
-      expectedArtifacts.push(scrolledFileName);
+        console.log(`[CDP Harness] Polling for full DOM, font, and image decode readiness...`);
+        const readinessStartTime = Date.now();
+        let readinessState = null;
 
-      const scrolledViewportEvidence = {
-        fileName: scrolledFileName,
-        pixelDimensions: `${expectedScrolledWidth}x${expectedScrolledHeight}`,
-        sizeBytes: scrolledBuffer.length,
-        scrollPosition: {
-          scrollY: scrolledState.scrollY,
-          scrollX: scrolledState.scrollX
-        },
-        viewportDimensions: {
-          widthCssPx: width,
-          heightCssPx: INITIAL_VIEWPORT_HEIGHT,
-          dpr: DEVICE_SCALE_FACTOR
-        },
-        targetFigureIndex: scrolledState.figureIndex,
-        figureRect: scrolledState.figureRect,
-        headerRect: scrolledState.headerRect,
-        clearanceFromHeaderBottomPx: scrolledState.clearanceFromHeaderBottomPx
-      };
+        while (Date.now() - readinessStartTime < READINESS_TIMEOUT_MS) {
+          if (abortController.signal.aborted) throw abortController.signal.reason;
+          readinessState = await evaluate(buildReadinessScript(width));
+          if (readinessState?.ready) {
+            break;
+          }
+          await new Promise((r) => setTimeout(r, 300));
+        }
 
-      // 3. Instantaneous top reset: explicitly override smooth scroll and assert scroll coordinates reach (0, 0)
-      console.log(`[CDP Harness] Executing instantaneous top reset at ${width}px...`);
-      await evaluate(`(() => {
-        if (document.documentElement) document.documentElement.style.scrollBehavior = 'auto';
-        if (document.body) document.body.style.scrollBehavior = 'auto';
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        return {
+        if (!readinessState?.ready) {
+          throw new Error(`Readiness gate failed at ${width}px for ${article.slug} after ${READINESS_TIMEOUT_MS}ms. State: ${JSON.stringify(readinessState)}`);
+        }
+        console.log(`[CDP Harness] Readiness verified in ${Date.now() - readinessStartTime}ms.`);
+
+        // Verify geometry stability before capture
+        console.log(`[CDP Harness] Verifying geometry stability before capture at ${width}px for ${article.slug}...`);
+        const stab1 = await evaluate(`(() => ({
           scrollY: window.scrollY,
           scrollX: window.scrollX,
-          resetInitiated: true
-        };
-      })()`);
-
-      let scrollResetClean = false;
-      const scrollResetStart = Date.now();
-      while (Date.now() - scrollResetStart < 5000) {
-        if (abortController.signal.aborted) throw abortController.signal.reason;
-        const pos = await evaluate(`(() => {
-          /* scrollResetPoll */
-          if (window.scrollY !== 0 || window.scrollX !== 0) {
-            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-          }
-          return { scrollY: window.scrollY, scrollX: window.scrollX };
-        })()`);
-        if (pos && pos.scrollY === 0 && pos.scrollX === 0) {
-          scrollResetClean = true;
-          break;
-        }
+          h1Top: Math.round(document.querySelector('h1')?.getBoundingClientRect()?.top ?? 0),
+          headerBottom: Math.round(document.querySelector('header')?.getBoundingClientRect()?.bottom ?? 0)
+        }))()`);
         await new Promise((r) => setTimeout(r, 100));
-      }
-      if (!scrollResetClean) {
-        throw new Error(`Scroll position failed to reset cleanly to (0, 0) at ${width}px within 5s`);
-      }
+        const stab2 = await evaluate(`(() => ({
+          scrollY: window.scrollY,
+          scrollX: window.scrollX,
+          h1Top: Math.round(document.querySelector('h1')?.getBoundingClientRect()?.top ?? 0),
+          headerBottom: Math.round(document.querySelector('header')?.getBoundingClientRect()?.bottom ?? 0)
+        }))()`);
 
-      console.log(`[CDP Harness] Polling for full DOM, font, and image decode readiness...`);
-      const readinessStartTime = Date.now();
-      let readinessState = null;
-
-      while (Date.now() - readinessStartTime < READINESS_TIMEOUT_MS) {
-        if (abortController.signal.aborted) throw abortController.signal.reason;
-        readinessState = await evaluate(buildReadinessScript(width));
-        if (readinessState?.ready) {
-          break;
+        if (stab1.scrollY !== 0 || stab2.scrollY !== 0 || stab1.scrollX !== 0 || stab2.scrollX !== 0) {
+          throw new Error(
+            `Unstable scroll state at ${width}px for ${article.slug}: sample1=(${stab1.scrollX},${stab1.scrollY}), sample2=(${stab2.scrollX},${stab2.scrollY})`
+          );
         }
-        await new Promise((r) => setTimeout(r, 300));
-      }
-
-      if (!readinessState?.ready) {
-        throw new Error(`Readiness gate failed at ${width}px after ${READINESS_TIMEOUT_MS}ms. State: ${JSON.stringify(readinessState)}`);
-      }
-      console.log(`[CDP Harness] Readiness verified in ${Date.now() - readinessStartTime}ms.`);
-
-      // Verify geometry stability before capture: sample scrollY, H1 and header rect across 100ms
-      console.log(`[CDP Harness] Verifying geometry stability before capture at ${width}px...`);
-      const stab1 = await evaluate(`(() => ({
-        scrollY: window.scrollY,
-        scrollX: window.scrollX,
-        h1Top: Math.round(document.querySelector('h1')?.getBoundingClientRect()?.top ?? 0),
-        headerBottom: Math.round(document.querySelector('header')?.getBoundingClientRect()?.bottom ?? 0)
-      }))()`);
-      await new Promise((r) => setTimeout(r, 100));
-      const stab2 = await evaluate(`(() => ({
-        scrollY: window.scrollY,
-        scrollX: window.scrollX,
-        h1Top: Math.round(document.querySelector('h1')?.getBoundingClientRect()?.top ?? 0),
-        headerBottom: Math.round(document.querySelector('header')?.getBoundingClientRect()?.bottom ?? 0)
-      }))()`);
-
-      if (stab1.scrollY !== 0 || stab2.scrollY !== 0 || stab1.scrollX !== 0 || stab2.scrollX !== 0) {
-        throw new Error(
-          `Unstable scroll state at ${width}px: sample1=(${stab1.scrollX},${stab1.scrollY}), sample2=(${stab2.scrollX},${stab2.scrollY})`
-        );
-      }
-      if (Math.abs(stab1.h1Top - stab2.h1Top) > 1 || Math.abs(stab1.headerBottom - stab2.headerBottom) > 1) {
-        throw new Error(
-          `Geometry shifted during stabilization at ${width}px: H1 top ${stab1.h1Top} -> ${stab2.h1Top}, Header bottom ${stab1.headerBottom} -> ${stab2.headerBottom}`
-        );
-      }
-
-      const metrics = await evaluate(buildGeometryScript());
-      validateDomMetrics(metrics, width, DEVICE_SCALE_FACTOR);
-      console.log(`[CDP Harness] DOM metrics validated cleanly: scrollWidth=${metrics.scrollWidth}, clientWidth=${metrics.clientWidth}, H1 right=${metrics.h1.right}px, clearance=${metrics.h1.top - metrics.header.bottom}px`);
-
-      if (pageExceptions.length > 0) {
-        throw new Error(`Page threw unhandled exception(s) during execution: ${JSON.stringify(pageExceptions)}`);
-      }
-
-      console.log(`[CDP Harness] Capturing full article screenshot (height: ${Math.ceil(metrics.scrollHeight)} CSS px)...`);
-      const shotRes = await send("Page.captureScreenshot", {
-        format: "png",
-        captureBeyondViewport: true,
-        fromSurface: true,
-        clip: {
-          x: 0,
-          y: 0,
-          width,
-          height: Math.ceil(metrics.scrollHeight),
-          scale: 1
+        if (Math.abs(stab1.h1Top - stab2.h1Top) > 1 || Math.abs(stab1.headerBottom - stab2.headerBottom) > 1) {
+          throw new Error(
+            `Geometry shifted during stabilization at ${width}px for ${article.slug}: H1 top ${stab1.h1Top} -> ${stab2.h1Top}, Header bottom ${stab1.headerBottom} -> ${stab2.headerBottom}`
+          );
         }
-      });
 
-      const fileName = `calibration-viewport-${width}px.png`;
-      const bundleShotPath = path.join(runBundleDir, fileName);
-      const imgBuffer = Buffer.from(shotRes.data, "base64");
-      fs.writeFileSync(bundleShotPath, imgBuffer);
+        const metrics = await evaluate(buildGeometryScript());
+        validateDomMetrics(metrics, width, DEVICE_SCALE_FACTOR, article);
+        console.log(`[CDP Harness] DOM metrics validated cleanly for ${article.slug}: scrollWidth=${metrics.scrollWidth}, clientWidth=${metrics.clientWidth}, H1 right=${metrics.h1.right}px, clearance=${metrics.h1.top - metrics.header.bottom}px`);
 
-      const pngDims = await validateScreenshotPng(imgBuffer, metrics, width, DEVICE_SCALE_FACTOR);
-      console.log(`[CDP Harness] Fully decompressed & validated candidate PNG: ${bundleShotPath} (${imgBuffer.length} bytes, pixel dimensions: ${pngDims.width}x${pngDims.height})`);
+        const pageMetadata = await evaluate(buildMetadataScript());
+        if (pageMetadata) {
+          validatePageMetadata(pageMetadata, article);
+          console.log(`[CDP Harness] Rendered DOM metadata validated for ${article.slug}: canonical=${pageMetadata.canonical}, og:image=${pageMetadata.ogImage}`);
+        } else if (isSmoke390) {
+          throw new Error(`Rendered DOM metadata missing in smoke-390 mode for ${article.slug}`);
+        }
 
-      expectedArtifacts.push(fileName);
-      sessionReport.viewports.push({
-        widthCssPx: width,
-        pixelWidth: pngDims.width,
-        pixelHeight: pngDims.height,
-        fileName,
-        sizeBytes: imgBuffer.length,
-        metrics,
-        scrolledViewportEvidence
-      });
+        if (pageExceptions.length > 0) {
+          throw new Error(`Page threw unhandled exception(s) during execution: ${JSON.stringify(pageExceptions)}`);
+        }
+
+        console.log(`[CDP Harness] Capturing full article screenshot (height: ${Math.ceil(metrics.scrollHeight)} CSS px) for ${article.slug}...`);
+        const shotRes = await send("Page.captureScreenshot", {
+          format: "png",
+          captureBeyondViewport: true,
+          fromSurface: true,
+          clip: {
+            x: 0,
+            y: 0,
+            width,
+            height: Math.ceil(metrics.scrollHeight),
+            scale: 1
+          }
+        });
+
+        const fullFileName = `${filePrefix}-viewport-${width}px.png`;
+        const bundleShotPath = path.join(runBundleDir, fullFileName);
+        const imgBuffer = Buffer.from(shotRes.data, "base64");
+        fs.writeFileSync(bundleShotPath, imgBuffer);
+
+        const pngDims = await validateScreenshotPng(imgBuffer, metrics, width, DEVICE_SCALE_FACTOR);
+        console.log(`[CDP Harness] Fully decompressed & validated candidate PNG: ${bundleShotPath} (${imgBuffer.length} bytes, pixel dimensions: ${pngDims.width}x${pngDims.height})`);
+
+        expectedArtifacts.push(fullFileName);
+        sessionReport.viewports.push({
+          slug: article.slug,
+          widthCssPx: width,
+          pixelWidth: pngDims.width,
+          pixelHeight: pngDims.height,
+          fileName: fullFileName,
+          sizeBytes: imgBuffer.length,
+          metrics,
+          metadata: pageMetadata || null,
+          scrolledViewportEvidence
+        });
+      }
     }
 
     if (abortController.signal.aborted) {
@@ -1361,8 +1489,10 @@ export async function runHarness(options = {}) {
         bundleTimestamp: new Date().toISOString(),
         runBundleDir,
         status: "VALIDATED_PASS",
+        mode: isSmoke390 ? "smoke-390" : "full-4width",
         artifacts: expectedArtifacts,
         viewports: sessionReport.viewports.map((v) => ({
+          slug: v.slug,
           widthCssPx: v.widthCssPx,
           pixelDimensions: `${v.pixelWidth}x${v.pixelHeight}`,
           file: v.fileName,

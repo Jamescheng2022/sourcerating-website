@@ -43,12 +43,142 @@ jobs:
           cat <<RECEIPT > docs/editorial/evidence/runs/job-status-receipt.json
           {
             "status": "INITIALIZED",
-            "headSha": "${{ github.event.pull_request.head.sha || github.sha }}",
-            "baseSha": "${{ github.event.pull_request.base.sha || 'origin/main' }}",
-            "runId": "${{ github.run_id }}",
+            "pinnedMainSha": "7a8c2a9361fa16728458536e61465a679716bf2a",
+            "pinnedPassedHeadSha": "859b85026c8aa294740e6b572381d0d071fa38a9",
+            "expectedProductMergedTree": "ac72179966f2a3acd0b5260495628f7163f984db",
+            "observedHeadSha": "${{ github.event.pull_request.head.sha || github.sha }}",
+            "observedBaseSha": "${{ github.event.pull_request.base.sha || 'origin/main' }}",
+            "githubRunId": "${{ github.run_id }}",
             "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           }
           RECEIPT
+
+      - name: Verify exact pinned product integration and establish ephemeral merge
+        id: verify_integration
+        run: |
+          set -euo pipefail
+          echo "=== 1. Pinned reviewed product identity ==="
+          PINNED_MAIN_SHA="7a8c2a9361fa16728458536e61465a679716bf2a"
+          PINNED_PASSED_HEAD_SHA="859b85026c8aa294740e6b572381d0d071fa38a9"
+          EXPECTED_PRODUCT_MERGED_TREE="ac72179966f2a3acd0b5260495628f7163f984db"
+
+          git rev-parse --verify "${PINNED_MAIN_SHA}^{commit}"
+          git rev-parse --verify "${PINNED_PASSED_HEAD_SHA}^{commit}"
+
+          echo "=== 2. Check PR event base and obtain authoritative current main ==="
+          # Additional guard: verify PR event base matches pinned main (stale => truthful FAIL, not proof of current main)
+          PR_BASE_SHA="${{ github.event.pull_request.base.sha || '' }}"
+          if [ -n "$PR_BASE_SHA" ] && [ "$PR_BASE_SHA" != "$PINNED_MAIN_SHA" ]; then
+            echo "::error::PR event base SHA drift detected! Pinned: $PINNED_MAIN_SHA, but PR base is: $PR_BASE_SHA"
+            exit 1
+          fi
+
+          # Authoritative check: fetch read-only remote ref directly from origin; fail if absent, unavailable, or different
+          echo "Fetching authoritative current main ref from origin..."
+          git fetch --no-tags origin refs/heads/main:refs/remotes/origin/main
+          AUTHORITATIVE_MAIN_SHA="$(git rev-parse --verify refs/remotes/origin/main)"
+          echo "Authoritative origin/main SHA: $AUTHORITATIVE_MAIN_SHA"
+
+          if [ -z "$AUTHORITATIVE_MAIN_SHA" ]; then
+            echo "::error::Authoritative origin/main ref is absent or unavailable!"
+            exit 1
+          fi
+
+          if [ "$AUTHORITATIVE_MAIN_SHA" != "$PINNED_MAIN_SHA" ]; then
+            echo "::error::Authoritative origin/main branch drift detected! Pinned: $PINNED_MAIN_SHA, but remote main is: $AUTHORITATIVE_MAIN_SHA"
+            exit 1
+          fi
+          echo "Verified: PR event base and authoritative origin/main strictly match pinned $PINNED_MAIN_SHA."
+
+          echo "=== 3. Verify exact product merge-tree without test patch (Fix 1) ==="
+          ACTUAL_PRODUCT_TREE="$(git merge-tree --write-tree "$PINNED_MAIN_SHA" "$PINNED_PASSED_HEAD_SHA")"
+          echo "Actual product merge-tree: $ACTUAL_PRODUCT_TREE"
+          if [ "$ACTUAL_PRODUCT_TREE" != "$EXPECTED_PRODUCT_MERGED_TREE" ]; then
+            echo "::error::Product merge-tree mismatch! Expected $EXPECTED_PRODUCT_MERGED_TREE, got $ACTUAL_PRODUCT_TREE"
+            exit 1
+          fi
+          echo "Verified: product merge-tree strictly matches $EXPECTED_PRODUCT_MERGED_TREE."
+
+          echo "=== 4. Enforce exact reviewed test files allowlist on test commit (Fix 2) ==="
+          CURRENT_TEST_SHA="$(git rev-parse HEAD)"
+          echo "Current test commit SHA: $CURRENT_TEST_SHA"
+
+          # Exact reviewed test files allowlist
+          REVIEWED_ALLOWLIST=(
+            ".github/workflows/source-rating-editorial-preflight.yml"
+            "scripts/cdp-capture-harness.mjs"
+            "scripts/validate-ci-bundle.mjs"
+          )
+
+          DIFF_PASSED_HEAD="$(git diff --name-only "$PINNED_PASSED_HEAD_SHA" HEAD)"
+          echo "Files modified between passedhead and test commit:"
+          echo "$DIFF_PASSED_HEAD"
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              ".github/workflows/source-rating-editorial-preflight.yml" | \
+              "scripts/cdp-capture-harness.mjs" | \
+              "scripts/validate-ci-bundle.mjs")
+                ;;
+              *)
+                echo "::error::Unexpected modified path in test commit: $f (refusing path outside reviewed test allowlist)"
+                exit 1
+                ;;
+            esac
+          done <<< "$DIFF_PASSED_HEAD"
+          echo "Verified: test commit modifies ONLY allowlisted test/CI files."
+
+          echo "=== 5. Ephemeral integration on disposable runner ==="
+          git -c user.name="CI-Runner" -c user.email="ci@sourcerating.local" merge --no-commit --no-ff "$PINNED_MAIN_SHA"
+
+          echo "=== 6. Verify integrated working tree boundaries with exact allowlist ==="
+          # Compare actual integrated working tree to expected product tree: ONLY allowlisted test files may differ
+          DIFF_INTEGRATED_EXPECTED="$(git diff --name-only "$EXPECTED_PRODUCT_MERGED_TREE")"
+          echo "Files differing between integrated working tree and expected product merged tree:"
+          echo "$DIFF_INTEGRATED_EXPECTED"
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              ".github/workflows/source-rating-editorial-preflight.yml" | \
+              "scripts/cdp-capture-harness.mjs" | \
+              "scripts/validate-ci-bundle.mjs")
+                ;;
+              *)
+                echo "::error::Integrated working tree has unexpected drift from expected product tree: $f"
+                exit 1
+                ;;
+            esac
+          done <<< "$DIFF_INTEGRATED_EXPECTED"
+
+          # Verify integrated test files match test commit HEAD
+          DIFF_INTEGRATED_TEST="$(git diff --name-only HEAD -- "${REVIEWED_ALLOWLIST[@]}")"
+          if [ -n "$DIFF_INTEGRATED_TEST" ]; then
+            echo "::error::Integrated working tree test files modified unexpectedly during merge!"
+            echo "$DIFF_INTEGRATED_TEST"
+            exit 1
+          fi
+          echo "Verified: all product files strictly match $EXPECTED_PRODUCT_MERGED_TREE and test files match $CURRENT_TEST_SHA."
+
+          mkdir -p docs/editorial/evidence/runs
+          cat <<EOF > docs/editorial/evidence/runs/integration-identity.json
+          {
+            "pinnedMainSha": "$PINNED_MAIN_SHA",
+            "authoritativeMainSha": "$AUTHORITATIVE_MAIN_SHA",
+            "pinnedPassedHeadSha": "$PINNED_PASSED_HEAD_SHA",
+            "expectedProductMergedTree": "$EXPECTED_PRODUCT_MERGED_TREE",
+            "actualProductMergedTree": "$ACTUAL_PRODUCT_TREE",
+            "testCommitSha": "$CURRENT_TEST_SHA",
+            "reviewedAllowlist": [
+              ".github/workflows/source-rating-editorial-preflight.yml",
+              "scripts/cdp-capture-harness.mjs",
+              "scripts/validate-ci-bundle.mjs"
+            ],
+            "nonTestDiffFromPassedHead": "CLEAN_ZERO_DIFF",
+            "integratedProductTreeDiff": "CLEAN_ZERO_DIFF",
+            "integratedTestTreeDiff": "CLEAN_ZERO_DIFF",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
 
       - name: Set up Node.js
         id: setup_node
@@ -197,7 +327,7 @@ jobs:
           trap cleanup_server EXIT
 
           # 3. Wall-clock 30-second route readiness deadline (date +%s) with dynamic budget-capped curl
-          echo "Awaiting route readiness at http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance (deadline: 30s)..."
+          echo "Awaiting route readiness for calibration and plywood articles (deadline: 30s)..."
           START_TIME=$(date +%s)
           DEADLINE=$((START_TIME + 30))
           READY=0
@@ -215,9 +345,10 @@ jobs:
             MAX_TIMEOUT=5
             [ "$MAX_TIMEOUT" -gt "$REMAINING" ] && MAX_TIMEOUT="$REMAINING"
 
-            if curl -s -f -o /dev/null --connect-timeout "$CONN_TIMEOUT" --max-time "$MAX_TIMEOUT" "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance"; then
+            if curl -s -f -o /dev/null --connect-timeout "$CONN_TIMEOUT" --max-time "$MAX_TIMEOUT" "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance" && \
+               curl -s -f -o /dev/null --connect-timeout "$CONN_TIMEOUT" --max-time "$MAX_TIMEOUT" "http://127.0.0.1:3000/blog/plywood-crate-solid-wood-skids-ispm15"; then
               ELAPSED=$(( $(date +%s) - START_TIME ))
-              echo "Target route is ready (attempt $ATTEMPT, elapsed: ${ELAPSED}s)."
+              echo "Target routes are ready (attempt $ATTEMPT, elapsed: ${ELAPSED}s)."
               READY=1
               break
             fi
@@ -230,7 +361,10 @@ jobs:
             cat <<RECEIPT > docs/editorial/evidence/runs/workflow-failure-receipt.json
           {
             "failureStage": "ROUTE_READINESS_TIMEOUT",
-            "route": "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance",
+            "routes": [
+              "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance",
+              "http://127.0.0.1:3000/blog/plywood-crate-solid-wood-skids-ispm15"
+            ],
             "deadlineSeconds": 30,
             "elapsedSeconds": $ELAPSED,
             "attempts": $ATTEMPT,
@@ -238,15 +372,15 @@ jobs:
             "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           }
           RECEIPT
-            echo "::error::Target route failed to become ready within ${ELAPSED}s (monotonic 30s deadline exceeded)."
+            echo "::error::Target routes failed to become ready within ${ELAPSED}s (monotonic 30s deadline exceeded)."
             cat next-server.log || true
             exit 1
           fi
 
-          # 4. Run 4-width reviewed CDP harness
-          echo "Executing CDP capture harness..."
+          # 4. Run targeted 390 mobile smoke CDP harness for calibration and plywood
+          echo "Executing targeted 390 mobile smoke CDP harness..."
           HARNESS_STATUS=0
-          node scripts/cdp-capture-harness.mjs || HARNESS_STATUS=$?
+          node scripts/cdp-capture-harness.mjs --smoke-390 || HARNESS_STATUS=$?
 
           if [ "$HARNESS_STATUS" -ne 0 ]; then
             mkdir -p docs/editorial/evidence/runs
@@ -262,10 +396,10 @@ jobs:
           fi
 
           # 5. Deterministic Node CI bundle validator (full-pixel decode & safe build-identity)
-          echo "Executing CI bundle validator..."
+          echo "Executing CI bundle validator in smoke-390 mode..."
           export HEAD_SHA="${{ github.event.pull_request.head.sha || github.sha }}"
           export BASE_SHA="${{ github.event.pull_request.base.sha || 'origin/main' }}"
-          node scripts/validate-ci-bundle.mjs
+          node scripts/validate-ci-bundle.mjs --smoke-390
 
           # Copy server log into validated bundle directory
           RUN_DIR="$(find docs/editorial/evidence/runs -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
@@ -280,9 +414,29 @@ jobs:
           node -e '
             const fs = require("fs");
             const path = require("path");
+            const runsDir = path.resolve("docs/editorial/evidence/runs");
+            fs.mkdirSync(runsDir, { recursive: true });
+
+            const receiptPath = path.join(runsDir, "job-status-receipt.json");
+            let initialReceipt = {};
+            if (fs.existsSync(receiptPath)) {
+              try {
+                initialReceipt = JSON.parse(fs.readFileSync(receiptPath, "utf8"));
+              } catch {}
+            }
+
+            let integrationIdentity = {};
+            const intPath = path.join(runsDir, "integration-identity.json");
+            if (fs.existsSync(intPath)) {
+              try {
+                integrationIdentity = JSON.parse(fs.readFileSync(intPath, "utf8"));
+              } catch {}
+            }
+
             const steps = {
               checkout: "${{ steps.checkout.outcome }}",
               early_evidence: "${{ steps.early_evidence.outcome }}",
+              verify_integration: "${{ steps.verify_integration.outcome }}",
               setup_node: "${{ steps.setup_node.outcome }}",
               npm_ci: "${{ steps.npm_ci.outcome }}",
               verify_sharp: "${{ steps.verify_sharp.outcome }}",
@@ -300,18 +454,22 @@ jobs:
                 break;
               }
             }
-            const runsDir = path.resolve("docs/editorial/evidence/runs");
-            fs.mkdirSync(runsDir, { recursive: true });
+
             const receipt = {
               status: failedStage ? "FAIL" : "PASS",
               failedStage: failedStage || null,
               stepOutcomes: steps,
-              headSha: "${{ github.event.pull_request.head.sha || github.sha }}",
-              baseSha: "${{ github.event.pull_request.base.sha || 'origin/main' }}",
+              pinnedMainSha: "7a8c2a9361fa16728458536e61465a679716bf2a",
+              authoritativeMainSha: integrationIdentity.authoritativeMainSha || null,
+              pinnedPassedHeadSha: "859b85026c8aa294740e6b572381d0d071fa38a9",
+              expectedProductMergedTree: "ac72179966f2a3acd0b5260495628f7163f984db",
+              actualProductMergedTree: integrationIdentity.actualProductMergedTree || null,
+              observedHeadSha: "${{ github.event.pull_request.head.sha || github.sha }}",
+              observedBaseSha: "${{ github.event.pull_request.base.sha || 'origin/main' }}",
               githubRunId: "${{ github.run_id }}",
               timestamp: new Date().toISOString()
             };
-            fs.writeFileSync(path.join(runsDir, "job-status-receipt.json"), JSON.stringify(receipt, null, 2));
+            fs.writeFileSync(receiptPath, JSON.stringify(receipt, null, 2));
             console.log("Finalized job-status-receipt.json with status: " + receipt.status + (failedStage ? " (failed stage: " + failedStage + ")" : ""));
           '
 
