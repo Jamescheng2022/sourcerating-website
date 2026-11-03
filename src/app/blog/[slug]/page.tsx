@@ -132,7 +132,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               priority
               className={post.coverImage.mobileSrc ? "hidden h-auto w-full rounded-md border border-gray-200 2xl:block" : "h-auto w-full rounded-md border border-gray-200"}
             />
-            <figcaption className={isEditorial ? "mx-auto mt-3 max-w-[760px] text-sm leading-6 text-gray-500" : "mt-3 text-sm leading-6 text-gray-500"}><InlineText text={post.coverImage.caption} editorial={isEditorial} /></figcaption>
+            <figcaption className={isEditorial ? "mx-auto mt-3 max-w-[760px] text-sm leading-6 text-gray-500" : "mt-3 text-sm leading-6 text-gray-500"}>{post.coverImage.caption.includes("](") ? <InlineText text={post.coverImage.caption} editorial={isEditorial} /> : post.coverImage.caption}</figcaption>
           </figure>
         ) : !post.articleBody ? <Image
           src="/images/hero-factory-audit.png"

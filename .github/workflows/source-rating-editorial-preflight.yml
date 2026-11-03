@@ -8,6 +8,9 @@ on:
       - '.github/workflows/source-rating-editorial-preflight.yml'
       - 'docs/editorial/**'
       - 'scripts/check-editorial-publication.mjs'
+      - 'scripts/cdp-capture-harness.mjs'
+      - 'scripts/test-cdp-harness-static.mjs'
+      - 'scripts/validate-ci-bundle.mjs'
       - 'src/content/blog/**'
       - 'src/data/blog.ts'
       - 'src/app/blog/**'
@@ -26,20 +29,461 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+
+      - name: Initialize early evidence and status receipt
+        id: early_evidence
+        run: |
+          mkdir -p docs/editorial/evidence/runs
+          cat <<RECEIPT > docs/editorial/evidence/runs/job-status-receipt.json
+          {
+            "status": "INITIALIZED",
+            "eventBaseSha": "${{ github.event.pull_request.base.sha || 'origin/main' }}",
+            "pinnedMainSha": "7a8c2a9361fa16728458536e61465a679716bf2a",
+            "pinnedPassedHeadSha": "859b85026c8aa294740e6b572381d0d071fa38a9",
+            "expectedProductMergedTree": "ac72179966f2a3acd0b5260495628f7163f984db",
+            "testCommitSha": "${{ github.event.pull_request.head.sha || github.sha }}",
+            "githubRunId": "${{ github.run_id }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          RECEIPT
+
+      - name: Verify exact pinned product integration and establish ephemeral merge
+        id: verify_integration
+        run: |
+          set -euo pipefail
+          echo "=== 1. Pinned reviewed product identity ==="
+          PINNED_MAIN_SHA="7a8c2a9361fa16728458536e61465a679716bf2a"
+          PINNED_PASSED_HEAD_SHA="859b85026c8aa294740e6b572381d0d071fa38a9"
+          EXPECTED_PRODUCT_MERGED_TREE="ac72179966f2a3acd0b5260495628f7163f984db"
+
+          git rev-parse --verify "${PINNED_MAIN_SHA}^{commit}"
+          git rev-parse --verify "${PINNED_PASSED_HEAD_SHA}^{commit}"
+
+          echo "=== 2. Record PR event base provenance and verify authoritative current main ==="
+          # Record PR event base as provenance / nonblocking difference (do not claim it matches main)
+          PR_EVENT_BASE_SHA="${{ github.event.pull_request.base.sha || '' }}"
+          echo "Observed PR event base SHA (provenance): ${PR_EVENT_BASE_SHA:-none}"
+          if [ -n "$PR_EVENT_BASE_SHA" ] && [ "$PR_EVENT_BASE_SHA" != "$PINNED_MAIN_SHA" ]; then
+            echo "Notice: PR event base ($PR_EVENT_BASE_SHA) differs from pinned current main ($PINNED_MAIN_SHA); recorded as provenance."
+          fi
+
+          # Authoritative check: fetch read-only remote ref directly from origin; MUST succeed and be exactly 7a8c2a9 or FAIL
+          echo "Fetching authoritative current main ref from origin..."
+          git fetch --no-tags origin refs/heads/main:refs/remotes/origin/main
+          AUTHORITATIVE_MAIN_SHA="$(git rev-parse --verify refs/remotes/origin/main)"
+          echo "Authoritative origin/main SHA: $AUTHORITATIVE_MAIN_SHA"
+
+          if [ -z "$AUTHORITATIVE_MAIN_SHA" ]; then
+            echo "::error::Authoritative origin/main ref is absent or unavailable!"
+            exit 1
+          fi
+
+          if [ "$AUTHORITATIVE_MAIN_SHA" != "$PINNED_MAIN_SHA" ]; then
+            echo "::error::Authoritative origin/main branch drift detected! Pinned: $PINNED_MAIN_SHA, but remote main is: $AUTHORITATIVE_MAIN_SHA"
+            exit 1
+          fi
+          echo "Verified: authoritative origin/main strictly matches pinned $PINNED_MAIN_SHA."
+
+          echo "=== 3. Verify exact product merge-tree without test patch (Fix 1) ==="
+          ACTUAL_PRODUCT_TREE="$(git merge-tree --write-tree "$PINNED_MAIN_SHA" "$PINNED_PASSED_HEAD_SHA")"
+          echo "Actual product merge-tree: $ACTUAL_PRODUCT_TREE"
+          if [ "$ACTUAL_PRODUCT_TREE" != "$EXPECTED_PRODUCT_MERGED_TREE" ]; then
+            echo "::error::Product merge-tree mismatch! Expected $EXPECTED_PRODUCT_MERGED_TREE, got $ACTUAL_PRODUCT_TREE"
+            exit 1
+          fi
+          echo "Verified: product merge-tree strictly matches $EXPECTED_PRODUCT_MERGED_TREE."
+
+          echo "=== 4. Enforce exact reviewed test files allowlist on test commit (Fix 2) ==="
+          CURRENT_TEST_SHA="$(git rev-parse HEAD)"
+          echo "Current test commit SHA: $CURRENT_TEST_SHA"
+
+          # Exact reviewed test files allowlist
+          REVIEWED_ALLOWLIST=(
+            ".github/workflows/source-rating-editorial-preflight.yml"
+            "scripts/cdp-capture-harness.mjs"
+            "scripts/test-cdp-harness-static.mjs"
+            "scripts/validate-ci-bundle.mjs"
+          )
+
+          DIFF_PASSED_HEAD="$(git diff --name-only "$PINNED_PASSED_HEAD_SHA" HEAD)"
+          echo "Files modified between passedhead and test commit:"
+          echo "$DIFF_PASSED_HEAD"
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              ".github/workflows/source-rating-editorial-preflight.yml" | \
+              "scripts/cdp-capture-harness.mjs" | \
+              "scripts/test-cdp-harness-static.mjs" | \
+              "scripts/validate-ci-bundle.mjs")
+                ;;
+              *)
+                echo "::error::Unexpected modified path in test commit: $f (refusing path outside reviewed test allowlist)"
+                exit 1
+                ;;
+            esac
+          done <<< "$DIFF_PASSED_HEAD"
+          echo "Verified: test commit modifies ONLY allowlisted test/CI files."
+
+          echo "=== 5. Ephemeral integration on disposable runner ==="
+          git -c user.name="CI-Runner" -c user.email="ci@sourcerating.local" merge --no-commit --no-ff "$PINNED_MAIN_SHA"
+
+          echo "=== 6. Verify integrated working tree boundaries with exact allowlist ==="
+          # Compare actual integrated working tree to expected product tree: ONLY allowlisted test files may differ
+          DIFF_INTEGRATED_EXPECTED="$(git diff --name-only "$EXPECTED_PRODUCT_MERGED_TREE")"
+          echo "Files differing between integrated working tree and expected product merged tree:"
+          echo "$DIFF_INTEGRATED_EXPECTED"
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              ".github/workflows/source-rating-editorial-preflight.yml" | \
+              "scripts/cdp-capture-harness.mjs" | \
+              "scripts/test-cdp-harness-static.mjs" | \
+              "scripts/validate-ci-bundle.mjs")
+                ;;
+              *)
+                echo "::error::Integrated working tree has unexpected drift from expected product tree: $f"
+                exit 1
+                ;;
+            esac
+          done <<< "$DIFF_INTEGRATED_EXPECTED"
+
+          # Verify integrated test files match test commit HEAD
+          DIFF_INTEGRATED_TEST="$(git diff --name-only HEAD -- "${REVIEWED_ALLOWLIST[@]}")"
+          if [ -n "$DIFF_INTEGRATED_TEST" ]; then
+            echo "::error::Integrated working tree test files modified unexpectedly during merge!"
+            echo "$DIFF_INTEGRATED_TEST"
+            exit 1
+          fi
+          echo "Verified: all product files strictly match $EXPECTED_PRODUCT_MERGED_TREE and test files match $CURRENT_TEST_SHA."
+
+          mkdir -p docs/editorial/evidence/runs
+          cat <<EOF > docs/editorial/evidence/runs/integration-identity.json
+          {
+            "eventBaseSha": "$PR_EVENT_BASE_SHA",
+            "fetchedMainSha": "$AUTHORITATIVE_MAIN_SHA",
+            "pinnedMainSha": "$PINNED_MAIN_SHA",
+            "pinnedPassedHeadSha": "$PINNED_PASSED_HEAD_SHA",
+            "expectedProductMergedTree": "$EXPECTED_PRODUCT_MERGED_TREE",
+            "actualProductMergedTree": "$ACTUAL_PRODUCT_TREE",
+            "testCommitSha": "$CURRENT_TEST_SHA",
+            "reviewedAllowlist": [
+              ".github/workflows/source-rating-editorial-preflight.yml",
+              "scripts/cdp-capture-harness.mjs",
+              "scripts/test-cdp-harness-static.mjs",
+              "scripts/validate-ci-bundle.mjs"
+            ],
+            "nonTestDiffFromPassedHead": "CLEAN_ZERO_DIFF",
+            "integratedProductTreeDiff": "CLEAN_ZERO_DIFF",
+            "integratedTestTreeDiff": "CLEAN_ZERO_DIFF",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+
+      - name: Set up Node.js
+        id: setup_node
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
+
       - name: Install locked dependencies
+        id: npm_ci
         run: npm ci
+
+      - name: Verify sharp availability and full-pixel decode from locked npm ci
+        id: verify_sharp
+        run: |
+          node -e "
+            const fs = require('fs');
+            const lock = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+            const pinnedVersion =
+              (lock.packages && lock.packages['node_modules/sharp'] && lock.packages['node_modules/sharp'].version) ||
+              (lock.dependencies && lock.dependencies['sharp'] && lock.dependencies['sharp'].version);
+            if (!pinnedVersion) {
+              console.error('Missing sharp entry in package-lock.json');
+              process.exit(1);
+            }
+            const sharp = require('sharp');
+            const actualVersion = (sharp.versions && sharp.versions.sharp) || sharp.version;
+            console.log('Sharp version from lockfile:', pinnedVersion, 'Loaded runtime version:', actualVersion);
+            if (actualVersion !== pinnedVersion) {
+              console.error('Version mismatch: expected ' + pinnedVersion + ' from lockfile, found ' + actualVersion);
+              process.exit(1);
+            }
+            sharp({ create: { width: 1, height: 1, channels: 3, background: { r: 0, g: 0, b: 0 } } })
+              .png()
+              .toBuffer()
+              .then(b => sharp(b).raw().toBuffer())
+              .then(() => console.log('Sharp full-pixel decode verified cleanly.'));
+          "
+
       - name: Deterministic publication preflight for all registered articles
+        id: check_pub
         run: npm run check:publication
+
       - name: Regression-test stale publication detection
+        id: test_pub
         run: npm run test:publication
+
       - name: Preserve pinned legacy blog and cover regressions
+        id: legacy_cover
         run: node scripts/verify-blog-cover.mjs
+
+      - name: Run deterministic offline CDP harness verification suite
+        id: offline_harness
+        run: node scripts/test-cdp-harness-static.mjs
+
       - name: Build Next.js website
+        id: build_next
         run: npm run build
+
+      - name: Run headless CDP capture against local production server
+        id: capture_harness
+        run: |
+          set -euo pipefail
+
+          # 1. Verify Google Chrome availability on runner
+          CHROME_EXEC=""
+          if command -v google-chrome-stable >/dev/null 2>&1; then
+            CHROME_EXEC="$(command -v google-chrome-stable)"
+          elif command -v google-chrome >/dev/null 2>&1; then
+            CHROME_EXEC="$(command -v google-chrome)"
+          elif command -v chromium-browser >/dev/null 2>&1; then
+            CHROME_EXEC="$(command -v chromium-browser)"
+          elif command -v chromium >/dev/null 2>&1; then
+            CHROME_EXEC="$(command -v chromium)"
+          else
+            echo "::error::Google Chrome or Chromium not found on runner PATH."
+            mkdir -p docs/editorial/evidence/runs
+            cat <<FAIL_RECEIPT > docs/editorial/evidence/runs/chrome-failure-receipt.json
+          {
+            "failureStage": "CHROME_BIN_LOOKUP",
+            "error": "Google Chrome or Chromium binary not found on runner PATH",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          FAIL_RECEIPT
+            exit 1
+          fi
+          echo "Verified Chrome executable: $CHROME_EXEC"
+          export CHROME_BIN="$CHROME_EXEC"
+
+          # 2. Start owned localhost production Next.js server directly
+          echo "Starting local Next.js production server directly on port 3000..."
+          node node_modules/next/dist/bin/next start --hostname 127.0.0.1 -p 3000 > next-server.log 2>&1 &
+          SERVER_PID=$!
+          echo "Started Next.js server with PID $SERVER_PID"
+
+          # Robust server cleanup handler: disables recursion, bounded wait, escalation, reap-after-exit, preserves exit code
+          cleanup_server() {
+            local orig_rc=$?
+            trap - EXIT
+            echo "Initiating server cleanup (PID ${SERVER_PID:-none}, original exit code: $orig_rc)..."
+            local cleanup_failed=0
+            if [ -n "${SERVER_PID:-}" ] && kill -0 "$SERVER_PID" 2>/dev/null; then
+              kill -TERM "$SERVER_PID" 2>/dev/null || true
+              local waited=0
+              while kill -0 "$SERVER_PID" 2>/dev/null && [ "$waited" -lt 5 ]; do
+                sleep 1
+                waited=$((waited + 1))
+              done
+
+              if kill -0 "$SERVER_PID" 2>/dev/null; then
+                echo "Server did not exit after 5s graceful wait, sending SIGKILL..."
+                kill -KILL "$SERVER_PID" 2>/dev/null || true
+                local kill_waited=0
+                while kill -0 "$SERVER_PID" 2>/dev/null && [ "$kill_waited" -lt 2 ]; do
+                  sleep 1
+                  kill_waited=$((kill_waited + 1))
+                done
+              fi
+
+              # Never wait on a live PID: if still alive after SIGKILL, fail immediately without wait
+              if kill -0 "$SERVER_PID" 2>/dev/null; then
+                echo "::error::Failed to terminate Next.js server process $SERVER_PID (still alive after SIGKILL)"
+                cleanup_failed=1
+                mkdir -p docs/editorial/evidence/runs
+                cat <<CLEANUP_FAIL > docs/editorial/evidence/runs/cleanup-failure-receipt.json
+          {
+            "status": "CLEANUP_FAILURE",
+            "serverPid": $SERVER_PID,
+            "serverAliveAfterKill": true,
+            "originalExitCode": $orig_rc,
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          CLEANUP_FAIL
+              else
+                # Only reap after confirmed exit
+                wait "$SERVER_PID" 2>/dev/null || true
+                echo "Verified Next.js server process $SERVER_PID exited cleanly."
+              fi
+            fi
+
+            if [ "$cleanup_failed" -ne 0 ]; then
+              exit 1
+            fi
+            exit "$orig_rc"
+          }
+          trap cleanup_server EXIT
+
+          # 3. Wall-clock 30-second route readiness deadline (date +%s) with dynamic budget-capped curl
+          echo "Awaiting route readiness for calibration and plywood articles (deadline: 30s)..."
+          START_TIME=$(date +%s)
+          DEADLINE=$((START_TIME + 30))
+          READY=0
+          ATTEMPT=0
+
+          while true; do
+            NOW=$(date +%s)
+            REMAINING=$((DEADLINE - NOW))
+            if [ "$REMAINING" -le 0 ]; then
+              break
+            fi
+            ATTEMPT=$((ATTEMPT + 1))
+            CONN_TIMEOUT=2
+            [ "$CONN_TIMEOUT" -gt "$REMAINING" ] && CONN_TIMEOUT="$REMAINING"
+            MAX_TIMEOUT=5
+            [ "$MAX_TIMEOUT" -gt "$REMAINING" ] && MAX_TIMEOUT="$REMAINING"
+
+            if curl -s -f -o /dev/null --connect-timeout "$CONN_TIMEOUT" --max-time "$MAX_TIMEOUT" "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance" && \
+               curl -s -f -o /dev/null --connect-timeout "$CONN_TIMEOUT" --max-time "$MAX_TIMEOUT" "http://127.0.0.1:3000/blog/plywood-crate-solid-wood-skids-ispm15"; then
+              ELAPSED=$(( $(date +%s) - START_TIME ))
+              echo "Target routes are ready (attempt $ATTEMPT, elapsed: ${ELAPSED}s)."
+              READY=1
+              break
+            fi
+            sleep 1
+          done
+
+          if [ "$READY" -ne 1 ]; then
+            ELAPSED=$(( $(date +%s) - START_TIME ))
+            mkdir -p docs/editorial/evidence/runs
+            cat <<RECEIPT > docs/editorial/evidence/runs/workflow-failure-receipt.json
+          {
+            "failureStage": "ROUTE_READINESS_TIMEOUT",
+            "routes": [
+              "http://127.0.0.1:3000/blog/calibration-sticker-measurement-tolerance",
+              "http://127.0.0.1:3000/blog/plywood-crate-solid-wood-skids-ispm15"
+            ],
+            "deadlineSeconds": 30,
+            "elapsedSeconds": $ELAPSED,
+            "attempts": $ATTEMPT,
+            "gitCommitSha": "${{ github.event.pull_request.head.sha || github.sha }}",
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          RECEIPT
+            echo "::error::Target routes failed to become ready within ${ELAPSED}s (monotonic 30s deadline exceeded)."
+            cat next-server.log || true
+            exit 1
+          fi
+
+          # 4. Run targeted 390 mobile smoke CDP harness for calibration and plywood
+          echo "Executing targeted 390 mobile smoke CDP harness..."
+          HARNESS_STATUS=0
+          node scripts/cdp-capture-harness.mjs --smoke-390 || HARNESS_STATUS=$?
+
+          if [ "$HARNESS_STATUS" -ne 0 ]; then
+            mkdir -p docs/editorial/evidence/runs
+            cat <<HARNESS_FAIL > docs/editorial/evidence/runs/harness-failure-receipt.json
+          {
+            "failureStage": "CDP_HARNESS_EXECUTION",
+            "exitCode": $HARNESS_STATUS,
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          HARNESS_FAIL
+            echo "::error::CDP capture harness failed with exit code $HARNESS_STATUS."
+            exit "$HARNESS_STATUS"
+          fi
+
+          # 5. Deterministic Node CI bundle validator (full-pixel decode & safe build-identity)
+          echo "Executing CI bundle validator in smoke-390 mode..."
+          export HEAD_SHA="${{ github.event.pull_request.head.sha || github.sha }}"
+          export BASE_SHA="${{ github.event.pull_request.base.sha || 'origin/main' }}"
+          node scripts/validate-ci-bundle.mjs --smoke-390
+
+          # Copy server log into validated bundle directory
+          RUN_DIR="$(find docs/editorial/evidence/runs -mindepth 1 -maxdepth 1 -type d | sort | tail -n 1)"
+          if [ -n "$RUN_DIR" ] && [ -d "$RUN_DIR" ]; then
+            cp next-server.log "$RUN_DIR/next-server.log" || true
+          fi
+
+      - name: Finalize job status receipt
+        id: finalize_receipt
+        if: always()
+        run: |
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+            const runsDir = path.resolve("docs/editorial/evidence/runs");
+            fs.mkdirSync(runsDir, { recursive: true });
+
+            const receiptPath = path.join(runsDir, "job-status-receipt.json");
+            let initialReceipt = {};
+            if (fs.existsSync(receiptPath)) {
+              try {
+                initialReceipt = JSON.parse(fs.readFileSync(receiptPath, "utf8"));
+              } catch {}
+            }
+
+            let integrationIdentity = {};
+            const intPath = path.join(runsDir, "integration-identity.json");
+            if (fs.existsSync(intPath)) {
+              try {
+                integrationIdentity = JSON.parse(fs.readFileSync(intPath, "utf8"));
+              } catch {}
+            }
+
+            const steps = {
+              checkout: "${{ steps.checkout.outcome }}",
+              early_evidence: "${{ steps.early_evidence.outcome }}",
+              verify_integration: "${{ steps.verify_integration.outcome }}",
+              setup_node: "${{ steps.setup_node.outcome }}",
+              npm_ci: "${{ steps.npm_ci.outcome }}",
+              verify_sharp: "${{ steps.verify_sharp.outcome }}",
+              check_pub: "${{ steps.check_pub.outcome }}",
+              test_pub: "${{ steps.test_pub.outcome }}",
+              legacy_cover: "${{ steps.legacy_cover.outcome }}",
+              offline_harness: "${{ steps.offline_harness.outcome }}",
+              build_next: "${{ steps.build_next.outcome }}",
+              capture_harness: "${{ steps.capture_harness.outcome }}"
+            };
+            let failedStage = null;
+            for (const [name, outcome] of Object.entries(steps)) {
+              if (outcome === "failure" || outcome === "cancelled") {
+                failedStage = name;
+                break;
+              }
+            }
+
+            const receipt = {
+              status: failedStage ? "FAIL" : "PASS",
+              failedStage: failedStage || null,
+              stepOutcomes: steps,
+              eventBaseSha: "${{ github.event.pull_request.base.sha || 'origin/main' }}",
+              fetchedMainSha: integrationIdentity.fetchedMainSha || null,
+              pinnedMainSha: "7a8c2a9361fa16728458536e61465a679716bf2a",
+              pinnedPassedHeadSha: "859b85026c8aa294740e6b572381d0d071fa38a9",
+              expectedProductMergedTree: "ac72179966f2a3acd0b5260495628f7163f984db",
+              actualProductMergedTree: integrationIdentity.actualProductMergedTree || null,
+              testCommitSha: "${{ github.event.pull_request.head.sha || github.sha }}",
+              githubRunId: "${{ github.run_id }}",
+              timestamp: new Date().toISOString()
+            };
+            fs.writeFileSync(receiptPath, JSON.stringify(receipt, null, 2));
+            console.log("Finalized job-status-receipt.json with status: " + receipt.status + (failedStage ? " (failed stage: " + failedStage + ")" : ""));
+          '
+
+      - name: Always upload CDP evidence run bundle and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cdp-evidence-run-bundle-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            docs/editorial/evidence/runs/
+            next-server.log
+          if-no-files-found: error
