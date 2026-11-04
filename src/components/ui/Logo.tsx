@@ -14,7 +14,7 @@ export function Logo({ inverted = false }: { inverted?: boolean }) {
           Source Rating
         </span>
         <span className={`block text-[11px] font-semibold uppercase ${inverted ? "text-gray-400" : "text-gray-500"}`}>
-          Factory Risk Checks
+          The Procurement Brief
         </span>
       </span>
     </Link>

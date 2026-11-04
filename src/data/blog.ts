@@ -1,3 +1,4 @@
+import { applyEditorialMedia } from "@/lib/editorial-media";
 import { blogPosts as existingPosts } from "@/content/blog/legacy-posts";
 import type { BlogPost } from "@/content/blog/legacy-posts";
 import { acceptanceSamplingPost } from "@/content/blog/accepted-sampling-lot-not-zero-defects";
@@ -15,7 +16,7 @@ import { weldEvidencePost } from "@/content/blog/weld-photo-not-joint-release-ev
 export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
-export const blogPosts: BlogPost[] = [
+export const blogPosts: BlogPost[] = ([
   weldEvidencePost,
   isoScopePost,
   calibrationPost,
@@ -28,7 +29,7 @@ export const blogPosts: BlogPost[] = [
   epdComparisonPost,
   acceptanceSamplingPost,
   ...existingPosts,
-];
+] as BlogPost[]).map(applyEditorialMedia);
 
 export function getBlogPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);

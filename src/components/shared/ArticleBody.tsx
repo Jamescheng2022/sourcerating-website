@@ -2,8 +2,8 @@ import Image from "next/image";
 import type { BlogPost } from "@/data/blog";
 
 export function InlineText({ text, editorial = false }: { text: string; editorial?: boolean }) {
-  return text.split(/(\[[^\]]+\]\(https?:\/\/[^\s)]+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, index) => {
-    const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
+  return text.split(/(\[[^\]]+\]\(https?:\/\/(?:[^\s()]|\([^()]*\))+\)|\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, index) => {
+    const link = part.match(/^\[([^\]]+)\]\((https?:\/\/(?:[^\s()]|\([^()]*\))+)\)$/);
     if (link) return <a key={index} href={link[2]} className={editorial ? "font-medium text-slate-900 underline decoration-[#ac8054] decoration-1 underline-offset-[3px] hover:text-brand-700" : "font-medium text-brand-700 underline decoration-brand-300 underline-offset-4 hover:text-brand-900"}>{link[1]}</a>;
     if (part.startsWith("**") && part.endsWith("**")) return <strong key={index}>{part.slice(2, -2)}</strong>;
     if (part.startsWith("*") && part.endsWith("*")) return <em key={index}>{part.slice(1, -1)}</em>;

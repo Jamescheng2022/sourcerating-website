@@ -1,0 +1,590 @@
+{
+  "weld-photo-not-joint-release-evidence": {
+    "coverImage": {
+      "src": "/assets/photography/49889480.jpg",
+      "width": 800,
+      "height": 533,
+      "alt": "Calibration check of a weld gauge. A gauge photograph does not identify or release an order’s joint.",
+      "caption": "Calibration check of a weld gauge. A gauge photograph does not identify or release an order’s joint. Photo: [Tatrankamzik](https://commons.wikimedia.org/wiki/File:Wzorcowanie_spoinomierza_suwmiarkowego.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "A procedure, a qualification and an inspection do different jobs",
+        "image": {
+          "src": "/assets/photography/129910636.jpg",
+          "width": 960,
+          "height": 960,
+          "alt": "Microscope used in a weld-inspection system. Equipment capability and the inspection record for a specific joint are separate evidence.",
+          "caption": "Microscope used in a weld-inspection system. Equipment capability and the inspection record for a specific joint are separate evidence. Photo: [DJH Designs, Inc.](https://commons.wikimedia.org/wiki/File:Standard_Microscope_for_the_Weld_Inspection_System.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      },
+      {
+        "afterHeading": "Release is a decision made against the order",
+        "image": {
+          "src": "/assets/photography/6466057.jpg",
+          "width": 794,
+          "height": 798,
+          "alt": "Historical ultrasonic quality-control inspection. A method photograph does not identify the inspected joint or establish its acceptance result.",
+          "caption": "Historical ultrasonic quality-control inspection. A method photograph does not identify the inspected joint or establish its acceptance result. Photo: [Eugen Nosko / Deutsche Fotothek](https://commons.wikimedia.org/wiki/File:Fotothek_df_n-16_0000092_Facharbeiter_f%C3%BCr_Qualit%C3%A4tskontrolle.jpg), [CC BY-SA 3.0 de](https://creativecommons.org/licenses/by-sa/3.0/de/deed.en); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "iso-9001-certificate-factory-scope": {
+    "coverImage": {
+      "src": "/assets/photography/142792903.jpg",
+      "width": 826,
+      "height": 1169,
+      "alt": "Historical ISO 9001:2008 certificate image for Quality Espresso, S.A., showing its Barcelona address and scope for design, production, after-sales service and sale of coffee machines and related equipment. The pictured certificate dates from 2013 and is not evidence of current certification.",
+      "caption": "Historical ISO 9001:2008 certificate image for Quality Espresso, S.A., showing its Barcelona address and scope for design, production, after-sales service and sale of coffee machines and related equipment. The pictured certificate dates from 2013 and is not evidence of current certification. Photo/document image: Monmar Comunicació from Vic / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Certificado_Quality_Espresso_ISO_9001_certificat_Quality_Espresso_ISO_9001_(9313530652).jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Not this order or supplier."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "Read the scope as a purchasing document",
+        "image": {
+          "src": "/assets/photography/114198818.jpg",
+          "width": 1236,
+          "height": 1600,
+          "alt": "Historical ISO 9001:2015 certificate image for the Association of Lady Entrepreneurs of India, showing the named organization, administrative and works addresses, and a scope for entrepreneur-development training and services. It illustrates why the printed scope must be read; this is not a factory-product certificate or current validity check.",
+          "caption": "Historical ISO 9001:2015 certificate image for the Association of Lady Entrepreneurs of India, showing the named organization, administrative and works addresses, and a scope for entrepreneur-development training and services. It illustrates why the printed scope must be read; this is not a factory-product certificate or current validity check. Photo/document image: Rama Devi Kanneganti / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:ISO_9001_2015_certificate_of_ALEI_page-0001.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Not this order or supplier."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "calibration-sticker-measurement-tolerance": {
+    "coverImage": {
+      "src": "/assets/photography/calibration-sticker-measurement-tolerance-cover.jpg",
+      "width": 1200,
+      "height": 900,
+      "alt": "NASA Armstrong metrology laboratory: plug-gauge calibration.",
+      "caption": "NASA Armstrong metrology laboratory: plug-gauge calibration. Photo: [NASA/Lauren Hughes](https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-16).jpg), Public domain; resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "Traceability belongs to the result",
+        "image": {
+          "src": "/assets/photography/calibration-sticker-measurement-tolerance-body0.jpg",
+          "width": 1200,
+          "height": 900,
+          "alt": "Metric gauge-block reference set.",
+          "caption": "Metric gauge-block reference set. Photo: [Glenn McKechnie](https://commons.wikimedia.org/wiki/File:GaugeBlockMetricSet.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      },
+      {
+        "afterHeading": "Look at the measurement as performed",
+        "image": {
+          "src": "/assets/photography/calibration-sticker-measurement-tolerance-body1.jpg",
+          "width": 1200,
+          "height": 900,
+          "alt": "NASA Armstrong digital-protractor calibration.",
+          "caption": "NASA Armstrong digital-protractor calibration. Photo: [NASA/Ken Ulbrich](https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-02).jpg), Public domain; resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "salt-spray-hours-not-service-life": {
+    "coverImage": {
+      "src": "/assets/photography/salt-chamber.jpg",
+      "width": 1280,
+      "height": 960,
+      "alt": "Salt-spray test chamber. Exposure hours in a chamber are not an outdoor service-life prediction.",
+      "caption": "Salt-spray test chamber. Exposure hours in a chamber are not an outdoor service-life prediction. Photo: [Cjp24](https://commons.wikimedia.org/wiki/File:Salt_spray_chamber.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "Read the report behind the headline number",
+        "image": {
+          "src": "/assets/photography/15067661.jpg",
+          "width": 960,
+          "height": 1246,
+          "alt": "Peristaltic pump and salt-solution flowmeter on a salt-spray chamber. Controlled test conditions belong in the report; the apparatus does not establish field life.",
+          "caption": "Peristaltic pump and salt-solution flowmeter on a salt-spray chamber. Controlled test conditions belong in the report; the apparatus does not establish field life. Photo: [Cjp24](https://commons.wikimedia.org/wiki/File:Peristaltic_pump.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "accredited-laboratory-specific-test-scope": {
+    "coverImage": {
+      "src": "/assets/photography/110834399.jpg",
+      "width": 960,
+      "height": 638,
+      "alt": "An XRF screening laboratory. Accreditation scope must cover the particular method, material and activity ordered.",
+      "caption": "An XRF screening laboratory. Accreditation scope must cover the particular method, material and activity ordered. Photo: [IAEA Imagebank](https://commons.wikimedia.org/wiki/File:X-Ray_Fluorescence_Spectrometry_(06410139)_(8160668897).jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "The scope is part of the evidence",
+        "image": {
+          "src": "/assets/photography/10302121.jpg",
+          "width": 853,
+          "height": 1280,
+          "alt": "A tensile testing machine. Mechanical tensile testing is a specific laboratory activity; it is not interchangeable with chemical analysis.",
+          "caption": "A tensile testing machine. Mechanical tensile testing is a specific laboratory activity; it is not interchangeable with chemical analysis. Photo: [Cdang](https://commons.wikimedia.org/wiki/File:Machine_traction_walter_bai.JPG), Public domain; resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      },
+      {
+        "afterHeading": "An order for testing is a technical instruction",
+        "image": {
+          "src": "/assets/photography/86383123.jpg",
+          "width": 960,
+          "height": 959,
+          "alt": "Optical micrograph of a Vickers indentation. Specify the hardness method and reporting requirements; no hardness value is inferred from this image.",
+          "caption": "Optical micrograph of a Vickers indentation. Specify the hardness method and reporting requirements; no hardness value is inferred from this image. Photo: [Encik Tekateki](https://commons.wikimedia.org/wiki/File:Vicker_Hardness_-_Diamond_Indentation.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "xrf-316l-carbon-verification": {
+    "coverImage": {
+      "src": "/assets/photography/86382741.jpg",
+      "width": 960,
+      "height": 1280,
+      "alt": "Bench XRF analyser. An instrument photograph is not a measured composition report or proof of a low-carbon grade.",
+      "caption": "Bench XRF analyser. An instrument photograph is not a measured composition report or proof of a low-carbon grade. Photo: [Encik Tekateki](https://commons.wikimedia.org/wiki/File:Fischer_XRF_machine.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "The missing element matters",
+        "image": {
+          "src": "/assets/photography/32403559.jpg",
+          "width": 960,
+          "height": 1280,
+          "alt": "Portable micro-XRF instrument. The method and measured elements must answer the grade-verification question.",
+          "caption": "Portable micro-XRF instrument. The method and measured elements must answer the grade-verification question. Photo: [RichardMcCoy](https://commons.wikimedia.org/wiki/File:Portable_Micro-X-ray_fluorescence_machine.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "plywood-crate-solid-wood-skids-ispm15": {
+    "coverImage": {
+      "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-cover.jpg",
+      "width": 1200,
+      "height": 900,
+      "alt": "Real photograph of plywood-clad shipping cases with timber framing and skids in a workshop; illustrative, not a SourceRating inspection.",
+      "caption": "Plywood-clad shipping cases may also include timber framing and skids. Photo: VCCmatt / Wikimedia Commons, CC BY-SA 4.0 (cropped and resized); not this buyer or shipment."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "Check the whole packing arrangement",
+        "image": {
+          "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body1.jpg",
+          "width": 1200,
+          "height": 900,
+          "alt": "Real photograph of a large plywood-clad export case showing lower timber support rails and forklift clearance; illustrative only.",
+          "caption": "The support and forklift-entry geometry is visible, but its material specification and treatment are not established by appearance alone. Photo: VCCmatt / Wikimedia Commons, CC BY-SA 4.0 (cropped and resized)."
+        }
+      },
+      {
+        "afterHeading": "The final addition can change the answer",
+        "image": {
+          "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body0.jpg",
+          "width": 1200,
+          "height": 900,
+          "alt": "Real close-up photograph of an ISPM 15 mark on wooden packaging; example mark, not evidence for a particular shipment.",
+          "caption": "A photographed ISPM 15 mark illustrates where identification may appear; it is not proof of this order's treatment, marking or compliance. Photo: VCCmatt / Wikimedia Commons, CC BY-SA 4.0 (cropped and resized)."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "packing-list-weight-container-vgm": {
+    "coverImage": {
+      "src": "/assets/photography/packing-list-weight-container-vgm-cover.jpg",
+      "width": 960,
+      "height": 1280,
+      "alt": "Real photograph of a forklift loading palletized cargo into a shipping container at a Thailand warehouse; no weight record is shown.",
+      "caption": "Photo: Goterrestrial / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Container_loading_with_forklift_at_warehouse_in_Thailand.jpg), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); resized for desktop/mobile. Not evidence of shipment VGM."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "The container is part of the number",
+        "image": {
+          "src": "/assets/photography/packing-list-weight-container-vgm-body0.jpg",
+          "width": 1280,
+          "height": 960,
+          "alt": "Real photograph of inflatable dunnage bags between goods inside a freight container; not an approved loading method or a weighing result.",
+          "caption": "Figure 1. Dunnage and securing materials add mass beyond cargo. Photo: Astrid Groeneveld / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Cordstrap_dunnage_bag_in_container.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); resized. Not a shipment weight or certified method."
+        }
+      },
+      {
+        "afterHeading": "Find the handover where the packing changes",
+        "image": {
+          "src": "/assets/photography/packing-list-weight-container-vgm-body1.jpg",
+          "width": 720,
+          "height": 1280,
+          "alt": "Real high-cube container door showing printed tare, maximum gross and payload markings, not a VGM document for packed cargo.",
+          "caption": "Figure 2. A container tare mark is not its packed VGM. Photo: Bullenwächter / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:ISO_HC_Container_right_door.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); resized. Not shipment-specific VGM evidence."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "supplier-hs-code-destination-import-classification": {
+    "coverImage": {
+      "src": "/assets/photography/176584858.jpg",
+      "width": 960,
+      "height": 720,
+      "alt": "An Austrian customs service container-and-vehicle scanner photographed in Egg, Vorarlberg, in 2025. This is physical customs-inspection equipment; it does not determine a product tariff classification or establish the correct destination HS code.",
+      "caption": "An Austrian customs service container-and-vehicle scanner photographed in Egg, Vorarlberg, in 2025. This is physical customs-inspection equipment; it does not determine a product tariff classification or establish the correct destination HS code. Photo/document image: Asurnipal / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Egg-Gro%C3%9Fdorf-customs_engine-SCANIA_460_(Nuctech_MT1213DE_Container_and_Vehicle_Scanner)-01ASD.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Not this order or supplier."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "epd-carbon-comparison-functional-unit-boundary": {
+    "coverImage": {
+      "src": "/assets/photography/151720855.jpg",
+      "width": 960,
+      "height": 720,
+      "alt": "Steel coils being transported. Product form and transport assumptions belong to the declared comparison boundary.",
+      "caption": "Steel coils being transported. Product form and transport assumptions belong to the declared comparison boundary. Photo: [Fumikas Sagisavas](https://commons.wikimedia.org/wiki/File:Steel_coils_loaded_on_truck_deck.jpg), [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "The denominator carries a technical assumption",
+        "image": {
+          "src": "/assets/photography/19241110.jpg",
+          "width": 960,
+          "height": 697,
+          "alt": "Recovered reinforcing steel at a demolition site. End-of-life recovery is a scenario to define, not a carbon credit that can be assumed from a photograph.",
+          "caption": "Recovered reinforcing steel at a demolition site. End-of-life recovery is a scenario to define, not a carbon credit that can be assumed from a photograph. Photo: [Anna Frodesiak](https://commons.wikimedia.org/wiki/File:Metal_rebar_reclamation_for_recycling_at_building_demolition_site_-_07.jpg), [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      },
+      {
+        "afterHeading": "Keep the comparison reproducible",
+        "image": {
+          "src": "/assets/photography/93088503.jpg",
+          "width": 960,
+          "height": 668,
+          "alt": "Concrete-recycling facility. Recycling and disposal assumptions must use comparable boundaries when EPD results are compared.",
+          "caption": "Concrete-recycling facility. Recycling and disposal assumptions must use comparable boundaries when EPD results are compared. Photo: [Brbbl](https://commons.wikimedia.org/wiki/File:Durail_(voormalig_Bonder)_beton_recycling.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "accepted-sampling-lot-not-zero-defects": {
+    "coverImage": {
+      "src": "/assets/photography/127884832.jpg",
+      "width": 960,
+      "height": 1201,
+      "alt": "Electronics-board inspection in a production setting. A photographed inspection activity does not reveal the sampling plan or establish zero defects in the lot.",
+      "caption": "Electronics-board inspection in a production setting. A photographed inspection activity does not reveal the sampling plan or establish zero defects in the lot. Photo: [Encik Tekateki](https://commons.wikimedia.org/wiki/File:Inspektor_QC_India_membuat_pemeriksaan_visual_di_atas_PCBA.png), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "The inspector needs more than an AQL number",
+        "image": {
+          "src": "/assets/photography/38290777.jpg",
+          "width": 960,
+          "height": 682,
+          "alt": "Garment quality inspection in Bangladesh. Across product categories, the acceptance criteria, sample selection and lot definition need to be stated.",
+          "caption": "Garment quality inspection in Bangladesh. Across product categories, the acceptance criteria, sample selection and lot definition need to be stated. Photo: [Fahad Faisal](https://commons.wikimedia.org/wiki/File:T-Shirt_Quality_Checking_in_a_RMG_factory_of_Bangladesh.JPG), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      },
+      {
+        "afterHeading": "Release instructions should preserve the limits",
+        "image": {
+          "src": "/assets/photography/33628046.jpg",
+          "width": 960,
+          "height": 634,
+          "alt": "Historical FDA inspection and sampling equipment. Inspection uses defined methods and records; a passed sample is not a census of every unit.",
+          "caption": "Historical FDA inspection and sampling equipment. Inspection uses defined methods and records; a passed sample is not a census of every unit. Photo: [The U.S. Food and Drug Administration](https://commons.wikimedia.org/wiki/File:Inspection_Equipment_(FDA_200)_(8226808295).jpg), Public domain; resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "hot-dip-galvanized-steel-china-astm-a123-inspection": {
+    "coverImage": {
+      "src": "/assets/photography/160684093.jpg",
+      "width": 960,
+      "height": 640,
+      "alt": "Hot-dip galvanizing work in progress. The project still needs piece identification, coating inspection and release records.",
+      "caption": "Hot-dip galvanizing work in progress. The project still needs piece identification, coating inspection and release records. Photo: [Government of the Autonomous Province of Vojvodina](https://commons.wikimedia.org/wiki/File:The_Hot_Dip_Galvanizing_Process_with_workers.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "A coating standard does not organize the whole purchase for you",
+        "image": {
+          "src": "/assets/photography/86913091.jpg",
+          "width": 960,
+          "height": 640,
+          "alt": "Detail of galvanized metal. Surface appearance alone does not establish coating thickness or order conformity.",
+          "caption": "Detail of galvanized metal. Surface appearance alone does not establish coating thickness or order conformity. Photo: [ZINQ Galva Power](https://commons.wikimedia.org/wiki/File:Thermisch_verzinken_in_de_volksmond_beter_gekend_als_galvaniseren.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "polyurethane-screen-panels-china-vs-local": {
+    "coverImage": {
+      "src": "/assets/photography/25685217.jpg",
+      "width": 960,
+      "height": 640,
+      "alt": "Installed polyurethane screening deck on an M2500, showing deck openings and equipment interfaces.",
+      "caption": "Installed polyurethane screening deck on an M2500, showing deck openings and equipment interfaces. Photo: Peter Craven / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Polyurethane_screen_deck_on_M2500_(7548963374).jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Peter Craven](https://commons.wikimedia.org/wiki/File:Polyurethane_screen_deck_on_M2500_(7548963374).jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0); resized for web."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "First identify what is actually being replaced",
+        "image": {
+          "src": "/assets/photography/15339349.jpg",
+          "width": 960,
+          "height": 720,
+          "alt": "A different screening medium: metal wire screen cloth with edge supports. This is wire cloth, not polyurethane; conversion requires checking the deck interface and process duty.",
+          "caption": "A different screening medium: metal wire screen cloth with edge supports. This is wire cloth, not polyurethane; conversion requires checking the deck interface and process duty. Photo: Precisioncrushers / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Screen_Mesh.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Precisioncrushers](https://commons.wikimedia.org/wiki/File:Screen_Mesh.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "cement-baghouse-filter-bags-china-vs-local": {
+    "coverImage": {
+      "src": "/assets/photography/3521780.jpg",
+      "width": 960,
+      "height": 720,
+      "alt": "View inside a bag filter, showing multiple fabric filter elements.",
+      "caption": "View inside a bag filter, showing multiple fabric filter elements. Photo: Tetris L / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bag_filter.jpg), Public domain; resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Tetris L](https://commons.wikimedia.org/wiki/File:Bag_filter.jpg), Public domain; resized for web."
+    },
+    "bodyPhotos": [
+      {
+        "afterHeading": "Start with the collector, not the supplier catalogue",
+        "image": {
+          "src": "/assets/photography/18368301.jpg",
+          "width": 216,
+          "height": 431,
+          "alt": "A real bag filter displayed at Deutsches Museum with internal elements visible. This museum example illustrates a collector arrangement; it does not identify the cement plant system.",
+          "caption": "A real bag filter displayed at Deutsches Museum with internal elements visible. This museum example illustrates a collector arrangement; it does not identify the cement plant system. Photo: Intensiv-Filter / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Schlauchfilter_im_Deutschen_Museum.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Intensiv-Filter](https://commons.wikimedia.org/wiki/File:Schlauchfilter_im_Deutschen_Museum.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web."
+        }
+      },
+      {
+        "afterHeading": "Separate the delivered cost from the cost of a failed changeover",
+        "image": {
+          "src": "/assets/photography/37641467.jpg",
+          "width": 640,
+          "height": 480,
+          "alt": "A large baghouse with inlet and outlet ductwork. The installed collector and duct interfaces form part of the operating system beyond the replacement fabric bags.",
+          "caption": "A large baghouse with inlet and outlet ductwork. The installed collector and duct interfaces form part of the operating system beyond the replacement fabric bags. Photo: Dan Engineer 3 / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Large_Baghouse_Inlet_%26_Outlet_Ductwork.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Dan Engineer 3](https://commons.wikimedia.org/wiki/File:Large_Baghouse_Inlet_%26_Outlet_Ductwork.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web."
+        }
+      }
+    ],
+    "sectionPhotos": []
+  },
+  "steel-mep-quotation-scope-exclusions-checklist": {
+    "coverImage": {
+      "src": "/assets/photography/80266869.jpg",
+      "width": 960,
+      "height": 638,
+      "alt": "Electricians reviewing paper drawings beneath ducts and pipes at the Blue Grass plant",
+      "caption": "Electricians review drawings before electrical-system installation at the Blue Grass plant. The photograph illustrates site coordination; it does not show a quotation or establish who priced each interface. Photo: [PEO ACWA](https://commons.wikimedia.org/wiki/File:Blue_Grass_Chemical_Agent-Destruction_Pilot_Plant_Control_and_Support_Building_(8230365976).jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "supplier-quotation-drawing-revision-control": {
+    "coverImage": {
+      "src": "/assets/photography/28064472.jpg",
+      "width": 960,
+      "height": 640,
+      "alt": "Engineering drawing sheets laid on a work surface",
+      "caption": "Engineering drawings photographed during an Oregon National Guard vertical-engineering activity. Sheet identity and issue status must be checked in the actual purchase documents. Photo: [Bureau of Land Management](https://commons.wikimedia.org/wiki/File:Oregon_National_Guard_Vertical_Engineering_Unit_(8759773158).jpg), Public domain; resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "procurement-handover-decision-record-checklist": {
+    "coverImage": {
+      "src": "/assets/photography/80268947.jpg",
+      "width": 960,
+      "height": 638,
+      "alt": "Two pipefitters examine a design drawing together among installed pipework",
+      "caption": "Pipefitters review design drawings inside the Blue Grass plant’s Agent Neutralization System Room. A procurement handover should likewise leave the next owner able to locate and explain the working documents. Photo: PEO ACWA, CC BY 2.0. Photo: [PEO ACWA](https://commons.wikimedia.org/wiki/File:Blue_Grass_Chemical_Agent-Destruction_Pilot_Plant_Munitions_Demilitarization_Building_(11068412815).jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "technical-sourcing-brief-before-rfq": {
+    "coverImage": {
+      "src": "/assets/photography/80268616.jpg",
+      "width": 960,
+      "height": 638,
+      "alt": "Pipefitters examine drawings beside incoming piping connections at the Blue Grass plant",
+      "caption": "Pipefitters review design drawings for incoming piping connections at the Blue Grass plant. A sourcing brief should identify the receiving equipment and interfaces that suppliers need to understand. Photo: PEO ACWA, CC BY 2.0. Photo: [PEO ACWA](https://commons.wikimedia.org/wiki/File:Blue_Grass_Chemical_Agent-Destruction_Pilot_Plant_Supercritical_Water_Oxidation_Process_Building_(14333632349).jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "procurement-dispute-evidence-pack": {
+    "coverImage": {
+      "src": "/assets/photography/29746274.jpg",
+      "width": 1280,
+      "height": 850,
+      "alt": "A contracting officer checks paperwork next to workers carrying out site work",
+      "caption": "A contracting officer checks paperwork at the Transit Center at Manas, Kyrgyzstan, May 22, 2013. An evidence pack connects requirement records with observations of work or supplied goods and states what each record can establish. U.S. Air Force photograph, public domain. Photo: [Staff Sgt. Robert Barnett](https://commons.wikimedia.org/wiki/File:U.S._Air_Force_Tech._Sgt._Angelica_Stevenson,_foreground,_a_contracting_officer_with_the_376th_Expeditionary_Contracting_Squadron,_checks_paperwork_at_the_Transit_Center_at_Manas,_Kyrgyzstan,_May_22,_2013_130522-F-LK329-001.jpg), Public domain; resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "specification-change-during-sourcing-requote-checklist": {
+    "coverImage": {
+      "src": "/assets/photography/91654152.jpg",
+      "width": 960,
+      "height": 1280,
+      "alt": "Close-up of resistor rework on the rear of a circuit-board connector",
+      "caption": "Documented engineering-change-order rework on a circuit board; the photographer identifies the regular pin array as the rear of a PCI bus connector. A changed specification can affect existing work as well as the new price. Photo: RBerteig, CC BY 2.0. Photo: [RBerteig](https://commons.wikimedia.org/wiki/File:20030408-135521_-_Flickr_-_RBerteig.jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "supplier-document-handover-data-book-checklist": {
+    "coverImage": {
+      "src": "/assets/photography/185090384.jpg",
+      "width": 1280,
+      "height": 960,
+      "alt": "A hand lifts a technical drawing from a box of archived engineering records",
+      "caption": "Handling technical archives, photographed by Gilliane in January 2026. A supplier data book likewise needs an index and records that intended users can retrieve; this is an archive example, not a supplier acceptance record. Photo: [Gilliane](https://commons.wikimedia.org/wiki/File:2026_TraitementArchives_CharlesSandoz_IMG_20260127_125708_04.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "expired-supplier-quotation-revalidation-checklist": {
+    "coverImage": {
+      "src": "/assets/photography/154183182.jpg",
+      "width": 1280,
+      "height": 722,
+      "alt": "A procurement specialist writes on a paper form",
+      "caption": "A contracting specialist fills out procurement paperwork at Kapaun Air Station, Germany, March 13, 2024. When refreshing a quotation, retain a dated supplier record that the purchase order can reference. Photo: Senior Airman Thomas Karol / U.S. Air Force, public domain. Photo: [U.S. Air Force photo by Senior Airman Thomas Karol](https://commons.wikimedia.org/wiki/File:700th_CONS,_the_procurement_people_(8307116).jpg), Public domain; resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "procurement-submittal-status-fabrication-release": {
+    "coverImage": {
+      "src": "/assets/photography/80266535.jpg",
+      "width": 960,
+      "height": 638,
+      "alt": "Two pipefitters review drawings in a room of industrial pipework",
+      "caption": "Pipefitters review drawings before more complex piping installation in the Blue Grass plant’s Agent Neutralization System Room. Document review and permission to carry out particular work remain distinct records. Photo: PEO ACWA, CC BY 2.0. Photo: [PEO ACWA](https://commons.wikimedia.org/wiki/File:Blue_Grass_Chemical_Agent-Destruction_Pilot_Plant_Munitions_Demilitarization_Building_(8589144123).jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "compare-industrial-supplier-quotes-like-for-like": {
+    "coverImage": {
+      "src": "/assets/photography/202447013.jpg",
+      "width": 1280,
+      "height": 853,
+      "alt": "Two contracting personnel review paperwork during a repair-agreement exercise",
+      "caption": "Training example: contracting personnel review a simulated repair agreement during Exercise Beverly Sword 27-1 at Naha Military Port, Japan, October 30, 2026. The review aligns repair requirements, costs and contract details before finalization. Photo: Airman 1st Class Nathaniel Jackson / U.S. Air Force, public domain. Photo: [U.S. Air Force photo by Airman 1st Class Nathaniel Jackson](https://commons.wikimedia.org/wiki/File:BS27-1-_Putting_a_price_on_port_repairs_(10059550).jpg), Public domain; resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "can-chinese-galvanized-steel-coil-compete-in-guatemala": {
+    "coverImage": {
+      "src": "/assets/photography/51284.jpg",
+      "width": 960,
+      "height": 640,
+      "alt": "Puerto Quetzal, Guatemala, photographed as geographical port context. This photograph establishes neither the supplier shipping route nor current freight charges.",
+      "caption": "Puerto Quetzal, Guatemala, photographed as geographical port context. This photograph establishes neither the supplier shipping route nor current freight charges. Photo: User:Stan Shebs / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Puerto_Quetzal_and_Volcano_Fuego.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [User:Stan Shebs](https://commons.wikimedia.org/wiki/File:Puerto_Quetzal_and_Volcano_Fuego.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": [
+      {
+        "after": 0,
+        "src": "/assets/photography/77027766.jpg",
+        "width": 960,
+        "height": 720,
+        "alt": "Packaged hot-dip galvanized steel coils. Packaging appearance does not establish steel grade, coating mass, origin, destination, or the quoted price.",
+        "caption": "Packaged hot-dip galvanized steel coils. Packaging appearance does not establish steel grade, coating mass, origin, destination, or the quoted price. Photo: Arosset / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:HDG_Coils_-_Leeco_Steel_Trading_-_Antonio_Carlos_Rosset.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Arosset](https://commons.wikimedia.org/wiki/File:HDG_Coils_-_Leeco_Steel_Trading_-_Antonio_Carlos_Rosset.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web."
+      }
+    ]
+  },
+  "how-to-verify-mill-test-certificates-and-heat-number-traceability-before-steel-shipment": {
+    "coverImage": {
+      "src": "/assets/photography/6730428.jpg",
+      "width": 1032,
+      "height": 774,
+      "alt": "A real steel plate with surface identification markings; the original photographer marked the heat-number area with an arrow and box. This shows a readable physical identifier to compare with an MTC; no corresponding certificate or shipment chain is shown.",
+      "caption": "A real steel plate with surface identification markings; the original photographer marked the heat-number area with an arrow and box. This shows a readable physical identifier to compare with an MTC; no corresponding certificate or shipment chain is shown. Photo/document image: Guero828 / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:HeatNumber.jpg), Public domain; resized for web. Not this order or supplier."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "verify-chinese-steel-structure-supplier-before-deposit": {
+    "coverImage": {
+      "src": "/assets/photography/51872404.jpg",
+      "width": 960,
+      "height": 638,
+      "alt": "A robotic welding cell working on an Xcentric Ripper housing. This is a specific fabrication process example, not evidence that a steel-building supplier controls its welding quality.",
+      "caption": "A robotic welding cell working on an Xcentric Ripper housing. This is a specific fabrication process example, not evidence that a steel-building supplier controls its welding quality. Photo: Ana 2016 / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:ABB_welding_robot.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Ana 2016](https://commons.wikimedia.org/wiki/File:ABB_welding_robot.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "china-precast-concrete-supplier-verification": {
+    "coverImage": {
+      "src": "/assets/photography/71696178.jpg",
+      "width": 960,
+      "height": 720,
+      "alt": "Precast pavement fabrication in Midland, Virginia: a worker fits reinforcement and components within the production form. This documented U.S. example is not a verified Chinese supplier.",
+      "caption": "Precast pavement fabrication in Midland, Virginia: a worker fits reinforcement and components within the production form. This documented U.S. example is not a verified Chinese supplier. Photo: Federal Highway Administration / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:PPCP_Fabrication_VA_(8447058473).jpg), Public domain; resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Federal Highway Administration](https://commons.wikimedia.org/wiki/File:PPCP_Fabrication_VA_(8447058473).jpg), Public domain; resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": [
+      {
+        "after": 1,
+        "src": "/assets/photography/71695794.jpg",
+        "width": 960,
+        "height": 720,
+        "alt": "Sleeper slab reinforcement assembled beside the Utah bridge project where the slabs were precast. The reinforcing assembly and supports are visible.",
+        "caption": "Sleeper slab reinforcement assembled beside the Utah bridge project where the slabs were precast. The reinforcing assembly and supports are visible. Photo: Federal Highway Administration / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sleeper_Slab_Reinforcement_Assembly_UT_(8496273558).jpg), Public domain; resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Federal Highway Administration](https://commons.wikimedia.org/wiki/File:Sleeper_Slab_Reinforcement_Assembly_UT_(8496273558).jpg), Public domain; resized for web."
+      },
+      {
+        "after": 1,
+        "src": "/assets/photography/155223623.jpg",
+        "width": 960,
+        "height": 1280,
+        "alt": "A crane handles a precast column in Manaus, Brazil. Handling and lifting arrangements are part of supplier and project planning; this is a documented site example, not a supplier qualification.",
+        "caption": "A crane handles a precast column in Manaus, Brazil. Handling and lifting arrangements are part of supplier and project planning; this is a documented site example, not a supplier qualification. Photo: Bernardobenzecry / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Precast_Concrete_Column_Moving.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Bernardobenzecry](https://commons.wikimedia.org/wiki/File:Precast_Concrete_Column_Moving.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web."
+      }
+    ]
+  },
+  "steel-structure-factory-audit-china": {
+    "coverImage": {
+      "src": "/assets/photography/42140609.jpg",
+      "width": 960,
+      "height": 720,
+      "alt": "An automated ultrasonic testing machine examining a steel tube. The equipment illustrates a tube-specific inspection process, not qualification for every structural weld or an audit result.",
+      "caption": "An automated ultrasonic testing machine examining a steel tube. The equipment illustrates a tube-specific inspection process, not qualification for every structural weld or an audit result. Photo: Andrzej Otrębski / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:UT_rury_automat.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Andrzej Otrębski](https://commons.wikimedia.org/wiki/File:UT_rury_automat.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": []
+  },
+  "pre-shipment-inspection-engineering-materials": {
+    "coverImage": {
+      "src": "/assets/photography/15925055.jpg",
+      "width": 420,
+      "height": 336,
+      "alt": "Dimensional inspection of a cable-band assembly for the Jiangyin Bridge before packing, a real example of checking an engineered item before shipment.",
+      "caption": "Dimensional inspection of a cable-band assembly for the Jiangyin Bridge before packing, a real example of checking an engineered item before shipment. Photo: Goodwin Steel Castings / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Cable_Band_for_Jiangyin_Bridge_undergoing_dimensional_inspection.jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Goodwin Steel Castings](https://commons.wikimedia.org/wiki/File:Cable_Band_for_Jiangyin_Bridge_undergoing_dimensional_inspection.jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web."
+    },
+    "bodyPhotos": [],
+    "sectionPhotos": [
+      {
+        "after": 1,
+        "src": "/assets/photography/15967282.jpg",
+        "width": 336,
+        "height": 420,
+        "alt": "Dimensional inspection of a different cable-band casting for Tsing Ma Bridge. This illustrates a physical acceptance check against engineering geometry, not release of this buyer order.",
+        "caption": "Dimensional inspection of a different cable-band casting for Tsing Ma Bridge. This illustrates a physical acceptance check against engineering geometry, not release of this buyer order. Photo: Goodwin Steel Castings / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Cable_band_for_Tsing_Ma_Bridge.jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Illustrative example, not a SourceRating inspection or this order. Photo: [Goodwin Steel Castings](https://commons.wikimedia.org/wiki/File:Cable_band_for_Tsing_Ma_Bridge.jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web."
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+import Link from "next/link";
+import type { BlogPost } from "@/data/blog";
+import { articleTopics, topics } from "@/lib/topics";
+export function ArticleFeed({ posts, topic = "All", query = "" }: { posts: BlogPost[]; topic?:string; query?:string }) {
+ const filter={topic:topics.includes(topic)?topic:"All",q:query};
+ const articles=posts.filter(p=>(filter.topic==="All"||articleTopics(p.slug).includes(filter.topic)) && `${p.title} ${p.excerpt} ${articleTopics(p.slug).join(" ")}`.toLowerCase().includes(filter.q.toLowerCase()));
+ return <main className="editorial-feed-layout"><section aria-label="Articles" className="editorial-feed"><h1 className="sr-only">{filter.topic === "All" ? "Procurement articles" : filter.topic}</h1>{filter.q && <p className="editorial-results">{articles.length} results for “{filter.q}”</p>}{articles.map(p=><article className="editorial-card" key={p.slug}><div><span className="editorial-category">{articleTopics(p.slug)[0]}</span><Link href={`/blog/${p.slug}`}><h2>{p.title}</h2></Link><p>{p.excerpt}</p><div className="editorial-meta">James Cheng · <time dateTime={p.date}>{p.date}</time> · {p.readTime}</div></div>{p.coverImage && <Link href={`/blog/${p.slug}`} tabIndex={-1} aria-hidden="true"><img src={p.coverImage.src} alt="" loading="lazy" width={p.coverImage.width} height={p.coverImage.height}/></Link>}</article>)}{!articles.length && <p>No matching articles. <Link href="/">See all articles</Link></p>}</section><aside className="editorial-author"><h2>James Cheng</h2><p>Engineering, industrial sourcing and cross-border procurement.</p><Link href="/about">About the author →</Link><a href="mailto:contact@sourcerating.com">contact@sourcerating.com</a><a href="https://www.linkedin.com/in/hcrdi/">LinkedIn</a></aside></main>;
+}
