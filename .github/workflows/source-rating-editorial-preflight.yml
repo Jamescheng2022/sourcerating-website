@@ -44,9 +44,9 @@ jobs:
           {
             "status": "INITIALIZED",
             "eventBaseSha": "${{ github.event.pull_request.base.sha || 'origin/main' }}",
-            "pinnedMainSha": "7a8c2a9361fa16728458536e61465a679716bf2a",
-            "pinnedPassedHeadSha": "859b85026c8aa294740e6b572381d0d071fa38a9",
-            "expectedProductMergedTree": "ac72179966f2a3acd0b5260495628f7163f984db",
+            "pinnedMainSha": "1ae189b66686db2e5351d073963e113e3bf75d9d",
+            "pinnedPassedHeadSha": "16ab1c329e7a66dc14aceab14c7254f25cd141d6",
+            "expectedProductMergedTree": "f6d434792f95071cb2dfb233fee3e6f594c2db67",
             "testCommitSha": "${{ github.event.pull_request.head.sha || github.sha }}",
             "githubRunId": "${{ github.run_id }}",
             "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -58,9 +58,9 @@ jobs:
         run: |
           set -euo pipefail
           echo "=== 1. Pinned reviewed product identity ==="
-          PINNED_MAIN_SHA="7a8c2a9361fa16728458536e61465a679716bf2a"
-          PINNED_PASSED_HEAD_SHA="859b85026c8aa294740e6b572381d0d071fa38a9"
-          EXPECTED_PRODUCT_MERGED_TREE="ac72179966f2a3acd0b5260495628f7163f984db"
+          PINNED_MAIN_SHA="1ae189b66686db2e5351d073963e113e3bf75d9d"
+          PINNED_PASSED_HEAD_SHA="16ab1c329e7a66dc14aceab14c7254f25cd141d6"
+          EXPECTED_PRODUCT_MERGED_TREE="f6d434792f95071cb2dfb233fee3e6f594c2db67"
 
           git rev-parse --verify "${PINNED_MAIN_SHA}^{commit}"
           git rev-parse --verify "${PINNED_PASSED_HEAD_SHA}^{commit}"
@@ -73,7 +73,7 @@ jobs:
             echo "Notice: PR event base ($PR_EVENT_BASE_SHA) differs from pinned current main ($PINNED_MAIN_SHA); recorded as provenance."
           fi
 
-          # Authoritative check: fetch read-only remote ref directly from origin; MUST succeed and be exactly 7a8c2a9 or FAIL
+          # Authoritative check: fetch read-only remote ref directly from origin; MUST succeed and be exactly 1ae189b or FAIL
           echo "Fetching authoritative current main ref from origin..."
           git fetch --no-tags origin refs/heads/main:refs/remotes/origin/main
           AUTHORITATIVE_MAIN_SHA="$(git rev-parse --verify refs/remotes/origin/main)"
@@ -466,9 +466,9 @@ jobs:
               stepOutcomes: steps,
               eventBaseSha: "${{ github.event.pull_request.base.sha || 'origin/main' }}",
               fetchedMainSha: integrationIdentity.fetchedMainSha || null,
-              pinnedMainSha: "7a8c2a9361fa16728458536e61465a679716bf2a",
-              pinnedPassedHeadSha: "859b85026c8aa294740e6b572381d0d071fa38a9",
-              expectedProductMergedTree: "ac72179966f2a3acd0b5260495628f7163f984db",
+              pinnedMainSha: "1ae189b66686db2e5351d073963e113e3bf75d9d",
+              pinnedPassedHeadSha: "16ab1c329e7a66dc14aceab14c7254f25cd141d6",
+              expectedProductMergedTree: "f6d434792f95071cb2dfb233fee3e6f594c2db67",
               actualProductMergedTree: integrationIdentity.actualProductMergedTree || null,
               testCommitSha: "${{ github.event.pull_request.head.sha || github.sha }}",
               githubRunId: "${{ github.run_id }}",
