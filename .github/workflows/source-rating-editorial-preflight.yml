@@ -45,8 +45,8 @@ jobs:
             "status": "INITIALIZED",
             "eventBaseSha": "${{ github.event.pull_request.base.sha || 'origin/main' }}",
             "pinnedMainSha": "16d749fef5875e46f0f423999e4632321bcf4015",
-            "pinnedPassedHeadSha": "cf0c373dbf6d2115a1f8ca5fd51711633137f9aa",
-            "expectedProductMergedTree": "a34150bd18e5a761a737eccdb83f7c46d8e07021",
+            "pinnedPassedHeadSha": "bdb802134fe1ce1cc382f4440ba63f7bc4ff17fb",
+            "expectedProductMergedTree": "6572749f53c76c65e12b6400ced00e2955d102fc",
             "testCommitSha": "${{ github.event.pull_request.head.sha || github.sha }}",
             "githubRunId": "${{ github.run_id }}",
             "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -59,8 +59,8 @@ jobs:
           set -euo pipefail
           echo "=== 1. Pinned reviewed product identity ==="
           PINNED_MAIN_SHA="16d749fef5875e46f0f423999e4632321bcf4015"
-          PINNED_PASSED_HEAD_SHA="cf0c373dbf6d2115a1f8ca5fd51711633137f9aa"
-          EXPECTED_PRODUCT_MERGED_TREE="a34150bd18e5a761a737eccdb83f7c46d8e07021"
+          PINNED_PASSED_HEAD_SHA="bdb802134fe1ce1cc382f4440ba63f7bc4ff17fb"
+          EXPECTED_PRODUCT_MERGED_TREE="6572749f53c76c65e12b6400ced00e2955d102fc"
 
           git rev-parse --verify "${PINNED_MAIN_SHA}^{commit}"
           git rev-parse --verify "${PINNED_PASSED_HEAD_SHA}^{commit}"
@@ -467,8 +467,8 @@ jobs:
               eventBaseSha: "${{ github.event.pull_request.base.sha || 'origin/main' }}",
               fetchedMainSha: integrationIdentity.fetchedMainSha || null,
               pinnedMainSha: "16d749fef5875e46f0f423999e4632321bcf4015",
-              pinnedPassedHeadSha: "cf0c373dbf6d2115a1f8ca5fd51711633137f9aa",
-              expectedProductMergedTree: "a34150bd18e5a761a737eccdb83f7c46d8e07021",
+              pinnedPassedHeadSha: "bdb802134fe1ce1cc382f4440ba63f7bc4ff17fb",
+              expectedProductMergedTree: "6572749f53c76c65e12b6400ced00e2955d102fc",
               actualProductMergedTree: integrationIdentity.actualProductMergedTree || null,
               testCommitSha: "${{ github.event.pull_request.head.sha || github.sha }}",
               githubRunId: "${{ github.run_id }}",
