@@ -1,0 +1,71 @@
+[
+  {
+    "slug": "supplier-bank-account-change-independent-verification",
+    "verdict": "PASS_SELF_REVIEW_PENDING_INDEPENDENT_REVIEW",
+    "gates": {
+      "1": "PASS",
+      "2": "PASS",
+      "3": "PASS",
+      "4": "PASS",
+      "5": "PASS",
+      "6": "PASS",
+      "7": "PASS",
+      "8": "PASS",
+      "9": "PASS",
+      "10": "PASS"
+    },
+    "notes": [
+      "Primary source URLs opened and consequential sections read.",
+      "No equations, tolerances, tax rates, legal deadlines or fabricated case studies.",
+      "Exactly one real photo, accurate contextual caption; no repeated asset in existing posts.",
+      "No public publication or external sending performed."
+    ],
+    "minor_editorial_observation": null
+  },
+  {
+    "slug": "ddp-quote-importer-of-record-duty-tax-responsibility",
+    "verdict": "PASS_SELF_REVIEW_PENDING_INDEPENDENT_REVIEW",
+    "gates": {
+      "1": "PASS",
+      "2": "PASS",
+      "3": "PASS",
+      "4": "PASS",
+      "5": "PASS",
+      "6": "PASS",
+      "7": "PASS",
+      "8": "PASS",
+      "9": "PASS",
+      "10": "PASS"
+    },
+    "notes": [
+      "Primary source URLs opened and consequential sections read.",
+      "No equations, tolerances, tax rates, legal deadlines or fabricated case studies.",
+      "Exactly one real photo, accurate contextual caption; no repeated asset in existing posts.",
+      "No public publication or external sending performed."
+    ],
+    "minor_editorial_observation": null
+  },
+  {
+    "slug": "approved-sample-production-process-change-volume-price",
+    "verdict": "PASS_SELF_REVIEW_PENDING_INDEPENDENT_REVIEW",
+    "gates": {
+      "1": "PASS",
+      "2": "PASS",
+      "3": "PASS",
+      "4": "PASS",
+      "5": "PASS",
+      "6": "PASS",
+      "7": "PASS",
+      "8": "PASS",
+      "9": "PASS",
+      "10": "PASS"
+    },
+    "notes": [
+      "Primary source URLs opened and consequential sections read.",
+      "No equations, tolerances, tax rates, legal deadlines or fabricated case studies.",
+      "Exactly one real photo, accurate contextual caption; no repeated asset in existing posts.",
+      "No public publication or external sending performed."
+    ],
+    "minor_editorial_observation": "The moulding-machine image is documentary but darker than ideal; a later replacement may improve presentation without changing article evidence."
+  }
+]

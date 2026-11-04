@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { ArticleViews } from "@/components/editorial/ArticleViews";
 import { ArticleBody, InlineText } from "@/components/shared/ArticleBody";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -107,7 +108,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           {post.dateModified && post.dateModified !== post.date ? (
             <time dateTime={post.dateModified}>Updated {new Date(`${post.dateModified}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}</time>
           ) : null}
-          <span>{post.readTime}</span>
+          <span>{post.readTime}</span><ArticleViews slug={post.slug}/>
         </div>
 
         {post.coverImage ? (

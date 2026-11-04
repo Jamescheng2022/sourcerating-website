@@ -1,0 +1,1063 @@
+[
+  {
+    "slug": "supplier-bank-account-change-independent-verification",
+    "title": "The Supplier Changed Its Bank Details. Verify the Route Before the Payment.",
+    "seoTitle": "The Supplier Changed Its Bank Details. Verify the Route Before the Payment.",
+    "excerpt": "Verify a supplier bank-account change through an established contact route, then preserve the amendment and payment approval record.",
+    "date": "2026-11-04",
+    "category": "Contracts & Payment",
+    "author": "James Cheng",
+    "layout": "editorial",
+    "readTime": "4 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "A supplier’s new bank details can arrive in the most ordinary message of the week: the same invoice format, the same signature, a familiar conversation about a deposit. The useful response is to verify the change through a previously trusted route before updating the payment record. Appearance is an unreliable basis for deciding which requests deserve a check."
+      },
+      {
+        "type": "paragraph",
+        "text": "That uncertainty is visible in a [public accounting discussion](https://www.reddit.com/r/Accounting/comments/1vn4yeg/how_do_you_actually_decide_on_a_vendor_bankchange/). A participant asks what should trigger a callback when a vendor requests new bank details; another worries about a request arriving from the vendor’s genuine account. These are anonymous practitioners’ questions, not verified fraud investigations. They capture the purchasing problem well: waiting for an obvious spelling mistake leaves the process dependent on suspicion."
+      },
+      {
+        "type": "heading",
+        "text": "The familiar email is still only a request"
+      },
+      {
+        "type": "paragraph",
+        "text": "The [FBI’s BEC guidance](https://www.fbi.gov/how-we-can-help-you/common-frauds-and-scams/business-email-compromise) describes both lookalike addresses and access to legitimate billing conversations. It advises verifying changes to account numbers or payment procedures and contacting the financial institution immediately if a fraudulent transfer has occurred. The agency’s examples concern deception; they do not mean every supplier account change is fraudulent."
+      },
+      {
+        "type": "paragraph",
+        "text": "[HSBC’s security guidance](https://www.hsbc.com/online-security/types-of-attack) makes a particularly useful distinction: a known email address, even with an earlier conversation attached, should not be assumed genuine. Its recommended check is a call to a trusted supplier contact on a number already known, rather than the number printed in the change request."
+      },
+      {
+        "type": "paragraph",
+        "text": "For the buyer, this means separating the commercial relationship from the proposed beneficiary. You may know the supplier, have received good goods before and owe a genuine invoice. Those facts do not authenticate a newly supplied destination for the money."
+      },
+      {
+        "type": "heading",
+        "text": "Make the callback independent of the change"
+      },
+      {
+        "type": "paragraph",
+        "text": "Start with the supplier contact and telephone number held before the request arrived. If that record is incomplete, establish a trusted route through your company’s approved supplier-verification process. Calling the number in the new bank letter simply allows the request to supply its own witness."
+      },
+      {
+        "type": "paragraph",
+        "text": "Explain that you are verifying a proposed amendment. Ask the established contact to confirm who authorized it, the effective date and the affected supplier entity. Read back the relevant beneficiary and account identifiers through the approved channel. Record whom you reached, how you obtained the number, when the conversation occurred and what was confirmed. Avoid circulating complete banking details through unnecessary email copies."
+      },
+      {
+        "type": "paragraph",
+        "text": "A sales representative may know that a change is underway without having authority to instruct payment. Follow the supplier’s established finance route and your own delegated approval rules. If the beneficiary is a different legal entity, treat that as an additional commercial question: why would payment to that entity discharge this particular invoice? Have the appropriate finance or contract owner resolve it. A bank-letter attachment alone does not answer the contractual question."
+      },
+      {
+        "type": "heading",
+        "text": "Keep the amendment separate from the payment run"
+      },
+      {
+        "type": "paragraph",
+        "text": "A practical internal control is to give the change its own record, linked to the supplier master entry and the affected invoices. Preserve the original request, the independent verification and the decision. Have the authorized reviewer approve the amendment before a payment preparer uses it. These are suggested purchasing controls, to adapt to company policy; they are not a universal banking rule."
+      },
+      {
+        "type": "paragraph",
+        "text": "The record should make five things easy to find: the supplier entity, the previous and proposed instructions, the independent contact route, the verification result and the person authorizing the update. Restrict sensitive account data appropriately. A reviewer needs enough evidence to assess the decision, not an uncontrolled spreadsheet of every vendor’s bank details."
+      },
+      {
+        "type": "paragraph",
+        "text": "Then check the payment instruction actually selected for the next transaction. A correct master-data amendment is little help if an old payment template remains in use, or if a preparer copies details from another email. The final check should connect the approved beneficiary to the invoice being paid and the bank instruction being released."
+      },
+      {
+        "type": "heading",
+        "text": "When the answer stays unclear"
+      },
+      {
+        "type": "paragraph",
+        "text": "An unanswered callback is an unresolved change, rather than evidence that the request is safe. Explain the verification requirement through the established supplier relationship and escalate the pending payment under your company’s process. Do not let a claimed shipment deadline quietly become permission to bypass approval."
+      },
+      {
+        "type": "paragraph",
+        "text": "For legitimate changes, consistency helps the relationship: suppliers should encounter the same check rather than an accusation based on a buyer’s intuition. A short verification note also lets another colleague finish the work without reconstructing a private phone conversation."
+      },
+      {
+        "type": "paragraph",
+        "text": "If money has already gone to an account you suspect is fraudulent, contact your bank immediately through an independently established channel. Follow its response instructions, preserve the messages and transaction records, and use the relevant official reporting route; the FBI identifies IC3 for US BEC reports. Do not wait to complete an internal purchasing review before making that contact. Recovery is not assured."
+      },
+      {
+        "type": "paragraph",
+        "text": "The decision worth preserving is precise: this authorized supplier contact confirmed this amendment through this independent route, and this reviewer permitted its use. That is a stronger payment record than “the email looked normal.”"
+      }
+    ],
+    "referencesHeading": "Sources and scope",
+    "referencesIntro": "Primary sources checked on November 4, 2026. Customer procedures and regional rules apply within their stated scope.",
+    "references": [
+      {
+        "title": "Business Email Compromise",
+        "publisher": "Federal Bureau of Investigation",
+        "href": "https://www.fbi.gov/how-we-can-help-you/common-frauds-and-scams/business-email-compromise",
+        "note": "Opened current public prevention and response guidance."
+      },
+      {
+        "title": "Types of attack: Business email compromise",
+        "publisher": "HSBC",
+        "href": "https://www.hsbc.com/online-security/types-of-attack",
+        "note": "Known email address and prior thread are not proof; call a known contact number."
+      },
+      {
+        "title": "How do you actually decide on a vendor bank-change request?",
+        "publisher": "Reddit r/Accounting",
+        "href": "https://www.reddit.com/r/Accounting/comments/1vn4yeg/how_do_you_actually_decide_on_a_vendor_bankchange/",
+        "note": "Anonymous public practitioner pain point; not verified evidence of a fraud case."
+      }
+    ],
+    "relatedLinks": [],
+    "coverImage": {
+      "src": "/assets/photography/new-13674604.jpg",
+      "width": 900,
+      "height": 1200,
+      "alt": "An office telephone on a desk",
+      "caption": "An office telephone: a callback must use an independently established supplier contact route. Object photograph; it does not depict a bank verification or endorse this equipment. Photo: [Own work by Donmike10 (talk)](https://commons.wikimedia.org/wiki/File:NEC_office_phone.JPG), [Public domain](https://commons.wikimedia.org/wiki/Commons:Public_domain); resized for web. Editorial context, not SourceRating work."
+    }
+  },
+  {
+    "slug": "ddp-quote-importer-of-record-duty-tax-responsibility",
+    "title": "Your Quote Says DDP. Whose Name Goes on the Import Declaration?",
+    "seoTitle": "Your Quote Says DDP. Whose Name Goes on the Import Declaration?",
+    "excerpt": "Check the importer, customs representation, duties, taxes and records behind a DDP quotation, with separate US and Great Britain examples.",
+    "date": "2026-11-04",
+    "category": "Policy & Customs",
+    "author": "James Cheng",
+    "layout": "editorial",
+    "readTime": "4 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "A DDP quotation promises an unusually comfortable purchase: one delivered price and a supplier handling the border. Before accepting it, ask a less comfortable question: whose legal identity will appear on the import declaration? A seller’s promise to pay the bill and an importer’s obligations to customs need to fit together, but they are different parts of the transaction."
+      },
+      {
+        "type": "paragraph",
+        "text": "This article uses Incoterms® 2020 as the commercial reference, with separate US and Great Britain examples. It does not supply a worldwide importer-registration rule. Destination law, the goods and the actual declaration arrangement need checking before shipment."
+      },
+      {
+        "type": "heading",
+        "text": "What the three letters actually allocate"
+      },
+      {
+        "type": "paragraph",
+        "text": "Under [ICC’s DDP explanation](https://library.iccwbo.org/content/tfb/BOOKS/BK_0049/BK_0049_04_RulesAny.htm), the seller brings the goods to the named destination, cleared for import and ready for unloading on the arriving vehicle. Import clearance and the associated duties and applicable taxes fall on the seller under that rule. Name the precise destination and the edition in the order; “DDP your country” leaves the endpoint poorly defined."
+      },
+      {
+        "type": "paragraph",
+        "text": "ICC also cautions sellers who cannot arrange import clearance to consider DAP or DPU instead. The practical lesson is to test whether the quoted arrangement can be performed. A low delivered price is incomplete if nobody has established a workable importer and customs-representation arrangement."
+      },
+      {
+        "type": "paragraph",
+        "text": "[HMRC’s customs-valuation guidance](https://www.gov.uk/guidance/customs-valuation/incoterms) describes Incoterms as trade terms clarifying delivery tasks, costs and risks. It notes that selecting one does not restrict which customs-valuation method may apply. The commercial label is therefore a starting point for border planning, rather than a substitute for a customs declaration."
+      },
+      {
+        "type": "heading",
+        "text": "Ask for names before asking for assurances"
+      },
+      {
+        "type": "paragraph",
+        "text": "Have the supplier identify the proposed importer, customs broker or representative, and entity funding duties and taxes. Ask who will appoint the broker and authorize any declaration made in the buyer’s name. Request a written explanation of the arrangement that the destination broker can review."
+      },
+      {
+        "type": "paragraph",
+        "text": "If the supplier says its forwarder “handles everything,” ask the forwarder the same questions. A transport provider’s involvement does not, by itself, tell the buyer whose information will be certified or who will answer a later customs query. Request the declaration and payment records the buyer will receive after clearance, with access and timing agreed in advance."
+      },
+      {
+        "type": "paragraph",
+        "text": "Avoid sending company identifiers or signing a customs authorization merely because it appears in a freight company’s onboarding email. First understand what role the document gives your business. There may be a legitimate reason for the request; establish that reason with the broker through a verified contact route."
+      },
+      {
+        "type": "heading",
+        "text": "The US example: entry has a responsible party"
+      },
+      {
+        "type": "paragraph",
+        "text": "The [2024 published US Code, 19 USC 1484](https://www.govinfo.gov/content/pkg/USCODE-2024-title19/html/USCODE-2024-title19-chap4-subtitleIII-partIII-sec1484.htm), assigns entry responsibilities, using reasonable care, to the importer of record, acting personally or through a written authorized agent. The required information includes value and classification. The statute also identifies eligible parties for that role. This is a US legal framework, not a rule assigning every DDP purchase to the overseas seller."
+      },
+      {
+        "type": "paragraph",
+        "text": "For a US-bound order, ask the licensed broker to identify the intended importer of record and explain the proposed authorization before the goods move. If your company is to be that party, get an explicit explanation of the responsibilities it retains and the documents it must review. A supplier agreeing to reimburse duties does not settle who made the entry or certified the information."
+      },
+      {
+        "type": "paragraph",
+        "text": "Do not accept a reduced declared value, misleading goods description or borrowed importer identity as a way to preserve the quoted delivered price. Resolve a classification, origin or valuation uncertainty through the proper customs process rather than an informal adjustment to shipping paperwork."
+      },
+      {
+        "type": "heading",
+        "text": "Great Britain: representation and VAT need their own discussion"
+      },
+      {
+        "type": "paragraph",
+        "text": "[HMRC’s guidance on appointing customs agents](https://www.gov.uk/guidance/check-what-you-need-to-consider-before-getting-someone-to-deal-with-customs-for-you) distinguishes direct representation, in your name, from indirect representation, in the representative’s name on your behalf. It describes different liability consequences and says appointing someone does not remove the trader’s due-diligence responsibility. Agree the form of representation rather than treating “our broker” as a complete answer."
+      },
+      {
+        "type": "paragraph",
+        "text": "Import VAT adds another question. [HMRC’s VIT44400 manual](https://www.gov.uk/hmrc-internal-manuals/vat-input-tax/vit44400), discussing toll operators and ownership, explains why paying import VAT or holding a certificate does not alone establish entitlement to deduct it. For the actual transaction, have a tax adviser confirm who owns the goods at import, who will be shown as importer and what evidence supports any intended recovery. Do not budget a VAT recovery solely because the supplier calls its offer DDP."
+      },
+      {
+        "type": "paragraph",
+        "text": "These examples concern Great Britain and specified UK guidance. Northern Ireland movements and other destinations require their own review; US terminology should not be copied into every country’s paperwork."
+      },
+      {
+        "type": "heading",
+        "text": "Turn the delivered price into a usable order"
+      },
+      {
+        "type": "paragraph",
+        "text": "Before approval, put the named delivery point, importer arrangement, representation, duty-and-tax funding and clearance-document handover in one purchasing note. Ask the supplier to identify exclusions and the treatment of inspections, storage, delayed clearance and changes in assessed charges. Have the relevant contract owner settle exceptions instead of leaving them hidden behind a delivered-price total."
+      },
+      {
+        "type": "paragraph",
+        "text": "If the proposed seller cannot perform its clearance obligations, revise the arrangement and price before shipment. A clearly agreed alternative gives the buyer a better basis for planning than a DDP label that the parties intend to reinterpret at the border."
+      }
+    ],
+    "referencesHeading": "Sources and scope",
+    "referencesIntro": "Primary sources checked on November 4, 2026. Customer procedures and regional rules apply within their stated scope.",
+    "references": [
+      {
+        "title": "Incoterms® 2020: DDP",
+        "publisher": "International Chamber of Commerce",
+        "href": "https://library.iccwbo.org/content/tfb/BOOKS/BK_0049/BK_0049_04_RulesAny.htm",
+        "note": "Opened DDP explanation and obligations; commercial delivery allocation."
+      },
+      {
+        "title": "19 USC 1484, Entry of merchandise",
+        "publisher": "US Government Publishing Office",
+        "href": "https://www.govinfo.gov/content/pkg/USCODE-2024-title19/html/USCODE-2024-title19-chap4-subtitleIII-partIII-sec1484.htm",
+        "note": "2024 published Code edition; US entry responsibilities and eligible parties."
+      },
+      {
+        "title": "Appointing someone to deal with customs",
+        "publisher": "HM Revenue & Customs",
+        "href": "https://www.gov.uk/guidance/check-what-you-need-to-consider-before-getting-someone-to-deal-with-customs-for-you",
+        "note": "Updated 21 August 2024; direct and indirect representation."
+      },
+      {
+        "title": "VIT44400: Specific issues—Toll Operators",
+        "publisher": "HM Revenue & Customs",
+        "href": "https://www.gov.uk/hmrc-internal-manuals/vat-input-tax/vit44400",
+        "note": "Ownership, importer role and import-VAT deduction in the described UK contexts."
+      },
+      {
+        "title": "Customs valuation: Incoterms",
+        "publisher": "HM Revenue & Customs",
+        "href": "https://www.gov.uk/guidance/customs-valuation/incoterms",
+        "note": "Updated 14 April 2026; trade terms do not determine customs valuation method."
+      }
+    ],
+    "relatedLinks": [],
+    "coverImage": {
+      "src": "/assets/photography/new-66505021.jpg",
+      "width": 1000,
+      "height": 691,
+      "alt": "A CBP agriculture inspection specialist checks paperwork beside imported machinery at the Port of Baltimore",
+      "caption": "CBP agriculture cargo inspection at the Port of Baltimore. The photograph shows border work; it does not identify the shipment’s Incoterm, importer of record or duty treatment. Photo: [U.S. Customs and Border Protection](https://commons.wikimedia.org/wiki/File:170726-H-NI589-409_(36183283842).jpg), [Public domain](https://commons.wikimedia.org/wiki/Commons:Public_domain); resized for web. Editorial context, not SourceRating work."
+    }
+  },
+  {
+    "slug": "approved-sample-production-process-change-volume-price",
+    "title": "The Sample Was Approved. What Exactly Did the Volume Price Preserve?",
+    "seoTitle": "The Sample Was Approved. What Exactly Did the Volume Price Preserve?",
+    "excerpt": "Link sample approval to specifications and the production route before negotiating volume savings, substitutions and change implementation.",
+    "date": "2026-11-04",
+    "category": "Pricing & Negotiation",
+    "author": "James Cheng",
+    "layout": "editorial",
+    "readTime": "4 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "The approved sample can remain on the buyer’s desk while production moves away from it. The visible item has not changed, yet the material source, tooling, manufacturing site or finishing route may have changed behind the order. A buyer who negotiated only the sample’s appearance has little evidence about which production conditions were meant to remain fixed."
+      },
+      {
+        "type": "paragraph",
+        "text": "The useful commercial question is what the supplier is offering to repeat. Before negotiating the volume price, connect the accepted sample to a defined product specification and an identified production route. Then agree which changes require notice, review or renewed approval. This is a question about preserving the purchase basis, distinct from deciding how many finished pieces to inspect before shipment."
+      },
+      {
+        "type": "heading",
+        "text": "A good object and a repeatable process answer different questions"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask how the sample was made. Was it a prototype, a pilot part or an item taken from the intended production line? Which drawing revision, material and tool did it use? Were any operations performed differently from the proposed volume route? The answers determine what the sample can reasonably represent."
+      },
+      {
+        "type": "paragraph",
+        "text": "[Bosch’s February 2025 supplier-quality requirements](https://assets.bosch.com/media/global/bosch_group/purchasing_and_logistics/information_for_business_partners/downloads/quality_docs/specific_regulations/supplier-quality-requirements.pdf), written for its Mobility Solutions supply chain, distinguish prototypes and pilot series from serial deliveries. The same document evaluates performance under production conditions and records identifying details such as tooling and production line in its approval documentation. These are customer-specific requirements, not an automatic obligation on an unrelated supplier. They illustrate the information missing from an approval email that merely says the sample looks good."
+      },
+      {
+        "type": "paragraph",
+        "text": "For another industrial purchase, scale the evidence to the product. A simple component may need a clear drawing and material specification plus a documented production route. A functionally critical assembly may need a much more substantial qualification. The responsible engineer should decide the required evidence and acceptance criteria; a buyer should not invent universal capability thresholds."
+      },
+      {
+        "type": "heading",
+        "text": "Make the sample point to something measurable"
+      },
+      {
+        "type": "paragraph",
+        "text": "A retained sample can help resolve an appearance discussion, but it should have an identity: sample reference, date, product revision and the characteristics it represents. Link its inspection results and any agreed concessions. Give the supplier and buyer access to the same approval record rather than allowing separate photographs to become competing references."
+      },
+      {
+        "type": "paragraph",
+        "text": "Where possible, describe the relevant requirement in the drawing, material specification or agreed test method. “Same as sample” leaves readers to decide whether it means colour, dimensions, performance, construction or all of them. An accepted surface finish does not explain an untested internal feature. Record which characteristics were assessed and which remain subject to other evidence."
+      },
+      {
+        "type": "paragraph",
+        "text": "This is also a negotiation issue. If a supplier offers a lower volume price, ask which assumptions make it possible: different tooling, a different process sequence, another material source or production at another facility. A genuine efficiency improvement may be welcome. The buyer needs the technical differences visible before accepting the saving."
+      },
+      {
+        "type": "heading",
+        "text": "Follow changes beneath an unchanged part number"
+      },
+      {
+        "type": "paragraph",
+        "text": "[Graco’s supplier change guidance](https://www.graco.com/us/en/suppliers/request-for-change.html) lists more than drawing changes. Its examples include relevant tooling changes, production-method changes, certain material-source changes, packaging and inspection methods. It requires suppliers to communicate proposed changes for review through its purchasing and quality contacts. The list is Graco’s purchasing framework; buyers can use the categories as questions without claiming the same contractual rules apply to their order."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask your supplier to describe proposed differences before implementation, identify affected parts and explain the reason. Have the technical reviewer decide whether further samples, qualification or documentation are needed. Keep that technical decision separate from accepting a cost reduction or revised delivery date."
+      },
+      {
+        "type": "paragraph",
+        "text": "[Infineon’s change-notification page](https://www.infineon.com/quality/quality-management/supplier-product-change-notification) provides another sector-specific example. Its requested information includes a before-and-after comparison, affected materials and sites, qualification evidence, and a transition plan for samples and date codes. The transferable idea is to make the boundary between the old and new supply identifiable. Semiconductor procedures should not be copied wholesale into a general fabricated-goods purchase."
+      },
+      {
+        "type": "heading",
+        "text": "Negotiate the transition as carefully as the unit price"
+      },
+      {
+        "type": "paragraph",
+        "text": "A change agreement should say which order lines, lots or units it affects. Ask what will happen to existing material, work in progress and stock already finished. If both versions will be delivered, agree identification and receiving instructions so the warehouse can distinguish them. Otherwise an approved new route may arrive mixed with the old one, leaving a technically acceptable decision difficult to apply."
+      },
+      {
+        "type": "paragraph",
+        "text": "Keep the commercial record equally clear. Separate recurring price changes from one-time tooling or qualification charges. Identify who owns the tool and the approved data where relevant to the contract. Record the evidence still outstanding before treating a promised saving as available for the next order."
+      },
+      {
+        "type": "paragraph",
+        "text": "When production appears to differ, compare its records with the accepted basis before assigning a cause. A mismatch may reflect an unauthorized change, an incomplete original specification or an observation that needs further measurement. Preserve the evidence and refer disposition to the authorized technical and commercial owners. Repeating that the supplier must match the sample does little until both parties can identify what the sample approved—and what production is now doing differently."
+      }
+    ],
+    "referencesHeading": "Sources and scope",
+    "referencesIntro": "Primary sources checked on November 4, 2026. Customer procedures and regional rules apply within their stated scope.",
+    "references": [
+      {
+        "title": "Supplier Quality Requirements, Summary & Explanations",
+        "publisher": "Bosch Mobility Solutions",
+        "href": "https://assets.bosch.com/media/global/bosch_group/purchasing_and_logistics/information_for_business_partners/downloads/quality_docs/specific_regulations/supplier-quality-requirements.pdf",
+        "note": "Edition 3, February 2025; sections 3.4, 4.7–4.9 and 12; customer-specific requirements."
+      },
+      {
+        "title": "Supplier Request for Change",
+        "publisher": "Graco",
+        "href": "https://www.graco.com/us/en/suppliers/request-for-change.html",
+        "note": "Manufacturer examples of product, process, tooling and inspection changes."
+      },
+      {
+        "title": "Supplier Product/Process Change Notification",
+        "publisher": "Infineon Technologies",
+        "href": "https://www.infineon.com/quality/quality-management/supplier-product-change-notification",
+        "note": "Sector-specific change information and transition planning; no universal timeline asserted."
+      }
+    ],
+    "relatedLinks": [],
+    "coverImage": {
+      "src": "/assets/photography/new-25101531.jpg",
+      "width": 800,
+      "height": 600,
+      "alt": "An injection-moulding machine with plastic products nearby",
+      "caption": "An injection-moulding machine used to make plastic utilities. Production equipment is part of the route behind a sample; this photograph does not establish qualification, process capability or product conformity. Photo: [Rohini](https://commons.wikimedia.org/wiki/File:Injection_moulding_machine.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Editorial context, not SourceRating work."
+    }
+  },
+  {
+    "slug": "sample-approved-production-site-changed",
+    "title": "The Sample Passed. Which Factory Will Make the Order?",
+    "seoTitle": "The Sample Passed. Which Factory Will Make the Order?",
+    "excerpt": "Connect an approved sample to the actual manufacturing site, outside processes and first production lot before an undisclosed route change becomes a delivery problem.",
+    "date": "2026-11-04",
+    "author": "James",
+    "category": "Supplier & Factory",
+    "layout": "editorial",
+    "readTime": "5 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "A good sample answers a product question. It does not automatically answer a production-location question. Before releasing a large order, the buyer needs to connect that sample to the company, site, equipment and outsourced operations that will actually make the goods. Otherwise, the approved object can become a reference for a process that has never been examined."
+      },
+      {
+        "type": "paragraph",
+        "text": "This is not an argument against subcontracting. A specialist heat treater, coating shop or toolmaker may be essential to a sensible supply chain. The risk is an unrecorded change: the sample comes from one route, the production order follows another, and nobody has agreed which differences require another approval."
+      },
+      {
+        "type": "heading",
+        "text": "Start with the sample's travel history"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask the supplier to reconstruct how the approved sample was made. Record its identifier, drawing revision, material batch, production date and the address where the relevant operations occurred. Separate the company that issued the invoice from the company that manufactured it. A trading office can legitimately arrange production; its office address should not become the manufacturing address by default."
+      },
+      {
+        "type": "paragraph",
+        "text": "For a molded part, the useful questions include which tool and cavity produced the sample, which press ran it, and whether material preparation or finishing took place elsewhere. For fabricated steel, the route might include cutting, welding, galvanizing and packing at different locations. Record the route that matters to the specified product, rather than requesting a vague declaration that everything is made in-house."
+      },
+      {
+        "type": "paragraph",
+        "text": "The result should be a short, usable production map. Each critical operation gets a named company, a physical site, a responsible person and a record linking it to the sample. If the supplier cannot reconstruct the sample route, treat that as an unresolved qualification question. It is not proof of fraud, but it is a poor foundation for assuming repeatability."
+      },
+      {
+        "type": "heading",
+        "text": "Put the production site inside the approval"
+      },
+      {
+        "type": "paragraph",
+        "text": "[Volvo's published May 2021 purchasing conditions](https://www.volvogroup.com/content/dam/volvo-group/markets/master/suppliers/our-supplier-requirements/Volvo-General-Purchasing-Conditions-May-2021.pdf) provide a useful industrial example. They distinguish sample approval from continuing supplier responsibility and require written consent before production is relocated wholly or partly. These are Volvo's contractual provisions, not rules that automatically apply to another buyer's purchase order."
+      },
+      {
+        "type": "paragraph",
+        "text": "The practical lesson is to describe what the buyer is approving. An approval record can identify the part and revision, the sample, the manufacturing site and the critical outside processes. Then specify which proposed changes must be notified before implementation. A move to a second building, a replacement coating subcontractor and a change of material source need different technical reviews; a single box marked “factory approved” hides those differences."
+      },
+      {
+        "type": "paragraph",
+        "text": "Make the notification route workable. Name who receives the request, who can authorize it and what production must wait for a decision. Silence in an email thread should not become an accidental approval mechanism. The actual agreement must define the commercial effect of a change and any stop or release decision."
+      },
+      {
+        "type": "heading",
+        "text": "Follow a real lot through the new route"
+      },
+      {
+        "type": "paragraph",
+        "text": "A video tour can help orient a buyer, but the stronger question is whether one identified production lot can be followed through the claimed route. Select a lot from the actual order. Ask for its work instruction, material identification, in-process checks, outside-process handover and final inspection record. The identifiers should connect across the records without relying on an explanation invented after the photographs arrive."
+      },
+      {
+        "type": "paragraph",
+        "text": "For an outsourced operation, ask what physically travels to the processor and what comes back. Does the delivery record identify the batch or only a total weight? Does the processor's record identify the order, relevant specification and date? Who checks incoming parts after the outside operation? A certificate with the right process name but no link to the delivered lot leaves the central question unanswered."
+      },
+      {
+        "type": "paragraph",
+        "text": "Photographs should serve this investigation. Request a contextual view and a readable detail tied to the same lot, rather than a folder of attractive machines. A current factory sign, tool identifier or operation sheet can help locate the evidence, but none should be treated as a substitute for the connecting records."
+      },
+      {
+        "type": "heading",
+        "text": "A move needs a first-production decision"
+      },
+      {
+        "type": "paragraph",
+        "text": "[Lear's October 2023 supplier bulletin](https://www.lear.com/suppliers-bulletin/requirements-for-production-tool-transfer-moves) makes the operating problem unusually visible: its tool-move requirements address advance approval, shared tooling, production cover and approval before shipments from a new location. The bulletin extends the concern to processing, assembly and sub-supplier tool moves. Its automotive approval requirements are Lear-specific; copying the form is less important than understanding the interruption it controls."
+      },
+      {
+        "type": "paragraph",
+        "text": "For another buyer, the corresponding decision might be a witnessed trial, renewed dimensional checks, a material review or a first-lot inspection. Choose it according to the changed operation and the consequences of failure. Agree how accepted stock will cover the transition, how old and new lots will remain distinguishable, and what happens if the trial fails. A delivery date should not quietly erase the approval step."
+      },
+      {
+        "type": "paragraph",
+        "text": "Before production release, the purchasing and technical owners should be able to answer three questions together: where was the approved sample made, where will this lot be made, and which evidence establishes that the difference is acceptable? An openly managed second site can be qualified. An unnamed second site cannot be assessed simply because the sample on the desk looks right."
+      }
+    ],
+    "coverImage": {
+      "src": "/assets/photography/new-183428762.jpg",
+      "alt": "A real injection-molding tool mounted in an Engel machine, showing the installed production arrangement. The photograph does not identify the site or process that made any buyer’s approved sample.",
+      "caption": "A real injection-molding tool mounted in an Engel machine, showing the installed production arrangement. The photograph does not identify the site or process that made any buyer’s approved sample. Photo: [Bricetofly](https://commons.wikimedia.org/wiki/File:Machine_injection_platique_Engel_(2).jpg), [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en); resized for web. Illustrative photograph, not a SourceRating inspection or the buyer’s order.",
+      "width": 1000,
+      "height": 666
+    },
+    "referencesHeading": "Source notes",
+    "referencesIntro": "Primary sources opened on 4 November 2026. Named-company purchasing provisions are examples of their own agreements; the practical questions and evidence workflow are the author’s recommendations.",
+    "references": [
+      {
+        "title": "Volvo General Purchasing Conditions, May 2021",
+        "publisher": "Volvo Group",
+        "href": "https://www.volvogroup.com/content/dam/volvo-group/markets/master/suppliers/our-supplier-requirements/Volvo-General-Purchasing-Conditions-May-2021.pdf",
+        "note": "Volvo contractual example; not represented as current applicable contract for another buyer"
+      },
+      {
+        "title": "Requirements for Production Tool Transfer Moves",
+        "publisher": "Lear Corporation",
+        "href": "https://www.lear.com/suppliers-bulletin/requirements-for-production-tool-transfer-moves",
+        "note": "Lear supplier-specific approval and transition requirements, not universal PPAP rule"
+      }
+    ]
+  },
+  {
+    "slug": "container-condensation-desiccant-limits",
+    "title": "The Container Arrived Wet. More Desiccant May Be the Wrong Answer.",
+    "seoTitle": "The Container Arrived Wet. More Desiccant May Be the Wrong Answer.",
+    "excerpt": "Wet pallets, leaks, temperature changes and unpacking conditions need different responses. Diagnose the moisture route before buying a larger drying-agent dose.",
+    "date": "2026-11-04",
+    "author": "James",
+    "category": "Packaging & Logistics",
+    "layout": "editorial",
+    "readTime": "5 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "When cartons arrive soft or steel arrives spotted with rust, the next packing instruction is often simple: add more desiccant. That may be part of the answer. It is not a diagnosis. A drying agent cannot repair a leaking roof, reverse damage already caused by wet packaging or make every unloading condition safe for cold machinery."
+      },
+      {
+        "type": "paragraph",
+        "text": "The purchasing task is to discover where the water entered the system, what released it during transport and where it condensed. Treat the container, goods, pallets, inner packaging and destination handover as one moisture problem. Buying another bag without answering those questions can repeat the failure with a larger packing bill."
+      },
+      {
+        "type": "heading",
+        "text": "The water may have been loaded with the goods"
+      },
+      {
+        "type": "paragraph",
+        "text": "Hapag-Lloyd's [container-packing guidance](https://www.hapag-lloyd.com/content/dam/website/downloads/press_and_media/publications/Container_Packing_Broschuere_engl.pdf), in its section on climatic stresses, identifies cargo, packaging and stowage materials among the moisture sources. It explains that temperature changes can produce condensation on the container structure or packaging, with dripping water damaging the load. A sound container is therefore not the same thing as a dry transport system."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask how the goods and packing were stored before stuffing. Were wooden supports kept outdoors? Were cartons exposed while the loading area was wet? Was equipment washed or tested with water before packing? These are investigation questions, not a presumption that any one operation caused the loss. The point is to identify a source that can be measured or corrected before the doors close."
+      },
+      {
+        "type": "paragraph",
+        "text": "Do not accept “the pallet looked dry” as a moisture record. Agree with the packaging specialist what must be measured, which method is suitable for the material, where readings are taken and what acceptance condition applies. A universal moisture limit copied from another cargo is a weak substitute for a product-specific packing specification."
+      },
+      {
+        "type": "heading",
+        "text": "Container sweat and cargo sweat are different handovers"
+      },
+      {
+        "type": "paragraph",
+        "text": "The [IMO/ILO/UNECE CTU Code, Annex 3](https://www.hapag-lloyd.com/content/dam/website/downloads/local_info/HPL-CTU_CODE_OF_PRACTICE.pdf) describes moisture released by cargo and associated materials as temperatures vary, followed by condensation on a cooling roof. It also distinguishes cargo sweat: cold goods can collect condensation when exposed to warmer, humid air during unpacking. Those mechanisms can require different receiving arrangements."
+      },
+      {
+        "type": "paragraph",
+        "text": "That distinction matters when an importer changes only the supplier's packing instruction. An arrival problem may also involve the warehouse opening the protective wrapping immediately. Record destination temperature and humidity conditions, the condition of the goods before and after opening, and the sequence of unloading. A receiving plan should be agreed with the packaging specialist and consignee for the actual cargo and climate; “always ventilate immediately” is not a safe universal instruction."
+      },
+      {
+        "type": "heading",
+        "text": "A desiccant has a moisture budget"
+      },
+      {
+        "type": "paragraph",
+        "text": "The same CTU Code warns that drying agents generally lack enough absorption capacity to rescue hygroscopic cargo that was not sufficiently dry when packed. GDV's [Container Handbook loss-prevention discussion](https://www.containerhandbuch.de/chb_e/scha/scha_10_03_07.html) likewise describes saturation and the importance of the protected enclosure. A small packet inside a product bag and a hanging unit inside an entire freight container are different arrangements."
+      },
+      {
+        "type": "paragraph",
+        "text": "The useful supplier question is not just how many bags were installed. Ask what enclosure the design protects, which moisture sources were included, what voyage and storage duration were assumed, and which capacity data support the selection under the expected conditions. Request installation instructions and a record showing the correct product was fitted in the specified positions without damage."
+      },
+      {
+        "type": "paragraph",
+        "text": "For sensitive machinery, discuss whether a properly designed barrier package is needed around the equipment. Its seams, penetrations and internal timber are part of that discussion. A bag inside an imperfect wrapping does not make the package vapor-tight. Neither a barrier nor a desiccant removes the separate need for cargo securing and a suitable unloading method."
+      },
+      {
+        "type": "heading",
+        "text": "Rule out liquid water before adjusting the dose"
+      },
+      {
+        "type": "paragraph",
+        "text": "The handbook's separate section on [rainwater and leaks](https://containerhandbuch.de/chb_e/scha/scha_10_03_04_05.html) describes wetting during loading and damage that can allow water through roofs, floors or door areas. That is a different corrective action from increasing passive absorption. Request a documented container-condition check and loading-weather record, including defects found and the decision to accept or reject the unit."
+      },
+      {
+        "type": "paragraph",
+        "text": "At destination, preserve the pattern of damage before rearranging the load. Photograph the ceiling, doors, floor and representative packages; identify which faces were wet and where they sat. Keep the container and seal identifiers, loading photographs, packing-material records and available temperature or humidity logs together. Those observations support a technical investigation; they do not by themselves allocate liability between seller, packer and carrier."
+      },
+      {
+        "type": "paragraph",
+        "text": "For the next shipment, agree a change that can be checked: drier packing materials, a corrected container defect, a revised protective package or a better receiving sequence. Then state who verifies it before release. Desiccant can be a useful component of that plan. It should not be the explanation for every wet arrival or the only item the buyer negotiates."
+      }
+    ],
+    "coverImage": {
+      "src": "/assets/photography/new-31420381.jpg",
+      "alt": "A real small silica-gel desiccant packet inside protective packaging. This product-level packet is not a container-scale drying design or a recommended shipment dose.",
+      "caption": "A real small silica-gel desiccant packet inside protective packaging. This product-level packet is not a container-scale drying design or a recommended shipment dose. Photo: [Woakamkurhram](https://commons.wikimedia.org/wiki/File:HK_plastic_container_n_bag_%E7%A1%85%E8%86%A0%E4%B9%BE%E7%87%A5%E5%8A%91_Silica_gel_Desiccant_small_pack_Feb-2014.JPG), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Illustrative photograph, not a SourceRating inspection or the buyer’s order.",
+      "width": 900,
+      "height": 1200
+    },
+    "referencesHeading": "Source notes",
+    "referencesIntro": "Primary sources opened on 4 November 2026. Named-company purchasing provisions are examples of their own agreements; the practical questions and evidence workflow are the author’s recommendations.",
+    "references": [
+      {
+        "title": "Container Packing",
+        "publisher": "Hapag-Lloyd",
+        "href": "https://www.hapag-lloyd.com/content/dam/website/downloads/press_and_media/publications/Container_Packing_Broschuere_engl.pdf",
+        "note": "Carrier technical guidance; no cargo-specific moisture limit or desiccant dose derived"
+      },
+      {
+        "title": "IMO/ILO/UNECE CTU Code — Annex3 Prevention of condensation damages",
+        "publisher": "IMO/ILO/UNECE; public carrier-hosted copy",
+        "href": "https://www.hapag-lloyd.com/content/dam/website/downloads/local_info/HPL-CTU_CODE_OF_PRACTICE.pdf",
+        "note": "General transport mechanisms and limitations; no universal receiving instruction or corrosion threshold prescribed"
+      },
+      {
+        "title": "Container Handbook10.3.7 Loss prevention measures for avoiding moisture damage in container transport",
+        "publisher": "GDV Container Handbook",
+        "href": "https://www.containerhandbuch.de/chb_e/scha/scha_10_03_07.html",
+        "note": "Describes limitations and context-specific examples; numerical desiccant examples not reused as prescription"
+      },
+      {
+        "title": "Container Handbook10.3.4.5 Rain water (leaks) as source of sweat",
+        "publisher": "GDV Container Handbook",
+        "href": "https://containerhandbuch.de/chb_e/scha/scha_10_03_04_05.html",
+        "note": "Physical entry routes; not evidence of this buyer’s loss cause or liability"
+      }
+    ]
+  },
+  {
+    "slug": "mold-quotation-ownership-storage-transfer",
+    "title": "The Mold Is Paid For. Can You Actually Move It?",
+    "seoTitle": "The Mold Is Paid For. Can You Actually Move It?",
+    "excerpt": "Compare the asset you own, the storage and care you receive, and the cost of the first accepted batch after a tool transfer—not just the mold charge.",
+    "date": "2026-11-04",
+    "author": "James",
+    "category": "Pricing & Negotiation",
+    "layout": "editorial",
+    "readTime": "5 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "A tooling quotation can look complete while leaving the buyer's next sourcing decision undefined. The mold price is agreed, parts are being produced and the supplier says the tool belongs to the customer. Months later, moving production raises a different set of questions: which components can leave, who prepares them, what records travel with them and what the receiving factory must spend before making an acceptable part."
+      },
+      {
+        "type": "paragraph",
+        "text": "These questions belong in the original commercial discussion. Ownership, custody and practical portability are connected, but they are not the same promise. A useful quotation makes each one inspectable before the buyer becomes dependent on the tool."
+      },
+      {
+        "type": "heading",
+        "text": "Start with the asset, not the invoice label"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask the supplier to define what the tooling price buys. Does it include a complete mold, cavity and core inserts, a shared mold base, hot-runner equipment, dedicated fixtures, spare components and gauges? Which items are supplier equipment that will remain behind? A short asset schedule with photographs and identifiers is more useful than an invoice describing everything as a “mold charge.”"
+      },
+      {
+        "type": "paragraph",
+        "text": "Record the owner, the agreed ownership milestone and the entity holding the tool. If a third-party toolmaker will build or repair it, name that party and its location. Decide how the buyer will know where the asset is after a repair or transfer. These are terms to agree, not conclusions that can be drawn from the fact that a deposit was paid."
+      },
+      {
+        "type": "paragraph",
+        "text": "[Bosch's North American non-mobility purchasing terms, revised February 2026](https://assets.bosch.com/media/global/bosch_group/purchasing_and_logistics/information_for_business_partners/downloads/purchasing_docs/terms_and_conditions/americas/non-mobility-direct-and-indirect-purchasing-potc-for-north-america.pdf), illustrate how specifically an industrial buyer can address these subjects. Their property and tooling provisions cover identification, custody, maintenance, outside toolmakers and return. They are Bosch's contractual allocation, not a general entitlement available to every mold buyer or a statement that every clause is enforceable in every jurisdiction."
+      },
+      {
+        "type": "heading",
+        "text": "Storage is a service with an end date"
+      },
+      {
+        "type": "paragraph",
+        "text": "A supplier can offer a low initial tooling price while attaching different conditions to future use. Protolabs' [published comparison of molding options](https://www.protolabs.com/services/injection-molding/on-demand-manufacturing/) explicitly distinguishes ownership and inactive-storage arrangements between its service options. This is a manufacturer's own offer, not an industry-wide tariff, but it shows why the buyer must compare the whole arrangement."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask when inactivity begins, how the supplier warns the buyer before storage ends and what happens if the buyer does not respond. Is extended storage chargeable? Who authorizes disposal? Are cleaning, corrosion protection and routine maintenance included, and how is their completion recorded? Specify a contact and a fallback contact; a tooling asset should not disappear because the original purchasing employee changed jobs."
+      },
+      {
+        "type": "paragraph",
+        "text": "Separate routine care from a design change or major repair. Request an approval process for work that changes cavity geometry, surface finish or critical components, together with a condition record and retained reference samples. Agree what the supplier must disclose before the next order is priced. “Lifetime maintenance” needs an operating definition if it is going to influence the sourcing comparison."
+      },
+      {
+        "type": "heading",
+        "text": "Quote the exit while everyone still wants the order"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask for a transfer schedule alongside the production quotation. It should identify the notice period, inspection and release process, deinstallation responsibilities, lifting provisions, protective packing and transport handover. Ask whether there are charges for cleaning, dismantling, service work, packing, administration or outstanding agreed tooling amortization. Record what is included, what is excluded and how variable charges will be authorized."
+      },
+      {
+        "type": "paragraph",
+        "text": "Do not turn this into a demand that every possible future move must be free. The purpose is to make costs visible and avoid an undefined release condition. Commercial disputes, liens, intellectual-property rights and cross-border recovery can depend on the signed documents and applicable law. Have the actual arrangement reviewed for the relevant jurisdiction rather than copying a large customer's clause and assuming the problem is solved."
+      },
+      {
+        "type": "paragraph",
+        "text": "The receiving molder also needs a quotation. Provide tool dimensions and weight, mounting and service interfaces, runner and control details, drawings, material information, repair history and agreed reference parts. Ask it to identify required adaptations and the evidence needed to accept production. A transferable physical object may still need work before it fits the new process."
+      },
+      {
+        "type": "heading",
+        "text": "Price the first accepted batch at the new site"
+      },
+      {
+        "type": "paragraph",
+        "text": "A sourcing comparison should include release and transport costs, incoming inspection, adaptations, trial material, testing and the inventory needed during transition. Keep uncertain amounts visible as allowances or items awaiting quotation. A precise-looking total built on unconfirmed assumptions can conceal more risk than an honest range."
+      },
+      {
+        "type": "paragraph",
+        "text": "Agree the acceptance milestone before the tool leaves. Who decides whether the receiving-site trial is acceptable, against which drawing revision and inspection plan? Which open defects must be resolved, and who owns the decision if the tool condition differs from the handover record? Tool release and production release should be separate decisions."
+      },
+      {
+        "type": "paragraph",
+        "text": "The strongest time to ask these questions is before awarding the mold. A slightly higher quotation with clear asset identity, care obligations and a workable exit may leave the buyer with a more useful sourcing option. The commercial value is not simply having an ownership sentence. It is being able to obtain another qualified source without discovering the transfer terms during the interruption."
+      }
+    ],
+    "coverImage": {
+      "src": "/assets/photography/new-183512675.jpg",
+      "alt": "A real close-up of injection-mold tooling and internal components. A mold quotation should identify the complete asset and distinguish included components from equipment retained by the supplier.",
+      "caption": "A real close-up of injection-mold tooling and internal components. A mold quotation should identify the complete asset and distinguish included components from equipment retained by the supplier. Photo: [Bricetofly](https://commons.wikimedia.org/wiki/File:Injection_mold_-_(1).jpg), [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en); resized for web. Illustrative photograph, not a SourceRating inspection or the buyer’s order.",
+      "width": 1000,
+      "height": 666
+    },
+    "referencesHeading": "Source notes",
+    "referencesIntro": "Primary sources opened on 4 November 2026. Named-company purchasing provisions are examples of their own agreements; the practical questions and evidence workflow are the author’s recommendations.",
+    "references": [
+      {
+        "title": "North American Non-Mobility Direct and Indirect Purchasing Terms and Conditions",
+        "publisher": "Robert Bosch LLC",
+        "href": "https://assets.bosch.com/media/global/bosch_group/purchasing_and_logistics/information_for_business_partners/downloads/purchasing_docs/terms_and_conditions/americas/non-mobility-direct-and-indirect-purchasing-potc-for-north-america.pdf",
+        "note": "Specific North American contractual terms; applicability, enforceability and mandatory rights not generalized"
+      },
+      {
+        "title": "Injection Molding Tool Options for Custom Plastic Parts",
+        "publisher": "Protolabs",
+        "href": "https://www.protolabs.com/services/injection-molding/on-demand-manufacturing/",
+        "note": "Attributed manufacturer service comparison; no general industry tariff or universal ownership rule"
+      }
+    ]
+  },
+  {
+    "slug": "supplier-equivalent-material-performance-condition-interface",
+    "title": "The Supplier Says “Equivalent.” Equivalent at Which Job?",
+    "seoTitle": "The Supplier Says “Equivalent.” Equivalent at Which Job?",
+    "layout": "editorial",
+    "excerpt": "A replacement material can match a grade table and still leave service conditions or interfaces unresolved. Ask for the comparison that belongs to the actual part.",
+    "date": "2026-11-04",
+    "category": "Production & Products",
+    "readTime": "5 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "“Equivalent material available” can be a useful reply to an RFQ. It may offer a way around a long lead time or an awkward minimum order. The difficult part is the noun that follows equivalent: composition, strength, corrosion behaviour, manufacturing condition, or the finished component’s job? A purchasing decision becomes fragile when those different promises are compressed into one word."
+      },
+      {
+        "type": "paragraph",
+        "text": "The first response need not be a rejection. Ask the supplier to identify the original requirement, the proposed change and the property being compared. Keep three questions separate: what will the material arrive as, what must it survive in service, and how will the finished part connect to the rest of the system? A clear answer can make an alternative worth evaluating. A confident grade-name comparison cannot answer all three."
+      },
+      {
+        "type": "heading",
+        "text": "A cross-reference is the start of a conversation"
+      },
+      {
+        "type": "paragraph",
+        "text": "Alleima’s public heat-exchanger tube materials table is a useful reminder of how carefully such comparisons need to be read. It marks some designations as nearest equivalents and flags a designation that is informative rather than applicable to tube and pipe. The same page lists product standards separately. Those distinctions appear in a manufacturer’s own selection information; they should survive the journey into a supplier’s quotation."
+      },
+      {
+        "type": "paragraph",
+        "text": "For an order, retain the complete original designation and governing product specification, including the edition if the contract identifies one. Then put the proposed designation beside it. Ask which requirements match, which differ and which have not been compared. This is more informative than accepting a screenshot whose row happens to contain both names. Do not treat a published comparison as authorization to depart from the drawing."
+      },
+      {
+        "type": "paragraph",
+        "text": "The incoming material also needs a condition. Ask whether the offered product has the required form, processing route and delivery condition, and what records will establish them. A test certificate should be tied to the material proposed for supply. A catalogue describes a product offering; it does not identify the particular heat or batch that will become the buyer’s part."
+      },
+      {
+        "type": "heading",
+        "text": "The service condition is part of the comparison"
+      },
+      {
+        "type": "paragraph",
+        "text": "A corrosion claim is especially easy to detach from its conditions. Outokumpu explains that its laboratory guidance uses controlled chemicals and conditions, while actual service may include contaminants, variation and a different oxygen content. It also separates uniform-corrosion information from localized attack. A favourable result in one kind of exposure therefore leaves other questions to investigate; it is not a universal ranking of materials."
+      },
+      {
+        "type": "paragraph",
+        "text": "A buyer can turn that limitation into a better request. Send the relevant service envelope with the comparison: media, contaminants that are known, temperature range, exposure pattern and the life or maintenance expectation in the specification. Mark missing operating information as missing. If the supplier’s evidence uses another environment, ask the technical reviewer to explain why it is relevant rather than silently accepting the difference."
+      },
+      {
+        "type": "paragraph",
+        "text": "This does not require procurement to invent a corrosion test or choose a grade from a chart. It requires the seller’s claim and the engineer’s question to meet in the same document. Where suitability depends on conditions the buyer cannot define, that uncertainty belongs in the decision. A quicker delivery date is valuable information, but it does not resolve an unknown operating environment."
+      },
+      {
+        "type": "heading",
+        "text": "The material sits inside an assembly"
+      },
+      {
+        "type": "paragraph",
+        "text": "AMPP’s materials-selection guidance includes compatibility with other system components alongside mechanical properties, maintenance and service life. Its discussion of system design also includes geometry, crevices and dissimilar-metal separation. That is a broader brief than comparing two values in a material datasheet. It asks what the material will be doing after it leaves the supplier’s warehouse."
+      },
+      {
+        "type": "paragraph",
+        "text": "For a replacement component, add a marked drawing showing the interfaces that the proposal leaves unchanged and those it affects. Ask about mating dimensions, connection details, surface requirements and any downstream fabrication or treatment that the project specifies. Treat an answer of “same outside size” as an answer about size. It is not, by itself, evidence about the other requirements."
+      },
+      {
+        "type": "paragraph",
+        "text": "The review should also identify who owns each question. Procurement can assemble the quotation, traceability documents and comparison. The responsible engineering or quality reviewer should determine whether the proposed evidence addresses the intended use and governing requirements. This is particularly important where the substitution changes an approved design basis. A buyer should not be pushed into supplying the missing technical approval merely by signing a revised price."
+      },
+      {
+        "type": "heading",
+        "text": "Buy the bounded change"
+      },
+      {
+        "type": "paragraph",
+        "text": "A useful substitution record can remain short. Name the affected drawing and order lines; identify the original and proposed material and condition; list the compared properties and evidence; state the operating assumptions and interfaces; and record the authorized decision. Ask the supplier to declare unresolved differences explicitly. An empty comparison cell should remain visible rather than disappearing into a final sentence saying that everything is equivalent."
+      },
+      {
+        "type": "paragraph",
+        "text": "If the alternative is accepted, carry the approved scope into the order and inspection instructions. If approval covers only a particular part, condition or service, preserve that limit. Keep the original requirement visible so the receiving team can tell an authorized change from an unexplained deviation. An approval that cannot be connected to the delivered material is difficult to use when a question appears later."
+      },
+      {
+        "type": "paragraph",
+        "text": "The commercial opportunity is still there: a suitable alternative may simplify supply. The buying discipline is to make the promise small enough to check. Ask the supplier to complete one sentence before the discussion moves on: equivalent for this requirement, under these conditions, with these differences still open. That answer is worth more than an unqualified tick in a quotation."
+      }
+    ],
+    "referencesHeading": "Source notes",
+    "referencesIntro": "Primary material checked on 4 November 2026. The purchasing workflow is editorial advice; project acceptance remains with the agreed specification and authorized reviewers.",
+    "references": [
+      {
+        "title": "Heat exchanger tube materials",
+        "publisher": "Alleima",
+        "href": "https://www.alleima.com/en/products/tube-pipe/tubular-products/heat-exchanger-tubes/materials/",
+        "note": "Manufacturer distinguishes nearest equivalent designations and tube/pipe applicability; this is not a substitution approval."
+      },
+      {
+        "title": "Utilizing corrosion testing for reliable materials selection",
+        "publisher": "Outokumpu",
+        "href": "https://www.outokumpu.com/en/expertise/2020/utilizing-corrosion-testing-for-reliable-materials-selection",
+        "note": "Manufacturer guidance on test conditions, contaminants and the limits of uniform-corrosion data."
+      },
+      {
+        "title": "Materials Selection and Design for Corrosion Control",
+        "publisher": "AMPP",
+        "href": "https://www.ampp.org/technical-research/what-is-corrosion/materials-selection-and-design-for-corrosion-control",
+        "note": "Professional association guidance includes mechanical properties, component compatibility and system design."
+      }
+    ],
+    "coverImage": {
+      "src": "/assets/photography/new-24622993.jpg",
+      "width": 1000,
+      "height": 923,
+      "alt": "A steel tensile specimen after testing. One observed mechanical response is not a complete material-substitution assessment.",
+      "caption": "A steel tensile specimen after testing. One observed mechanical response is not a complete material-substitution assessment. Photo: [Andrzej Otrębski](https://commons.wikimedia.org/wiki/File:Proba_rozciagania_stal_probka_3.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    }
+  },
+  {
+    "slug": "inspection-report-not-inspected-not-available",
+    "title": "“Not Inspected” Is a Result You Still Have to Close",
+    "seoTitle": "“Not Inspected” Is a Result You Still Have to Close",
+    "layout": "editorial",
+    "excerpt": "Missing reference samples and unavailable test equipment leave different gaps. Read the remarks, define the missing evidence and keep shipment authorization explicit.",
+    "date": "2026-11-04",
+    "category": "Quality & Inspection",
+    "readTime": "5 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "An inspection report can contain pages of photographs and reassuring observations while leaving one purchase requirement unanswered. The line may say not inspected, not available, or simply that a check could not be performed. Before anyone treats that wording as harmless administration, ask what was missing: the product, the acceptance reference, access to it, or the means to test it."
+      },
+      {
+        "type": "paragraph",
+        "text": "These expressions are not a universal reporting code. Read the inspection company’s legend and the accompanying remarks, then ask for clarification where the wording is ambiguous. The important distinction is between an observed satisfactory result and a requirement for which no usable conclusion was reached. The latter needs a decision, even when the rest of the report looks complete."
+      },
+      {
+        "type": "heading",
+        "text": "An actual report shows two different gaps"
+      },
+      {
+        "type": "paragraph",
+        "text": "Import QC publishes an anonymized sample report for a sealing-machine and PET-bottle order inspected on 7 August 2026. The provider describes the document as a genuine job, with identities withheld; it is watermarked as a sample and is not for contractual use. SourceRating has not independently audited that transaction. The document is useful here because its limitations can be read directly, without inventing a buyer’s experience."
+      },
+      {
+        "type": "paragraph",
+        "text": "The opening remarks state that signed reference samples were not provided. They also say the factory lacked instruments for high-voltage and power testing of the sealing machine. The overall conclusion is pending. These are different unfinished questions: one concerns the reference against which a comparison could be made; the other concerns tests that the available resources could not support. Photographs of completed checks cannot answer either by themselves."
+      },
+      {
+        "type": "paragraph",
+        "text": "The practical response is to name each affected requirement. Which finish, feature or other agreed characteristic required the missing reference? Which specified test required unavailable equipment? Ask the inspection company to connect its limitation to the checklist item and the inspected product or order line. Avoid expanding the statement into a claim that every part of the inspection is invalid. Avoid shrinking it into a pass, too."
+      },
+      {
+        "type": "heading",
+        "text": "Separate a missing reference from a missing test"
+      },
+      {
+        "type": "paragraph",
+        "text": "When a reference sample is absent, supplying more pictures may help explain the product but may not restore the agreed basis of comparison. ICW’s discussion of signed samples describes how an inspection can proceed with an incomplete understanding of the buyer’s requirements. That is practitioner guidance, not a rule that samples define every performance requirement. The buyer still needs the written specification and the relevant approved reference."
+      },
+      {
+        "type": "paragraph",
+        "text": "A sensible closure request identifies the missing reference, its approval status and the characteristics it governs. Ask whether the original observations can legitimately be assessed against it later or whether another visit is needed. Do not invite a retrospective rewrite that makes the reference appear to have been available on the inspection date. Preserve what the inspector actually saw and the information that was available then."
+      },
+      {
+        "type": "paragraph",
+        "text": "Unavailable test equipment calls for another route. Ask what test remains incomplete, what method and equipment the order requires, and who can perform and review it. The answer may involve a properly arranged return visit or an appropriate laboratory. This is a planning question, not permission for factory staff to improvise an electrical test. Where the requirement concerns safety or regulatory conformity, obtain the responsible technical review before deciding how to proceed."
+      },
+      {
+        "type": "heading",
+        "text": "The visit needs a workable setup"
+      },
+      {
+        "type": "paragraph",
+        "text": "QIMA’s public inspection instructions make the preparation issue concrete. They call for accessible goods and the necessary test equipment to be ready before the inspector arrives, and ask for advance notice when machinery or equipment will be unavailable. Those are QIMA’s instructions; other providers may set different conditions. The broader buying lesson is to agree resources and access before paying for a visit whose critical checks cannot be completed."
+      },
+      {
+        "type": "paragraph",
+        "text": "Before a reinspection, confirm more than an appointment. Send the affected requirements and approved references, identify the equipment or facilities needed, and ask the inspection provider to confirm the planned scope. Name who will make the goods accessible. Ask what will happen if the same obstacle remains. A new date without a changed setup can leave the same unanswered line in a newer report."
+      },
+      {
+        "type": "paragraph",
+        "text": "Keep the evidence of closure attached to the original finding. It should identify what was checked, which products or order lines it covers, the result and the reviewer. If the later evidence has a narrower scope than the original requirement, retain that difference. An attachment saying only that the supplier has fixed the issue is a promise of completion, not an inspection result."
+      },
+      {
+        "type": "heading",
+        "text": "Someone still owns the shipment decision"
+      },
+      {
+        "type": "paragraph",
+        "text": "The closure record should end in a named disposition: further evidence required, accepted against the agreed requirement, or a documented deviation sent to the authorized decision-maker. Whether shipment may proceed depends on the contract and the nature of the open requirement. There is no universal recommendation here to waive a check or hold an entire order for every missing item."
+      },
+      {
+        "type": "paragraph",
+        "text": "QIMA’s instructions tell suppliers to wait for client approval before shipping. A buyer can make that handoff explicit in its own order: a report’s conclusion informs the decision, while release authorization follows the agreed process. Do not ask an inspector to soften a limitation so the report looks easier to approve. Ask the person who owns the requirement to decide what evidence is still needed."
+      },
+      {
+        "type": "paragraph",
+        "text": "The most useful reading habit is to collect the unresolved lines before writing the release email. For each one, record the requirement, the reason it was not concluded, the next evidence and the responsible person. A report becomes valuable when its boundaries remain visible. “Not inspected” is information about work still open; the buyer’s next task is to close that work honestly."
+      }
+    ],
+    "referencesHeading": "Source notes",
+    "referencesIntro": "Primary material checked on 4 November 2026. The purchasing workflow is editorial advice; project acceptance remains with the agreed specification and authorized reviewers.",
+    "references": [
+      {
+        "title": "Sealing Machine — Pre-Shipment Inspection: public sample report",
+        "publisher": "Import QC",
+        "href": "https://www.importqc.com/reports/files/psi-industrial-equipment-sealing-machine.pdf",
+        "note": "Provider-published, anonymized report marked SAMPLE, not for contractual use. The provider calls it a genuine job; SourceRating has not independently audited the job."
+      },
+      {
+        "title": "Sealing Machine sample report provenance",
+        "publisher": "Import QC",
+        "href": "https://www.importqc.com/sample-reports/psi-industrial-equipment-sealing-machine/",
+        "note": "Establishes the publisher’s stated provenance and public sample status, not independent validation of its client or factory."
+      },
+      {
+        "title": "Inspection instructions and requirements",
+        "publisher": "QIMA",
+        "href": "https://www.qima.com/inspection-instructions",
+        "note": "Provider instructions require accessible goods, available equipment and advance notification of unavailable machinery; these are QIMA-specific instructions, not universal law."
+      },
+      {
+        "title": "Pre-shipment Inspection — The Fundamentals",
+        "publisher": "ICW",
+        "href": "https://www.icw.io/pre-shipment-inspection/",
+        "note": "Attributed practitioner discussion of missing signed reference samples and the distinction between inspection reporting and shipment authorization. Do not repeat the page’s broad claim that a signed sample represents all quality requirements."
+      }
+    ],
+    "coverImage": {
+      "src": "/assets/photography/new-71880032.jpg",
+      "width": 900,
+      "height": 1200,
+      "alt": "A high-voltage test in progress. Required equipment and an agreed method are part of completing a test; this is not the sealing-machine inspection discussed.",
+      "caption": "A high-voltage test in progress. Required equipment and an agreed method are part of completing a test; this is not the sealing-machine inspection discussed. Photo: [Dr Lotus Black](https://commons.wikimedia.org/wiki/File:Hipot_tester_in_action.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    }
+  },
+  {
+    "slug": "spot-freight-index-supplier-freight-included-quote",
+    "title": "The Freight Index Fell. Why Has the Supplier’s Quote Not Moved?",
+    "seoTitle": "The Freight Index Fell. Why Has the Supplier’s Quote Not Moved?",
+    "layout": "editorial",
+    "excerpt": "A spot-market signal and a supplier’s freight-inclusive price answer different questions. Compare scope, booking conditions and time before negotiating the difference.",
+    "date": "2026-11-04",
+    "category": "Markets",
+    "readTime": "5 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "A buyer sees a falling container-freight chart and asks the supplier to reduce a quotation marked freight included. It is a reasonable commercial question. It becomes less useful when the chart and the quotation are treated as two versions of the same invoice. One describes a market observation. The other needs to describe a particular cargo movement and the seller’s promise to the buyer."
+      },
+      {
+        "type": "paragraph",
+        "text": "The right comparison starts with scope and dates. Which route and equipment does the market signal represent? Which departure window, origin, destination and services does the supplier’s price cover? Is the transport already booked, still being estimated, or subject to a stated validity period? Without those answers, the difference between the two numbers has no clear explanation to test."
+      },
+      {
+        "type": "heading",
+        "text": "The market signal still matters"
+      },
+      {
+        "type": "paragraph",
+        "text": "UNCTAD’s 2025 Review of Maritime Transport provides a historical example of why freight comparisons need a period and a route. Its freight-cost chapter examines January 2024 to mid-2025 and describes how Red Sea rerouting lengthened voyages, reduced effective capacity and raised operating costs. This is evidence of how market conditions change; it is not a quotation for a November 2026 shipment or a forecast of the next sailing’s price."
+      },
+      {
+        "type": "paragraph",
+        "text": "Use a market movement to ask for a refreshed offer on the same shipping assumptions. Do not multiply a percentage change in a broad indicator into a supplier’s total delivered price and call the answer a verified saving. First establish what portion of that price the comparison can explain. If the seller will not separate transport commercially, ask for a revised inclusive offer alongside an offer that lets the buyer arrange the defined movement."
+      },
+      {
+        "type": "heading",
+        "text": "A confirmed rate has a defined scope"
+      },
+      {
+        "type": "paragraph",
+        "text": "Maersk’s published Spot terms illustrate why the booking document matters. Confirmed rates are subject to specified exceptions; the terms address matters including situational surcharges, currency effects, extra services, cargo weight and booking amendments. This is a carrier-specific example, not a claim that every freight price can change freely. Read the applicable booking terms rather than transferring one carrier’s conditions to another supplier’s offer."
+      },
+      {
+        "type": "paragraph",
+        "text": "For an industrial order, send the same cargo description to everyone being compared. Include the packing dimensions and weight, equipment requirements, cargo readiness window and the exact collection and delivery points. If those details are provisional, ask which changes would require repricing. A rate for a different container or a different service boundary is another offer, even when both spreadsheets put it under an ocean-freight heading."
+      },
+      {
+        "type": "paragraph",
+        "text": "Then ask the supplier to mark the included and excluded services. Useful questions cover origin collection and handling, the sea leg, destination handling, documentation and onward delivery where relevant. Separately confirm how taxes, insurance and any special handling are treated. Do not infer an obligation from the phrase freight included alone. Record the named place, agreed trade rule and any additional commercial commitments in the actual offer."
+      },
+      {
+        "type": "heading",
+        "text": "The container has a clock as well as a price"
+      },
+      {
+        "type": "paragraph",
+        "text": "Maersk’s detention and demurrage terms distinguish use of terminal space from use of the carrier’s container, and distinguish container time inside and outside the terminal. They also provide for location-specific arrangements and alternative combined charging. The practical point is to request the applicable free time, start and stop events, and charging schedule. A sea-freight amount by itself does not tell the buyer what happens after arrival."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask who will prepare the documents, arrange collection and return the empty container. If a project cannot receive the material immediately, include that constraint in the comparison before booking. Do not assume that a cheaper sailing creates a cheaper receiving operation. The buyer should see the remaining exposure and the party responsible for it, even if the purchasing team chooses to accept it."
+      },
+      {
+        "type": "paragraph",
+        "text": "Time also needs a boundary. Hapag-Lloyd describes its route-planning transit times as indicative and separates network exploration from departure schedules. Ask whether the supplier’s quoted time refers to the sea leg, port-to-port movement or arrival at the project’s receiving point. Record the planned routing and any transshipment, then ask what is confirmed and what remains an estimate. A scheduled vessel movement is not automatically a project delivery commitment."
+      },
+      {
+        "type": "heading",
+        "text": "Negotiate the difference you can identify"
+      },
+      {
+        "type": "paragraph",
+        "text": "A short comparison sheet can carry both commercial and operational facts. Keep cargo, route, equipment and departure window together. Add the quoted validity, included services, exclusions, free time and delivery milestones. Identify any booking already placed and the consequences of changing it. Where the supplier holds transport risk in the agreed price, ask how the new proposal changes that allocation rather than demanding an unexplained pass-through reduction."
+      },
+      {
+        "type": "paragraph",
+        "text": "The supplier may be able to improve the offer; it may also be comparing a different departure or holding a commitment that the buyer has not seen. Neither explanation should be invented on the supplier’s behalf. Ask for the stated basis of the price and compare a fresh alternative with the same scope. Keep unverified reasons marked as unverified until the documents support them."
+      },
+      {
+        "type": "paragraph",
+        "text": "That approach gives the freight chart a useful role. It opens a negotiation and challenges an old assumption without pretending to be a shipment invoice. The best question is more precise than why the quote has not fallen: what would it cost to move this cargo, over this boundary, in this window, with these responsibilities? Once both sides answer that question, the price discussion has something solid underneath it."
+      }
+    ],
+    "referencesHeading": "Source notes",
+    "referencesIntro": "Primary material checked on 4 November 2026. The purchasing workflow is editorial advice; project acceptance remains with the agreed specification and authorized reviewers.",
+    "references": [
+      {
+        "title": "Review of Maritime Transport 2025, Chapter III: Freight rates and maritime transport costs",
+        "publisher": "UN Trade and Development (UNCTAD)",
+        "href": "https://unctad.org/system/files/official-document/rmt2025ch3_en.pdf",
+        "note": "Historical evidence of rerouting and freight-market volatility; no claim about a current November 2026 rate."
+      },
+      {
+        "title": "Terms for Spot Booking",
+        "publisher": "Maersk",
+        "href": "https://terms.maersk.com/terms-spot-booking",
+        "note": "Carrier-specific scope, exceptions, currency, services, cargo weight and amendment provisions. Not a statement that all carrier rates can change for any reason."
+      },
+      {
+        "title": "Terms for Detention and Demurrage",
+        "publisher": "Maersk",
+        "href": "https://terms.maersk.com/dnd",
+        "note": "Carrier definitions distinguish terminal-space storage from container use and distinguish inside/outside terminal periods."
+      },
+      {
+        "title": "Service Explorer",
+        "publisher": "Hapag-Lloyd",
+        "href": "https://www.hapag-lloyd.com/en/services-information/routes-trades/service-explorer.html",
+        "note": "Carrier describes routing alternatives and indicative transit times, with schedules handled in a separate tool."
+      }
+    ],
+    "coverImage": {
+      "src": "/assets/photography/new-177054558.jpg",
+      "width": 1000,
+      "height": 629,
+      "alt": "A container ship alongside cranes at the Port of Felixstowe. A freight-market indicator does not define the services and timing of an individual booking.",
+      "caption": "A container ship alongside cranes at the Port of Felixstowe. A freight-market indicator does not define the services and timing of an individual booking. Photo: [Christopher Hilton](https://commons.wikimedia.org/wiki/File:Container_ship_loading,_Port_of_Felixstowe,_from_the_Harwich_Haven_ferry_-_geograph.org.uk_-_8147845.jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    }
+  }
+]

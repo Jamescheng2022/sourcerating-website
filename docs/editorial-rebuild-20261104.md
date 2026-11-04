@@ -13,12 +13,12 @@ The old service-led home, repeated navigation and article wrappers obscure the c
 
 ## Evidence
 
-Final source build passes; all 30 article routes generated. Existing publication comparison tests: 10 passed. Source publication checker passes; warnings for original articles lacking explicit references remain visible and have not been suppressed. Exact media provenance and licenses: editorial-photo-provenance-20261104.json.
+Final source build passes; all 30 article routes generated. Existing publication comparison tests: 10 passed. Source publication checker passes 692 checks for 39 articles; warnings for original articles lacking explicit references remain visible and have not been suppressed. Exact media provenance and licenses: editorial-photo-provenance-20261104.json.
 
 The separate static review site was inspected in the browser on desktop and its live search returned the calibrated-gauge article. Native Next.js browser QA remains incomplete: the managed preview launcher appends Vite flags that Next rejects. No working application script was changed to compensate. The native production build and source checks pass; those are not a production release.
 
 ## Outstanding work
 
-No new articles in this commit. Large-scale researched content expansion, deeper revisions to older prose/reference quality, and genuine persistent public article-view counts remain outstanding. No invented view counts. This commit is a reviewable redesign/photo-remediation batch, not a claim that all editorial work is finished.
+Added nine researched articles with cross-review, source/claim records and nine additional real photographs (39 total articles, 64 media files). Public article-view labels now use a completed GA4 snapshot for the production hosts only, 2026-01-01 through 2026-11-03; 5/2/2/2 recorded views for the four reported articles, no invented popularity. The existing daily operation task now refreshes the same snapshot through the prior publication path. This is recorded page views, not unique humans or a realtime counter; consent gaps can undercount. Deeper revisions to older prose/reference quality remain ongoing editorial work.
 
 Main snapshot: 16d749fef5875e46f0f423999e4632321bcf4015. Existing frozen editorial workflow contains pinned integration identities for earlier narrow photo PRs; review its applicability to this new scope without bypassing or weakening protected gates. No domain or production deployment changed by this branch.

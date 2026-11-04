@@ -1,0 +1,67 @@
+{
+  "reviewer": "/root/supply_photos",
+  "reviewed_directory": "/workspace/scratch/c6e10bb8047b/sr-review/new-content-documents",
+  "reviewed_date": "2026-11-04",
+  "independent": true,
+  "verdict": "PASS",
+  "scope": "Actual three posts, source/claim ledgers, actual contact-sheet photographs, source metadata, and recomputed delivered-file hashes. Focused review of material facts, scope, photo fit and permission; no author files changed.",
+  "blocking_findings": [],
+  "article_results": [
+    {
+      "slug": "supplier-bank-account-change-independent-verification",
+      "verdict": "PASS",
+      "evidence": [
+        "Opened FBI current BEC page: lookalike accounts, real billing-thread compromise, independent verification and immediate financial-institution contact support the attributed text.",
+        "Opened HSBC page: BEC section specifically warns against trusting known addresses/prior threads and recommends known supplier telephone details.",
+        "Opened the exact r/Accounting thread: vendor-bank-change callback question and concern about compromise of a genuine account are present; article accurately limits this to anonymous discussion rather than a proven fraud case.",
+        "Telephone photo is a real office-object photograph, accurately qualified as context. Local Commons metadata identifies Donmike10 and public-domain release; SHA256 matches manifest."
+      ],
+      "material_corrections": []
+    },
+    {
+      "slug": "ddp-quote-importer-of-record-duty-tax-responsibility",
+      "verdict": "PASS",
+      "evidence": [
+        "Opened ICC source at DDP section: import-cleared arrival, ready for unloading, seller duties/applicable taxes and named destination support the summary.",
+        "Opened published 2024 19USC1484 and cross-checked current House USCode search result: importer-of-record entry responsibilities, written agent authorization, reasonable care, valuation and classification align. Article explicitly identifies the 2024 edition and US scope.",
+        "Opened HMRC customs-agent, valuation/Incoterms and VIT44400 pages. Direct/indirect representation, distinction from valuation, and the limited import-VAT deduction warning align; text appropriately calls for transaction-specific advice and flags Northern Ireland separately.",
+        "Real CBP photo shows agriculture inspection and paperwork beside machinery. The explicit caption avoids claiming it proves DDP or importer identity. Metadata confirms CBP/GlennFawcett official photo and public-domain status; SHA256 matches."
+      ],
+      "material_corrections": []
+    },
+    {
+      "slug": "approved-sample-production-process-change-volume-price",
+      "verdict": "PASS",
+      "evidence": [
+        "Opened Bosch actual61-page PDF, Edition3 February2025: prototype/pilot/serial distinctions and PPA/PPAP record identifiers including tool number and production machine/line support article summary.",
+        "Opened Graco actual change table: relevant tooling, sequence, material-source, packaging and inspection-method changes and purchasing/quality review support the attributed paragraph.",
+        "Opened Infineon actual SPCN page: affected material/site, before/after comparison, qualification evidence and sample/date-code transition plan are present. Article does not universalize semiconductor procedures or invent a notification period.",
+        "Actual injection-molding machine image matches caption and depicted plastic mugs. Commons source metadata confirms Rohini, CCBY-SA3.0; SHA256 matches."
+      ],
+      "material_corrections": []
+    }
+  ],
+  "ten_gates": {
+    "source_existence_and_urls": "PASS: consequential primary URLs independently opened; exact Reddit thread also opened",
+    "claim_source_alignment": "PASS: attributed claims supported; proposed controls distinguished from legal mandates",
+    "date_version_jurisdiction": "PASS: exactBosch2025 edition, explicitUS2024 Code, GB/NI boundaries clear; currentUS source cross-check aligned",
+    "numbers_units_equations": "PASS: no unsupported technical quantities, equations, prices or savings",
+    "applicability_and_safety": "PASS: no recovery guarantee; finance/customs/tax responsibilities referred to authorized parties",
+    "actionable_reader_value": "PASS: bank-amendment evidence trail, DDP identity/authorization questions, change-and-price review workflow",
+    "distinctive_perspective": "PASS as individual pieces; optional combined-batch overlap note below",
+    "image_integrity": "PASS: three actual photographs viewed; described subjects, scope qualifications, licenses and file hashes align",
+    "english_seo_cta": "PASS: coherent professional prose and problem-led titles; no invented live service path",
+    "handoff_target": "PASS: source/photo/claim files present; lead must map local photo paths into site assets during integration"
+  },
+  "nonblocking_editorial_note": {
+    "slug": "approved-sample-production-process-change-volume-price",
+    "location": "Opening and sample/production-route paragraphs across article",
+    "note": "There is meaningful thematic overlap with new-content-supply/sample-approved-production-site-changed. This is not a factual or photo-permission defect and need not delay release. In a later editorial pass, keep this piece centered on quoted volume-price assumptions, recurring versus one-time costs and commercial change implementation; keep the supply piece centered on site/subcontractor/lot provenance."
+  },
+  "photo_hash_checks": [
+    {"id":13674604,"sha256":"d76a89c2fdfa86ed7a8cd0f8526d83f95361abe43dd35dd0bf7ace161f5671a2","matches_manifest":true},
+    {"id":66505021,"sha256":"7fb3a2cf059d022135edc538e378be55ae0dc4ac6d4434162232bcabf2388e25","matches_manifest":true},
+    {"id":25101531,"sha256":"f15d2c6d56ffcd17e16568fa9c320c0d8c04e842a87406b6808cc6e1df3f4392","matches_manifest":true}
+  ],
+  "release_limit": "PASS is editorial/technical review only; integration and deployment decision remain with lead. No production claim made."
+}

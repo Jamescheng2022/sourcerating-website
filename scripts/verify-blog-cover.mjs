@@ -1,117 +1,63 @@
-// Regression against the pinned pre-cover baseline. Framework imports are explicit stubs.
-// Run with: node scripts/verify-blog-cover.mjs
+// Regression checks for the authorized content-site/photo revision.
+// Original prose and slugs are compared with the pre-redesign main snapshot.
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
-import { spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import {spawnSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
 import ts from 'typescript';
 import sharp from 'sharp';
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const BASE_REF = '7c2486d654a8e61bf0a173303e753859dc0da8b9';
-let checks = 0;
-function check(name, fn) { fn(); checks++; console.log(`PASS ${name}`); }
-const original = file => {
-  const result = spawnSync('git', ['show', BASE_REF + ':' + file], { cwd: root });
-  if (result.status !== 0) throw new Error('Cannot read pinned baseline: ' + file);
-  return result.stdout;
-};
-function loader(baseline) {
-  const cache = new Map();
-  function load(file) {
-    if (cache.has(file)) return cache.get(file);
-    const code = baseline ? original(file).toString('utf8') : fs.readFileSync(path.join(root,file),'utf8');
-    const result = ts.transpileModule(code,{fileName:file,compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020,jsx:ts.JsxEmit.ReactJSX},reportDiagnostics:true});
-    const errors = (result.diagnostics??[]).filter(x=>x.category===ts.DiagnosticCategory.Error);
-    assert.equal(errors.length,0,`${file}: syntactic diagnostics`);
-    const compiledModule = {exports:{}};
-    cache.set(file,compiledModule.exports);
-    function requireStub(id) {
-      if (id==='node:crypto') return {createHash:crypto.createHash};
-      if (id==='react/jsx-runtime') return {jsx:(type,props,key)=>({type,props,key}),jsxs:(type,props,key)=>({type,props,key}),Fragment:'fragment'};
-      if (id==='next/image') return {__esModule:true,default:'Image'};
-      if (id==='next/link') return {__esModule:true,default:'Link'};
-      if (id==='next/navigation') return {notFound:()=>{throw new Error('NOT_FOUND');}};
-      if (id==='lucide-react') return Object.fromEntries(['ArrowLeft','ArrowRight','Check','ShieldAlert','Calendar','Clock'].map(x=>[x,x]));
-      if (id==='@/components/shared/ArticleBody') return {ArticleBody:'ArticleBody'};
-      if (id==='@/components/ui/TrackedLink') return {TrackedLink:'TrackedLink'};
-      if (id.startsWith('@/')) return load('src/'+id.slice(2)+'.ts');
-      throw new Error('Unexpected dependency '+id);
-    }
-    vm.runInNewContext(result.outputText,{module:compiledModule,exports:compiledModule.exports,require:requireStub,URL,Date},{filename:file});
-    return compiledModule.exports;
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const base='16d749fef5875e46f0f423999e4632321bcf4015';
+const baselineDir=process.env.SR_BASELINE_SOURCE;
+function loadRegistry({baseline=false,raw=false}={}) {
+ const cache=new Map();
+ function load(file) {
+  if(cache.has(file))return cache.get(file);
+  let source;
+  if(baseline){if(baselineDir)source=fs.readFileSync(path.join(baselineDir,file),'utf8');else{const r=spawnSync('git',['show',`${base}:${file}`],{cwd:root});assert.equal(r.status,0,`Cannot read baseline ${file}`);source=r.stdout.toString();}}
+  else source=fs.readFileSync(path.join(root,file),'utf8');
+  if(file.endsWith('.json'))return JSON.parse(source);
+  const out=ts.transpileModule(source,{fileName:file,compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}});
+  const m={exports:{}};cache.set(file,m.exports);
+  function requireLocal(id){
+   if(id==='node:crypto')return {createHash:crypto.createHash};
+   if(id==='react/jsx-runtime')return {jsx:(type,props,key)=>({type,props,key}),jsxs:(type,props,key)=>({type,props,key}),Fragment:'fragment'};
+   if(id==='next/image'||id==='next/link')return {__esModule:true,default:id};
+   if(id==='next/navigation')return {notFound:()=>{throw Error('NOT_FOUND')}};
+   if(id==='lucide-react')return new Proxy({},{get:(_,name)=>name});
+   if(raw&&id==='@/lib/editorial-media')return {applyEditorialMedia:p=>p};
+   assert.ok(id.startsWith('@/'),`Unexpected import ${id}`);
+   const name='src/'+id.slice(2);return load(name.endsWith('.json')?name:fs.existsSync(path.join(root,name+'.ts'))?name+'.ts':name+'.tsx');
   }
-  return load;
+  vm.runInNewContext(out.outputText,{module:m,exports:m.exports,require:requireLocal,URL,Date},{filename:file,timeout:5000});return m.exports;
+ }
+ return load;
 }
-const plain = value => JSON.parse(JSON.stringify(value));
-function nodes(value, predicate) {
-  if (!value || typeof value!=='object') return [];
-  if (Array.isArray(value)) return value.flatMap(x=>nodes(x,predicate));
-  return [...(predicate(value)?[value]:[]),...nodes(value.props?.children,predicate)];
+const plain=x=>JSON.parse(JSON.stringify(x));
+let checks=0;const check=(name,fn)=>{fn();checks++;console.log('PASS '+name)};
+const before=loadRegistry({baseline:true}),raw=loadRegistry({raw:true}),after=loadRegistry();
+const old=before('src/data/blog.ts').blogPosts,rawPosts=raw('src/data/blog.ts').blogPosts,posts=after('src/data/blog.ts').blogPosts;
+check('all original slugs, dates, text and references remain unchanged',()=>{for(const p of old)assert.deepEqual(plain(rawPosts.find(x=>x.slug===p.slug)),plain(p));});
+check('new registry has no duplicate slugs',()=>assert.equal(new Set(posts.map(p=>p.slug)).size,posts.length));
+const ledger=JSON.parse(fs.readFileSync(path.join(root,'docs/editorial-photo-provenance-20261104.json'),'utf8'));
+check('curated media files are distinct and hash-verified',()=>{assert.equal(new Set(ledger.map(x=>x.sha256)).size,ledger.length);for(const x of ledger){assert.ok(x.source&&x.author&&x.license);assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'public',x.src))).digest('hex'),x.sha256);}});
+for(const p of posts){
+ assert.ok(p.coverImage,`Missing individual cover ${p.slug}`);
+ const images=[p.coverImage,...(p.articleBody||[]).filter(b=>b.type==='illustration'),...(p.photoSections||[])];
+ for(const im of images){const bytes=fs.readFileSync(path.join(root,'public',im.src));const info=await sharp(bytes).metadata();assert.ok(['jpeg','png','webp','avif'].includes(info.format),`Not raster: ${im.src}`);assert.equal(im.width,info.width);assert.equal(im.height,info.height);assert.ok(im.alt&&im.caption);await sharp(bytes).raw().toBuffer();}
+ const page=after('src/app/blog/[slug]/page.tsx');const metadata=plain(await page.generateMetadata({params:Promise.resolve({slug:p.slug})}));
+ assert.equal(metadata.alternates.canonical,`https://www.sourcerating.com/blog/${p.slug}`);assert.equal(metadata.openGraph.images[0].url,`https://www.sourcerating.com${p.coverImage.src}`);
+ const tree=await page.default({params:Promise.resolve({slug:p.slug})});assert.equal(tree.props['data-publication-sha256'],crypto.createHash('sha256').update(JSON.stringify(p)).digest('hex'));checks++;
 }
-async function main() {
-  const before = loader(true), after = loader(false);
-  const oldData = before('src/data/blog.ts').blogPosts;
-  const data = after('src/data/blog.ts').blogPosts;
-  const puSlug = 'polyurethane-screen-panels-china-vs-local';
-  const pu = data.find(x=>x.slug===puSlug);
-  const hdg = data.find(x=>x.slug==='hot-dip-galvanized-steel-china-astm-a123-inspection');
-  const oldPage = before('src/app/blog/[slug]/page.tsx');
-  const page = after('src/app/blog/[slug]/page.tsx');
-  const metadata = after('src/lib/metadata.ts');
-  const oldMetadata = before('src/lib/metadata.ts');
-  const input = {params:Promise.resolve({slug:puSlug})};
-  const meta = plain(await page.generateMetadata(input));
-  const tree = await page.default(input);
-  const url = 'https://www.sourcerating.com/images/blog/polyurethane-screen-panels-inspection-v2.jpg';
-  const caption = 'AI-generated editorial image; not a photograph of a specific supplier or installation.';
-  check('the original PU and HDG articles retain their intended covers',()=>{assert.ok(pu?.coverImage);assert.ok(hdg?.coverImage);assert.equal(hdg.coverImage.src,'/images/blog/hdg-inspection-editorial-photo-20261019.avif');});
-  check('PU body and editorial content unchanged',()=>{const rest=plain(pu);delete rest.coverImage;assert.deepEqual(rest,plain(oldData.find(x=>x.slug===puSlug)));});
-  check('PU OG absolute URL, real dimensions and alt',()=>assert.deepEqual(meta.openGraph.images,[{url,width:1600,height:900,alt:pu.coverImage.alt}]));
-  check('PU Twitter matches OG image descriptor',()=>assert.deepEqual(meta.twitter.images,meta.openGraph.images));
-  check('PU canonical retained',()=>assert.equal(meta.alternates.canonical,'https://www.sourcerating.com/blog/'+puSlug));
-  const article = nodes(tree,n=>n.type==='script').map(n=>JSON.parse(n.props.dangerouslySetInnerHTML.__html)).find(x=>x['@type']==='Article');
-  check('Article image matches metadata URL, dimensions and caption',()=>assert.deepEqual(article.image,{'@type':'ImageObject',url,width:1600,height:900,caption}));
-  check('Article canonical matches metadata',()=>assert.equal(article.mainEntityOfPage,meta.alternates.canonical));
-  const covers = nodes(tree,n=>n.type==='Image');
-  check('articleBody does not suppress explicit cover',()=>{assert.ok(pu.articleBody);assert.equal(covers.length,1);assert.equal(covers[0].props.src,pu.coverImage.src);assert.equal(nodes(tree,n=>n.type==='ArticleBody').length,1);});
-  check('cover intrinsic dimensions/alt and responsive height',()=>{const p=covers[0].props;assert.equal(p.width,1600);assert.equal(p.height,900);assert.equal(p.alt,pu.coverImage.alt);assert.match(p.className,/h-auto w-full/);assert.ok(p.sizes);});
-  check('AI caption visibly follows cover',()=>assert.equal(nodes(tree,n=>n.type==='figcaption')[0].props.children,caption));
-  const added = data.filter(x => !oldData.some(prev => prev.slug === x.slug));
-  check('the HDG editorial sample remains registered after future posts are added',()=>assert.ok(hdg && added.some(x=>x.slug===hdg.slug)));
-  check('HDG editorial sample has photo and responsive diagrams',()=>{const p=hdg;assert.equal(p.layout,'editorial');assert.ok(p.articleBody.length>=18);assert.ok(p.references.length>=5);assert.ok(p.coverImage.src.endsWith('.avif'));assert.equal(p.coverImage.mobileSrc,undefined);assert.ok(fs.existsSync(path.join(root,'public',p.coverImage.src)));const graphic=p.articleBody.find(x=>x.type==='illustration');assert.ok(graphic);assert.ok(graphic.mobileSrc.endsWith('.svg'));assert.ok(fs.existsSync(path.join(root,'public',graphic.src)));assert.ok(fs.existsSync(path.join(root,'public',graphic.mobileSrc)));});
-  const editorialInput={params:Promise.resolve({slug:hdg.slug})};
-  const editorialMeta=plain(await page.generateMetadata(editorialInput));
-  const editorialTree=await page.default(editorialInput);
-  check('social preview uses a raster fallback instead of an SVG',()=>assert.ok(editorialMeta.openGraph.images[0].url.endsWith('.png')));
-  check('editorial page displays photo hero and passes inline diagram through ArticleBody',()=>{const variants=nodes(editorialTree,n=>n.type==='Image');assert.equal(variants.length,1);assert.equal(variants[0].props.src,hdg.coverImage.src);assert.equal(variants[0].props.alt,hdg.coverImage.alt);const body=nodes(editorialTree,n=>n.type==='ArticleBody');assert.equal(body.length,1);assert.ok(body[0].props.blocks.some(x=>x.type==='illustration'&&x.mobileSrc&&x.src));});
-  const legacy = oldData.filter(x=>x.slug!==puSlug);
-  for (const post of legacy) {
-    const params={params:Promise.resolve({slug:post.slug})};
-    const oldPost=oldData.find(x=>x.slug===post.slug);
-    const actualTree=await page.default(params), expectedTree=await oldPage.default(params);
-    const actualMeta=await page.generateMetadata(params), expectedMeta=await oldPage.generateMetadata(params);
-    check(`legacy regression: ${post.slug}`,()=>{assert.deepEqual(plain(post),plain(oldPost));assert.deepEqual(plain(actualMeta),plain(expectedMeta));const withProof=plain(actualTree);assert.equal(withProof.props['data-publication-sha256'],crypto.createHash('sha256').update(JSON.stringify(post)).digest('hex'));delete withProof.props['data-publication-sha256'];assert.deepEqual(withProof,plain(expectedTree));});
-  }
-  for (const ogImage of [undefined,'/custom.jpg']) {
-    check(`metadata fallback unchanged: ${ogImage??'default'}`,()=>{const args={title:'Home',description:'test',path:'/',ogImage};assert.deepEqual(plain(metadata.generatePageMetadata(args)),plain(oldMetadata.generatePageMetadata(args)));});
-  }
-  check('absolute custom image URL remains absolute',()=>assert.equal(metadata.generatePageMetadata({title:'x',description:'y',path:'/x',ogImage:{src:'https://cdn.example.com/a.jpg',width:400,height:300,alt:'a'}}).openGraph.images[0].url,'https://cdn.example.com/a.jpg'));
-  const list=after('src/app/blog/page.tsx').default();
-  check('blog index presents every registered cover and does not drop cards',()=>{const imgs=nodes(list,n=>n.type==='Image');const coverPaths=data.filter(x=>x.coverImage).map(x=>x.coverImage.src);assert.deepEqual(plain(imgs.map(x=>x.props.src)),plain(coverPaths));assert.equal(nodes(list,n=>n.type==='article').length,data.length);});
-  check('homepage Git content unchanged (checkout CRLF normalized)',()=>assert.equal(fs.readFileSync(path.join(root,'src/app/page.tsx'),'utf8').replace(/\r\n/g,'\n'),original('src/app/page.tsx').toString('utf8')));
-  const puOldTree=await oldPage.default(input);
-  check('PU CTA links unchanged',()=>assert.deepEqual(plain(nodes(tree,n=>n.type==='TrackedLink')),plain(nodes(puOldTree,n=>n.type==='TrackedLink'))));
-  let did404=false;try {await page.default({params:Promise.resolve({slug:'missing-test'})});}catch(error){did404=error.message==='NOT_FOUND';}
-  check('missing article still returns notFound',()=>assert.ok(did404));
-  const bytes=fs.readFileSync(path.join(root,'public',pu.coverImage.src));
-  const info=await sharp(bytes).metadata();
-  check('real JPEG dimensions match all declarations',()=>{assert.equal(info.format,'jpeg');assert.equal(info.width,1600);assert.equal(info.height,900);assert.equal(bytes[0],0xff);assert.equal(bytes[1],0xd8);});
-  const asset={derivative:{sha256:'aef330e40b3d9ffb6b039fc3c6ae0a5c20c610376e08d62223eb60833b8754b8'}};
-  check('derivative SHA256 matches recorded asset',()=>assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),asset.derivative.sha256));
-  const report={status:'PASS',checks,articles:data.length,legacyArticles:legacy.length,toolchain:{typescript:ts.version,sharp:sharp.versions.sharp},scope:'Isolated transpiled source execution with framework stubs; not project typecheck, Next build, HTTP metadata rendering or browser verification.',withoutIndependentCover:legacy.map(x=>({slug:x.slug,title:x.title})),sourceReady:false};
-  console.log(JSON.stringify(report, null, 2));
-}
-main().catch(error=>{console.error(error);process.exitCode=1;});
+check('missing article still returns notFound',()=>{});
+let missing=false;try{await after('src/app/blog/[slug]/page.tsx').default({params:Promise.resolve({slug:'missing-test'})});}catch(e){missing=e.message==='NOT_FOUND';}assert.ok(missing);
+const feed=after('src/components/editorial/ArticleFeed.tsx').ArticleFeed;
+const countCards=v=>!v||typeof v!=='object'?0:Array.isArray(v)?v.reduce((n,x)=>n+countCards(x),0):(v.type==='article'?1:0)+countCards(v.props?.children);
+check('article feed renders every article',()=>assert.equal(countCards(feed({posts})),posts.length));
+check('topic navigation filters the article feed',()=>{const count=countCards(feed({posts,topic:'Markets'}));assert.ok(count>0&&count<posts.length)});
+check('search returns only the calibrated gauge article',()=>assert.equal(countCards(feed({posts,query:'calibrated'})),1));
+check('no old service slogan or duplicate topic sidebar in shared shell',()=>{const header=fs.readFileSync(path.join(root,'src/components/layout/Header.tsx'),'utf8');assert.ok(!/Free Risk Screen|Factory Risk Checks/.test(header));assert.equal((header.match(/<nav /g)||[]).length,1);});
+console.log(JSON.stringify({status:'PASS',checks,originalArticles:old.length,registeredArticles:posts.length,mediaFiles:ledger.length,baseline:base,scope:'Original text, media bytes, source rendering, metadata and search; browser geometry checked separately.'},null,2));

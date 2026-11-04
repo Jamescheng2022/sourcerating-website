@@ -1,0 +1,352 @@
+[
+  {
+    "slug": "supplier-equivalent-material-performance-condition-interface",
+    "title": "The Supplier Says “Equivalent.” Equivalent at Which Job?",
+    "seoTitle": "The Supplier Says “Equivalent.” Equivalent at Which Job?",
+    "layout": "editorial",
+    "excerpt": "A replacement material can match a grade table and still leave service conditions or interfaces unresolved. Ask for the comparison that belongs to the actual part.",
+    "date": "2026-11-04",
+    "category": "Production & Products",
+    "readTime": "5 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "“Equivalent material available” can be a useful reply to an RFQ. It may offer a way around a long lead time or an awkward minimum order. The difficult part is the noun that follows equivalent: composition, strength, corrosion behaviour, manufacturing condition, or the finished component’s job? A purchasing decision becomes fragile when those different promises are compressed into one word."
+      },
+      {
+        "type": "paragraph",
+        "text": "The first response need not be a rejection. Ask the supplier to identify the original requirement, the proposed change and the property being compared. Keep three questions separate: what will the material arrive as, what must it survive in service, and how will the finished part connect to the rest of the system? A clear answer can make an alternative worth evaluating. A confident grade-name comparison cannot answer all three."
+      },
+      {
+        "type": "heading",
+        "text": "A cross-reference is the start of a conversation"
+      },
+      {
+        "type": "paragraph",
+        "text": "Alleima’s public heat-exchanger tube materials table is a useful reminder of how carefully such comparisons need to be read. It marks some designations as nearest equivalents and flags a designation that is informative rather than applicable to tube and pipe. The same page lists product standards separately. Those distinctions appear in a manufacturer’s own selection information; they should survive the journey into a supplier’s quotation."
+      },
+      {
+        "type": "paragraph",
+        "text": "For an order, retain the complete original designation and governing product specification, including the edition if the contract identifies one. Then put the proposed designation beside it. Ask which requirements match, which differ and which have not been compared. This is more informative than accepting a screenshot whose row happens to contain both names. Do not treat a published comparison as authorization to depart from the drawing."
+      },
+      {
+        "type": "paragraph",
+        "text": "The incoming material also needs a condition. Ask whether the offered product has the required form, processing route and delivery condition, and what records will establish them. A test certificate should be tied to the material proposed for supply. A catalogue describes a product offering; it does not identify the particular heat or batch that will become the buyer’s part."
+      },
+      {
+        "type": "heading",
+        "text": "The service condition is part of the comparison"
+      },
+      {
+        "type": "paragraph",
+        "text": "A corrosion claim is especially easy to detach from its conditions. Outokumpu explains that its laboratory guidance uses controlled chemicals and conditions, while actual service may include contaminants, variation and a different oxygen content. It also separates uniform-corrosion information from localized attack. A favourable result in one kind of exposure therefore leaves other questions to investigate; it is not a universal ranking of materials."
+      },
+      {
+        "type": "paragraph",
+        "text": "A buyer can turn that limitation into a better request. Send the relevant service envelope with the comparison: media, contaminants that are known, temperature range, exposure pattern and the life or maintenance expectation in the specification. Mark missing operating information as missing. If the supplier’s evidence uses another environment, ask the technical reviewer to explain why it is relevant rather than silently accepting the difference."
+      },
+      {
+        "type": "paragraph",
+        "text": "This does not require procurement to invent a corrosion test or choose a grade from a chart. It requires the seller’s claim and the engineer’s question to meet in the same document. Where suitability depends on conditions the buyer cannot define, that uncertainty belongs in the decision. A quicker delivery date is valuable information, but it does not resolve an unknown operating environment."
+      },
+      {
+        "type": "heading",
+        "text": "The material sits inside an assembly"
+      },
+      {
+        "type": "paragraph",
+        "text": "AMPP’s materials-selection guidance includes compatibility with other system components alongside mechanical properties, maintenance and service life. Its discussion of system design also includes geometry, crevices and dissimilar-metal separation. That is a broader brief than comparing two values in a material datasheet. It asks what the material will be doing after it leaves the supplier’s warehouse."
+      },
+      {
+        "type": "paragraph",
+        "text": "For a replacement component, add a marked drawing showing the interfaces that the proposal leaves unchanged and those it affects. Ask about mating dimensions, connection details, surface requirements and any downstream fabrication or treatment that the project specifies. Treat an answer of “same outside size” as an answer about size. It is not, by itself, evidence about the other requirements."
+      },
+      {
+        "type": "paragraph",
+        "text": "The review should also identify who owns each question. Procurement can assemble the quotation, traceability documents and comparison. The responsible engineering or quality reviewer should determine whether the proposed evidence addresses the intended use and governing requirements. This is particularly important where the substitution changes an approved design basis. A buyer should not be pushed into supplying the missing technical approval merely by signing a revised price."
+      },
+      {
+        "type": "heading",
+        "text": "Buy the bounded change"
+      },
+      {
+        "type": "paragraph",
+        "text": "A useful substitution record can remain short. Name the affected drawing and order lines; identify the original and proposed material and condition; list the compared properties and evidence; state the operating assumptions and interfaces; and record the authorized decision. Ask the supplier to declare unresolved differences explicitly. An empty comparison cell should remain visible rather than disappearing into a final sentence saying that everything is equivalent."
+      },
+      {
+        "type": "paragraph",
+        "text": "If the alternative is accepted, carry the approved scope into the order and inspection instructions. If approval covers only a particular part, condition or service, preserve that limit. Keep the original requirement visible so the receiving team can tell an authorized change from an unexplained deviation. An approval that cannot be connected to the delivered material is difficult to use when a question appears later."
+      },
+      {
+        "type": "paragraph",
+        "text": "The commercial opportunity is still there: a suitable alternative may simplify supply. The buying discipline is to make the promise small enough to check. Ask the supplier to complete one sentence before the discussion moves on: equivalent for this requirement, under these conditions, with these differences still open. That answer is worth more than an unqualified tick in a quotation."
+      }
+    ],
+    "referencesHeading": "Source notes",
+    "referencesIntro": "Primary material checked on 4 November 2026. The purchasing workflow is editorial advice; project acceptance remains with the agreed specification and authorized reviewers.",
+    "references": [
+      {
+        "title": "Heat exchanger tube materials",
+        "publisher": "Alleima",
+        "href": "https://www.alleima.com/en/products/tube-pipe/tubular-products/heat-exchanger-tubes/materials/",
+        "note": "Manufacturer distinguishes nearest equivalent designations and tube/pipe applicability; this is not a substitution approval."
+      },
+      {
+        "title": "Utilizing corrosion testing for reliable materials selection",
+        "publisher": "Outokumpu",
+        "href": "https://www.outokumpu.com/en/expertise/2020/utilizing-corrosion-testing-for-reliable-materials-selection",
+        "note": "Manufacturer guidance on test conditions, contaminants and the limits of uniform-corrosion data."
+      },
+      {
+        "title": "Materials Selection and Design for Corrosion Control",
+        "publisher": "AMPP",
+        "href": "https://www.ampp.org/technical-research/what-is-corrosion/materials-selection-and-design-for-corrosion-control",
+        "note": "Professional association guidance includes mechanical properties, component compatibility and system design."
+      }
+    ],
+    "coverImage": {
+      "src": "/assets/photography/supplier-equivalent-material-performance-condition-interface.jpg",
+      "width": 1280,
+      "height": 1181,
+      "alt": "A steel tensile specimen after testing. One observed mechanical response is not a complete material-substitution assessment.",
+      "caption": "A steel tensile specimen after testing. One observed mechanical response is not a complete material-substitution assessment. Photo: [Andrzej Otrębski](https://commons.wikimedia.org/wiki/File:Proba_rozciagania_stal_probka_3.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    }
+  },
+  {
+    "slug": "inspection-report-not-inspected-not-available",
+    "title": "“Not Inspected” Is a Result You Still Have to Close",
+    "seoTitle": "“Not Inspected” Is a Result You Still Have to Close",
+    "layout": "editorial",
+    "excerpt": "Missing reference samples and unavailable test equipment leave different gaps. Read the remarks, define the missing evidence and keep shipment authorization explicit.",
+    "date": "2026-11-04",
+    "category": "Quality & Inspection",
+    "readTime": "5 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "An inspection report can contain pages of photographs and reassuring observations while leaving one purchase requirement unanswered. The line may say not inspected, not available, or simply that a check could not be performed. Before anyone treats that wording as harmless administration, ask what was missing: the product, the acceptance reference, access to it, or the means to test it."
+      },
+      {
+        "type": "paragraph",
+        "text": "These expressions are not a universal reporting code. Read the inspection company’s legend and the accompanying remarks, then ask for clarification where the wording is ambiguous. The important distinction is between an observed satisfactory result and a requirement for which no usable conclusion was reached. The latter needs a decision, even when the rest of the report looks complete."
+      },
+      {
+        "type": "heading",
+        "text": "An actual report shows two different gaps"
+      },
+      {
+        "type": "paragraph",
+        "text": "Import QC publishes an anonymized sample report for a sealing-machine and PET-bottle order inspected on 7 August 2026. The provider describes the document as a genuine job, with identities withheld; it is watermarked as a sample and is not for contractual use. SourceRating has not independently audited that transaction. The document is useful here because its limitations can be read directly, without inventing a buyer’s experience."
+      },
+      {
+        "type": "paragraph",
+        "text": "The opening remarks state that signed reference samples were not provided. They also say the factory lacked instruments for high-voltage and power testing of the sealing machine. The overall conclusion is pending. These are different unfinished questions: one concerns the reference against which a comparison could be made; the other concerns tests that the available resources could not support. Photographs of completed checks cannot answer either by themselves."
+      },
+      {
+        "type": "paragraph",
+        "text": "The practical response is to name each affected requirement. Which finish, feature or other agreed characteristic required the missing reference? Which specified test required unavailable equipment? Ask the inspection company to connect its limitation to the checklist item and the inspected product or order line. Avoid expanding the statement into a claim that every part of the inspection is invalid. Avoid shrinking it into a pass, too."
+      },
+      {
+        "type": "heading",
+        "text": "Separate a missing reference from a missing test"
+      },
+      {
+        "type": "paragraph",
+        "text": "When a reference sample is absent, supplying more pictures may help explain the product but may not restore the agreed basis of comparison. ICW’s discussion of signed samples describes how an inspection can proceed with an incomplete understanding of the buyer’s requirements. That is practitioner guidance, not a rule that samples define every performance requirement. The buyer still needs the written specification and the relevant approved reference."
+      },
+      {
+        "type": "paragraph",
+        "text": "A sensible closure request identifies the missing reference, its approval status and the characteristics it governs. Ask whether the original observations can legitimately be assessed against it later or whether another visit is needed. Do not invite a retrospective rewrite that makes the reference appear to have been available on the inspection date. Preserve what the inspector actually saw and the information that was available then."
+      },
+      {
+        "type": "paragraph",
+        "text": "Unavailable test equipment calls for another route. Ask what test remains incomplete, what method and equipment the order requires, and who can perform and review it. The answer may involve a properly arranged return visit or an appropriate laboratory. This is a planning question, not permission for factory staff to improvise an electrical test. Where the requirement concerns safety or regulatory conformity, obtain the responsible technical review before deciding how to proceed."
+      },
+      {
+        "type": "heading",
+        "text": "The visit needs a workable setup"
+      },
+      {
+        "type": "paragraph",
+        "text": "QIMA’s public inspection instructions make the preparation issue concrete. They call for accessible goods and the necessary test equipment to be ready before the inspector arrives, and ask for advance notice when machinery or equipment will be unavailable. Those are QIMA’s instructions; other providers may set different conditions. The broader buying lesson is to agree resources and access before paying for a visit whose critical checks cannot be completed."
+      },
+      {
+        "type": "paragraph",
+        "text": "Before a reinspection, confirm more than an appointment. Send the affected requirements and approved references, identify the equipment or facilities needed, and ask the inspection provider to confirm the planned scope. Name who will make the goods accessible. Ask what will happen if the same obstacle remains. A new date without a changed setup can leave the same unanswered line in a newer report."
+      },
+      {
+        "type": "paragraph",
+        "text": "Keep the evidence of closure attached to the original finding. It should identify what was checked, which products or order lines it covers, the result and the reviewer. If the later evidence has a narrower scope than the original requirement, retain that difference. An attachment saying only that the supplier has fixed the issue is a promise of completion, not an inspection result."
+      },
+      {
+        "type": "heading",
+        "text": "Someone still owns the shipment decision"
+      },
+      {
+        "type": "paragraph",
+        "text": "The closure record should end in a named disposition: further evidence required, accepted against the agreed requirement, or a documented deviation sent to the authorized decision-maker. Whether shipment may proceed depends on the contract and the nature of the open requirement. There is no universal recommendation here to waive a check or hold an entire order for every missing item."
+      },
+      {
+        "type": "paragraph",
+        "text": "QIMA’s instructions tell suppliers to wait for client approval before shipping. A buyer can make that handoff explicit in its own order: a report’s conclusion informs the decision, while release authorization follows the agreed process. Do not ask an inspector to soften a limitation so the report looks easier to approve. Ask the person who owns the requirement to decide what evidence is still needed."
+      },
+      {
+        "type": "paragraph",
+        "text": "The most useful reading habit is to collect the unresolved lines before writing the release email. For each one, record the requirement, the reason it was not concluded, the next evidence and the responsible person. A report becomes valuable when its boundaries remain visible. “Not inspected” is information about work still open; the buyer’s next task is to close that work honestly."
+      }
+    ],
+    "referencesHeading": "Source notes",
+    "referencesIntro": "Primary material checked on 4 November 2026. The purchasing workflow is editorial advice; project acceptance remains with the agreed specification and authorized reviewers.",
+    "references": [
+      {
+        "title": "Sealing Machine — Pre-Shipment Inspection: public sample report",
+        "publisher": "Import QC",
+        "href": "https://www.importqc.com/reports/files/psi-industrial-equipment-sealing-machine.pdf",
+        "note": "Provider-published, anonymized report marked SAMPLE, not for contractual use. The provider calls it a genuine job; SourceRating has not independently audited the job."
+      },
+      {
+        "title": "Sealing Machine sample report provenance",
+        "publisher": "Import QC",
+        "href": "https://www.importqc.com/sample-reports/psi-industrial-equipment-sealing-machine/",
+        "note": "Establishes the publisher’s stated provenance and public sample status, not independent validation of its client or factory."
+      },
+      {
+        "title": "Inspection instructions and requirements",
+        "publisher": "QIMA",
+        "href": "https://www.qima.com/inspection-instructions",
+        "note": "Provider instructions require accessible goods, available equipment and advance notification of unavailable machinery; these are QIMA-specific instructions, not universal law."
+      },
+      {
+        "title": "Pre-shipment Inspection — The Fundamentals",
+        "publisher": "ICW",
+        "href": "https://www.icw.io/pre-shipment-inspection/",
+        "note": "Attributed practitioner discussion of missing signed reference samples and the distinction between inspection reporting and shipment authorization. Do not repeat the page’s broad claim that a signed sample represents all quality requirements."
+      }
+    ],
+    "coverImage": {
+      "src": "/assets/photography/inspection-report-not-inspected-not-available.jpg",
+      "width": 1200,
+      "height": 1600,
+      "alt": "A high-voltage test in progress. Required equipment and an agreed method are part of completing a test; this is not the sealing-machine inspection discussed.",
+      "caption": "A high-voltage test in progress. Required equipment and an agreed method are part of completing a test; this is not the sealing-machine inspection discussed. Photo: [Dr Lotus Black](https://commons.wikimedia.org/wiki/File:Hipot_tester_in_action.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    }
+  },
+  {
+    "slug": "spot-freight-index-supplier-freight-included-quote",
+    "title": "The Freight Index Fell. Why Has the Supplier’s Quote Not Moved?",
+    "seoTitle": "The Freight Index Fell. Why Has the Supplier’s Quote Not Moved?",
+    "layout": "editorial",
+    "excerpt": "A spot-market signal and a supplier’s freight-inclusive price answer different questions. Compare scope, booking conditions and time before negotiating the difference.",
+    "date": "2026-11-04",
+    "category": "Markets",
+    "readTime": "5 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "A buyer sees a falling container-freight chart and asks the supplier to reduce a quotation marked freight included. It is a reasonable commercial question. It becomes less useful when the chart and the quotation are treated as two versions of the same invoice. One describes a market observation. The other needs to describe a particular cargo movement and the seller’s promise to the buyer."
+      },
+      {
+        "type": "paragraph",
+        "text": "The right comparison starts with scope and dates. Which route and equipment does the market signal represent? Which departure window, origin, destination and services does the supplier’s price cover? Is the transport already booked, still being estimated, or subject to a stated validity period? Without those answers, the difference between the two numbers has no clear explanation to test."
+      },
+      {
+        "type": "heading",
+        "text": "The market signal still matters"
+      },
+      {
+        "type": "paragraph",
+        "text": "UNCTAD’s 2025 Review of Maritime Transport provides a historical example of why freight comparisons need a period and a route. Its freight-cost chapter examines January 2024 to mid-2025 and describes how Red Sea rerouting lengthened voyages, reduced effective capacity and raised operating costs. This is evidence of how market conditions change; it is not a quotation for a November 2026 shipment or a forecast of the next sailing’s price."
+      },
+      {
+        "type": "paragraph",
+        "text": "Use a market movement to ask for a refreshed offer on the same shipping assumptions. Do not multiply a percentage change in a broad indicator into a supplier’s total delivered price and call the answer a verified saving. First establish what portion of that price the comparison can explain. If the seller will not separate transport commercially, ask for a revised inclusive offer alongside an offer that lets the buyer arrange the defined movement."
+      },
+      {
+        "type": "heading",
+        "text": "A confirmed rate has a defined scope"
+      },
+      {
+        "type": "paragraph",
+        "text": "Maersk’s published Spot terms illustrate why the booking document matters. Confirmed rates are subject to specified exceptions; the terms address matters including situational surcharges, currency effects, extra services, cargo weight and booking amendments. This is a carrier-specific example, not a claim that every freight price can change freely. Read the applicable booking terms rather than transferring one carrier’s conditions to another supplier’s offer."
+      },
+      {
+        "type": "paragraph",
+        "text": "For an industrial order, send the same cargo description to everyone being compared. Include the packing dimensions and weight, equipment requirements, cargo readiness window and the exact collection and delivery points. If those details are provisional, ask which changes would require repricing. A rate for a different container or a different service boundary is another offer, even when both spreadsheets put it under an ocean-freight heading."
+      },
+      {
+        "type": "paragraph",
+        "text": "Then ask the supplier to mark the included and excluded services. Useful questions cover origin collection and handling, the sea leg, destination handling, documentation and onward delivery where relevant. Separately confirm how taxes, insurance and any special handling are treated. Do not infer an obligation from the phrase freight included alone. Record the named place, agreed trade rule and any additional commercial commitments in the actual offer."
+      },
+      {
+        "type": "heading",
+        "text": "The container has a clock as well as a price"
+      },
+      {
+        "type": "paragraph",
+        "text": "Maersk’s detention and demurrage terms distinguish use of terminal space from use of the carrier’s container, and distinguish container time inside and outside the terminal. They also provide for location-specific arrangements and alternative combined charging. The practical point is to request the applicable free time, start and stop events, and charging schedule. A sea-freight amount by itself does not tell the buyer what happens after arrival."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask who will prepare the documents, arrange collection and return the empty container. If a project cannot receive the material immediately, include that constraint in the comparison before booking. Do not assume that a cheaper sailing creates a cheaper receiving operation. The buyer should see the remaining exposure and the party responsible for it, even if the purchasing team chooses to accept it."
+      },
+      {
+        "type": "paragraph",
+        "text": "Time also needs a boundary. Hapag-Lloyd describes its route-planning transit times as indicative and separates network exploration from departure schedules. Ask whether the supplier’s quoted time refers to the sea leg, port-to-port movement or arrival at the project’s receiving point. Record the planned routing and any transshipment, then ask what is confirmed and what remains an estimate. A scheduled vessel movement is not automatically a project delivery commitment."
+      },
+      {
+        "type": "heading",
+        "text": "Negotiate the difference you can identify"
+      },
+      {
+        "type": "paragraph",
+        "text": "A short comparison sheet can carry both commercial and operational facts. Keep cargo, route, equipment and departure window together. Add the quoted validity, included services, exclusions, free time and delivery milestones. Identify any booking already placed and the consequences of changing it. Where the supplier holds transport risk in the agreed price, ask how the new proposal changes that allocation rather than demanding an unexplained pass-through reduction."
+      },
+      {
+        "type": "paragraph",
+        "text": "The supplier may be able to improve the offer; it may also be comparing a different departure or holding a commitment that the buyer has not seen. Neither explanation should be invented on the supplier’s behalf. Ask for the stated basis of the price and compare a fresh alternative with the same scope. Keep unverified reasons marked as unverified until the documents support them."
+      },
+      {
+        "type": "paragraph",
+        "text": "That approach gives the freight chart a useful role. It opens a negotiation and challenges an old assumption without pretending to be a shipment invoice. The best question is more precise than why the quote has not fallen: what would it cost to move this cargo, over this boundary, in this window, with these responsibilities? Once both sides answer that question, the price discussion has something solid underneath it."
+      }
+    ],
+    "referencesHeading": "Source notes",
+    "referencesIntro": "Primary material checked on 4 November 2026. The purchasing workflow is editorial advice; project acceptance remains with the agreed specification and authorized reviewers.",
+    "references": [
+      {
+        "title": "Review of Maritime Transport 2025, Chapter III: Freight rates and maritime transport costs",
+        "publisher": "UN Trade and Development (UNCTAD)",
+        "href": "https://unctad.org/system/files/official-document/rmt2025ch3_en.pdf",
+        "note": "Historical evidence of rerouting and freight-market volatility; no claim about a current November 2026 rate."
+      },
+      {
+        "title": "Terms for Spot Booking",
+        "publisher": "Maersk",
+        "href": "https://terms.maersk.com/terms-spot-booking",
+        "note": "Carrier-specific scope, exceptions, currency, services, cargo weight and amendment provisions. Not a statement that all carrier rates can change for any reason."
+      },
+      {
+        "title": "Terms for Detention and Demurrage",
+        "publisher": "Maersk",
+        "href": "https://terms.maersk.com/dnd",
+        "note": "Carrier definitions distinguish terminal-space storage from container use and distinguish inside/outside terminal periods."
+      },
+      {
+        "title": "Service Explorer",
+        "publisher": "Hapag-Lloyd",
+        "href": "https://www.hapag-lloyd.com/en/services-information/routes-trades/service-explorer.html",
+        "note": "Carrier describes routing alternatives and indicative transit times, with schedules handled in a separate tool."
+      }
+    ],
+    "coverImage": {
+      "src": "/assets/photography/spot-freight-index-supplier-freight-included-quote.jpg",
+      "width": 1280,
+      "height": 805,
+      "alt": "A container ship alongside cranes at the Port of Felixstowe. A freight-market indicator does not define the services and timing of an individual booking.",
+      "caption": "A container ship alongside cranes at the Port of Felixstowe. A freight-market indicator does not define the services and timing of an individual booking. Photo: [Christopher Hilton](https://commons.wikimedia.org/wiki/File:Container_ship_loading,_Port_of_Felixstowe,_from_the_Harwich_Haven_ferry_-_geograph.org.uk_-_8147845.jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+    }
+  }
+]

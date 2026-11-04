@@ -1,0 +1,112 @@
+{
+  "M1": {
+    "title": "Heat exchanger tube materials",
+    "publisher": "Alleima",
+    "href": "https://www.alleima.com/en/products/tube-pipe/tubular-products/heat-exchanger-tubes/materials/",
+    "location": "Materials: high-alloy austenitic table footnotes; Product standards table",
+    "date": "Undated living page; accessed 2026-11-04",
+    "status": "opened and verified",
+    "ref": "turn35view2",
+    "note": "Manufacturer distinguishes nearest equivalent designations and tube/pipe applicability; this is not a substitution approval."
+  },
+  "M2": {
+    "title": "Utilizing corrosion testing for reliable materials selection",
+    "publisher": "Outokumpu",
+    "href": "https://www.outokumpu.com/en/expertise/2020/utilizing-corrosion-testing-for-reliable-materials-selection",
+    "location": "Applicability; The importance of including all types of corrosion; Conclusions",
+    "date": "2020 (URL year); accessed 2026-11-04",
+    "status": "opened and verified",
+    "ref": "turn31view4 / turn31view5",
+    "note": "Manufacturer guidance on test conditions, contaminants and the limits of uniform-corrosion data."
+  },
+  "M3": {
+    "title": "Materials Selection and Design for Corrosion Control",
+    "publisher": "AMPP",
+    "href": "https://www.ampp.org/technical-research/what-is-corrosion/materials-selection-and-design-for-corrosion-control",
+    "location": "Materials Selection and Design for Corrosion Control, opening paragraphs",
+    "date": "Undated; accessed 2026-11-04",
+    "status": "opened and verified",
+    "ref": "turn29view4",
+    "note": "Professional association guidance includes mechanical properties, component compatibility and system design."
+  },
+  "Q1": {
+    "title": "Sealing Machine — Pre-Shipment Inspection: public sample report",
+    "publisher": "Import QC",
+    "href": "https://www.importqc.com/reports/files/psi-industrial-equipment-sealing-machine.pdf",
+    "location": "PDF pages 1–2: General information and Remarks 5–6",
+    "date": "Inspection 2026-08-07; accessed 2026-11-04",
+    "status": "opened and page 2 screenshot checked",
+    "ref": "turn40view0 / turn41view3",
+    "note": "Provider-published, anonymized report marked SAMPLE, not for contractual use. The provider calls it a genuine job; SourceRating has not independently audited the job."
+  },
+  "Q2": {
+    "title": "Sealing Machine sample report provenance",
+    "publisher": "Import QC",
+    "href": "https://www.importqc.com/sample-reports/psi-industrial-equipment-sealing-machine/",
+    "location": "Inspection date; Verdict; paragraph following PDF download",
+    "date": "Inspection 2026-08-07; accessed 2026-11-04",
+    "status": "opened and verified",
+    "ref": "turn33view0",
+    "note": "Establishes the publisher’s stated provenance and public sample status, not independent validation of its client or factory."
+  },
+  "Q3": {
+    "title": "Inspection instructions and requirements",
+    "publisher": "QIMA",
+    "href": "https://www.qima.com/inspection-instructions",
+    "location": "Inspection instructions and requirements: access, equipment availability, advance notice and client approval",
+    "date": "Undated living instructions; accessed 2026-11-04",
+    "status": "opened and verified",
+    "ref": "turn38view0",
+    "note": "Provider instructions require accessible goods, available equipment and advance notification of unavailable machinery; these are QIMA-specific instructions, not universal law."
+  },
+  "Q4": {
+    "title": "Pre-shipment Inspection — The Fundamentals",
+    "publisher": "ICW",
+    "href": "https://www.icw.io/pre-shipment-inspection/",
+    "location": "Signed sample as inspection reference; Conformance to specification decision",
+    "date": "Undated; accessed 2026-11-04",
+    "status": "opened and verified",
+    "ref": "turn43view2",
+    "note": "Attributed practitioner discussion of missing signed reference samples and the distinction between inspection reporting and shipment authorization. Do not repeat the page’s broad claim that a signed sample represents all quality requirements."
+  },
+  "F1": {
+    "title": "Review of Maritime Transport 2025, Chapter III: Freight rates and maritime transport costs",
+    "publisher": "UN Trade and Development (UNCTAD)",
+    "href": "https://unctad.org/system/files/official-document/rmt2025ch3_en.pdf",
+    "location": "Printed pp. 69 and 72, chapter opening and A.1",
+    "date": "2025 report; covers January 2024 to mid-2025; accessed 2026-11-04",
+    "status": "official PDF directly extracted through Tavily after web reader returned 403",
+    "ref": "Tavily request 75d04291-0335-4c40-86cd-3d35b31b55db",
+    "note": "Historical evidence of rerouting and freight-market volatility; no claim about a current November 2026 rate."
+  },
+  "F2": {
+    "title": "Terms for Spot Booking",
+    "publisher": "Maersk",
+    "href": "https://terms.maersk.com/terms-spot-booking",
+    "location": "2.1–2.8 Rates and charges; 4.1 DND",
+    "date": "Living terms, version displayed 2026-11-04; terms at actual booking govern",
+    "status": "opened and verified",
+    "ref": "turn25view0",
+    "note": "Carrier-specific scope, exceptions, currency, services, cargo weight and amendment provisions. Not a statement that all carrier rates can change for any reason."
+  },
+  "F3": {
+    "title": "Terms for Detention and Demurrage",
+    "publisher": "Maersk",
+    "href": "https://terms.maersk.com/dnd",
+    "location": "2. Detention and Demurrage types; 3. Compensation",
+    "date": "Living terms displayed 2026-11-04; booking/location terms govern",
+    "status": "opened and verified",
+    "ref": "turn25view1",
+    "note": "Carrier definitions distinguish terminal-space storage from container use and distinguish inside/outside terminal periods."
+  },
+  "F4": {
+    "title": "Service Explorer",
+    "publisher": "Hapag-Lloyd",
+    "href": "https://www.hapag-lloyd.com/en/services-information/routes-trades/service-explorer.html",
+    "location": "How it works; Service rotation; FAQ: Are transit times included?",
+    "date": "Undated living service page; accessed 2026-11-04",
+    "status": "opened and verified",
+    "ref": "turn43view1",
+    "note": "Carrier describes routing alternatives and indicative transit times, with schedules handled in a separate tool."
+  }
+}

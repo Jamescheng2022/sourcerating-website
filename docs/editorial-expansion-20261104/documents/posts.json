@@ -1,0 +1,378 @@
+[
+  {
+    "slug": "supplier-bank-account-change-independent-verification",
+    "title": "The Supplier Changed Its Bank Details. Verify the Route Before the Payment.",
+    "seoTitle": "The Supplier Changed Its Bank Details. Verify the Route Before the Payment.",
+    "excerpt": "Verify a supplier bank-account change through an established contact route, then preserve the amendment and payment approval record.",
+    "date": "2026-11-04",
+    "category": "Contracts & Payment",
+    "author": "James Cheng",
+    "layout": "editorial",
+    "readTime": "4 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "A supplier’s new bank details can arrive in the most ordinary message of the week: the same invoice format, the same signature, a familiar conversation about a deposit. The useful response is to verify the change through a previously trusted route before updating the payment record. Appearance is an unreliable basis for deciding which requests deserve a check."
+      },
+      {
+        "type": "paragraph",
+        "text": "That uncertainty is visible in a [public accounting discussion](https://www.reddit.com/r/Accounting/comments/1vn4yeg/how_do_you_actually_decide_on_a_vendor_bankchange/). A participant asks what should trigger a callback when a vendor requests new bank details; another worries about a request arriving from the vendor’s genuine account. These are anonymous practitioners’ questions, not verified fraud investigations. They capture the purchasing problem well: waiting for an obvious spelling mistake leaves the process dependent on suspicion."
+      },
+      {
+        "type": "heading",
+        "text": "The familiar email is still only a request"
+      },
+      {
+        "type": "paragraph",
+        "text": "The [FBI’s BEC guidance](https://www.fbi.gov/how-we-can-help-you/common-frauds-and-scams/business-email-compromise) describes both lookalike addresses and access to legitimate billing conversations. It advises verifying changes to account numbers or payment procedures and contacting the financial institution immediately if a fraudulent transfer has occurred. The agency’s examples concern deception; they do not mean every supplier account change is fraudulent."
+      },
+      {
+        "type": "paragraph",
+        "text": "[HSBC’s security guidance](https://www.hsbc.com/online-security/types-of-attack) makes a particularly useful distinction: a known email address, even with an earlier conversation attached, should not be assumed genuine. Its recommended check is a call to a trusted supplier contact on a number already known, rather than the number printed in the change request."
+      },
+      {
+        "type": "paragraph",
+        "text": "For the buyer, this means separating the commercial relationship from the proposed beneficiary. You may know the supplier, have received good goods before and owe a genuine invoice. Those facts do not authenticate a newly supplied destination for the money."
+      },
+      {
+        "type": "heading",
+        "text": "Make the callback independent of the change"
+      },
+      {
+        "type": "paragraph",
+        "text": "Start with the supplier contact and telephone number held before the request arrived. If that record is incomplete, establish a trusted route through your company’s approved supplier-verification process. Calling the number in the new bank letter simply allows the request to supply its own witness."
+      },
+      {
+        "type": "paragraph",
+        "text": "Explain that you are verifying a proposed amendment. Ask the established contact to confirm who authorized it, the effective date and the affected supplier entity. Read back the relevant beneficiary and account identifiers through the approved channel. Record whom you reached, how you obtained the number, when the conversation occurred and what was confirmed. Avoid circulating complete banking details through unnecessary email copies."
+      },
+      {
+        "type": "paragraph",
+        "text": "A sales representative may know that a change is underway without having authority to instruct payment. Follow the supplier’s established finance route and your own delegated approval rules. If the beneficiary is a different legal entity, treat that as an additional commercial question: why would payment to that entity discharge this particular invoice? Have the appropriate finance or contract owner resolve it. A bank-letter attachment alone does not answer the contractual question."
+      },
+      {
+        "type": "heading",
+        "text": "Keep the amendment separate from the payment run"
+      },
+      {
+        "type": "paragraph",
+        "text": "A practical internal control is to give the change its own record, linked to the supplier master entry and the affected invoices. Preserve the original request, the independent verification and the decision. Have the authorized reviewer approve the amendment before a payment preparer uses it. These are suggested purchasing controls, to adapt to company policy; they are not a universal banking rule."
+      },
+      {
+        "type": "paragraph",
+        "text": "The record should make five things easy to find: the supplier entity, the previous and proposed instructions, the independent contact route, the verification result and the person authorizing the update. Restrict sensitive account data appropriately. A reviewer needs enough evidence to assess the decision, not an uncontrolled spreadsheet of every vendor’s bank details."
+      },
+      {
+        "type": "paragraph",
+        "text": "Then check the payment instruction actually selected for the next transaction. A correct master-data amendment is little help if an old payment template remains in use, or if a preparer copies details from another email. The final check should connect the approved beneficiary to the invoice being paid and the bank instruction being released."
+      },
+      {
+        "type": "heading",
+        "text": "When the answer stays unclear"
+      },
+      {
+        "type": "paragraph",
+        "text": "An unanswered callback is an unresolved change, rather than evidence that the request is safe. Explain the verification requirement through the established supplier relationship and escalate the pending payment under your company’s process. Do not let a claimed shipment deadline quietly become permission to bypass approval."
+      },
+      {
+        "type": "paragraph",
+        "text": "For legitimate changes, consistency helps the relationship: suppliers should encounter the same check rather than an accusation based on a buyer’s intuition. A short verification note also lets another colleague finish the work without reconstructing a private phone conversation."
+      },
+      {
+        "type": "paragraph",
+        "text": "If money has already gone to an account you suspect is fraudulent, contact your bank immediately through an independently established channel. Follow its response instructions, preserve the messages and transaction records, and use the relevant official reporting route; the FBI identifies IC3 for US BEC reports. Do not wait to complete an internal purchasing review before making that contact. Recovery is not assured."
+      },
+      {
+        "type": "paragraph",
+        "text": "The decision worth preserving is precise: this authorized supplier contact confirmed this amendment through this independent route, and this reviewer permitted its use. That is a stronger payment record than “the email looked normal.”"
+      }
+    ],
+    "referencesHeading": "Sources and scope",
+    "referencesIntro": "Primary sources checked on November 4, 2026. Customer procedures and regional rules apply within their stated scope.",
+    "references": [
+      {
+        "title": "Business Email Compromise",
+        "publisher": "Federal Bureau of Investigation",
+        "href": "https://www.fbi.gov/how-we-can-help-you/common-frauds-and-scams/business-email-compromise",
+        "note": "Opened current public prevention and response guidance."
+      },
+      {
+        "title": "Types of attack: Business email compromise",
+        "publisher": "HSBC",
+        "href": "https://www.hsbc.com/online-security/types-of-attack",
+        "note": "Known email address and prior thread are not proof; call a known contact number."
+      },
+      {
+        "title": "How do you actually decide on a vendor bank-change request?",
+        "publisher": "Reddit r/Accounting",
+        "href": "https://www.reddit.com/r/Accounting/comments/1vn4yeg/how_do_you_actually_decide_on_a_vendor_bankchange/",
+        "note": "Anonymous public practitioner pain point; not verified evidence of a fraud case."
+      }
+    ],
+    "relatedLinks": [],
+    "coverImage": {
+      "src": "/workspace/scratch/c6e10bb8047b/sr-review/new-content-documents/assets/13674604.jpg",
+      "width": 1224,
+      "height": 1632,
+      "alt": "An office telephone on a desk",
+      "caption": "An office telephone: a callback must use an independently established supplier contact route. Object photograph; it does not depict a bank verification or endorse this equipment. Photo: [Own work by Donmike10 (talk)](https://commons.wikimedia.org/wiki/File:NEC_office_phone.JPG), [Public domain](https://commons.wikimedia.org/wiki/Commons:Public_domain); resized for web. Editorial context, not SourceRating work."
+    }
+  },
+  {
+    "slug": "ddp-quote-importer-of-record-duty-tax-responsibility",
+    "title": "Your Quote Says DDP. Whose Name Goes on the Import Declaration?",
+    "seoTitle": "Your Quote Says DDP. Whose Name Goes on the Import Declaration?",
+    "excerpt": "Check the importer, customs representation, duties, taxes and records behind a DDP quotation, with separate US and Great Britain examples.",
+    "date": "2026-11-04",
+    "category": "Policy & Customs",
+    "author": "James Cheng",
+    "layout": "editorial",
+    "readTime": "4 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "A DDP quotation promises an unusually comfortable purchase: one delivered price and a supplier handling the border. Before accepting it, ask a less comfortable question: whose legal identity will appear on the import declaration? A seller’s promise to pay the bill and an importer’s obligations to customs need to fit together, but they are different parts of the transaction."
+      },
+      {
+        "type": "paragraph",
+        "text": "This article uses Incoterms® 2020 as the commercial reference, with separate US and Great Britain examples. It does not supply a worldwide importer-registration rule. Destination law, the goods and the actual declaration arrangement need checking before shipment."
+      },
+      {
+        "type": "heading",
+        "text": "What the three letters actually allocate"
+      },
+      {
+        "type": "paragraph",
+        "text": "Under [ICC’s DDP explanation](https://library.iccwbo.org/content/tfb/BOOKS/BK_0049/BK_0049_04_RulesAny.htm), the seller brings the goods to the named destination, cleared for import and ready for unloading on the arriving vehicle. Import clearance and the associated duties and applicable taxes fall on the seller under that rule. Name the precise destination and the edition in the order; “DDP your country” leaves the endpoint poorly defined."
+      },
+      {
+        "type": "paragraph",
+        "text": "ICC also cautions sellers who cannot arrange import clearance to consider DAP or DPU instead. The practical lesson is to test whether the quoted arrangement can be performed. A low delivered price is incomplete if nobody has established a workable importer and customs-representation arrangement."
+      },
+      {
+        "type": "paragraph",
+        "text": "[HMRC’s customs-valuation guidance](https://www.gov.uk/guidance/customs-valuation/incoterms) describes Incoterms as trade terms clarifying delivery tasks, costs and risks. It notes that selecting one does not restrict which customs-valuation method may apply. The commercial label is therefore a starting point for border planning, rather than a substitute for a customs declaration."
+      },
+      {
+        "type": "heading",
+        "text": "Ask for names before asking for assurances"
+      },
+      {
+        "type": "paragraph",
+        "text": "Have the supplier identify the proposed importer, customs broker or representative, and entity funding duties and taxes. Ask who will appoint the broker and authorize any declaration made in the buyer’s name. Request a written explanation of the arrangement that the destination broker can review."
+      },
+      {
+        "type": "paragraph",
+        "text": "If the supplier says its forwarder “handles everything,” ask the forwarder the same questions. A transport provider’s involvement does not, by itself, tell the buyer whose information will be certified or who will answer a later customs query. Request the declaration and payment records the buyer will receive after clearance, with access and timing agreed in advance."
+      },
+      {
+        "type": "paragraph",
+        "text": "Avoid sending company identifiers or signing a customs authorization merely because it appears in a freight company’s onboarding email. First understand what role the document gives your business. There may be a legitimate reason for the request; establish that reason with the broker through a verified contact route."
+      },
+      {
+        "type": "heading",
+        "text": "The US example: entry has a responsible party"
+      },
+      {
+        "type": "paragraph",
+        "text": "The [2024 published US Code, 19 USC 1484](https://www.govinfo.gov/content/pkg/USCODE-2024-title19/html/USCODE-2024-title19-chap4-subtitleIII-partIII-sec1484.htm), assigns entry responsibilities, using reasonable care, to the importer of record, acting personally or through a written authorized agent. The required information includes value and classification. The statute also identifies eligible parties for that role. This is a US legal framework, not a rule assigning every DDP purchase to the overseas seller."
+      },
+      {
+        "type": "paragraph",
+        "text": "For a US-bound order, ask the licensed broker to identify the intended importer of record and explain the proposed authorization before the goods move. If your company is to be that party, get an explicit explanation of the responsibilities it retains and the documents it must review. A supplier agreeing to reimburse duties does not settle who made the entry or certified the information."
+      },
+      {
+        "type": "paragraph",
+        "text": "Do not accept a reduced declared value, misleading goods description or borrowed importer identity as a way to preserve the quoted delivered price. Resolve a classification, origin or valuation uncertainty through the proper customs process rather than an informal adjustment to shipping paperwork."
+      },
+      {
+        "type": "heading",
+        "text": "Great Britain: representation and VAT need their own discussion"
+      },
+      {
+        "type": "paragraph",
+        "text": "[HMRC’s guidance on appointing customs agents](https://www.gov.uk/guidance/check-what-you-need-to-consider-before-getting-someone-to-deal-with-customs-for-you) distinguishes direct representation, in your name, from indirect representation, in the representative’s name on your behalf. It describes different liability consequences and says appointing someone does not remove the trader’s due-diligence responsibility. Agree the form of representation rather than treating “our broker” as a complete answer."
+      },
+      {
+        "type": "paragraph",
+        "text": "Import VAT adds another question. [HMRC’s VIT44400 manual](https://www.gov.uk/hmrc-internal-manuals/vat-input-tax/vit44400), discussing toll operators and ownership, explains why paying import VAT or holding a certificate does not alone establish entitlement to deduct it. For the actual transaction, have a tax adviser confirm who owns the goods at import, who will be shown as importer and what evidence supports any intended recovery. Do not budget a VAT recovery solely because the supplier calls its offer DDP."
+      },
+      {
+        "type": "paragraph",
+        "text": "These examples concern Great Britain and specified UK guidance. Northern Ireland movements and other destinations require their own review; US terminology should not be copied into every country’s paperwork."
+      },
+      {
+        "type": "heading",
+        "text": "Turn the delivered price into a usable order"
+      },
+      {
+        "type": "paragraph",
+        "text": "Before approval, put the named delivery point, importer arrangement, representation, duty-and-tax funding and clearance-document handover in one purchasing note. Ask the supplier to identify exclusions and the treatment of inspections, storage, delayed clearance and changes in assessed charges. Have the relevant contract owner settle exceptions instead of leaving them hidden behind a delivered-price total."
+      },
+      {
+        "type": "paragraph",
+        "text": "If the proposed seller cannot perform its clearance obligations, revise the arrangement and price before shipment. A clearly agreed alternative gives the buyer a better basis for planning than a DDP label that the parties intend to reinterpret at the border."
+      }
+    ],
+    "referencesHeading": "Sources and scope",
+    "referencesIntro": "Primary sources checked on November 4, 2026. Customer procedures and regional rules apply within their stated scope.",
+    "references": [
+      {
+        "title": "Incoterms® 2020: DDP",
+        "publisher": "International Chamber of Commerce",
+        "href": "https://library.iccwbo.org/content/tfb/BOOKS/BK_0049/BK_0049_04_RulesAny.htm",
+        "note": "Opened DDP explanation and obligations; commercial delivery allocation."
+      },
+      {
+        "title": "19 USC 1484, Entry of merchandise",
+        "publisher": "US Government Publishing Office",
+        "href": "https://www.govinfo.gov/content/pkg/USCODE-2024-title19/html/USCODE-2024-title19-chap4-subtitleIII-partIII-sec1484.htm",
+        "note": "2024 published Code edition; US entry responsibilities and eligible parties."
+      },
+      {
+        "title": "Appointing someone to deal with customs",
+        "publisher": "HM Revenue & Customs",
+        "href": "https://www.gov.uk/guidance/check-what-you-need-to-consider-before-getting-someone-to-deal-with-customs-for-you",
+        "note": "Updated 21 August 2024; direct and indirect representation."
+      },
+      {
+        "title": "VIT44400: Specific issues—Toll Operators",
+        "publisher": "HM Revenue & Customs",
+        "href": "https://www.gov.uk/hmrc-internal-manuals/vat-input-tax/vit44400",
+        "note": "Ownership, importer role and import-VAT deduction in the described UK contexts."
+      },
+      {
+        "title": "Customs valuation: Incoterms",
+        "publisher": "HM Revenue & Customs",
+        "href": "https://www.gov.uk/guidance/customs-valuation/incoterms",
+        "note": "Updated 14 April 2026; trade terms do not determine customs valuation method."
+      }
+    ],
+    "relatedLinks": [],
+    "coverImage": {
+      "src": "/workspace/scratch/c6e10bb8047b/sr-review/new-content-documents/assets/66505021.jpg",
+      "width": 1280,
+      "height": 885,
+      "alt": "A CBP agriculture inspection specialist checks paperwork beside imported machinery at the Port of Baltimore",
+      "caption": "CBP agriculture cargo inspection at the Port of Baltimore. The photograph shows border work; it does not identify the shipment’s Incoterm, importer of record or duty treatment. Photo: [U.S. Customs and Border Protection](https://commons.wikimedia.org/wiki/File:170726-H-NI589-409_(36183283842).jpg), [Public domain](https://commons.wikimedia.org/wiki/Commons:Public_domain); resized for web. Editorial context, not SourceRating work."
+    }
+  },
+  {
+    "slug": "approved-sample-production-process-change-volume-price",
+    "title": "The Sample Was Approved. What Exactly Did the Volume Price Preserve?",
+    "seoTitle": "The Sample Was Approved. What Exactly Did the Volume Price Preserve?",
+    "excerpt": "Link sample approval to specifications and the production route before negotiating volume savings, substitutions and change implementation.",
+    "date": "2026-11-04",
+    "category": "Pricing & Negotiation",
+    "author": "James Cheng",
+    "layout": "editorial",
+    "readTime": "4 min read",
+    "sections": [],
+    "articleBody": [
+      {
+        "type": "paragraph",
+        "text": "The approved sample can remain on the buyer’s desk while production moves away from it. The visible item has not changed, yet the material source, tooling, manufacturing site or finishing route may have changed behind the order. A buyer who negotiated only the sample’s appearance has little evidence about which production conditions were meant to remain fixed."
+      },
+      {
+        "type": "paragraph",
+        "text": "The useful commercial question is what the supplier is offering to repeat. Before negotiating the volume price, connect the accepted sample to a defined product specification and an identified production route. Then agree which changes require notice, review or renewed approval. This is a question about preserving the purchase basis, distinct from deciding how many finished pieces to inspect before shipment."
+      },
+      {
+        "type": "heading",
+        "text": "A good object and a repeatable process answer different questions"
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask how the sample was made. Was it a prototype, a pilot part or an item taken from the intended production line? Which drawing revision, material and tool did it use? Were any operations performed differently from the proposed volume route? The answers determine what the sample can reasonably represent."
+      },
+      {
+        "type": "paragraph",
+        "text": "[Bosch’s February 2025 supplier-quality requirements](https://assets.bosch.com/media/global/bosch_group/purchasing_and_logistics/information_for_business_partners/downloads/quality_docs/specific_regulations/supplier-quality-requirements.pdf), written for its Mobility Solutions supply chain, distinguish prototypes and pilot series from serial deliveries. The same document evaluates performance under production conditions and records identifying details such as tooling and production line in its approval documentation. These are customer-specific requirements, not an automatic obligation on an unrelated supplier. They illustrate the information missing from an approval email that merely says the sample looks good."
+      },
+      {
+        "type": "paragraph",
+        "text": "For another industrial purchase, scale the evidence to the product. A simple component may need a clear drawing and material specification plus a documented production route. A functionally critical assembly may need a much more substantial qualification. The responsible engineer should decide the required evidence and acceptance criteria; a buyer should not invent universal capability thresholds."
+      },
+      {
+        "type": "heading",
+        "text": "Make the sample point to something measurable"
+      },
+      {
+        "type": "paragraph",
+        "text": "A retained sample can help resolve an appearance discussion, but it should have an identity: sample reference, date, product revision and the characteristics it represents. Link its inspection results and any agreed concessions. Give the supplier and buyer access to the same approval record rather than allowing separate photographs to become competing references."
+      },
+      {
+        "type": "paragraph",
+        "text": "Where possible, describe the relevant requirement in the drawing, material specification or agreed test method. “Same as sample” leaves readers to decide whether it means colour, dimensions, performance, construction or all of them. An accepted surface finish does not explain an untested internal feature. Record which characteristics were assessed and which remain subject to other evidence."
+      },
+      {
+        "type": "paragraph",
+        "text": "This is also a negotiation issue. If a supplier offers a lower volume price, ask which assumptions make it possible: different tooling, a different process sequence, another material source or production at another facility. A genuine efficiency improvement may be welcome. The buyer needs the technical differences visible before accepting the saving."
+      },
+      {
+        "type": "heading",
+        "text": "Follow changes beneath an unchanged part number"
+      },
+      {
+        "type": "paragraph",
+        "text": "[Graco’s supplier change guidance](https://www.graco.com/us/en/suppliers/request-for-change.html) lists more than drawing changes. Its examples include relevant tooling changes, production-method changes, certain material-source changes, packaging and inspection methods. It requires suppliers to communicate proposed changes for review through its purchasing and quality contacts. The list is Graco’s purchasing framework; buyers can use the categories as questions without claiming the same contractual rules apply to their order."
+      },
+      {
+        "type": "paragraph",
+        "text": "Ask your supplier to describe proposed differences before implementation, identify affected parts and explain the reason. Have the technical reviewer decide whether further samples, qualification or documentation are needed. Keep that technical decision separate from accepting a cost reduction or revised delivery date."
+      },
+      {
+        "type": "paragraph",
+        "text": "[Infineon’s change-notification page](https://www.infineon.com/quality/quality-management/supplier-product-change-notification) provides another sector-specific example. Its requested information includes a before-and-after comparison, affected materials and sites, qualification evidence, and a transition plan for samples and date codes. The transferable idea is to make the boundary between the old and new supply identifiable. Semiconductor procedures should not be copied wholesale into a general fabricated-goods purchase."
+      },
+      {
+        "type": "heading",
+        "text": "Negotiate the transition as carefully as the unit price"
+      },
+      {
+        "type": "paragraph",
+        "text": "A change agreement should say which order lines, lots or units it affects. Ask what will happen to existing material, work in progress and stock already finished. If both versions will be delivered, agree identification and receiving instructions so the warehouse can distinguish them. Otherwise an approved new route may arrive mixed with the old one, leaving a technically acceptable decision difficult to apply."
+      },
+      {
+        "type": "paragraph",
+        "text": "Keep the commercial record equally clear. Separate recurring price changes from one-time tooling or qualification charges. Identify who owns the tool and the approved data where relevant to the contract. Record the evidence still outstanding before treating a promised saving as available for the next order."
+      },
+      {
+        "type": "paragraph",
+        "text": "When production appears to differ, compare its records with the accepted basis before assigning a cause. A mismatch may reflect an unauthorized change, an incomplete original specification or an observation that needs further measurement. Preserve the evidence and refer disposition to the authorized technical and commercial owners. Repeating that the supplier must match the sample does little until both parties can identify what the sample approved—and what production is now doing differently."
+      }
+    ],
+    "referencesHeading": "Sources and scope",
+    "referencesIntro": "Primary sources checked on November 4, 2026. Customer procedures and regional rules apply within their stated scope.",
+    "references": [
+      {
+        "title": "Supplier Quality Requirements, Summary & Explanations",
+        "publisher": "Bosch Mobility Solutions",
+        "href": "https://assets.bosch.com/media/global/bosch_group/purchasing_and_logistics/information_for_business_partners/downloads/quality_docs/specific_regulations/supplier-quality-requirements.pdf",
+        "note": "Edition 3, February 2025; sections 3.4, 4.7–4.9 and 12; customer-specific requirements."
+      },
+      {
+        "title": "Supplier Request for Change",
+        "publisher": "Graco",
+        "href": "https://www.graco.com/us/en/suppliers/request-for-change.html",
+        "note": "Manufacturer examples of product, process, tooling and inspection changes."
+      },
+      {
+        "title": "Supplier Product/Process Change Notification",
+        "publisher": "Infineon Technologies",
+        "href": "https://www.infineon.com/quality/quality-management/supplier-product-change-notification",
+        "note": "Sector-specific change information and transition planning; no universal timeline asserted."
+      }
+    ],
+    "relatedLinks": [],
+    "coverImage": {
+      "src": "/workspace/scratch/c6e10bb8047b/sr-review/new-content-documents/assets/25101531.jpg",
+      "width": 800,
+      "height": 600,
+      "alt": "An injection-moulding machine with plastic products nearby",
+      "caption": "An injection-moulding machine used to make plastic utilities. Production equipment is part of the route behind a sample; this photograph does not establish qualification, process capability or product conformity. Photo: [Rohini](https://commons.wikimedia.org/wiki/File:Injection_moulding_machine.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Editorial context, not SourceRating work."
+    }
+  }
+]
