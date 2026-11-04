@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export function Logo({ inverted = false }: { inverted?: boolean }) {
+export function Logo({ inverted = false, compactOnMobile = false }: { inverted?: boolean; compactOnMobile?: boolean }) {
   return (
     <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Source Rating home">
       <span className={`flex h-10 w-10 items-center justify-center rounded-md ${inverted ? "bg-white text-brand-950" : "bg-brand-950 text-white"}`}>
@@ -9,7 +9,7 @@ export function Logo({ inverted = false }: { inverted?: boolean }) {
           <path d="M8 31.2h25v2.8H8v-2.8Z" fill="currentColor" opacity="0.42" />
         </svg>
       </span>
-      <span className="leading-none">
+      <span className={compactOnMobile ? "hidden sm:block leading-none" : "leading-none"}>
         <span className={`block text-lg font-bold ${inverted ? "text-white" : "text-gray-950"}`}>
           Source Rating
         </span>
