@@ -117,8 +117,8 @@ export default async function BlogPostPage({ params }: PageProps) {
               <Image
                 src={post.coverImage.mobileSrc}
                 alt={post.coverImage.alt}
-                width={(post.coverImage as { mobileWidth?: number }).mobileWidth ?? 720}
-                height={(post.coverImage as { mobileHeight?: number }).mobileHeight ?? 1180}
+                width={post.coverImage.mobileWidth ?? 720}
+                height={post.coverImage.mobileHeight ?? 1180}
                 sizes="(max-width: 1535px) 100vw, 0px"
                 className="block h-auto w-full rounded-md border border-stone-200 2xl:hidden"
               />
