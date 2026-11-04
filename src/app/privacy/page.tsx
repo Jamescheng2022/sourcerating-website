@@ -28,6 +28,7 @@ export default function PrivacyPage() {
             <h2 className="text-xl font-bold text-gray-950 mb-3">Sharing</h2>
             <p>We do not sell personal information. Project information is shared only when needed to perform requested services or when required by law.</p>
           </div>
+          <div><h2 className="text-xl font-bold text-gray-950 mb-3">Optional Google Analytics</h2><p>With your permission, Google Analytics uses cookies and receives page addresses, browser/device information and bounded interaction events. It stays off until you choose Allow analytics. Use the Analytics control to withdraw or change your choice. Advertising storage and personalization are disabled. See Google’s privacy policy for its processing practices. <a href="https://policies.google.com/privacy">Google privacy policy</a>.</p></div>
           <div>
             <h2 className="text-xl font-bold text-gray-950 mb-3">Contact</h2>
             <p>For privacy questions, email <a className="text-brand-700 font-medium" href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.</p>
