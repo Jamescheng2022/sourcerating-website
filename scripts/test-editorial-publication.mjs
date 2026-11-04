@@ -1,6 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
 import { missingDeployedText, normalizeVisibleArticleText, hasMatchingPublicationDigest } from "./check-editorial-publication.mjs";
 
 const article = {
@@ -132,4 +134,29 @@ test("source digest rejects image revisions under an unchanged public filename",
     "<article class=\"prose\" data-publication-sha256=\"" + oldDigest + "\">");
   assert.equal(hasMatchingPublicationDigest(oldHtml, a), true);
   assert.equal(hasMatchingPublicationDigest(oldHtml, b), false);
+});
+
+test("editorial contract regression: blog slug page contains zero bare parentheses and respects articleBody CTA contract", () => {
+  const pageSource = fs.readFileSync(
+    path.join(process.cwd(), "src/app/blog/[slug]/page.tsx"),
+    "utf8"
+  );
+
+  // Must not have bare parenthesis text nodes outside JSX expressions
+  assert.equal(
+    /^\s*\(\s*$/m.test(pageSource),
+    false,
+    "page.tsx must not contain stray bare '(' outside expressions"
+  );
+  assert.equal(
+    /^\s*\)\s*$/m.test(pageSource),
+    false,
+    "page.tsx must not contain stray bare ')' outside expressions"
+  );
+
+  // Must gate the generic CTA on {!post.articleBody ? (...) : null}
+  assert.ok(
+    pageSource.includes("{!post.articleBody ? ("),
+    "Generic template CTA must be gated on {!post.articleBody ? ( to preserve 25 articleBody editorial posts"
+  );
 });

@@ -5,7 +5,7 @@ import { Logo } from "@/components/ui/Logo";
 export function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="bg-brand-950 text-gray-300">
+    <footer className="bg-brand-950 text-gray-300 pb-28 sm:pb-32 lg:pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
