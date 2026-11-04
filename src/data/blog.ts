@@ -11,6 +11,7 @@ import { containerMassPost } from "@/content/blog/packing-list-weight-container-
 import { tariffCodePost } from "@/content/blog/supplier-hs-code-destination-import-classification";
 import { epdComparisonPost } from "@/content/blog/epd-carbon-comparison-functional-unit-boundary";
 import { weldEvidencePost } from "@/content/blog/weld-photo-not-joint-release-evidence";
+import { panelFireClassificationPost } from "@/content/blog/astm-e84-class-a-vs-en-13501-1-panel-fire-evidence";
 
 export type { BlogPost } from "@/content/blog/legacy-posts";
 
@@ -27,6 +28,7 @@ export const blogPosts: BlogPost[] = [
   tariffCodePost,
   epdComparisonPost,
   acceptanceSamplingPost,
+  panelFireClassificationPost,
   ...existingPosts,
 ];
 
