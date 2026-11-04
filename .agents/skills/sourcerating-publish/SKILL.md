@@ -1,9 +1,9 @@
 ---
 name: sourcerating-publish
-description: Research, edit, illustrate and stage SourceRating.com buyer-research articles in the canonical website GitHub repository; independently reviewed releases and public verification are owned only by Claude Lead.
+description: Research, edit, illustrate, stage, publish and verify SourceRating.com website buyer-research articles via the canonical GitHub repository and Vercel under the Owner 2026-11-02 approved flow (AGY layout/source, Codex GPT-6.1 Terra medium independent review PASS, authorized local publishing).
 ---
 
-# SourceRating website editorial staging and Claude Lead release
+# SourceRating website publisher and editorial release
 
 **Canonical website repo:** `Jamescheng2022/sourcerating-website`, branch `main`. **Vercel project:** `sourcerating-website`, team `jamescheng2022s-projects`, project `prj_2dv2ZpoNaeZD438vuWtgeSdsB2B1`, public canonical origin `https://www.sourcerating.com`.
 
@@ -12,7 +12,7 @@ This repository Skill is the workflow contract, **not an autonomous scheduler**,
 ## 0. Boundaries and ownership
 
 - Work only in this website repository, not `Jamescheng2022/sourcerating` (the separate application), and not An-Thai, NEWMEDA, Precast or mail.
-- **Ownership override (2026-10-23):** ChatGPT is the website article/image author and may create/update the existing content branch and **Draft PR only**. Claude Lead is the **sole independent final reviewer, main-merge owner and production publisher**, working through the original `Jamescheng2022/agent-bus` `claude/BOARD.md`, `claude/LEAD.md` and `to-claude/` handoff. ChatGPT must not merge, deploy or substitute another reviewer when Claude is unavailable. Do not create parallel writers, publishers, workflows, accounts or scheduled jobs.
+- **Approved release flow (Owner override 2026-11-02, site-only):** AGY implements original responsive layout, media staging and source wiring in the existing single content Draft PR. Local **Codex GPT-6.1 Terra medium** provides the single independent review and PASS/FAIL gate at the exact final SHA (verifying factual integrity, rights, image presence, severe mobile issues, build and diff). Upon an independent PASS from Codex Terra medium and passing automated checks, the **existing authorized local publisher** may merge to `main` and deploy to production directly, without requiring a separate Claude `IMAGE_EDITORIAL_PASS` or second editorial signoff. Preserve the existing publisher operating identity; this flow grants no new publisher identity, no alternate identity, and no relaxation of security or access boundaries. All explicit permission STOPs, protected Preview refusals, rights/image quality thresholds and GitHub preflight checks remain strictly binding.
 - For ordinary content and editorial images, use the connected GitHub tools directly, independent of a local PC or Codex queue. Do not silently change billing, DNS, authentication, payment plans, credentials, marketing identity or frontend ownership.
 - Existing explicit platform denials, held drafts, AGY ownership restrictions and other project-specific permissions remain binding. A new GitHub/API path is not permission to retry a refused operation.
 - The website Skill handles its own articles. LinkedIn is a **separate destination**: a LinkedIn draft or image does not count as a posted update. Verify the original authorized account, posting connector, review and public permalink separately.
@@ -66,14 +66,14 @@ npm run build
 
 - `npm run check:publication` checks **all registered articles** for structural/asset/link failures; `--slug` checks the exact article. The GitHub PR preflight workflow should also run these deterministic checks.
 - The checker tests local files and metadata only; it **cannot verify factual truth, design taste, copyright or legal compliance**. A writer's self-review is not an independent acceptance.
-- Obtain a truly independent editorial/fact/source review and the available GitHub code review on the exact final content and asset revision. Claude Lead must record a separate **`IMAGE_EDITORIAL_PASS` on each full-size cover and inline figure** (physical credibility, distinct information value, license, disclosure, responsive mobile legibility) and an exact-head final decision. Fix findings in the **same original Draft PR**; a review of an older SHA is not approval of a different article.
+- Obtain a truly independent editorial/fact/source review and the available GitHub code review on the exact final content and asset revision. Under the Owner 2026-11-02 override, local **Codex GPT-6.1 Terra medium** performs this independent review on the exact final head SHA (verifying factual integrity, image rights/provenance, visible figure presence, responsive mobile display, build and diff) for a single PASS/FAIL verdict, without requiring a separate Claude `IMAGE_EDITORIAL_PASS` or second signoff. Fix findings in the **same original Draft PR**; a review of an older SHA is not approval of a different article.
 - Confirm Preview build is READY. For public/previews actually accessible to a tester, check full body, actual hero, internal illustration, captions, links, mobile appearance and SEO. If preview requires authentication, state that openly, do not claim it was visually inspected.
 - If a check fails, a reviewer flags a material issue, a PR is conflicted or access is refused, stop **that release**. Preserve completed work; never bypass a denial by switching identities or weakening access controls.
 
 ## 6. Release by GitHub and verify production
 
 1. Use a focused feature/content branch and PR to `main`. Confirm changed files are within scope, independent content review and automated checks pass, and there are no current unresolved blockers.
-2. **Claude Lead alone**, after his independent review and all prior platform permission/quality gates, resolves legitimate conflicts and merges the exact reviewed final PR head to `main`, then owns production deployment. The ChatGPT author cannot merge, publish, override a held review, or change reviewer identity. No force pushes, no unrelated secret, payment or configuration changes.
+2. After an independent PASS from Codex GPT-6.1 Terra medium at the exact final PR head SHA, green CI and passing deterministic publication checks, the **existing authorized local publisher** resolves legitimate merge conflicts and merges the exact reviewed final PR head to `main`, deploying to verified Vercel production directly. Neither author nor implementer may self-approve, merge or deploy without independent PASS; no alternate publisher identity is granted, no force pushes, and no unrelated secret, payment or configuration changes.
 3. Check the **exact merged commit** is deployed to the verified Vercel project's **production** target and state is `READY`. A Preview is not production.
 4. Then fetch the **public** article URL, blog index, sitemap and media; verify title, full body, images including mobile diagram asset, captions, intended links and raster OG image. Run:
 
@@ -86,6 +86,6 @@ node scripts/check-editorial-publication.mjs --slug ARTICLE_SLUG --live --origin
 
 ## 7. Respond with real outcomes
 
-Use a concise Chinese factual receipt: original Draft PR URL, **precise new head SHA**, article and cover/inline **distinct image counts and committed byte paths**, Claude Lead acknowledgement (`UNKNOWN` unless evidenced), independent `IMAGE_EDITORIAL_PASS`, mergeability and actual production/public readback; distinguish each from CI/Preview. For the one daily LinkedIn item report its complete 200–450 word independent English copy, actual JPG/PNG and real already-published article URL, or mark manual sharing if no connected account. Never report scheduled, drafted, previewed or PR-open as public publication.
+Use a concise Chinese factual receipt: original Draft PR URL, **precise new head SHA**, article and cover/inline **distinct image counts and committed byte paths**, Codex GPT-6.1 Terra medium independent review verdict, mergeability and actual production/public readback; distinguish each from CI/Preview. For the one daily LinkedIn item report its complete 200–450 word independent English copy, actual JPG/PNG and real already-published article URL, or mark manual sharing if no connected account. Never report scheduled, drafted, previewed or PR-open as public publication.
 
 For repeat daily runs, re-read this Skill from `main`, check the current branch/product scope and restore only verifiable unfinished work. Do not delete originals or repeat a previously rejected release action.
