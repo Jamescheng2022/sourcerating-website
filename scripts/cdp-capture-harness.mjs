@@ -869,10 +869,40 @@ export async function testBorderOnlyBlankProbe() {
 }
 
 /**
+ * A normal-flow item can extend beyond the viewport inside a bounded horizontal
+ * scroller without overflowing the page. Do not exempt hidden/clip containers,
+ * root clipping, out-of-flow items or content outside the reachable scroll area.
+ * This function is serialized into the browser; keep it self-contained.
+ */
+export function isReachableInHorizontalScroller(el, viewportWidth) {
+  const rect = el.getBoundingClientRect();
+  let contained = false;
+  for (let node = el; node && node !== document.body && node !== document.documentElement; node = node.parentElement) {
+    const style = window.getComputedStyle(node);
+    // Positioned/transformed descendants may escape an ancestor's scroll clip.
+    // Keep the original strict check for these ambiguous cases.
+    if (style.position === 'fixed' || style.position === 'absolute' || style.transform !== 'none') return false;
+    if (node === el) continue;
+    if (style.overflowX === 'hidden' || style.overflowX === 'clip') return false;
+    if (contained) continue;
+    if (style.overflowX !== 'auto' && style.overflowX !== 'scroll') continue;
+    const box = node.getBoundingClientRect();
+    if (node.clientWidth <= 0 || node.scrollWidth <= node.clientWidth ||
+        box.left < -1 || box.right > viewportWidth + 1 ||
+        style.direction !== 'ltr' || rect.width > node.clientWidth) return false;
+    const contentLeft = box.left + node.clientLeft - node.scrollLeft;
+    contained = rect.left >= contentLeft - 1 && rect.right <= contentLeft + node.scrollWidth + 1;
+    if (!contained) return false;
+  }
+  return contained;
+}
+
+/**
  * Generates browser-side geometry extraction script.
  */
 export function buildGeometryScript() {
   return `(() => {
+    const isReachableInHorizontalScroller = ${isReachableInHorizontalScroller.toString()};
     function resolveImgUrl(raw) {
       if (!raw) return '';
       try {
@@ -957,10 +987,12 @@ export function buildGeometryScript() {
     const overflowing = [];
     document.querySelectorAll('body *').forEach((el) => {
       const r = el.getBoundingClientRect();
-      if (r.right > clientWidth + 1 && r.width > 0) {
+      if (r.width > 0 && (r.right > clientWidth + 1 || r.left < -1) &&
+          !isReachableInHorizontalScroller(el, clientWidth)) {
         overflowing.push({
           tag: el.tagName,
           className: typeof el.className === 'string' ? el.className : '',
+          left: Math.round(r.left),
           right: Math.round(r.right),
           width: Math.round(r.width)
         });

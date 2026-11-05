@@ -845,6 +845,21 @@ function testDomMetricsValidation() {
   // 7.1 Baseline valid metrics must pass
   assert.equal(validateDomMetrics(baseline, 320, 2), true);
 
+  // Root overflow must still fail even if every individual item is scroll-contained.
+  for (const changed of [
+    { hasHorizontalOverflow: true },
+    { scrollWidth: 321 },
+    { overflowDeltaPx: 1 }
+  ]) {
+    assert.throws(() => validateDomMetrics({ ...baseline, ...changed }, 320, 2), /Horizontal overflow detected/);
+  }
+  // Clipping the root does not excuse a visible or unreachable overflowing item.
+  assert.throws(() => validateDomMetrics({
+    ...baseline,
+    overflowingElementsCount: 1,
+    sampleOverflowing: [{ tag: 'DIV', left: 0, right: 420, width: 420 }]
+  }, 320, 2), /1 overflowing element/);
+
   // 7.2 Non-zero scrollY negative probe
   const nonZeroY = { ...baseline, scrollY: 150 };
   assert.throws(

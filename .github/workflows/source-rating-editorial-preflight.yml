@@ -10,6 +10,7 @@ on:
       - 'scripts/check-editorial-publication.mjs'
       - 'scripts/cdp-capture-harness.mjs'
       - 'scripts/test-cdp-harness-static.mjs'
+      - 'scripts/test-cdp-overflow-browser.mjs'
       - 'scripts/validate-ci-bundle.mjs'
       - 'src/content/blog/**'
       - 'src/data/**'
@@ -181,6 +182,9 @@ jobs:
           fi
           echo "Verified Chrome executable: $CHROME_EXEC"
           export CHROME_BIN="$CHROME_EXEC"
+
+          # Exercise scroll clipping, keyboard reachability and real overflow negatives.
+          node scripts/test-cdp-overflow-browser.mjs
 
           # 2. Start owned localhost production Next.js server directly
           echo "Starting local Next.js production server directly on port 3000..."
