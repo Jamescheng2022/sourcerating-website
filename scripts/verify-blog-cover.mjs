@@ -8,6 +8,7 @@ import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import ts from 'typescript';
+import * as React from 'react';
 import sharp from 'sharp';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const base='16d749fef5875e46f0f423999e4632321bcf4015';
@@ -24,6 +25,7 @@ function loadRegistry({baseline=false,raw=false}={}) {
   const m={exports:{}};cache.set(file,m.exports);
   function requireLocal(id){
    if(id==='node:crypto')return {createHash:crypto.createHash};
+   if(id==='react')return React;
    if(id==='react/jsx-runtime')return {jsx:(type,props,key)=>({type,props,key}),jsxs:(type,props,key)=>({type,props,key}),Fragment:'fragment'};
    if(id==='next/image'||id==='next/link')return {__esModule:true,default:id};
    if(id==='next/navigation')return {notFound:()=>{throw Error('NOT_FOUND')}};
@@ -59,5 +61,13 @@ const countCards=v=>!v||typeof v!=='object'?0:Array.isArray(v)?v.reduce((n,x)=>n
 check('article feed renders every article',()=>assert.equal(countCards(feed({posts})),posts.length));
 check('topic navigation filters the article feed',()=>{const count=countCards(feed({posts,topic:'Markets'}));assert.ok(count>0&&count<posts.length)});
 check('search returns only the calibrated gauge article',()=>assert.equal(countCards(feed({posts,query:'calibrated'})),1));
+const Newsletter=after('src/components/editorial/NewsletterSignup.tsx').NewsletterSignup;
+function flowNodes(v){if(!v||typeof v!=='object')return [];if(Array.isArray(v))return v.flatMap(flowNodes);return [v,...flowNodes(v.props?.children)];}
+for(const count of [0,1,2,3,4])check(`newsletter placement for ${count} articles`,()=>{
+ const flow=flowNodes(feed({posts:posts.slice(0,count)}));
+ const signup=flow.filter(v=>v.type===Newsletter);
+ assert.equal(signup.length,count?1:0);
+ if(count)assert.equal(flow.slice(0,flow.indexOf(signup[0])).filter(v=>v.type==='article').length,Math.min(count,3));
+});
 check('no old service slogan or duplicate topic sidebar in shared shell',()=>{const header=fs.readFileSync(path.join(root,'src/components/layout/Header.tsx'),'utf8');assert.ok(!/Free Risk Screen|Factory Risk Checks/.test(header));assert.equal((header.match(/<nav /g)||[]).length,1);});
 console.log(JSON.stringify({status:'PASS',checks,originalArticles:old.length,registeredArticles:posts.length,mediaFiles:ledger.length,baseline:base,scope:'Original text, media bytes, source rendering, metadata and search; browser geometry checked separately.'},null,2));

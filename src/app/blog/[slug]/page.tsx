@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { NewsletterSignup } from "@/components/editorial/NewsletterSignup";
 import { ArticleViews } from "@/components/editorial/ArticleViews";
 import { ArticleBody, InlineText } from "@/components/shared/ArticleBody";
 import type { Metadata } from "next";
@@ -318,7 +319,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </aside>
 
-
+        <NewsletterSignup />
       </div>
     </article>
   );

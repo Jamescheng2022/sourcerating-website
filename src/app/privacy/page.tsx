@@ -13,7 +13,7 @@ export default function PrivacyPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold text-gray-950">Privacy Policy</h1>
         <p className="mt-4 text-gray-600 leading-relaxed">
-          Source Rating collects only the information needed to respond to inquiries and provide sourcing, inspection, and advisory services.
+          Source Rating collects only the information needed to respond to inquiries, send requested newsletter updates, and provide sourcing, inspection, and advisory services.
         </p>
         <div className="mt-10 space-y-8 text-gray-700 leading-relaxed">
           <div>
@@ -27,6 +27,10 @@ export default function PrivacyPage() {
           <div>
             <h2 className="text-xl font-bold text-gray-950 mb-3">Sharing</h2>
             <p>We do not sell personal information. Project information is shared only when needed to perform requested services or when required by law.</p>
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-gray-950 mb-3">Newsletter subscriptions</h2>
+            <p>Pages that display the newsletter form automatically connect your browser to Kit before you subscribe. Kit receives technical information such as your IP address and browser details when the form loads. If you choose to subscribe, the details you enter are processed by Kit to manage your subscription and send SourceRating newsletters. Subscribing is optional and separate from the Google Analytics choice below. You can unsubscribe using the link in each newsletter or contact us using the address below.</p>
           </div>
           <div><h2 className="text-xl font-bold text-gray-950 mb-3">Optional Google Analytics</h2><p>With your permission, Google Analytics uses cookies and receives page addresses, browser/device information and bounded interaction events. It stays off until you choose Allow analytics. Use the Analytics control to withdraw or change your choice. Advertising storage and personalization are disabled. See Google’s privacy policy for its processing practices. <a href="https://policies.google.com/privacy">Google privacy policy</a>.</p></div>
           <div>
