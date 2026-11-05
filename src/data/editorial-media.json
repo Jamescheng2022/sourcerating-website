@@ -78,8 +78,8 @@
           "src": "/assets/photography/calibration-sticker-measurement-tolerance-body1.jpg",
           "width": 1200,
           "height": 900,
-          "alt": "NASA Armstrong digital-protractor calibration.",
-          "caption": "NASA Armstrong digital-protractor calibration. Photo: [NASA/Ken Ulbrich](https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-02).jpg), Public domain; resized for web. Editorial example, not a SourceRating inspection or endorsement."
+          "alt": "Calibration using a digital protractor at NASA Armstrong.",
+          "caption": "Calibration using a digital protractor at NASA Armstrong. Photo: [NASA/Ken Ulbrich](https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-02).jpg), Public domain; resized for web. Editorial example, not a SourceRating inspection or endorsement."
         }
       }
     ],
@@ -113,7 +113,7 @@
       "width": 960,
       "height": 638,
       "alt": "An XRF screening laboratory. Accreditation scope must cover the particular method, material and activity ordered.",
-      "caption": "An XRF screening laboratory. Accreditation scope must cover the particular method, material and activity ordered. Photo: [IAEA Imagebank](https://commons.wikimedia.org/wiki/File:X-Ray_Fluorescence_Spectrometry_(06410139)_(8160668897).jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
+      "caption": "An XRF screening laboratory. Accreditation scope must cover the particular method, material and activity ordered. Photo: [Dean Calma / IAEA](https://commons.wikimedia.org/wiki/File:X-Ray_Fluorescence_Spectrometry_(06410139)_(8160668897).jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Editorial example, not a SourceRating inspection or endorsement."
     },
     "bodyPhotos": [
       {
@@ -173,7 +173,7 @@
       {
         "afterHeading": "Check the whole packing arrangement",
         "image": {
-          "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body1.jpg",
+          "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body0.jpg",
           "width": 1200,
           "height": 900,
           "alt": "Real photograph of a large plywood-clad export case showing lower timber support rails and forklift clearance; illustrative only.",
@@ -183,7 +183,7 @@
       {
         "afterHeading": "The final addition can change the answer",
         "image": {
-          "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body0.jpg",
+          "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body1.jpg",
           "width": 1200,
           "height": 900,
           "alt": "Real close-up photograph of an ISPM 15 mark on wooden packaging; example mark, not evidence for a particular shipment.",

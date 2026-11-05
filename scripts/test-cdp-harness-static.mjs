@@ -173,7 +173,7 @@ function createValidBaselineMetrics(targetWidth = 320, dpr = 2) {
           resolvedSrc: "/assets/photography/calibration-sticker-measurement-tolerance-body1.jpg"
         },
         caption: {
-          text: "NASA Armstrong digital-protractor calibration. to the measurement task: here, real digital-protractor calibration",
+          text: "Calibration using a digital protractor at NASA Armstrong.",
           links: [
             {
               text: "NASA/Ken Ulbrich original photograph",

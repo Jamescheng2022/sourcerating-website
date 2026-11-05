@@ -79,8 +79,8 @@
     "src": "/assets/photography/calibration-sticker-measurement-tolerance-body1.jpg",
     "width": 1200,
     "height": 900,
-    "alt": "NASA Armstrong digital-protractor calibration.",
-    "caption": "NASA Armstrong digital-protractor calibration. Photo: [NASA/Ken Ulbrich](https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-02).jpg), Public domain; resized for web. Editorial example, not a SourceRating inspection or endorsement.",
+    "alt": "Calibration using a digital protractor at NASA Armstrong.",
+    "caption": "Calibration using a digital protractor at NASA Armstrong. Photo: [NASA/Ken Ulbrich](https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-02).jpg), Public domain; resized for web. Editorial example, not a SourceRating inspection or endorsement.",
     "sha256": "b533f6c894e6e437ccbfd514c29cf8dc84db57405ece4bb9c6aab1c3e93faf5f"
   },
   {
@@ -115,14 +115,14 @@
     "slug": "accredited-laboratory-specific-test-scope",
     "role": "cover",
     "source": "https://commons.wikimedia.org/wiki/File:X-Ray_Fluorescence_Spectrometry_(06410139)_(8160668897).jpg",
-    "author": "IAEA Imagebank",
+    "author": "Dean Calma / IAEA",
     "license": "CC BY-SA 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
     "src": "/assets/photography/110834399.jpg",
     "width": 960,
     "height": 638,
     "alt": "An XRF screening laboratory. Accreditation scope must cover the particular method, material and activity ordered.",
-    "caption": "An XRF screening laboratory. Accreditation scope must cover the particular method, material and activity ordered. Photo: [IAEA Imagebank](https://commons.wikimedia.org/wiki/File:X-Ray_Fluorescence_Spectrometry_(06410139)_(8160668897).jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Editorial example, not a SourceRating inspection or endorsement.",
+    "caption": "An XRF screening laboratory. Accreditation scope must cover the particular method, material and activity ordered. Photo: [Dean Calma / IAEA](https://commons.wikimedia.org/wiki/File:X-Ray_Fluorescence_Spectrometry_(06410139)_(8160668897).jpg), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0); resized for web. Editorial example, not a SourceRating inspection or endorsement.",
     "sha256": "abc4c5c12646ff17f2e7185bada9ec300b42a380ef5fd9b40bab087122cc699e"
   },
   {
@@ -314,12 +314,12 @@
     "author": "VCCmatt",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body1.jpg",
+    "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body0.jpg",
     "width": 1200,
     "height": 900,
     "alt": "Real photograph of a large plywood-clad export case showing lower timber support rails and forklift clearance; illustrative only.",
     "caption": "The support and forklift-entry geometry is visible, but its material specification and treatment are not established by appearance alone. Photo: [VCCmatt](https://commons.wikimedia.org/wiki/File:Four-way-forklift-entry-crate-vol-case.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (cropped and resized).",
-    "sha256": "16d925d652de34a6349fa22dc8c65225079cf4e88584815bca0b0cbe9b06c7dc"
+    "sha256": "2d2b534879af152ca968db2cf38cded0cc7f50d1e6c372931f6945f3a2f10314"
   },
   {
     "slug": "plywood-crate-solid-wood-skids-ispm15",
@@ -328,12 +328,12 @@
     "author": "VCCmatt",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body0.jpg",
+    "src": "/assets/photography/plywood-crate-solid-wood-skids-ispm15-body1.jpg",
     "width": 1200,
     "height": 900,
     "alt": "Real close-up photograph of an ISPM 15 mark on wooden packaging; example mark, not evidence for a particular shipment.",
     "caption": "A photographed ISPM 15 mark illustrates where identification may appear; it is not proof of this order's treatment, marking or compliance. Photo: [VCCmatt](https://commons.wikimedia.org/wiki/File:ISPM15-certified-wood-crate-vol-case.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (cropped and resized).",
-    "sha256": "2d2b534879af152ca968db2cf38cded0cc7f50d1e6c372931f6945f3a2f10314"
+    "sha256": "16d925d652de34a6349fa22dc8c65225079cf4e88584815bca0b0cbe9b06c7dc"
   },
   {
     "slug": "packing-list-weight-container-vgm",

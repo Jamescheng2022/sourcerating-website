@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 import vm from 'node:vm';
 import {createRequire} from 'node:module';
 import ts from 'typescript';
@@ -13,21 +14,32 @@ function load(file) {
   if(file.endsWith('.json'))return JSON.parse(fs.readFileSync(file,'utf8'));
   const source=fs.readFileSync(file,'utf8');
   const code=ts.transpileModule(source,{fileName:file,compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText;
-  const module={exports:{}};cache.set(file,module);
+  const mod={exports:{}};cache.set(file,mod);
   const requireLocal=id=>{
     if(id==='next/link')return {__esModule:true,default:({children,...props})=>React.createElement('a',props,children)};
     if(!id.startsWith('@/'))return nativeRequire(id);
     const base='src/'+id.slice(2);
     return load(base.endsWith('.json')?base:fs.existsSync(base+'.ts')?base+'.ts':base+'.tsx');
   };
-  vm.runInNewContext(code,{module,exports:module.exports,require:requireLocal,URL,Date},{filename:file,timeout:5000});
-  return module.exports;
+  vm.runInNewContext(code,{module:mod,exports:mod.exports,require:requireLocal,URL,Date},{filename:file,timeout:5000});
+  return mod.exports;
 }
 const {normalizeArticleFeedParams}=load('src/lib/article-feed-params.ts');
 const {ArticleFeed}=load('src/components/editorial/ArticleFeed.tsx');
 const {blogPosts}=load('src/data/blog.ts');
 const home=load('src/app/page.tsx'), blog=load('src/app/blog/page.tsx'), about=load('src/app/about/page.tsx');
 const {ArticleViews}=load('src/components/editorial/ArticleViews.tsx');
+
+test('visually reviewed crate geometry and IPPC-mark bytes retain correct caption/source mapping',()=>{
+  const media=JSON.parse(fs.readFileSync('src/data/editorial-media.json','utf8'))['plywood-crate-solid-wood-skids-ispm15'];
+  const ledger=JSON.parse(fs.readFileSync('docs/editorial-photo-provenance-20261104.json','utf8'));
+  const expected=[['body0','2d2b534879af152ca968db2cf38cded0cc7f50d1e6c372931f6945f3a2f10314','forklift-entry geometry','Four-way-forklift-entry-crate'],['body1','16d925d652de34a6349fa22dc8c65225079cf4e88584815bca0b0cbe9b06c7dc','photographed ISPM 15 mark','ISPM15-certified-wood-crate']];
+  expected.forEach(([suffix,hash,caption,source],i)=>{
+    const image=media.bodyPhotos[i].image;assert.ok(image.src.endsWith(suffix+'.jpg'));assert.ok(image.caption.includes(caption));
+    const row=ledger.find(x=>x.src===image.src);assert.ok(row.source.includes(source));assert.equal(row.sha256,hash);assert.equal(row.caption,image.caption);
+    assert.equal(crypto.createHash('sha256').update(fs.readFileSync('public'+image.src)).digest('hex'),hash);
+  });
+});
 
 test('view labels preserve verified counts, distinguish missing/out-of-period data and expose period to assistive technology',()=>{
   const expected={
@@ -89,8 +101,13 @@ if(origin){
       const html=await res.text(),head=html.match(/<head>([\s\S]*?)<\/head>/)?.[1];assert.ok(head,route);
       const pathname=route.startsWith('/blog')?'/blog':route==='/about'?'/about':'/';
       const canonical='https://www.sourcerating.com'+pathname;
-      assert.ok(head.includes('rel="canonical" href="'+canonical+'"'),route+' canonical');
-      assert.ok(head.includes('property="og:url" content="'+canonical+'"'),route+' og:url');
+      // Next serializes the root URL without its optional trailing slash.
+      // Compare absolute URL identities while still requiring real SSR head tags.
+      const renderedCanonical=head.match(/rel="canonical" href="([^"]+)"/)?.[1];
+      const renderedOgUrl=head.match(/property="og:url" content="([^"]+)"/)?.[1];
+      assert.ok(renderedCanonical && renderedOgUrl,route+' missing canonical/OG URL');
+      assert.equal(new URL(renderedCanonical).href,new URL(canonical).href,route+' canonical');
+      assert.equal(new URL(renderedOgUrl).href,new URL(canonical).href,route+' og:url');
       if(route.includes('q=calib')||route.includes('topic=Markets'))assert.match(head,/<meta name="robots" content="noindex, follow"/);
       if(route==='/about'){assert.match(head,/<title>About James Cheng \| Source Rating<\/title>/);assert.match(head,/name="description" content="Meet James Cheng/);}
       console.log('SSR 200 + canonical/OG/robots verified: '+route);

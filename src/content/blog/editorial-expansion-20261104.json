@@ -849,7 +849,7 @@
       },
       {
         "type": "paragraph",
-        "text": "Import QC publishes an anonymized sample report for a sealing-machine and PET-bottle order inspected on 7 August 2026. The provider describes the document as a genuine job, with identities withheld; it is watermarked as a sample and is not for contractual use. SourceRating has not independently audited that transaction. The document is useful here because its limitations can be read directly, without inventing a buyer’s experience."
+        "text": "Import QC publishes an anonymized sample report for a sealing-machine and PET-bottle order inspected on 7 August 2026. Its [sample-report index](https://www.importqc.com/sample-reports/) describes the document as a genuine job, with identities withheld; it is watermarked as a sample and is not for contractual use. SourceRating has not independently audited that transaction. The document is useful here because its limitations can be read directly, without inventing a buyer’s experience."
       },
       {
         "type": "paragraph",
@@ -915,12 +915,12 @@
         "title": "Sealing Machine — Pre-Shipment Inspection: public sample report",
         "publisher": "Import QC",
         "href": "https://www.importqc.com/reports/files/psi-industrial-equipment-sealing-machine.pdf",
-        "note": "Provider-published, anonymized report marked SAMPLE, not for contractual use. The provider calls it a genuine job; SourceRating has not independently audited the job."
+        "note": "Provider-published, anonymized report marked SAMPLE, not for contractual use. The provider's sample-report index describes genuine jobs; SourceRating has not independently audited the job."
       },
       {
-        "title": "Sealing Machine sample report provenance",
+        "title": "Sample-report index and provenance",
         "publisher": "Import QC",
-        "href": "https://www.importqc.com/sample-reports/psi-industrial-equipment-sealing-machine/",
+        "href": "https://www.importqc.com/sample-reports/",
         "note": "Establishes the publisher’s stated provenance and public sample status, not independent validation of its client or factory."
       },
       {

@@ -114,7 +114,7 @@ export const EXPECTED_ARTICLE = {
       role: "inline-2",
       expectedDesktopSrc: "calibration-sticker-measurement-tolerance-body1.jpg",
       expectedMobileSrc: "calibration-sticker-measurement-tolerance-body1.jpg",
-      captionSubstring: "NASA Armstrong digital-protractor calibration.",
+      captionSubstring: "Calibration using a digital protractor at NASA Armstrong.",
       expectedLinkHref: "https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-02).jpg"
     }
   ]
@@ -145,15 +145,15 @@ export const PLYWOOD_ARTICLE = {
     {
       index: 1,
       role: "inline-1",
-      expectedDesktopSrc: "plywood-crate-solid-wood-skids-ispm15-body1.jpg",
-      expectedMobileSrc: "plywood-crate-solid-wood-skids-ispm15-body1.jpg",
+      expectedDesktopSrc: "plywood-crate-solid-wood-skids-ispm15-body0.jpg",
+      expectedMobileSrc: "plywood-crate-solid-wood-skids-ispm15-body0.jpg",
       captionSubstring: "support and forklift-entry geometry"
     },
     {
       index: 2,
       role: "inline-2",
-      expectedDesktopSrc: "plywood-crate-solid-wood-skids-ispm15-body0.jpg",
-      expectedMobileSrc: "plywood-crate-solid-wood-skids-ispm15-body0.jpg",
+      expectedDesktopSrc: "plywood-crate-solid-wood-skids-ispm15-body1.jpg",
+      expectedMobileSrc: "plywood-crate-solid-wood-skids-ispm15-body1.jpg",
       captionSubstring: "photographed ISPM 15 mark"
     }
   ]
