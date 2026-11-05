@@ -6,7 +6,7 @@ export function articleTopics(slug: string, category?: string): string[] {
  if (/weld|certificate|calibration|salt-spray|laboratory|xrf|sampling|galvanized-steel-china|inspection|traceability|audit/.test(slug)) a.push(topics[3]);
  if (/quot|scope-exclusions|guatemala|china-vs-local/.test(slug)) a.push(topics[4]);
  if (/packing|crate|shipment|handover/.test(slug)) a.push(topics[5]);
- if (/hs-code|crate|epd|guatemala/.test(slug)) a.push(topics[6]);
+ if (/cbam|hs-code|crate|epd|guatemala/.test(slug)) a.push(topics[6]);
  if (/deposit|handover|dispute|specification|expired|release|quotation-scope/.test(slug)) a.push(topics[7]);
  if (/guatemala|china-vs-local/.test(slug)) a.push(topics[8]);
  return a.length ? [...new Set(a)] : [topics[1]];
