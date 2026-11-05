@@ -1,3 +1,4 @@
+import { cbamSteelEmissionsPost } from "@/content/blog/eu-cbam-steel-supplier-emissions-data-2026";
 import newEditorialPosts from "@/content/blog/editorial-expansion-20261104.json";
 import { applyEditorialMedia } from "@/lib/editorial-media";
 import { blogPosts as existingPosts } from "@/content/blog/legacy-posts";
@@ -18,6 +19,7 @@ export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
 export const blogPosts: BlogPost[] = ([
+  cbamSteelEmissionsPost,
   ...(newEditorialPosts as BlogPost[]),
   weldEvidencePost,
   isoScopePost,
