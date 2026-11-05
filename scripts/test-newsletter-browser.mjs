@@ -14,6 +14,7 @@ const require = createRequire(import.meta.url);
 const {webpack} = require('next/dist/compiled/webpack/webpack');
 const kitUrl = 'https://sourcerating.kit.com/43bff6853a/index.js';
 const originArg = process.argv.find(a => a.startsWith('--origin='))?.slice(9);
+const evidenceDir = process.argv.find(a => a.startsWith('--evidence-dir='))?.slice(15);
 if (originArg) assert.equal(new URL(originArg).hostname, '127.0.0.1', 'Only task-owned localhost may be tested');
 const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'sr-newsletter-test-'));
 const results = [], requests = [], blocked = [], exceptions = [];
@@ -180,6 +181,18 @@ try {
     await evaluate('history.forward()');await until(`location.pathname===${JSON.stringify(articlePath)} && (${ready})`,'Forward navigation',10000);
     const articleMetrics=await evaluate(buildGeometryScript());assert.equal(articleMetrics.scrollWidth,390);assert.equal(articleMetrics.overflowingElementsCount,0);
     probe('actual Next client navigation / Back / Forward: exactly one mock form; article placement and 390px geometry');
+    await send('Page.navigate',{url:originArg+'/blog/plywood-crate-solid-wood-skids-ispm15'});
+    await until(ready,'crate article mock form',10000);
+    for(const [index,suffix,caption] of [[1,'body0','support and forklift-entry geometry'],[2,'body1','photographed ISPM 15 mark']]) {
+      await evaluate(`document.querySelectorAll('figure')[${index}].scrollIntoView({behavior:'instant',block:'center'})`);
+      await until(`(()=>{const img=document.querySelectorAll('figure')[${index}].querySelector('img');return img?.complete && img.naturalWidth>0})()`,'crate image decode',10000);
+      await evaluate(`document.querySelectorAll('figure')[${index}].querySelector('img').decode()`);
+      const figure=await evaluate(`(()=>{const f=document.querySelectorAll('figure')[${index}];return {src:f.querySelector('img').currentSrc,caption:f.querySelector('figcaption').textContent,rect:f.getBoundingClientRect().toJSON()}})()`);
+      assert.ok(decodeURIComponent(figure.src).includes('plywood-crate-solid-wood-skids-ispm15-'+suffix+'.jpg'));
+      assert.ok(figure.caption.includes(caption));assert.ok(figure.rect.left>=0 && figure.rect.right<=390 && figure.rect.top>=0 && figure.rect.bottom<=844);
+      if(evidenceDir){fs.mkdirSync(evidenceDir,{recursive:true});const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});fs.writeFileSync(path.join(evidenceDir,'crate-'+suffix+'-390px.png'),Buffer.from(shot.data,'base64'));}
+      probe('actual 390px crate '+suffix+' source/caption and visible viewport verified',figure);
+    }
     await send('Page.navigate',{url:originArg+'/?q=calibrated'});await until(ready,'one-result feed',10000);
     assert.equal(await evaluate('document.querySelectorAll("article.editorial-card").length'),1);
     assert.equal(await evaluate('document.querySelector(".editorial-newsletter").previousElementSibling.tagName'),'ARTICLE');
