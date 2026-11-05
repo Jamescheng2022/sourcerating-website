@@ -20,6 +20,7 @@ export interface BlogPost {
     alt: string;
     caption: string;
   };
+  photoSections?: Array<{after:number;src:string;width:number;height:number;alt:string;caption:string}>;
   directAnswer?: string;
   keyTakeawaysHeading?: string;
   keyTakeaways?: string[];

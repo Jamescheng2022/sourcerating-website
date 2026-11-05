@@ -1,0 +1,83 @@
+{
+  "verdict": "SELF-CHECK COMPLETE; INDEPENDENT REVIEW PENDING",
+  "author": "James",
+  "site": "SourceRating.com",
+  "target": "Native BlogPost JSON; no deployment",
+  "checks": [
+    {
+      "slug": "supplier-equivalent-material-performance-condition-interface",
+      "words": 913,
+      "actual_sources_opened": true,
+      "reused_legacy_theme": false
+    },
+    {
+      "slug": "inspection-report-not-inspected-not-available",
+      "words": 935,
+      "actual_sources_opened": true,
+      "reused_legacy_theme": false
+    },
+    {
+      "slug": "spot-freight-index-supplier-freight-included-quote",
+      "words": 887,
+      "actual_sources_opened": true,
+      "reused_legacy_theme": false
+    }
+  ],
+  "gates": [
+    {
+      "gate": 1,
+      "result": "PASS",
+      "evidence": "All cited sources directly opened; UNCTAD PDF extracted with Tavily after web reader403."
+    },
+    {
+      "gate": 2,
+      "result": "PASS",
+      "evidence": "22 item claim ledger separates primary facts, attributed provenance and author recommendations."
+    },
+    {
+      "gate": 3,
+      "result": "PASS",
+      "evidence": "Historical2025 shipping evidence expressly not current2026 rates; living carrier terms scoped to actual booking; no standards clauses claimed."
+    },
+    {
+      "gate": 4,
+      "result": "PASS",
+      "evidence": "No engineering calculations, test thresholds or quoted freight values."
+    },
+    {
+      "gate": 5,
+      "result": "PASS",
+      "evidence": "No DIY electrical test; no grade recommendation; project/contract approval boundaries stated."
+    },
+    {
+      "gate": 6,
+      "result": "PASS",
+      "evidence": "Concrete comparison/closure/booking records with actionable fields."
+    },
+    {
+      "gate": 7,
+      "result": "PASS",
+      "evidence": "New material substitution, missing-check completion and freight-scope angles; no sampling lesson repeated."
+    },
+    {
+      "gate": 8,
+      "result": "PASS",
+      "evidence": "Three real downloaded/inspected photos, explicit scopes, sources, licenses and hashes; no exact or near duplicate among55 current files."
+    },
+    {
+      "gate": 9,
+      "result": "PASS",
+      "evidence": "Reader-led English, no fabricated cases or unsupported live feature/CTA."
+    },
+    {
+      "gate": 10,
+      "result": "PASS",
+      "evidence": "Individual and combined JSON+Markdown, sources, claims, photos; release approval remains with root."
+    }
+  ],
+  "open_issues": [
+    "Independent review by another agent pending.",
+    "Native BlogPost interface has no author field; handoff author is James and site-global byline must remain aligned during integration."
+  ],
+  "no_files_changed_outside_private_directory": true
+}

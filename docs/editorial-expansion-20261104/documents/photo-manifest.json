@@ -1,0 +1,53 @@
+[
+  {
+    "slug": "supplier-bank-account-change-independent-verification",
+    "id": 13674604,
+    "origin": "https://commons.wikimedia.org/wiki/File:NEC_office_phone.JPG",
+    "downloadURL": "https://upload.wikimedia.org/wikipedia/commons/b/ba/NEC_office_phone.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "author": "Own work by Donmike10 (talk)",
+    "license": "Public domain",
+    "licenseURL": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+    "depiction_type": "real-photograph",
+    "caption": "An office telephone: a callback must use an independently established supplier contact route. Object photograph; it does not depict a bank verification or endorse this equipment. Photo: [Own work by Donmike10 (talk)](https://commons.wikimedia.org/wiki/File:NEC_office_phone.JPG), [Public domain](https://commons.wikimedia.org/wiki/Commons:Public_domain); resized for web. Editorial context, not SourceRating work.",
+    "alt_text": "An office telephone on a desk",
+    "output_path": "/workspace/scratch/c6e10bb8047b/sr-review/new-content-documents/assets/13674604.jpg",
+    "sha256": "d76a89c2fdfa86ed7a8cd0f8526d83f95361abe43dd35dd0bf7ace161f5671a2",
+    "visuallyInspected": true,
+    "notInExistingPosts": true,
+    "wordCount": 818
+  },
+  {
+    "slug": "ddp-quote-importer-of-record-duty-tax-responsibility",
+    "id": 66505021,
+    "origin": "https://commons.wikimedia.org/wiki/File:170726-H-NI589-409_(36183283842).jpg",
+    "downloadURL": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/170726-H-NI589-409_%2836183283842%29.jpg/1280px-170726-H-NI589-409_%2836183283842%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "author": "U.S. Customs and Border Protection",
+    "license": "Public domain",
+    "licenseURL": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+    "depiction_type": "real-photograph",
+    "caption": "CBP agriculture cargo inspection at the Port of Baltimore. The photograph shows border work; it does not identify the shipment’s Incoterm, importer of record or duty treatment. Photo: [U.S. Customs and Border Protection](https://commons.wikimedia.org/wiki/File:170726-H-NI589-409_(36183283842).jpg), [Public domain](https://commons.wikimedia.org/wiki/Commons:Public_domain); resized for web. Editorial context, not SourceRating work.",
+    "alt_text": "A CBP agriculture inspection specialist checks paperwork beside imported machinery at the Port of Baltimore",
+    "output_path": "/workspace/scratch/c6e10bb8047b/sr-review/new-content-documents/assets/66505021.jpg",
+    "sha256": "7fb3a2cf059d022135edc538e378be55ae0dc4ac6d4434162232bcabf2388e25",
+    "visuallyInspected": true,
+    "notInExistingPosts": true,
+    "wordCount": 847
+  },
+  {
+    "slug": "approved-sample-production-process-change-volume-price",
+    "id": 25101531,
+    "origin": "https://commons.wikimedia.org/wiki/File:Injection_moulding_machine.jpg",
+    "downloadURL": "https://upload.wikimedia.org/wikipedia/commons/5/52/Injection_moulding_machine.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "author": "Rohini",
+    "license": "CC BY-SA 3.0",
+    "licenseURL": "https://creativecommons.org/licenses/by-sa/3.0",
+    "depiction_type": "real-photograph",
+    "caption": "An injection-moulding machine used to make plastic utilities. Production equipment is part of the route behind a sample; this photograph does not establish qualification, process capability or product conformity. Photo: [Rohini](https://commons.wikimedia.org/wiki/File:Injection_moulding_machine.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); resized for web. Editorial context, not SourceRating work.",
+    "alt_text": "An injection-moulding machine with plastic products nearby",
+    "output_path": "/workspace/scratch/c6e10bb8047b/sr-review/new-content-documents/assets/25101531.jpg",
+    "sha256": "f15d2c6d56ffcd17e16568fa9c320c0d8c04e842a87406b6808cc6e1df3f4392",
+    "visuallyInspected": true,
+    "notInExistingPosts": true,
+    "wordCount": 832
+  }
+]

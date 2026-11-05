@@ -1,0 +1,132 @@
+{
+  "slug": "supplier-bank-account-change-independent-verification",
+  "site": "SourceRating.com",
+  "content_type": "TECHNICAL procurement feature",
+  "audience": "Industrial buyers, procurement managers and owner-managers",
+  "sources": [
+    {
+      "source_id": "S1",
+      "title": "Business Email Compromise",
+      "exact_url": "https://www.fbi.gov/how-we-can-help-you/common-frauds-and-scams/business-email-compromise",
+      "publisher": "Federal Bureau of Investigation",
+      "accessed_date": "2026-11-04",
+      "opened": true,
+      "source_type": "primary",
+      "scope_note": "Opened current public prevention and response guidance."
+    },
+    {
+      "source_id": "S2",
+      "title": "Types of attack: Business email compromise",
+      "exact_url": "https://www.hsbc.com/online-security/types-of-attack",
+      "publisher": "HSBC",
+      "accessed_date": "2026-11-04",
+      "opened": true,
+      "source_type": "primary",
+      "scope_note": "Known email address and prior thread are not proof; call a known contact number."
+    },
+    {
+      "source_id": "S3",
+      "title": "How do you actually decide on a vendor bank-change request?",
+      "exact_url": "https://www.reddit.com/r/Accounting/comments/1vn4yeg/how_do_you_actually_decide_on_a_vendor_bankchange/",
+      "publisher": "Reddit r/Accounting",
+      "accessed_date": "2026-11-04",
+      "opened": true,
+      "source_type": "public-user-discussion",
+      "scope_note": "Anonymous public practitioner pain point; not verified evidence of a fraud case."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C01",
+      "claim_text": "A public practitioner asks when vendor bank-detail changes should trigger a known-number callback.",
+      "source_title": "How do you actually decide on a vendor bank-change request?",
+      "exact_url": "https://www.reddit.com/r/Accounting/comments/1vn4yeg/how_do_you_actually_decide_on_a_vendor_bankchange/",
+      "accessed_date": "2026-11-04",
+      "publication_or_revision_date": "Anonymous public practitioner pain point; not verified evidence of a fraud case.",
+      "page_or_section": "Post opening; web extraction lines 17–19",
+      "supporting_passage_paraphrase": "Opening question describes vendor-change verification and asks about apparently legitimate requests.",
+      "source_type": "public-user-discussion",
+      "factual_status": "attributed-user-pain",
+      "geographic_scope": "Public online discussion",
+      "caveat": "Anonymous account; neither identity nor alleged incidents independently verified.",
+      "independent_corroboration": false
+    },
+    {
+      "claim_id": "C02",
+      "claim_text": "BEC can use lookalike addresses or legitimate billing conversations.",
+      "source_title": "Business Email Compromise",
+      "exact_url": "https://www.fbi.gov/how-we-can-help-you/common-frauds-and-scams/business-email-compromise",
+      "accessed_date": "2026-11-04",
+      "publication_or_revision_date": "Opened current public prevention and response guidance.",
+      "page_or_section": "How BEC scams work; lines 63–68",
+      "supporting_passage_paraphrase": "Agency describes spoofing, spearphishing and access to real billing conversations.",
+      "source_type": "primary",
+      "factual_status": "confirmed-primary",
+      "geographic_scope": "US agency prevention guidance; techniques not limited to US",
+      "caveat": "No claim that every change is fraudulent or that email checks can authenticate a beneficiary.",
+      "independent_corroboration": true
+    },
+    {
+      "claim_id": "C03",
+      "claim_text": "Verify account-number/payment-procedure changes; contact the bank immediately after suspected fraudulent transfer.",
+      "source_title": "Business Email Compromise",
+      "exact_url": "https://www.fbi.gov/how-we-can-help-you/common-frauds-and-scams/business-email-compromise",
+      "accessed_date": "2026-11-04",
+      "publication_or_revision_date": "Opened current public prevention and response guidance.",
+      "page_or_section": "Protect yourself; Report BEC; lines 60–75",
+      "supporting_passage_paraphrase": "Agency calls for verification and immediate financial-institution contact.",
+      "source_type": "primary",
+      "factual_status": "confirmed-primary",
+      "geographic_scope": "US reporting route IC3 specifically identified",
+      "caveat": "No recovery guarantee or invented deadline.",
+      "independent_corroboration": true
+    },
+    {
+      "claim_id": "C04",
+      "claim_text": "A known email address and previous thread do not prove authenticity; call a known supplier number.",
+      "source_title": "Types of attack: Business email compromise",
+      "exact_url": "https://www.hsbc.com/online-security/types-of-attack",
+      "accessed_date": "2026-11-04",
+      "publication_or_revision_date": "Known email address and prior thread are not proof; call a known contact number.",
+      "page_or_section": "Business email compromise; lines 270–281",
+      "supporting_passage_paraphrase": "Bank explicitly distinguishes familiar email appearance from an independently placed supplier call.",
+      "source_type": "primary",
+      "factual_status": "confirmed-primary",
+      "geographic_scope": "HSBC public general security guidance",
+      "caveat": "Does not claim all telephone contact is impossible to spoof.",
+      "independent_corroboration": true
+    },
+    {
+      "claim_id": "C05",
+      "claim_text": "Use separate amendment approval, records and a final beneficiary-to-invoice check.",
+      "source_title": "SourceRating editorial recommendation",
+      "exact_url": null,
+      "accessed_date": "2026-11-04",
+      "publication_or_revision_date": "2026-11-04",
+      "page_or_section": "Keep the amendment separate from the payment run",
+      "supporting_passage_paraphrase": "Proposed purchasing workflow applying primary-source independent-verification principle.",
+      "source_type": "editorial",
+      "factual_status": "editorial-recommendation",
+      "geographic_scope": "Adapt to company authority and finance controls",
+      "caveat": "Not described as banking regulation, mandatory guarantee or supplier legal entitlement.",
+      "independent_corroboration": false
+    },
+    {
+      "claim_id": "C06",
+      "claim_text": "Different beneficiary entity requires a commercial explanation of payment discharge.",
+      "source_title": "SourceRating editorial recommendation",
+      "exact_url": null,
+      "accessed_date": "2026-11-04",
+      "publication_or_revision_date": "2026-11-04",
+      "page_or_section": "Make the callback independent of the change",
+      "supporting_passage_paraphrase": "Buyer question for authorized finance/contract owner, not a legal conclusion.",
+      "source_type": "editorial",
+      "factual_status": "editorial-recommendation",
+      "geographic_scope": "Contract and jurisdiction specific",
+      "caveat": "No assertion that third-party payment is invariably unlawful.",
+      "independent_corroboration": false
+    }
+  ],
+  "limits": "No invented project, quotation, numerical example or customer result. Primary source statements are attributed; proposed workflow is editorial advice.",
+  "next_review": "Before publication and after relevant source or regulatory changes. Independent editorial review remains pending."
+}

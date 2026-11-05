@@ -123,15 +123,15 @@ function createValidBaselineMetrics(targetWidth = 320, dpr = 2) {
           naturalHeight: 1180,
           renderedWidth: targetWidth - 32,
           renderedHeight: Math.round((targetWidth - 32) * (1180 / 720)),
-          rawSrc: "/_next/image?url=%2Fimages%2Fblog%2Fcalibration-photo-20261031-calibration-lab-mobile.jpg&w=750&q=75",
-          resolvedSrc: "/images/blog/calibration-photo-20261031-calibration-lab-mobile.jpg"
+          rawSrc: "/_next/image?url=%2Fimages%2Fblog%2Fcalibration-sticker-measurement-tolerance-cover.jpg&w=750&q=75",
+          resolvedSrc: "/assets/photography/calibration-sticker-measurement-tolerance-cover.jpg"
         },
         caption: {
-          text: "Real NASA Armstrong laboratory photograph: NASA/Lauren Hughes, 23 July 2019, public domain",
+          text: "NASA Armstrong metrology laboratory: plug-gauge calibration. NASA/Lauren Hughes, 23 July 2019, public domain",
           links: [
             {
               text: "NASA/Lauren Hughes",
-              href: "https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_%28AFRC2019-0098-16%29.jpg"
+              href: "https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-16).jpg"
             }
           ]
         }
@@ -144,11 +144,11 @@ function createValidBaselineMetrics(targetWidth = 320, dpr = 2) {
           naturalHeight: 1180,
           renderedWidth: targetWidth - 32,
           renderedHeight: Math.round((targetWidth - 32) * (1180 / 720)),
-          rawSrc: "/_next/image?url=%2Fimages%2Fblog%2Fcalibration-photo-20261031-gauge-blocks-mobile.jpg&w=750&q=75",
-          resolvedSrc: "/images/blog/calibration-photo-20261031-gauge-blocks-mobile.jpg"
+          rawSrc: "/_next/image?url=%2Fimages%2Fblog%2Fcalibration-sticker-measurement-tolerance-body0.jpg&w=750&q=75",
+          resolvedSrc: "/assets/photography/calibration-sticker-measurement-tolerance-body0.jpg"
         },
         caption: {
-          text: "Figure 1. Metric gauge-block set, a reference artifact category rather than a part release record. Photo: Glenn McKechnie, CC BY-SA 3.0",
+          text: "Metric gauge-block reference set., a reference artifact category rather than a part release record. Photo: Glenn McKechnie, CC BY-SA 3.0",
           links: [
             {
               text: "Glenn McKechnie / Wikimedia Commons",
@@ -169,15 +169,15 @@ function createValidBaselineMetrics(targetWidth = 320, dpr = 2) {
           naturalHeight: 1180,
           renderedWidth: targetWidth - 32,
           renderedHeight: Math.round((targetWidth - 32) * (1180 / 720)),
-          rawSrc: "/_next/image?url=%2Fimages%2Fblog%2Fcalibration-photo-20261031-digital-protractor-mobile.jpg&w=750&q=75",
-          resolvedSrc: "/images/blog/calibration-photo-20261031-digital-protractor-mobile.jpg"
+          rawSrc: "/_next/image?url=%2Fimages%2Fblog%2Fcalibration-sticker-measurement-tolerance-body1.jpg&w=750&q=75",
+          resolvedSrc: "/assets/photography/calibration-sticker-measurement-tolerance-body1.jpg"
         },
         caption: {
-          text: "Figure 2. Instrument and setup matter to the measurement task: here, real digital-protractor calibration",
+          text: "Calibration using a digital protractor at NASA Armstrong.",
           links: [
             {
               text: "NASA/Ken Ulbrich original photograph",
-              href: "https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_%28AFRC2019-0098-02%29.jpg"
+              href: "https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-02).jpg"
             }
           ]
         }
@@ -844,6 +844,21 @@ function testDomMetricsValidation() {
 
   // 7.1 Baseline valid metrics must pass
   assert.equal(validateDomMetrics(baseline, 320, 2), true);
+
+  // Root overflow must still fail even if every individual item is scroll-contained.
+  for (const changed of [
+    { hasHorizontalOverflow: true },
+    { scrollWidth: 321 },
+    { overflowDeltaPx: 1 }
+  ]) {
+    assert.throws(() => validateDomMetrics({ ...baseline, ...changed }, 320, 2), /Horizontal overflow detected/);
+  }
+  // Clipping the root does not excuse a visible or unreachable overflowing item.
+  assert.throws(() => validateDomMetrics({
+    ...baseline,
+    overflowingElementsCount: 1,
+    sampleOverflowing: [{ tag: 'DIV', left: 0, right: 420, width: 420 }]
+  }, 320, 2), /1 overflowing element/);
 
   // 7.2 Non-zero scrollY negative probe
   const nonZeroY = { ...baseline, scrollY: 150 };

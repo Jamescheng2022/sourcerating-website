@@ -1,13 +1,14 @@
 import { createHash } from "node:crypto";
+import { NewsletterSignup } from "@/components/editorial/NewsletterSignup";
+import { ArticleViews } from "@/components/editorial/ArticleViews";
 import { ArticleBody, InlineText } from "@/components/shared/ArticleBody";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, ShieldAlert } from "lucide-react";
+import { ArrowLeft, Check, ShieldAlert } from "lucide-react";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPost } from "@/data/blog";
 import { siteConfig } from "@/data/site-config";
-import { TrackedLink } from "@/components/ui/TrackedLink";
 import { generatePageMetadata } from "@/lib/metadata";
 
 interface PageProps { params: Promise<{ slug: string }>; }
@@ -39,7 +40,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) notFound();
-  const isEditorial = post.layout === "editorial";
+  const isEditorial = true;
   // Exact content revision evidence for publishing readback. The digest covers
   // URLs, table headers/cells, captions and every other serialized post field.
   const publicationSha256 = createHash("sha256").update(JSON.stringify(post)).digest("hex");
@@ -90,17 +91,17 @@ export default async function BlogPostPage({ params }: PageProps) {
     : null;
 
   return (
-    <article data-publication-sha256={publicationSha256} className={isEditorial ? "bg-[#fcfcf9] pb-24 pt-28" : "bg-white pb-24 pt-32"}>
+    <article data-publication-sha256={publicationSha256} className={isEditorial ? "bg-[#fcfcf9] pb-16 pt-8" : "bg-white pb-16 pt-8"}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {faqSchema ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} /> : null}
       <div className={isEditorial ? "mx-auto max-w-[760px] px-5 sm:px-7 lg:px-8" : "mx-auto max-w-4xl px-4 sm:px-6 lg:px-8"}>
         <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-900">
           <ArrowLeft className="h-4 w-4" />
-          Back to guides
+          All articles
         </Link>
         <p className="text-sm font-semibold uppercase text-brand-700">{post.category}</p>
-        <h1 className={isEditorial ? "mt-4 font-serif text-[41px] font-normal leading-[1.1] tracking-[-0.035em] text-slate-950 sm:text-[57px]" : "mt-3 text-4xl font-bold text-gray-950 sm:text-5xl"}>{post.title}</h1>
+        <h1 className={isEditorial ? "mt-4 font-serif text-[31px] font-normal leading-[1.1] tracking-[-0.035em] text-slate-950 sm:text-[43px]" : "mt-3 text-4xl font-bold text-gray-950 sm:text-5xl"}>{post.title}</h1>
         <p className={isEditorial ? "mt-6 text-[19px] leading-[1.65] text-slate-600 sm:text-[21px]" : "mt-5 text-lg leading-8 text-gray-600"}>{post.excerpt}</p>
         <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-500">
           <span>By <Link href="/about" className="font-semibold text-gray-800 hover:text-brand-700">James Cheng</Link></span>
@@ -108,7 +109,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           {post.dateModified && post.dateModified !== post.date ? (
             <time dateTime={post.dateModified}>Updated {new Date(`${post.dateModified}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}</time>
           ) : null}
-          <span>{post.readTime}</span>
+          <span>{post.readTime}</span><ArticleViews slug={post.slug} publishedAt={post.date}/>
         </div>
 
         {post.coverImage ? (
@@ -134,14 +135,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             />
             <figcaption className={isEditorial ? "mx-auto mt-3 max-w-[760px] text-sm leading-6 text-gray-500" : "mt-3 text-sm leading-6 text-gray-500"}>{post.coverImage.caption.includes("](") ? <InlineText text={post.coverImage.caption} editorial={isEditorial} /> : post.coverImage.caption}</figcaption>
           </figure>
-        ) : !post.articleBody ? <Image
-          src="/images/hero-factory-audit.png"
-          alt={`${post.title} — buyer-side supplier verification guide`}
-          width={1600}
-          height={900}
-          priority
-          className="mt-10 aspect-[16/9] w-full rounded-md border border-gray-200 object-cover"
-        /> : null}
+        ) : null}
 
         {post.directAnswer ? (
           <section className="mt-10 border-l-4 border-brand-700 bg-[#f4f6f4] p-6 sm:p-8">
@@ -206,7 +200,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         {post.articleBody ? (isEditorial ? <ArticleBody blocks={post.articleBody} editorial /> : <ArticleBody blocks={post.articleBody} />) : null}
 
         {post.sections.length > 0 ? <div className="mt-12 space-y-12 border-t border-gray-200 pt-12">
-          {post.sections.map((section) => (
+          {post.sections.map((section, sectionIndex) => (
             <section key={section.heading}>
               <h2 className="text-2xl font-bold text-gray-950">{section.heading}</h2>
               <p className="mt-4 leading-8 text-gray-700">{section.body}</p>
@@ -221,6 +215,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   <p className="mt-2 text-sm leading-7 text-gray-700">{section.callout.text}</p>
                 </div>
               ) : null}
+              {post.photoSections?.filter(photo=>photo.after===sectionIndex).map(photo=><figure key={photo.src} className="my-8"><Image src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} sizes="(max-width:800px) 100vw, 760px" className="h-auto w-full rounded-md"/><figcaption className="mt-3 text-xs leading-6 text-gray-500"><InlineText text={photo.caption} editorial/></figcaption></figure>)}
             </section>
           ))}
         </div> : null}
@@ -319,37 +314,12 @@ export default async function BlogPostPage({ params }: PageProps) {
           </p>
           <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
             <Link href="/about" className="text-brand-700 hover:text-brand-900">About James</Link>
-            <Link href="/playbook" className="text-brand-700 hover:text-brand-900">Buyer playbook</Link>
-            <Link href="/case-studies" className="text-brand-700 hover:text-brand-900">Anonymized cases</Link>
+            <a href="mailto:contact@sourcerating.com" className="text-brand-700">contact@sourcerating.com</a>
+            <a href="https://www.linkedin.com/in/hcrdi/" className="text-brand-700">LinkedIn</a>
           </div>
         </aside>
 
-        {!post.articleBody ? (
-        <div className="mt-12 rounded-md bg-brand-950 p-7 text-white sm:p-9">
-          <h2 className="text-2xl font-bold">{post.ctaHeading ?? "Want this applied to one real supplier?"}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-gray-200">
-            {post.ctaBody ?? "Send one supplier link, product category, destination country, and the issue that worries you most. The launch-stage first-pass risk screen is free and does not require an account."}
-          </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <TrackedLink
-              href={`/risk-screen?source=${post.slug}`}
-              eventName="cta_click"
-              eventParams={{ location: "buyer_guide", label: "risk_screen", guide: post.slug }}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-brand-950 hover:bg-gray-100"
-            >
-              {post.ctaLabel ?? "Start the free risk screen"} <ArrowRight className="h-4 w-4" />
-            </TrackedLink>
-            <TrackedLink
-              href="/pricing"
-              eventName="pricing_click"
-              eventParams={{ location: "buyer_guide", guide: post.slug }}
-              className="inline-flex items-center justify-center rounded-md border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
-            >
-              View verification scopes
-            </TrackedLink>
-          </div>
-        </div>
-        ) : null}
+        <NewsletterSignup />
       </div>
     </article>
   );

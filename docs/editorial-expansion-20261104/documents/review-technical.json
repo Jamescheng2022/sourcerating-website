@@ -1,0 +1,98 @@
+{
+  "verdict": "PASS",
+  "reviewer": "documents_photos independent reviewer; not author",
+  "reviewed_at": "2026-11-04",
+  "reviewed_files": [
+    "new-content-technical/posts.json",
+    "new-content-technical/source-ledger.json",
+    "new-content-technical/photo-manifest.json",
+    "new-content-technical/research/photo-source-metadata.json"
+  ],
+  "summary": "No substantive factual, scope, image-authenticity or licensing blocker found in the three current drafts. No edits made to author files.",
+  "articles": [
+    {
+      "slug": "supplier-equivalent-material-performance-condition-interface",
+      "verdict": "PASS",
+      "findings": []
+    },
+    {
+      "slug": "inspection-report-not-inspected-not-available",
+      "verdict": "PASS",
+      "findings": []
+    },
+    {
+      "slug": "spot-freight-index-supplier-freight-included-quote",
+      "verdict": "PASS",
+      "findings": []
+    }
+  ],
+  "source_verification": [
+    {
+      "article": "supplier-equivalent-material-performance-condition-interface",
+      "checked": [
+        "Alleima materials table nearest-equivalent and tube/pipe footnotes",
+        "Outokumpu Applicability, oxygen and uniform-versus-localized-corrosion sections",
+        "AMPP component compatibility and system design"
+      ],
+      "result": "Aligned. Manufacturer/professional guidance attributed; no substitution approval inferred."
+    },
+    {
+      "article": "inspection-report-not-inspected-not-available",
+      "checked": [
+        "Import QC public sample provenance page and PDF extracted through Tavily request59d8e25e-d312-4119-9508-98a40e57d541 after web reader access failed",
+        "QIMA inspection instructions incl equipment availability and client shipment approval",
+        "ICW signed-sample discussion"
+      ],
+      "result": "Aligned. PDF independently confirms inspection date2026-08-07, absent signed samples, unavailable high-voltage/power instruments and Pending conclusion. Provider provenance is explicitly attributed, not independently certified."
+    },
+    {
+      "article": "spot-freight-index-supplier-freight-included-quote",
+      "checked": [
+        "UNCTAD2025 chapterIII directly extracted through Tavily, historical periodJanuary2024–mid2025",
+        "Maersk Spot terms2.1–2.7",
+        "Maersk DND definitions storage/container/inside/outside and location-specific arrangements",
+        "Hapag-Lloyd Service Explorer indicative transit-time and schedule distinction"
+      ],
+      "result": "Aligned. No November2026 rate, forecast, universal carrier term or invented reduction percentage asserted."
+    }
+  ],
+  "photo_checks": [
+    {
+      "slug": "supplier-equivalent-material-performance-condition-interface",
+      "photo_id": "24622993",
+      "license": "CC BY-SA 3.0",
+      "hash_valid": true,
+      "local_file_exists": true,
+      "visually_inspected_by_reviewer": true
+    },
+    {
+      "slug": "inspection-report-not-inspected-not-available",
+      "photo_id": "71880032",
+      "license": "CC BY-SA 4.0",
+      "hash_valid": true,
+      "local_file_exists": true,
+      "visually_inspected_by_reviewer": true
+    },
+    {
+      "slug": "spot-freight-index-supplier-freight-included-quote",
+      "photo_id": "177054558",
+      "license": "CC BY-SA 2.0",
+      "hash_valid": true,
+      "local_file_exists": true,
+      "visually_inspected_by_reviewer": true
+    }
+  ],
+  "gates": {
+    "source_existence": "PASS; alternate extraction used where web reader failed",
+    "claim_alignment": "PASS",
+    "date_version_jurisdiction": "PASS; historical freight period and provider-specific procedures explicit",
+    "numbers_equations_units": "PASS; no unsupported calculations or thresholds",
+    "safety_applicability": "PASS; electrical testing not improvised; engineering approval separate",
+    "reader_value": "PASS; concrete purchasing actions",
+    "distinctiveness": "PASS; bounded material substitution, incomplete-report closure and freight scope are separate decisions",
+    "image_integrity": "PASS; real local files, correct metadata/licences, captions limit inference",
+    "editorial_links": "PASS; source links verified; no fabricated contact/feature claims",
+    "handoff": "PASS for substantive review; source, image paths and hashes available"
+  },
+  "release_note": "Independent editorial PASS does not itself authorize deployment; parent release process remains responsible."
+}

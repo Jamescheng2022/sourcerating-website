@@ -83,6 +83,9 @@ function loadBlogPosts() {
     const loadedModule = { exports: {} };
     cache.set(safePath, loadedModule.exports);
     function requireLocal(specifier) {
+      if (specifier === "@/content/blog/editorial-expansion-20261104.json") return { default: JSON.parse(fs.readFileSync(path.join(ROOT, "src/content/blog/editorial-expansion-20261104.json"), "utf8")) };
+      if (specifier === "@/lib/editorial-media") return load("src/lib/editorial-media.ts");
+      if (specifier === "@/data/editorial-media.json") return { default: JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/editorial-media.json"), "utf8")) };
       if (!specifier.startsWith(importPrefix)) {
         throw new Error("Unexpected blog registry import: " + specifier);
       }

@@ -85,37 +85,37 @@ export const EXPECTED_ARTICLE = {
     canonical: "https://www.sourcerating.com/blog/calibration-sticker-measurement-tolerance",
     ogTitle: "The Gauge Is Calibrated. Can It Decide This Tolerance? | Source Rating",
     ogUrl: "https://www.sourcerating.com/blog/calibration-sticker-measurement-tolerance",
-    ogImage: "https://www.sourcerating.com/images/blog/calibration-photo-20261031-calibration-lab-desktop.jpg",
+    ogImage: "https://www.sourcerating.com/assets/photography/calibration-sticker-measurement-tolerance-cover.jpg",
     twitterCard: "summary_large_image",
     twitterTitle: "The Gauge Is Calibrated. Can It Decide This Tolerance? | Source Rating",
-    twitterImage: "https://www.sourcerating.com/images/blog/calibration-photo-20261031-calibration-lab-desktop.jpg"
+    twitterImage: "https://www.sourcerating.com/assets/photography/calibration-sticker-measurement-tolerance-cover.jpg"
   },
   expectedFiguresCount: 3,
   figures: [
     {
       index: 0,
       role: "cover",
-      expectedDesktopSrc: "calibration-photo-20261031-calibration-lab-desktop.jpg",
-      expectedMobileSrc: "calibration-photo-20261031-calibration-lab-mobile.jpg",
-      captionSubstring: "Real NASA Armstrong laboratory photograph:",
-      expectedLinkHref: "https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_%28AFRC2019-0098-16%29.jpg"
+      expectedDesktopSrc: "calibration-sticker-measurement-tolerance-cover.jpg",
+      expectedMobileSrc: "calibration-sticker-measurement-tolerance-cover.jpg",
+      captionSubstring: "NASA Armstrong metrology laboratory: plug-gauge calibration.",
+      expectedLinkHref: "https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-16).jpg"
     },
     {
       index: 1,
       role: "inline-1",
-      expectedDesktopSrc: "calibration-photo-20261031-gauge-blocks-desktop.jpg",
-      expectedMobileSrc: "calibration-photo-20261031-gauge-blocks-mobile.jpg",
-      captionSubstring: "Figure 1. Metric gauge-block set",
+      expectedDesktopSrc: "calibration-sticker-measurement-tolerance-body0.jpg",
+      expectedMobileSrc: "calibration-sticker-measurement-tolerance-body0.jpg",
+      captionSubstring: "Metric gauge-block reference set.",
       expectedLinkHref: "https://commons.wikimedia.org/wiki/File:GaugeBlockMetricSet.jpg",
       expectedLicenseHref: "https://creativecommons.org/licenses/by-sa/3.0/"
     },
     {
       index: 2,
       role: "inline-2",
-      expectedDesktopSrc: "calibration-photo-20261031-digital-protractor-desktop.jpg",
-      expectedMobileSrc: "calibration-photo-20261031-digital-protractor-mobile.jpg",
-      captionSubstring: "Figure 2. Instrument and setup matter",
-      expectedLinkHref: "https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_%28AFRC2019-0098-02%29.jpg"
+      expectedDesktopSrc: "calibration-sticker-measurement-tolerance-body1.jpg",
+      expectedMobileSrc: "calibration-sticker-measurement-tolerance-body1.jpg",
+      captionSubstring: "Calibration using a digital protractor at NASA Armstrong.",
+      expectedLinkHref: "https://commons.wikimedia.org/wiki/File:Calibration_Laboratory_Provides_Key_Aircraft_Support_(AFRC2019-0098-02).jpg"
     }
   ]
 };
@@ -128,32 +128,32 @@ export const PLYWOOD_ARTICLE = {
     canonical: "https://www.sourcerating.com/blog/plywood-crate-solid-wood-skids-ispm15",
     ogTitle: "The Crate Is Plywood. What Are the Skids Made Of? | Source Rating",
     ogUrl: "https://www.sourcerating.com/blog/plywood-crate-solid-wood-skids-ispm15",
-    ogImage: "https://www.sourcerating.com/images/blog/plywood-crate-photography-cover-20261030-desktop.jpg",
+    ogImage: "https://www.sourcerating.com/assets/photography/plywood-crate-solid-wood-skids-ispm15-cover.jpg",
     twitterCard: "summary_large_image",
     twitterTitle: "The Crate Is Plywood. What Are the Skids Made Of? | Source Rating",
-    twitterImage: "https://www.sourcerating.com/images/blog/plywood-crate-photography-cover-20261030-desktop.jpg"
+    twitterImage: "https://www.sourcerating.com/assets/photography/plywood-crate-solid-wood-skids-ispm15-cover.jpg"
   },
   expectedFiguresCount: 3,
   figures: [
     {
       index: 0,
       role: "cover",
-      expectedDesktopSrc: "plywood-crate-photography-cover-20261030-desktop.jpg",
-      expectedMobileSrc: "plywood-crate-photography-cover-20261030-mobile.jpg",
+      expectedDesktopSrc: "plywood-crate-solid-wood-skids-ispm15-cover.jpg",
+      expectedMobileSrc: "plywood-crate-solid-wood-skids-ispm15-cover.jpg",
       captionSubstring: "Plywood-clad shipping cases"
     },
     {
       index: 1,
       role: "inline-1",
-      expectedDesktopSrc: "plywood-crate-skids-inspection-20261030-desktop.jpg",
-      expectedMobileSrc: "plywood-crate-skids-inspection-20261030-mobile.jpg",
+      expectedDesktopSrc: "plywood-crate-solid-wood-skids-ispm15-body0.jpg",
+      expectedMobileSrc: "plywood-crate-solid-wood-skids-ispm15-body0.jpg",
       captionSubstring: "support and forklift-entry geometry"
     },
     {
       index: 2,
       role: "inline-2",
-      expectedDesktopSrc: "plywood-crate-ispm15-mark-20261030-desktop.jpg",
-      expectedMobileSrc: "plywood-crate-ispm15-mark-20261030-mobile.jpg",
+      expectedDesktopSrc: "plywood-crate-solid-wood-skids-ispm15-body1.jpg",
+      expectedMobileSrc: "plywood-crate-solid-wood-skids-ispm15-body1.jpg",
       captionSubstring: "photographed ISPM 15 mark"
     }
   ]
@@ -869,10 +869,40 @@ export async function testBorderOnlyBlankProbe() {
 }
 
 /**
+ * A normal-flow item can extend beyond the viewport inside a bounded horizontal
+ * scroller without overflowing the page. Do not exempt hidden/clip containers,
+ * root clipping, out-of-flow items or content outside the reachable scroll area.
+ * This function is serialized into the browser; keep it self-contained.
+ */
+export function isReachableInHorizontalScroller(el, viewportWidth) {
+  const rect = el.getBoundingClientRect();
+  let contained = false;
+  for (let node = el; node && node !== document.body && node !== document.documentElement; node = node.parentElement) {
+    const style = window.getComputedStyle(node);
+    // Positioned/transformed descendants may escape an ancestor's scroll clip.
+    // Keep the original strict check for these ambiguous cases.
+    if (style.position === 'fixed' || style.position === 'absolute' || style.transform !== 'none') return false;
+    if (node === el) continue;
+    if (style.overflowX === 'hidden' || style.overflowX === 'clip') return false;
+    if (contained) continue;
+    if (style.overflowX !== 'auto' && style.overflowX !== 'scroll') continue;
+    const box = node.getBoundingClientRect();
+    if (node.clientWidth <= 0 || node.scrollWidth <= node.clientWidth ||
+        box.left < -1 || box.right > viewportWidth + 1 ||
+        style.direction !== 'ltr' || rect.width > node.clientWidth) return false;
+    const contentLeft = box.left + node.clientLeft - node.scrollLeft;
+    contained = rect.left >= contentLeft - 1 && rect.right <= contentLeft + node.scrollWidth + 1;
+    if (!contained) return false;
+  }
+  return contained;
+}
+
+/**
  * Generates browser-side geometry extraction script.
  */
 export function buildGeometryScript() {
   return `(() => {
+    const isReachableInHorizontalScroller = ${isReachableInHorizontalScroller.toString()};
     function resolveImgUrl(raw) {
       if (!raw) return '';
       try {
@@ -957,10 +987,12 @@ export function buildGeometryScript() {
     const overflowing = [];
     document.querySelectorAll('body *').forEach((el) => {
       const r = el.getBoundingClientRect();
-      if (r.right > clientWidth + 1 && r.width > 0) {
+      if (r.width > 0 && (r.right > clientWidth + 1 || r.left < -1) &&
+          !isReachableInHorizontalScroller(el, clientWidth)) {
         overflowing.push({
           tag: el.tagName,
           className: typeof el.className === 'string' ? el.className : '',
+          left: Math.round(r.left),
           right: Math.round(r.right),
           width: Math.round(r.width)
         });

@@ -1,0 +1,95 @@
+{
+  "verdict": "REVISE",
+  "reviewer": "technical_photos independent reviewer, not author",
+  "target": "/workspace/scratch/c6e10bb8047b/sr-review/new-content-supply/posts.json",
+  "reviewed_date": "2026-11-04",
+  "gates": [
+    {
+      "gate": 1,
+      "result": "PASS",
+      "evidence": "All eight cited primary sources independently opened; exact supporting passages checked."
+    },
+    {
+      "gate": 2,
+      "result": "PASS",
+      "evidence": "Volvo15.4/16.1, Lear18.2, Bosch16/17, Protolabs storage/ownership rows, CTUAnnex3 and carrier/GDV passages support the bounded article statements."
+    },
+    {
+      "gate": 3,
+      "result": "PASS",
+      "evidence": "Dated2021/2023/2026 company terms explicitly scoped to named agreements; no universal legal entitlement or code mandate."
+    },
+    {
+      "gate": 4,
+      "result": "PASS",
+      "evidence": "No new technical thresholds or dosage numbers prescribed. Numerical handbook examples deliberately excluded."
+    },
+    {
+      "gate": 5,
+      "result": "PASS",
+      "evidence": "Condensation and cargo sweat separated, no universal ventilation instruction; legal and engineering decisions kept project-specific."
+    },
+    {
+      "gate": 6,
+      "result": "PASS",
+      "evidence": "Concrete lot-route records, tool-exit quotation and moisture-investigation actions."
+    },
+    {
+      "gate": 7,
+      "result": "PASS",
+      "evidence": "Distinct themes; no invented customer case or repeated sampling article."
+    },
+    {
+      "gate": 8,
+      "result": "PASS",
+      "evidence": "Three actual photos visually inspected; captions fit; CC0/CC BY-SA metadata preserved, files/hashes valid; no similarity below threshold against55 old+3 new technical photos."
+    },
+    {
+      "gate": 9,
+      "result": "PASS",
+      "evidence": "Coherent English and descriptive metadata; no broken CTA or claimed unavailable feature."
+    },
+    {
+      "gate": 10,
+      "result": "FIX",
+      "evidence": "Required cover width/height absent from all three delivery JSONs and manifests; exact dimensions supplied in findings."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "MAJOR",
+      "article": "sample-approved-production-site-changed",
+      "location": "coverImage in posts.json and individual article JSON; corresponding photo-manifest entry",
+      "problem": "Missing required native BlogPost coverImage.width and coverImage.height. File is present and valid, but the JSON does not satisfy the native interface as delivered.",
+      "fix": {
+        "width": 1280,
+        "height": 852
+      },
+      "evidence": "Native src/content/blog/legacy-posts.ts interface requires both width:number and height:number; verified dimensions directly with Pillow."
+    },
+    {
+      "severity": "MAJOR",
+      "article": "container-condensation-desiccant-limits",
+      "location": "coverImage in posts.json and individual article JSON; corresponding photo-manifest entry",
+      "problem": "Missing required native BlogPost coverImage.width and coverImage.height. File is present and valid, but the JSON does not satisfy the native interface as delivered.",
+      "fix": {
+        "width": 1200,
+        "height": 1600
+      },
+      "evidence": "Native src/content/blog/legacy-posts.ts interface requires both width:number and height:number; verified dimensions directly with Pillow."
+    },
+    {
+      "severity": "MAJOR",
+      "article": "mold-quotation-ownership-storage-transfer",
+      "location": "coverImage in posts.json and individual article JSON; corresponding photo-manifest entry",
+      "problem": "Missing required native BlogPost coverImage.width and coverImage.height. File is present and valid, but the JSON does not satisfy the native interface as delivered.",
+      "fix": {
+        "width": 1280,
+        "height": 852
+      },
+      "evidence": "Native src/content/blog/legacy-posts.ts interface requires both width:number and height:number; verified dimensions directly with Pillow."
+    }
+  ],
+  "substantive_factual_corrections": [],
+  "release_note": "After cover dimensions are synchronized, no substantive factual/image/license blocker identified. PASS would not itself grant publication authorization."
+}

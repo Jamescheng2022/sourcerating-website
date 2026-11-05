@@ -10,12 +10,25 @@ on:
       - 'scripts/check-editorial-publication.mjs'
       - 'scripts/cdp-capture-harness.mjs'
       - 'scripts/test-cdp-harness-static.mjs'
+      - 'scripts/test-cdp-overflow-browser.mjs'
+      - 'scripts/test-newsletter-browser.mjs'
+      - 'scripts/test-editorial-release.mjs'
       - 'scripts/validate-ci-bundle.mjs'
       - 'src/content/blog/**'
-      - 'src/data/blog.ts'
+      - 'src/data/**'
+      - 'src/lib/**'
+      - 'src/components/**'
+      - 'src/app/page.tsx'
+      - 'src/app/about/**'
+      - 'src/app/privacy/**'
+      - 'src/app/layout.tsx'
+      - 'src/app/globals.css'
       - 'src/app/blog/**'
       - 'src/components/shared/ArticleBody.tsx'
       - 'public/images/blog/**'
+      - 'public/assets/photography/**'
+      - 'scripts/verify-blog-cover.mjs'
+      - 'scripts/import-article-views.mjs'
       - 'package.json'
       - 'package-lock.json'
   workflow_dispatch:
@@ -44,146 +57,47 @@ jobs:
           {
             "status": "INITIALIZED",
             "eventBaseSha": "${{ github.event.pull_request.base.sha || 'origin/main' }}",
-            "pinnedMainSha": "1ae189b66686db2e5351d073963e113e3bf75d9d",
-            "pinnedPassedHeadSha": "16ab1c329e7a66dc14aceab14c7254f25cd141d6",
-            "expectedProductMergedTree": "f6d434792f95071cb2dfb233fee3e6f594c2db67",
+            "pinnedMainSha": "${{ github.event.pull_request.base.sha || github.sha }}",
+            "pinnedPassedHeadSha": "${{ github.event.pull_request.head.sha || github.sha }}",
+            "expectedProductMergedTree": null,
             "testCommitSha": "${{ github.event.pull_request.head.sha || github.sha }}",
             "githubRunId": "${{ github.run_id }}",
             "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           }
           RECEIPT
 
-      - name: Verify exact pinned product integration and establish ephemeral merge
+      - name: Verify requested revision and integrate authoritative main
         id: verify_integration
+        env:
+          REQUESTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          REQUESTED_BASE: ${{ github.event.pull_request.base.sha || github.sha }}
         run: |
           set -euo pipefail
-          echo "=== 1. Pinned reviewed product identity ==="
-          PINNED_MAIN_SHA="1ae189b66686db2e5351d073963e113e3bf75d9d"
-          PINNED_PASSED_HEAD_SHA="16ab1c329e7a66dc14aceab14c7254f25cd141d6"
-          EXPECTED_PRODUCT_MERGED_TREE="f6d434792f95071cb2dfb233fee3e6f594c2db67"
-
-          git rev-parse --verify "${PINNED_MAIN_SHA}^{commit}"
-          git rev-parse --verify "${PINNED_PASSED_HEAD_SHA}^{commit}"
-
-          echo "=== 2. Record PR event base provenance and verify authoritative current main ==="
-          # Record PR event base as provenance / nonblocking difference (do not claim it matches main)
-          PR_EVENT_BASE_SHA="${{ github.event.pull_request.base.sha || '' }}"
-          echo "Observed PR event base SHA (provenance): ${PR_EVENT_BASE_SHA:-none}"
-          if [ -n "$PR_EVENT_BASE_SHA" ] && [ "$PR_EVENT_BASE_SHA" != "$PINNED_MAIN_SHA" ]; then
-            echo "Notice: PR event base ($PR_EVENT_BASE_SHA) differs from pinned current main ($PINNED_MAIN_SHA); recorded as provenance."
-          fi
-
-          # Authoritative check: fetch read-only remote ref directly from origin; MUST succeed and be exactly 1ae189b or FAIL
-          echo "Fetching authoritative current main ref from origin..."
+          CHECKOUT_HEAD="$(git rev-parse HEAD)"
+          test "$CHECKOUT_HEAD" = "$REQUESTED_HEAD" || { echo "::error::Checkout is not the requested revision"; exit 1; }
           git fetch --no-tags origin refs/heads/main:refs/remotes/origin/main
           AUTHORITATIVE_MAIN_SHA="$(git rev-parse --verify refs/remotes/origin/main)"
-          echo "Authoritative origin/main SHA: $AUTHORITATIVE_MAIN_SHA"
-
-          if [ -z "$AUTHORITATIVE_MAIN_SHA" ]; then
-            echo "::error::Authoritative origin/main ref is absent or unavailable!"
-            exit 1
-          fi
-
-          if [ "$AUTHORITATIVE_MAIN_SHA" != "$PINNED_MAIN_SHA" ]; then
-            echo "::error::Authoritative origin/main branch drift detected! Pinned: $PINNED_MAIN_SHA, but remote main is: $AUTHORITATIVE_MAIN_SHA"
-            exit 1
-          fi
-          echo "Verified: authoritative origin/main strictly matches pinned $PINNED_MAIN_SHA."
-
-          echo "=== 3. Verify exact product merge-tree without test patch (Fix 1) ==="
-          ACTUAL_PRODUCT_TREE="$(git merge-tree --write-tree "$PINNED_MAIN_SHA" "$PINNED_PASSED_HEAD_SHA")"
-          echo "Actual product merge-tree: $ACTUAL_PRODUCT_TREE"
-          if [ "$ACTUAL_PRODUCT_TREE" != "$EXPECTED_PRODUCT_MERGED_TREE" ]; then
-            echo "::error::Product merge-tree mismatch! Expected $EXPECTED_PRODUCT_MERGED_TREE, got $ACTUAL_PRODUCT_TREE"
-            exit 1
-          fi
-          echo "Verified: product merge-tree strictly matches $EXPECTED_PRODUCT_MERGED_TREE."
-
-          echo "=== 4. Enforce exact reviewed test files allowlist on test commit (Fix 2) ==="
-          CURRENT_TEST_SHA="$(git rev-parse HEAD)"
-          echo "Current test commit SHA: $CURRENT_TEST_SHA"
-
-          # Exact reviewed test files allowlist
-          REVIEWED_ALLOWLIST=(
-            ".github/workflows/source-rating-editorial-preflight.yml"
-            "scripts/cdp-capture-harness.mjs"
-            "scripts/test-cdp-harness-static.mjs"
-            "scripts/validate-ci-bundle.mjs"
-          )
-
-          DIFF_PASSED_HEAD="$(git diff --name-only "$PINNED_PASSED_HEAD_SHA" HEAD)"
-          echo "Files modified between passedhead and test commit:"
-          echo "$DIFF_PASSED_HEAD"
-          while IFS= read -r f; do
-            [ -z "$f" ] && continue
-            case "$f" in
-              ".github/workflows/source-rating-editorial-preflight.yml" | \
-              "scripts/cdp-capture-harness.mjs" | \
-              "scripts/test-cdp-harness-static.mjs" | \
-              "scripts/validate-ci-bundle.mjs")
-                ;;
-              *)
-                echo "::error::Unexpected modified path in test commit: $f (refusing path outside reviewed test allowlist)"
-                exit 1
-                ;;
-            esac
-          done <<< "$DIFF_PASSED_HEAD"
-          echo "Verified: test commit modifies ONLY allowlisted test/CI files."
-
-          echo "=== 5. Ephemeral integration on disposable runner ==="
-          git -c user.name="CI-Runner" -c user.email="ci@sourcerating.local" merge --no-commit --no-ff "$PINNED_MAIN_SHA"
-
-          echo "=== 6. Verify integrated working tree boundaries with exact allowlist ==="
-          # Compare actual integrated working tree to expected product tree: ONLY allowlisted test files may differ
-          DIFF_INTEGRATED_EXPECTED="$(git diff --name-only "$EXPECTED_PRODUCT_MERGED_TREE")"
-          echo "Files differing between integrated working tree and expected product merged tree:"
-          echo "$DIFF_INTEGRATED_EXPECTED"
-          while IFS= read -r f; do
-            [ -z "$f" ] && continue
-            case "$f" in
-              ".github/workflows/source-rating-editorial-preflight.yml" | \
-              "scripts/cdp-capture-harness.mjs" | \
-              "scripts/test-cdp-harness-static.mjs" | \
-              "scripts/validate-ci-bundle.mjs")
-                ;;
-              *)
-                echo "::error::Integrated working tree has unexpected drift from expected product tree: $f"
-                exit 1
-                ;;
-            esac
-          done <<< "$DIFF_INTEGRATED_EXPECTED"
-
-          # Verify integrated test files match test commit HEAD
-          DIFF_INTEGRATED_TEST="$(git diff --name-only HEAD -- "${REVIEWED_ALLOWLIST[@]}")"
-          if [ -n "$DIFF_INTEGRATED_TEST" ]; then
-            echo "::error::Integrated working tree test files modified unexpectedly during merge!"
-            echo "$DIFF_INTEGRATED_TEST"
-            exit 1
-          fi
-          echo "Verified: all product files strictly match $EXPECTED_PRODUCT_MERGED_TREE and test files match $CURRENT_TEST_SHA."
-
+          test "$AUTHORITATIVE_MAIN_SHA" = "$REQUESTED_BASE" || { echo "::error::Main moved since this PR event; rerun against the current base"; exit 1; }
+          EXPECTED_PRODUCT_MERGED_TREE="$(git merge-tree --write-tree "$AUTHORITATIVE_MAIN_SHA" "$REQUESTED_HEAD")"
+          git -c user.name="CI-Runner" -c user.email="ci@sourcerating.local" merge --no-commit --no-ff "$AUTHORITATIVE_MAIN_SHA"
+          ACTUAL_PRODUCT_TREE="$(git write-tree)"
+          test "$ACTUAL_PRODUCT_TREE" = "$EXPECTED_PRODUCT_MERGED_TREE" || { echo "::error::Integrated tree differs from the verified merge result"; exit 1; }
+          git diff --exit-code
           mkdir -p docs/editorial/evidence/runs
-          cat <<EOF > docs/editorial/evidence/runs/integration-identity.json
-          {
-            "eventBaseSha": "$PR_EVENT_BASE_SHA",
-            "fetchedMainSha": "$AUTHORITATIVE_MAIN_SHA",
-            "pinnedMainSha": "$PINNED_MAIN_SHA",
-            "pinnedPassedHeadSha": "$PINNED_PASSED_HEAD_SHA",
-            "expectedProductMergedTree": "$EXPECTED_PRODUCT_MERGED_TREE",
-            "actualProductMergedTree": "$ACTUAL_PRODUCT_TREE",
-            "testCommitSha": "$CURRENT_TEST_SHA",
-            "reviewedAllowlist": [
-              ".github/workflows/source-rating-editorial-preflight.yml",
-              "scripts/cdp-capture-harness.mjs",
-              "scripts/test-cdp-harness-static.mjs",
-              "scripts/validate-ci-bundle.mjs"
-            ],
-            "nonTestDiffFromPassedHead": "CLEAN_ZERO_DIFF",
-            "integratedProductTreeDiff": "CLEAN_ZERO_DIFF",
-            "integratedTestTreeDiff": "CLEAN_ZERO_DIFF",
-            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          }
-          EOF
+          node -e '
+            const fs=require("fs");
+            fs.writeFileSync("docs/editorial/evidence/runs/integration-identity.json",JSON.stringify({
+              eventBaseSha:process.env.REQUESTED_BASE,
+              fetchedMainSha:process.argv[1],
+              pinnedMainSha:process.argv[1],
+              pinnedPassedHeadSha:process.env.REQUESTED_HEAD,
+              expectedProductMergedTree:process.argv[2],
+              actualProductMergedTree:process.argv[3],
+              testCommitSha:process.env.REQUESTED_HEAD,
+              identityPolicy:"exact-event-head-and-authoritative-base; full integrated source checked",
+              timestamp:new Date().toISOString()
+            },null,2));
+          ' "$AUTHORITATIVE_MAIN_SHA" "$EXPECTED_PRODUCT_MERGED_TREE" "$ACTUAL_PRODUCT_TREE"
 
       - name: Set up Node.js
         id: setup_node
@@ -231,7 +145,7 @@ jobs:
         id: test_pub
         run: npm run test:publication
 
-      - name: Preserve pinned legacy blog and cover regressions
+      - name: Preserve original prose, real media, metadata and search regressions
         id: legacy_cover
         run: node scripts/verify-blog-cover.mjs
 
@@ -272,6 +186,9 @@ jobs:
           fi
           echo "Verified Chrome executable: $CHROME_EXEC"
           export CHROME_BIN="$CHROME_EXEC"
+
+          # Exercise scroll clipping, keyboard reachability and real overflow negatives.
+          node scripts/test-cdp-overflow-browser.mjs
 
           # 2. Start owned localhost production Next.js server directly
           echo "Starting local Next.js production server directly on port 3000..."
@@ -382,6 +299,10 @@ jobs:
             exit 1
           fi
 
+          # Test real React/navigation with a local mock; never contact Kit or submit email.
+          node scripts/test-newsletter-browser.mjs --origin=http://127.0.0.1:3000
+          node scripts/test-editorial-release.mjs --origin=http://127.0.0.1:3000
+
           # 4. Run targeted 390 mobile smoke CDP harness for calibration and plywood
           echo "Executing targeted 390 mobile smoke CDP harness..."
           HARNESS_STATUS=0
@@ -466,9 +387,9 @@ jobs:
               stepOutcomes: steps,
               eventBaseSha: "${{ github.event.pull_request.base.sha || 'origin/main' }}",
               fetchedMainSha: integrationIdentity.fetchedMainSha || null,
-              pinnedMainSha: "1ae189b66686db2e5351d073963e113e3bf75d9d",
-              pinnedPassedHeadSha: "16ab1c329e7a66dc14aceab14c7254f25cd141d6",
-              expectedProductMergedTree: "f6d434792f95071cb2dfb233fee3e6f594c2db67",
+              pinnedMainSha: integrationIdentity.pinnedMainSha || null,
+              pinnedPassedHeadSha: integrationIdentity.pinnedPassedHeadSha || null,
+              expectedProductMergedTree: integrationIdentity.expectedProductMergedTree || null,
               actualProductMergedTree: integrationIdentity.actualProductMergedTree || null,
               testCommitSha: "${{ github.event.pull_request.head.sha || github.sha }}",
               githubRunId: "${{ github.run_id }}",

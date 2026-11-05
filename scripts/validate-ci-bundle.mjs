@@ -98,18 +98,18 @@ export async function validateCiBundle(options = {}) {
         canonical: "https://www.sourcerating.com/blog/calibration-sticker-measurement-tolerance",
         ogTitle: "The Gauge Is Calibrated. Can It Decide This Tolerance? | Source Rating",
         ogUrl: "https://www.sourcerating.com/blog/calibration-sticker-measurement-tolerance",
-        ogImage: "https://www.sourcerating.com/images/blog/calibration-photo-20261031-calibration-lab-desktop.jpg",
+        ogImage: "https://www.sourcerating.com/assets/photography/calibration-sticker-measurement-tolerance-cover.jpg",
         twitterCard: "summary_large_image",
         twitterTitle: "The Gauge Is Calibrated. Can It Decide This Tolerance? | Source Rating",
-        twitterImage: "https://www.sourcerating.com/images/blog/calibration-photo-20261031-calibration-lab-desktop.jpg"
+        twitterImage: "https://www.sourcerating.com/assets/photography/calibration-sticker-measurement-tolerance-cover.jpg"
       } : {
         canonical: "https://www.sourcerating.com/blog/plywood-crate-solid-wood-skids-ispm15",
         ogTitle: "The Crate Is Plywood. What Are the Skids Made Of? | Source Rating",
         ogUrl: "https://www.sourcerating.com/blog/plywood-crate-solid-wood-skids-ispm15",
-        ogImage: "https://www.sourcerating.com/images/blog/plywood-crate-photography-cover-20261030-desktop.jpg",
+        ogImage: "https://www.sourcerating.com/assets/photography/plywood-crate-solid-wood-skids-ispm15-cover.jpg",
         twitterCard: "summary_large_image",
         twitterTitle: "The Crate Is Plywood. What Are the Skids Made Of? | Source Rating",
-        twitterImage: "https://www.sourcerating.com/images/blog/plywood-crate-photography-cover-20261030-desktop.jpg"
+        twitterImage: "https://www.sourcerating.com/assets/photography/plywood-crate-solid-wood-skids-ispm15-cover.jpg"
       };
 
       assert.equal(metricEntry.metadata.canonical, expMetadata.canonical, `Canonical mismatch for ${slug}`);
@@ -238,10 +238,10 @@ export async function validateCiBundle(options = {}) {
         assert.equal(metricEntry.metadata.canonical, "https://www.sourcerating.com/blog/calibration-sticker-measurement-tolerance");
         assert.equal(metricEntry.metadata.ogTitle, "The Gauge Is Calibrated. Can It Decide This Tolerance? | Source Rating");
         assert.equal(metricEntry.metadata.ogUrl, "https://www.sourcerating.com/blog/calibration-sticker-measurement-tolerance");
-        assert.equal(metricEntry.metadata.ogImage, "https://www.sourcerating.com/images/blog/calibration-photo-20261031-calibration-lab-desktop.jpg");
+        assert.equal(metricEntry.metadata.ogImage, "https://www.sourcerating.com/assets/photography/calibration-sticker-measurement-tolerance-cover.jpg");
         assert.equal(metricEntry.metadata.twitterCard, "summary_large_image");
         assert.equal(metricEntry.metadata.twitterTitle, "The Gauge Is Calibrated. Can It Decide This Tolerance? | Source Rating");
-        assert.equal(metricEntry.metadata.twitterImage, "https://www.sourcerating.com/images/blog/calibration-photo-20261031-calibration-lab-desktop.jpg");
+        assert.equal(metricEntry.metadata.twitterImage, "https://www.sourcerating.com/assets/photography/calibration-sticker-measurement-tolerance-cover.jpg");
       }
 
       screenshotHashes[`${width}px`] = sha256(buf);

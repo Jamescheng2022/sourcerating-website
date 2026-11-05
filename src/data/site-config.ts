@@ -1,10 +1,10 @@
 export const siteConfig = {
   name: "Source Rating",
-  tagline: "Engineering Supplier Verification & Procurement Support",
+  tagline: "Procurement Reporting & Field Notes",
   domain: "www.sourcerating.com",
   url: "https://www.sourcerating.com",
   description:
-    "Thailand-based buyer-side supplier verification, factory audits, inspection, and engineering procurement support across China, Vietnam, and Southeast Asia.",
+    "Independent articles on industrial suppliers, production, quality, logistics, customs and cross-border procurement, by James Cheng.",
   author: "James Cheng",
   locale: "en_US",
   contact: { email: "contact@sourcerating.com", wechat: "SourceRating" },

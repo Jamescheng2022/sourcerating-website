@@ -1,0 +1,1 @@
+{"issue":"Supply cover width/height missing in author drafts","resolution":"Integrated dimensions read from actual decoded files with PIL; validated again using sharp in verify-blog-cover.mjs","status":"FIXED"}
