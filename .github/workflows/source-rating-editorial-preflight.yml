@@ -12,12 +12,15 @@ on:
       - 'scripts/test-cdp-harness-static.mjs'
       - 'scripts/test-cdp-overflow-browser.mjs'
       - 'scripts/test-newsletter-browser.mjs'
+      - 'scripts/test-editorial-release.mjs'
       - 'scripts/validate-ci-bundle.mjs'
       - 'src/content/blog/**'
       - 'src/data/**'
       - 'src/lib/**'
       - 'src/components/**'
       - 'src/app/page.tsx'
+      - 'src/app/about/**'
+      - 'src/app/privacy/**'
       - 'src/app/layout.tsx'
       - 'src/app/globals.css'
       - 'src/app/blog/**'
@@ -298,6 +301,7 @@ jobs:
 
           # Test real React/navigation with a local mock; never contact Kit or submit email.
           node scripts/test-newsletter-browser.mjs --origin=http://127.0.0.1:3000
+          node scripts/test-editorial-release.mjs --origin=http://127.0.0.1:3000
 
           # 4. Run targeted 390 mobile smoke CDP harness for calibration and plywood
           echo "Executing targeted 390 mobile smoke CDP harness..."
