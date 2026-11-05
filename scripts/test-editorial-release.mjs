@@ -27,6 +27,26 @@ const {normalizeArticleFeedParams}=load('src/lib/article-feed-params.ts');
 const {ArticleFeed}=load('src/components/editorial/ArticleFeed.tsx');
 const {blogPosts}=load('src/data/blog.ts');
 const home=load('src/app/page.tsx'), blog=load('src/app/blog/page.tsx'), about=load('src/app/about/page.tsx');
+const {ArticleViews}=load('src/components/editorial/ArticleViews.tsx');
+
+test('view labels preserve verified counts, distinguish missing/out-of-period data and expose period to assistive technology',()=>{
+  const expected={
+    'plywood-crate-solid-wood-skids-ispm15':5,
+    'calibration-sticker-measurement-tolerance':2,
+    'salt-spray-hours-not-service-life':2,
+    'supplier-hs-code-destination-import-classification':2,
+  };
+  for(const [slug,count] of Object.entries(expected)){
+    const html=renderToStaticMarkup(React.createElement(ArticleViews,{slug,publishedAt:'2026-11-03'}));
+    assert.ok(html.includes(count+' views'));
+    assert.match(html,/class="sr-only"/);assert.match(html,/2026-01-01 to 2026-11-03/);assert.match(html,/not realtime/);
+  }
+  for(const props of [{slug:'missing',publishedAt:'2026-10-01'},{slug:'calibration-sticker-measurement-tolerance',publishedAt:'2026-11-04'}]){
+    const html=renderToStaticMarkup(React.createElement(ArticleViews,props));assert.match(html,/Views not yet available/);assert.doesNotMatch(html,/>0 views/);
+  }
+  const newPosts=blogPosts.filter(p=>p.date>'2026-11-03');assert.equal(newPosts.length,9);
+  for(const post of newPosts)assert.match(renderToStaticMarkup(React.createElement(ArticleViews,{slug:post.slug,publishedAt:post.date})),/Views not yet available/);
+});
 
 test('first repeated q/topic value wins, including empty values; whitespace trimmed and unknown topics reset',()=>{
   const cases=[
