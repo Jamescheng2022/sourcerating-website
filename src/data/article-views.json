@@ -1,11 +1,13 @@
 {
   "source": "Google Analytics 4",
   "periodStart": "2026-01-01",
-  "periodEnd": "2026-11-03",
-  "updatedAt": "2026-11-04",
+  "periodEnd": "2026-11-05",
+  "updatedAt": "2026-11-06",
   "metric": "screen_page_views",
   "counts": {
-    "plywood-crate-solid-wood-skids-ispm15": 5,
+    "plywood-crate-solid-wood-skids-ispm15": 6,
+    "packing-list-weight-container-vgm": 3,
+    "supplier-bank-account-change-independent-verification": 3,
     "calibration-sticker-measurement-tolerance": 2,
     "salt-spray-hours-not-service-life": 2,
     "supplier-hs-code-destination-import-classification": 2
