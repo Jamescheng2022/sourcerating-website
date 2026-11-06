@@ -42,24 +42,62 @@ test('visually reviewed crate geometry and IPPC-mark bytes retain correct captio
 });
 
 test('view labels preserve verified counts, distinguish missing/out-of-period data and expose period to assistive technology',()=>{
-  const expected={
-    'plywood-crate-solid-wood-skids-ispm15':6,
-    'packing-list-weight-container-vgm':3,
-    'supplier-bank-account-change-independent-verification':3,
-    'calibration-sticker-measurement-tolerance':2,
-    'salt-spray-hours-not-service-life':2,
-    'supplier-hs-code-destination-import-classification':2,
-  };
-  for(const [slug,count] of Object.entries(expected)){
-    const html=renderToStaticMarkup(React.createElement(ArticleViews,{slug,publishedAt:'2026-11-03'}));
-    assert.ok(html.includes(count+' views'));
-    assert.match(html,/class="sr-only"/);assert.match(html,/2026-01-01 to 2026-11-05/);assert.match(html,/not realtime/);
+  const snapshot=JSON.parse(fs.readFileSync('src/data/article-views.json','utf8'));
+  assert.equal(snapshot.source,'Google Analytics 4');
+  assert.equal(snapshot.metric,'screen_page_views');
+  assert.match(snapshot.periodStart,/^\d{4}-\d{2}-\d{2}$/);
+  assert.match(snapshot.periodEnd,/^\d{4}-\d{2}-\d{2}$/);
+  assert.ok(snapshot.periodEnd>=snapshot.periodStart);
+
+  const counts=snapshot.counts;
+  assert.ok(counts && typeof counts==='object');
+  for(const [slug,val] of Object.entries(counts)){
+    assert.ok(Number.isSafeInteger(val)&&val>=0,`Invalid count for ${slug}: ${val}`);
   }
-  for(const props of [{slug:'missing',publishedAt:'2026-10-01'},{slug:'calibration-sticker-measurement-tolerance',publishedAt:'2026-11-06'}]){
-    const html=renderToStaticMarkup(React.createElement(ArticleViews,props));assert.match(html,/Views not yet available/);assert.doesNotMatch(html,/>0 views/);
+
+  // Focused assertion for exact independently confirmed source counts for this PR:
+  // Nov 5 GA4 read (18 total views across 6 paths)
+  assert.equal(Object.keys(counts).length,6);
+  assert.equal(Object.values(counts).reduce((a,b)=>a+b,0),18);
+  assert.equal(counts['plywood-crate-solid-wood-skids-ispm15'],6);
+  assert.equal(counts['packing-list-weight-container-vgm'],3);
+  assert.equal(counts['supplier-bank-account-change-independent-verification'],3);
+  assert.equal(counts['calibration-sticker-measurement-tolerance'],2);
+  assert.equal(counts['salt-spray-hours-not-service-life'],2);
+  assert.equal(counts['supplier-hs-code-destination-import-classification'],2);
+
+  // For each actual recorded slug in counts, confirm ArticleViews renders its count, accessible period, and "not realtime" qualifier
+  for(const [slug,count] of Object.entries(counts)){
+    const html=renderToStaticMarkup(React.createElement(ArticleViews,{slug,publishedAt:snapshot.periodStart}));
+    assert.ok(html.includes(count.toLocaleString('en-US')+' views'),`Expected ${count} views for ${slug}`);
+    assert.match(html,/class="sr-only"/);
+    assert.match(html,new RegExp(`${snapshot.periodStart} to ${snapshot.periodEnd}`));
+    assert.match(html,/not realtime/);
   }
-  const newPosts=blogPosts.filter(p=>p.date>'2026-11-05');
-  for(const post of newPosts)assert.match(renderToStaticMarkup(React.createElement(ArticleViews,{slug:post.slug,publishedAt:post.date})),/Views not yet available/);
+
+  // For unknown slugs and a known slug published strictly AFTER snapshot.periodEnd, ArticleViews must say "Views not yet available", never "0 views"
+  const futureDate=new Date(Date.parse(snapshot.periodEnd+'T00:00:00Z')+86400000).toISOString().slice(0,10);
+  for(const props of [
+    {slug:'missing-article-slug',publishedAt:snapshot.periodStart},
+    {slug:'calibration-sticker-measurement-tolerance',publishedAt:futureDate}
+  ]){
+    const html=renderToStaticMarkup(React.createElement(ArticleViews,props));
+    assert.match(html,/Views not yet available/);
+    assert.doesNotMatch(html,/>0 views/);
+  }
+
+  // For all registered articles:
+  // only assert unavailable if slug lacks an actual recorded count OR article publication date exceeds stats.periodEnd;
+  // a Nov 4 article with 3 recorded views must be accepted and tested as count 3, not rejected as unavailable.
+  for(const post of blogPosts){
+    const html=renderToStaticMarkup(React.createElement(ArticleViews,{slug:post.slug,publishedAt:post.date}));
+    const count=counts[post.slug];
+    if(post.date<=snapshot.periodEnd && count!==undefined){
+      assert.ok(html.includes(count.toLocaleString('en-US')+' views'),`Expected ${count} views rendered for registered post ${post.slug}`);
+    }else{
+      assert.match(html,/Views not yet available/,`Expected "Views not yet available" for ${post.slug} (date: ${post.date})`);
+    }
+  }
 });
 
 test('first repeated q/topic value wins, including empty values; whitespace trimmed and unknown topics reset',()=>{
