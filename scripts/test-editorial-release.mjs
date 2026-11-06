@@ -43,7 +43,9 @@ test('visually reviewed crate geometry and IPPC-mark bytes retain correct captio
 
 test('view labels preserve verified counts, distinguish missing/out-of-period data and expose period to assistive technology',()=>{
   const expected={
-    'plywood-crate-solid-wood-skids-ispm15':5,
+    'plywood-crate-solid-wood-skids-ispm15':6,
+    'packing-list-weight-container-vgm':3,
+    'supplier-bank-account-change-independent-verification':3,
     'calibration-sticker-measurement-tolerance':2,
     'salt-spray-hours-not-service-life':2,
     'supplier-hs-code-destination-import-classification':2,
@@ -51,12 +53,12 @@ test('view labels preserve verified counts, distinguish missing/out-of-period da
   for(const [slug,count] of Object.entries(expected)){
     const html=renderToStaticMarkup(React.createElement(ArticleViews,{slug,publishedAt:'2026-11-03'}));
     assert.ok(html.includes(count+' views'));
-    assert.match(html,/class="sr-only"/);assert.match(html,/2026-01-01 to 2026-11-03/);assert.match(html,/not realtime/);
+    assert.match(html,/class="sr-only"/);assert.match(html,/2026-01-01 to 2026-11-05/);assert.match(html,/not realtime/);
   }
-  for(const props of [{slug:'missing',publishedAt:'2026-10-01'},{slug:'calibration-sticker-measurement-tolerance',publishedAt:'2026-11-04'}]){
+  for(const props of [{slug:'missing',publishedAt:'2026-10-01'},{slug:'calibration-sticker-measurement-tolerance',publishedAt:'2026-11-06'}]){
     const html=renderToStaticMarkup(React.createElement(ArticleViews,props));assert.match(html,/Views not yet available/);assert.doesNotMatch(html,/>0 views/);
   }
-  const newPosts=blogPosts.filter(p=>p.date>'2026-11-03');assert.ok(newPosts.length>=9);
+  const newPosts=blogPosts.filter(p=>p.date>'2026-11-05');
   for(const post of newPosts)assert.match(renderToStaticMarkup(React.createElement(ArticleViews,{slug:post.slug,publishedAt:post.date})),/Views not yet available/);
 });
 
