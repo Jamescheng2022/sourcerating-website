@@ -310,7 +310,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           <p className="text-sm font-semibold uppercase text-brand-700">About the author</p>
           <h2 className="mt-3 text-xl font-bold text-gray-950">James Cheng</h2>
           <p className="mt-3 text-sm leading-7 text-gray-700">
-            James has a civil and structural engineering background, spent more than 10 years with the CNBM group, and has worked on industrial, construction, and overseas market projects across more than 10 countries. Source Rating applies that engineering and procurement context to buyer-side supplier decisions.
+            James has over a decade of experience in international engineering procurement, global sourcing, and cross-border trade. He has worked with manufacturers, suppliers, and project teams across multiple international markets, gaining practical experience in supplier selection, commercial negotiations, and international supply chains. At Source Rating, he shares buyer-focused insights to help businesses evaluate suppliers, compare offers, manage sourcing risks, and make more informed purchasing decisions.
           </p>
           <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
             <Link href="/about" className="text-brand-700 hover:text-brand-900">About James</Link>
