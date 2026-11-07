@@ -73,7 +73,7 @@ export const electronicBillOfLadingPost: BlogPost = {
       mobileHeight: 571,
       alt: "Archival paper bill of lading dated 1912 with printed contract clauses and handwritten marks",
       caption:
-        "An archival paper bill of lading from a 1912 shipment. Image: Archives New Zealand / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bill_of_lading_(50116721023).jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/). Historical comparison only; not a modern eBL.",
+        "An archival paper bill of lading from a 1912 shipment. Image: Archives New Zealand / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bill_of_lading_(50116721023).jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/); resized. Historical comparison only; not a modern eBL.",
     },
     {
       type: "heading",
