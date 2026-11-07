@@ -7,6 +7,7 @@ const staticRoutes = [
   ["/services", "monthly", 0.9],
   ["/buyer-decisions", "monthly", 0.95],
   ["/pricing", "monthly", 0.85],
+  ["/tools/quote-comparison", "monthly", 0.85],
   ["/playbook", "monthly", 0.95],
   ["/risk-screen", "weekly", 0.95],
   ["/industries", "monthly", 0.85],
