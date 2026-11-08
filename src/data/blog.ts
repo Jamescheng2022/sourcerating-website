@@ -1,3 +1,4 @@
+import { maerskAsiaMiddleEastPssPost } from "@/content/blog/maersk-asia-middle-east-peak-season-surcharge-buyer-guide";
 import { electronicBillOfLadingPost } from "@/content/blog/electronic-bill-of-lading-cargo-release-buyer-checklist";
 import { cbamSteelEmissionsPost } from "@/content/blog/eu-cbam-steel-supplier-emissions-data-2026";
 import newEditorialPosts from "@/content/blog/editorial-expansion-20261104.json";
@@ -20,6 +21,7 @@ export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
 export const blogPosts: BlogPost[] = ([
+  maerskAsiaMiddleEastPssPost,
   electronicBillOfLadingPost,
   cbamSteelEmissionsPost,
   ...(newEditorialPosts as BlogPost[]),
