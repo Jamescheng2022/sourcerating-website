@@ -1,3 +1,4 @@
+import { euForcedLabourIndustrialPost } from "@/content/blog/eu-forced-labour-regulation-industrial-supplier-evidence-2027";
 import { maerskMediterraneanHeavyLoadPost } from "@/content/blog/maersk-mediterranean-pss-heavy-load-vgm-november-2026";
 import { maerskAsiaMiddleEastPssPost } from "@/content/blog/maersk-asia-middle-east-peak-season-surcharge-buyer-guide";
 import { electronicBillOfLadingPost } from "@/content/blog/electronic-bill-of-lading-cargo-release-buyer-checklist";
@@ -22,6 +23,7 @@ export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
 export const blogPosts: BlogPost[] = ([
+  euForcedLabourIndustrialPost,
   maerskMediterraneanHeavyLoadPost,
   maerskAsiaMiddleEastPssPost,
   electronicBillOfLadingPost,
