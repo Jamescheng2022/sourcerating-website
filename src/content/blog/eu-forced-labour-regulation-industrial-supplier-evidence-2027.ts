@@ -114,7 +114,7 @@ export const euForcedLabourIndustrialPost: BlogPost = {
       "note": "Scope across all products and origins; distinction between forced-labour prohibition and procedural audit or reporting duties; investigation and enforcement."
     },
     {
-      "title": "Regulation (EU) 2024/3015 — official overview",
+      "title": "Regulation (EU) 2024/3015, official overview",
       "publisher": "EUR-Lex, European Union",
       "href": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=legissum:5502411",
       "note": "Legislation overview and 14 December 2027 application date."
