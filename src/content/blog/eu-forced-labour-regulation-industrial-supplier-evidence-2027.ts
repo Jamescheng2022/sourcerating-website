@@ -5,17 +5,20 @@ export const euForcedLabourIndustrialPost: BlogPost = {
   "title": "The EU Is Banning Forced-Labour Products. What Can an Industrial Buyer Actually Verify?",
   "seoTitle": "EU Forced Labour Regulation 2027: Supplier Evidence for Industrial Buyers",
   "excerpt": "The EU's forced-labour product ban starts on 14 December 2027. Industrial buyers should map the actual manufacturing chain, not mistake quality certificates or a supplier declaration for proof of labour conditions.",
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "category": "Policy & Customs",
   "layout": "editorial",
   "readTime": "6 min read",
   "sections": [],
   "coverImage": {
-    "src": "/images/blog/cbam-20261106-steel-coils.jpg",
-    "width": 1600,
-    "height": 1200,
-    "alt": "Steel coils carried on rail wagons near Port Kembla, an illustrative photograph of industrial supply chains",
-    "caption": "Steel products can pass through several production and sales entities. Photo: JustARandomEditor123 / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Steel_Coils_at_Port_Kembla.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); resized for web. Archival illustration, not an investigation of the photographed facility."
+    "src": "/images/blog/flr-factory-cover-desktop-20261113.jpg",
+    "mobileSrc": "/images/blog/flr-factory-cover-mobile-20261113.jpg",
+    "width": 1280,
+    "height": 854,
+    "mobileWidth": 330,
+    "mobileHeight": 220,
+    "alt": "Metal-forming equipment inside a security-door production workshop, used as a generic supply-chain illustration",
+    "caption": "An industrial workshop can involve multiple production steps. Photo: Karolis zilius / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Security-doors-factory.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); Wikimedia thumbnail resized. Illustrative photo only: no forced-labour finding or endorsement is implied."
   },
   "articleBody": [
     {
@@ -37,6 +40,17 @@ export const euForcedLabourIndustrialPost: BlogPost = {
     {
       "type": "paragraph",
       "text": "Start from the item actually being purchased: its description, critical subcomponents, producing sites and processing steps. A fabricated bracket with purchased fasteners and outsourced coating has a different map from a one-piece casting. Document what is known, what is based only on a supplier declaration, and what remains unverified. The aim is not to generate a glossy compliance badge. It is to make a sensible procurement decision with an evidence trail."
+    },
+    {
+      "type": "illustration",
+      "src": "/images/blog/flr-robotic-welding-desktop-20261113.jpg",
+      "mobileSrc": "/images/blog/flr-robotic-welding-mobile-20261113.jpg",
+      "width": 1280,
+      "height": 508,
+      "mobileWidth": 330,
+      "mobileHeight": 131,
+      "alt": "Robot welding cell and protected worker inside a photographed manufacturing facility",
+      "caption": "A welding process is one stage of manufacture, not a complete product-chain record. Photo: Antoniusaw / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Welding_Robot_Facility.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); Wikimedia thumbnail resized. This image illustrates manufacturing only and makes no claim about the depicted workplace's labour conditions."
     },
     {
       "type": "heading",
@@ -68,6 +82,17 @@ export const euForcedLabourIndustrialPost: BlogPost = {
     {
       "type": "paragraph",
       "text": "These are **commercial risk controls proposed for buyers**, not a statutory list of five documents. Labour information can be sensitive: request proportionate, lawful evidence and avoid copying unnecessary worker personal data into a purchasing folder. A factory visit or third-party assessment may help on a particular case; neither should be described as proof that forced labour is impossible anywhere in the supply chain."
+    },
+    {
+      "type": "illustration",
+      "src": "/images/blog/flr-mesh-welding-desktop-20261113.jpg",
+      "mobileSrc": "/images/blog/flr-mesh-welding-mobile-20261113.jpg",
+      "width": 960,
+      "height": 1280,
+      "mobileWidth": 500,
+      "mobileHeight": 667,
+      "alt": "Welder fabricating steel mesh within an industrial workshop in Gauteng, South Africa",
+      "caption": "A photographed welding operation shows only one visible production activity. Photo: GlynD / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Factory_worker_welding_mesh.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); Wikimedia thumbnail resized. Archive photograph from South Africa; it does not suggest forced labour at the pictured location."
     },
     {
       "type": "heading",
