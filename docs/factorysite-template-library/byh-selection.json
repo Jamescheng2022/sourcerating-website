@@ -1,0 +1,21 @@
+{
+  "company":"BYH NEW TECHNOLOGY CO., LTD.",
+  "selection_date":"2026-08-25",
+  "winner":"german-technical-documentation",
+  "composed_with":"precision-engineering",
+  "reason":"BYH sells engineering confidence: casting and machining capability, automotive/new-energy applications, quality evidence and local Thailand capacity. A dense technical architecture converts better than a cinematic campaign page.",
+  "candidates":[
+    {"family":"german-technical-documentation","industry_fit":96,"content_fit":94,"evidence_fit":98,"localization":91,"conversion":90,"implementation":88,"weighted_total":94},
+    {"family":"precision-engineering","industry_fit":98,"content_fit":90,"evidence_fit":90,"localization":86,"conversion":92,"implementation":91,"weighted_total":93},
+    {"family":"global-corporate-clean","industry_fit":88,"content_fit":91,"evidence_fit":92,"localization":94,"conversion":84,"implementation":92,"weighted_total":90},
+    {"family":"sme-export-manufacturer","industry_fit":84,"content_fit":86,"evidence_fit":80,"localization":90,"conversion":96,"implementation":96,"weighted_total":87},
+    {"family":"japanese-minimal-trust","industry_fit":86,"content_fit":82,"evidence_fit":90,"localization":92,"conversion":78,"implementation":90,"weighted_total":85}
+  ],
+  "facts_policy":"Thailand-specific capacity, certifications, equipment, customers and contact data are not inferred from the parent. Unconfirmed items are visibly marked pending company confirmation.",
+  "primary_sources":[
+    "https://static.cninfo.com.cn/finalpage/2024-08-08/1220815659.PDF",
+    "https://amata.com/news/50-business-news/1426-amata-congratulates-byh-on-the-opening-of-its-new-factory-at-amata-city-chonburi-2",
+    "https://en.chinaaie.com.cn/News_details/191.html",
+    "https://www.wuxibest.com/en/"
+  ]
+}
