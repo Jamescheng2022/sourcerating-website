@@ -1,0 +1,82 @@
+{
+  "schema": "sourcerating.photo-library.v1",
+  "scope": "New rights-checked additions from 2026-11-14; historical media remain documented in src/data/editorial-media.json and article captions",
+  "createdAt": "2026-11-14",
+  "photos": [
+    {
+      "role": "cover",
+      "key": "port",
+      "author": "AgainErick",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shipping_container_-_Port_of_Rotterdam_-_2017_-_3.jpg",
+      "bytes": {
+        "desktop": 165214,
+        "mobile": 25872
+      },
+      "sha256": {
+        "desktop": "c0501f128cd3062576a9b815acc8c6041f3ec3470fdea19700b3e45ebe40b294",
+        "mobile": "607af6d18c173118f5fbaf9f13ee790f190488473a4740850c3f1b1c81f733df"
+      },
+      "usedIn": [
+        "purchase-order-factory-invoice-trader-seller-entity-check"
+      ],
+      "source": "Wikimedia Commons",
+      "modifications": "Resized to 960px desktop and 330px mobile JPEG thumbnails without changing depicted subjects",
+      "files": {
+        "desktop": "/images/blog/seller-invoice-port-desktop.jpg",
+        "mobile": "/images/blog/seller-invoice-port-mobile.jpg"
+      }
+    },
+    {
+      "role": "body",
+      "key": "receipt",
+      "author": "Solomon203",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:JCHACST_Keelung_Office_uniform_invoice_20180925_P2.jpg",
+      "bytes": {
+        "desktop": 209225,
+        "mobile": 28757
+      },
+      "sha256": {
+        "desktop": "3ec4aa5a772f9a24da56759fb2fa96d3da4250f46b6b12acc4f497c87419f5ea",
+        "mobile": "e6d4d90504871d20ab0b2cc8cab160d645e9866a1d8ae2561327cedc0f1016fe"
+      },
+      "usedIn": [
+        "purchase-order-factory-invoice-trader-seller-entity-check"
+      ],
+      "source": "Wikimedia Commons",
+      "modifications": "Resized to 960px desktop and 330px mobile JPEG thumbnails without changing depicted subjects",
+      "files": {
+        "desktop": "/images/blog/seller-invoice-receipt-desktop.jpg",
+        "mobile": "/images/blog/seller-invoice-receipt-mobile.jpg"
+      }
+    },
+    {
+      "role": "body",
+      "key": "factory",
+      "author": "Shixart1985 / Nenad Stojković",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Industrial_production_line_operating_in_a_large_modern_factory.jpg",
+      "bytes": {
+        "desktop": 227129,
+        "mobile": 33008
+      },
+      "sha256": {
+        "desktop": "e55ebf118fe69d84f3061de5fa71041a60d79f3a20c327eaa06cc12be6e4a173",
+        "mobile": "5bcabd8aa938f29a73a09d17981cdcf07776d554361c60392f7b0a92613900ec"
+      },
+      "usedIn": [
+        "purchase-order-factory-invoice-trader-seller-entity-check"
+      ],
+      "source": "Wikimedia Commons",
+      "modifications": "Resized to 960px desktop and 330px mobile JPEG thumbnails without changing depicted subjects",
+      "files": {
+        "desktop": "/images/blog/seller-invoice-factory-desktop.jpg",
+        "mobile": "/images/blog/seller-invoice-factory-mobile.jpg"
+      }
+    }
+  ]
+}
