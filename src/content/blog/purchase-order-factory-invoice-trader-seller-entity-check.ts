@@ -7,7 +7,6 @@ export const sellerInvoiceEntityPost: BlogPost = {
   "excerpt": "An industrial factory can produce the goods while a trader invoices the buyer. Identify the legal seller, exporter and bank beneficiary before a deposit or customs release.",
   "date": "2026-11-14",
   "category": "Contracts & Payment",
-  "author": "James Cheng",
   "layout": "editorial",
   "readTime": "7 min read",
   "sections": [],
