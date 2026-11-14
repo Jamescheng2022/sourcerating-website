@@ -81,17 +81,6 @@ export const sellerInvoiceEntityPost: BlogPost = {
       "text": "U.S. CBP guidance asks for the foreign firm responsible for invoicing, ordinarily the seller or manufacturer, and explains the variant where they differ. In the United Kingdom, HMRC says the seller's invoice or equivalent payment request can support transaction-value evidence when authentic and sufficiently detailed. These examples show why the document chain matters; applicable requirements differ by destination, shipment and contractual structure. Confirm customs treatment with the responsible importer or licensed adviser rather than promising a universal seller-name rule."
     },
     {
-      "type": "illustration",
-      "src": "/images/blog/seller-invoice-receipt-desktop.jpg",
-      "mobileSrc": "/images/blog/seller-invoice-receipt-mobile.jpg",
-      "width": 960,
-      "height": 720,
-      "mobileWidth": 330,
-      "mobileHeight": 247,
-      "alt": "An actual Taiwanese business invoice photographed in 2018, illustrating how the invoice issuer is identified on real documents",
-      "caption": "An authentic Taiwanese company invoice, photographed as a document example. Photo: Solomon203, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:JCHACST_Keelung_Office_uniform_invoice_20180925_P2.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); resized. The depicted business is unrelated to this article and is not alleged to have any document discrepancy."
-    },
-    {
       "type": "heading",
       "text": "The bank beneficiary is another approval—not an invoice footnote"
     },
@@ -110,6 +99,17 @@ export const sellerInvoiceEntityPost: BlogPost = {
     {
       "type": "paragraph",
       "text": "A workable buyer record can fit on one page if it links to the real files. Record the signed purchase order and legal seller, the producing factory and its location, the invoice issuer and commercial reason for the difference, the exporter or shipper, and the verified beneficiary. Attach the relevant written authorization and note who accepted any amendment. The purpose is to let a new colleague reconstruct the decision without asking five people which WhatsApp message was decisive."
+    },
+    {
+      "type": "illustration",
+      "src": "/images/blog/seller-invoice-records-desktop.jpg",
+      "mobileSrc": "/images/blog/seller-invoice-records-mobile.jpg",
+      "width": 960,
+      "height": 720,
+      "mobileWidth": 330,
+      "mobileHeight": 248,
+      "alt": "A hand retrieving a reference from a physical card-filing cabinet, illustrating the value of retrievable purchasing approval records",
+      "caption": "An archival filing-card system, used here to illustrate traceable records rather than any particular invoice or supplier. Photo: Watty62, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Hand_in_filing_cabinet.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); resized for desktop and mobile. The photograph shows no seller or buyer involved in this article."
     },
     {
       "type": "list",

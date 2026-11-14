@@ -30,18 +30,18 @@
     },
     {
       "role": "body",
-      "key": "receipt",
-      "author": "Solomon203",
+      "key": "records",
+      "author": "Watty62",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:JCHACST_Keelung_Office_uniform_invoice_20180925_P2.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hand_in_filing_cabinet.jpg",
       "bytes": {
-        "desktop": 209225,
-        "mobile": 28757
+        "desktop": 177647,
+        "mobile": 30709
       },
       "sha256": {
-        "desktop": "3ec4aa5a772f9a24da56759fb2fa96d3da4250f46b6b12acc4f497c87419f5ea",
-        "mobile": "e6d4d90504871d20ab0b2cc8cab160d645e9866a1d8ae2561327cedc0f1016fe"
+        "desktop": "eefa7647abddeff8ae75693f1dd9f906081f93be6608aa82beb3ed8e3df4f811",
+        "mobile": "533633e849230447374c60f9651cbf9314ccc6fc2aabf3a31134a875decf869b"
       },
       "usedIn": [
         "purchase-order-factory-invoice-trader-seller-entity-check"
@@ -49,8 +49,8 @@
       "source": "Wikimedia Commons",
       "modifications": "Resized to 960px desktop and 330px mobile JPEG thumbnails without changing depicted subjects",
       "files": {
-        "desktop": "/images/blog/seller-invoice-receipt-desktop.jpg",
-        "mobile": "/images/blog/seller-invoice-receipt-mobile.jpg"
+        "desktop": "/images/blog/seller-invoice-records-desktop.jpg",
+        "mobile": "/images/blog/seller-invoice-records-mobile.jpg"
       }
     },
     {
