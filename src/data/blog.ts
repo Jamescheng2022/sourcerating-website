@@ -1,3 +1,4 @@
+import { cocMillSheetTraceabilityPost } from "@/content/blog/certificate-of-conformance-mill-sheet-traceability-port-rejection";
 import { sellerInvoiceEntityPost } from "@/content/blog/purchase-order-factory-invoice-trader-seller-entity-check";
 import { euForcedLabourIndustrialPost } from "@/content/blog/eu-forced-labour-regulation-industrial-supplier-evidence-2027";
 import { maerskMediterraneanHeavyLoadPost } from "@/content/blog/maersk-mediterranean-pss-heavy-load-vgm-november-2026";
@@ -24,6 +25,7 @@ export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
 export const blogPosts: BlogPost[] = ([
+  cocMillSheetTraceabilityPost,
   sellerInvoiceEntityPost,
   euForcedLabourIndustrialPost,
   maerskMediterraneanHeavyLoadPost,
