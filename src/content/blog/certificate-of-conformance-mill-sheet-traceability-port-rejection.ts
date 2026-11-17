@@ -154,7 +154,7 @@ export const cocMillSheetTraceabilityPost: BlogPost = {
     {
       "title": "ISO 10474:2013 — Steel and steel products — Inspection documents",
       "publisher": "International Organization for Standardization (ISO)",
-      "href": "https://www.iso.org/standard/54605.html",
+      "href": "https://www.iso.org/standard/53736.html",
       "note": "International equivalent standard defining manufacturer declarations and inspection certificates based on specific vs non-specific testing."
     }
   ],
