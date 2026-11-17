@@ -5,6 +5,111 @@
   "photos": [
     {
       "role": "cover",
+      "key": "steel-coils",
+      "author": "Antonio Carlos Rosset (Arosset)",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Steel_Coils_-_Leeco_Steel_-_Antonio_Rosset.jpg",
+      "bytes": {
+        "desktop": 147427,
+        "mobile": 22694
+      },
+      "sha256": {
+        "desktop": "8246b895d56daa8b451d3a187e504d33139e2210457ae81e0e49512b0e452796",
+        "mobile": "1a7d180d784aabd380fe12fc3f306c785b8c0ac2a5bf2f0f434c84b2d6e4b465"
+      },
+      "dimensions": {
+        "desktop": {
+          "width": 960,
+          "height": 720
+        },
+        "mobile": {
+          "width": 330,
+          "height": 248
+        }
+      },
+      "usedIn": [
+        "certificate-of-conformance-mill-sheet-traceability-port-rejection"
+      ],
+      "source": "Wikimedia Commons",
+      "modifications": "Resized to 960px desktop and 330px mobile JPEG thumbnails without changing depicted subjects",
+      "files": {
+        "desktop": "/images/blog/coc-mill-sheet-steel-coils-desktop.jpg",
+        "mobile": "/images/blog/coc-mill-sheet-steel-coils-mobile.jpg"
+      }
+    },
+    {
+      "role": "body",
+      "key": "xrf-analyzer",
+      "author": "IAEA Imagebank (Dean Calma / IAEA)",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:X-Ray_Fluorescence_Analyzer_(03010733)_(45372292762).jpg",
+      "bytes": {
+        "desktop": 68584,
+        "mobile": 14461
+      },
+      "sha256": {
+        "desktop": "5c0548737acc1b69d726f3e4b0690fc8a38e883676401f66e802eaee9725b32b",
+        "mobile": "9989b817138b7fb1bd1a524b17e833f1171616f91546731d0fff5be79280e94d"
+      },
+      "dimensions": {
+        "desktop": {
+          "width": 960,
+          "height": 640
+        },
+        "mobile": {
+          "width": 330,
+          "height": 220
+        }
+      },
+      "usedIn": [
+        "certificate-of-conformance-mill-sheet-traceability-port-rejection"
+      ],
+      "source": "Wikimedia Commons",
+      "modifications": "Resized to 960px desktop and 330px mobile JPEG thumbnails without changing depicted subjects",
+      "files": {
+        "desktop": "/images/blog/coc-mill-sheet-xrf-analyzer-desktop.jpg",
+        "mobile": "/images/blog/coc-mill-sheet-xrf-analyzer-mobile.jpg"
+      }
+    },
+    {
+      "role": "body",
+      "key": "port-inspection",
+      "author": "CBP Photography / U.S. Customs and Border Protection",
+      "license": "Public domain",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Public_domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:U_S_Customs_%26_Border_Protection_Port_of_New_York_-_Newark_Resumes_Vessel_and_Cargo_Container_Inspection_Following_Hurricane_Sandy_(8167609897).jpg",
+      "bytes": {
+        "desktop": 121269,
+        "mobile": 19160
+      },
+      "sha256": {
+        "desktop": "8587772ef42fe8f74ad8e8afd9a163a59e91e79426e3e2cf07efdda9942e2ae0",
+        "mobile": "84797cb58e6bf00c160a12c468501c46b67fe7a6972b4d75ba8299e8bd508417"
+      },
+      "dimensions": {
+        "desktop": {
+          "width": 960,
+          "height": 640
+        },
+        "mobile": {
+          "width": 330,
+          "height": 220
+        }
+      },
+      "usedIn": [
+        "certificate-of-conformance-mill-sheet-traceability-port-rejection"
+      ],
+      "source": "Wikimedia Commons",
+      "modifications": "Resized to 960px desktop and 330px mobile JPEG thumbnails without changing depicted subjects",
+      "files": {
+        "desktop": "/images/blog/coc-mill-sheet-port-inspection-desktop.jpg",
+        "mobile": "/images/blog/coc-mill-sheet-port-inspection-mobile.jpg"
+      }
+    },
+    {
+      "role": "cover",
       "key": "port",
       "author": "AgainErick",
       "license": "CC BY-SA 4.0",
