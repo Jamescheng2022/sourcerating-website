@@ -284,7 +284,7 @@ function normalizedText(value) {
 
 function plainBodyText(value) {
   return String(value ?? "")
-    .replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, "$1")
+    .replace(/\[([^\]]+)\]\(https?:\/\/(?:[^\s()]|\([^()]*\))+\)/g, "$1")
     .replace(/\*\*([^*]+)\*\*/g, "$1")
     .replace(/\*([^*]+)\*/g, "$1");
 }
@@ -314,7 +314,7 @@ export function hasMatchingPublicationDigest(html, post) {
 
 export function missingDeployedText(html, post) {
   const visible = normalizeVisibleArticleText(html);
-  const expected = [post.title, post.excerpt, post.coverImage?.caption];
+  const expected = [post.title, post.excerpt, plainBodyText(post.coverImage?.caption)];
   const requestedHeaders = [];
   if (post.directAnswer) expected.push(post.directAnswer);
   if (post.keyTakeaways?.length) {
@@ -338,7 +338,7 @@ export function missingDeployedText(html, post) {
         for (const value of row) expected.push(String(value));
       }
     } else if (block.type === "illustration") {
-      expected.push(block.caption);
+      expected.push(plainBodyText(block.caption));
     }
   }
   for (const section of post.sections || []) {
