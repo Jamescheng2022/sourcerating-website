@@ -289,7 +289,7 @@ export const crossBorderProcurementGuidePost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "If defective goods must be returned to an overseas factory for repair or remanufacturing, never re-export without formal customs documentation. Under Chinese customs regulations, file under **Customs Trade Mode 4600 (Repair Goods / 进境修理货物)** with an approved repair bond or security deposit. Goods must enter, undergo processing, and exit within statutory timeframes to avoid re-imposition of full import tariffs and VAT upon subsequent re-entry."
+      "text": "If defective goods must be returned to an overseas factory for repair or remanufacturing, never re-export without formal customs documentation. For ordinary cross-border commercial shipments returned to China, file under **Customs Trade Mode 1300 (Goods for Repair / 修理物品)** under an approved repair bond or security deposit; distinguish this from Code 4600, which applies strictly to finished-product returns under inward processing trade. Goods must enter, undergo processing, and re-export within the statutory six-month timeframe to avoid re-imposition of full import tariffs and VAT upon subsequent re-entry."
     },
     {
       "type": "paragraph",
