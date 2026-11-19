@@ -1,3 +1,4 @@
+import { valveForgingItpInspectionPost } from "@/content/blog/overseas-valves-forgings-itp-en10204-inspection-guide";
 import { crossBorderProcurementGuidePost } from "@/content/blog/cross-border-procurement-supply-chain-full-spectrum-guide";
 import { cocMillSheetTraceabilityPost } from "@/content/blog/certificate-of-conformance-mill-sheet-traceability-port-rejection";
 import { sellerInvoiceEntityPost } from "@/content/blog/purchase-order-factory-invoice-trader-seller-entity-check";
@@ -26,6 +27,7 @@ export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
 export const blogPosts: BlogPost[] = ([
+  valveForgingItpInspectionPost,
   crossBorderProcurementGuidePost,
   cocMillSheetTraceabilityPost,
   sellerInvoiceEntityPost,

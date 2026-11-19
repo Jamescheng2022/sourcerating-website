@@ -1,6 +1,6 @@
 # 四站已发布文章与内容防重总台账 (Published Articles Anti-Duplication Ledger)
 
-> **状态**：实时维护台账 | **最新归档时间**：2026-11-18 | **跟踪总条目**：110 篇/章节
+> **状态**：实时维护台账 | **最新归档时间**：2026-11-19 | **跟踪总条目**：111 篇/章节
 
 本台账记录四个站点的全部已上线历史文章与内容，**作为每次选题第一步的强制比对依据**，严格杜绝同质化、主题重叠、标题近似和虚构选题。
 
@@ -12,7 +12,7 @@
 - [5. 每日选题防重检索流程规范](#5-每日选题防重检索流程规范)
 - [6. 原始资料与本地空间管理规范 (Google Drive 云端化)](#6-原始资料与本地空间管理规范-google-drive-云端化)
 
-## 1. SourceRating 采购与跨国工程供应链 (共 27 篇)
+## 1. SourceRating 采购与跨国工程供应链 (共 28 篇)
 | 序号 | 发布日期 / 分类 | 文章标题 | Slug / 链接 | 核心关注痛点 |
 | :--- | :--- | :--- | :--- | :--- |
 | 1 | 2026-10-21 <br>`Buyer` | **The Shipment Passed Inspection. That Does Not Mean Every Piece Passed.** | [`accepted-sampling-lot-not-zero-defects`](https://www.sourcerating.com/blog/accepted-sampling-lot-not-zero-defects) | 材质证书真实性、端口验货、防腐公差、检测范围、海运提单与清关争议 |
@@ -42,6 +42,7 @@
 | 25 | Historical <br>`Historical` | **Steel Structure Factory Audit Checklist for China Sourcing** | [`steel-structure-factory-audit-china`](https://www.sourcerating.com/blog/steel-structure-factory-audit-china) | 材质证书真实性、端口验货、防腐公差、检测范围、海运提单与清关争议 |
 | 26 | Historical <br>`Historical` | **Pre-Shipment Inspection for Engineering Materials: What to Check** | [`pre-shipment-inspection-engineering-materials`](https://www.sourcerating.com/blog/pre-shipment-inspection-engineering-materials) | 材质证书真实性、端口验货、防腐公差、检测范围、海运提单与清关争议 |
 | 27 | 2026-11-18 <br>Procurement Operations | **The Cross-Border Procurement Field Guide: Managing Supply Chain Risk from Factory Audit to Port Release** | [cross-border-procurement-supply-chain-full-spectrum-guide](https://www.sourcerating.com/blog/cross-border-procurement-supply-chain-full-spectrum-guide) | 全球寻源穿透式尽调、验厂QMS/ESG审核、Should-Cost成本拆解、Incoterms 2020与CIF陷阱、BEC防骗带外核验、ITP见证点与EN 10204 3.1打假、AQL抽样、ISPM 15防腐防锈包装计算、CBAM/UFLPA合规、CIETAC/SIAC国际仲裁 |
+| 28 | 2026-11-19 <br>`Quality & Inspection` | **The 3.2 Certificate Has Two Signatures. Did Either Inspector See the Test Bar Cut?** | [`overseas-valves-forgings-itp-en10204-inspection-guide`](https://www.sourcerating.com/blog/overseas-valves-forgings-itp-en10204-inspection-guide) | 承压阀门/铸锻件 ITP 的 H/W/R/M 设置、EN 10204 3.2 试块钢印移植与见证链、A105↔A350 LF2 / WCB↔LCC 等 XRF 无法识别的调包、LR/TÜV/DNV/BV 签字真伪核验、PED 公告机构 NANDO 核对、现场 PMI/硬度/铁素体/金相复型、中英合同条款（与 11-17 CoC 文章、10-21 316L XRF 文章区分：本篇聚焦第二签名的物理见证与韧性证明） |
 
 
 ## 2. Precast.World 全球预制混凝土工艺与设备 (共 21 篇)
