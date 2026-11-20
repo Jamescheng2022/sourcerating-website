@@ -36,7 +36,7 @@ export const aiSteelFabricatorDecisionPost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "The [AISC Code of Standard Practice](https://www.aisc.org/globalassets/aisc/publications/standards/a303-22w.pdf) is useful as an illustration of why design documents, fabrication approval documents and the flow of revisions matter. It is not a substitute for the code or approvals governing a particular destination. A supplier's shop drawing is also not, by itself, an approval from the locally responsible designer."
+      "text": "The [AISC Code of Standard Practice](https://www.aisc.org/aisc/publications/current-standards/aisc-303/) is useful as an illustration of why design documents, fabrication approval documents and the flow of revisions matter. It is not a substitute for the code or approvals governing a particular destination. A supplier's shop drawing is also not, by itself, an approval from the locally responsible designer."
     },
     {
       "type": "paragraph",
@@ -101,7 +101,7 @@ export const aiSteelFabricatorDecisionPost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "A factory's ISO, AISC or EN certificate may be relevant, but the buyer must check the exact issuing body, facility, certification scope, validity and project applicability. Even a valid certificate is not a batch-specific inspection report. This is why the [AISC fabrication certification framework](https://www.aisc.org/globalassets/certification/files/certification-standard-for-steel-fabrication-and-erection-and-manufacturing-of-metal-components.pdf) addresses purchasing requirements, supplier evaluation and verification—not merely a sign on the factory gate."
+      "text": "A factory's ISO, AISC or EN certificate may be relevant, but the buyer must check the exact issuing body, facility, certification scope, validity and project applicability. Even a valid certificate is not a batch-specific inspection report. This is why the [AISC fabrication certification framework](https://www.aisc.org/certification/) addresses purchasing requirements, supplier evaluation and verification—not merely a sign on the factory gate."
     },
     {
       "type": "paragraph",
@@ -170,13 +170,13 @@ export const aiSteelFabricatorDecisionPost: BlogPost = {
     {
       "title": "Code of Standard Practice for Steel Buildings and Bridges, ANSI/AISC 303-22",
       "publisher": "American Institute of Steel Construction",
-      "href": "https://www.aisc.org/globalassets/aisc/publications/standards/a303-22w.pdf",
+      "href": "https://www.aisc.org/aisc/publications/current-standards/aisc-303/",
       "note": "Design documents, revisions, approval and fabrication responsibilities. Application is project-specific."
     },
     {
       "title": "Certification Standard for Steel Fabrication and Erection (AISC 207-16)",
       "publisher": "American Institute of Steel Construction",
-      "href": "https://www.aisc.org/globalassets/certification/files/certification-standard-for-steel-fabrication-and-erection-and-manufacturing-of-metal-components.pdf",
+      "href": "https://www.aisc.org/certification/",
       "note": "Supplier evaluation, purchasing requirements and verification of purchased material and services."
     },
     {
