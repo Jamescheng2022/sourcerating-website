@@ -158,7 +158,7 @@ export const aiSteelFabricatorDecisionPost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "If you already have a candidate, [Source Rating's free first-pass supplier risk screen](/risk-screen) is intended to help identify which question merits further verification, not to certify a factory or replace the local engineer. A related but separate business, [AN-THAI Engineering's steel sourcing service](https://an-thai.com/steel-procurement.html), describes optional project-specific manufacturing and technical coordination; any engagement, commission and inspection independence should be agreed and disclosed separately."
+      "text": "If you already have a potential fabricator, [Source Rating's free first-pass supplier risk screen](/risk-screen) may help identify a question for further verification; it does not certify a factory or replace the local engineer. For a real steel procurement package, contact **AN-THAI Engineering Company Limited**, a separate engineering business, through its [steel sourcing and fabrication-coordination page](https://an-thai.com/steel-procurement.html) or [steel enquiry form](https://an-thai.com/contact.html?type=steel#enquiry-form). **Email:** [anthaicheng@gmail.com](mailto:anthaicheng@gmail.com). **Phone:** [+66 90 292 1749](tel:+66902921749). The company coordinates project-specific services; manufacturers, qualified designers, inspectors and contract responsibilities are confirmed for each engagement. Any sourcing commission or inspection conflict must be disclosed rather than assumed independent."
     },
     {
       "type": "paragraph",
