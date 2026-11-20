@@ -8,7 +8,7 @@ export const aiSteelFabricatorDecisionPost: BlogPost = {
   "date": "2026-11-20",
   "category": "Steel structures",
   "layout": "editorial",
-  "readTime": "9 min read",
+  "readTime": "7 min read",
   "sections": [],
   "coverImage": {
     "src": "/assets/photography/51872404.jpg",
