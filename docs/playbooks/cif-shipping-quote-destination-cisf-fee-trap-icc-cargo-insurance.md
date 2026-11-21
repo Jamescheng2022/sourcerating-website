@@ -162,11 +162,11 @@ To eliminate destination fee extortion and insurance gaps, procurement contracts
 
 > **English:**  
 > "The Contract Price is based on [FOB / CIF named port of destination, Incoterms 2020]. The Seller expressly warrants that the ocean freight contracted by the Seller or its shipping agents does not contain any 'negative freight', freight rebates, or co-loading kickback arrangements. The Seller guarantees that neither the Seller, the carrier, nor any destination de-consolidator or agent shall levy any China Import Service Fee (CISF), China Import Surcharge (CISS), turnover fees, or any destination terminal fees exceeding the standard published carrier terminal tariff at the port of discharge.  
-> If the consignee is billed any CISF, CISS, or unagreed destination surcharges to obtain the Delivery Order (D/O), the Seller shall unconditionally reimburse the Buyer within five (5) business days of receiving the invoice copy, or the Buyer shall have the legal right to deduct the full amount from any pending contract payment, warranty retention, or bank guarantee."
+> If the consignee is billed any CISF, CISS, or unagreed destination surcharges to obtain the Delivery Order (D/O), the Seller shall unconditionally reimburse the Buyer within five (5) business days of receiving the invoice copy, or the Buyer shall have the legal right to deduct the full amount from any pending contract payment, warranty retention, or, subject to the instrument's terms and demand conditions, applicable bank guarantee."
 > 
 > **中文对照：**  
 > “合同价格基于【FOB / CIF 指定目的港，Incoterms 2020】。卖方明确保证，由其或其货运代理订舱的海运服务绝不包含任何‘负运费’、运费回扣或拼箱暗佣安排。卖方保证，卖方、承运人及其目的港拆箱代理均不得向买方收取中国进口服务费（CISF）、中国进口附加费（CISS）、单证交接费，或任何超出卸货港船公司公开公布标准费率的目的港杂费。  
-> 若收货人为换取提货单（D/O）而被索要任何 CISF、CISS 或未经事先书面确认的目的港不合理附加费，卖方须在收到发票副本后五（5）个工作日内无条件向买方足额补偿，或买方有权直接从任何应付合同款项、质保金或银行保函中全额扣除等额款项。”
+> 若收货人为换取提货单（D/O）而被索要任何 CISF、CISS 或未经事先书面确认的目的港不合理附加费，卖方须在收到发票副本后五（5）个工作日内无条件向买方足额补偿，或买方有权直接从任何应付合同款项、质保金中等额扣除；若拟对银行保函提出索赔，须严格符合保函具体担保范围与 URDG 758 第 5 条及第 15 条规定的单据索赔条件。”
 
 ### Clause 2: Mandatory Marine Cargo Insurance Rider (海运一切险指定条款)
 
