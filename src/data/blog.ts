@@ -1,3 +1,4 @@
+import { chinaSteelBoltedJointPost } from "@/content/blog/china-steel-structures-bolted-joint-requirements";
 import { cifCisfDestinationFeePost } from "@/content/blog/cif-shipping-quote-destination-cisf-fee-trap-icc-cargo-insurance";
 import { aiSteelFabricatorDecisionPost } from "@/content/blog/ai-found-chinese-steel-fabricator-do-you-need-agent";
 import { advancePaymentGuaranteeUrdgPost } from "@/content/blog/advance-payment-guarantee-performance-bond-urdg-758-buyer-guide";
@@ -30,6 +31,7 @@ export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
 export const blogPosts: BlogPost[] = ([
+  chinaSteelBoltedJointPost,
   cifCisfDestinationFeePost,
   aiSteelFabricatorDecisionPost,
   advancePaymentGuaranteeUrdgPost,
