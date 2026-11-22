@@ -1,6 +1,6 @@
 # 四站已发布文章与内容防重总台账 (Published Articles Anti-Duplication Ledger)
 
-> **状态**：实时维护台账 | **最新归档时间**：2026-11-21 | **跟踪总条目**：114 篇/章节
+> **状态**：实时维护台账 | **最新归档时间**：2026-11-22 | **跟踪总条目**：115 篇/章节
 
 本台账记录四个站点的全部已上线历史文章与内容，**作为每次选题第一步的强制比对依据**，严格杜绝同质化、主题重叠、标题近似和虚构选题。
 
@@ -12,7 +12,7 @@
 - [5. 每日选题防重检索流程规范](#5-每日选题防重检索流程规范)
 - [6. 原始资料与本地空间管理规范 (Google Drive 云端化)](#6-原始资料与本地空间管理规范-google-drive-云端化)
 
-## 1. SourceRating 采购与跨国工程供应链 (共 31 篇)
+## 1. SourceRating 采购与跨国工程供应链 (共 32 篇)
 | 序号 | 发布日期 / 分类 | 文章标题 | Slug / 链接 | 核心关注痛点 |
 | :--- | :--- | :--- | :--- | :--- |
 | 1 | 2026-10-21 <br>`Buyer` | **The Shipment Passed Inspection. That Does Not Mean Every Piece Passed.** | [`accepted-sampling-lot-not-zero-defects`](https://www.sourcerating.com/blog/accepted-sampling-lot-not-zero-defects) | 材质证书真实性、端口验货、防腐公差、检测范围、海运提单与清关争议 |
@@ -46,6 +46,7 @@
 | 29 | 2026-11-20 <br>`Contracts & Payment` | **The Supplier Sent a Bank Guarantee for Your Deposit. Will the Bank Actually Pay?** | [`advance-payment-guarantee-performance-bond-urdg-758-buyer-guide`](https://www.sourcerating.com/blog/advance-payment-guarantee-performance-bond-urdg-758-buyer-guide) | 成套设备预付款保函 (APG)/履约/质保保函三段时间轴空窗、URDG 758 第 7 条生效条款与付款账户错配、MT760 加押核验防伪保函、发运即减额与到期日陷阱、第 15/20/23/24/25(c) 条索赔与展期或付款、最高法法释〔2016〕24 号止付风险与证据链、转开保函结构、中英合同条款与索赔函模板（与 11-18 全景指南仅一段概述区分：本篇为保函专题深度实操） |
 | 30 | 2026-11-20 <br>Steel structures | **AI Found You a Chinese Steel Fabricator. Do You Still Need a Sourcing Agent?** | [`ai-found-chinese-steel-fabricator-do-you-need-agent`](https://www.sourcerating.com/blog/ai-found-chinese-steel-fabricator-do-you-need-agent) | AI 推荐工厂与现场工程责任割裂、AISC 303 与 EN 1090 适用范围边界、Q355B 替代 ASTM/EN 材质技术审批、最长最重件运输与包装口径、分项到岸成本模型、直接直采条件与专业技术协调服务区分（与历史验厂、供应商审核、报价对比文章区分：聚焦 AI 寻源后的买家决策分流与专业工程协调真实边界） |
 | 31 | 2026-11-21 <br>Packaging & Logistics | **The $300 CIF Shipping Quote That Invoiced $4,200 at the Port: A Buyer's Field Guide to LCL Destination Fee Extortion, the CISF Kickback, and the ICC (C) Insurance Blindspot** | [`cif-shipping-quote-destination-cisf-fee-trap-icc-cargo-insurance`](https://www.sourcerating.com/blog/cif-shipping-quote-destination-cisf-fee-trap-icc-cargo-insurance) | 国际海运拼箱(LCL)与整箱(FCL)目的港杂费穿透分析；揭秘国内货代向工厂倒贴“负运费/退运费”回扣、联合海外目的港拆箱代理向买方转嫁恶性高额杂费（CISF/CISS/超额THC/单证费）的灰色利益链；Incoterms 2020 CIF双港分离与A6(b)费用划分边界；12-14 CBM拼箱与20GP整箱运费分水岭计算模型；海运险ICC (C)最低险种对落水/海水浸泡/装卸摔损/集装箱汗湿生锈的免赔漏洞；中英双语禁止收取CISF与指定一切险(ICC A)合同模版；到港被扣货勒索时援引CISG第30条及FMC监管的反制急救协议 |
+| 32 | 2026-11-22 <br>Contracts & Sourcing | **The Western NDA That Protected Nothing: Why Overseas Buyers Lose Their Tooling, Tech, and Markets—and How to Draft an Enforceable Chinese-English NNN Agreement** | [`nnn-agreement-china-manufacturing-tooling-bailment-ip-guide`](https://www.sourcerating.com/blog/nnn-agreement-china-manufacturing-tooling-bailment-ip-guide) | 跨国硬件/机械/电子/模具采购中西方普通NDA保护真空穿透分析；揭秘保密(Non-Disclosure)仅防公开泄露而不防内部挪用(Non-Use)与私联客户(Non-Circumvention)的法律漏洞；中国民法典第585条约定违约金与民诉法第103/104条48小时诉前财产保全（冻结工厂基本户）实操；工装模具保管协议(Tooling Bailment)、模具铭牌永久铆接与民法典第447条法定留置权放弃条款；双语中英合同以中文为准与被告住所地中级法院专属管辖设计；防范商标与实用新型专利抢注及海关知识产权保护备案；保姆级中英双语可直接套用合同条款模板（禁止使用、禁止反跳、违约金、放弃留置权、管辖与语言）。 |
 
 
 ## 2. Precast.World 全球预制混凝土工艺与设备 (共 21 篇)
