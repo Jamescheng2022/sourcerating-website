@@ -1,6 +1,6 @@
 # 四站已发布文章与内容防重总台账 (Published Articles Anti-Duplication Ledger)
 
-> **状态**：实时维护台账 | **最新归档时间**：2026-11-21 | **跟踪总条目**：114 篇/章节
+> **状态**：实时维护台账 | **最新归档时间**：2026-11-23 | **跟踪总条目**：116 篇/章节
 
 本台账记录四个站点的全部已上线历史文章与内容，**作为每次选题第一步的强制比对依据**，严格杜绝同质化、主题重叠、标题近似和虚构选题。
 
@@ -12,7 +12,7 @@
 - [5. 每日选题防重检索流程规范](#5-每日选题防重检索流程规范)
 - [6. 原始资料与本地空间管理规范 (Google Drive 云端化)](#6-原始资料与本地空间管理规范-google-drive-云端化)
 
-## 1. SourceRating 采购与跨国工程供应链 (共 32 篇)
+## 1. SourceRating 采购与跨国工程供应链 (共 33 篇)
 | 序号 | 发布日期 / 分类 | 文章标题 | Slug / 链接 | 核心关注痛点 |
 | :--- | :--- | :--- | :--- | :--- |
 | 1 | 2026-10-21 <br>`Buyer` | **The Shipment Passed Inspection. That Does Not Mean Every Piece Passed.** | [`accepted-sampling-lot-not-zero-defects`](https://www.sourcerating.com/blog/accepted-sampling-lot-not-zero-defects) | 材质证书真实性、端口验货、防腐公差、检测范围、海运提单与清关争议 |
@@ -47,6 +47,7 @@
 | 30 | 2026-11-20 <br>Steel structures | **AI Found You a Chinese Steel Fabricator. Do You Still Need a Sourcing Agent?** | [`ai-found-chinese-steel-fabricator-do-you-need-agent`](https://www.sourcerating.com/blog/ai-found-chinese-steel-fabricator-do-you-need-agent) | AI 推荐工厂与现场工程责任割裂、AISC 303 与 EN 1090 适用范围边界、Q355B 替代 ASTM/EN 材质技术审批、最长最重件运输与包装口径、分项到岸成本模型、直接直采条件与专业技术协调服务区分（与历史验厂、供应商审核、报价对比文章区分：聚焦 AI 寻源后的买家决策分流与专业工程协调真实边界） |
 | 31 | 2026-11-21 <br>Packaging & Logistics | **The $300 CIF Shipping Quote That Invoiced $4,200 at the Port: A Buyer's Field Guide to LCL Destination Fee Extortion, the CISF Kickback, and the ICC (C) Insurance Blindspot** | [`cif-shipping-quote-destination-cisf-fee-trap-icc-cargo-insurance`](https://www.sourcerating.com/blog/cif-shipping-quote-destination-cisf-fee-trap-icc-cargo-insurance) | 国际海运拼箱(LCL)与整箱(FCL)目的港杂费穿透分析；揭秘国内货代向工厂倒贴“负运费/退运费”回扣、联合海外目的港拆箱代理向买方转嫁恶性高额杂费（CISF/CISS/超额THC/单证费）的灰色利益链；Incoterms 2020 CIF双港分离与A6(b)费用划分边界；12-14 CBM拼箱与20GP整箱运费分水岭计算模型；海运险ICC (C)最低险种对落水/海水浸泡/装卸摔损/集装箱汗湿生锈的免赔漏洞；中英双语禁止收取CISF与指定一切险(ICC A)合同模版；到港被扣货勒索时援引CISG第30条及FMC监管的反制急救协议 |
 | 32 | 2026-11-22 <br>Steel structures | **The Bolts Are Correct. Is the Steel Connection?** | [`china-steel-structures-bolted-joint-requirements`](https://www.sourcerating.com/blog/china-steel-structures-bolted-joint-requirements) | 海外买家采购中国钢结构出口中的高强螺栓连接要求；区分紧固件螺栓规格与结构连接设计要求（Snug-tightened / Pretensioned / Slip-critical 三类连接性能边界）；RCSC、AISC 360 与 EN 1090-2 标准技术差异；摩擦型连接接触面（faying surface）摩擦系数、除锈等级与涂层防锈污染陷阱；紧固件总成代用审批与现场扭矩/转角法施工复验；中欧美紧固件与CE认证混用风险；买家5项审核清单与审核责任矩阵 |
+| 33 | 2026-11-23 <br>Procurement Operations | **The 50,000 m² Factory That Existed Only in the Showroom: The Overseas Buyer's Guide to Corporate Penetration Due Diligence in Chinese Industrial Sourcing** | [`supplier-penetration-due-diligence-showroom-factory-guide`](https://www.sourcerating.com/blog/supplier-penetration-due-diligence-showroom-factory-guide) | 揭秘海外买家在定制机械、电气成套、模具五金与工程零部件采购中的“展厅工厂”挂牌与影子作坊假代工欺诈；穿透国家企业信用信息公示系统(GSXT)18位统一社会信用代码、新《公司法》第47条5年内实缴资本穿透与企业年报城镇职工社保参保实收人数核查；全国排污许可证管理信息平台合规准入；高压大工业用电电费结算单变压器kVA容量与每月有功电量kWh工程测算模型；现场固定资产标签、工序流转卡/派工单实地追踪、门卫过磅单与合同相对性突击核查；中英双语禁止擅自转包、生产场地陈述保证与30%惩罚性约定违约金(民法典第585条)合同模版 |
 
 
 ## 2. Precast.World 全球预制混凝土工艺与设备 (共 21 篇)
