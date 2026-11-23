@@ -70,7 +70,7 @@ export const steelFabricatedGalvanizerRejectionPost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "As the [American Galvanizers Association (AGA)](https://galvanizeit.org/aess-for-specifiers/design-details-and-fabrication-best-practices-for-hdg) and [ASTM A385/A385M](https://www.astm.org/a0385_a0385m-20.html) govern, every enclosed tubular component, internal baffle, and stiffened hollow member must have properly sized venting holes at the highest point during dipping, and drainage holes at the lowest point. European standard [DIN EN ISO 14713-2](https://www.metallbau-magazin.de/news/aenderungen-din-en-iso-14713-3548272.html) specifies exact minimum hole diameters based on profile cross-section."
+      "text": "As the [American Galvanizers Association (AGA)](https://galvanizeit.org/design-and-fabrication/design-considerations/venting-and-drainage/pipe-columns-girders-and-poles) and [ASTM A385/A385M](https://www.astm.org/a0385_a0385m-20.html) govern, opening sizes must scale with member geometry rather than generic fixed holes. For example, AGA's pipe-column and pole guidance specifies internal end-plate or cap openings totaling at least 30% of the inside diameter area for members 3 inches (76 mm) and larger, and 45% for smaller pipes. European standard [DIN EN ISO 14713-2](https://www.metallbau-magazin.de/news/aenderungen-din-en-iso-14713-3548272.html) similarly links minimum vent diameters directly to the profile diagonal and cross-sectional area to prevent air locks during rapid submersion."
     },
     {
       "type": "paragraph",
@@ -103,7 +103,7 @@ export const steelFabricatedGalvanizerRejectionPost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "Technical documentation from galvanizing specialists, such as [V&S Hot Dip Galvanizing's technical bulletins](https://www.hotdipgalvanizing.com/technical-resources/why-vent-and-drain-holes-can-plug-during-galvanizing-and-how-to-prevent-it), explains how zinc freezing around undersized holes causes progressive blockage. If the drainage holes are too small (e.g., standard 6 mm fabrication holes instead of the required 12 mm to 20 mm minimums), the zinc begins freezing across the orifice before drainage completes, trapping hundreds of kilograms of liquid metal."
+      "text": "Technical documentation from galvanizing specialists, such as [V&S Hot Dip Galvanizing's technical bulletins](https://www.hotdipgalvanizing.com/technical-resources/why-vent-and-drain-holes-can-plug-during-galvanizing-and-how-to-prevent-it), explains how zinc freezing around undersized holes causes progressive blockage. If the drainage holes are too small (e.g., standard small weep holes instead of openings proportioned to the member's volume and length), the zinc begins freezing across the orifice before drainage completes, trapping hundreds of kilograms of liquid metal."
     },
     {
       "type": "heading",
@@ -224,8 +224,8 @@ export const steelFabricatedGalvanizerRejectionPost: BlogPost = {
         [
           "Hollow Structural Sections (HSS/Pipe)",
           "Closed ends with solid welded cap plates; no vent holes",
-          "Diagonal venting and drainage holes (minimum 25% of profile area or dual 12–20 mm holes at opposite ends)",
-          "ASTM A385 Section 7 / EN ISO 14713-2"
+          "Geometry-scaled end openings confirmed with galvanizer: minimum 30% cross-sectional area for members >=3\" (76 mm), 45% for smaller pipes, or diagonal corner snipes/slots per ASTM A385 & ISO 14713-2",
+          "ASTM A385 Section 7 / AGA Venting Guidelines / EN ISO 14713-2"
         ],
         [
           "Beam Stiffeners & Diaphragms",
@@ -294,6 +294,12 @@ export const steelFabricatedGalvanizerRejectionPost: BlogPost = {
       "publisher": "American Galvanizers Association",
       "href": "https://galvanizeit.org/aess-for-specifiers/design-details-and-fabrication-best-practices-for-hdg",
       "note": "AESS and structural steel design guidelines for hot-dip galvanizing, venting, distortion control, and ASTM A385 compliance."
+    },
+    {
+      "title": "Venting and Drainage: Pipe Columns, Girders, and Poles",
+      "publisher": "American Galvanizers Association",
+      "href": "https://galvanizeit.org/design-and-fabrication/design-considerations/venting-and-drainage/pipe-columns-girders-and-poles",
+      "note": "Technical specification of cross-sectional opening percentages (30% for >=3\" and 45% for <3\" pipe) for hot-dip galvanizing."
     },
     {
       "title": "ASTM A385/A385M - Standard Practice for Providing High-Quality Zinc Coatings (Hot-Dip)",
