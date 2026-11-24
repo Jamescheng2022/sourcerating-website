@@ -13,12 +13,13 @@ All four subjects are licensed documentary photographs from Wikimedia Commons an
 - **Adaptation:** High-resolution original, cropped to 16:9, resized to 960x540 and 330x186 WebP.
 - **Visible caption:** Credits author, Commons and licence; documents an authentic industrial manufacturing shop floor with workers operating heavy equipment, illustrating the physical operational reality that due diligence seeks to confirm versus empty showroom suites.
 
-### 2. Figure: Vertical CNC Machining Center with Automatic Tool Changer
-- **Author:** Stilfehler
-- **Source URL:** https://commons.wikimedia.org/wiki/File:CNC_Mill_2.jpg
-- **License:** CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
-- **Adaptation:** High-resolution original, resized to 960x640 landscape WebP (desktop) and 360x450 portrait WebP (mobile) for phone readability; adapted renditions shared under the same licence.
-- **Visible caption:** Credits author, Commons and licence; documents a vertical CNC milling machining center on an industrial shop floor, illustrating on-site verification of equipment asset tags, serial numbers, and physical ownership to prevent "showroom borrowed machine" fraud.
+### 2. Figure: Row of Numbered Vertical CNC Machining Centers on a Working Shop Floor
+- **Author:** Marcin Wichary
+- **Source URL:** https://commons.wikimedia.org/wiki/File:TGFT25_Fadal_CNC_machines_-_Taylor_Guitar_Factory.jpg
+- **License:** CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/)
+- **Adaptation:** 1920x1278 Commons rendition of the 4752x3164 original, centre-cropped and resized to 960x640 landscape WebP (desktop) and 360x450 portrait WebP (mobile).
+- **Visible caption:** Credits author, Commons and licence; documents a line of Fadal VMC 4020 vertical machining centers with machine numbers and control pendants, illustrating on-site verification of equipment asset tags, serial numbers, and physical ownership to prevent "showroom borrowed machine" fraud.
+- **Replacement note (2026-11-24, Opus acceptance):** replaced the earlier `CNC_Mill_2.jpg` subject because the same photograph is used by the 22 Nov NNN/tooling article published in the same release; this keeps every SourceRating figure unique.
 
 ### 3. Figure: High-Voltage Electrical Substation and Industrial Distribution Transformer
 - **Author:** Jacek Halicki
@@ -44,8 +45,8 @@ Source files were fetched directly in-memory, converted with `sharp` to WebP, an
 |---|---|---|---|
 | `public/images/blog/due-diligence-factory-workshop-machinery-desktop.webp` | 960x540 | 26996 | `562e5b486df548a04857d670fc588034ab9041559f50cb028a26e93f72d6dc93` |
 | `public/images/blog/due-diligence-factory-workshop-machinery-mobile.webp` | 330x186 | 6406 | `1422da5b80f9766a67b8d7e064fc30de2217d30d17f3eb627898cf1d75045f59` |
-| `public/images/blog/due-diligence-cnc-machining-center-desktop.webp` | 960x640 | 68638 | `d7c2d394fc34fa880cb797f397a36f850da023936293091627ff1495a47091f7` |
-| `public/images/blog/due-diligence-cnc-machining-center-mobile.webp` | 360x450 | 22714 | `fc92d19f0576dd8523444fea04ac5c53bd7c65f8d65553457dd90998fe0ae510` |
+| `public/images/blog/due-diligence-cnc-machining-center-desktop.webp` | 960x640 | 78610 | `23f5415f8b09823b236573e57059f6527d6430e4afa6741488bc62631aab1d1b` |
+| `public/images/blog/due-diligence-cnc-machining-center-mobile.webp` | 360x450 | 23976 | `df21e234b5ce5e7c07827f1184b61b2e8b01d0aa6254bc0bead2144d9a0ee97e` |
 | `public/images/blog/due-diligence-industrial-substation-transformer-desktop.webp` | 960x640 | 145114 | `11035e246dec51cf63d0095939dec46e4fb39cf69d24be403814cc7bfe16c34e` |
 | `public/images/blog/due-diligence-industrial-substation-transformer-mobile.webp` | 360x450 | 31196 | `acf86a9282dc61ea8655c2594a30a545f2e45c39bf6bd9e026dd3d5e931f980a` |
 | `public/images/blog/due-diligence-precision-component-inspection-desktop.webp` | 960x640 | 35186 | `8db9febc8589574d77ad45a7a6f4d05105f104ec2507044e649ed493f892a7fd` |

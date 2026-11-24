@@ -63,8 +63,8 @@ export const supplierDueDiligenceGuidePost: BlogPost = {
       "height": 640,
       "mobileWidth": 360,
       "mobileHeight": 450,
-      "alt": "Vertical CNC machining center on an industrial manufacturing shop floor with automatic tool changer and clamping table",
-      "caption": "A vertical CNC milling machining center on an industrial shop floor. Verifying fixed asset inventory tags, machine serial plates, and maintenance records is vital to confirm that equipment belongs to the contracted vendor rather than a co-located third party. Photo: Stilfehler, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:CNC_Mill_2.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); adapted for web. Documentary illustration only."
+      "alt": "Row of numbered Fadal VMC 4020 vertical CNC machining centers with operator control pendants on a working factory floor",
+      "caption": "A row of numbered Fadal VMC 4020 vertical CNC machining centers on a working factory floor. Verifying fixed asset inventory tags, machine serial plates, and maintenance records is vital to confirm that equipment belongs to the contracted vendor rather than a co-located third party. Photo: Marcin Wichary, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:TGFT25_Fadal_CNC_machines_-_Taylor_Guitar_Factory.jpg), [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/); cropped and resized for web. Documentary illustration only."
     },
     {
       "type": "heading",
