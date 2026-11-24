@@ -1,6 +1,7 @@
 import { industrialMachineryFatSatGuidePost } from "@/content/blog/industrial-machinery-fat-sat-electrical-safety-buyer-guide";
 import { steelFabricatedGalvanizerRejectionPost } from "@/content/blog/the-steel-is-fabricated-why-wont-the-galvanizer-accept-it";
 import { chinaSteelBoltedJointPost } from "@/content/blog/china-steel-structures-bolted-joint-requirements";
+import { nnnAgreementToolingBailmentPost } from "@/content/blog/nnn-agreement-china-manufacturing-tooling-bailment-ip-guide";
 import { cifCisfDestinationFeePost } from "@/content/blog/cif-shipping-quote-destination-cisf-fee-trap-icc-cargo-insurance";
 import { aiSteelFabricatorDecisionPost } from "@/content/blog/ai-found-chinese-steel-fabricator-do-you-need-agent";
 import { advancePaymentGuaranteeUrdgPost } from "@/content/blog/advance-payment-guarantee-performance-bond-urdg-758-buyer-guide";
@@ -36,6 +37,7 @@ export const blogPosts: BlogPost[] = ([
   industrialMachineryFatSatGuidePost,
   steelFabricatedGalvanizerRejectionPost,
   chinaSteelBoltedJointPost,
+  nnnAgreementToolingBailmentPost,
   cifCisfDestinationFeePost,
   aiSteelFabricatorDecisionPost,
   advancePaymentGuaranteeUrdgPost,
