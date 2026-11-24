@@ -35,12 +35,23 @@ Read `docs/editorial/SOURCERATING_EDITORIAL_STANDARD.md` **at execution time**. 
 
 ## 3. Prepare actual images, not just image prompts
 
-1. For a substantial article consider a documentary-style editorial photo and/or a technical explanatory visual; every chosen visual must help understanding, not just add decoration.
-2. Secure actual image bytes, confirm rights, add to `public/images/blog/` (or another proven public path), and check format, dimensions, responsive layout, alt, caption and attribution. Any generated factory scene must be labeled as an **AI-generated illustration, not evidence of a particular facility, product inspection or customer**.
-3. Place the real media path in the article's `coverImage` or an inline `articleBody` `illustration` block. **Generated in the chat, stored in Library or mentioned in a draft is not the same as present in the production webpage.**
-4. Use an actual mobile-specific layout for text-heavy wide diagrams (the current article renderer supports `mobileSrc`). Confirm caption stays with the corresponding visual.
-5. The image shared on LinkedIn or in Open Graph must be a compatible raster image (typically JPG/PNG). The site body may use SVG or AVIF with a raster social fallback. Check the *actual production* `og:image`, not just the source filename.
-6. No copyrighted third-party visual copied without permission. If an image cannot be obtained or truthfully attributed, use a suitable original graphic or publish without that image and explain the limitation.
+Read `docs/editorial/REAL_INDUSTRIAL_PHOTOGRAPHY_STANDARD.md` **at execution time**. It governs authentic industrial photography management, licensing verification, responsive formats, and attribution.
+
+1. **Standard allocation:** Provide 2–4 authentic industrial engineering photos per substantial technical article (1 Cover/Hero photo establishing the primary industrial process or operating environment + 1–3 in-body technical close-ups illustrating specific fabrication, geometry, defect control, or inspection details). Every visual must help technical understanding, not serve as mere decoration.
+2. **Zero AI-generated factory scenes:** Strict prohibition of AI-generated fake factory scenes, imaginary workers, synthetic quality inspection records, or simulated manufacturing environments. If a conceptual diagram or workflow is needed, use an explicit technical SVG schematic labeled as an *original editorial illustration / schematic, not an actual project record*.
+3. **Deterministic copyright & licensing audit:** When reviewing candidate industry sources (trade journals like *metallbau*, corporate galvanizers/fabricators, manufacturer catalogs like *Kowa*, or trade associations like *AGA*/*AISC*), check page copyright, Terms of Service, and image metadata. If proprietary (*"All rights reserved"*, *"Alle Rechte vorbehalten"*, catalog copyright) without an explicit open commercial reuse license:
+   - **DO NOT** copy or scrape third-party images.
+   - **DO** retain candidate URLs in the article bibliography as research citations.
+   - **DO** acquire verified Creative Commons (CC BY, CC BY-SA, CC0) or Public Domain authentic engineering photography from open repositories (such as Wikimedia Commons). Never use assets with NC (Non-Commercial) or ND (No-Derivatives) restrictions.
+4. **Mandatory metadata & attribution format:** Every embedded photo must include:
+   - Descriptive English `alt` text detailing physical components and engineering elements.
+   - Standardized `caption` including technical explanation, photographer/organization credit with link, archive source link, license designation with link, web-resizing note, and documentary disclaimer:
+     `[Technical description]. Photo: [Author] / [Source Link], [License Link]; cropped and resized for web. Documentary illustration only; not a specific project, supplier, or inspection discussed in this article.`
+5. **Responsive web optimization:** Secure actual image bytes in `public/images/blog/` using descriptive kebab-case filenames. Provide dual-tier JPG/WebP assets:
+   - Landscape (3:2): Desktop `1200x800` (<250 KB), Mobile `600x400` (<70 KB).
+   - Portrait (3:4): Desktop `800x1067` (<250 KB), Mobile `480x640` (<70 KB).
+   - Social / Open Graph: Compatible raster JPG/PNG for `og:image` and LinkedIn previews.
+6. **Live component integration:** Place real media paths in `coverImage` (with `src`, `mobileSrc`, `width`, `height`, `mobileWidth`, `mobileHeight`, `alt`, `caption`) and inline `articleBody` `illustration` blocks. **Generated in chat, stored in Library or mentioned in a draft is not present in the production webpage.**
 
 ## 4. Stage the article in the live data model
 
