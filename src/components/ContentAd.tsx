@@ -52,7 +52,7 @@ export function ContentAd({ enabled, slot, hosts }: { enabled: boolean; slot: st
     };
   }, [configured, hosts]);
 
-  if (!configured || !consented || requested.current && !unit.current) return null;
+  if (!configured || !consented) return null;
   return (
     <>
       <Script
