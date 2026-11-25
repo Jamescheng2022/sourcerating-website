@@ -27,7 +27,7 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "An industrial manufacturing supplier in East Asia contracts to deliver $680,000 of custom high-pressure flanged valves, structural steel sections, or specialized electrical control transformers to an overseas engineering contractor. The commercial negotiation was protracted, but both parties agreed to eliminate credit risk by utilizing a 100% Irrevocable Documentary Letter of Credit (L/C) payable at sight against shipping documents, governed by the International Chamber of Commerce (ICC) [Uniform Customs and Practice for Documentary Credits (UCP 600)](https://iccwbo.org/business-solutions/rules-and-standards/ucp-600/)."
+      "text": "Consider a common illustrative scenario: An industrial manufacturing supplier in East Asia contracts to deliver $680,000 of custom high-pressure flanged valves, structural steel sections, or specialized electrical control transformers to an overseas engineering contractor. The commercial negotiation was protracted, but both parties agreed to eliminate credit risk by utilizing a 100% Irrevocable Documentary Letter of Credit (L/C) payable at sight against shipping documents, governed by the International Chamber of Commerce (ICC) [Uniform Customs and Practice for Documentary Credits (UCP 600)](https://library.iccwbo.org/content/tfb/RULES/tfb-ucp600-rules.htm)."
     },
     {
       "type": "paragraph",
@@ -35,21 +35,21 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "Then the market shifts. During the 32-day ocean voyage, destination spot prices for industrial metals drop by 22%, or the buyer's downstream end-client delays site civil works and cancels its installation schedule. Suddenly, the buyer no longer wants the shipment at the contracted price. Five banking days after receiving the documents, the issuing bank transmits a formal SWIFT MT734 Notice of Refusal, listing four discrepancies:"
+      "text": "Then the market shifts. In this illustrative scenario, during the 32-day ocean voyage, destination spot prices for industrial metals drop by 22%, or the buyer's downstream end-client delays site civil works and cancels its installation schedule. Suddenly, the buyer no longer wants the shipment at the contracted price. Five banking days after receiving the documents, the issuing bank transmits a formal SWIFT MT734 Notice of Refusal, listing four alleged discrepancies:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**The Microscopic Typographical Discrepancy:** The commercial invoice described the goods as 'High-Pressure Cast Steel Gate Valves, Class 600', while the L/C Field 45A stated 'High Pressure Cast Steel Gate Valves Class 600' without the hyphen and comma.",
-        "**The Shipper Name Mismatch:** The certificate of origin issued by the regional customs bureau listed the manufacturer's corporate legal name, whereas Field 59 of the L/C listed the seller's commercial trading subsidiary.",
-        "**The Third-Party Forwarder Bill of Lading Exclusion:** The ocean transport document was executed on an international freight forwarder's multimodal bill of lading rather than a traditional vessel-operating ocean carrier (VOCC) master bill of lading, violating a restrictive clause buried deep in Field 47A.",
-        "**The Missing Applicant Inspection Certificate:** Field 46A required an 'Inspection Certificate signed by the buyer's designated representative whose signature must be verified by the issuing bank'—a document the buyer had promised to sign at the port of discharge, but never executed prior to vessel departure."
+        "**The Microscopic Typographical Discrepancy:** The commercial invoice described the goods as 'High-Pressure Cast Steel Gate Valves, Class 600', while the L/C Field 45A stated 'High Pressure Cast Steel Gate Valves Class 600' without the hyphen and comma (an alleged discrepancy directly refuted by ISBP 821 paragraph A23 and UCP 600 Article 14(d)).",
+        "**The Shipper Name Mismatch:** The certificate of origin issued by the regional customs bureau listed the manufacturer's corporate legal name, whereas Field 59 of the L/C listed the seller's commercial trading subsidiary (overlooking UCP 600 Article 14(k), which establishes that the shipper or consignor indicated on any document need not be the beneficiary of the credit unless specifically stipulated).",
+        "**The Third-Party Forwarder Transport Document Exclusion:** The transport document was executed on an international freight forwarder's multimodal transport document rather than a traditional vessel-operating ocean carrier (VOCC) port-to-port bill of lading, violating an express restrictive condition inserted into Field 47A (under UCP 600 Article 14(l), forwarder-issued transport documents are valid if meeting Articles 19–25, but specific negative stipulations in the credit override this default).",
+        "**The Missing Applicant Inspection Certificate:** Field 46A required an 'Inspection Certificate signed by the buyer's designated representative whose signature must be verified by the issuing bank'—a classic soft clause that the buyer promised to execute at the destination port, but intentionally never signed prior to vessel departure."
       ]
     },
     {
       "type": "paragraph",
-      "text": "The issuing bank declares the documents non-compliant, refuses to honor the draft, and announces it is holding the bills of lading at the disposal of the presenter. Meanwhile, the container vessel berths at the destination port. As demurrage and container detention penalties accumulate at $350 per container per day, the buyer's procurement director calls the seller with an extortionate ultimatum: *'Our bank has rejected your documents. We will instruct them to waive the discrepancies only if you grant us an immediate 30% discount via an L/C amendment, or we will allow the port authority to seize and auction the cargo.'*"
+      "text": "The issuing bank declares the documents non-compliant, refuses to honor the presentation, and states it is holding the bills of lading at the disposal of the presenter. Shortly thereafter, the container vessel berths at the destination port while the documents remain blocked in banking channels. As demurrage and container detention penalties accumulate at $350 per container per day, the buyer's procurement director calls the seller with an extortionate ultimatum: *'Our bank has rejected your documents. We will instruct them to waive the discrepancies only if you grant us an immediate 30% discount via an L/C amendment, or we will allow the port authority to seize and auction the cargo.'*"
     },
     {
       "type": "paragraph",
@@ -72,11 +72,11 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
       "mobileWidth": 600,
       "mobileHeight": 400,
       "alt": "International multimodal container bill of lading showing transport consignment terms, container numbers, and carrier execution fields",
-      "caption": "International multimodal container bill of lading showing transport consignment terms, container numbers, and carrier execution fields. Photo: Jibi44 / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Connaissement_conteneur.JPG), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); cropped and resized for web. Illustrates physical shipping documentation subject to strict document examination and discrepancy review under UCP 600 Article 20."
+      "caption": "International multimodal container bill of lading showing transport consignment terms, container numbers, and carrier execution fields. Photo: Jibi44 / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Connaissement_conteneur.JPG), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); cropped and resized for web (derivative work under CC BY-SA 3.0). Illustrates physical shipping documentation subject to strict document examination and discrepancy review under UCP 600 Articles 19 and 20."
     },
     {
       "type": "paragraph",
-      "text": "Under [UCP 600 Article 4(a)](https://iccwbo.org/business-solutions/rules-and-standards/ucp-600/), a credit by its nature is a separate transaction from the sale or other contract on which it may be based. Banks are in no way concerned with or bound by such contracts, even if any reference whatsoever to them is included in the credit. Furthermore, Article 5 establishes the bedrock doctrine: *'Banks deal with documents and not with goods, services or performance to which the documents may relate.'*"
+      "text": "Under [UCP 600 Article 4(a)](https://library.iccwbo.org/content/tfb/RULES/tfb-ucp600-rules.htm), a credit by its nature is a separate transaction from the sale or other contract on which it may be based. Banks are in no way concerned with or bound by such contracts, even if any reference whatsoever to them is included in the credit. Furthermore, Article 5 establishes the bedrock doctrine: *'Banks deal with documents and not with goods, services or performance to which the documents may relate.'*"
     },
     {
       "type": "paragraph",
@@ -111,10 +111,10 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
       "ordered": false,
       "items": [
         "**Lethal Clause 1: The Applicant-Signed Inspection Certificate Trap:**\n*Sample Wording (Field 46A / 47A):* 'Original Inspection Certificate signed by Mr. John Doe, authorized representative of the applicant, confirming cargo conformity, whose signature must be verified by the issuing bank against specimen signature held in their files.'\n*The Mechanism:* This is the most destructive soft clause in global trade. If market prices collapse or the buyer suffers liquidity issues, the buyer simply refuses to send an inspector, instructs their representative to withhold their signature, or signs with a deliberate deviation from the specimen signature. Because the document cannot be created without the buyer's affirmative action, the seller cannot execute a complying presentation. The L/C becomes a discretionary checkbook in the buyer's pocket.",
-        "**Lethal Clause 2: The Vessel Nomination / Pre-Approval Ambush:**\n*Sample Wording (Field 47A):* 'Shipment must be effected only on an ocean vessel approved in writing by the applicant. A copy of the applicant's Vessel Nomination & Approval Certificate must accompany the transport documents.'\n*The Mechanism:* Under FOB or CFR terms, the seller books cargo space with a reputable carrier. The seller submits vessel details to the buyer for formal approval. The buyer delays communication, claims the vessel's age, flag, or carrier rating is unacceptable, or remains silent until after the latest shipment date (Field 44C) has expired. Once the latest shipment date lapses, any subsequent bill of lading constitutes a late shipment discrepancy (UCP 600 Article 14(c)), completely voiding bank liability.",
-        "**Lethal Clause 3: The Suffocating Document Presentation Window:**\n*Sample Wording (Field 48):* 'Documents must be presented within 5 calendar days after the date of shipment.'\n*The Mechanism:* Under UCP 600 Article 14(c), if no presentation period is stated, the default statutory period is 21 calendar days after the date of shipment (but not later than the expiry date of the credit). Rogue applicants deliberately override Article 14(c) by inserting a 5-day or 7-day presentation window. In modern container shipping, ocean carriers frequently take 4 to 8 working days following vessel departure to process manifest data and release original physical bills of lading. By the time the seller collects the bills of lading from the carrier and dispatches them to their negotiating bank, the 5-day window has expired, guaranteeing an incurable late presentation rejection.",
+        "**Lethal Clause 2: The Vessel Nomination / Pre-Approval Ambush:**\n*Sample Wording (Field 47A):* 'Shipment must be effected only on an ocean vessel approved in writing by the applicant. A copy of the applicant's Vessel Nomination & Approval Certificate must accompany the transport documents.'\n*The Mechanism:* Under FOB or CFR terms, the seller books cargo space with a reputable carrier. The seller submits vessel details to the buyer for formal approval. The buyer delays communication, claims the vessel's age, flag, or carrier rating is unacceptable, or remains silent until after the latest shipment date (Field 44C) has expired. Once the latest shipment date lapses, any subsequent bill of lading with a later on-board date constitutes a late shipment discrepancy (Field 44C / UCP 600 Article 14(a)), distinct from a late presentation discrepancy under Field 48 / Article 14(c), completely voiding bank liability.",
+        "**Lethal Clause 3: The Suffocating Document Presentation Window:**\n*Sample Wording (Field 48):* 'Documents must be presented within 5 calendar days after the date of shipment.'\n*The Mechanism:* Under UCP 600 Article 14(c), if no presentation period is stated, the default statutory period is 21 calendar days after the date of shipment (but not later than the expiry date of the credit in Field 31D). Rogue applicants deliberately override Article 14(c) by inserting a 5-day or 7-day presentation window in Field 48 (formatted in SWIFT as `3n[/35x]`). In modern container shipping, ocean carriers frequently take 4 to 8 working days following vessel departure to process manifest data and release original physical bills of lading. By the time the seller collects the bills of lading from the carrier and dispatches them to their nominated bank, the 5-day window has expired, guaranteeing an incurable late presentation rejection.",
         "**Lethal Clause 4: The Ambiguous Non-Documentary Condition:**\n*Sample Wording (Field 47A):* 'The manufacturing facility must maintain a zero-carbon emission rating and all shipping containers must be steam-sterilized prior to stuffing.'\n*The Mechanism:* Notice what is missing: the clause fails to state what document must be presented to evidence compliance, nor who must issue it. Under UCP 600 Article 14(h), 'If a credit contains a condition without stating the document to be presented to evidence compliance with the condition, banks will deem such condition as not stated and will disregard it.' However, in practice, issuing banks in developing or politically influenced jurisdictions frequently ignore Article 14(h) and use non-documentary conditions to issue discrepancy notices. Even if the negotiating bank argues Article 14(h), the dispute freezes funds while cargo accumulates demurrage.",
-        "**Lethal Clause 5: The Freight Forwarder B/L & Multimodal Transport Exclusion:**\n*Sample Wording (Field 46A):* 'Full set 3/3 original clean on-board marine ocean bills of lading, marked freight prepaid, consigned to order of issuing bank. Charter party bills of lading and forwarder bills of lading (House B/Ls) are strictly unacceptable.'\n*The Mechanism:* Under Incoterms 2020 FOB terms, the overseas buyer nominates the freight forwarder. The nominated freight forwarder issues an NVOCC House Bill of Lading (HBL) to the factory, while the underlying ocean carrier (e.g., Maersk or MSC) issues the Master Bill of Lading (MBL) directly to the forwarder's overseas destination office. Because the seller only holds the forwarder's HBL, presenting it directly violates the L/C prohibition under [UCP 600 Article 20](https://iccwbo.org/business-solutions/rules-and-standards/ucp-600/) and Article 22, handing the buyer an immediate technical pretext for non-payment."
+        "**Lethal Clause 5: The Freight Forwarder B/L & Multimodal Transport Exclusion:**\n*Sample Wording (Field 46A / 47A):* 'Full set 3/3 original clean on-board marine ocean bills of lading, marked freight prepaid, consigned to order of issuing bank. Freight forwarder bills of lading (House B/Ls) and multimodal transport documents are strictly unacceptable.'\n*The Mechanism:* Under Incoterms 2020 FOB terms, the overseas buyer nominates the freight forwarder. The nominated freight forwarder issues an NVOCC House Bill of Lading (HBL) to the factory, while the underlying ocean carrier (e.g., Maersk or MSC) issues the Master Bill of Lading (MBL) directly to the forwarder's destination agent. Under UCP 600 Article 14(l), a transport document issued by a freight forwarder is legally acceptable if it satisfies the signing, agency, and carriage requirements of Articles 19 through 25. However, when the credit contains an express negative stipulation in Field 46A or 47A barring forwarder documents or restricting transport strictly to Article 20 port-to-port bills of lading, presenting an HBL or an Article 19 multimodal transport document constitutes an immediate, valid discrepancy."
       ]
     },
     {
@@ -145,13 +145,13 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
       "ordered": true,
       "items": [
         "**Before Vessel Departure:** The seller holds physical custody of the cargo at their warehouse or port of loading. If the buyer requests an unreasonable contract amendment or fails to provide an operative L/C, the seller can halt dispatch and resell the goods locally or to another international buyer with minimal loss.",
-        "**During Ocean Transit:** The cargo is at sea. The bills of lading are dispatched into international banking channels via DHL or FedEx. The seller cannot easily redirect the vessel or access the physical freight.",
-        "**Upon Discharge at Destination Port:** The ocean carrier discharges the containers into the destination container terminal. Free time for demurrage (equipment storage inside the terminal) and detention (equipment usage outside the terminal) typically ranges from 7 to 14 calendar days. Once free time expires, daily demurrage penalties escalate rapidly ($200 to $500 per container per day)."
+        "**During Ocean Transit:** The cargo is at sea. The bills of lading are dispatched into international banking channels via courier. If documents were presented promptly, the issuing bank examines them within 5 banking days while the vessel is en route. If the bank issues an MT734 notice of refusal, the seller cannot easily redirect the vessel or access the physical freight while documents remain tied up.",
+        "**Upon Discharge at Destination Port:** The ocean carrier discharges the containers into the destination container terminal. Free time for demurrage (terminal storage) and detention (equipment usage outside the terminal) typically ranges from 7 to 14 calendar days. Once free time expires, daily demurrage penalties escalate rapidly ($200 to $500 per container per day)."
       ]
     },
     {
       "type": "paragraph",
-      "text": "This is the exact moment the issuing bank issues its SWIFT MT734 Notice of Refusal. The seller is trapped across three fronts:"
+      "text": "When cargo arrives and free time burns away while the MT734 refusal stands unresolved, the seller is trapped across three fronts:"
     },
     {
       "type": "list",
@@ -164,7 +164,7 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "The rogue buyer knows this financial pressure point with mathematical certainty. By manufacturing trivial discrepancies, the buyer shifts the entire economic burden of market price drops onto the seller, demanding a 20% to 35% discount as the 'price' for authorizing the issuing bank to waive discrepancies."
+      "text": "The rogue buyer knows this financial pressure point with mathematical certainty. Facing a 22% drop in destination market prices, the buyer exploits technical discrepancies to shift the commercial loss onto the seller, demanding a 20% to 35% discount as the 'price' for authorizing the issuing bank to waive discrepancies."
     },
     {
       "type": "heading",
@@ -182,47 +182,48 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
       "height": 800,
       "mobileWidth": 600,
       "mobileHeight": 400,
-      "alt": "Port customs and border protection officers conducting physical container examination and manifest verification",
-      "caption": "Port customs and border protection officers conducting physical container examination and manifest verification. Photo: CBP Photography / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:U_S_Customs_and_Border_Protection_Seattle_Washington_Inspection_(5764585803).jpg), [Public Domain](https://commons.wikimedia.org/wiki/Public_domain); cropped and resized for web. Documentary illustration of physical cargo inspection and seal verification establishing the boundary between independent surveyor reports and applicant-controlled soft clauses."
+      "alt": "U.S. Customs and Border Protection officer inspecting a vehicle ahead of Mobile VACIS examination at the Port of Seattle",
+      "caption": "U.S. Customs and Border Protection officer inspecting a vehicle ahead of Mobile VACIS examination at the Port of Seattle. Photo: Donna Burton / CBP Photography / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:U_S_Customs_and_Border_Protection_Seattle_Washington_Inspection_(5764585803).jpg), [Public Domain](https://commons.wikimedia.org/wiki/Public_domain); cropped and resized for web. Illustrates physical port cargo examination establishing the boundary between independent technical inspection and applicant-controlled soft clauses."
     },
     {
       "type": "paragraph",
-      "text": "The seller's ultimate legal shield is [UCP 600 Article 16](https://iccwbo.org/business-solutions/rules-and-standards/ucp-600/), which establishes strict rules for document refusal:"
+      "text": "The seller's ultimate legal shield is [UCP 600 Article 16](https://library.iccwbo.org/content/tfb/RULES/tfb-ucp600-rules.htm), which establishes strict rules for document refusal:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**The 5 Banking Days Limit (Article 14(b) & 16(d)):** The issuing bank, nominated bank, or confirming bank has a maximum of five banking days following the day of presentation to determine whether the presentation is complying. This period is not an automatic entitlement; the bank must act within a reasonable time and cannot exceed five banking days under any circumstances.",
-        "**The Single, Comprehensive Telecommunication Notice (Article 16(c)):** When an issuing bank decides to refuse to honor, it must give a single notice to that effect to the presenter via telecommunication (SWIFT MT734). The notice must state: (1) that the bank is refusing to honor, (2) each discrepancy in respect of which the bank refuses to honor, and (3) the exact document disposition status under Article 16(c)(iii) (e.g., that the bank is holding documents pending further instructions from the presenter, or returning documents, or holding documents until it receives a waiver from the applicant and agrees to accept it).",
-        "**The Prohibition on 'Piecemeal' Discrepancies:** The bank cannot issue an initial rejection listing two discrepancies, and then two days later issue a secondary message listing three additional discrepancies. Any discrepancy not included in the original notice is waived forever.",
-        "**The Absolute Preclusion Penalty (Article 16(f)):** This is the strongest statutory rule in trade finance: *'If an issuing bank or a confirming bank fails to act in accordance with the provisions of this article, it shall be precluded from claiming that the documents do not constitute a complying presentation.'*"
+        "**The 5 Banking Days Limit (Article 14(b) & 16(d)):** The issuing bank, nominated bank acting on its behalf, or confirming bank has a maximum of five banking days following the day of presentation to determine whether the presentation is complying. This period is not an automatic entitlement; the bank must act within a reasonable time and cannot exceed five banking days under any circumstances.",
+        "**The Single, Comprehensive Notice (Article 16(c) & 16(d)):** When an issuing bank decides to refuse to honor or negotiate, it must give a single notice to that effect to the presenter. The notice must be given by telecommunication (SWIFT MT734) or, if telecommunication is impossible, by another expeditious method (Article 16(d)), no later than the close of the fifth banking day. The notice must state: (1) that the bank is refusing to honor or negotiate, (2) each discrepancy in respect of which the bank refuses to honor or negotiate, and (3) the exact document disposition status under Article 16(c)(iii) (e.g., that the bank is holding documents pending further instructions from the presenter, or returning documents, or holding documents until it receives a waiver from the applicant and agrees to accept it). Under Article 16(c)(iii)(b), an applicant waiver is subject to the issuing bank's agreement, and seeking an applicant waiver does not extend the 5 banking days examination period.",
+        "**The Prohibition on 'Piecemeal' Discrepancies:** The bank cannot issue an initial rejection listing two discrepancies, and then two days later issue a secondary message listing three additional discrepancies. Any discrepancy not included in the original notice is precluded forever.",
+        "**The Absolute Preclusion Penalty (Article 16(f)):** This is the foundational statutory sanction in trade finance: *'If an issuing bank or a confirming bank fails to act in accordance with the provisions of this article, it shall be precluded from claiming that the documents do not constitute a complying presentation.'*"
       ]
     },
     {
       "type": "paragraph",
-      "text": "What does Article 16(f) mean in practice? It means that even if the seller's documents were riddled with genuine errors—wrong dates, missing signatures, spelling blunders—if the issuing bank sent its notice on the sixth banking day, or failed to specify document disposition, or gave notice by regular airmail instead of SWIFT, the bank loses its right to reject the documents. The issuing bank is legally compelled to pay the full credit amount immediately, plus interest!"
+      "text": "What does Article 16(f) mean in practice? It means that if an issuing bank sends its refusal notice after the fifth banking day, fails to specify document disposition under Article 16(c)(iii), or sends notice by regular non-expeditious mail when telecommunication was available, the bank is legally precluded from asserting documentary discrepancies. As a matter of law, the presentation is deemed complying. Preclusion does not create an instantaneous cash wire transfer outside the credit terms, but it compels the bank to honor or negotiate in strict accordance with the credit's payment structure (sight payment, deferred payment undertaking, or draft acceptance per Articles 2, 7, and 8) and applicable governing law, stripping the bank and applicant of their discrepancy defense."
     },
     {
       "type": "paragraph",
-      "text": "Furthermore, the [ICC International Standard Banking Practice (ISBP 745)](https://iccwbo.org/business-solutions/rules-and-standards/isbp-745/) establishes common-sense guidelines that defeat bad-faith typographical rejections:"
+      "text": "Furthermore, the [ICC International Standard Banking Practice (ISBP 821)](https://library.iccwbo.org/content/tfb/RULES/tfb-isbp-2023-rules.htm) (ICC Publication No. 821, 2023 edition) and UCP 600 Article 14(d) establish common-sense examination rules that defeat bad-faith technical rejections:"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**Typographical Errors (ISBP 745 Paragraph A23):** A misspelling or typing error that does not affect the meaning of a word or the sentence in which it occurs does not make a document non-compliant (e.g., 'mashine' instead of 'machine').",
-        "**Punctuation and Virgules (ISBP 745 Paragraph A21):** The presence or absence of punctuation marks (commas, hyphens, periods) does not create a discrepancy unless it fundamentally changes the commercial identity of the goods.",
-        "**Mathematical Rounding (ISBP 745 Paragraph A22):** Standard international mathematical rounding and currency decimal conventions cannot be cited as discrepancies if the total invoice calculation is logically consistent."
+        "**Data Need Not Be Identical (UCP 600 Article 14(d)):** Data in a document, when read in context with the credit, the document itself, and international standard banking practice, need not be identical to, but must not conflict with, data in that document, any other stipulated document, or the credit.",
+        "**Harmless Misspellings and Punctuation (ISBP 821 Paragraph A23):** A misspelling or typing error that does not affect the meaning of a word or the sentence in which it occurs does not make a document non-compliant (e.g., 'mashine' instead of 'machine'). Similarly, the presence or absence of punctuation marks, virgules, hyphens, or commas does not create a discrepancy unless it fundamentally changes the commercial meaning.",
+        "**Language Consistency (ISBP 821 Paragraph A21):** Documents must be issued in the language required by the credit, but standard international trade terminology, codes, or carrier references do not create non-compliance.",
+        "**Mathematical Calculations & Stated Totals (ISBP 821 Paragraph A22):** A document need not show the mathematical calculation leading to a stated result. However, if mathematical calculations or stated totals in a document conflict with the credit or with another presented document, that conflict constitutes a valid discrepancy."
       ]
     },
     {
       "type": "heading",
-      "text": "5. SWIFT MT700 L/C audit checklist: 7 fields to sanitize before manufacturing"
+      "text": "5. SWIFT MT700 L/C audit checklist: critical fields to sanitize before manufacturing"
     },
     {
       "type": "paragraph",
-      "text": "The only reliable way to eliminate discrepancy risk is to sanitize the SWIFT MT700 instruction the moment it is advised, before raw materials are cut or cargo is booked. When the advising bank transmits the L/C copy, the procurement and sales engineering team must audit seven critical fields:"
+      "text": "The only reliable way to eliminate discrepancy risk is to sanitize the SWIFT MT700 instruction the moment it is advised, before raw materials are cut or cargo is booked. When the advising bank transmits the credit copy, the procurement and sales engineering team must audit these key fields (governed by the official [SWIFT Standards MT700 Specification](https://www2.swift.com/knowledgecentre/rest/v1/publications/us7m_20200724/2.0/us7m_20200724.pdf?logDownload=true)):"
     },
     {
       "type": "table",
@@ -240,27 +241,33 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
           "Must state 'IRREVOCABLE', subject to ICC UCP 600 latest revision. Never accept revocable or uncodified credits."
         ],
         [
-          "Field 41A / 41D",
-          "Available With... By...",
-          "Available only with issuing bank by payment (restricting negotiation to the buyer's home country).",
-          "Must state available with advising/nominated bank 'BY NEGOTIATION' or 'BY PAYMENT' freely negotiable at seller's counters."
+          "Field 41a",
+          "Available With... By... (Payment, Acceptance, Negotiation, Def Payment)",
+          "Restricted exclusively to issuing bank counters by payment in buyer's country, preventing domestic negotiation or discounting.",
+          "Must state available with advising/nominated bank 'BY NEGOTIATION' or 'BY PAYMENT' at seller's counters. Distinguish: BY PAYMENT (sight payment without drafts), BY ACCEPTANCE (usance drafts), BY NEGOTIATION (nominated bank advances funds), BY DEF PAYMENT (deferred undertaking without drafts)."
         ],
         [
-          "Field 42C / 42P",
-          "Drafts at... / Deferred Payment",
-          "Usance drafts (e.g., 90 days after B/L) without explicit clause stating buyer pays discount and acceptance interest.",
-          "Must specify 'AT SIGHT'. If usance, ensure financing charges and acceptance commission are expressly for applicant's account."
+          "Field 42C / 42a & 42M / 42P",
+          "Drafts at... / Drawee vs Deferred Payment Details",
+          "Demanding financial drafts for deferred payment credits, or usance drafts where applicant shifts discount/acceptance interest onto seller.",
+          "Specify 'AT SIGHT' under 42C with Drawee under 42a. If deferred payment, use Field 42M/42P without financial drafts. Ensure all financing and acceptance fees outside seller's country are for applicant's account."
+        ],
+        [
+          "Field 31D",
+          "Date and Place of Expiry",
+          "Expiry location set in buyer's country (forcing seller to ensure presentation arrives overseas before expiry date).",
+          "Expiry place must be in seller's country at the counters of the nominated bank, with expiry date extending at least 21 days past latest shipment date."
         ],
         [
           "Field 44C / 44D",
-          "Latest Date of Shipment / Expiry",
-          "Latest shipment date set too close to production lead time (<14 days margin) or expiry date <21 days after shipment.",
-          "Maintain at least 15 days manufacturing buffer. Expiry date (Field 31D) must extend at least 21 days past latest shipment."
+          "Latest Date of Shipment (44C) or Shipment Period (44D)",
+          "Latest shipment date set too close to production lead time (<14 days margin) or conflicting shipment schedules under 44D.",
+          "Maintain at least 15 days manufacturing buffer. Field 44C specifies fixed latest on-board date; Field 44D specifies narrative period (e.g., 'DURING JUNE 2026'). Never conflate shipment date with credit expiry."
         ],
         [
           "Field 46A",
           "Documents Required",
-          "Inspection certificate signed by applicant/buyer, or requiring embassy legalizations impossible within presentation window.",
+          "Inspection certificate signed by applicant/buyer, or requiring consular legalizations impossible within presentation window.",
           "Replace buyer signature with accredited third-party surveyor (SGS, BV, Intertek, TÜV). Require only commercial chamber attestations."
         ],
         [
@@ -271,15 +278,15 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
         ],
         [
           "Field 48",
-          "Period for Presentation",
-          "Presentation period compressed to <10 days (e.g., 'Documents to be presented within 7 days after B/L date').",
-          "Must state '21 DAYS AFTER SHIPMENT DATE BUT WITHIN CREDIT EXPIRY'. Minimum acceptable window is 15 calendar days."
+          "Period for Presentation (Syntax: 3n[/35x])",
+          "Presentation period compressed to <10 days (e.g., '5' or '7/AFTER SHIPMENT DATE'), creating unavoidable late presentation.",
+          "Must state '21' or '21/AFTER SHIPMENT DATE BUT WITHIN CREDIT EXPIRY'. Minimum acceptable window is 15 calendar days."
         ],
         [
-          "Field 49",
-          "Confirmation Instructions",
-          "Credit states 'WITHOUT' confirmation when issuing bank is located in a high-risk or foreign-exchange restricted jurisdiction.",
-          "Specify 'CONFIRM' with a top-tier international confirming bank (e.g., HSBC, Citi, BNP Paribas) adding its independent payment undertaking."
+          "Field 49 & 58a",
+          "Confirmation Instructions & Requested Confirming Bank",
+          "Credit states 'WITHOUT' confirmation for issuing banks in high-risk jurisdictions, or confusing confirmation request with added confirmation.",
+          "Specify 'CONFIRM' with a top-tier international confirming bank named in Field 58a. Verify that the confirming bank has actually added its independent payment undertaking, not merely advised the credit."
         ]
       ]
     },
@@ -336,41 +343,49 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "To protect cross-border transactions, legal safeguards must be embedded in the underlying Sales Contract / Pro-Forma Invoice *before* the buyer applies for the L/C, coupled with a formal statutory rebuttal template should an issuing bank issue an unjustified rejection."
+      "text": "To protect cross-border transactions, legal safeguards must be embedded in the underlying Sales Contract / Pro-Forma Invoice before the buyer applies for the L/C, coupled with a formal statutory rebuttal template should an issuing bank issue an unjustified rejection."
     },
     {
-      "type": "paragraph",
-      "text": "### Contract Clause 1: Prohibition of Soft Clauses and Strict L/C Terms (中英双语信用证开立与软条款禁止条款)"
+      "type": "heading",
+      "text": "Contract Clause 1: Prohibition of soft clauses and strict L/C terms (中英双语信用证开立与软条款禁止条款)"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**English Standard Text:**\n'Payment shall be made by an irrevocable, confirmed Letter of Credit (L/C) at sight, opened by a first-class international bank acceptable to the Seller, subject to the Uniform Customs and Practice for Documentary Credits (2007 Revision, ICC Publication No. 600). The Buyer shall ensure that the draft L/C application is submitted to the Seller for written approval at least ten (10) calendar days prior to formal issuance. The L/C shall contain no soft clauses, non-operative conditions, or requirements for documents under the unilateral control of the Buyer (including, but not limited to, buyer-signed inspection certificates, buyer-approved vessel nomination certificates, or pre-conditions requiring applicant countersignatures). Any L/C issued with such conditions shall be considered non-operative, and the Seller shall be entitled to suspend manufacturing and shipment without liability until an operative amendment is received. All banking charges, amendment fees, and confirmation costs outside the Seller's country shall be for the Buyer's account.'",
-        "**中文对等法定条款：**\n'货款应通过由卖方认可的一流国际商业银行开立的不可撤销、保兑的即期信用证（L/C）进行结算，并受国际商会《跟单信用证统一惯例》（ICC UCP 600）管辖。买方应在正式开证前至少十（10）个日历日将信用证开证草案提交卖方进行书面确认。信用证不得包含任何软条款、非实质性生效条件或由买方单方面控制出具的单据要求（包括但不限于：买方或其代表签署的商检证书、买方书面确认的租船定舱通知、或附带买方副签要求的单据）。凡开立含有上述软条款的信用证，均被视为非实质生效信用证，卖方有权在收到合规修改通知前中止生产与发运，且不承担任何迟延违约责任。买方国家境外的所有银行费用、信用证修改费及保兑手续费均由买方全额承担。'"
+        "**English Standard Text:** 'Payment shall be made by an irrevocable, confirmed Letter of Credit (L/C) at sight, opened by a first-class international bank acceptable to the Seller, subject to the Uniform Customs and Practice for Documentary Credits (2007 Revision, ICC Publication No. 600). The Buyer shall ensure that the draft L/C application is submitted to the Seller for written approval at least ten (10) calendar days prior to formal issuance. The L/C shall contain no soft clauses, non-operative conditions, or requirements for documents under the unilateral control of the Buyer (including, but not limited to, buyer-signed inspection certificates, buyer-approved vessel nomination certificates, or pre-conditions requiring applicant countersignatures). Any L/C issued with such conditions shall be considered non-operative, and the Seller shall be entitled to suspend manufacturing and shipment without liability until an operative amendment is received. All banking charges, amendment fees, and confirmation costs outside the Seller's country shall be for the Buyer's account.'",
+        "**中文对等法定条款：** '货款应通过由卖方认可的一流国际商业银行开立的不可撤销、保兑的即期信用证（L/C）进行结算，并受国际商会《跟单信用证统一惯例》（ICC UCP 600）管辖。买方应在正式开证前至少十（10）个日历日将信用证开证草案提交卖方进行书面确认。信用证不得包含任何软条款、非实质性生效条件或由买方单方面控制出具的单据要求（包括但不限于：买方或其代表签署的商检证书、买方书面确认的租船定舱通知、或附带买方副签要求的单据）。凡开立含有上述软条款的信用证，均被视为非实质生效信用证，卖方有权在收到合规修改通知前中止生产与发运，且不承担任何迟延违约责任。卖方所在国家/地区境外发生的所有银行费用、信用证修改费及保兑手续费均由买方全额承担。'"
       ]
     },
     {
-      "type": "paragraph",
-      "text": "### Contract Clause 2: Discrepancy Waiver and Market Price Defense Clause (中英双语不符点免责与禁止压价条款)"
+      "type": "heading",
+      "text": "Contract Clause 2: Discrepancy waiver and market price defense clause (中英双语不符点免责与禁止压价条款)"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**English Standard Text:**\n'The parties agree that minor typographical, formatting, or clerical variations that do not affect the commercial description, quantity, or value of the goods (as defined under ISBP 745 Paragraphs A21-A23) shall not constitute valid discrepancies under the L/C. In the event the issuing bank identifies technical discrepancies, the Buyer irrevocably undertakes to instruct the issuing bank to accept the documents and waive such discrepancies within three (3) banking days of notification. The Buyer expressly covenants that it shall not use technical discrepancies or issuing bank notices of refusal as leverage to request price reductions, discount amendments, or payment deferrals. In the event of unjustified refusal to waive minor discrepancies, the Buyer shall be liable for all port demurrage, container detention, warehousing, and legal fees incurred thereby, and shall pay interest on the outstanding invoice balance at the rate of 1.5% per month until full payment is realized.'",
-        "**中文对等法定条款：**\n'双方一致同意，不影响货物商业描述、数量或货值的微小排版、格式或文书差错（依据国际商会 ISBP 745 第 A21-A23 条规定），均不得构成信用证项下的有效不符点。若开证行提出技术性不符点，买方不可撤销地承诺在收到通知后三（3）个银行工作日内向开证行下达接受单据并放弃不符点的有效指示。买方明确承诺，绝不利用单据技术性不符点或开证行拒付通知作为要求降价、修改金额或拖延付款的谈判手段。若买方无理拒绝指示放弃微小不符点，买方应全额承担由此产生的目的港滞期费、集装箱超期使用费、仓储费及法律追偿费用，并就未付货款按每月 1.5% 的利率计付利息，直至款项全部结清。'"
+        "**English Standard Text:** 'The parties agree that minor typographical, punctuation, or clerical variations that do not affect the commercial description, quantity, or value of the goods (as defined under ISBP 821 Paragraphs A21-A23 and UCP 600 Article 14(d)) shall not constitute valid discrepancies under the L/C. In the event the issuing bank identifies technical discrepancies, the Buyer irrevocably undertakes to instruct the issuing bank to accept the documents and waive such discrepancies within three (3) banking days of notification. The Buyer expressly covenants that it shall not use technical discrepancies or issuing bank notices of refusal as leverage to request price reductions, discount amendments, or payment deferrals. In the event of unjustified refusal to waive minor discrepancies, the Buyer shall be liable for all port demurrage, container detention, warehousing, and legal fees incurred thereby, and shall pay interest on the outstanding invoice balance at the rate of 1.5% per month until full payment is realized.'",
+        "**中文对等法定条款：** '双方一致同意，不影响货物商业描述、数量或货值的微小排版、标点或文书差错（依据国际商会 ISBP 821 第 A21-A23 条及 UCP 600 第 14(d) 条规定），均不得构成信用证项下的有效不符点。若开证行提出技术性不符点，买方不可撤销地承诺在收到通知后三（3）个银行工作日内向开证行下达接受单据并放弃不符点的有效指示。买方明确承诺，绝不利用单据技术性不符点或开证行拒付通知作为要求降价、修改金额或拖延付款的谈判手段。若买方无理拒绝指示放弃微小不符点，买方应全额承担由此产生的目的港滞期费、集装箱超期使用费、仓储费及法律追偿费用，并就未付货款按每月 1.5% 的利率计付利息，直至款项全部结清。'"
       ]
     },
     {
+      "type": "heading",
+      "text": "Formal Legal Notice: Rebuttal of SWIFT MT734 Notice of Refusal under UCP 600 Article 16 (开证行恶意拒付法定反驳函模板)"
+    },
+    {
       "type": "paragraph",
-      "text": "### Formal Legal Notice: Rebuttal of SWIFT MT734 Notice of Refusal under UCP 600 Article 16 (开证行恶意拒付法定反驳函模板)"
+      "text": "Formal Rebuttal Template (Presented via Authenticated SWIFT MT799/MT999 or Legal Counsel):"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**Formal Rebuttal Template (Presented via Authenticated SWIFT MT799/MT999 or Legal Counsel):**\n`TO: [Name of Issuing Bank]\nBRANCH / SWIFT BIC: [Issuing Bank SWIFT]\nDATE: [Date]\nRE: UCP 600 ARTICLE 16 REBUTTAL - L/C NO: [L/C Number] / OUR REF: [Presenter Ref Number]\n\nDEAR SIRS,\n\nWE REFER TO YOUR SWIFT MT734 NOTICE OF REFUSAL DATED [Date of MT734], IN WHICH YOU ALLEGE CERTAIN DISCREPANCIES REGARDING OUR PRESENTATION UNDER DOCUMENTARY CREDIT NO. [L/C Number].\n\nWE HEREBY REJECT YOUR NOTICE OF REFUSAL AS NULL, VOID, AND LEGALLY INEFFECTIVE PURSUANT TO THE UNIFORM CUSTOMS AND PRACTICE FOR DOCUMENTARY CREDITS (ICC UCP 600) ON THE FOLLOWING STATUTORY GROUNDS:\n\n1. FAILURE TO COMPLY WITH UCP 600 ARTICLE 16(c)(iii) (DOCUMENT DISPOSITION):\nYOUR NOTICE OF REFUSAL FAILED TO EXPLICITLY STATE THE DISPOSITION OF THE DOCUMENTS IN ACCORDANCE WITH ARTICLE 16(c)(iii)(a), (b), (c), OR (d). UNDER PREVAILING ICC BANKING COMMISSION OPINIONS (R639 / TA.644), AN AMBIGUOUS STATEMENT REGARDING DOCUMENT DISPOSITION INVALIDATES THE ENTIRE NOTICE OF REFUSAL.\n\n2. TIMING AND PRECLUSION UNDER ARTICLE 16(d) & 16(f):\nDOCUMENTS WERE RECEIVED AT YOUR COUNTERS ON [Date of Receipt]. YOUR NOTICE OF REFUSAL WAS TRANSMITTED ON [Date of MT734], EXCEEDING THE MANDATORY FIVE (5) BANKING DAYS LIMIT PRESCRIBED UNDER UCP 600 ARTICLE 14(b). CONSEQUENTLY, PURSUANT TO UCP 600 ARTICLE 16(f), YOUR BANK IS IRREVOCABLY PRECLUDED FROM CLAIMING THAT THE DOCUMENTS DO NOT CONSTITUTE A COMPLYING PRESENTATION.\n\n3. INVALIDITY OF ALLEGED DISCREPANCIES UNDER ISBP 745:\nTHE DISCREPANCY REGARDING PUNCTUATION AND TYPOGRAPHY IN THE INVOICE DESCRIPTION DIRECTLY CONTRAVENES ICC ISBP 745 PARAGRAPHS A21 AND A23, WHICH ESTABLISH THAT MINOR TYPOGRAPHICAL VARIATIONS THAT DO NOT ALTER COMMERCIAL MEANING DO NOT CONSTITUTE A DISCREPANCY.\n\nIN LIGHT OF THE FOREGOING, WE DEMAND THAT YOU EFFECT IMMEDIATE UNCONDITIONAL WIRE PAYMENT OF THE FULL CREDIT AMOUNT OF USD [Amount] PLUS ACCRUED STATUTORY INTEREST TO OUR NOMINATED ACCOUNT WITHIN FORTY-EIGHT (48) HOURS OF RECEIPT OF THIS NOTICE. FAILING THIS, WE SHALL INSTRUCT OUR INTERNATIONAL LEGAL COUNSEL TO INITIATE ENFORCEMENT PROCEEDINGS AGAINST YOUR BANK AND REPORT THIS DELIBERATE BREACH TO THE ICC BANKING COMMISSION AND REGULATORY MONETARY AUTHORITIES.'`"
+        "**Addressee & Reference:** TO: [Name of Issuing Bank] | BRANCH / SWIFT BIC: [Issuing Bank SWIFT] | DATE: [Date] | RE: UCP 600 ARTICLE 16 REBUTTAL - L/C NO: [L/C Number] / OUR REF: [Presenter Ref Number]",
+        "**Ground 1 — Failure to State Document Disposition (Article 16(c)(iii)):** Your Notice of Refusal failed to explicitly state the disposition of the documents in accordance with Article 16(c)(iii)(a), (b), (c), or (d). Under prevailing ICC Banking Commission Opinions (including R639 / TA.644), an ambiguous or incomplete statement regarding document disposition invalidates the entire notice of refusal.",
+        "**Ground 2 — Late Notice & Statutory Preclusion (Articles 14(b), 16(d) & 16(f)):** Documents were received at your counters on [Date of Receipt]. Your Notice of Refusal was transmitted on [Date of MT734], exceeding the maximum five (5) banking days examination limit prescribed under UCP 600 Article 14(b). Furthermore, if telecommunication was available, notice by non-expeditious means violates Article 16(d). Consequently, pursuant to UCP 600 Article 16(f), your bank is irrevocably precluded from claiming that the documents do not constitute a complying presentation.",
+        "**Ground 3 — Invalid Discrepancies under ISBP 821 & UCP 600 Article 14(d):** The alleged discrepancies regarding punctuation and clerical variation in the invoice description directly contravene ICC ISBP 821 Paragraphs A21–A23 and UCP 600 Article 14(d), which establish that data need not be identical and that minor clerical variations not altering commercial meaning do not constitute discrepancies.",
+        "**Demand for Honor:** In light of the statutory preclusion under UCP 600 Article 16(f), the presentation is deemed complying as a matter of law. We accordingly call upon your bank to immediately discharge its independent undertaking to honor the presentation (or negotiate in strict conformity with Field 41a / 42 of the credit) without further delay. Failing immediate confirmation of honor, we shall instruct international legal counsel to pursue all available legal remedies and report this regulatory breach to the ICC Banking Commission and competent monetary authorities."
       ]
     },
     {
@@ -392,20 +407,26 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
     {
       "title": "ICC Uniform Customs and Practice for Documentary Credits (UCP 600)",
       "publisher": "International Chamber of Commerce (ICC)",
-      "href": "https://iccwbo.org/business-solutions/rules-and-standards/ucp-600/",
-      "note": "Articles 4, 5, 14, 15, 16, and 20 governing credit independence, examination standards, refusal notices, and transport documentation."
+      "href": "https://library.iccwbo.org/content/tfb/RULES/tfb-ucp600-rules.htm",
+      "note": "Articles 4, 5, 14, 15, 16, 19, and 20 governing credit independence, examination standards, refusal notices, preclusion, multimodal transport, and bills of lading."
     },
     {
-      "title": "International Standard Banking Practice for the Examination of Documents under UCP 600 (ISBP 745)",
+      "title": "International Standard Banking Practice for the Examination of Documents under UCP 600 (ISBP 821, 2023 Edition)",
       "publisher": "International Chamber of Commerce Banking Commission",
-      "href": "https://iccwbo.org/business-solutions/rules-and-standards/isbp-745/",
-      "note": "Paragraphs A1-A42 governing typographical errors, punctuation, mathematical calculations, and standard document examination rules."
+      "href": "https://library.iccwbo.org/content/tfb/RULES/tfb-isbp-2023-rules.htm",
+      "note": "ICC Publication No. 821 (2023 revision superseding ISBP 745); paragraphs A1-A42 governing language, mathematical calculations, harmless misspellings, punctuation, and standard document examination rules."
     },
     {
       "title": "Incoterms 2020: ICC Rules for the Use of Domestic and International Trade Terms",
       "publisher": "International Chamber of Commerce",
-      "href": "https://iccwbo.org/business-solutions/rules-and-standards/incoterms-2020/",
+      "href": "https://iccwbo.org/business-solutions/incoterms-rules/incoterms-2020/",
       "note": "FOB, CFR, and CIF freight and delivery risk demarcations influencing bill of lading consignment and transport document execution."
+    },
+    {
+      "title": "SWIFT Standards MT700 Issue of a Documentary Credit Message Reference Guide",
+      "publisher": "Society for Worldwide Interbank Financial Telecommunication (SWIFT)",
+      "href": "https://www2.swift.com/knowledgecentre/rest/v1/publications/us7m_20200724/2.0/us7m_20200724.pdf?logDownload=true",
+      "note": "Official SWIFT message format, status codes, field specifications (Fields 31D, 40A, 41a, 42C/a, 44C/D, 46A, 47A, 48, 49, 58a), and presentation rules."
     },
     {
       "title": "United Nations Convention on Contracts for the International Sale of Goods (CISG)",

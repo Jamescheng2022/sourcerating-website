@@ -23,8 +23,8 @@ All four photographic subjects are authentic documentary photographs from Wikime
 - **Author:** Jibi44
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Connaissement_conteneur.JPG
 - **License:** Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) (https://creativecommons.org/licenses/by-sa/3.0/)
-- **Adaptation:** High-resolution original (1980x1345 px), cropped to 3:2 landscape aspect ratio focusing on document fields, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and MozJPEG.
-- **Visible Caption:** International multimodal container bill of lading showing transport consignment terms, container numbers, and carrier execution fields. Photo: Jibi44 / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Connaissement_conteneur.JPG), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); cropped and resized for web. Illustrates physical shipping documentation subject to strict document examination and discrepancy review under UCP 600 Article 20.
+- **Adaptation:** High-resolution original (1980x1345 px), cropped to 3:2 landscape aspect ratio focusing on document fields, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and MozJPEG. Derivative work licensed under Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0).
+- **Visible Caption:** International multimodal container bill of lading showing transport consignment terms, container numbers, and carrier execution fields. Photo: Jibi44 / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Connaissement_conteneur.JPG), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0); cropped and resized for web (derivative work under CC BY-SA 3.0). Illustrates physical shipping documentation subject to strict document examination and discrepancy review under UCP 600 Articles 19 and 20.
 
 ---
 
@@ -38,13 +38,13 @@ All four photographic subjects are authentic documentary photographs from Wikime
 
 ---
 
-### 4. Figure 3: Port Cargo Container Physical Tally & Customs Documentation Inspection
-- **Subject:** U.S. Customs and Border Protection officers and port inspection personnel conducting container seal verification, cargo manifest checking, and physical cargo tally at the Port of Seattle.
-- **Author:** CBP Photography (U.S. Customs and Border Protection)
+### 4. Figure 3: Port Vehicle & Cargo Inspection Ahead of Mobile VACIS Screening
+- **Subject:** Donna Burton, U.S. Customs and Border Protection officer, conducting a physical vehicle and documentation inspection ahead of Mobile VACIS non-intrusive examination at the Port of Seattle.
+- **Author:** Donna Burton / CBP Photography (U.S. Customs and Border Protection)
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:U_S_Customs_and_Border_Protection_Seattle_Washington_Inspection_(5764585803).jpg
 - **License:** Public Domain (Work of the United States Federal Government under 17 U.S.C. § 105)
 - **Adaptation:** High-resolution original (2240x1493 px), cropped to 3:2 landscape aspect ratio, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and MozJPEG.
-- **Visible Caption:** Port customs and border protection officers conducting physical container examination and manifest verification. Photo: CBP Photography / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:U_S_Customs_and_Border_Protection_Seattle_Washington_Inspection_(5764585803).jpg), [Public Domain](https://commons.wikimedia.org/wiki/Public_domain); cropped and resized for web. Documentary illustration of physical cargo inspection and seal verification establishing the boundary between independent surveyor reports and applicant-controlled soft clauses.
+- **Visible Caption:** U.S. Customs and Border Protection officer inspecting a vehicle ahead of Mobile VACIS examination at the Port of Seattle. Photo: Donna Burton / CBP Photography / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:U_S_Customs_and_Border_Protection_Seattle_Washington_Inspection_(5764585803).jpg), [Public Domain](https://commons.wikimedia.org/wiki/Public_domain); cropped and resized for web. Illustrates physical port cargo examination establishing the boundary between independent technical inspection and applicant-controlled soft clauses.
 
 ---
 
