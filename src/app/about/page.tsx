@@ -22,7 +22,7 @@ export default function AboutPage() {
       <section className="mt-10">
         <h2 className="font-serif text-2xl">About SourceRating</h2>
         <p className="mt-4 leading-8">
-          {siteConfig.operatorNotice} The company operates from Thailand. SourceRating publishes
+          {siteConfig.operatorNotice} SourceRating publishes
           articles on industrial procurement and delivers updates to newsletter subscribers.
           Contact: <a href={`mailto:${email}`}>{email}</a>
         </p>
