@@ -27,14 +27,16 @@ function loadRegistry({baseline=false,raw=false}={}) {
    if(id==='node:crypto')return {createHash:crypto.createHash};
    if(id==='react')return React;
    if(id==='react/jsx-runtime')return {jsx:(type,props,key)=>({type,props,key}),jsxs:(type,props,key)=>({type,props,key}),Fragment:'fragment'};
-   if(id==='next/image'||id==='next/link')return {__esModule:true,default:id};
+   if(id==='next/image'||id==='next/link'||id==='next/script')return {__esModule:true,default:id};
    if(id==='next/navigation')return {notFound:()=>{throw Error('NOT_FOUND')}};
    if(id==='lucide-react')return new Proxy({},{get:(_,name)=>name});
    if(raw&&id==='@/lib/editorial-media')return {applyEditorialMedia:p=>p};
    assert.ok(id.startsWith('@/'),`Unexpected import ${id}`);
    const name='src/'+id.slice(2);return load(name.endsWith('.json')?name:fs.existsSync(path.join(root,name+'.ts'))?name+'.ts':name+'.tsx');
   }
-  vm.runInNewContext(out.outputText,{module:m,exports:m.exports,require:requireLocal,URL,Date},{filename:file,timeout:5000});return m.exports;
+  // Deterministic preview-only environment: never expose real runner environment or load ad scripts.
+  const previewProcess=Object.freeze({env:Object.freeze({VERCEL_ENV:'preview',NEXT_PUBLIC_ADSENSE_ENABLED:'false',NEXT_PUBLIC_ADSENSE_CONTENT_SLOT:''})});
+  vm.runInNewContext(out.outputText,{module:m,exports:m.exports,require:requireLocal,URL,Date,process:previewProcess},{filename:file,timeout:5000});return m.exports;
  }
  return load;
 }
@@ -42,6 +44,7 @@ const plain=x=>JSON.parse(JSON.stringify(x));
 let checks=0;const check=(name,fn)=>{fn();checks++;console.log('PASS '+name)};
 const before=loadRegistry({baseline:true}),raw=loadRegistry({raw:true}),after=loadRegistry();
 const old=before('src/data/blog.ts').blogPosts,rawPosts=raw('src/data/blog.ts').blogPosts,posts=after('src/data/blog.ts').blogPosts;
+const ContentAd=after('src/components/ContentAd.tsx').ContentAd;
 check('all original slugs, dates, text and references remain unchanged',()=>{for(const p of old)assert.deepEqual(plain(rawPosts.find(x=>x.slug===p.slug)),plain(p));});
 check('new registry has no duplicate slugs',()=>assert.equal(new Set(posts.map(p=>p.slug)).size,posts.length));
 const ledger=JSON.parse(fs.readFileSync(path.join(root,'docs/editorial-photo-provenance-20261104.json'),'utf8'));
@@ -53,6 +56,12 @@ for(const p of posts){
  const page=after('src/app/blog/[slug]/page.tsx');const metadata=plain(await page.generateMetadata({params:Promise.resolve({slug:p.slug})}));
  assert.equal(metadata.alternates.canonical,`https://www.sourcerating.com/blog/${p.slug}`);assert.equal(metadata.openGraph.images[0].url,`https://www.sourcerating.com${p.coverImage.src}`);
  const tree=await page.default({params:Promise.resolve({slug:p.slug})});assert.equal(tree.props['data-publication-sha256'],crypto.createHash('sha256').update(JSON.stringify(p)).digest('hex'));checks++;
+ // The source-render harness inspects the component boundary, not client-side consent hooks.
+ const adNodes=flowNodes(tree).filter(v=>v.type===ContentAd);
+ assert.equal(adNodes.length,1,`Unexpected content-ad placements ${p.slug}`);
+ assert.equal(adNodes[0].props.enabled,false,`Ads must be disabled in preview ${p.slug}`);
+ assert.equal(adNodes[0].props.slot,'',`No live ad slot in the test harness ${p.slug}`);
+ assert.deepEqual(plain(adNodes[0].props.hosts),['sourcerating.com','www.sourcerating.com']);checks++;
 }
 check('missing article still returns notFound',()=>{});
 let missing=false;try{await after('src/app/blog/[slug]/page.tsx').default({params:Promise.resolve({slug:'missing-test'})});}catch(e){missing=e.message==='NOT_FOUND';}assert.ok(missing);
