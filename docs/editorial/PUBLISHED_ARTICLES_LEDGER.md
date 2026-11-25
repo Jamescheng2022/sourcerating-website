@@ -1,6 +1,6 @@
 # 四站已发布文章与内容防重总台账 (Published Articles Anti-Duplication Ledger)
 
-> **状态**：实时维护台账 | **最新归档时间**：2026-11-24 | **跟踪总条目**：119 篇/章节
+> **状态**：实时维护台账 | **最新归档时间**：2026-11-25 | **跟踪总条目**：120 篇/章节
 
 本台账记录四个站点的全部已上线历史文章与内容，**作为每次选题第一步的强制比对依据**，严格杜绝同质化、主题重叠、标题近似和虚构选题。
 
@@ -12,7 +12,7 @@
 - [5. 每日选题防重检索流程规范](#5-每日选题防重检索流程规范)
 - [6. 原始资料与本地空间管理规范 (Google Drive 云端化)](#6-原始资料与本地空间管理规范-google-drive-云端化)
 
-## 1. SourceRating 采购与跨国工程供应链 (共 36 篇)
+## 1. SourceRating 采购与跨国工程供应链 (共 37 篇)
 | 序号 | 发布日期 / 分类 | 文章标题 | Slug / 链接 | 核心关注痛点 |
 | :--- | :--- | :--- | :--- | :--- |
 | 1 | 2026-10-21 <br>`Buyer` | **The Shipment Passed Inspection. That Does Not Mean Every Piece Passed.** | [`accepted-sampling-lot-not-zero-defects`](https://www.sourcerating.com/blog/accepted-sampling-lot-not-zero-defects) | 材质证书真实性、端口验货、防腐公差、检测范围、海运提单与清关争议 |
@@ -51,6 +51,7 @@
 | 34 | 2026-11-23 <br>Steel structures | **The Steel Is Fabricated. Why Won't the Galvanizer Accept It?** | [`the-steel-is-fabricated-why-wont-the-galvanizer-accept-it`](https://www.sourcerating.com/blog/the-steel-is-fabricated-why-wont-the-galvanizer-accept-it) | 深度解析机械加工合格构件在热浸镀锌厂遭遇拒收的物理机理与工程防线；450°C熔锌浸渍热冲击与密闭空心型钢（HSS/管件）水汽急剧膨胀超压爆炸红线；熔锌密度（6.6 g/cm³）浮力障碍、排气排锌不良导致巨额死重与高昂锌耗；搭接贴合面（Lap joints）断续焊吸酸、镀后毛细渗漏“吐黄水”（Rust weeping）防范；ASTM A385 母材化学成分限制（Sandelin 硅不稳定区 0.04%~0.14% 及磷超标引起的超厚脆裂与运输剥落）；日本 Kowa 工艺标准与 H 型钢加劲肋切角（Cope snipes）排气规范；买方下料前 5 项热浸镀锌图纸审核清单（DFG）与 MTR 成分筛查责任矩阵 |
 | 35 | 2026-11-23 <br>Procurement Operations | **The 50,000 m² Factory That Existed Only in the Showroom: The Overseas Buyer's Guide to Corporate Penetration Due Diligence in Chinese Industrial Sourcing** | [`supplier-penetration-due-diligence-showroom-factory-guide`](https://www.sourcerating.com/blog/supplier-penetration-due-diligence-showroom-factory-guide) | 揭秘海外买家在定制机械、电气成套、模具五金与工程零部件采购中的“展厅工厂”挂牌与影子作坊假代工欺诈；穿透国家企业信用信息公示系统(GSXT)18位统一社会信用代码、新《公司法》第47条5年内实缴资本穿透与企业年报城镇职工社保参保实收人数核查；全国排污许可证管理信息平台合规准入；高压大工业用电电费结算单变压器kVA容量与每月有功电量kWh工程测算模型；现场固定资产标签、工序流转卡/派工单实地追踪、门卫过磅单与合同相对性突击核查；中英双语禁止擅自转包、生产场地陈述保证与30%惩罚性约定违约金(民法典第585条)合同模版 |
 | 36 | 2026-11-24 <br>Machinery & Electrical | **The Machine Spun in the Video. Why Won't It Run on Your Floor?** | [`industrial-machinery-fat-sat-electrical-safety-buyer-guide`](https://www.sourcerating.com/blog/industrial-machinery-fat-sat-electrical-safety-buyer-guide) | 跨国自动化设备与电气控制柜工厂验收测试(FAT)与现场验收(SAT)实操防坑指南；揭秘微信/WhatsApp 30秒空载试车视频假象；北美 NEC/NFPA 79 与 UL 508A 认证红线穿透（NRTL元件清单、SCCR短路配合计算、NFPA 79第13.2条导线线色违规、电柜门接地跨接线）；欧盟新机械法规 2023/1230、EN 60204-1 与 EN ISO 13849-1 双通道安全继电器架构；物理热平衡机理与客户真实物料 8 小时连续满载湿运行考核（OEE >= 85%、Cpk >= 1.33）；防范 PLC 梯形图密码锁定、RTC 时间炸弹与西门子/罗克韦尔未编译纯源码 Escrow 托管；海外调试签证延误破局（4G/5G 远程路由调试与本地第三方集成商代履行费用抵扣）；保姆级 6 阶段 ITP 验货矩阵（H/W/R）与中英双语防坑合同模版 |
+| 37 | 2026-11-25 <br>Contracts & Payment | **The Letter of Credit Looked Irrevocable. Why Did the Issuing Bank Refuse to Pay?** | [`letter-of-credit-soft-clauses-ucp-600-discrepancy-risk-guide`](https://www.sourcerating.com/blog/letter-of-credit-soft-clauses-ucp-600-discrepancy-risk-guide) | 跨国采购与供应链大宗/定制设备结算信用证(L/C)软条款陷阱与UCP 600不符点恶意拒付破局指南；揭秘海运途中市场大宗商品价格暴跌20%时买方联合开证行挑刺微小排版不符点、发起断崖式降价勒索并任由货物在目的港产生每天数百美元滞期费(Demurrage)的恶性收割链；穿透UCP 600第4/5条单证独立原则、第14(b)条5个银行工作日审单上限、第16(c)条单一拒付电讯通知要件与第16(f)条开证行程序瑕疵“失权规则(Preclusion Rule)”；解构5大致命软条款（买方指定代表签署商检证书与印鉴核验、买方书面租船定舱通知、5-7天极限交单期、第14(h)条非单据化条件、货代提单HBL与多式联运排除）；保兑行信用评级与静默保兑/公开保兑风险；第三方独立商检机构(SGS/BV/TÜV)在Field 46A中的工程化条款解绑设计；保姆级SWIFT MT700开证草案7大核心字段排雷审核清单；中英双语防软条款合同条款模版、不符点免责承诺与援引UCP 600第16条强制付款法定反驳函模版。 |
 
 
 ## 2. Precast.World 全球预制混凝土工艺与设备 (共 21 篇)

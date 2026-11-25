@@ -1,3 +1,4 @@
+import { letterOfCreditSoftClausesGuidePost } from "@/content/blog/letter-of-credit-soft-clauses-ucp-600-discrepancy-risk-guide";
 import { industrialMachineryFatSatGuidePost } from "@/content/blog/industrial-machinery-fat-sat-electrical-safety-buyer-guide";
 import { steelFabricatedGalvanizerRejectionPost } from "@/content/blog/the-steel-is-fabricated-why-wont-the-galvanizer-accept-it";
 import { supplierDueDiligenceGuidePost } from "@/content/blog/supplier-penetration-due-diligence-showroom-factory-guide";
@@ -35,6 +36,7 @@ export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
 export const blogPosts: BlogPost[] = ([
+  letterOfCreditSoftClausesGuidePost,
   industrialMachineryFatSatGuidePost,
   steelFabricatedGalvanizerRejectionPost,
   supplierDueDiligenceGuidePost,
