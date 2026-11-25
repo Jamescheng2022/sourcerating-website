@@ -6,6 +6,8 @@ export const siteConfig = {
   description:
     "Independent articles on industrial suppliers, production, quality, logistics, customs and cross-border procurement, by James Cheng.",
   author: "James Cheng",
+  operatorNotice:
+    "SourceRating is owned and operated by AnThai Ventures LLC, a limited liability company registered in Wyoming, United States.",
   locale: "en_US",
   contact: { email: "contact@sourcerating.com", wechat: "SourceRating" },
   social: { linkedin: "https://www.linkedin.com/in/hcrdi" },
