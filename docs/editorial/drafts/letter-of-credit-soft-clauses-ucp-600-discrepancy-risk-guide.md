@@ -159,3 +159,13 @@ The following checklist aligns with standard SWIFT MT700 interbank messaging spe
 In international procurement, trust is maintained through contract structure, not through verbal goodwill. When international markets are stable and profits are ample, buyers overlook imperfect documents and pay without hesitation. But the true test of a procurement contract occurs during economic downturns, sudden tariff increases, and commodity crashes.
 
 A Letter of Credit is not an insurance policy against an unreliable trading partner; it is a precision financial instrument. By sanitizing SWIFT MT700 instructions at intake, eliminating applicant-controlled soft clauses, enforcing independent third-party engineering inspection protocols, and mastering the procedural shield of UCP 600 Article 16, industrial buyers and suppliers transform the Letter of Credit from a vulnerable trap into what it was always intended to be: an unassailable guarantee of performance and payment.
+
+
+---
+
+## References and Standards Cited
+- **ICC Uniform Customs and Practice for Documentary Credits (UCP 600):** https://library.iccwbo.org/content/tfb/RULES/tfb-ucp600-rules.htm
+- **International Standard Banking Practice for the Examination of Documents under UCP 600 (ISBP 821, 2023 Edition):** https://library.iccwbo.org/content/tfb/RULES/tfb-isbp-2023-rules.htm
+- **Incoterms 2020: ICC Rules for the Use of Domestic and International Trade Terms:** https://iccwbo.org/business-solutions/incoterms-rules/incoterms-2020/
+- **Trade Finance Guide: A Quick Reference for Exporters (U.S. International Trade Administration):** https://www.trade.gov/trade-finance-guide
+- **United Nations Convention on Contracts for the International Sale of Goods (CISG):** https://uncitral.un.org/en/texts/salegoods/conventions/sale_of_goods/cisg

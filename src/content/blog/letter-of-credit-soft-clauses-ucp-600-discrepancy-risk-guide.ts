@@ -423,10 +423,10 @@ export const letterOfCreditSoftClausesGuidePost: BlogPost = {
       "note": "FOB, CFR, and CIF freight and delivery risk demarcations influencing bill of lading consignment and transport document execution."
     },
     {
-      "title": "World Trade Organization (WTO) Trade Finance Guide: Exporting with Letters of Credit",
-      "publisher": "World Trade Organization (WTO)",
-      "href": "https://www.wto.org/english/res_e/publications_e/trade_finance_guide_e.htm",
-      "note": "Authoritative intergovernmental guide on documentary credits, SWIFT interbank messaging structures (MT700 series), and commercial risk mitigation in cross-border trade."
+      "title": "Trade Finance Guide: A Quick Reference for Exporters",
+      "publisher": "International Trade Administration, U.S. Department of Commerce",
+      "href": "https://www.trade.gov/trade-finance-guide",
+      "note": "Exporter guide covering documentary letters of credit, commercial payment risks, document examination, and trade finance methods."
     },
     {
       "title": "United Nations Convention on Contracts for the International Sale of Goods (CISG)",
