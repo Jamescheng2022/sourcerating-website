@@ -30,7 +30,9 @@ export default function TermsPage() {
           </div>
           <div>
             <h2 className="text-xl font-bold text-gray-950 mb-3">Contact</h2>
-            <p>For questions, email <a className="text-brand-700 font-medium" href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.</p>
+            <p>{siteConfig.operatorNotice} Contact:{" "}
+              <a className="text-brand-700 font-medium" href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>
+            </p>
           </div>
         </div>
       </div>
