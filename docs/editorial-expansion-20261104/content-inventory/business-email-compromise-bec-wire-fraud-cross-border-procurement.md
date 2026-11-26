@@ -72,46 +72,44 @@ When $400,000 vanishes into a fraudulent offshore bank account, a vicious commer
 Who wins in court?
 
 ### A. The Bedrock Doctrine: Debtor’s Risk of Payment Transmission
-Under international commercial jurisprudence—including the **United Nations Convention on Contracts for the International Sale of Goods (CISG Article 54 & 57)**, the **US Uniform Commercial Code (UCC § 4A-406)**, **English Common Law**, and the **Civil Code of the People's Republic of China (Articles 509 and 599)**:
+Under international commercial jurisprudence—including the **United Nations Convention on Contracts for the International Sale of Goods (CISG Articles 54 & 57)**, the **US Uniform Commercial Code (UCC § 4A-406)**, **English Common Law**, and the **Civil Code of the People's Republic of China (Articles 509, 599, 626, and 627)**:
 > **The general rule of law is that a debtor bears the risk of ensuring that payment reaches the creditor’s designated account.**
 
 Unless a contract expressly states otherwise, an obligation to pay is only discharged when the funds are actually credited to the creditor’s lawful account. Simply initiating a wire transfer or transmitting funds to an unauthorized third party does not extinguish the debt.
 
 ### B. The "Imposter Rule" and Comparative Negligence
-In common law jurisdictions (United States, United Kingdom, Canada, Australia, Hong Kong, Singapore), courts adjudicating BEC wire fraud cases apply principles of **comparative fault** and the equitable doctrine derived from *Lickbarrow v. Mason*:
-> *"Wherever one of two innocent persons must suffer by the acts of a third, he who has enabled such third person to occasion the loss must sustain it."*
-
-In landmark rulings such as *Beau Townsend Ford, Inc. v. Don Hinds Ford, Inc.* (759 F. App'x 348, 6th Cir. 2018), *Bile v. Rynac Ltd* [2014] EWHC 4531 (QB), and *J.F. v. D.F.* (2021 NY Slip Op 50387), courts have consistently established that:
+In commercial litigation across common-law jurisdictions, courts evaluate which party had the opportunity to prevent the fraud and whether either party acted negligently:
+- In *Beau Townsend Ford, Inc. v. Don Hinds Ford, Inc.* (759 F. App'x 348, 6th Cir. 2018), the Sixth Circuit reversed summary judgment against the payor and remanded the case for trial, holding that whether the payor exercised ordinary care or whether the payee's compromised email system was negligent presented genuine factual disputes under UCC principles.
+- In *Bile v. RREMC, LLC* (E.D. Va. 2016), the payor actually prevailed on summary judgment because the payee's compromised email system was the proximate cause and the fraudulent email specifically instructed the payor not to call.
+- In English commercial law, cases such as *K v A* [2019] EWHC 1118 (Comm) confirm that liability turns on contractual construction, actual or apparent authority, and whether the payee is estopped from denying receipt.
 1. **Breach of IT Security Is Not Automatic Liability:** The mere fact that the supplier’s email server was hacked does not make the supplier strictly liable for the stolen funds.
 2. **The Duty of Inquiry on the Paying Party:** Commercial buyers are held to a standard of commercial reasonableness. When a buyer receives an unexpected, sudden instruction to change payment coordinates—especially directing funds to a different bank, a different city, or a beneficiary name that does not match the contracting entity—the buyer has an affirmative legal duty to investigate and verify.
-3. **Failure to Verify Constitutes Gross Negligence:** If the buyer blindly executes a wire transfer based solely on an email request without picking up the phone or conducting out-of-band verification, courts routinely hold that the buyer was the party in the best position to prevent the fraud. Consequently, the buyer must bear 100% of the financial loss and must pay the seller a second time to receive the goods.
+3. **Failure to Verify Creates Grave Exposure:** If the buyer executes a wire transfer based solely on an unverified email request without out-of-band verification, courts often find the buyer failed to exercise ordinary care. In such cases, the buyer risks being assigned primary comparative fault, bearing the financial loss, and remaining obligated to pay the seller to receive the goods.
 
 ### C. The Maritime Lien Trap
 While the legal dispute plays out in court or arbitration, the physical cargo sits in shipping containers at the destination port. Ocean carriers and terminal operators do not care about email hacking; they will not release containers without an original Bill of Lading or an electronic telex release. As demurrage and port storage fees mount—often exceeding $300 to $500 per container per day—the buyer faces compounding financial ruin.
 
 ---
 
-## 3. The 72-Hour Golden Window: Emergency Asset Recovery Protocol
+## 3. The Emergency Asset Recovery Protocol
 
-If your treasury or accounts payable team discovers that funds were wired to an unauthorized account, you enter the **72-Hour Golden Window**. Beyond 72 hours, the probability of recovering funds drops to near zero as criminal syndicates disperse funds across multiple layered accounts and cryptocurrency off-ramps.
+If your treasury or accounts payable team discovers that funds were wired to an unauthorized account, you enter an immediate multi-track recovery protocol:
 
-Here is the exact step-by-step emergency protocol that must be executed immediately:
-
-### Step 1: Issue an Immediate SWIFT MT192 / MT199 Recall
+### Step 1: Issue an Immediate SWIFT camt.056 / MT192 Recall Request
 Within minutes of discovery:
-1. Instruct your remitting bank’s treasury operations desk to issue an urgent **SWIFT MT192 (Request for Cancellation)** or **SWIFT MT199 (Free Format Message)** to the beneficiary bank.
-2. Specify the exact reason: *"URGENT: CRIMINAL FRAUD / BUSINESS EMAIL COMPROMISE. BENEFICIARY ACCOUNT IS AN UNAUTHORIZED MULE ACCOUNT. REQUEST IMMEDIATE FREEZE AND RETURN OF FUNDS."*
-3. Request the remitting bank’s fraud liaison officer to directly contact the compliance/fraud desk of the beneficiary bank and any intermediary correspondent banks (such as JP Morgan, Citibank, or Standard Chartered New York for USD clearing).
+1. Instruct your remitting bank’s treasury operations desk to issue an urgent **SWIFT camt.056 (Payment Cancellation Request)** under ISO 20022 or a legacy **SWIFT MT192 (Request for Cancellation)**, supported by a **SWIFT MT199 (Free Format Message)** to the beneficiary bank.
+2. Specify the exact reason: *"URGENT: CRIMINAL FRAUD / BUSINESS EMAIL COMPROMISE. BENEFICIARY ACCOUNT IS AN UNAUTHORIZED MULE ACCOUNT. REQUEST IMMEDIATE STOP AND RECALL."*
+3. Request the remitting bank’s fraud liaison officer to directly contact the compliance/fraud desk of the beneficiary bank and any intermediary correspondent clearing banks. Note that a recall is an administrative request to receiving and intermediary banks, not a self-executing statutory freeze.
 
 ### Step 2: Emergency Multi-Agency Law Enforcement Reporting
-Filing a standard police report at a local precinct is completely ineffective for international wire fraud. You must trigger specialized cyber-financial units:
-- **United States:** Immediately file an urgent incident report through the **FBI Internet Crime Complaint Center (IC3)** at [ic3.gov](https://www.ic3.gov). If the wire transfer exceeds $50,000, request immediate activation of the **FBI IC3 Recovery Asset Team (RAT)** and the Financial Fraud Kill Chain (FFKC). The RAT coordinates directly with the Financial Crimes Enforcement Network (FinCEN) and correspondent clearing banks to freeze USD wires in transit.
-- **Hong Kong:** If funds were directed to a Hong Kong bank account, immediately contact the **Hong Kong Police Force Anti-Deception Coordination Centre (ADCC)** (24/7 hotline: +852 18222) and file a formal e-Report. Request the Joint Financial Intelligence Unit (JFIU) to issue a formal **Letter of No Consent (LNC)** under Section 25A of the Organized and Serious Crimes Ordinance (OSCO), which legally compels Hong Kong banks to freeze the recipient account.
-- **Singapore:** Contact the **Singapore Police Force Commercial Affairs Department (CAD)** Anti-Scam Centre (ASC) to initiate inter-bank account freezing under the Criminal Procedure Code.
+Filing a standard police report at a local precinct is completely ineffective for international wire fraud. You must trigger specialized cyber-financial units immediately, regardless of the loss amount:
+- **United States:** Immediately file an urgent incident report through the **FBI Internet Crime Complaint Center (IC3)** at [ic3.gov](https://www.ic3.gov). The FBI's **Recovery Asset Team (RAT)** coordinates with the Financial Fraud Kill Chain (FFKC) to liaise with financial institutions and correspondent banks to assist in intercepting wires in transit.
+- **Hong Kong:** If funds were directed to a Hong Kong bank account, immediately contact the **Hong Kong Police Force Anti-Deception Coordination Centre (ADCC)** (24/7 hotline: +852 18222) and the Joint Financial Intelligence Unit (JFIU). Under Hong Kong law (*Tam Sze Leung v Commissioner of Police* [2024] HKCFA 8), a police Letter of No Consent (LNC) withholds statutory consent under Section 25A of the Organized and Serious Crimes Ordinance (OSCO)—warning the bank that dealing with the funds may constitute money laundering—but the LNC does not itself constitute a judicial freezing order; the bank exercises its own contractual discretion to withhold payment.
+- **Singapore:** Contact the **Singapore Police Force Commercial Affairs Department (CAD)** Anti-Scam Centre (ASC) to initiate inter-bank account alerts under the Criminal Procedure Code.
 - **Mainland China:** If funds touched a mainland Chinese domestic account, report immediately to the **National Anti-Telecom and Online Fraud Center** (national hotline: 96110) through local Public Security Bureau (PSB) economic crime investigation units.
 
 ### Step 3: Emergency Civil Injunctions (Mareva / Asset Freezing Orders)
-Criminal freezing mechanisms often take days to process. If significant capital ($200,000+) is at stake, retain emergency cross-border commercial litigation counsel in the beneficiary bank’s jurisdiction (e.g., Hong Kong, Singapore, or London) within 24 hours to file an ex parte application for:
+Criminal freezing mechanisms take time to coordinate. Where substantial capital is at stake, retain emergency cross-border commercial litigation counsel in the beneficiary bank’s jurisdiction (e.g., Hong Kong, Singapore, or London) to evaluate applying for:
 - **A Mareva Injunction (Asset Freezing Order):** Freezing the balance of the recipient account globally.
 - **A Norwich Pharmacal Order:** Compelling the beneficiary bank to immediately disclose the account holder’s identity, transaction logs, and the destinations of any downstream outgoing wire transfers.
 
@@ -154,14 +152,14 @@ Financial controls cannot rely on email to police email. The only mathematically
 - **Strict Prohibition:** Never dial phone numbers listed in the email signature, email body, or the attached PDF invoice. Attackers routinely include VOIP numbers that route directly to call centers staffed by co-conspirators.
 
 #### Pillar 2: Live Video Verification with Identification Credentials
-- For any balance payment exceeding $50,000 where banking coordinates change, mandate a live, scheduled video conference (via Zoom, Teams, or WeChat).
-- The supplier’s designated legal representative or corporate director must appear on camera, holding their official government-issued photo ID (national ID or passport) alongside the physical company bank account opening certificate (*Bank Account Opening Permit / 基本存款账户信息*).
-- Cross-reference the face and credentials against the business license and initial corporate due diligence dossier.
+- For any balance payment where banking coordinates change, mandate a live, scheduled video conference (via Zoom, Teams, or WeChat).
+- The supplier’s designated legal representative or corporate director must appear on camera, holding their official government-issued photo ID (national ID or passport) alongside current bank-issued account documentation (*Basic Deposit Account Information / 基本存款账户信息*, or bank-certified account details; note that PBOC abolished paper Account Opening Permits in 2019).
+- Cross-reference the face and credentials against the business license and initial corporate due diligence dossier, noting that video confirms identity but must be backed by verified bank documents.
 
 #### Pillar 3: The $100 Penny Test Remittance
 - If banking details genuinely change (e.g., corporate restructuring, new bank opening), never send the full wire amount immediately.
 - Execute a **test micro-remittance of $100**.
-- Require the supplier’s finance department to log into their enterprise online banking portal, screenshot the posted $100 transaction record, and send an encrypted bank statement confirmation.
+- Require the supplier’s finance department to log into their enterprise online banking portal, verify the posted $100 transaction record, and obtain independent verbal and statement confirmation.
 - Only after the test wire settles and is verbally confirmed should the remaining balance be released.
 
 ---
@@ -193,18 +191,18 @@ Below is the production-ready bilingual English-Chinese contract clause drafted 
    仅当通过满足以下全部法定累积条件的正式书面协议变更时，指定账户的变更方为合法有效且具备约束力：
    (a) Physically signed by the Seller's legal representative with an original corporate seal (*gongzhang*) affixed;
        由卖方法定代表人亲笔签署并加盖原始企业公章；
-   (b) Delivered in physical hard copy via international courier (DHL/FedEx) or verified via live video conference with official corporate bank documentation; and
-       通过国际专递（DHL/FedEx）送达纸质原件，或通过包含官方企业银行文件的视频会议进行现场核验；并且
+   (b) Delivered in physical hard copy via international courier (DHL/FedEx) and verified via live video conference with bank-issued Basic Deposit Account Information (*基本存款账户信息*) or official bank documentation; and
+       通过国际专递（DHL/FedEx）送达纸质原件，并通过包含银行官方企业账户证明文件的视频会议进行现场核验；并且
    (c) Confirmed by mutual execution of a US$100 test wire remittance prior to the transmission of any substantial commercial balance.
        在汇出任何大额商业尾款之前，经双方通过执行100美元的测试电汇确认无误。
 
 4. **Allocation of Loss for Cyber Compromise / 网络安全事件损失分配与责任承担:**
    In the event that the Seller's email systems, domain names, servers, or personnel credentials suffer unauthorized access, compromise, interception, or manipulation resulting in the transmission of fraudulent payment instructions to the Buyer:
    若因卖方电子邮件系统、域名、服务器或员工凭证遭受未授权访问、沦陷、拦截或篡改，导致向买方发送欺诈性付款指示：
-   (a) If the Buyer complied with the Out-of-Band Verification (OOBV) procedures stipulated herein, any remittance made by the Buyer in reliance on instructions originating from the Seller's compromised systems shall be deemed full and final satisfaction of the Buyer's payment obligation pro tanto; and
-       若买方已遵守本协议约定的带外核验（OOBV）程序，则买方因信赖源自卖方被黑系统发出的指示而完成的汇款，在汇出金额范围内视为买方付款义务的完全与最终履行；并且
-   (b) The Seller shall immediately execute and release all Bills of Lading, shipping documents, and cargo to the Buyer without delay, and the Seller shall bear the sole burden of pursuing recovery of the stolen funds from the criminal perpetrators.
-       卖方应立即向买方签发并交付所有海运提单、运输单据及货物，不得延误，且卖方应独自承担向犯罪分子追偿被盗资金的全部责任与损失。
+   (a) If the Buyer complied with the Out-of-Band Verification (OOBV) procedures stipulated herein, any remittance made by the Buyer in reliance on instructions originating from the Seller's compromised systems shall be deemed satisfaction of the Buyer's payment obligation pro tanto (to the extent of the amount paid); and
+       若买方已遵守本协议约定的带外核验（OOBV）程序，则买方因信赖源自卖方被黑系统发出的指示而完成的汇款，在实际支付金额范围内产生清偿效力（pro tanto）；并且
+   (b) The Seller shall promptly release shipping documents and bills of lading corresponding proportionately to the discharged amount, or release all cargo upon receipt of the net remaining balance. In the event of discrepancy between the English and Chinese versions, the English version [or Chinese version, as chosen by parties] shall prevail.
+       卖方应当在已清偿金额范围内相应签发放行海运单证与提单，或在买方结清剩余净差额后立即无条件放行全部货物。中英文版本如有冲突，以英文版[或中文版]为准。
 ```
 
 ---
@@ -215,11 +213,11 @@ Before any accounts payable specialist, finance manager, or CFO approves an inte
 
 | Audit Step | Verification Item | Operational Standard & Action | Status | Verified By |
 |---|---|---|---|---|
-| **Step 1** | **Domain Header Analysis** | Inspect raw email headers (`Received`, `Return-Path`, `Authentication-Results`). Confirm SPF, DKIM, and DMARC pass with zero domain typosquatting or homoglyph substitutions. | [ ] PASS <br>[ ] FAIL | IT Security |
+| **Step 1** | **Domain Header Analysis** | Inspect raw RFC 5322/822 headers. Check SPF, DKIM, and DMARC alignment; note that compromised legitimate accounts pass authentication, while lookalikes may authenticate their own domains. Reject typosquatting, homoglyphs, and mismatched reply-to headers. | [ ] PASS <br>[ ] FAIL | IT Security |
 | **Step 2** | **Beneficiary Name Matching** | Ensure the beneficiary account name matches the exact corporate legal entity on the sales contract. Reject any "subsidiary", "clearing agent", or individual personal account. | [ ] PASS <br>[ ] FAIL | Finance AP |
 | **Step 3** | **Jurisdiction Consistency** | Confirm the bank’s geographic jurisdiction matches the supplier's registered manufacturing domicile (e.g., reject Hong Kong or Singapore accounts for mainland factories without certified tax filings). | [ ] PASS <br>[ ] FAIL | Treasury |
 | **Step 4** | **Pre-Agreed Voice Callback** | Perform a voice callback to the telephone number established in the original contract. Never use numbers listed on the updated invoice. Confirm verbal challenge passphrase. | [ ] PASS <br>[ ] FAIL | Procurement Lead |
-| **Step 5** | **Live Video Conference** | Conduct a live video call with the factory director holding government photo ID and the official physical Bank Account Opening Certificate. | [ ] PASS <br>[ ] FAIL | Sourcing Manager |
+| **Step 5** | **Live Video Conference** | Conduct a live video call with the factory director holding government photo ID and current bank-issued Basic Deposit Account Information (*基本存款账户信息*) or official bank verification letter (noting PBOC abolished paper permits in 2019). | [ ] PASS <br>[ ] FAIL | Sourcing Manager |
 | **Step 6** | **Physical Contract Amendment** | Obtain a courier-delivered, physically signed, and sealed (*gongzhang*) formal contract amendment. Digital signatures on emails are strictly inadmissible. | [ ] PASS <br>[ ] FAIL | Legal Counsel |
 | **Step 7** | **$100 Penny Test Wire** | Execute a $100 test telegraphic transfer. Obtain verified online banking transaction confirmation before wiring the remaining balance. | [ ] PASS <br>[ ] FAIL | Treasury Lead |
 | **Step 8** | **Dual CFO Sign-off** | Both the Head of Global Procurement and the Chief Financial Officer must sign the physical Wire Release Authorization form with archived OOBV evidence. | [ ] PASS <br>[ ] FAIL | CFO / VP Finance |

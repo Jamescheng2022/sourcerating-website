@@ -14,7 +14,7 @@ All four photographic subjects are authentic documentary photographs from Wikime
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Skyline,_Marina_Bay,_Singapur,_2023-08-18,_DD_30-32_HDR.jpg
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
 - **Adaptation:** High-resolution original (6917x4611 px), cropped to 3:2 landscape aspect ratio, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and MozJPEG formats. Derivative work licensed under CC BY-SA 4.0.
-- **Visible Caption:** Marina Bay financial district skyline in Singapore, a major international trade finance and cross-border currency clearing hub. Photo: Diego Delso / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Skyline,_Marina_Bay,_Singapur,_2023-08-18,_DD_30-32_HDR.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration only; not a specific bank, account, or legal dispute discussed in this article.
+- **Visible Caption:** Marina Bay financial district skyline in Singapore, a major international trade finance and cross-border currency clearing hub. Photo: Diego Delso, delso.photo / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Skyline,_Marina_Bay,_Singapur,_2023-08-18,_DD_30-32_HDR.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration only; not a specific bank, account, or legal dispute discussed in this article.
 
 ---
 
@@ -24,17 +24,17 @@ All four photographic subjects are authentic documentary photographs from Wikime
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Bank_Muamalat.JPG
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
 - **Adaptation:** High-resolution original (5616x3744 px), cropped to 3:2 landscape aspect ratio, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and MozJPEG. Derivative work licensed under CC BY-SA 4.0.
-- **Visible Caption:** Commercial banking service counter where international remittance instructions and telegraphic transfers (T/T) are processed. Photo: Melwinsy / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bank_Muamalat.JPG), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates the operational banking interface where beneficiary account verification and callback controls must intercept fraudulent payment instructions.
+- **Visible Caption:** Commercial banking branch counter and customer service area. Photo: Melwinsy / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bank_Muamalat.JPG), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates the retail and commercial banking environment where customer transactions are submitted, serving as a conceptual backdrop for the procedural verification controls needed to catch unauthorized payment diversions.
 
 ---
 
 ### 3. Figure 2: Intermodal Container Yard & Gantry Cranes at Deepwater Seaport
 - **Subject:** Port of Rotterdam Waalhaven container terminal, showing rows of stacked ISO shipping containers and ship-to-shore gantry cranes where ocean freight sits physically detained on port storage and demurrage charges while buyer and manufacturer dispute unreceived funds following email compromise.
-- **Author:** Waalhaven / Wikipedia user
+- **Author:** AgainErick
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Waalhaven_pier_6_-_Port_of_Rotterdam_-_container_terminal_and_cranes.jpg
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
 - **Adaptation:** High-resolution original (5181x2914 px), cropped to 3:2 landscape aspect ratio, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and MozJPEG. Derivative work licensed under CC BY-SA 4.0.
-- **Visible Caption:** Stacked shipping containers and gantry cranes at the Port of Rotterdam Waalhaven container terminal. Photo: Waalhaven / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Waalhaven_pier_6_-_Port_of_Rotterdam_-_container_terminal_and_cranes.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Depicts the physical shipping terminal where containerized cargo is frozen under carrier liens and accumulating port demurrage when wire fraud interrupts contractual bill of lading release.
+- **Visible Caption:** Stacked shipping containers and gantry cranes at the Port of Rotterdam Waalhaven container terminal. Photo: AgainErick / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Waalhaven_pier_6_-_Port_of_Rotterdam_-_container_terminal_and_cranes.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Depicts container terminal infrastructure where cargo may sit detained under carrier liens and port demurrage when wire fraud interrupts contractual bill of lading release.
 
 ---
 
@@ -44,7 +44,7 @@ All four photographic subjects are authentic documentary photographs from Wikime
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Rack_of_Cisco_Hyperflex_HXAF_240c_M5_nodes.jpg
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
 - **Adaptation:** High-resolution original (2604x4624 px), cropped to 3:2 landscape aspect ratio focusing on server nodes, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and MozJPEG. Derivative work licensed under CC BY-SA 4.0.
-- **Visible Caption:** High-density enterprise server nodes and networking hardware hosting corporate email systems and routing directories. Photo: Btrs / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rack_of_Cisco_Hyperflex_HXAF_240c_M5_nodes.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates enterprise infrastructure where compromised mail tenant credentials and hidden inbox forwarding rules enable silent invoice modification.
+- **Visible Caption:** High-density enterprise server nodes and networking hardware. Photo: Btrs / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rack_of_Cisco_Hyperflex_HXAF_240c_M5_nodes.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates enterprise computing hardware, serving as a conceptual backdrop for the cloud tenant credentials and server-side mailbox rules manipulated during business email compromise.
 
 ---
 

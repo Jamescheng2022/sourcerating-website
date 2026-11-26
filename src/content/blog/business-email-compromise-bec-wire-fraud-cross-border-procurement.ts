@@ -18,7 +18,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
     "mobileWidth": 600,
     "mobileHeight": 400,
     "alt": "Singapore Marina Bay financial district skyline and commercial trade banking towers where cross-border trade finance and offshore wire transfers are cleared",
-    "caption": "Marina Bay financial district skyline in Singapore, a major international trade finance and cross-border currency clearing hub. Photo: Diego Delso / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Skyline,_Marina_Bay,_Singapur,_2023-08-18,_DD_30-32_HDR.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration only; not a specific bank, account, or legal dispute discussed in this article."
+    "caption": "Marina Bay financial district skyline in Singapore, a major international trade finance and cross-border currency clearing hub. Photo: Diego Delso, delso.photo / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Skyline,_Marina_Bay,_Singapur,_2023-08-18,_DD_30-32_HDR.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration only; not a specific bank, account, or legal dispute discussed in this article."
   },
   "articleBody": [
     {
@@ -50,7 +50,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "mobileWidth": 600,
       "mobileHeight": 400,
       "alt": "Commercial bank customer service counter where international remittance instructions and telegraphic transfers are processed",
-      "caption": "Commercial banking service counter where international remittance instructions and telegraphic transfers (T/T) are processed. Photo: Melwinsy / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bank_Muamalat.JPG), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates the operational banking interface where beneficiary account verification and callback controls must intercept fraudulent payment instructions."
+      "caption": "Commercial banking branch counter and customer service area. Photo: Melwinsy / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bank_Muamalat.JPG), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates the retail and commercial banking environment where customer transactions are submitted, serving as a conceptual backdrop for the procedural verification controls needed to catch unauthorized payment diversions."
     },
     {
       "type": "paragraph",
@@ -62,7 +62,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "Even more catastrophic for the buyer is the legal reality: paying a scammer does not extinguish your contractual obligation to pay the manufacturer. Under international commercial law, the buyer still owes the factory $406,000, while the shipping containers sit impounded at the port accumulating thousands of dollars per day in carrier demurrage."
+      "text": "Even more perilous for the buyer is the legal exposure under international sales jurisprudence: paying an unauthorized imposter does not automatically extinguish your underlying debt to the manufacturer. Unless the buyer can establish that the seller authorized or is estopped from denying the redirection, or demonstrate an enforceable comparative fault defense, the buyer risks remaining liable for the balance while shipping containers sit impounded at the port accumulating thousands of dollars per day in demurrage."
     },
     {
       "type": "heading",
@@ -70,7 +70,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "Business Email Compromise in international manufacturing is rarely a crude mass-phishing campaign. According to the [FBI Internet Crime Complaint Center (IC3)](https://www.ic3.gov), BEC represents over $2.9 billion in annual reported losses, weaponizing targeted corporate reconnaissance and technical mail-tenant manipulation."
+      "text": "Business Email Compromise in international manufacturing is rarely a crude mass-phishing campaign. According to the [FBI Internet Crime Complaint Center (IC3)](https://www.ic3.gov), BEC generated over $2.9 billion to $3.047 billion in aggregate annual reported losses across all sectors, weaponizing targeted corporate reconnaissance and technical mail-tenant manipulation."
     },
     {
       "type": "illustration",
@@ -81,17 +81,17 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "mobileWidth": 600,
       "mobileHeight": 400,
       "alt": "Rack of enterprise Cisco Hyperflex server nodes and network switches hosting corporate mail systems and directory routing",
-      "caption": "High-density enterprise server nodes and networking hardware hosting corporate email systems and routing directories. Photo: Btrs / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rack_of_Cisco_Hyperflex_HXAF_240c_M5_nodes.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates enterprise infrastructure where compromised mail tenant credentials and hidden inbox forwarding rules enable silent invoice modification."
+      "caption": "High-density enterprise server nodes and networking hardware. Photo: Btrs / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rack_of_Cisco_Hyperflex_HXAF_240c_M5_nodes.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates enterprise computing hardware, serving as a conceptual backdrop for the cloud tenant credentials and server-side mailbox rules manipulated during business email compromise."
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**Adversary-in-the-Middle (AiTM) Session Theft:** Threat actors deploy reverse-proxy phishing kits (such as Evilginx) that harvest not only user credentials but authenticated session tokens and multi-factor authentication (MFA) cookies in real time, granting persistent access to supplier cloud mailboxes without triggering basic sign-in alerts.",
+        "**Adversary-in-the-Middle (AiTM) Session Theft:** Threat actors deploy reverse-proxy phishing kits (such as Evilginx) that harvest user credentials, authenticated session tokens, and multi-factor authentication (MFA) cookies in real time. Depending on cloud tenant session lifetimes and token-binding policies, this can grant access without triggering standard MFA re-prompts, although anomalous IP or device logins can trigger conditional access alerts.",
         "**Silent Mailbox Reconnaissance & Keyword Indexing:** Once inside, attackers maintain complete silence for weeks. Automated scripts scan historical threads for commercial keywords: 'wire', 'invoice', 'proforma', 'balance', 'T/T', 'SWIFT', 'remittance', and 'bill of lading'. The threat actor maps payment cycles and identifies the exact moment pre-shipment balance payments mature.",
-        "**Covert Inbox Rule Manipulation:** Attackers configure hidden server-side rules in the victim's email client: automatically forwarding incoming messages containing banking terms to an external drop account (e.g., via ProtonMail), while shunting legitimate buyer replies into hidden folders (such as RSS Feeds, Archive, or Deleted Items) and marking them as read. The genuine sales manager never sees the buyer's queries regarding account verification.",
-        "**Direct Account Hijack vs. Homoglyph Lookalikes:** Attacks execute either directly from the legitimate vendor address (defeating SPF, DKIM, and DMARC authentication entirely) or via visually identical homoglyph domains (e.g., substituting lowercase 'l' for digit '1', or 'rn' for 'm') inserted into the 'Reply-To' header.",
-        "**Pixel-Perfect PDF Invoice Tampering:** Attackers extract the vendor's authentic invoice template, leaving line items, quantities, HS codes, and contractual terms identical, while editing only the beneficiary name, bank routing coordinates, and IBAN/SWIFT numbers. Authentic digital scans of official company seals (gongzhang) are superimposed with accurate opacity and edge noise."
+        "**Covert Server-Side Inbox Rule Manipulation:** Attackers configure hidden server-side rules in the victim's cloud mail tenant (e.g. Exchange Online or Google Workspace, operating independently of local IMAP clients): automatically forwarding incoming messages containing banking terms to an external drop account, while shunting legitimate buyer replies into hidden folders (such as RSS Feeds, Archive, or Deleted Items) and marking them as read. The genuine sales manager never sees the buyer's queries regarding account verification.",
+        "**Direct Account Hijack vs. Lookalike Domains:** Attacks execute either directly from the legitimate vendor mailbox (where outgoing mail passes valid SPF, DKIM, and DMARC alignment) or via visually identical homoglyph domains (where attackers register their own domain and configure their own valid SPF/DKIM records to bypass filters, inserting spoofed addresses into the 'Reply-To' header).",
+        "**PDF Invoice Modification & Graphic Stamp Forgery:** Attackers extract the vendor's authentic invoice template, leaving line items, quantities, HS codes, and contractual terms identical, while editing only the beneficiary name, bank routing coordinates, and IBAN/SWIFT numbers. Scanned images of official company seals (gongzhang) are superimposed onto the PDF; while visually persuasive to accounts payable clerks, a scanned graphic provides zero cryptographic authenticity or document integrity."
       ]
     },
     {
@@ -110,9 +110,9 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "type": "list",
       "ordered": false,
       "items": [
-        "**The Debtor's Transmission Risk Doctrine:** Under the [United Nations Convention on Contracts for the International Sale of Goods (CISG Articles 54 & 57)](https://uncitral.un.org/en/texts/salegoods/conventions/sale_of_goods/cisg), US Uniform Commercial Code (UCC § 4A-406), English Common Law, and the Civil Code of the People's Republic of China (Articles 509 and 599), the legal default is unambiguous: the debtor (buyer) bears the risk of ensuring payment reaches the creditor's nominated account. Delivering funds to an unauthorized third-party imposter does not discharge the underlying contractual debt.",
-        "**The Imposter Rule and Comparative Fault:** In commercial litigation across common-law jurisdictions (such as *Beau Townsend Ford, Inc. v. Don Hinds Ford, Inc.* and *Bile v. Rynac Ltd*), courts examine which party was in the best position to prevent the fraud. While the seller's compromised IT system enabled the deception, courts consistently hold that an experienced commercial buyer has an affirmative duty of inquiry when receiving sudden, out-of-the-blue instructions to divert funds to a different bank, different country, or different corporate entity.",
-        "**The Negligence Finding:** A buyer who executes a six-figure wire transfer based solely on an unverified email instruction without conducting out-of-band verification is routinely deemed commercially negligent. Courts rule that the buyer had the 'last clear chance' to prevent the loss. Consequently, the buyer must bear 100% of the stolen funds and must pay the seller a second time to obtain the goods."
+        "**The Debtor's Transmission Risk Doctrine:** Under the [United Nations Convention on Contracts for the International Sale of Goods (CISG Articles 54 & 57)](https://uncitral.un.org/en/texts/salegoods/conventions/sale_of_goods/cisg), Article 54 requires the buyer to enable payment formalities and Article 57 establishes that payment must be made at the seller's place of business unless agreed otherwise. In the Civil Code of the People's Republic of China, while Article 509 sets out general performance in good faith and Article 599 governs delivery of ancillary documents, Articles 626 and 627 specifically govern the buyer's obligation to pay the purchase price at the agreed place. Under US Uniform Commercial Code (UCC § 4A-406), discharge occurs upon acceptance by the beneficiary's bank for the benefit of the designated creditor, subject to statutory exceptions, while § 4A-207 governs beneficiary misdescription and § 4A-202 allocates risk for unauthorized orders based on commercially reasonable security procedures. Delivering funds to an unauthorized third-party imposter does not discharge the underlying contractual debt unless legal authorization, ratification, or an affirmative defense applies.",
+        "**Comparative Fault and Fact-Specific Inquiries:** In commercial litigation across common-law jurisdictions, courts evaluate which party had the opportunity to prevent the fraud and whether either party acted negligently. In *Beau Townsend Ford, Inc. v. Don Hinds Ford, Inc.* (759 F. App'x 348, 6th Cir. 2018), the Sixth Circuit reversed summary judgment against the payor and remanded for trial, holding that whether the payor exercised ordinary care or whether the payee's compromised email system was negligent presented genuine factual disputes under UCC principles. In *Bile v. RREMC, LLC* (E.D. Va. 2016), the payor actually prevailed on summary judgment because the payee's compromised system was the proximate cause and the fraudulent email specifically instructed the payor not to call. In English commercial law, cases such as *K v A* [2019] EWHC 1118 (Comm) confirm that liability turns on contractual construction, actual or apparent authority, and whether the payee is estopped from denying receipt.",
+        "**The Duty of Inquiry and Verification Risk:** While liability is never automatic and depends heavily on specific facts and governing law, a buyer who executes a major wire diversion based purely on unverified email instructions without out-of-band verification faces severe legal jeopardy. If a court finds the buyer failed to observe reasonable commercial standards when presented with red flags (such as sudden bank or jurisdiction changes), the buyer risks being assigned primary comparative fault, bearing the fraud loss, and remaining obligated to pay the supplier to obtain the cargo."
       ]
     },
     {
@@ -124,7 +124,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "mobileWidth": 600,
       "mobileHeight": 400,
       "alt": "Stacked shipping containers and gantry cranes at the Port of Rotterdam Waalhaven container terminal",
-      "caption": "Stacked shipping containers and gantry cranes at the Port of Rotterdam Waalhaven container terminal. Photo: Waalhaven / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Waalhaven_pier_6_-_Port_of_Rotterdam_-_container_terminal_and_cranes.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Depicts the physical shipping terminal where containerized cargo is frozen under carrier liens and accumulating port demurrage when wire fraud interrupts contractual bill of lading release."
+      "caption": "Stacked shipping containers and gantry cranes at the Port of Rotterdam Waalhaven container terminal. Photo: AgainErick / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Waalhaven_pier_6_-_Port_of_Rotterdam_-_container_terminal_and_cranes.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Depicts container terminal infrastructure where cargo may sit detained under carrier liens and port demurrage when wire fraud interrupts contractual bill of lading release."
     },
     {
       "type": "paragraph",
@@ -132,19 +132,19 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
     },
     {
       "type": "heading",
-      "text": "3. The 72-hour golden window: SWIFT recall and asset recovery"
+      "text": "3. Emergency asset recovery protocol: SWIFT recall and legal coordination"
     },
     {
       "type": "paragraph",
-      "text": "If unauthorized wire diversion is discovered, the organization enters the 72-Hour Golden Window. Beyond 72 hours, criminal syndicates systematically liquidate mule accounts through layered domestic transfers, cash withdrawals, and peer-to-peer cryptocurrency off-ramps, reducing recovery rates to near zero."
+      "text": "If unauthorized wire diversion is discovered, the organization must initiate an immediate emergency response. Criminal syndicates rapidly move funds through layered accounts and cryptocurrency off-ramps, making immediate multi-track intervention essential to maximize any chance of freezing or clawing back the remittance."
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**Step 1: Immediate SWIFT MT192 / MT199 Recall Request:** Within minutes of discovery, instruct the remitting bank's treasury desk to broadcast an urgent SWIFT MT192 (Request for Cancellation) or MT199 (Free Format Message) to the beneficiary bank and US intermediary clearing banks. The message must state: 'URGENT CRIMINAL FRAUD / BUSINESS EMAIL COMPROMISE. BENEFICIARY IS AN UNAUTHORIZED MULE ACCOUNT. FREEZE AND RETURN FUNDS IMMEDIATELY.'",
-        "**Step 2: Emergency Multi-Agency Law Enforcement Reporting:** In the United States, immediately file with the [FBI IC3](https://www.ic3.gov) and request activation of the Recovery Asset Team (RAT) for wires over $50,000 transiting the US financial system. In Hong Kong, contact the [Hong Kong Police Force Anti-Deception Coordination Centre (ADCC)](https://www.police.gov.hk/ppp_en/04_crime_matters/adcc/) hotline (+852 18222) to issue a formal Letter of No Consent (LNC) under Section 25A of the Organized and Serious Crimes Ordinance, legally compelling the recipient bank to freeze the account.",
-        "**Step 3: Injunctions and Disclosure Orders:** If substantial capital ($200,000+) is involved, immediately retain emergency cross-border litigation counsel in the recipient jurisdiction (e.g., Hong Kong High Court or Singapore High Court) to secure an ex parte Mareva Injunction (asset freezing order) and a Norwich Pharmacal disclosure order compelling the bank to reveal the mule account holder's identity and downstream fund flows."
+        "**Step 1: Immediate Bank-Led Stop and Recall (SWIFT camt.056 / MT192):** Within minutes of discovery, instruct the remitting bank's treasury desk to broadcast an urgent payment cancellation request through SWIFT. Under current ISO 20022 messaging standards and SWIFT's coexistence roadmap, banks transmit a `camt.056` (Payment Cancellation Request) or legacy MT192 (Request for Cancellation), followed by `camt.029` investigation resolution, supported by free-format MT199 broadcast messages where necessary. The message must state: 'URGENT CRIMINAL FRAUD / BUSINESS EMAIL COMPROMISE. BENEFICIARY IS AN UNAUTHORIZED MULE ACCOUNT. REQUEST IMMEDIATE STOP AND RECALL.' Note that a recall is an urgent administrative request to the receiving and intermediary banks; it is not a self-executing statutory freeze.",
+        "**Step 2: Emergency Multi-Agency Law Enforcement Reporting:** Regardless of transaction amount, immediately file an incident report with the originating bank and national cybercrime agencies. In the United States, file immediately with the [FBI IC3](https://www.ic3.gov); the FBI's Recovery Asset Team (RAT) coordinates with the Financial Fraud Kill Chain (FFKC) to liaise with beneficiary financial institutions. In Hong Kong, contact the [Hong Kong Police Force Anti-Deception Coordination Centre (ADCC)](https://www.police.gov.hk/ppp_en/04_crime_matters/adcc/) enquiry hotline (+852 18222) and the Joint Financial Intelligence Unit (JFIU). Under Hong Kong law (*Tam Sze Leung v Commissioner of Police* [2024] HKCFA 8), a police Letter of No Consent (LNC) withholds statutory consent under Section 25A of the Organized and Serious Crimes Ordinance—warning the bank that dealing with the funds may constitute money laundering—but the LNC does not itself constitute a judicial freezing order; the bank exercises its own contractual discretion to withhold payment.",
+        "**Step 3: Emergency Judicial Injunctions and Disclosure Relief:** Where the financial exposure warrants immediate civil litigation, retain local counsel in the recipient jurisdiction (such as Hong Kong, Singapore, or the UK) to seek urgent judicial relief. Counsel will evaluate applying for an ex parte Mareva freezing injunction (restraining the mule account holder from dissipating assets) and a Norwich Pharmacal disclosure order (compelling the receiving bank to disclose the identity of the account holder, signature cards, and downstream transaction destinations)."
       ]
     },
     {
@@ -165,18 +165,18 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "rows": [
         [
           "Pillar 1: Dedicated Voice Callback",
-          "Voice callback exclusively to pre-agreed phone numbers recorded in the signed master contract. Never call numbers from invoice footers or email signatures.",
+          "Voice callback conducted exclusively to pre-agreed phone numbers recorded in the signed master contract or verified public corporate switchboard. Never call numbers from invoice footers, revised email signatures, or message threads.",
           "Defeats attacker-controlled VOIP phone numbers and forged email contact headers."
         ],
         [
-          "Pillar 2: Live Video Credential Challenge",
-          "Scheduled live video conference with the supplier's registered corporate director displaying government photo ID and original bank account opening permits.",
-          "Eliminates anonymous threat actors, deepfake audio lures, and fictitious third-party offshore clearing agents."
+          "Pillar 2: Live Video Credential & Account Verification",
+          "Scheduled live video conference with the supplier's authorized signatory or legal representative, cross-referencing government photo ID against corporate registration filings and current bank-issued account documentation (e.g., mainland Chinese Basic Deposit Account Information / 基本存款账户信息, or bank-stamped account certificates). Note: video calls confirm identity but do not alone prove account ownership; always cross-verify bank documentation independently.",
+          "Deters anonymous threat actors, deepfake audio lures, and fictitious offshore clearing intermediaries."
         ],
         [
-          "Pillar 3: $100 Penny Test Remittance",
-          "Transmission of an initial $100 micro-wire. Full balance release is strictly conditioned on online banking screenshot confirmation and encrypted statement reconciliation.",
-          "Prevents the irreversible loss of five- and six-figure capital balances to fraudulent accounts."
+          "Pillar 3: Micro-Wire Remittance & Direct Confirmation",
+          "Transmission of an initial $100 test micro-wire to the designated account. Balance release is conditioned on direct verbal confirmation from the authorized finance lead and official online banking statement reconciliation matching the exact beneficiary name.",
+          "Verifies bank routing and beneficiary account operation before committing full balance capital."
         ]
       ]
     },
@@ -190,16 +190,16 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "Contract Clause Template (Bilingual Production Ready):"
+      "text": "Contract Clause Template: Bank Account Lock-in, Out-of-Band Verification & Cyber Breach Risk Allocation (Bilingual English-Chinese):"
     },
     {
       "type": "list",
       "ordered": false,
       "items": [
-        "**1. Designated Beneficiary Account / 指定收款账户:** All payments under this Agreement shall be remitted strictly and exclusively to the Seller's designated bank account specified herein. The Seller represents that this account is its official corporate operating account.",
-        "**2. Absolute Ban on Email Notification of Bank Changes / 严禁通过电子邮件变更账户:** The Buyer shall not recognize, act upon, or accept any notice, invoice, or instruction requesting a change, amendment, or redirection of the Designated Account received via electronic mail, messaging applications, or facsimile. Any purported change of banking details communicated via electronic mail shall be presumed fraudulent, null, and void.",
-        "**3. Mandatory Formal Procedure for Banking Changes / 银行账户变更的法定严格程序:** A change to the Designated Account shall be valid only if executed through a formal written Amendment signed by the Seller's legal representative, sealed with the official corporate seal (gongzhang), delivered in hard copy via courier, and confirmed via a US$100 test wire remittance prior to the transmission of any substantial commercial balance.",
-        "**4. Allocation of Loss for Cyber Compromise / 网络安全事件损失分配与责任承担:** In the event that the Seller's email systems, domain names, servers, or personnel credentials suffer unauthorized access resulting in fraudulent payment instructions transmitted to the Buyer: if the Buyer complied with the Out-of-Band Verification (OOBV) procedures stipulated herein, any remittance made by the Buyer in reliance on instructions originating from the Seller's compromised systems shall be deemed full and final satisfaction of the Buyer's payment obligation pro tanto, and the Seller shall immediately release all Bills of Lading and cargo without delay."
+        "**Clause 1: Designated Account / 第一条 指定收款账户:** All payments under this Agreement shall be remitted strictly and exclusively to the Seller's designated bank account specified in Schedule A herein. The Seller warrants that this account is its official corporate operating account held under its exact registered corporate name. / 本合同项下所有款项均须严格且排他性地汇入本合同附件A明确指定的卖方银行账户。卖方保证该账户为其以其法定登记注册名称开立的官方企业银行账户。",
+        "**Clause 2: Ban on Email-Based Account Changes / 第二条 严禁通过电子邮件变更账户:** The Buyer shall not recognize, act upon, or accept any notice, invoice, or instruction requesting a change, amendment, or redirection of the Designated Account received via electronic mail, messaging applications, or facsimile. Any purported change of banking details communicated via electronic mail shall be presumed fraudulent, void ab initio, and of no legal effect. / 买方不得认可、执行或接受通过电子邮件、即时通讯工具或传真发送的任何要求变更、修改或重定向指定账户的通知、发票或指示。任何通过电子邮件形式传达的银行账户变更均被推定为欺诈、自始无效且无任何法律约束力。",
+        "**Clause 3: Strict Formal Amendment & OOBV Protocol / 第三条 账户变更法定程序与带外核验规程:** Any amendment to the Designated Account shall be valid only if executed through a written formal Supplementary Agreement signed by both parties' legal representatives, stamped with their registered corporate seals, delivered in original physical form via courier, and independently verified via Out-of-Band Verification (voice callback to the pre-agreed master telephone number and bank-issued account confirmation). / 指定收款账户的任何变更，仅在同时满足以下条件时方为有效：由双方加盖正式公章并由法定代表人签字的书面补充协议原件通过邮政快递送达，并经由买方执行带外核验规程（按合同预留号码电话回呼及银行官方账户证明核实）。",
+        "**Clause 4: Allocation of Loss for Cyber Compromise / 第四条 网络被劫持事件之责任分配与提单放行:** If the Seller's email systems, domain names, servers, or personnel credentials suffer unauthorized access resulting in fraudulent payment instructions transmitted to the Buyer, and the Buyer has complied with the verification procedures agreed herein, any remittance executed in good-faith reliance on such compromised transmission shall discharge the Buyer's payment obligation pro tanto (to the extent of the amount paid). The Seller shall promptly release shipping documents and bills of lading corresponding proportionately to the discharged amount, or release all cargo upon receipt of the net remaining balance. In the event of discrepancy between the English and Chinese versions, the English version [or Chinese version, as chosen by parties] shall prevail. / 若卖方电子邮件系统、域名、服务器或员工通讯工具遭受未授权入侵导致向买方发出虚假付款指令，且买方已履行本合同约定的核验程序，则买方善意依据该受侵害系统指令付出的款项在其实际支付金额范围内产生清偿效力（pro tanto）。卖方应当在已清偿金额范围内相应签发放行海运单证与提单，或在买方结清剩余净差额后立即无条件放行全部货物。中英文版本如有冲突，以英文版[或中文版]为准。"
       ]
     },
     {
@@ -222,7 +222,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
         [
           "Step 1: Header Analysis",
           "SPF, DKIM, DMARC validation",
-          "Inspect raw RFC 822 email headers. Verify alignment; reject domain typosquatting, lookalike homoglyphs, and external reply-to redirects.",
+          "Inspect raw RFC 5322/822 email headers. Check SPF, DKIM, and DMARC alignment; note that compromised legitimate accounts pass authentication, while lookalike domains may authenticate their own records. Reject typosquatting, homoglyphs, and mismatched reply-to headers.",
           "IT Security Specialist"
         ],
         [
@@ -246,7 +246,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
         [
           "Step 5: Live Video Challenge",
           "Visual identity & bank permit",
-          "Conduct a live video conference with the factory director holding government photo ID and the physical corporate Bank Account Opening Permit.",
+          "Conduct a live video conference with the factory director/signatory holding government photo ID, cross-referenced against corporate registration and current bank-issued Basic Deposit Account Information (基本存款账户信息) or bank verification letter. (Note: PBOC abolished paper Account Opening Permits in 2019).",
           "Procurement Director"
         ],
         [
@@ -258,7 +258,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
         [
           "Step 7: $100 Penny Test Wire",
           "Micro-remittance verification",
-          "Execute a $100 test wire. Require the vendor to send an authenticated online banking portal screenshot confirming settlement before releasing the balance.",
+          "Execute a $100 test wire. Require independent telephone confirmation from the authorized finance lead and verified electronic bank statement reconciliation before releasing balance.",
           "Treasury Lead"
         ],
         [
@@ -276,10 +276,10 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
   ],
   "keyTakeaways": [
     "Business Email Compromise (BEC) in cross-border procurement weaponizes session hijacking (AiTM), silent mailbox reconnaissance, and covert inbox forwarding rules to intercept commercial invoices at the critical pre-shipment balance payment milestone.",
-    "Under international sales law (CISG Articles 54 & 57, UCC § 4A-406, and Chinese Civil Code Article 509), the debtor bears the risk of payment transmission. Wiring funds to an imposter does not discharge your contractual debt to the manufacturer.",
-    "Courts apply comparative fault under the 'imposter rule': an experienced commercial buyer who fails to independently verify sudden banking coordinate changes is routinely deemed negligent and bears 100% of the financial loss.",
-    "The 72-Hour Golden Window requires immediate SWIFT MT192 recall messages, emergency law enforcement filings (FBI IC3 RAT, Hong Kong Police ADCC Letter of No Consent), and ex parte Mareva freezing injunctions before mule accounts are liquidated.",
-    "The non-negotiable Out-of-Band Verification (OOBV) standard combines pre-contracted voice callbacks, live video credential inspections, and $100 penny test micro-wires.",
+    "Under international sales law (CISG Articles 54 & 57, UCC § 4A-406, and Chinese Civil Code Articles 509, 599, 626 & 627), the default rule is that the debtor bears the risk of payment transmission. Wiring funds to an imposter does not automatically discharge contractual debt unless authorization, estoppel, or comparative fault is proven.",
+    "Courts apply comparative fault under common law and UCC principles (e.g., Beau Townsend, Bile v. RREMC, K v A): an experienced commercial buyer who fails to independently verify sudden banking changes risks being held negligent for failing to exercise ordinary commercial care.",
+    "The emergency recovery protocol requires immediate bank-led recall requests (SWIFT camt.056 / MT192), law enforcement reporting (FBI IC3, HK Police ADCC 18222 / LNC), and local counsel evaluation of discretionary civil relief (Mareva freezing injunctions, Norwich Pharmacal disclosure).",
+    "The non-negotiable Out-of-Band Verification (OOBV) standard combines pre-contracted voice callbacks, live video credential inspections, current bank account confirmation records, and $100 penny test micro-wires.",
     "Every international procurement contract must incorporate an ironclad Bank Account Lock-in Clause that bans email-based account modifications and reallocates breach losses to the party whose IT infrastructure was compromised."
   ],
   "checklistHeading": "Pre-Remittance Wire Fraud & BEC Audit Checklist",
@@ -296,7 +296,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "category": "Out-of-Band Verification (OOBV) Execution",
       "evidence": [
         "Voice callback completed exclusively via the pre-contracted phone number established in the master contract.",
-        "Live video conference conducted with corporate director holding government ID and physical Bank Account Opening Permit.",
+        "Live video conference conducted with corporate director holding government ID and current bank-issued Basic Deposit Account Information (基本存款账户信息) or certified bank account statement.",
         "A $100 penny test micro-remittance executed, settled, and reconciled via enterprise online banking records prior to balance release."
       ]
     },
@@ -311,15 +311,15 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
   "faqs": [
     {
       "question": "If our supplier's email was hacked and sent us the fraudulent invoice, why doesn't the supplier have to bear the financial loss?",
-      "answer": "Under international sales jurisprudence (including CISG Article 54, UCC Article 4A, English common law, and Chinese Civil Code Article 509), the legal doctrine of debtor's payment transmission risk dictates that a buyer's payment obligation is only satisfied when funds are actually credited to the seller's lawful account. While the seller suffered an IT security breach, courts apply the 'imposter rule' and comparative negligence: an experienced commercial buyer has an affirmative duty of inquiry when receiving sudden instructions to redirect funds to an unfamiliar bank or jurisdiction. If the buyer pays without performing out-of-band verification, courts hold that the buyer had the last opportunity to prevent the fraud and must bear the loss."
+      "answer": "Under international sales jurisprudence (including CISG Articles 54 & 57, UCC § 4A-406, English common law, and Chinese Civil Code Articles 509, 626 & 627), the prima facie rule is debtor payment transmission risk: a buyer's payment obligation is only satisfied when funds are credited to the seller's lawful account. While the seller's email system was breached, courts (such as the Sixth Circuit in Beau Townsend and English courts in K v A) evaluate comparative negligence, agency, and which party had the opportunity to prevent the loss. If the buyer pays without conducting out-of-band verification after receiving unexpected diversion instructions, the buyer risks being assigned comparative fault. Conversely, cases like Bile v. RREMC show payors can prevail when the payee's breach was the proximate cause and actively suppressed verification. Without ironclad contractual terms, buyers face costly litigation and risk having to pay again."
     },
     {
       "question": "What is an Out-of-Band Verification (OOBV) protocol, and why can't we just reply to the email to confirm?",
-      "answer": "Out-of-Band Verification (OOBV) requires verifying financial instructions through a completely independent, secondary communication channel that is separate from the channel that transmitted the request. Replying to the email is completely useless because the attacker has compromised the email account or configured server-side forwarding rules; your reply will be answered directly by the criminal, who will enthusiastically 'confirm' their fraudulent banking details. True OOBV requires a telephone callback to a pre-agreed number recorded in the original paper contract, a live video conference with credential inspection, and a $100 test micro-wire."
+      "answer": "Out-of-Band Verification (OOBV) requires verifying financial instructions through a completely independent, secondary communication channel that is separate from the channel that transmitted the request. Replying to the email is completely useless because the attacker has compromised the email account or configured server-side forwarding rules; your reply will be answered directly by the criminal, who will enthusiastically 'confirm' their fraudulent banking details. True OOBV requires a telephone callback to a pre-agreed number recorded in the original paper contract, a live video conference with credential and current bank document inspection (such as Basic Deposit Account Information / 基本存款账户信息), and a $100 test micro-wire."
     },
     {
       "question": "What should our company do immediately if we discover we just wired $300,000 to a fraudulent BEC account?",
-      "answer": "You must act within the 72-Hour Golden Window. First, immediately instruct your remitting bank's treasury department to transmit an urgent SWIFT MT192 (Request for Cancellation) or MT199 message to the beneficiary bank and US intermediary clearing banks stating criminal fraud. Second, file an emergency complaint with the FBI IC3 requesting activation of the Recovery Asset Team (RAT) for wires transiting the US financial system. If funds went to Hong Kong, immediately call the Hong Kong Police Anti-Deception Coordination Centre (ADCC) at +852 18222 to request an emergency Letter of No Consent (LNC) to freeze the account. Third, retain local litigation counsel in the destination jurisdiction to file for an ex parte Mareva asset freezing injunction before the funds are dispersed."
+      "answer": "Act immediately regardless of the amount. First, immediately instruct your remitting bank's treasury department to transmit an urgent SWIFT cancellation request (camt.056 under ISO 20022 or legacy MT192 / MT199) to beneficiary and intermediary banks. Second, report the incident immediately to law enforcement, including the FBI IC3 (requesting Recovery Asset Team coordination for US-cleared wires). If funds transited Hong Kong, notify the Hong Kong Police ADCC (+852 18222) and JFIU; note that a police Letter of No Consent (LNC) withholds statutory consent under OSCO § 25A (Tam Sze Leung [2024] HKCFA 8) but does not itself legally freeze funds, as the bank exercises its own judgment. Third, retain emergency local counsel to evaluate applying for discretionary civil court orders, including an ex parte Mareva asset freezing injunction and Norwich Pharmacal disclosure order."
     }
   ],
   "referencesHeading": "Authoritative Trade Finance, Cyber Security & Legal Standards",
@@ -346,12 +346,12 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "title": "Anti-Deception Coordination Centre (ADCC) & Letter of No Consent (LNC) Protocol",
       "publisher": "Hong Kong Police Force Commercial Crime Bureau",
       "href": "https://www.police.gov.hk/ppp_en/04_crime_matters/adcc/",
-      "note": "Operational guidelines and emergency contact procedures for freezing fraudulent cross-border funds in Hong Kong banking institutions."
+      "note": "Operational guidelines and emergency contact procedures for reporting fraudulent cross-border funds in Hong Kong banking institutions."
     },
     {
-      "title": "Business Email Compromise: How to Protect Your Organisation",
+      "title": "Phishing: Defending Your Organisation Against Email Compromise",
       "publisher": "National Cyber Security Centre (NCSC UK)",
-      "href": "https://www.ncsc.gov.uk/guidance/business-email-compromise-how-to-protect-your-organisation",
+      "href": "https://www.ncsc.gov.uk/guidance/phishing",
       "note": "Technical mitigation strategies for session token theft, inbox forwarding rules, and email authentication standards (SPF, DKIM, DMARC)."
     }
   ],
