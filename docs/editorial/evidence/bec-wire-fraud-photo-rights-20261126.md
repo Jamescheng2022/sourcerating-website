@@ -9,7 +9,7 @@ All four photographic subjects are authentic documentary photographs from Wikime
 ---
 
 ### 1. Cover: Downtown Singapore Marina Bay Financial District Skyline
-- **Subject:** Singapore Marina Bay Financial Centre and commercial trade banking skyline, establishing the international offshore foreign exchange clearing and trade banking hub where cross-border SWIFT telegraphic transfers (T/T), multi-currency correspondent banking, and fraudulent diversion accounts are routed.
+- **Subject:** Singapore Marina Bay Financial Centre skyline, representing international financial and trade banking infrastructure.
 - **Author:** Diego Delso, delso.photo
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Skyline,_Marina_Bay,_Singapur,_2023-08-18,_DD_30-32_HDR.jpg
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
@@ -19,7 +19,7 @@ All four photographic subjects are authentic documentary photographs from Wikime
 ---
 
 ### 2. Figure 1: Commercial Bank Customer Service & Remittance Counter
-- **Subject:** Commercial bank branch service counter and customer teller stations, depicting the operational interface where enterprise foreign exchange wire remittances are executed, beneficiary coordinates are processed, and out-of-band verification procedures are enforced.
+- **Subject:** Commercial bank branch customer service counter and teller stations.
 - **Author:** Melwinsy
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Bank_Muamalat.JPG
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
@@ -39,7 +39,7 @@ All four photographic subjects are authentic documentary photographs from Wikime
 ---
 
 ### 4. Figure 3: Enterprise Cisco Server Nodes & Network Switching Infrastructure
-- **Subject:** Rack of enterprise Cisco Hyperflex server nodes and network switches hosting corporate mail servers, DNS MX records, and routing rules where business email compromise (BEC) and unauthorized IMAP forwarding rules are executed.
+- **Subject:** Rack of enterprise Cisco Hyperflex server nodes and network switches, representing high-density computing infrastructure.
 - **Author:** Btrs
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Rack_of_Cisco_Hyperflex_HXAF_240c_M5_nodes.jpg
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)

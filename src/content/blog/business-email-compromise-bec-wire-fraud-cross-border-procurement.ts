@@ -4,7 +4,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
   "slug": "business-email-compromise-bec-wire-fraud-cross-border-procurement",
   "title": "The Supplier’s Email Sent 'Updated Bank Details' for the Balance Wire. Why Your $400,000 Transferred to a Scammer—and the Out-of-Band Verification (OOBV) Protocol That Prevents Cross-Border T/T Fraud",
   "seoTitle": "Cross-Border Procurement Wire Fraud: BEC Attacks, Bank Account Diversion & OOBV Defense",
-  "excerpt": "Business Email Compromise (BEC) accounts for billions in lost procurement capital annually. When an overseas supplier's compromised mailbox sends an 'updated bank account' invoice just before final balance telegraphic transfer, wiring funds to a criminal mule account does not legally discharge your payment obligation. Here is the technical anatomy of email hijacking, court loss allocation doctrines, the 72-hour SWIFT recall window, and the non-negotiable Out-of-Band Verification protocol.",
+  "excerpt": "Business Email Compromise (BEC) accounts for billions in lost procurement capital annually. When an overseas supplier's compromised mailbox sends an 'updated bank account' invoice just before final balance telegraphic transfer, wiring funds to an unauthorized account generally does not discharge your underlying payment obligation by default unless authorization, estoppel, or a fault-based defense applies. Here is the technical anatomy of email hijacking, court loss allocation doctrines, the critical first 72 hours for bank-led recall requests and law enforcement escalation, and the non-negotiable Out-of-Band Verification protocol.",
   "date": "2026-11-26",
   "category": "Contracts & Payment",
   "layout": "editorial",
@@ -49,7 +49,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "height": 800,
       "mobileWidth": 600,
       "mobileHeight": 400,
-      "alt": "Commercial bank customer service counter where international remittance instructions and telegraphic transfers are processed",
+      "alt": "Commercial bank branch customer service counter and teller stations",
       "caption": "Commercial banking branch counter and customer service area. Photo: Melwinsy / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Bank_Muamalat.JPG), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates the retail and commercial banking environment where customer transactions are submitted, serving as a conceptual backdrop for the procedural verification controls needed to catch unauthorized payment diversions."
     },
     {
@@ -70,7 +70,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
     },
     {
       "type": "paragraph",
-      "text": "Business Email Compromise in international manufacturing is rarely a crude mass-phishing campaign. According to the [FBI Internet Crime Complaint Center (IC3)](https://www.ic3.gov), BEC generated over $2.9 billion to $3.047 billion in aggregate annual reported losses across all sectors, weaponizing targeted corporate reconnaissance and technical mail-tenant manipulation."
+      "text": "Business Email Compromise in international manufacturing is rarely a crude mass-phishing campaign. According to the [FBI Internet Crime Complaint Center (IC3)](https://www.ic3.gov), BEC generated over $2.9 billion in reported annual losses across all sectors, weaponizing targeted corporate reconnaissance and technical mail-tenant manipulation."
     },
     {
       "type": "illustration",
@@ -80,7 +80,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "height": 800,
       "mobileWidth": 600,
       "mobileHeight": 400,
-      "alt": "Rack of enterprise Cisco Hyperflex server nodes and network switches hosting corporate mail systems and directory routing",
+      "alt": "High-density enterprise server nodes and networking hardware in a data center rack",
       "caption": "High-density enterprise server nodes and networking hardware. Photo: Btrs / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rack_of_Cisco_Hyperflex_HXAF_240c_M5_nodes.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Illustrates enterprise computing hardware, serving as a conceptual backdrop for the cloud tenant credentials and server-side mailbox rules manipulated during business email compromise."
     },
     {
@@ -111,7 +111,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
       "ordered": false,
       "items": [
         "**The Debtor's Transmission Risk Doctrine:** Under the [United Nations Convention on Contracts for the International Sale of Goods (CISG Articles 54 & 57)](https://uncitral.un.org/en/texts/salegoods/conventions/sale_of_goods/cisg), Article 54 requires the buyer to enable payment formalities and Article 57 establishes that payment must be made at the seller's place of business unless agreed otherwise. In the Civil Code of the People's Republic of China, while Article 509 sets out general performance in good faith and Article 599 governs delivery of ancillary documents, Articles 626 and 627 specifically govern the buyer's obligation to pay the purchase price at the agreed place. Under US Uniform Commercial Code (UCC § 4A-406), discharge occurs upon acceptance by the beneficiary's bank for the benefit of the designated creditor, subject to statutory exceptions, while § 4A-207 governs beneficiary misdescription and § 4A-202 allocates risk for unauthorized orders based on commercially reasonable security procedures. Delivering funds to an unauthorized third-party imposter does not discharge the underlying contractual debt unless legal authorization, ratification, or an affirmative defense applies.",
-        "**Comparative Fault and Fact-Specific Inquiries:** In commercial litigation across common-law jurisdictions, courts evaluate which party had the opportunity to prevent the fraud and whether either party acted negligently. In *Beau Townsend Ford, Inc. v. Don Hinds Ford, Inc.* (759 F. App'x 348, 6th Cir. 2018), the Sixth Circuit reversed summary judgment against the payor and remanded for trial, holding that whether the payor exercised ordinary care or whether the payee's compromised email system was negligent presented genuine factual disputes under UCC principles. In *Bile v. RREMC, LLC* (E.D. Va. 2016), the payor actually prevailed on summary judgment because the payee's compromised system was the proximate cause and the fraudulent email specifically instructed the payor not to call. In English commercial law, cases such as *K v A* [2019] EWHC 1118 (Comm) confirm that liability turns on contractual construction, actual or apparent authority, and whether the payee is estopped from denying receipt.",
+        "**Comparative Fault and Fact-Specific Inquiries:** In commercial litigation across common-law jurisdictions, courts evaluate which party had the opportunity to prevent the fraud and whether either party acted negligently. In *Beau Townsend Ford, Inc. v. Don Hinds Ford, Inc.* (759 F. App'x 348, 6th Cir. 2018), the Sixth Circuit reversed summary judgment against the payor and remanded for trial, holding that whether the payor exercised ordinary care or whether the payee's compromised email system was negligent presented genuine factual disputes under UCC principles. In *Bile v. RREMC, LLC* (E.D. Va. 2016), the court ruled for the payor because the payee's compromised email system was the proximate cause of the loss. In English commercial law, cases such as *K v A* [2019] EWHC 1118 (Comm) confirm that liability turns on contractual construction, actual or apparent authority, and whether the payee is estopped from denying receipt.",
         "**The Duty of Inquiry and Verification Risk:** While liability is never automatic and depends heavily on specific facts and governing law, a buyer who executes a major wire diversion based purely on unverified email instructions without out-of-band verification faces severe legal jeopardy. If a court finds the buyer failed to observe reasonable commercial standards when presented with red flags (such as sudden bank or jurisdiction changes), the buyer risks being assigned primary comparative fault, bearing the fraud loss, and remaining obligated to pay the supplier to obtain the cargo."
       ]
     },
@@ -245,7 +245,7 @@ export const businessEmailCompromiseGuidePost: BlogPost = {
         ],
         [
           "Step 5: Live Video Challenge",
-          "Visual identity & bank permit",
+          "Visual identity & bank account documents",
           "Conduct a live video conference with the factory director/signatory holding government photo ID, cross-referenced against corporate registration and current bank-issued Basic Deposit Account Information (基本存款账户信息) or bank verification letter. (Note: PBOC abolished paper Account Opening Permits in 2019).",
           "Procurement Director"
         ],
