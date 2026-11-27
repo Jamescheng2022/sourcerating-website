@@ -105,6 +105,6 @@ try {
   console.log(JSON.stringify(receipt, null, 2));
   assert.equal(receipt.status, 'PASS', receipt.error);
 } finally {
-  if (completed) fs.rmSync(tempDir, {recursive:true, force:true});
+  if (completed) fs.rmSync(tempDir, {recursive:true, force:true, maxRetries:10, retryDelay:150});
   else console.error('Browser exit unconfirmed; temporary evidence retained at ' + tempDir);
 }

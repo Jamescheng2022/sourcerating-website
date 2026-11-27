@@ -210,6 +210,9 @@ try {
   for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error('Test closing'));}pending.clear();
   if(chrome && !exited){chrome.kill();await Promise.race([once(chrome,'exit'),pause(5000)]);}
   if(server)await new Promise(resolve=>server.close(resolve));
-  if(!chrome || exited){assert.equal(path.dirname(scratch),path.resolve(os.tmpdir()));fs.rmSync(scratch,{recursive:true,force:true});}
+  if(!chrome || exited){
+    assert.equal(path.dirname(scratch),path.resolve(os.tmpdir()));
+    fs.rmSync(scratch,{recursive:true,force:true,maxRetries:10,retryDelay:150});
+  }
   else throw Error('Owned Chrome exit unconfirmed; retained '+scratch);
 }
