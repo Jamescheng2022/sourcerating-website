@@ -1,3 +1,4 @@
+import { flatRackOogLashingGuidePost } from "@/content/blog/flat-rack-oog-sea-freight-lashing-imo-css-code-package-limitation";
 import { businessEmailCompromiseGuidePost } from "@/content/blog/business-email-compromise-bec-wire-fraud-cross-border-procurement";
 import { letterOfCreditSoftClausesGuidePost } from "@/content/blog/letter-of-credit-soft-clauses-ucp-600-discrepancy-risk-guide";
 import { industrialMachineryFatSatGuidePost } from "@/content/blog/industrial-machinery-fat-sat-electrical-safety-buyer-guide";
@@ -37,6 +38,7 @@ export type { BlogPost } from "@/content/blog/legacy-posts";
 
 // Existing articles retain their original records and relative order.
 export const blogPosts: BlogPost[] = ([
+  flatRackOogLashingGuidePost,
   businessEmailCompromiseGuidePost,
   letterOfCreditSoftClausesGuidePost,
   industrialMachineryFatSatGuidePost,
