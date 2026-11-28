@@ -4,47 +4,51 @@
 
 ## Four Non-Duplicate Real Photographic Subjects (16 Assets: WebP & JPG)
 
-All four photographic subjects are authentic documentary photographs from Wikimedia Commons under verified open commercial licenses (Creative Commons CC BY-SA 3.0, CC BY-SA 4.0, and Public Domain). None are synthetic or AI-generated imagery, and none duplicate images used in earlier SourceRating publications. License metadata was verified on 2026-11-28.
+All four photographic subjects are authentic documentary photographs from Wikimedia Commons under verified open commercial licenses (Creative Commons CC BY-SA 3.0, CC BY-SA 4.0, and Public Domain). None are synthetic or AI-generated imagery, and none duplicate images used in earlier SourceRating publications. License metadata was verified on 2026-11-28. Captions and alt text accurately reflect original archive contexts without implying documented customs clearance, bonded zone operations, or specific factory rework projects.
 
 ---
 
-### 1. Cover: Container Terminal Logistics & Customs Yard at Yangshan Deep-Water Port, Shanghai
-- **Subject:** Gantry cranes and container stacks at the Yangshan deep-water port container terminal in Shanghai, China, handling intermodal maritime customs clearance, return logistics, and container staging.
+### 1. Cover: Container Gantry Cranes and Container Stacks at Yangshan Deep-Water Port, Shanghai
+- **Subject:** Gantry cranes and container stacks at the Yangshan deep-water port container terminal in Shanghai, China, establishing the maritime intermodal port environment.
 - **Author:** Bruno Corpet (User:Quoique)
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Shanghai-Yangshan-Port-Containers2013-01.JPG
 - **License:** Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0) (https://creativecommons.org/licenses/by-sa/3.0/)
 - **Adaptation:** High-resolution original (4592x3056 px), cropped to 3:2 landscape aspect ratio focusing on container stacks and port gantry cranes, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and optimized JPEG formats. Derivative work licensed under CC BY-SA 3.0.
-- **Visible Caption:** Container gantry cranes and container stacks at the Yangshan deep-water port container terminal in Shanghai. Photo: Bruno Corpet / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Shanghai-Yangshan-Port-Containers2013-01.JPG), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); cropped and resized for web. Documentary illustration only; not a specific project, supplier, or inspection discussed in this article.
+- **Alt Text:** `Container gantry cranes and container stacks at the Yangshan deep-water port container terminal in Shanghai, China`
+- **Visible Caption:** `Container gantry cranes and container stacks at the Yangshan deep-water port container terminal in Shanghai. Photo: Bruno Corpet / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Shanghai-Yangshan-Port-Containers2013-01.JPG), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); cropped and resized for web. Documentary illustration of intermodal port container handling; not a specific project, supplier, or customs inspection discussed in this article.`
 
 ---
 
 ### 2. Figure 1: Five-Axis Coordinate Measuring Machine (CMM) Dimensional Verification
-- **Subject:** Five-axis coordinate measuring machine performing high-precision dimensional metrology and non-conformance verification on a manufactured engineering part.
+- **Subject:** Five-axis coordinate measuring machine performing precision dimensional verification on a manufactured engineering part.
 - **Author:** AB Technology (Newark) Ltd
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:5_Axis_Scanning_Coordinate_Measurement_Machine_(CMM).png
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
 - **Adaptation:** High-resolution original (2048x1536 px), cropped to 3:2 landscape aspect ratio, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and optimized JPEG formats. Derivative work licensed under CC BY-SA 4.0.
-- **Visible Caption:** Five-axis coordinate measuring machine performing precision dimensional verification on a manufactured component. Photo: AB Technology (Newark) Ltd / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:5_Axis_Scanning_Coordinate_Measurement_Machine_(CMM).png), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration only; not a specific project, supplier, or inspection discussed in this article.
+- **Alt Text:** `Five-axis coordinate measuring machine performing precision dimensional scanning on a manufactured engineering component`
+- **Visible Caption:** `Five-axis coordinate measuring machine performing precision dimensional verification on a manufactured component. Photo: AB Technology (Newark) Ltd / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:5_Axis_Scanning_Coordinate_Measurement_Machine_(CMM).png), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration of precision metrology; not a specific project, supplier, or inspection discussed in this article.`
 
 ---
 
-### 3. Figure 2: Heavy Forklifts Staging Intermodal Freight in Industrial Logistics Facility
-- **Subject:** Heavy forklifts staging palletized intermodal freight inside an industrial customs logistics facility, illustrating bonded warehouse cargo staging and quarantine inspection.
+### 3. Figure 2: Heavy Forklifts Staging Palletized Freight in Logistics Warehouse
+- **Subject:** Heavy forklifts staging palletized intermodal freight inside an industrial warehouse facility (Crowley Logistics, Miami, FL; USDA aid freight staging).
 - **Author:** Lance Cheung / U.S. Department of Agriculture (USDA)
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:Workers_drive_Forkloaders_laden_with_USAID_goods_inside_a_large_warehouse_-_20110826-FS-LSC-0108_-_Flickr_-_USDAgov.jpg
 - **License:** Public Domain (https://creativecommons.org/publicdomain/mark/1.0/)
 - **Adaptation:** High-resolution original (4928x3264 px), cropped to 3:2 landscape aspect ratio, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and optimized JPEG formats.
-- **Visible Caption:** Heavy forklifts staging palletized intermodal freight inside an industrial logistics facility. Photo: Lance Cheung / [U.S. Department of Agriculture](https://commons.wikimedia.org/wiki/File:Workers_drive_Forkloaders_laden_with_USAID_goods_inside_a_large_warehouse_-_20110826-FS-LSC-0108_-_Flickr_-_USDAgov.jpg), [Public Domain](https://creativecommons.org/publicdomain/mark/1.0/); cropped and resized for web. Documentary illustration only; not a specific project, supplier, or inspection discussed in this article.
+- **Alt Text:** `Heavy forklifts staging palletized cargo inside an intermodal warehouse facility`
+- **Visible Caption:** `Heavy forklifts staging palletized intermodal freight inside an industrial warehouse facility. Photo: Lance Cheung / [U.S. Department of Agriculture](https://commons.wikimedia.org/wiki/File:Workers_drive_Forkloaders_laden_with_USAID_goods_inside_a_large_warehouse_-_20110826-FS-LSC-0108_-_Flickr_-_USDAgov.jpg), [Public Domain](https://creativecommons.org/publicdomain/mark/1.0/); cropped and resized for web. Documentary illustration of freight warehousing; not a specific project, supplier, or customs inspection discussed in this article.`
 
 ---
 
-### 4. Figure 3: CNC Milling Machine Spindle and Bed Reworking Metal Component
-- **Subject:** CNC milling machine spindle and bed machining metal workpiece during component modification, demonstrating factory rework and precision re-machining operations.
+### 4. Figure 3: CNC Milling Machine Spindle and Bed Machining Metal Component
+- **Subject:** CNC milling machine spindle and bed demonstrating metalworking and component machining (exhibited at Cobo Center, Detroit).
 - **Author:** Stilfehler
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:CNC_Mill_2.jpg
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
 - **Adaptation:** High-resolution original (4000x3000 px), cropped to 3:2 landscape aspect ratio, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and optimized JPEG formats. Derivative work licensed under CC BY-SA 4.0.
-- **Visible Caption:** CNC milling machine spindle and bed machining metal workpiece during component modification. Photo: Stilfehler / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:CNC_Mill_2.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration only; not a specific project, supplier, or inspection discussed in this article.
+- **Alt Text:** `CNC milling machine spindle and bed in an engineering workshop demonstrating precision metalworking`
+- **Visible Caption:** `CNC milling machine spindle and bed demonstrating metalworking and precision component machining. Photo: Stilfehler / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:CNC_Mill_2.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration of machining equipment; not a specific project, supplier, or inspection discussed in this article.`
 
 ---
 
