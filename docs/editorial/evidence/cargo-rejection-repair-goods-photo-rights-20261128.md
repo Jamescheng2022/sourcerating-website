@@ -19,14 +19,14 @@ All four photographic subjects are authentic documentary photographs from Wikime
 
 ---
 
-### 2. Figure 1: Five-Axis Coordinate Measuring Machine (CMM) Dimensional Verification
-- **Subject:** Five-axis coordinate measuring machine performing precision dimensional verification on a manufactured engineering part.
+### 2. Figure 1: Five-Axis Coordinate Measuring Machine (CMM) in Metrology Lab
+- **Subject:** Five-axis coordinate measuring machine in a precision metrology laboratory.
 - **Author:** AB Technology (Newark) Ltd
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:5_Axis_Scanning_Coordinate_Measurement_Machine_(CMM).png
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
 - **Adaptation:** High-resolution original (2048x1536 px), cropped to 3:2 landscape aspect ratio, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and optimized JPEG formats. Derivative work licensed under CC BY-SA 4.0.
-- **Alt Text:** `Five-axis coordinate measuring machine performing precision dimensional scanning on a manufactured engineering component`
-- **Visible Caption:** `Five-axis coordinate measuring machine performing precision dimensional verification on a manufactured component. Photo: AB Technology (Newark) Ltd / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:5_Axis_Scanning_Coordinate_Measurement_Machine_(CMM).png), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration of precision metrology; not a specific project, supplier, or inspection discussed in this article.`
+- **Alt Text:** `Five-axis coordinate measuring machine in a metrology lab`
+- **Visible Caption:** `Five-axis coordinate measuring machine in a precision engineering metrology laboratory. Photo: AB Technology (Newark) Ltd / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:5_Axis_Scanning_Coordinate_Measurement_Machine_(CMM).png), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration of precision metrology equipment; not a specific project, supplier, or inspection discussed in this article.`
 
 ---
 
@@ -41,14 +41,14 @@ All four photographic subjects are authentic documentary photographs from Wikime
 
 ---
 
-### 4. Figure 3: CNC Milling Machine Spindle and Bed Machining Metal Component
-- **Subject:** CNC milling machine spindle and bed demonstrating metalworking and component machining (exhibited at Cobo Center, Detroit).
+### 4. Figure 3: CNC Milling Machine on Display at Industrial Trade Exhibition
+- **Subject:** CNC milling machine on display at an industrial trade exhibition (exhibited at Cobo Center, Detroit).
 - **Author:** Stilfehler
 - **Source Archive URL:** https://commons.wikimedia.org/wiki/File:CNC_Mill_2.jpg
 - **License:** Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) (https://creativecommons.org/licenses/by-sa/4.0/)
 - **Adaptation:** High-resolution original (4000x3000 px), cropped to 3:2 landscape aspect ratio, resized to 1200x800 px (Desktop) and 600x400 px (Mobile), rendered in WebP and optimized JPEG formats. Derivative work licensed under CC BY-SA 4.0.
-- **Alt Text:** `CNC milling machine spindle and bed in an engineering workshop demonstrating precision metalworking`
-- **Visible Caption:** `CNC milling machine spindle and bed demonstrating metalworking and precision component machining. Photo: Stilfehler / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:CNC_Mill_2.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration of machining equipment; not a specific project, supplier, or inspection discussed in this article.`
+- **Alt Text:** `CNC milling machine on display at an industrial trade exhibition`
+- **Visible Caption:** `CNC milling machine on display at an industrial trade exhibition. Photo: Stilfehler / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:CNC_Mill_2.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); cropped and resized for web. Documentary illustration of machining equipment; not a specific project, supplier, or inspection discussed in this article.`
 
 ---
 
