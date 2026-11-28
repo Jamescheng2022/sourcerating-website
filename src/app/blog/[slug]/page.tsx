@@ -1,3 +1,4 @@
+import { ContentAd } from "@/components/ContentAd";
 import { createHash } from "node:crypto";
 import { NewsletterSignup } from "@/components/editorial/NewsletterSignup";
 import { ArticleViews } from "@/components/editorial/ArticleViews";
@@ -305,6 +306,8 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           </section>
         ) : null}
+
+        <ContentAd key={post.slug} enabled={process.env.VERCEL_ENV === "production" && process.env.NEXT_PUBLIC_ADSENSE_ENABLED === "true"} slot={process.env.NEXT_PUBLIC_ADSENSE_CONTENT_SLOT ?? ""} hosts={["sourcerating.com", "www.sourcerating.com"]} />
 
         <aside className="mt-14 border-y border-gray-200 bg-[#f7f8f5] p-6 sm:p-8">
           <p className="text-sm font-semibold uppercase text-brand-700">About the author</p>
